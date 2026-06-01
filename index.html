@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio Command Center</title>
+<title>Net Worth Command Center</title>
 <script src="https://unpkg.com/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
 <style>
-/* ─── PASSWORD GATE ─── */
 #gate{position:fixed;inset:0;background:#0d0f17;z-index:9999;display:flex;align-items:center;justify-content:center;}
 #gate.hidden{display:none;}
 .gate-box{background:#141720;border:1px solid #252a3a;border-radius:12px;padding:40px;width:360px;text-align:center;}
@@ -18,13 +17,11 @@
 .gate-btn{width:100%;background:#f59e0b;color:#000;border:none;padding:12px;border-radius:8px;font-size:14px;font-weight:800;cursor:pointer;letter-spacing:.02em;}
 .gate-btn:hover{background:#d97706;}
 .gate-error{font-size:12px;color:#ef4444;margin-top:10px;height:16px;}
-/* ─── MAIN APP ─── */
 :root{--bg:#0d0f17;--surf:#141720;--surf2:#1c2030;--border:#252a3a;--text:#e2e8f0;--muted:#6b7280;--accent:#f59e0b;--green:#22c55e;--red:#ef4444;--blue:#3b82f6;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);font-size:13px;line-height:1.5;}
 #app{display:none;}
 #app.visible{display:block;}
-a{color:inherit;text-decoration:none;}
 .topbar{background:var(--surf);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
 .topbar-brand{font-size:17px;font-weight:800;color:var(--accent);letter-spacing:-0.02em;}
 .topbar-sub{font-size:11px;color:var(--muted);}
@@ -34,15 +31,13 @@ a{color:inherit;text-decoration:none;}
 .btn-primary{background:var(--accent);color:#000;border-color:var(--accent);}
 .btn-primary:hover{background:#d97706;border-color:#d97706;color:#000;}
 .kpi-strip{display:flex;background:var(--surf);border-bottom:1px solid var(--border);overflow-x:auto;}
-.kpi{flex:1;min-width:140px;padding:14px 20px;border-right:1px solid var(--border);}
+.kpi{flex:1;min-width:150px;padding:14px 20px;border-right:1px solid var(--border);}
 .kpi:last-child{border-right:none;}
 .kpi-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;}
-.kpi-val{font-size:21px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
+.kpi-val{font-size:20px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
 .kpi-sub{font-size:11px;color:var(--muted);margin-top:3px;}
-.pos{color:var(--green);}
-.neg{color:var(--red);}
-.neu{color:var(--muted);}
-.nav{background:var(--surf);border-bottom:1px solid var(--border);display:flex;padding:0 20px;overflow-x:auto;gap:0;}
+.pos{color:var(--green);}.neg{color:var(--red);}.neu{color:var(--muted);}
+.nav{background:var(--surf);border-bottom:1px solid var(--border);display:flex;padding:0 20px;overflow-x:auto;}
 .nav-btn{padding:11px 14px;font-size:12px;font-weight:600;color:var(--muted);border:none;border-bottom:2px solid transparent;background:none;cursor:pointer;white-space:nowrap;}
 .nav-btn:hover{color:var(--text);}
 .nav-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
@@ -52,9 +47,8 @@ a{color:inherit;text-decoration:none;}
 .card{background:var(--surf);border:1px solid var(--border);border-radius:8px;padding:16px;}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
-.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
-@media(max-width:900px){.grid4{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.grid4,.grid3,.grid2{grid-template-columns:1fr}}
+@media(max-width:900px){.grid3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.grid3,.grid2{grid-template-columns:1fr}}
 .sh{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin:0 0 10px;}
 .tbl-wrap{overflow-x:auto;}
 table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;}
@@ -64,6 +58,7 @@ th:hover{color:var(--text);}
 td{padding:8px 10px;border-bottom:1px solid var(--border);white-space:nowrap;}
 tr.clickable:hover td{background:rgba(245,158,11,.06);cursor:pointer;}
 .ticker-badge{font-size:11px;font-weight:700;background:rgba(245,158,11,.12);color:var(--accent);padding:2px 7px;border-radius:4px;}
+.cur-badge{font-size:10px;font-weight:700;color:var(--muted);background:var(--surf2);padding:1px 6px;border-radius:4px;}
 .pill{display:inline-flex;align-items:center;padding:1px 7px;border-radius:99px;font-size:11px;font-weight:600;}
 .pill.pos{background:rgba(34,197,94,.15);color:var(--green);}
 .pill.neg{background:rgba(239,68,68,.15);color:var(--red);}
@@ -76,7 +71,7 @@ tr.clickable:hover td{background:rgba(245,158,11,.06);cursor:pointer;}
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:2000;justify-content:center;align-items:flex-start;padding:32px 16px;overflow-y:auto;}
 .overlay.open{display:flex;}
 .modal{background:var(--surf);border:1px solid var(--border);border-radius:12px;width:100%;max-width:940px;padding:24px;position:relative;}
-.modal-close-btn{position:absolute;top:14px;right:14px;background:var(--surf2);border:1px solid var(--border);color:var(--muted);border-radius:6px;width:30px;height:30px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.modal-close-btn{position:absolute;top:14px;right:14px;background:var(--surf2);border:1px solid var(--border);color:var(--muted);border-radius:6px;width:30px;height:30px;font-size:16px;cursor:pointer;}
 .modal-close-btn:hover{color:var(--text);}
 .modal-header{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;}
 .modal-ticker{font-size:28px;font-weight:800;letter-spacing:-.02em;}
@@ -92,13 +87,11 @@ tr.clickable:hover td{background:rgba(245,158,11,.06);cursor:pointer;}
 .pb.active{background:var(--accent);color:#000;border-color:var(--accent);}
 .chart-box{height:300px;border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:8px;}
 .ld{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:11px;}
-.spin{width:12px;height:12px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:sp .7s linear infinite;flex-shrink:0;}
+.spin{width:12px;height:12px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:sp .7s linear infinite;}
 @keyframes sp{to{transform:rotate(360deg)}}
-.statusbar{background:var(--surf);border-top:1px solid var(--border);padding:7px 24px;font-size:11px;color:var(--muted);display:flex;align-items:center;gap:16px;}
+.statusbar{background:var(--surf);border-top:1px solid var(--border);padding:7px 24px;font-size:11px;color:var(--muted);display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
 .dot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:4px;}
-.dot.green{background:var(--green);}
-.dot.amber{background:var(--accent);}
-.dot.red{background:var(--red);}
+.dot.green{background:var(--green);}.dot.amber{background:var(--accent);}.dot.red{background:var(--red);}
 .perf-period-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--border);}
 @media(max-width:700px){.perf-period-grid{grid-template-columns:repeat(3,1fr)}}
 .perf-cell{background:var(--surf2);padding:10px;text-align:center;}
@@ -110,29 +103,27 @@ tr.clickable:hover td{background:rgba(245,158,11,.06);cursor:pointer;}
 .leg-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0;}
 .leg-name{flex:1;color:var(--text);}
 .leg-pct{color:var(--muted);font-variant-numeric:tabular-nums;}
+.note{background:rgba(245,158,11,.08);border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 6px 6px 0;font-size:12px;color:var(--text);margin-bottom:16px;}
 </style>
 </head>
 <body>
 
-<!-- ─── PASSWORD GATE ─── -->
 <div id="gate">
   <div class="gate-box">
     <div class="gate-logo">⌂</div>
-    <div class="gate-title">Portfolio Command Center</div>
+    <div class="gate-title">Net Worth Command Center</div>
     <div class="gate-sub">Zhao Ziqing Dominic · Personal Access Only</div>
-    <input class="gate-input" id="gate-pw" type="password" placeholder="Enter password" autocomplete="current-password" onkeydown="if(event.key==='Enter')checkPw()">
+    <input class="gate-input" id="gate-pw" type="password" placeholder="Enter password" autocomplete="current-password">
     <button class="gate-btn" onclick="checkPw()">Unlock</button>
     <div class="gate-error" id="gate-err"></div>
   </div>
 </div>
 
-<!-- ─── MAIN APP (hidden until authenticated) ─── -->
 <div id="app">
-
 <div class="topbar">
   <div>
-    <div class="topbar-brand">⌂ Portfolio Command Center</div>
-    <div class="topbar-sub">Zhao Ziqing Dominic · Conservative + S-REIT Core · Ref: 21 May 2026</div>
+    <div class="topbar-brand">⌂ Net Worth Command Center</div>
+    <div class="topbar-sub">Zhao Ziqing Dominic · Full Portfolio · Holdings as of Apr–Jun 2026 statements</div>
   </div>
   <div class="topbar-right">
     <span id="last-updated" class="topbar-sub">Not loaded</span>
@@ -142,51 +133,28 @@ tr.clickable:hover td{background:rgba(245,158,11,.06);cursor:pointer;}
 </div>
 
 <div class="kpi-strip">
-  <div class="kpi">
-    <div class="kpi-label">Portfolio Value (SGD)</div>
-    <div class="kpi-val" id="kpi-total">—</div>
-    <div class="kpi-sub" id="kpi-total-sub"><span class="ld"><span class="spin"></span>Loading…</span></div>
-  </div>
-  <div class="kpi">
-    <div class="kpi-label">Day P&amp;L</div>
-    <div class="kpi-val" id="kpi-day">—</div>
-    <div class="kpi-sub" id="kpi-day-sub">vs prev close</div>
-  </div>
-  <div class="kpi">
-    <div class="kpi-label">Since Inception (21 May)</div>
-    <div class="kpi-val" id="kpi-inc">—</div>
-    <div class="kpi-sub">vs deployment date</div>
-  </div>
-  <div class="kpi">
-    <div class="kpi-label">1-Month</div>
-    <div class="kpi-val" id="kpi-1m">—</div>
-    <div class="kpi-sub">weighted avg return</div>
-  </div>
-  <div class="kpi">
-    <div class="kpi-label">YTD</div>
-    <div class="kpi-val" id="kpi-ytd">—</div>
-    <div class="kpi-sub">year to date</div>
-  </div>
-  <div class="kpi">
-    <div class="kpi-label">USD/SGD · HKD/SGD</div>
-    <div class="kpi-val" id="kpi-fx">—</div>
-    <div class="kpi-sub" id="kpi-fx-sub">live FX</div>
-  </div>
+  <div class="kpi"><div class="kpi-label">Total Net Worth (SGD)</div><div class="kpi-val" id="kpi-nw">—</div><div class="kpi-sub" id="kpi-nw-sub"><span class="ld"><span class="spin"></span>Loading…</span></div></div>
+  <div class="kpi"><div class="kpi-label">Liquid Investable</div><div class="kpi-val" id="kpi-liq">—</div><div class="kpi-sub">securities + cash + fund</div></div>
+  <div class="kpi"><div class="kpi-label">Illiquid (Property + PE)</div><div class="kpi-val" id="kpi-illq">—</div><div class="kpi-sub">property + private equity</div></div>
+  <div class="kpi"><div class="kpi-label">Listed Securities Day P&amp;L</div><div class="kpi-val" id="kpi-day">—</div><div class="kpi-sub" id="kpi-day-sub">vs prev close</div></div>
+  <div class="kpi"><div class="kpi-label">Securities Value</div><div class="kpi-val" id="kpi-sec">—</div><div class="kpi-sub">live-priced equities</div></div>
+  <div class="kpi"><div class="kpi-label">FX → SGD</div><div class="kpi-val" id="kpi-fx" style="font-size:14px;">—</div><div class="kpi-sub">USD·HKD·CNY·MYR</div></div>
 </div>
 
 <div class="nav">
   <button class="nav-btn active" onclick="showTab('overview',this)">Overview</button>
-  <button class="nav-btn" onclick="showTab('positions',this)">Positions</button>
-  <button class="nav-btn" onclick="showTab('sectors',this)">Sectors</button>
-  <button class="nav-btn" onclick="showTab('regions',this)">Regions</button>
-  <button class="nav-btn" onclick="showTab('assets',this)">Asset Classes</button>
+  <button class="nav-btn" onclick="showTab('holdings',this)">All Holdings</button>
+  <button class="nav-btn" onclick="showTab('class',this)">Asset Class</button>
+  <button class="nav-btn" onclick="showTab('region',this)">Region</button>
+  <button class="nav-btn" onclick="showTab('currency',this)">Currency</button>
+  <button class="nav-btn" onclick="showTab('about',this)">Sources &amp; Notes</button>
 </div>
 
 <div class="main">
 
 <div class="panel active" id="panel-overview">
   <div style="margin-bottom:16px;">
-    <div class="sh">Portfolio Performance by Period (weighted)</div>
+    <div class="sh">Listed Securities Performance by Period (value-weighted)</div>
     <div class="perf-period-grid">
       <div class="perf-cell"><div class="pp-label">1D</div><div class="pp-val" id="pp-1d">—</div></div>
       <div class="perf-cell"><div class="pp-label">1W</div><div class="pp-val" id="pp-1w">—</div></div>
@@ -197,137 +165,97 @@ tr.clickable:hover td{background:rgba(245,158,11,.06);cursor:pointer;}
     </div>
   </div>
   <div class="grid3" style="margin-bottom:16px;">
-    <div class="card">
-      <div class="sh">Asset Class Allocation</div>
-      <div class="donut-section">
-        <svg id="donut-ac" width="140" height="140" viewBox="0 0 140 140"></svg>
-        <div class="legend" id="legend-ac"></div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="sh">Sector Allocation</div>
-      <div class="donut-section">
-        <svg id="donut-sec" width="140" height="140" viewBox="0 0 140 140"></svg>
-        <div class="legend" id="legend-sec"></div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="sh">Regional Allocation</div>
-      <div class="donut-section">
-        <svg id="donut-reg" width="140" height="140" viewBox="0 0 140 140"></svg>
-        <div class="legend" id="legend-reg"></div>
-      </div>
-    </div>
+    <div class="card"><div class="sh">By Asset Class</div><div class="donut-section"><svg id="donut-class" width="140" height="140" viewBox="0 0 140 140"></svg><div class="legend" id="legend-class"></div></div></div>
+    <div class="card"><div class="sh">By Region</div><div class="donut-section"><svg id="donut-region" width="140" height="140" viewBox="0 0 140 140"></svg><div class="legend" id="legend-region"></div></div></div>
+    <div class="card"><div class="sh">By Currency</div><div class="donut-section"><svg id="donut-currency" width="140" height="140" viewBox="0 0 140 140"></svg><div class="legend" id="legend-currency"></div></div></div>
   </div>
   <div class="grid2">
-    <div class="card">
-      <div class="sh">Top Performers (1D)</div>
-      <table><thead><tr><th>Name</th><th>Ticker</th><th class="r">Price</th><th class="r">1D</th></tr></thead>
-      <tbody id="top-gainers"></tbody></table>
-    </div>
-    <div class="card">
-      <div class="sh">Laggards (1D)</div>
-      <table><thead><tr><th>Name</th><th>Ticker</th><th class="r">Price</th><th class="r">1D</th></tr></thead>
-      <tbody id="top-losers"></tbody></table>
-    </div>
+    <div class="card"><div class="sh">Top Holdings by Value (SGD)</div><table><thead><tr><th>Name</th><th class="r">Value SGD</th><th class="r">% NW</th></tr></thead><tbody id="top-holdings"></tbody></table></div>
+    <div class="card"><div class="sh">Listed Movers (1D)</div><table><thead><tr><th>Name</th><th class="r">Price</th><th class="r">1D</th></tr></thead><tbody id="movers"></tbody></table></div>
   </div>
 </div>
 
-<div class="panel" id="panel-positions">
+<div class="panel" id="panel-holdings">
   <div class="search-row">
-    <input class="search-input" id="pos-search" placeholder="Search name or ticker…" oninput="filterPositions()">
+    <input class="search-input" id="pos-search" placeholder="Search name or ticker…" oninput="filterHoldings()">
     <button class="filter-pill active" onclick="setFilter('all',this)">All</button>
     <button class="filter-pill" onclick="setFilter('Equity',this)">Equity</button>
-    <button class="filter-pill" onclick="setFilter('Bond',this)">Bonds</button>
-    <button class="filter-pill" onclick="setFilter('Commodity',this)">Commodities</button>
-    <button class="filter-pill" onclick="setFilter('REIT',this)">REITs</button>
-    <button class="filter-pill" onclick="setFilter('Crypto',this)">Crypto</button>
     <button class="filter-pill" onclick="setFilter('Cash',this)">Cash</button>
+    <button class="filter-pill" onclick="setFilter('Fund',this)">Funds</button>
+    <button class="filter-pill" onclick="setFilter('Private Equity',this)">PE</button>
+    <button class="filter-pill" onclick="setFilter('Property',this)">Property</button>
   </div>
   <div class="card" style="padding:0;">
     <div class="tbl-wrap">
       <table>
         <thead><tr>
-          <th onclick="sortTable('n')">Name</th>
-          <th onclick="sortTable('t')">Ticker</th>
-          <th>Exch</th>
-          <th onclick="sortTable('ac')">Class</th>
-          <th onclick="sortTable('sector')">Sector</th>
-          <th class="r" onclick="sortTable('price')">Price</th>
-          <th class="r" onclick="sortTable('r1d')">1D</th>
-          <th class="r" onclick="sortTable('r1w')">1W</th>
-          <th class="r" onclick="sortTable('r1m')">1M</th>
-          <th class="r" onclick="sortTable('r3m')">3M</th>
-          <th class="r" onclick="sortTable('rYTD')">YTD</th>
-          <th class="r" onclick="sortTable('r1y')">1Y</th>
-          <th class="r" onclick="sortTable('w')">Wt%</th>
-          <th class="r" onclick="sortTable('alloc')">Target S$</th>
+          <th onclick="sortHold('n')">Name</th>
+          <th onclick="sortHold('t')">Ticker</th>
+          <th onclick="sortHold('ac')">Class</th>
+          <th onclick="sortHold('region')">Region</th>
+          <th>Cur</th>
+          <th class="r" onclick="sortHold('qty')">Qty</th>
+          <th class="r" onclick="sortHold('price')">Price</th>
+          <th class="r" onclick="sortHold('sgd')">Value SGD</th>
+          <th class="r" onclick="sortHold('r1d')">1D</th>
+          <th class="r" onclick="sortHold('r1m')">1M</th>
+          <th class="r" onclick="sortHold('rYTD')">YTD</th>
+          <th class="r" onclick="sortHold('r1y')">1Y</th>
+          <th class="r" onclick="sortHold('sgd')">% NW</th>
         </tr></thead>
-        <tbody id="pos-tbody"></tbody>
+        <tbody id="hold-tbody"></tbody>
       </table>
     </div>
   </div>
 </div>
 
-<div class="panel" id="panel-sectors">
-  <div class="card" style="margin-bottom:16px;">
-    <div class="sh">Sector Performance by Period</div>
-    <div class="tbl-wrap">
-      <table><thead><tr>
-        <th style="width:180px;">Sector</th><th class="r">Weight</th><th class="r">Target S$</th>
-        <th class="r">1D</th><th class="r">1W</th><th class="r">1M</th><th class="r">3M</th><th class="r">YTD</th><th class="r">1Y</th>
-      </tr></thead><tbody id="sector-tbody"></tbody></table>
-    </div>
-  </div>
-  <div class="card"><div class="sh">Sector Weights</div><div id="sector-bars"></div></div>
+<div class="panel" id="panel-class">
+  <div class="card"><div class="sh">Net Worth by Asset Class</div><div class="tbl-wrap"><table><thead><tr><th>Asset Class</th><th class="r">Value SGD</th><th class="r">% NW</th><th class="r">1D*</th><th class="r">1M*</th><th class="r">YTD*</th><th class="r">1Y*</th></tr></thead><tbody id="class-tbody"></tbody></table></div><p style="font-size:11px;color:var(--muted);margin-top:8px;">*Period returns reflect live-priced listed securities only; cash, funds, PE and property show "—".</p></div>
+  <div class="card" style="margin-top:16px;"><div class="sh">Weights</div><div id="class-bars"></div></div>
 </div>
 
-<div class="panel" id="panel-regions">
-  <div class="card" style="margin-bottom:16px;">
-    <div class="sh">Regional Performance by Period</div>
-    <div class="tbl-wrap">
-      <table><thead><tr>
-        <th style="width:180px;">Region</th><th class="r">Weight</th><th class="r">Target S$</th>
-        <th class="r">1D</th><th class="r">1W</th><th class="r">1M</th><th class="r">3M</th><th class="r">YTD</th><th class="r">1Y</th>
-      </tr></thead><tbody id="region-tbody"></tbody></table>
-    </div>
-  </div>
-  <div class="card"><div class="sh">Regional Weights</div><div id="region-bars"></div></div>
+<div class="panel" id="panel-region">
+  <div class="card"><div class="sh">Net Worth by Region</div><div class="tbl-wrap"><table><thead><tr><th>Region</th><th class="r">Value SGD</th><th class="r">% NW</th><th class="r">1D*</th><th class="r">1M*</th><th class="r">YTD*</th><th class="r">1Y*</th></tr></thead><tbody id="region-tbody"></tbody></table></div></div>
+  <div class="card" style="margin-top:16px;"><div class="sh">Weights</div><div id="region-bars"></div></div>
 </div>
 
-<div class="panel" id="panel-assets">
-  <div class="card" style="margin-bottom:16px;">
-    <div class="sh">Asset Class Performance by Period</div>
-    <div class="tbl-wrap">
-      <table><thead><tr>
-        <th style="width:180px;">Asset Class</th><th class="r">Weight</th><th class="r">Target S$</th>
-        <th class="r">1D</th><th class="r">1W</th><th class="r">1M</th><th class="r">3M</th><th class="r">YTD</th><th class="r">1Y</th>
-      </tr></thead><tbody id="asset-tbody"></tbody></table>
-    </div>
-  </div>
-  <div class="card"><div class="sh">Asset Class Weights</div><div id="asset-bars"></div></div>
+<div class="panel" id="panel-currency">
+  <div class="card"><div class="sh">Currency Exposure (pre-hedge)</div><div class="tbl-wrap"><table><thead><tr><th>Currency</th><th class="r">Value SGD</th><th class="r">% NW</th><th class="r">FX → SGD</th></tr></thead><tbody id="currency-tbody"></tbody></table></div></div>
+  <div class="card" style="margin-top:16px;"><div class="sh">Weights</div><div id="currency-bars"></div></div>
 </div>
 
-</div><!-- /main -->
+<div class="panel" id="panel-about">
+  <div class="card">
+    <div class="sh">Data Sources</div>
+    <ul style="font-size:13px;line-height:1.9;padding-left:18px;">
+      <li><strong>SGX equities</strong> — CDP Statement (Apr 2026). Major liquid names tracked live individually; ~60 penny/suspended/USD-quoted names grouped into one "SGX/CDP Legacy Tail" line at statement value.</li>
+      <li><strong>Foreign securities</strong> — Phillip POEMS custodian: US miners (SILJ, SLVP, GDX), VanEck Vietnam, and HK tech (Tencent, SMIC, Xiaomi). Live-priced.</li>
+      <li><strong>Cash &amp; deposits</strong> — DBS/POSB &amp; UOB screenshots (SGD). Static values.</li>
+      <li><strong>Foreign cash</strong> — HK BOC: CNY 1.7M + USD 130K. China house-sale proceeds: CNY 7M. Static.</li>
+      <li><strong>Fund</strong> — Astral Value Fund VCC: USD 154,342.57 (684.30 sh @ NAV 225.55, 30 Apr 2026). Static NAV.</li>
+      <li><strong>Private equity</strong> — China PE deal: CNY 2M. Static.</li>
+      <li><strong>Property</strong> — HDB Marine Crescent S$1M · Hundred Palms EC S$2M · 2× Johor Bahru MYR 1.5M. Static user estimates.</li>
+    </ul>
+    <div class="sh" style="margin-top:18px;">De-duplication</div>
+    <p style="font-size:13px;">SGX shares appear in both CDP and POEMS. To avoid double-counting, SGX names are taken from <strong>CDP only</strong> and foreign names from <strong>POEMS only</strong>. CapLand China Trust &amp; Healthbank (in both) counted once via CDP.</p>
+    <div class="sh" style="margin-top:18px;">Live prices</div>
+    <p style="font-size:13px;">Listed securities &amp; FX from Yahoo Finance (~15min delayed) via a public proxy. Cash, fund, PE &amp; property are static — edit them when balances change. Live value = quantity × live price × FX. Some SGX small-caps may lack live data and fall back to statement values.</p>
+  </div>
+</div>
+
+</div>
 
 <div class="statusbar">
-  <span id="status-text"><span class="dot amber"></span>Ready — click Refresh to load live data</span>
-  <span style="margin-left:auto;">Data: Yahoo Finance · Prices ~15min delayed · Personal use only</span>
+  <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
+  <span style="margin-left:auto;">Live: Yahoo Finance · Static: bank/fund/property statements · Personal use only</span>
 </div>
 
-<!-- POSITION MODAL -->
 <div class="overlay" id="modal-overlay" onclick="closeModal(event)">
   <div class="modal">
     <button class="modal-close-btn" onclick="closeModal()">✕</button>
     <div class="modal-header">
-      <div>
-        <div class="modal-ticker" id="m-ticker">—</div>
-        <div class="modal-name" id="m-name">—</div>
-      </div>
-      <div style="margin-left:auto;text-align:right;">
-        <div class="modal-price" id="m-price">—</div>
-        <div class="modal-chg" id="m-chg">—</div>
-      </div>
+      <div><div class="modal-ticker" id="m-ticker">—</div><div class="modal-name" id="m-name">—</div></div>
+      <div style="margin-left:auto;text-align:right;"><div class="modal-price" id="m-price">—</div><div class="modal-chg" id="m-chg">—</div></div>
     </div>
     <div class="modal-stats" id="m-stats"></div>
     <div class="period-row">
@@ -341,430 +269,297 @@ tr.clickable:hover td{background:rgba(245,158,11,.06);cursor:pointer;}
     <div style="font-size:11px;color:var(--muted);margin-top:8px;">Click &amp; drag to zoom · Scroll to pan · Daily OHLCV candles</div>
   </div>
 </div>
-
-</div><!-- /app -->
+</div>
 
 <script>
-// ═══════════════════════════════════════════════════════════════════
-// PASSWORD GATE
-// Hash is SHA-256 of your password. Default password: Dom2026!
-// To change: open browser console and run:
-//   crypto.subtle.digest('SHA-256', new TextEncoder().encode('YourNewPassword'))
-//     .then(b => console.log([...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')))
-// Then paste the output as PW_HASH below.
-// ═══════════════════════════════════════════════════════════════════
-const PW_HASH = 'ef1d3997e83e2bfec3b1cd0580a994506f999578cfacaf3926e94cf27102713a'; // (private)
-const SESSION_KEY = 'pcc_auth_v1';
-
-async function sha256(str) {
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-  return [...new Uint8Array(buf)].map(x => x.toString(16).padStart(2,'0')).join('');
-}
-
-async function checkPw() {
-  const pw = document.getElementById('gate-pw').value;
-  const hash = await sha256(pw);
-  if (hash === PW_HASH) {
-    sessionStorage.setItem(SESSION_KEY, '1');
-    unlock();
-  } else {
-    document.getElementById('gate-err').textContent = 'Incorrect password';
-    document.getElementById('gate-pw').value = '';
-    document.getElementById('gate-pw').focus();
-    setTimeout(() => { document.getElementById('gate-err').textContent = ''; }, 3000);
-  }
-}
-
-function unlock() {
-  document.getElementById('gate').classList.add('hidden');
-  document.getElementById('app').classList.add('visible');
-  renderAll();
-  setTimeout(loadAll, 300);
-}
-
-function lock() {
-  sessionStorage.removeItem(SESSION_KEY);
-  document.getElementById('gate').classList.remove('hidden');
-  document.getElementById('app').classList.remove('visible');
-  document.getElementById('gate-pw').value = '';
-  document.getElementById('gate-pw').focus();
-}
-
-// Auto-unlock if same session
-if (sessionStorage.getItem(SESSION_KEY) === '1') {
-  document.getElementById('gate').classList.add('hidden');
-  document.getElementById('app').classList.add('visible');
-}
-
-document.getElementById('gate-pw').addEventListener('keydown', e => {
-  if (e.key === 'Enter') checkPw();
-});
+// ═══ PASSWORD GATE (catherine11) ═══
+const PW_HASH='ef1d3997e83e2bfec3b1cd0580a994506f999578cfacaf3926e94cf27102713a';
+const SESSION_KEY='pcc_auth_v1';
+async function sha256(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');}
+async function checkPw(){const pw=document.getElementById('gate-pw').value;if(await sha256(pw)===PW_HASH){sessionStorage.setItem(SESSION_KEY,'1');unlock();}else{document.getElementById('gate-err').textContent='Incorrect password';document.getElementById('gate-pw').value='';setTimeout(()=>document.getElementById('gate-err').textContent='',3000);}}
+function unlock(){document.getElementById('gate').classList.add('hidden');document.getElementById('app').classList.add('visible');renderAll();setTimeout(loadAll,300);}
+function lock(){sessionStorage.removeItem(SESSION_KEY);document.getElementById('gate').classList.remove('hidden');document.getElementById('app').classList.remove('visible');document.getElementById('gate-pw').value='';}
+if(sessionStorage.getItem(SESSION_KEY)==='1'){document.getElementById('gate').classList.add('hidden');document.getElementById('app').classList.add('visible');}
+document.getElementById('gate-pw').addEventListener('keydown',e=>{if(e.key==='Enter')checkPw();});
 document.getElementById('gate-pw').focus();
 
-// ═══════════════════════════════════════════════════════════════════
-// PORTFOLIO DATA
-// ═══════════════════════════════════════════════════════════════════
-const BASE = 2699373;
-const REF_DATE = '2026-05-21';
-
-const POSITIONS = [
-  {id:1, n:"World Quality Factor",      t:"IWQU",  yf:"IWQU.L",   ex:"LSE",  cur:"USD", w:0.07,   alloc:188956, sector:"Quality/Broad Equity",  region:"Global DM",      ac:"Equity"},
-  {id:2, n:"iShares Core S&P 500",      t:"CSPX",  yf:"CSPX.L",   ex:"LSE",  cur:"USD", w:0.07,   alloc:188956, sector:"Quality/Broad Equity",  region:"United States",  ac:"Equity"},
-  {id:3, n:"VanEck Semiconductor",      t:"SMGB",  yf:"SMGB.L",   ex:"LSE",  cur:"USD", w:0.05,   alloc:134969, sector:"AI & Technology",       region:"Global DM",      ac:"Equity"},
-  {id:4, n:"L&G Digital Infra",         t:"DIGI",  yf:"DIGI.L",   ex:"LSE",  cur:"USD", w:0.03,   alloc:80981,  sector:"AI & Technology",       region:"Global DM",      ac:"Equity"},
-  {id:5, n:"iShares MSCI India",        t:"NDIA",  yf:"NDIA.L",   ex:"LSE",  cur:"USD", w:0.08,   alloc:215950, sector:"India Equity",          region:"India",          ac:"Equity"},
-  {id:6, n:"iShares Core MSCI Japan",   t:"CSJP",  yf:"CSJP.L",   ex:"LSE",  cur:"USD", w:0.05,   alloc:134969, sector:"Japan Equity",          region:"Japan",          ac:"Equity"},
-  {id:7, n:"Franklin FTSE Asia ex-Jpn", t:"FLXA",  yf:"FLXA.L",   ex:"LSE",  cur:"USD", w:0.04,   alloc:107975, sector:"EM Asia ex-China",      region:"Asia ex-Japan",  ac:"Equity"},
-  {id:8, n:"Tracker Fund HK (2800)",    t:"2800",  yf:"2800.HK",  ex:"HKEX", cur:"HKD", w:0.02,   alloc:53987,  sector:"China Direct",          region:"China/HK",       ac:"Equity"},
-  {id:9, n:"Hang Seng Tech (3032)",     t:"3032",  yf:"3032.HK",  ex:"HKEX", cur:"HKD", w:0.01,   alloc:26994,  sector:"China Direct",          region:"China/HK",       ac:"Equity"},
-  {id:10,n:"WisdomTree Europe Defence", t:"WDEF",  yf:"WDEF.L",   ex:"LSE",  cur:"USD", w:0.02,   alloc:53987,  sector:"Defense",               region:"Europe",         ac:"Equity"},
-  {id:11,n:"iShares Global Aerospace",  t:"DFND",  yf:"DFND.L",   ex:"LSE",  cur:"USD", w:0.02,   alloc:53987,  sector:"Defense",               region:"Global DM",      ac:"Equity"},
-  {id:12,n:"iShares S&P 500 Energy",    t:"IUES",  yf:"IUES.L",   ex:"LSE",  cur:"USD", w:0.04,   alloc:107975, sector:"Energy",                region:"United States",  ac:"Equity"},
-  {id:13,n:"Sprott Uranium Miners",     t:"URNU",  yf:"URNU.L",   ex:"LSE",  cur:"USD", w:0.03,   alloc:80981,  sector:"Uranium",               region:"Global",         ac:"Equity"},
-  {id:14,n:"Global X Copper Miners",    t:"COPX",  yf:"COPX.L",   ex:"LSE",  cur:"USD", w:0.02,   alloc:53987,  sector:"Copper/Minerals",       region:"Global",         ac:"Equity"},
-  {id:15,n:"iShares Agribusiness",      t:"SPAG",  yf:"SPAG.L",   ex:"LSE",  cur:"USD", w:0.02,   alloc:53987,  sector:"Agriculture",           region:"Global",         ac:"Equity"},
-  {id:16,n:"WisdomTree Broad Commod",   t:"WCOM",  yf:"WCOM.L",   ex:"LSE",  cur:"USD", w:0.02,   alloc:53987,  sector:"Broad Commodities",     region:"Global",         ac:"Commodity"},
-  {id:17,n:"iShares $ Treasury 20+yr",  t:"IDTL",  yf:"IDTL.L",   ex:"LSE",  cur:"USD", w:0.10,   alloc:269937, sector:"Long-Duration Bonds",   region:"United States",  ac:"Bond"},
-  {id:18,n:"iShares $ TIPS",            t:"ITPS",  yf:"ITPS.L",   ex:"LSE",  cur:"USD", w:0.02,   alloc:53987,  sector:"Inflation-Linked Bonds",region:"United States",  ac:"Bond"},
-  {id:19,n:"Mapletree Industrial Trust",t:"M44U",  yf:"M44U.SI",  ex:"SGX",  cur:"SGD", w:0.012,  alloc:32393,  sector:"Singapore REITs",       region:"Singapore",      ac:"REIT"},
-  {id:20,n:"Keppel DC REIT",            t:"AJBU",  yf:"AJBU.SI",  ex:"SGX",  cur:"SGD", w:0.01,   alloc:26994,  sector:"Singapore REITs",       region:"Singapore",      ac:"REIT"},
-  {id:21,n:"CapitaLand Ascendas REIT",  t:"A17U",  yf:"A17U.SI",  ex:"SGX",  cur:"SGD", w:0.008,  alloc:21595,  sector:"Singapore REITs",       region:"Singapore",      ac:"REIT"},
-  {id:22,n:"Frasers Logistics & Comm",  t:"BUOU",  yf:"BUOU.SI",  ex:"SGX",  cur:"SGD", w:0.006,  alloc:16196,  sector:"Singapore REITs",       region:"Singapore",      ac:"REIT"},
-  {id:23,n:"Parkway Life REIT",         t:"C2PU",  yf:"C2PU.SI",  ex:"SGX",  cur:"SGD", w:0.004,  alloc:10798,  sector:"Singapore REITs",       region:"Singapore",      ac:"REIT"},
-  {id:24,n:"Gold (Physical / Futures)", t:"GOLD",  yf:"GC=F",     ex:"COMEX",cur:"USD", w:0.09,   alloc:242944, sector:"Precious Metals",       region:"Global",         ac:"Commodity"},
-  {id:25,n:"Bitcoin",                   t:"BTC",   yf:"BTC-USD",  ex:"Crypto",cur:"USD",w:0.03,   alloc:80981,  sector:"Cryptocurrency",        region:"Global",         ac:"Crypto"},
-  {id:26,n:"Cash / T-bills / SSB",      t:"CASH",  yf:null,       ex:"DBS",  cur:"SGD", w:0.04,   alloc:107975, sector:"Cash & Equivalents",    region:"Singapore",      ac:"Cash"},
-  {id:27,n:"Tactical Sleeve",           t:"TACT",  yf:null,       ex:"—",    cur:"SGD", w:0.09,   alloc:242944, sector:"Cash & Equivalents",    region:"Singapore",      ac:"Cash"},
-  {id:28,n:"Tencent Holdings",          t:"0700",  yf:"0700.HK",  ex:"HKEX", cur:"HKD", w:0.031,  alloc:84000,  sector:"China Direct",          region:"China/HK",       ac:"Equity"},
-  {id:29,n:"SMIC",                      t:"0981",  yf:"0981.HK",  ex:"HKEX", cur:"HKD", w:0.047,  alloc:127000, sector:"AI & Technology",       region:"China/HK",       ac:"Equity"},
-  {id:30,n:"Xiaomi Corp",               t:"1810",  yf:"1810.HK",  ex:"HKEX", cur:"HKD", w:0.039,  alloc:105000, sector:"China Direct",          region:"China/HK",       ac:"Equity"},
+// ═══ HOLDINGS — actual portfolio ═══
+// Priced:  {yf, qty, cur}            value = qty × livePrice × fx[cur]
+// Static:  {manualNative, cur}       value = manualNative × fx[cur]   (no live price/chart)
+const H = [
+  // ── SGX EQUITIES (CDP, live-priced) ──
+  {id:1, n:"DBS Group",               t:"D05",  yf:"D05.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:3000,   book:175500},
+  {id:2, n:"Fraser & Neave",          t:"F99",  yf:"F99.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:100000, book:145000},
+  {id:3, n:"VICOM",                   t:"WJP",  yf:"WJP.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:60000,  book:108000},
+  {id:4, n:"Straits Trading",         t:"S20",  yf:"S20.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:55000,  book:96800},
+  {id:5, n:"City Developments",       t:"C09",  yf:"C09.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:8000,   book:65280},
+  {id:6, n:"UOL Group",               t:"U14",  yf:"U14.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:5372,   book:57104},
+  {id:7, n:"Wing Tai Holdings",       t:"W05",  yf:"W05.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:35000,  book:56350},
+  {id:8, n:"Yanlord Land",            t:"Z25",  yf:"Z25.SI",  ac:"Equity", region:"China/HK",  cur:"SGD", qty:80000,  book:55600},
+  {id:9, n:"Ho Bee Land",             t:"H13",  yf:"H13.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:25000,  book:53500},
+  {id:10,n:"Seatrium",                t:"5E2",  yf:"5E2.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:20000,  book:47000},
+  {id:11,n:"CapLand China Trust",     t:"AU8U", yf:"AU8U.SI", ac:"Equity", region:"China/HK",  cur:"SGD", qty:65000,  book:43225},
+  {id:12,n:"YZJ Shipbuilding",        t:"BS6",  yf:"BS6.SI",  ac:"Equity", region:"China/HK",  cur:"SGD", qty:10000,  book:43100},
+  {id:13,n:"Global Investments",      t:"B73",  yf:"B73.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:263877, book:34040},
+  {id:14,n:"Singtel",                 t:"Z74",  yf:"Z74.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:7310,   book:33553},
+  {id:15,n:"Metro Holdings",          t:"M01",  yf:"M01.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:34768,  book:17210},
+  {id:16,n:"Lum Chang Holdings",      t:"L46",  yf:"L46.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:28760,  book:17256},
+  {id:17,n:"Tuan Sing Holdings",      t:"T24",  yf:"T24.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:50616,  book:16703},
+  {id:18,n:"Food Empire",             t:"F03",  yf:"F03.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:5000,   book:16300},
+  {id:19,n:"Tiong Woon",              t:"BQM",  yf:"BQM.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:12500,  book:13750},
+  {id:20,n:"Keppel REIT",             t:"K71U", yf:"K71U.SI", ac:"Equity", region:"Singapore", cur:"SGD", qty:14000,  book:12530},
+  {id:21,n:"Bonvests Holdings",       t:"B28",  yf:"B28.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:10000,  book:9750},
+  {id:22,n:"Stamford Land",           t:"H07",  yf:"H07.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:20000,  book:9500},
+  {id:23,n:"AIMS APAC REIT",          t:"O5RU", yf:"O5RU.SI", ac:"Equity", region:"Singapore", cur:"SGD", qty:6000,   book:9060},
+  {id:24,n:"Hotel Grand Central",     t:"H18",  yf:"H18.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:11161,  book:8594},
+  {id:25,n:"Mapletree PACT",          t:"N2IU", yf:"N2IU.SI", ac:"Equity", region:"Singapore", cur:"SGD", qty:6000,   book:7740},
+  {id:26,n:"Keppel Infra Trust",      t:"A7RU", yf:"A7RU.SI", ac:"Equity", region:"Singapore", cur:"SGD", qty:11000,  book:5940},
+  {id:27,n:"Golden Agri-Resources",   t:"E5H",  yf:"E5H.SI",  ac:"Equity", region:"Asia",      cur:"SGD", qty:18600,  book:5859},
+  {id:28,n:"China Aviation Oil",      t:"G92",  yf:"G92.SI",  ac:"Equity", region:"China/HK",  cur:"SGD", qty:2268,   book:4808},
+  {id:29,n:"CapLand Integrated Comm", t:"C38U", yf:"C38U.SI", ac:"Equity", region:"Singapore", cur:"SGD", qty:1546,   book:3649},
+  {id:30,n:"SingPost",                t:"S08",  yf:"S08.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:10000,  book:3450},
+  {id:31,n:"Asian Pay TV Trust",      t:"S7OU", yf:"S7OU.SI", ac:"Equity", region:"Asia",      cur:"SGD", qty:34573,  book:3008},
+  // ── SGX/CDP LEGACY TAIL (penny, suspended & USD-quoted, ~60 names) ──
+  {id:32,n:"SGX/CDP Legacy Tail (~60 penny/suspended names)", t:"TAIL", yf:null, ac:"Equity", region:"Singapore", cur:"SGD", manualNative:147234},
+  // ── FOREIGN SECURITIES (POEMS custodian, live-priced) ──
+  {id:33,n:"Tencent Holdings",        t:"0700", yf:"0700.HK", ac:"Equity", region:"China/HK", cur:"HKD", qty:1100},
+  {id:34,n:"SMIC",                    t:"0981", yf:"0981.HK", ac:"Equity", region:"China/HK", cur:"HKD", qty:11000},
+  {id:35,n:"Xiaomi Corp",             t:"1810", yf:"1810.HK", ac:"Equity", region:"China/HK", cur:"HKD", qty:14000},
+  {id:36,n:"VanEck Gold Miners (GDX)",t:"GDX",  yf:"GDX",     ac:"Equity", region:"Global",   cur:"USD", qty:1000},
+  {id:37,n:"ETFMG Jr Silver Miners",  t:"SILJ", yf:"SILJ",    ac:"Equity", region:"Global",   cur:"USD", qty:2500},
+  {id:38,n:"iShares Global Silver",   t:"SLVP", yf:"SLVP",    ac:"Equity", region:"Global",   cur:"USD", qty:2000},
+  {id:39,n:"VanEck Vietnam (VNM)",    t:"VNM",  yf:"VNM",     ac:"Equity", region:"Vietnam",  cur:"USD", qty:450},
+  {id:40,n:"China Greenfresh (penny)",t:"CGF",  yf:null,      ac:"Equity", region:"China/HK", cur:"HKD", manualNative:0},
+  // ── FUND ──
+  {id:41,n:"Astral Value Fund VCC",   t:"ASTRAL", yf:null, ac:"Fund", region:"Global", cur:"USD", manualNative:154342.57},
+  // ── CASH & DEPOSITS (SGD) ──
+  {id:42,n:"POSB Passbook 050-41594-5", t:"CASH", yf:null, ac:"Cash", region:"Singapore", cur:"SGD", manualNative:1832112.99},
+  {id:43,n:"UOB One Account",           t:"CASH", yf:null, ac:"Cash", region:"Singapore", cur:"SGD", manualNative:224219.34},
+  {id:44,n:"UOB KrisFlyer Account",     t:"CASH", yf:null, ac:"Cash", region:"Singapore", cur:"SGD", manualNative:102033.15},
+  {id:45,n:"DBS Multiplier Account",    t:"CASH", yf:null, ac:"Cash", region:"Singapore", cur:"SGD", manualNative:66668.73},
+  {id:46,n:"POSB Passbook 404-05431-7", t:"CASH", yf:null, ac:"Cash", region:"Singapore", cur:"SGD", manualNative:28913.93},
+  {id:47,n:"SRS Account",               t:"CASH", yf:null, ac:"Cash", region:"Singapore", cur:"SGD", manualNative:15300.25},
+  {id:48,n:"DBS Savings Account",       t:"CASH", yf:null, ac:"Cash", region:"Singapore", cur:"SGD", manualNative:14016.27},
+  {id:49,n:"POEMS Cash (SGD equiv)",    t:"CASH", yf:null, ac:"Cash", region:"Singapore", cur:"SGD", manualNative:5133.04},
+  // ── FOREIGN CASH ──
+  {id:50,n:"China House-Sale Proceeds (CNY 7M)", t:"CASH", yf:null, ac:"Cash", region:"China/HK", cur:"CNY", manualNative:7000000},
+  {id:51,n:"HK BOC — RMB Cash (CNY 1.7M)",       t:"CASH", yf:null, ac:"Cash", region:"China/HK", cur:"CNY", manualNative:1700000},
+  {id:52,n:"HK BOC — USD Cash (USD 130K)",       t:"CASH", yf:null, ac:"Cash", region:"China/HK", cur:"USD", manualNative:130000},
+  // ── PRIVATE EQUITY ──
+  {id:53,n:"China Private Equity Deal (CNY 2M)",  t:"PE", yf:null, ac:"Private Equity", region:"China/HK", cur:"CNY", manualNative:2000000},
+  // ── PROPERTY ──
+  {id:54,n:"Hundred Palms EC",                t:"PROP", yf:null, ac:"Property", region:"Singapore", cur:"SGD", manualNative:2000000},
+  {id:55,n:"HDB Flat — Marine Crescent",      t:"PROP", yf:null, ac:"Property", region:"Singapore", cur:"SGD", manualNative:1000000},
+  {id:56,n:"Johor Bahru Properties (2×)",     t:"PROP", yf:null, ac:"Property", region:"Malaysia",  cur:"MYR", manualNative:1500000},
 ];
 
-// ═══════════════════════════════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════════════════════════════
-const FX = {USDSGD:1.34, HKDSGD:0.172};
-const priceData = {};
-let sortKey = 'w', sortAsc = false;
-let posFilter = 'all', posSearch = '';
-let chartInstance = null;
-let modalHistFull = null;
+const FX={SGD:1, USD:1.34, HKD:0.172, CNY:0.186, MYR:0.30};
+const pd={};
+let sortKey='sgd', sortAsc=false, filt='all', search='';
+let chart=null, modalHist=null;
+const PROXY='https://api.allorigins.win/raw?url=';
 
-// ═══════════════════════════════════════════════════════════════════
-// FETCH
-// ═══════════════════════════════════════════════════════════════════
-const PROXY = 'https://api.allorigins.win/raw?url=';
+async function yfFetch(u){try{const r=await fetch(u,{signal:AbortSignal.timeout(5000)});if(r.ok)return r.json();}catch(_){}const r=await fetch(PROXY+encodeURIComponent(u),{signal:AbortSignal.timeout(20000)});if(!r.ok)throw new Error('HTTP '+r.status);return r.json();}
 
-async function yfFetch(url) {
-  try {
-    const r = await fetch(url, {signal: AbortSignal.timeout(5000)});
-    if (r.ok) return r.json();
-  } catch(_) {}
-  const r = await fetch(PROXY + encodeURIComponent(url), {signal: AbortSignal.timeout(20000)});
-  if (!r.ok) throw new Error('HTTP ' + r.status);
-  return r.json();
-}
-
-async function loadAll() {
-  setStatus('amber','Loading live data…');
-  el('last-updated').textContent = 'Loading…';
-  const tradeable = POSITIONS.filter(p => p.yf);
-  const allTickers = [...tradeable.map(p=>p.yf), 'USDSGD=X', 'HKDSGD=X'];
-
-  try {
-    // Batch quotes
-    for (const chunk of chunkArray(allTickers, 20)) {
-      const url = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${chunk.join(',')}`;
-      const data = await yfFetch(url);
-      for (const q of (data?.quoteResponse?.result || [])) {
-        const sym = q.symbol;
-        if (sym === 'USDSGD=X') { FX.USDSGD = q.regularMarketPrice || FX.USDSGD; continue; }
-        if (sym === 'HKDSGD=X') { FX.HKDSGD = q.regularMarketPrice || FX.HKDSGD; continue; }
-        const pos = tradeable.find(p => p.yf === sym);
-        if (!pos) continue;
-        priceData[pos.t] = {
-          price: q.regularMarketPrice,
-          prevClose: q.regularMarketPreviousClose,
-          currency: (q.currency || pos.cur || 'USD').toUpperCase(),
-          r1d: q.regularMarketChangePercent / 100,
-          high52: q.fiftyTwoWeekHigh,
-          low52: q.fiftyTwoWeekLow,
-          volume: q.regularMarketVolume,
-          avgVolume: q.averageDailyVolume3Month,
-          name: q.longName || q.shortName || pos.n,
-        };
+async function loadAll(){
+  setStatus('amber','Loading…');el('last-updated').textContent='Loading…';
+  const priced=H.filter(h=>h.yf);
+  const all=[...priced.map(h=>h.yf),'USDSGD=X','HKDSGD=X','CNYSGD=X','MYRSGD=X'];
+  try{
+    for(const ck of chunk(all,20)){
+      const data=await yfFetch(`https://query1.finance.yahoo.com/v7/finance/quote?symbols=${ck.join(',')}`);
+      for(const q of (data?.quoteResponse?.result||[])){
+        const s=q.symbol;
+        if(s==='USDSGD=X'){FX.USD=q.regularMarketPrice||FX.USD;continue;}
+        if(s==='HKDSGD=X'){FX.HKD=q.regularMarketPrice||FX.HKD;continue;}
+        if(s==='CNYSGD=X'){FX.CNY=q.regularMarketPrice||FX.CNY;continue;}
+        if(s==='MYRSGD=X'){FX.MYR=q.regularMarketPrice||FX.MYR;continue;}
+        const h=priced.find(x=>x.yf===s);if(!h)continue;
+        pd[h.t]={price:q.regularMarketPrice,currency:(q.currency||h.cur).toUpperCase(),r1d:q.regularMarketChangePercent/100,high52:q.fiftyTwoWeekHigh,low52:q.fiftyTwoWeekLow,volume:q.regularMarketVolume,avgVolume:q.averageDailyVolume3Month,name:q.longName||q.shortName||h.n};
       }
     }
     renderAll();
-
-    // Fetch history in background
-    setStatus('amber','Fetching historical data…');
-    const histJobs = tradeable.filter(p => priceData[p.t]?.price);
-    for (let i=0; i<histJobs.length; i+=5) {
-      await Promise.allSettled(histJobs.slice(i,i+5).map(p => fetchHistory(p)));
-      renderAll(); // update progressively
-    }
-
-    const now = new Date();
-    el('last-updated').textContent = 'Updated ' + now.toLocaleTimeString('en-SG');
-    setStatus('green','Live — ' + now.toLocaleString('en-SG'));
-  } catch(e) {
-    setStatus('red','Error: ' + e.message);
-    renderAll();
-  }
+    setStatus('amber','Fetching history…');
+    const jobs=priced.filter(h=>pd[h.t]?.price);
+    for(let i=0;i<jobs.length;i+=5){await Promise.allSettled(jobs.slice(i,i+5).map(h=>fetchHist(h)));renderAll();}
+    const now=new Date();el('last-updated').textContent='Updated '+now.toLocaleTimeString('en-SG');setStatus('green','Live — '+now.toLocaleString('en-SG'));
+  }catch(e){setStatus('red','Error: '+e.message);renderAll();}
 }
 
-async function fetchHistory(pos) {
-  try {
-    const url = `https://query1.finance.yahoo.com/v8/finance/chart/${pos.yf}?interval=1d&range=2y`;
-    const data = await yfFetch(url);
-    const res = data?.chart?.result?.[0];
-    if (!res) return;
-    const ts = res.timestamp, q0 = res.indicators?.quote?.[0];
-    if (!ts || !q0?.close) return;
-    const hist = [];
-    for (let i=0; i<ts.length; i++) {
-      if (q0.close[i] == null) continue;
-      hist.push({
-        time: new Date(ts[i]*1000).toISOString().slice(0,10),
-        open: q0.open?.[i] ?? q0.close[i],
-        high: q0.high?.[i] ?? q0.close[i],
-        low:  q0.low?.[i]  ?? q0.close[i],
-        close: q0.close[i],
-        volume: q0.volume?.[i] ?? 0,
-      });
-    }
-    if (!priceData[pos.t]) priceData[pos.t] = {};
-    priceData[pos.t].history = hist;
-    const n = hist.length;
-    if (n < 2) return;
-    const cur = hist[n-1].close;
-    priceData[pos.t].price = priceData[pos.t].price ?? cur;
-    const pct = i => i >= 0 && i < n ? (cur/hist[i].close)-1 : null;
-    priceData[pos.t].r1d  = pct(n-2);
-    priceData[pos.t].r1w  = pct(Math.max(0,n-6));
-    priceData[pos.t].r1m  = pct(Math.max(0,n-23));
-    priceData[pos.t].r3m  = pct(Math.max(0,n-67));
-    priceData[pos.t].r6m  = pct(Math.max(0,n-131));
-    priceData[pos.t].r1y  = pct(Math.max(0,n-253));
-    const yr = new Date().getFullYear();
-    const ytdBar = hist.find(h => h.time.startsWith(yr+'-'));
-    priceData[pos.t].rYTD = ytdBar ? (cur/ytdBar.close)-1 : null;
-    const incBar = hist.find(h => h.time >= REF_DATE);
-    priceData[pos.t].rInc = incBar ? (cur/incBar.close)-1 : null;
-  } catch(_) {}
+async function fetchHist(h){
+  try{
+    const data=await yfFetch(`https://query1.finance.yahoo.com/v8/finance/chart/${h.yf}?interval=1d&range=2y`);
+    const res=data?.chart?.result?.[0];if(!res)return;
+    const ts=res.timestamp,q0=res.indicators?.quote?.[0];if(!ts||!q0?.close)return;
+    const hist=[];
+    for(let i=0;i<ts.length;i++){if(q0.close[i]==null)continue;hist.push({time:new Date(ts[i]*1000).toISOString().slice(0,10),open:q0.open?.[i]??q0.close[i],high:q0.high?.[i]??q0.close[i],low:q0.low?.[i]??q0.close[i],close:q0.close[i],volume:q0.volume?.[i]??0});}
+    if(!pd[h.t])pd[h.t]={};pd[h.t].history=hist;
+    const n=hist.length;if(n<2)return;const cur=hist[n-1].close;pd[h.t].price=pd[h.t].price??cur;
+    const pct=i=>i>=0&&i<n?(cur/hist[i].close)-1:null;
+    pd[h.t].r1d=pct(n-2);pd[h.t].r1w=pct(Math.max(0,n-6));pd[h.t].r1m=pct(Math.max(0,n-23));pd[h.t].r3m=pct(Math.max(0,n-67));pd[h.t].r1y=pct(Math.max(0,n-253));
+    const yr=new Date().getFullYear();const yb=hist.find(x=>x.time.startsWith(yr+'-'));pd[h.t].rYTD=yb?(cur/yb.close)-1:null;
+  }catch(_){}
 }
 
-function chunkArray(arr, n) {
-  const out=[];
-  for(let i=0;i<arr.length;i+=n) out.push(arr.slice(i,i+n));
-  return out;
+function chunk(a,n){const o=[];for(let i=0;i<a.length;i+=n)o.push(a.slice(i,i+n));return o;}
+
+// value of a holding in SGD
+function valSGD(h){
+  if(h.yf&&pd[h.t]?.price!=null) return h.qty*pd[h.t].price*(FX[h.currency||h.cur]||FX[h.cur]||1);
+  if(h.yf&&h.book!=null) return h.book; // live failed → statement book value (already SGD)
+  if(h.manualNative!=null) return h.manualNative*(FX[h.cur]||1);
+  return 0;
+}
+function nativeVal(h){ if(h.yf&&pd[h.t]?.price!=null) return h.qty*pd[h.t].price; if(h.manualNative!=null) return h.manualNative; return null; }
+
+const fmt=(n,d=2)=>n==null?'—':n.toLocaleString('en-SG',{minimumFractionDigits:d,maximumFractionDigits:d});
+const fmtP=n=>n==null?'—':(n>=0?'+':'')+(n*100).toFixed(2)+'%';
+const fmtS=n=>n==null?'—':'S$'+Math.round(n).toLocaleString('en-SG');
+const fmtSk=n=>n==null?'—':Math.abs(n)>=1e6?'S$'+(n/1e6).toFixed(2)+'M':'S$'+Math.round(n).toLocaleString('en-SG');
+const clr=n=>n==null?'neu':n>0?'pos':n<0?'neg':'neu';
+const pill=n=>`<span class="pill ${clr(n)}">${fmtP(n)}</span>`;
+
+function totalNW(){return H.reduce((s,h)=>s+valSGD(h),0);}
+function secReturn(key){let ws=0,wt=0;H.forEach(h=>{if(!h.yf)return;const r=pd[h.t]?.[key];const v=valSGD(h);if(r!=null&&v>0){ws+=v*r;wt+=v;}});return wt>0?ws/wt:null;}
+
+function renderAll(){
+  const nw=totalNW();
+  const liq=H.filter(h=>['Equity','Cash','Fund'].includes(h.ac)).reduce((s,h)=>s+valSGD(h),0);
+  const illq=H.filter(h=>['Property','Private Equity'].includes(h.ac)).reduce((s,h)=>s+valSGD(h),0);
+  const sec=H.filter(h=>h.ac==='Equity').reduce((s,h)=>s+valSGD(h),0);
+  el('kpi-nw').textContent=fmtSk(nw);el('kpi-nw').className='kpi-val';
+  el('kpi-nw-sub').textContent=fmt(nw,0)+' SGD total';
+  el('kpi-liq').textContent=fmtSk(liq);
+  el('kpi-illq').textContent=fmtSk(illq);
+  el('kpi-sec').textContent=fmtSk(sec);
+  const r1d=secReturn('r1d');
+  const dayPnL=r1d!=null?sec*r1d/(1+r1d):null;
+  el('kpi-day').textContent=dayPnL!=null?(dayPnL>=0?'+':'')+fmtS(dayPnL):'—';el('kpi-day').className='kpi-val '+clr(dayPnL);
+  el('kpi-day-sub').textContent=r1d!=null?fmtP(r1d)+' weighted':'vs prev close';
+  el('kpi-fx').textContent=`${fmt(FX.USD,3)}·${fmt(FX.HKD,3)}·${fmt(FX.CNY,3)}·${fmt(FX.MYR,3)}`;
+  // period grid
+  [['r1d','pp-1d'],['r1w','pp-1w'],['r1m','pp-1m'],['r3m','pp-3m'],['rYTD','pp-ytd'],['r1y','pp-1y']].forEach(([k,id])=>{const r=secReturn(k);el(id).textContent=fmtP(r);el(id).className='pp-val '+clr(r);});
+  renderHoldings();
+  renderGroup('ac','class-tbody','class-bars',true);
+  renderGroup('region','region-tbody','region-bars',true);
+  renderCurrency();
+  renderDonut('donut-class','legend-class','ac');
+  renderDonut('donut-region','legend-region','region');
+  renderDonut('donut-currency','legend-currency','cur');
+  renderTopHoldings();renderMovers();
 }
 
-// ═══════════════════════════════════════════════════════════════════
-// FORMATTERS
-// ═══════════════════════════════════════════════════════════════════
-const fmt  = (n,d=2) => n==null ? '—' : n.toLocaleString('en-SG',{minimumFractionDigits:d,maximumFractionDigits:d});
-const fmtP = n => n==null ? '—' : (n>=0?'+':'')+(n*100).toFixed(2)+'%';
-const fmtS = n => n==null ? '—' : 'S$'+Math.round(n).toLocaleString('en-SG');
-const clr  = n => n==null?'neu':n>0?'pos':n<0?'neg':'neu';
-const pill = n => `<span class="pill ${clr(n)}">${fmtP(n)}</span>`;
+function setFilter(f,b){filt=f;document.querySelectorAll('.filter-pill').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderHoldings();}
+function filterHoldings(){search=el('pos-search').value.toLowerCase();renderHoldings();}
+function sortHold(k){if(sortKey===k)sortAsc=!sortAsc;else{sortKey=k;sortAsc=false;}renderHoldings();}
 
-// ═══════════════════════════════════════════════════════════════════
-// RENDERS
-// ═══════════════════════════════════════════════════════════════════
-function renderAll() {
-  updateKPIs(); updatePeriodGrid(); renderPositionsTable();
-  renderBreakdown('sector','sector-tbody','sector-bars');
-  renderBreakdown('region','region-tbody','region-bars');
-  renderBreakdown('ac','asset-tbody','asset-bars');
-  renderDonuts(); renderMovers();
-  el('kpi-fx').textContent = fmt(FX.USDSGD,4)+' · '+fmt(FX.HKDSGD,4);
-}
-
-function portfolioReturn(key) {
-  let ws=0,wt=0;
-  POSITIONS.forEach(p => { const r=priceData[p.t]?.[key]; if(r!=null){ws+=p.w*r;wt+=p.w;} });
-  return wt>0?ws/wt:null;
-}
-
-function updateKPIs() {
-  let tot=0;
-  POSITIONS.forEach(p => { tot += p.alloc*(1+(priceData[p.t]?.rInc??0)); });
-  const r1d=portfolioReturn('r1d'), r1m=portfolioReturn('r1m'), rYTD=portfolioReturn('rYTD'), rInc=portfolioReturn('rInc');
-  const dayPnL = r1d!=null ? tot*r1d/(1+r1d) : null;
-  el('kpi-total').textContent = fmtS(tot);
-  el('kpi-total').className = 'kpi-val';
-  el('kpi-total-sub').textContent = `vs target ${fmtS(BASE)}`;
-  el('kpi-day').textContent = dayPnL!=null?(dayPnL>=0?'+':'')+fmtS(dayPnL):'—';
-  el('kpi-day').className = 'kpi-val '+(dayPnL>0?'pos':dayPnL<0?'neg':'');
-  el('kpi-day-sub').textContent = r1d!=null?fmtP(r1d)+' today':'vs prev close';
-  el('kpi-inc').textContent=fmtP(rInc); el('kpi-inc').className='kpi-val '+clr(rInc);
-  el('kpi-1m').textContent=fmtP(r1m);   el('kpi-1m').className='kpi-val '+clr(r1m);
-  el('kpi-ytd').textContent=fmtP(rYTD); el('kpi-ytd').className='kpi-val '+clr(rYTD);
-}
-
-function updatePeriodGrid() {
-  const map = {r1d:'pp-1d',r1w:'pp-1w',r1m:'pp-1m',r3m:'pp-3m',rYTD:'pp-ytd',r1y:'pp-1y'};
-  for(const[k,id] of Object.entries(map)){const r=portfolioReturn(k);el(id).textContent=fmtP(r);el(id).className='pp-val '+clr(r);}
-}
-
-function setFilter(f,btn) {
-  posFilter=f;
-  document.querySelectorAll('.filter-pill').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderPositionsTable();
-}
-function filterPositions() { posSearch=el('pos-search').value.toLowerCase(); renderPositionsTable(); }
-function sortTable(k) { if(sortKey===k)sortAsc=!sortAsc; else{sortKey=k;sortAsc=false;} renderPositionsTable(); }
-
-function renderPositionsTable() {
-  let rows = [...POSITIONS];
-  if(posFilter!=='all') rows=rows.filter(p=>p.ac===posFilter);
-  if(posSearch) rows=rows.filter(p=>p.n.toLowerCase().includes(posSearch)||p.t.toLowerCase().includes(posSearch));
-  const getV = (p,k) => k==='price'?priceData[p.t]?.price??0
-    : ['r1d','r1w','r1m','r3m','rYTD','r1y'].includes(k)?priceData[p.t]?.[k]??-99
-    : p[k]??p.n;
-  rows.sort((a,b)=>{ const va=getV(a,sortKey),vb=getV(b,sortKey); return sortAsc?(va>vb?1:-1):(va<vb?1:-1); });
-  el('pos-tbody').innerHTML = rows.map(p => {
-    const d=priceData[p.t]||{};
-    const pr=d.price!=null?fmt(d.price,d.price<10?4:d.price<100?3:2)+' '+(d.currency||p.cur)
-      :p.yf?'<span class="ld"><span class="spin"></span></span>':'—';
-    return `<tr class="clickable" onclick="openModal(${p.id})">
-      <td>${p.n}</td><td><span class="ticker-badge">${p.t}</span></td>
-      <td style="color:var(--muted)">${p.ex}</td><td style="color:var(--muted)">${p.ac}</td>
-      <td style="color:var(--muted)">${p.sector}</td><td class="r">${pr}</td>
-      <td class="r">${pill(d.r1d)}</td><td class="r">${pill(d.r1w)}</td>
-      <td class="r">${pill(d.r1m)}</td><td class="r">${pill(d.r3m)}</td>
-      <td class="r">${pill(d.rYTD)}</td><td class="r">${pill(d.r1y)}</td>
-      <td class="r">${(p.w*100).toFixed(1)}%</td><td class="r">${fmtS(p.alloc)}</td>
+function renderHoldings(){
+  const nw=totalNW();
+  let rows=[...H];
+  if(filt!=='all')rows=rows.filter(h=>h.ac===filt);
+  if(search)rows=rows.filter(h=>h.n.toLowerCase().includes(search)||(h.t||'').toLowerCase().includes(search));
+  const gv=(h,k)=>k==='sgd'?valSGD(h):k==='price'?(pd[h.t]?.price??0):k==='qty'?(h.qty??0):['r1d','r1m','rYTD','r1y'].includes(k)?(pd[h.t]?.[k]??-99):h[k]??h.n;
+  rows.sort((a,b)=>{const va=gv(a,sortKey),vb=gv(b,sortKey);return sortAsc?(va>vb?1:-1):(va<vb?1:-1);});
+  el('hold-tbody').innerHTML=rows.map(h=>{
+    const d=pd[h.t]||{};const v=valSGD(h);
+    const priced=!!h.yf;
+    const priceStr=priced?(d.price!=null?fmt(d.price,d.price<10?4:d.price<100?3:2):'<span class="ld"><span class="spin"></span></span>'):'—';
+    const qtyStr=h.qty!=null?h.qty.toLocaleString('en-SG'):'—';
+    return `<tr class="${priced?'clickable':''}" ${priced?`onclick="openModal(${h.id})"`:''}>
+      <td>${h.n}</td>
+      <td>${h.t&&h.t!=='CASH'&&h.t!=='PROP'&&h.t!=='PE'?`<span class="ticker-badge">${h.t}</span>`:'<span style="color:var(--muted)">—</span>'}</td>
+      <td style="color:var(--muted)">${h.ac}</td>
+      <td style="color:var(--muted)">${h.region}</td>
+      <td><span class="cur-badge">${h.cur}</span></td>
+      <td class="r">${qtyStr}</td>
+      <td class="r">${priceStr}</td>
+      <td class="r" style="font-weight:700">${fmtS(v)}</td>
+      <td class="r">${priced?pill(d.r1d):'—'}</td>
+      <td class="r">${priced?pill(d.r1m):'—'}</td>
+      <td class="r">${priced?pill(d.rYTD):'—'}</td>
+      <td class="r">${priced?pill(d.r1y):'—'}</td>
+      <td class="r">${(v/nw*100).toFixed(1)}%</td>
     </tr>`;
   }).join('');
 }
 
-function renderBreakdown(gk,tbId,bId) {
-  const grps={};
-  POSITIONS.forEach(p=>{ const k=p[gk]; if(!grps[k]) grps[k]={key:k,w:0,alloc:0,pos:[]}; grps[k].w+=p.w; grps[k].alloc+=p.alloc; grps[k].pos.push(p); });
-  const arr=Object.values(grps).sort((a,b)=>b.alloc-a.alloc);
-  arr.forEach(g=>{ ['r1d','r1w','r1m','r3m','rYTD','r1y'].forEach(pd=>{ let ws=0,wt=0; g.pos.forEach(p=>{const r=priceData[p.t]?.[pd];if(r!=null){ws+=p.w*r;wt+=p.w;}}); g[pd]=wt>0?ws/wt:null; }); });
-  const max=arr[0]?.alloc||1;
-  el(tbId).innerHTML=arr.map(g=>`<tr><td><strong>${g.key}</strong></td><td class="r">${(g.w*100).toFixed(1)}%</td><td class="r">${fmtS(g.alloc)}</td><td class="r">${pill(g.r1d)}</td><td class="r">${pill(g.r1w)}</td><td class="r">${pill(g.r1m)}</td><td class="r">${pill(g.r3m)}</td><td class="r">${pill(g.rYTD)}</td><td class="r">${pill(g.r1y)}</td></tr>`).join('');
-  el(bId).innerHTML=arr.map(g=>`<div style="display:grid;grid-template-columns:160px 1fr 60px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)"><span style="font-size:12px">${g.key}</span><div style="background:var(--surf2);height:5px;border-radius:3px;overflow:hidden"><div style="height:100%;border-radius:3px;background:var(--accent);width:${(g.alloc/max*100).toFixed(1)}%"></div></div><span style="font-size:12px;color:var(--muted);text-align:right">${(g.w*100).toFixed(1)}%</span></div>`).join('');
+function renderGroup(gk,tbId,barsId){
+  const nw=totalNW();const g={};
+  H.forEach(h=>{const k=h[gk];if(!g[k])g[k]={key:k,v:0,pos:[]};g[k].v+=valSGD(h);g[k].pos.push(h);});
+  const arr=Object.values(g).sort((a,b)=>b.v-a.v);
+  arr.forEach(x=>{['r1d','r1m','rYTD','r1y'].forEach(pe=>{let ws=0,wt=0;x.pos.forEach(h=>{if(!h.yf)return;const r=pd[h.t]?.[pe];const v=valSGD(h);if(r!=null&&v>0){ws+=v*r;wt+=v;}});x[pe]=wt>0?ws/wt:null;});});
+  const max=arr[0]?.v||1;
+  el(tbId).innerHTML=arr.map(x=>`<tr><td><strong>${x.key}</strong></td><td class="r" style="font-weight:700">${fmtS(x.v)}</td><td class="r">${(x.v/nw*100).toFixed(1)}%</td><td class="r">${pill(x.r1d)}</td><td class="r">${pill(x.r1m)}</td><td class="r">${pill(x.rYTD)}</td><td class="r">${pill(x.r1y)}</td></tr>`).join('');
+  el(barsId).innerHTML=arr.map(x=>`<div style="display:grid;grid-template-columns:200px 1fr 70px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)"><span style="font-size:12px">${x.key}</span><div style="background:var(--surf2);height:6px;border-radius:3px;overflow:hidden"><div style="height:100%;border-radius:3px;background:var(--accent);width:${(x.v/max*100).toFixed(1)}%"></div></div><span style="font-size:12px;color:var(--muted);text-align:right">${(x.v/nw*100).toFixed(1)}%</span></div>`).join('');
 }
 
-const COLORS=['#f59e0b','#3b82f6','#22c55e','#ef4444','#a855f7','#14b8a6','#f97316','#ec4899','#84cc16','#06b6d4','#7c3aed','#0ea5e9','#10b981','#dc2626','#6366f1','#64748b'];
-
-function renderDonuts() {
-  ['ac','sec','reg'].forEach(k=>{ const gk=k==='ac'?'ac':k==='sec'?'sector':'region'; renderDonut('donut-'+k,'legend-'+k,gk); });
+function renderCurrency(){
+  const nw=totalNW();const g={};
+  H.forEach(h=>{if(!g[h.cur])g[h.cur]={cur:h.cur,v:0};g[h.cur].v+=valSGD(h);});
+  const arr=Object.values(g).sort((a,b)=>b.v-a.v);const max=arr[0]?.v||1;
+  el('currency-tbody').innerHTML=arr.map(x=>`<tr><td><strong>${x.cur}</strong></td><td class="r" style="font-weight:700">${fmtS(x.v)}</td><td class="r">${(x.v/nw*100).toFixed(1)}%</td><td class="r">${x.cur==='SGD'?'1.000':fmt(FX[x.cur],4)}</td></tr>`).join('');
+  el('currency-bars').innerHTML=arr.map(x=>`<div style="display:grid;grid-template-columns:80px 1fr 70px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)"><span style="font-size:12px">${x.cur}</span><div style="background:var(--surf2);height:6px;border-radius:3px;overflow:hidden"><div style="height:100%;border-radius:3px;background:var(--accent);width:${(x.v/max*100).toFixed(1)}%"></div></div><span style="font-size:12px;color:var(--muted);text-align:right">${(x.v/nw*100).toFixed(1)}%</span></div>`).join('');
 }
 
-function renderDonut(svgId,legId,gk) {
-  const grps={};
-  POSITIONS.forEach(p=>{ grps[p[gk]]=(grps[p[gk]]||0)+p.w; });
-  const arr=Object.entries(grps).sort((a,b)=>b[1]-a[1]);
-  const tot=arr.reduce((s,[,v])=>s+v,0);
-  const cx=70,cy=70,r=55,inner=32;
-  let ang=-Math.PI/2, paths='';
-  const items=[];
-  arr.forEach(([name,val],i)=>{
-    const frac=val/tot, sweep=frac*Math.PI*2;
-    const x1=cx+r*Math.cos(ang),y1=cy+r*Math.sin(ang);
-    ang+=sweep;
-    const x2=cx+r*Math.cos(ang),y2=cy+r*Math.sin(ang);
-    const ix1=cx+inner*Math.cos(ang-sweep),iy1=cy+inner*Math.sin(ang-sweep);
-    const ix2=cx+inner*Math.cos(ang),iy2=cy+inner*Math.sin(ang);
-    const lg=sweep>Math.PI?1:0, c=COLORS[i%COLORS.length];
-    paths+=`<path d="M${ix1},${iy1}L${x1},${y1}A${r},${r} 0 ${lg},1 ${x2},${y2}L${ix2},${iy2}A${inner},${inner} 0 ${lg},0 ${ix1},${iy1}" fill="${c}" opacity=".9"/>`;
-    items.push({name,pct:(frac*100).toFixed(1),c});
-  });
+const COLORS=['#f59e0b','#3b82f6','#22c55e','#ef4444','#a855f7','#14b8a6','#f97316','#ec4899','#84cc16','#06b6d4','#7c3aed','#0ea5e9'];
+function renderDonut(svgId,legId,gk){
+  const g={};H.forEach(h=>{g[h[gk]]=(g[h[gk]]||0)+valSGD(h);});
+  const arr=Object.entries(g).sort((a,b)=>b[1]-a[1]);const tot=arr.reduce((s,[,v])=>s+v,0);
+  const cx=70,cy=70,r=55,inner=32;let ang=-Math.PI/2,paths='';const items=[];
+  arr.forEach(([name,val],i)=>{const f=val/tot,sw=f*Math.PI*2;const x1=cx+r*Math.cos(ang),y1=cy+r*Math.sin(ang);ang+=sw;const x2=cx+r*Math.cos(ang),y2=cy+r*Math.sin(ang);const ix1=cx+inner*Math.cos(ang-sw),iy1=cy+inner*Math.sin(ang-sw),ix2=cx+inner*Math.cos(ang),iy2=cy+inner*Math.sin(ang);const lg=sw>Math.PI?1:0,c=COLORS[i%COLORS.length];paths+=`<path d="M${ix1},${iy1}L${x1},${y1}A${r},${r} 0 ${lg},1 ${x2},${y2}L${ix2},${iy2}A${inner},${inner} 0 ${lg},0 ${ix1},${iy1}" fill="${c}" opacity=".9"/>`;items.push({name,pct:(f*100).toFixed(1),c});});
   el(svgId).innerHTML=paths+`<circle cx="${cx}" cy="${cy}" r="${inner}" fill="var(--surf)"/>`;
-  el(legId).innerHTML=items.slice(0,8).map(it=>`<div class="legend-row"><div class="leg-dot" style="background:${it.c}"></div><span class="leg-name">${it.name}</span><span class="leg-pct">${it.pct}%</span></div>`).join('');
+  el(legId).innerHTML=items.slice(0,9).map(it=>`<div class="legend-row"><div class="leg-dot" style="background:${it.c}"></div><span class="leg-name">${it.name}</span><span class="leg-pct">${it.pct}%</span></div>`).join('');
 }
 
-function renderMovers() {
-  const ranked=POSITIONS.filter(p=>priceData[p.t]?.r1d!=null).map(p=>({...p,r1d:priceData[p.t].r1d})).sort((a,b)=>b.r1d-a.r1d);
-  const row=p=>`<tr class="clickable" onclick="openModal(${p.id})"><td>${p.n}</td><td><span class="ticker-badge">${p.t}</span></td><td class="r">${priceData[p.t]?.price!=null?fmt(priceData[p.t].price,priceData[p.t].price<100?3:2):'—'}</td><td class="r">${pill(p.r1d)}</td></tr>`;
-  el('top-gainers').innerHTML=ranked.slice(0,5).map(row).join('');
-  el('top-losers').innerHTML=ranked.slice(-5).reverse().map(row).join('');
+function renderTopHoldings(){
+  const nw=totalNW();
+  const arr=[...H].sort((a,b)=>valSGD(b)-valSGD(a)).slice(0,10);
+  el('top-holdings').innerHTML=arr.map(h=>`<tr class="${h.yf?'clickable':''}" ${h.yf?`onclick="openModal(${h.id})"`:''}><td>${h.n}</td><td class="r" style="font-weight:700">${fmtS(valSGD(h))}</td><td class="r" style="color:var(--muted)">${(valSGD(h)/nw*100).toFixed(1)}%</td></tr>`).join('');
+}
+function renderMovers(){
+  const arr=H.filter(h=>h.yf&&pd[h.t]?.r1d!=null).map(h=>({...h,r1d:pd[h.t].r1d})).sort((a,b)=>b.r1d-a.r1d);
+  const top=[...arr.slice(0,4),...arr.slice(-4).reverse()];
+  el('movers').innerHTML=top.map(h=>`<tr class="clickable" onclick="openModal(${h.id})"><td>${h.n} <span class="cur-badge">${h.cur}</span></td><td class="r">${pd[h.t]?.price!=null?fmt(pd[h.t].price,pd[h.t].price<100?3:2):'—'}</td><td class="r">${pill(h.r1d)}</td></tr>`).join('');
 }
 
-// ═══════════════════════════════════════════════════════════════════
-// MODAL / CHART
-// ═══════════════════════════════════════════════════════════════════
-function openModal(posId) {
-  const pos=POSITIONS.find(p=>p.id===posId); if(!pos) return;
-  const d=priceData[pos.t]||{};
-  el('m-ticker').textContent=pos.t;
-  el('m-name').textContent=d.name||pos.n;
-  if(d.price!=null){
-    el('m-price').textContent=fmt(d.price,d.price<10?4:d.price<100?3:2)+' '+(d.currency||pos.cur);
-    el('m-chg').textContent=d.r1d!=null?(d.r1d>=0?'+':'')+(d.r1d*100).toFixed(2)+'%':'—';
-    el('m-chg').className='modal-chg '+clr(d.r1d);
-  } else { el('m-price').textContent='No data'; el('m-chg').textContent=''; }
+// ═══ MODAL ═══
+function openModal(id){
+  const h=H.find(x=>x.id===id);if(!h||!h.yf)return;const d=pd[h.t]||{};
+  el('m-ticker').textContent=h.t;el('m-name').textContent=d.name||h.n;
+  if(d.price!=null){el('m-price').textContent=fmt(d.price,d.price<10?4:d.price<100?3:2)+' '+(d.currency||h.cur);el('m-chg').textContent=d.r1d!=null?(d.r1d>=0?'+':'')+(d.r1d*100).toFixed(2)+'%':'—';el('m-chg').className='modal-chg '+clr(d.r1d);}else{el('m-price').textContent='No data';el('m-chg').textContent='';}
+  const nv=nativeVal(h);
   el('m-stats').innerHTML=`
+    <div class="stat-item"><label>Quantity</label><span>${h.qty!=null?h.qty.toLocaleString('en-SG'):'—'}</span></div>
+    <div class="stat-item"><label>Value (${h.cur})</label><span>${nv!=null?fmt(nv,0):'—'}</span></div>
+    <div class="stat-item"><label>Value (SGD)</label><span>${fmtS(valSGD(h))}</span></div>
     <div class="stat-item"><label>52W High</label><span>${d.high52!=null?fmt(d.high52,2):'—'}</span></div>
     <div class="stat-item"><label>52W Low</label><span>${d.low52!=null?fmt(d.low52,2):'—'}</span></div>
-    <div class="stat-item"><label>Volume</label><span>${d.volume!=null?(d.volume/1e6).toFixed(2)+'M':'—'}</span></div>
-    <div class="stat-item"><label>Avg Vol 3M</label><span>${d.avgVolume!=null?(d.avgVolume/1e6).toFixed(2)+'M':'—'}</span></div>
     <div class="stat-item"><label>1W</label><span class="${clr(d.r1w)}">${fmtP(d.r1w)}</span></div>
     <div class="stat-item"><label>1M</label><span class="${clr(d.r1m)}">${fmtP(d.r1m)}</span></div>
     <div class="stat-item"><label>3M</label><span class="${clr(d.r3m)}">${fmtP(d.r3m)}</span></div>
     <div class="stat-item"><label>YTD</label><span class="${clr(d.rYTD)}">${fmtP(d.rYTD)}</span></div>
-    <div class="stat-item"><label>1Y</label><span class="${clr(d.r1y)}">${fmtP(d.r1y)}</span></div>
-    <div class="stat-item"><label>Since 21 May</label><span class="${clr(d.rInc)}">${fmtP(d.rInc)}</span></div>
-    <div class="stat-item"><label>Weight</label><span>${(pos.w*100).toFixed(1)}%</span></div>
-    <div class="stat-item"><label>Target Alloc</label><span>${fmtS(pos.alloc)}</span></div>`;
-  modalHistFull=d.history||null;
-  el('modal-overlay').classList.add('open');
-  setChartPeriod('1Y');
-  if(!modalHistFull&&pos.yf) fetchHistory(pos).then(()=>{ modalHistFull=priceData[pos.t]?.history||null; setChartPeriod('1Y'); });
+    <div class="stat-item"><label>1Y</label><span class="${clr(d.r1y)}">${fmtP(d.r1y)}</span></div>`;
+  modalHist=d.history||null;el('modal-overlay').classList.add('open');setChartPeriod('1Y');
+  if(!modalHist){fetchHist(h).then(()=>{modalHist=pd[h.t]?.history||null;setChartPeriod('1Y');});}
+}
+function closeModal(e){if(e&&e.target!==el('modal-overlay'))return;el('modal-overlay').classList.remove('open');if(chart){chart.remove();chart=null;}}
+function setChartPeriod(p){
+  document.querySelectorAll('.pb').forEach(b=>b.classList.toggle('active',b.textContent===p));
+  const box=el('m-chart-box');box.innerHTML='';if(chart){chart.remove();chart=null;}
+  if(!modalHist||!modalHist.length){box.innerHTML='<div style="height:100%;display:flex;align-items:center;justify-content:center;color:var(--muted)">No chart data — Refresh first</div>';return;}
+  const days={'1M':30,'3M':90,'6M':183,'1Y':365,'2Y':730}[p]||365;
+  const co=new Date();co.setDate(co.getDate()-days);const f=modalHist.filter(x=>x.time>=co.toISOString().slice(0,10));
+  if(!f.length){box.innerHTML='<div style="height:100%;display:flex;align-items:center;justify-content:center;color:var(--muted)">Insufficient history</div>';return;}
+  try{chart=LightweightCharts.createChart(box,{width:box.clientWidth,height:290,layout:{background:{color:'transparent'},textColor:'#6b7280'},grid:{vertLines:{color:'#252a3a'},horzLines:{color:'#252a3a'}},crosshair:{mode:LightweightCharts.CrosshairMode.Normal},rightPriceScale:{borderColor:'#252a3a'},timeScale:{borderColor:'#252a3a',timeVisible:true}});
+  chart.addCandlestickSeries({upColor:'#22c55e',downColor:'#ef4444',borderUpColor:'#22c55e',borderDownColor:'#ef4444',wickUpColor:'#22c55e',wickDownColor:'#ef4444'}).setData(f);
+  chart.addHistogramSeries({color:'rgba(59,130,246,0.3)',priceFormat:{type:'volume'},priceScaleId:'vol',scaleMargins:{top:0.8,bottom:0}}).setData(f.map(x=>({time:x.time,value:x.volume,color:x.close>=x.open?'rgba(34,197,94,0.3)':'rgba(239,68,68,0.3)'})));
+  chart.timeScale().fitContent();}catch(e){box.innerHTML='<div style="height:100%;display:flex;align-items:center;justify-content:center;color:var(--muted)">Chart error</div>';}
 }
 
-function closeModal(e) {
-  if(e&&e.target!==el('modal-overlay')) return;
-  el('modal-overlay').classList.remove('open');
-  if(chartInstance){chartInstance.remove();chartInstance=null;}
-}
-
-function setChartPeriod(period) {
-  document.querySelectorAll('.pb').forEach(b=>b.classList.toggle('active',b.textContent===period));
-  const box=el('m-chart-box'); box.innerHTML='';
-  if(chartInstance){chartInstance.remove();chartInstance=null;}
-  const hist=modalHistFull;
-  if(!hist||!hist.length){box.innerHTML='<div style="height:100%;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;">No chart data — click Refresh first</div>';return;}
-  const days={'1M':30,'3M':90,'6M':183,'1Y':365,'2Y':730}[period]||365;
-  const cutoff=new Date(); cutoff.setDate(cutoff.getDate()-days);
-  const filtered=hist.filter(h=>h.time>=cutoff.toISOString().slice(0,10));
-  if(!filtered.length){box.innerHTML='<div style="height:100%;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;">Insufficient history for this period</div>';return;}
-  try {
-    chartInstance=LightweightCharts.createChart(box,{
-      width:box.clientWidth,height:290,
-      layout:{background:{color:'transparent'},textColor:'#6b7280'},
-      grid:{vertLines:{color:'#252a3a'},horzLines:{color:'#252a3a'}},
-      crosshair:{mode:LightweightCharts.CrosshairMode.Normal},
-      rightPriceScale:{borderColor:'#252a3a'},
-      timeScale:{borderColor:'#252a3a',timeVisible:true},
-    });
-    chartInstance.addCandlestickSeries({upColor:'#22c55e',downColor:'#ef4444',borderUpColor:'#22c55e',borderDownColor:'#ef4444',wickUpColor:'#22c55e',wickDownColor:'#ef4444'}).setData(filtered);
-    chartInstance.addHistogramSeries({color:'rgba(59,130,246,0.3)',priceFormat:{type:'volume'},priceScaleId:'vol',scaleMargins:{top:0.8,bottom:0}})
-      .setData(filtered.map(h=>({time:h.time,value:h.volume,color:h.close>=h.open?'rgba(34,197,94,0.3)':'rgba(239,68,68,0.3)'})));
-    chartInstance.timeScale().fitContent();
-  } catch(e) { box.innerHTML='<div style="height:100%;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;">Chart error: '+e.message+'</div>'; }
-}
-
-// ═══════════════════════════════════════════════════════════════════
-// UTILS
-// ═══════════════════════════════════════════════════════════════════
-function showTab(id,btn) {
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  el('panel-'+id).classList.add('active'); btn.classList.add('active');
-}
+function showTab(id,b){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active'));el('panel-'+id).classList.add('active');b.classList.add('active');}
 function el(id){return document.getElementById(id);}
-function setStatus(c,msg){el('status-text').innerHTML=`<span class="dot ${c}"></span>${msg}`;}
-
-// Auto-init if session already unlocked
-if(sessionStorage.getItem(SESSION_KEY)==='1') renderAll();
+function setStatus(c,m){el('status-text').innerHTML=`<span class="dot ${c}"></span>${m}`;}
+if(sessionStorage.getItem(SESSION_KEY)==='1')renderAll();
 </script>
 </body>
 </html>
