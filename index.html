@@ -210,8 +210,24 @@ tr.clickable:hover td{background:rgba(245,158,11,.06);cursor:pointer;}
 </div>
 
 <div class="panel" id="panel-class">
-  <div class="card"><div class="sh">Net Worth by Asset Class</div><div class="tbl-wrap"><table><thead><tr><th>Asset Class</th><th class="r">Value SGD</th><th class="r">% NW</th><th class="r">1D*</th><th class="r">1M*</th><th class="r">YTD*</th><th class="r">1Y*</th></tr></thead><tbody id="class-tbody"></tbody></table></div><p style="font-size:11px;color:var(--muted);margin-top:8px;">*Period returns reflect live-priced listed securities only; cash, funds, PE and property show "—".</p></div>
+  <div class="card"><div class="sh">Net Worth by Asset Class</div>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:8px;">Click any class to expand — <strong>Cash</strong> breaks down by currency; other classes list their holdings.</p>
+    <div class="tbl-wrap"><table><thead><tr><th>Asset Class</th><th class="r">Value SGD</th><th class="r">% NW</th><th class="r">1D*</th><th class="r">1M*</th><th class="r">YTD*</th><th class="r">1Y*</th></tr></thead><tbody id="class-tbody"></tbody></table></div>
+    <p style="font-size:11px;color:var(--muted);margin-top:8px;">*Period returns reflect live-priced listed securities only; cash, funds, PE and property show "—".</p>
+  </div>
   <div class="card" style="margin-top:16px;"><div class="sh">Weights</div><div id="class-bars"></div></div>
+  <div class="card" style="margin-top:16px;"><div class="sh">Performance Attribution — Listed Securities</div>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:8px;">Each security's contribution to the listed-securities return for the period. Contribution = (security value ÷ total securities value) × its return. The column sums to the total at the bottom.</p>
+    <div class="period-row" id="attr-period">
+      <button class="pb" data-p="r1d" onclick="setAttrPeriod('r1d')">1D</button>
+      <button class="pb" data-p="r1w" onclick="setAttrPeriod('r1w')">1W</button>
+      <button class="pb active" data-p="r1m" onclick="setAttrPeriod('r1m')">1M</button>
+      <button class="pb" data-p="r3m" onclick="setAttrPeriod('r3m')">3M</button>
+      <button class="pb" data-p="rYTD" onclick="setAttrPeriod('rYTD')">YTD</button>
+      <button class="pb" data-p="r1y" onclick="setAttrPeriod('r1y')">1Y</button>
+    </div>
+    <div class="tbl-wrap"><table><thead><tr><th>Security</th><th>Cur</th><th class="r">Value SGD</th><th class="r">Weight</th><th class="r">Return</th><th class="r">Contribution</th></tr></thead><tbody id="attr-tbody"></tbody></table></div>
+  </div>
 </div>
 
 <div class="panel" id="panel-region">
@@ -434,7 +450,8 @@ async function fetchOne(h){
       if(n>=2){
         const cur=rec.price??hist[n-1].close;
         const pct=i=>i>=0&&i<n?(cur/hist[i].close)-1:null;
-        rec.r1d=(rec.price&&rec.prevClose)?(rec.price/rec.prevClose-1):pct(n-2);
+        rec.r1d=pct(n-2); // daily change from last two daily closes (meta.chartPreviousClose spans the whole range, so don't use it)
+        rec.prevClose=hist[n-2]?.close;
         rec.r1w=pct(Math.max(0,n-6));rec.r1m=pct(Math.max(0,n-23));rec.r3m=pct(Math.max(0,n-67));rec.r1y=pct(Math.max(0,n-253));
         const yr=new Date().getFullYear();const yb=hist.find(x=>x.time.startsWith(yr+'-'));rec.rYTD=yb?(cur/yb.close)-1:null;
       }
@@ -481,7 +498,8 @@ function renderAll(){
   // period grid
   [['r1d','pp-1d'],['r1w','pp-1w'],['r1m','pp-1m'],['r3m','pp-3m'],['rYTD','pp-ytd'],['r1y','pp-1y']].forEach(([k,id])=>{const r=secReturn(k);el(id).textContent=fmtP(r);el(id).className='pp-val '+clr(r);});
   renderHoldings();
-  renderGroup('ac','class-tbody','class-bars',true);
+  renderClassTable();
+  renderAttribution();
   renderGroup('region','region-tbody','region-bars',true);
   renderCurrency();
   renderDonut('donut-class','legend-class','ac');
@@ -534,6 +552,53 @@ function renderGroup(gk,tbId,barsId){
   el(barsId).innerHTML=arr.map(x=>`<div style="display:grid;grid-template-columns:200px 1fr 70px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)"><span style="font-size:12px">${x.key}</span><div style="background:var(--surf2);height:6px;border-radius:3px;overflow:hidden"><div style="height:100%;border-radius:3px;background:var(--accent);width:${(x.v/max*100).toFixed(1)}%"></div></div><span style="font-size:12px;color:var(--muted);text-align:right">${(x.v/nw*100).toFixed(1)}%</span></div>`).join('');
 }
 
+// ── Asset Class table with expandable drill-down ──
+let expandedClass=null;
+function toggleClass(k){expandedClass=expandedClass===k?null:k;renderClassTable();}
+function renderClassTable(){
+  const nw=totalNW();const g={};
+  H.forEach(h=>{const k=h.ac;if(!g[k])g[k]={key:k,v:0,pos:[]};g[k].v+=valSGD(h);g[k].pos.push(h);});
+  const arr=Object.values(g).sort((a,b)=>b.v-a.v);
+  arr.forEach(x=>{['r1d','r1m','rYTD','r1y'].forEach(pe=>{let ws=0,wt=0;x.pos.forEach(h=>{if(!h.yf)return;const r=pd[h.t]?.[pe];const v=valSGD(h);if(r!=null&&v>0){ws+=v*r;wt+=v;}});x[pe]=wt>0?ws/wt:null;});});
+  let html='';
+  arr.forEach(x=>{
+    const open=expandedClass===x.key;
+    html+=`<tr class="clickable" onclick="toggleClass('${x.key}')"><td><span style="display:inline-block;width:14px;color:var(--accent)">${open?'▾':'▸'}</span><strong>${x.key}</strong></td><td class="r" style="font-weight:700">${fmtS(x.v)}</td><td class="r">${(x.v/nw*100).toFixed(1)}%</td><td class="r">${pill(x.r1d)}</td><td class="r">${pill(x.r1m)}</td><td class="r">${pill(x.rYTD)}</td><td class="r">${pill(x.r1y)}</td></tr>`;
+    if(open) html+=`<tr><td colspan="7" style="background:var(--surf2);padding:0"><div style="padding:12px 16px">${classDetail(x)}</div></td></tr>`;
+  });
+  el('class-tbody').innerHTML=html;
+  const max=arr[0]?.v||1;
+  el('class-bars').innerHTML=arr.map(x=>`<div style="display:grid;grid-template-columns:200px 1fr 70px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)"><span style="font-size:12px">${x.key}</span><div style="background:var(--surf2);height:6px;border-radius:3px;overflow:hidden"><div style="height:100%;border-radius:3px;background:var(--accent);width:${(x.v/max*100).toFixed(1)}%"></div></div><span style="font-size:12px;color:var(--muted);text-align:right">${(x.v/nw*100).toFixed(1)}%</span></div>`).join('');
+}
+function classDetail(x){
+  if(x.key==='Cash'){
+    const cg={};x.pos.forEach(h=>{const c=h.cur;if(!cg[c])cg[c]={cur:c,v:0,native:0};cg[c].v+=valSGD(h);cg[c].native+=(h.manualNative||0);});
+    const carr=Object.values(cg).sort((a,b)=>b.v-a.v);const tot=x.v;
+    let s='<div class="sh">Cash by currency</div><table><thead><tr><th>Currency</th><th class="r">Native amount</th><th class="r">Value SGD</th><th class="r">% of cash</th></tr></thead><tbody>';
+    s+=carr.map(c=>`<tr><td><span class="cur-badge">${c.cur}</span></td><td class="r">${c.cur} ${fmt(c.native,0)}</td><td class="r" style="font-weight:700">${fmtS(c.v)}</td><td class="r">${(c.v/tot*100).toFixed(1)}%</td></tr>`).join('');
+    s+=`<tr style="border-top:2px solid var(--border)"><td><strong>Total cash</strong></td><td></td><td class="r" style="font-weight:800">${fmtS(tot)}</td><td class="r">100%</td></tr></tbody></table>`;
+    s+='<div class="sh" style="margin-top:14px">Accounts</div><table><tbody>'+[...x.pos].sort((a,b)=>valSGD(b)-valSGD(a)).map(h=>`<tr><td>${h.n}</td><td><span class="cur-badge">${h.cur}</span></td><td class="r" style="color:var(--muted)">${h.cur} ${fmt(h.manualNative||0,0)}</td><td class="r" style="font-weight:700">${fmtS(valSGD(h))}</td></tr>`).join('')+'</tbody></table>';
+    return s;
+  }
+  const pricedV=x.pos.reduce((s,h)=>s+((h.yf&&pd[h.t]?.r1m!=null)?valSGD(h):0),0);
+  let s='<table><thead><tr><th>Holding</th><th>Cur</th><th class="r">Value SGD</th><th class="r">% class</th><th class="r">1M</th><th class="r">YTD</th><th class="r">1M contrib</th></tr></thead><tbody>';
+  s+=[...x.pos].sort((a,b)=>valSGD(b)-valSGD(a)).map(h=>{const v=valSGD(h);const r1m=pd[h.t]?.r1m;const contrib=(h.yf&&r1m!=null&&pricedV>0)?(v/pricedV)*r1m:null;const clk=h.yf?`class="clickable" onclick="openModal(${h.id})"`:'';return `<tr ${clk}><td>${h.n}</td><td><span class="cur-badge">${h.cur}</span></td><td class="r" style="font-weight:700">${fmtS(v)}</td><td class="r">${(v/x.v*100).toFixed(1)}%</td><td class="r">${h.yf?pill(r1m):'—'}</td><td class="r">${h.yf?pill(pd[h.t]?.rYTD):'—'}</td><td class="r">${contrib!=null?pill(contrib):'—'}</td></tr>`;}).join('');
+  s+='</tbody></table>';
+  return s;
+}
+// ── Performance attribution (listed securities) ──
+let attrPeriod='r1m';
+const ATTR_LABEL={r1d:'1D',r1w:'1W',r1m:'1M',r3m:'3M',rYTD:'YTD',r1y:'1Y'};
+function setAttrPeriod(p){attrPeriod=p;document.querySelectorAll('#attr-period .pb').forEach(b=>b.classList.toggle('active',b.dataset.p===p));renderAttribution();}
+function renderAttribution(){
+  const priced=H.filter(h=>h.yf&&pd[h.t]?.[attrPeriod]!=null&&valSGD(h)>0);
+  const totV=priced.reduce((s,h)=>s+valSGD(h),0);
+  if(!totV){el('attr-tbody').innerHTML='<tr><td colspan="6" style="color:var(--muted);text-align:center;padding:16px">No live data yet — click Refresh.</td></tr>';return;}
+  const rows=priced.map(h=>{const v=valSGD(h);const r=pd[h.t][attrPeriod];const w=v/totV;return {h,v,w,r,c:w*r};}).sort((a,b)=>b.c-a.c);
+  const port=rows.reduce((s,x)=>s+x.c,0);
+  el('attr-tbody').innerHTML=rows.map(x=>`<tr class="clickable" onclick="openModal(${x.h.id})"><td>${x.h.n}</td><td><span class="cur-badge">${x.h.cur}</span></td><td class="r">${fmtS(x.v)}</td><td class="r">${(x.w*100).toFixed(1)}%</td><td class="r">${pill(x.r)}</td><td class="r" style="font-weight:700">${pill(x.c)}</td></tr>`).join('')
+    +`<tr style="border-top:2px solid var(--border)"><td colspan="5"><strong>Total listed-securities return (${ATTR_LABEL[attrPeriod]})</strong></td><td class="r" style="font-weight:800">${pill(port)}</td></tr>`;
+}
 function renderCurrency(){
   const nw=totalNW();const g={};
   H.forEach(h=>{if(!g[h.cur])g[h.cur]={cur:h.cur,v:0};g[h.cur].v+=valSGD(h);});
