@@ -237,7 +237,7 @@ tr.clickable:hover td{background:rgba(245,158,11,.06);cursor:pointer;}
       <li><strong>Property</strong> — HDB Marine Crescent S$1M · Hundred Palms EC S$2M · 2× Johor Bahru MYR 1.5M. Static user estimates.</li>
     </ul>
     <div class="sh" style="margin-top:18px;">De-duplication</div>
-    <p style="font-size:13px;">SGX shares appear in both CDP and POEMS. To avoid double-counting, SGX names are taken from <strong>CDP only</strong> and foreign names from <strong>POEMS only</strong>. CapLand China Trust &amp; Healthbank (in both) counted once via CDP.</p>
+    <p style="font-size:13px;">SGX shares appear in both CDP and POEMS. To avoid double-counting, SGX names are taken from <strong>CDP only</strong> and foreign names from <strong>POEMS only</strong>. <strong>Healthbank Holdings has been removed entirely</strong> (not your position).</p>
     <div class="sh" style="margin-top:18px;">Live prices</div>
     <p style="font-size:13px;">Listed securities &amp; FX from Yahoo Finance (~15min delayed) via a public proxy. Cash, fund, PE &amp; property are static — edit them when balances change. Live value = quantity × live price × FX. Some SGX small-caps may lack live data and fall back to statement values.</p>
   </div>
@@ -320,7 +320,7 @@ const H = [
   {id:30,n:"SingPost",                t:"S08",  yf:"S08.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:10000,  book:3450},
   {id:31,n:"Asian Pay TV Trust",      t:"S7OU", yf:"S7OU.SI", ac:"Equity", region:"Asia",      cur:"SGD", qty:34573,  book:3008},
   // ── SGX/CDP LEGACY TAIL (penny, suspended & USD-quoted, ~60 names) ──
-  {id:32,n:"SGX/CDP Legacy Tail (~60 penny/suspended names)", t:"TAIL", yf:null, ac:"Equity", region:"Singapore", cur:"SGD", manualNative:147234},
+  {id:32,n:"SGX/CDP Legacy Tail (penny/suspended, excl. Healthbank)", t:"TAIL", yf:null, ac:"Equity", region:"Singapore", cur:"SGD", manualNative:119717},
   // ── FOREIGN SECURITIES (POEMS custodian, live-priced) ──
   {id:33,n:"Tencent Holdings",        t:"0700", yf:"0700.HK", ac:"Equity", region:"China/HK", cur:"HKD", qty:1100},
   {id:34,n:"SMIC",                    t:"0981", yf:"0981.HK", ac:"Equity", region:"China/HK", cur:"HKD", qty:11000},
