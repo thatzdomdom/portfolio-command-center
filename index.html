@@ -357,47 +357,88 @@ const FX={SGD:1, USD:1.34, HKD:0.172, CNY:0.186, MYR:0.30};
 const pd={};
 let sortKey='sgd', sortAsc=false, filt='all', search='';
 let chart=null, modalHist=null;
-const PROXY='https://api.allorigins.win/raw?url=';
-
-async function yfFetch(u){try{const r=await fetch(u,{signal:AbortSignal.timeout(5000)});if(r.ok)return r.json();}catch(_){}const r=await fetch(PROXY+encodeURIComponent(u),{signal:AbortSignal.timeout(20000)});if(!r.ok)throw new Error('HTTP '+r.status);return r.json();}
+const PROXIES=[
+  u=>'https://corsproxy.io/?url='+encodeURIComponent(u),
+  u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u),
+  u=>'https://thingproxy.freeboard.io/fetch/'+u,
+  u=>'https://api.codetabs.com/v1/proxy/?quest='+encodeURIComponent(u)
+];
+async function yfFetch(u){
+  // try direct (works on some networks)
+  try{const r=await fetch(u,{signal:AbortSignal.timeout(4000)});if(r.ok)return await r.json();}catch(_){}
+  // rotate through proxies, with one retry round
+  for(let attempt=0;attempt<2;attempt++){
+    for(const mk of PROXIES){
+      try{const r=await fetch(mk(u),{signal:AbortSignal.timeout(14000)});if(r.ok)return await r.json();}catch(_){}
+    }
+    await new Promise(res=>setTimeout(res,600));
+  }
+  throw new Error('all proxies failed');
+}
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 
 async function loadAll(){
   setStatus('amber','Loading…');el('last-updated').textContent='Loading…';
   const priced=H.filter(h=>h.yf);
-  const all=[...priced.map(h=>h.yf),'USDSGD=X','HKDSGD=X','CNYSGD=X','MYRSGD=X'];
   try{
-    for(const ck of chunk(all,20)){
-      const data=await yfFetch(`https://query1.finance.yahoo.com/v7/finance/quote?symbols=${ck.join(',')}`);
-      for(const q of (data?.quoteResponse?.result||[])){
-        const s=q.symbol;
-        if(s==='USDSGD=X'){FX.USD=q.regularMarketPrice||FX.USD;continue;}
-        if(s==='HKDSGD=X'){FX.HKD=q.regularMarketPrice||FX.HKD;continue;}
-        if(s==='CNYSGD=X'){FX.CNY=q.regularMarketPrice||FX.CNY;continue;}
-        if(s==='MYRSGD=X'){FX.MYR=q.regularMarketPrice||FX.MYR;continue;}
-        const h=priced.find(x=>x.yf===s);if(!h)continue;
-        pd[h.t]={price:q.regularMarketPrice,currency:(q.currency||h.cur).toUpperCase(),r1d:q.regularMarketChangePercent/100,high52:q.fiftyTwoWeekHigh,low52:q.fiftyTwoWeekLow,volume:q.regularMarketVolume,avgVolume:q.averageDailyVolume3Month,name:q.longName||q.shortName||h.n};
-      }
-    }
+    // FX first (chart endpoint — quote endpoint is rate-limited/needs crumb)
+    setStatus('amber','Fetching FX rates…');
+    await Promise.allSettled([['USD','USDSGD=X'],['HKD','HKDSGD=X'],['CNY','CNYSGD=X'],['MYR','MYRSGD=X']].map(([k,s])=>fetchFx(k,s)));
     renderAll();
-    setStatus('amber','Fetching history…');
-    const jobs=priced.filter(h=>pd[h.t]?.price);
-    for(let i=0;i<jobs.length;i+=5){await Promise.allSettled(jobs.slice(i,i+5).map(h=>fetchHist(h)));renderAll();}
+    // Prices + history in one call each
+    setStatus('amber','Fetching prices & charts…');
+    let done=0;
+    for(let i=0;i<priced.length;i+=3){
+      await Promise.allSettled(priced.slice(i,i+3).map(h=>fetchOne(h)));
+      done=Math.min(priced.length,i+3);
+      setStatus('amber',`Fetching prices & charts… ${done}/${priced.length}`);
+      renderAll();
+      await sleep(350);
+    }
+    // retry any that failed to get a price
+    const missed=priced.filter(h=>pd[h.t]?.price==null);
+    if(missed.length){setStatus('amber',`Retrying ${missed.length} slow tickers…`);
+      for(let i=0;i<missed.length;i+=3){await Promise.allSettled(missed.slice(i,i+3).map(h=>fetchOne(h)));renderAll();await sleep(400);}}
     const now=new Date();el('last-updated').textContent='Updated '+now.toLocaleTimeString('en-SG');setStatus('green','Live — '+now.toLocaleString('en-SG'));
   }catch(e){setStatus('red','Error: '+e.message);renderAll();}
 }
 
-async function fetchHist(h){
+async function fetchFx(key,sym){
+  try{
+    const data=await yfFetch(`https://query1.finance.yahoo.com/v8/finance/chart/${sym}?interval=1d&range=5d`);
+    const m=data?.chart?.result?.[0]?.meta;
+    if(m&&m.regularMarketPrice) FX[key]=m.regularMarketPrice;
+  }catch(_){}
+}
+
+// One call per ticker: v8/chart gives BOTH current price (meta) and daily candles.
+async function fetchOne(h){
   try{
     const data=await yfFetch(`https://query1.finance.yahoo.com/v8/finance/chart/${h.yf}?interval=1d&range=2y`);
     const res=data?.chart?.result?.[0];if(!res)return;
-    const ts=res.timestamp,q0=res.indicators?.quote?.[0];if(!ts||!q0?.close)return;
-    const hist=[];
-    for(let i=0;i<ts.length;i++){if(q0.close[i]==null)continue;hist.push({time:new Date(ts[i]*1000).toISOString().slice(0,10),open:q0.open?.[i]??q0.close[i],high:q0.high?.[i]??q0.close[i],low:q0.low?.[i]??q0.close[i],close:q0.close[i],volume:q0.volume?.[i]??0});}
-    if(!pd[h.t])pd[h.t]={};pd[h.t].history=hist;
-    const n=hist.length;if(n<2)return;const cur=hist[n-1].close;pd[h.t].price=pd[h.t].price??cur;
-    const pct=i=>i>=0&&i<n?(cur/hist[i].close)-1:null;
-    pd[h.t].r1d=pct(n-2);pd[h.t].r1w=pct(Math.max(0,n-6));pd[h.t].r1m=pct(Math.max(0,n-23));pd[h.t].r3m=pct(Math.max(0,n-67));pd[h.t].r1y=pct(Math.max(0,n-253));
-    const yr=new Date().getFullYear();const yb=hist.find(x=>x.time.startsWith(yr+'-'));pd[h.t].rYTD=yb?(cur/yb.close)-1:null;
+    const m=res.meta||{};
+    const rec=pd[h.t]||{};
+    rec.price=m.regularMarketPrice??rec.price;
+    rec.currency=(m.currency||h.cur).toUpperCase();
+    rec.prevClose=m.chartPreviousClose??m.previousClose;
+    rec.high52=m.fiftyTwoWeekHigh;rec.low52=m.fiftyTwoWeekLow;
+    rec.volume=m.regularMarketVolume;
+    rec.name=m.longName||m.shortName||h.n;
+    pd[h.t]=rec;
+    const ts=res.timestamp,q0=res.indicators?.quote?.[0];
+    if(ts&&q0?.close){
+      const hist=[];
+      for(let i=0;i<ts.length;i++){if(q0.close[i]==null)continue;hist.push({time:new Date(ts[i]*1000).toISOString().slice(0,10),open:q0.open?.[i]??q0.close[i],high:q0.high?.[i]??q0.close[i],low:q0.low?.[i]??q0.close[i],close:q0.close[i],volume:q0.volume?.[i]??0});}
+      rec.history=hist;
+      const n=hist.length;
+      if(n>=2){
+        const cur=rec.price??hist[n-1].close;
+        const pct=i=>i>=0&&i<n?(cur/hist[i].close)-1:null;
+        rec.r1d=(rec.price&&rec.prevClose)?(rec.price/rec.prevClose-1):pct(n-2);
+        rec.r1w=pct(Math.max(0,n-6));rec.r1m=pct(Math.max(0,n-23));rec.r3m=pct(Math.max(0,n-67));rec.r1y=pct(Math.max(0,n-253));
+        const yr=new Date().getFullYear();const yb=hist.find(x=>x.time.startsWith(yr+'-'));rec.rYTD=yb?(cur/yb.close)-1:null;
+      }
+    }
   }catch(_){}
 }
 
@@ -539,8 +580,15 @@ function openModal(id){
     <div class="stat-item"><label>3M</label><span class="${clr(d.r3m)}">${fmtP(d.r3m)}</span></div>
     <div class="stat-item"><label>YTD</label><span class="${clr(d.rYTD)}">${fmtP(d.rYTD)}</span></div>
     <div class="stat-item"><label>1Y</label><span class="${clr(d.r1y)}">${fmtP(d.r1y)}</span></div>`;
-  modalHist=d.history||null;el('modal-overlay').classList.add('open');setChartPeriod('1Y');
-  if(!modalHist){fetchHist(h).then(()=>{modalHist=pd[h.t]?.history||null;setChartPeriod('1Y');});}
+  modalHist=d.history||null;el('modal-overlay').classList.add('open');
+  if(modalHist&&modalHist.length){setChartPeriod('1Y');}
+  else{
+    el('m-chart-box').innerHTML='<div style="height:100%;display:flex;align-items:center;justify-content:center;color:var(--muted)"><span class="ld"><span class="spin"></span>Loading chart…</span></div>';
+    fetchOne(h).then(()=>{const dd=pd[h.t]||{};modalHist=dd.history||null;
+      // refresh header price too
+      if(dd.price!=null){el('m-price').textContent=fmt(dd.price,dd.price<10?4:dd.price<100?3:2)+' '+(dd.currency||h.cur);el('m-chg').textContent=dd.r1d!=null?(dd.r1d>=0?'+':'')+(dd.r1d*100).toFixed(2)+'%':'—';el('m-chg').className='modal-chg '+clr(dd.r1d);}
+      setChartPeriod('1Y');});
+  }
 }
 function closeModal(e){if(e&&e.target!==el('modal-overlay'))return;el('modal-overlay').classList.remove('open');if(chart){chart.remove();chart=null;}}
 function setChartPeriod(p){
@@ -559,7 +607,7 @@ function setChartPeriod(p){
 function showTab(id,b){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active'));el('panel-'+id).classList.add('active');b.classList.add('active');}
 function el(id){return document.getElementById(id);}
 function setStatus(c,m){el('status-text').innerHTML=`<span class="dot ${c}"></span>${m}`;}
-if(sessionStorage.getItem(SESSION_KEY)==='1')renderAll();
+if(sessionStorage.getItem(SESSION_KEY)==='1'){renderAll();setTimeout(loadAll,300);}
 </script>
 </body>
 </html>
