@@ -301,7 +301,7 @@ tr.clickable:hover td{background:rgba(245,158,11,.06);cursor:pointer;}
 
 <script>
 // ═══ PASSWORD GATE (catherine11) ═══
-const PW_HASH='ef1d3997e83e2bfec3b1cd0580a994506f999578cfacaf3926e94cf27102713a';
+const PW_HASH='14ace37a8a6723e0fa54f82c20d3b1cebe0b40b4f5656cf046e00b1acfa30810';
 const SESSION_KEY='pcc_auth_v1';
 async function sha256(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');}
 async function checkPw(){const pw=document.getElementById('gate-pw').value;if(await sha256(pw)===PW_HASH){sessionStorage.setItem(SESSION_KEY,'1');unlock();}else{document.getElementById('gate-err').textContent='Incorrect password';document.getElementById('gate-pw').value='';setTimeout(()=>document.getElementById('gate-err').textContent='',3000);}}
