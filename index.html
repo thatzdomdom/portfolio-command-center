@@ -139,7 +139,6 @@ tr.clickable:hover td{background:rgba(245,158,11,.06);cursor:pointer;}
   </div>
   <div class="topbar-right">
     <span id="last-updated" class="topbar-sub">Not loaded</span>
-    <button class="btn" onclick="lock()">🔒 Lock</button>
     <button class="btn btn-primary" onclick="loadAll()">↻ Refresh</button>
   </div>
 </div>
@@ -283,7 +282,7 @@ tr.clickable:hover td{background:rgba(245,158,11,.06);cursor:pointer;}
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v10 · Live: Yahoo Finance · Static: bank/fund/property statements · Personal use only</span>
+  <span style="margin-left:auto;">build v11 (no password) · Live: Yahoo Finance · Static: bank/fund/property statements · Personal use only</span>
 </div>
 
 <div class="overlay" id="modal-overlay" onclick="closeModal(event)">
@@ -315,9 +314,11 @@ async function sha256(s){const b=await crypto.subtle.digest('SHA-256',new TextEn
 async function checkPw(){const pw=document.getElementById('gate-pw').value;if(await sha256(pw)===PW_HASH){sessionStorage.setItem(SESSION_KEY,'1');unlock();}else{document.getElementById('gate-err').textContent='Incorrect password';document.getElementById('gate-pw').value='';setTimeout(()=>document.getElementById('gate-err').textContent='',3000);}}
 function unlock(){document.getElementById('gate').classList.add('hidden');document.getElementById('app').classList.add('visible');renderAll();setTimeout(loadAll,300);}
 function lock(){sessionStorage.removeItem(SESSION_KEY);document.getElementById('gate').classList.remove('hidden');document.getElementById('app').classList.remove('visible');document.getElementById('gate-pw').value='';}
-if(sessionStorage.getItem(SESSION_KEY)==='1'){document.getElementById('gate').classList.add('hidden');document.getElementById('app').classList.add('visible');}
+// PASSWORD DISABLED (development phase) — gate bypassed; re-enable by setting GATE_ON=true
+const GATE_ON=false;
+if(!GATE_ON){document.getElementById('gate').classList.add('hidden');document.getElementById('app').classList.add('visible');}
+else if(sessionStorage.getItem(SESSION_KEY)==='1'){document.getElementById('gate').classList.add('hidden');document.getElementById('app').classList.add('visible');}
 document.getElementById('gate-pw').addEventListener('keydown',e=>{if(e.key==='Enter')checkPw();});
-document.getElementById('gate-pw').focus();
 
 // ═══ HOLDINGS — actual portfolio ═══
 // Priced:  {yf, qty, cur}            value = qty × livePrice × fx[cur]
@@ -759,7 +760,7 @@ function showTab(id,b){document.querySelectorAll('.panel').forEach(p=>p.classLis
 function el(id){return document.getElementById(id);}
 function setStatus(c,m){el('status-text').innerHTML=`<span class="dot ${c}"></span>${m}`;}
 let _rzT; window.addEventListener('resize',()=>{clearTimeout(_rzT);_rzT=setTimeout(renderAll,200);});
-if(sessionStorage.getItem(SESSION_KEY)==='1'){renderAll();setTimeout(loadAll,300);}
+if(!GATE_ON||sessionStorage.getItem(SESSION_KEY)==='1'){renderAll();setTimeout(loadAll,300);}
 </script>
 </body>
 </html>
