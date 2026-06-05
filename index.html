@@ -186,7 +186,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
     <div class="card"><div class="sh">By Currency</div><div class="donut-section"><svg id="donut-currency" width="140" height="140" viewBox="0 0 140 140"></svg><div class="legend" id="legend-currency"></div></div></div>
   </div>
   <div class="grid2">
-    <div class="card"><div class="sh">Top Holdings by Value (SGD)</div><table><thead><tr><th>Name</th><th class="r">Value SGD</th><th class="r">% NW</th></tr></thead><tbody id="top-holdings"></tbody></table></div>
+    <div class="card"><div class="sh">Largest Listed Holdings (live-priced)</div><table><thead><tr><th>Name</th><th class="r">Value SGD</th><th class="r">1M</th><th class="r">% NW</th></tr></thead><tbody id="top-holdings"></tbody></table></div>
     <div class="card"><div class="sh">Listed Movers (1D)</div><table><thead><tr><th>Name</th><th class="r">Price</th><th class="r">1D</th></tr></thead><tbody id="movers"></tbody></table></div>
   </div>
 </div>
@@ -286,7 +286,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v16 (no password) · Live: Yahoo Finance · Static: bank/fund/property statements · Personal use only</span>
+  <span style="margin-left:auto;">build v17 (no password) · Live: Yahoo Finance · Static: bank/fund/property statements · Personal use only</span>
 </div>
 
 <div class="overlay" id="modal-overlay" onclick="closeModal(event)">
@@ -759,8 +759,9 @@ function renderDonut(svgId,legId,gk){
 
 function renderTopHoldings(){
   const nw=totalNW();
-  const arr=[...H].sort((a,b)=>valSGD(b)-valSGD(a)).slice(0,10);
-  el('top-holdings').innerHTML=arr.map(h=>`<tr class="${h.yf?'clickable':''}" ${h.yf?`onclick="openModal(${h.id})"`:''}><td>${h.n}</td><td class="r" style="font-weight:700">${vS(valSGD(h))}</td><td class="r" style="color:var(--muted)">${(valSGD(h)/nw*100).toFixed(1)}%</td></tr>`).join('');
+  // only exchange-listed, live-priced positions (these actually move day-to-day)
+  const arr=H.filter(h=>h.yf).sort((a,b)=>valSGD(b)-valSGD(a)).slice(0,10);
+  el('top-holdings').innerHTML=arr.map(h=>{const d=pd[h.t]||{};return `<tr class="clickable" onclick="openModal(${h.id})"><td>${h.n}</td><td class="r" style="font-weight:700">${vS(valSGD(h))}</td><td class="r">${pill(d.r1m)}</td><td class="r" style="color:var(--muted)">${(valSGD(h)/nw*100).toFixed(1)}%</td></tr>`;}).join('');
 }
 function renderMovers(){
   const arr=H.filter(h=>h.yf&&pd[h.t]?.r1d!=null).map(h=>({...h,r1d:pd[h.t].r1d})).sort((a,b)=>b.r1d-a.r1d);
