@@ -52,14 +52,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 @media(max-width:600px){
   th,td{padding:6px 4px;font-size:11px;white-space:normal;}
   .tbl-wrap>table{table-layout:fixed;width:100%;}
-  .tbl-wrap>table th,.tbl-wrap>table td{overflow-wrap:anywhere;}
-  .tbl-wrap>table td:first-child,.tbl-wrap>table th:first-child{width:40%;word-break:break-word;}
+  .tbl-wrap>table th,.tbl-wrap>table td{white-space:normal!important;}
+  .tbl-wrap>table td:first-child,.tbl-wrap>table th:first-child{width:40%;word-break:break-word;overflow-wrap:anywhere;}
   .hide-sm{display:none!important;}
   .main{padding:14px 12px;}
   .kpi{min-width:128px;padding:12px 14px;}
   .kpi-val{font-size:18px;}
   .ticker-badge{padding:1px 5px;}
-  .pill{padding:0 3px;font-size:9px;}
+  .pill{padding:0 3px;font-size:9px;white-space:nowrap;overflow-wrap:normal;}
 }
 .sh{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin:0 0 10px;}
 .tbl-wrap{overflow-x:auto;}
@@ -159,6 +159,7 @@ tr.clickable:hover td{background:rgba(245,158,11,.06);cursor:pointer;}
   <button class="nav-btn" onclick="showTab('class',this)">Asset Class</button>
   <button class="nav-btn" onclick="showTab('region',this)">Region</button>
   <button class="nav-btn" onclick="showTab('currency',this)">Currency</button>
+  <button class="nav-btn" onclick="showTab('analytics',this)">Analytics</button>
   <button class="nav-btn" onclick="showTab('about',this)">Sources &amp; Notes</button>
 </div>
 
@@ -211,7 +212,7 @@ tr.clickable:hover td{background:rgba(245,158,11,.06);cursor:pointer;}
           <th class="r" onclick="sortHold('sgd')">Value SGD</th>
           <th class="r hide-sm" onclick="sortHold('r1d')">1D</th>
           <th class="r" onclick="sortHold('r1m')">1M</th>
-          <th class="r" onclick="sortHold('rYTD')">YTD</th>
+          <th class="r hide-sm" onclick="sortHold('rYTD')">YTD</th>
           <th class="r hide-sm" onclick="sortHold('r1y')">1Y</th>
           <th class="r" onclick="sortHold('sgd')">% NW</th>
         </tr></thead>
@@ -228,18 +229,6 @@ tr.clickable:hover td{background:rgba(245,158,11,.06);cursor:pointer;}
     <p style="font-size:11px;color:var(--muted);margin-top:8px;">*Period returns reflect live-priced listed securities only; cash, funds, PE and property show "—".</p>
   </div>
   <div class="card" style="margin-top:16px;"><div class="sh">Weights</div><div id="class-bars"></div></div>
-  <div class="card" style="margin-top:16px;"><div class="sh">Performance Attribution — Listed Securities</div>
-    <p style="font-size:12px;color:var(--muted);margin-bottom:8px;">Each security's contribution to the listed-securities return for the period. Contribution = (security value ÷ total securities value) × its return. The column sums to the total at the bottom.</p>
-    <div class="period-row" id="attr-period">
-      <button class="pb" data-p="r1d" onclick="setAttrPeriod('r1d')">1D</button>
-      <button class="pb" data-p="r1w" onclick="setAttrPeriod('r1w')">1W</button>
-      <button class="pb active" data-p="r1m" onclick="setAttrPeriod('r1m')">1M</button>
-      <button class="pb" data-p="r3m" onclick="setAttrPeriod('r3m')">3M</button>
-      <button class="pb" data-p="rYTD" onclick="setAttrPeriod('rYTD')">YTD</button>
-      <button class="pb" data-p="r1y" onclick="setAttrPeriod('r1y')">1Y</button>
-    </div>
-    <div class="tbl-wrap"><table><thead><tr><th>Security</th><th class="hide-sm">Cur</th><th class="r hide-sm">Value SGD</th><th class="r">Weight</th><th class="r hide-sm">Return</th><th class="r">Contrib.</th></tr></thead><tbody id="attr-tbody"></tbody></table></div>
-  </div>
 </div>
 
 <div class="panel" id="panel-region">
@@ -250,6 +239,25 @@ tr.clickable:hover td{background:rgba(245,158,11,.06);cursor:pointer;}
 <div class="panel" id="panel-currency">
   <div class="card"><div class="sh">Currency Exposure (pre-hedge)</div><div class="tbl-wrap"><table><thead><tr><th>Currency</th><th class="r">Value SGD</th><th class="r">% NW</th><th class="r">FX → SGD</th></tr></thead><tbody id="currency-tbody"></tbody></table></div></div>
   <div class="card" style="margin-top:16px;"><div class="sh">Weights</div><div id="currency-bars"></div></div>
+</div>
+
+<div class="panel" id="panel-analytics">
+  <div class="card"><div class="sh">Performance Attribution — Listed Securities</div>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:8px;">Each security's contribution to the listed-securities return for the period. Contribution = (security value ÷ total securities value) × its return. Bars are centred at zero; the table sums to the total.</p>
+    <div class="period-row" id="attr-period">
+      <button class="pb" data-p="r1d" onclick="setAttrPeriod('r1d')">1D</button>
+      <button class="pb" data-p="r1w" onclick="setAttrPeriod('r1w')">1W</button>
+      <button class="pb active" data-p="r1m" onclick="setAttrPeriod('r1m')">1M</button>
+      <button class="pb" data-p="r3m" onclick="setAttrPeriod('r3m')">3M</button>
+      <button class="pb" data-p="rYTD" onclick="setAttrPeriod('rYTD')">YTD</button>
+      <button class="pb" data-p="r1y" onclick="setAttrPeriod('r1y')">1Y</button>
+    </div>
+    <div id="attr-bars" style="margin:12px 0 16px;"></div>
+    <div class="tbl-wrap"><table><thead><tr><th>Security</th><th class="hide-sm">Cur</th><th class="r hide-sm">Value SGD</th><th class="r">Weight</th><th class="r hide-sm">Return</th><th class="r">Contrib.</th></tr></thead><tbody id="attr-tbody"></tbody></table></div>
+  </div>
+  <div class="card" style="margin-top:16px;"><div class="sh">Sector Heat Map — size = value, colour = 1M return</div><div id="heat-legend"></div><svg id="heat-sector" viewBox="0 0 1000 560" width="100%" preserveAspectRatio="xMidYMid meet" style="height:auto;display:block;"></svg></div>
+  <div class="card" style="margin-top:16px;"><div class="sh">Country / Region Heat Map — size = value, colour = 1M return</div><svg id="heat-region" viewBox="0 0 1000 560" width="100%" preserveAspectRatio="xMidYMid meet" style="height:auto;display:block;"></svg></div>
+  <p style="font-size:11px;color:var(--muted);margin-top:10px;">Heat maps cover listed equities only (cash, funds, PE, property excluded). Grey = no live return (e.g. legacy tail).</p>
 </div>
 
 <div class="panel" id="panel-about">
@@ -381,6 +389,10 @@ const H = [
   {id:56,n:"Johor Bahru Properties (2×)",     t:"PROP", yf:null, ac:"Property", region:"Malaysia",  cur:"MYR", manualNative:1500000},
 ];
 
+// Sector tags (by holding id) for the sector heat map
+const SECTOR={1:'Financials',2:'Consumer Staples',3:'Industrials',4:'Materials',5:'Real Estate',6:'Real Estate',7:'Real Estate',8:'Real Estate',9:'Real Estate',10:'Industrials',11:'Real Estate',12:'Industrials',13:'Financials',14:'Communications',15:'Real Estate',16:'Industrials',17:'Real Estate',18:'Consumer Staples',19:'Industrials',20:'Real Estate',21:'Real Estate',22:'Real Estate',23:'Real Estate',24:'Real Estate',25:'Real Estate',26:'Utilities',27:'Consumer Staples',28:'Energy',29:'Real Estate',30:'Industrials',31:'Communications',32:'Other / Tail',33:'Communications',34:'Technology',35:'Technology',36:'Gold/Silver Miners',37:'Gold/Silver Miners',38:'Gold/Silver Miners',39:'Diversified Equity',40:'Consumer Staples'};
+H.forEach(h=>{h.sector=SECTOR[h.id]||null;});
+
 const FX={SGD:1, USD:1.34, HKD:0.172, CNY:0.186, MYR:0.30};
 const pd={};
 let sortKey='sgd', sortAsc=false, filt='all', search='';
@@ -485,6 +497,9 @@ function nativeVal(h){ if(h.yf&&pd[h.t]?.price!=null) return h.qty*pd[h.t].price
 const fmt=(n,d=2)=>n==null?'—':n.toLocaleString('en-SG',{minimumFractionDigits:d,maximumFractionDigits:d});
 const fmtP=n=>n==null?'—':(n>=0?'+':'')+(n*100).toFixed(2)+'%';
 const fmtS=n=>n==null?'—':'S$'+Math.round(n).toLocaleString('en-SG');
+const isMobile=()=>window.matchMedia('(max-width:600px)').matches;
+const fmtScompact=n=>n==null?'—':(Math.abs(n)>=1e6?'S$'+(n/1e6).toFixed(2)+'M':Math.abs(n)>=1e3?'S$'+Math.round(n/1e3)+'K':'S$'+Math.round(n));
+const vS=n=>isMobile()?fmtScompact(n):fmtS(n); // mobile-aware SGD value (compact on phones)
 const fmtSk=n=>n==null?'—':Math.abs(n)>=1e6?'S$'+(n/1e6).toFixed(2)+'M':'S$'+Math.round(n).toLocaleString('en-SG');
 const clr=n=>n==null?'neu':n>0?'pos':n<0?'neg':'neu';
 const pill=n=>`<span class="pill ${clr(n)}">${fmtP(n)}</span>`;
@@ -512,6 +527,7 @@ function renderAll(){
   renderHoldings();
   renderClassTable();
   renderAttribution();
+  renderHeatmaps();
   renderGroup('region','region-tbody','region-bars',true);
   renderCurrency();
   renderDonut('donut-class','legend-class','ac');
@@ -544,10 +560,10 @@ function renderHoldings(){
       <td class="hide-sm"><span class="cur-badge">${h.cur}</span></td>
       <td class="r hide-sm">${qtyStr}</td>
       <td class="r hide-sm">${priceStr}</td>
-      <td class="r" style="font-weight:700">${fmtS(v)}</td>
+      <td class="r" style="font-weight:700">${vS(v)}</td>
       <td class="r hide-sm">${priced?pill(d.r1d):'—'}</td>
       <td class="r">${priced?pill(d.r1m):'—'}</td>
-      <td class="r">${priced?pill(d.rYTD):'—'}</td>
+      <td class="r hide-sm">${priced?pill(d.rYTD):'—'}</td>
       <td class="r hide-sm">${priced?pill(d.r1y):'—'}</td>
       <td class="r">${(v/nw*100).toFixed(1)}%</td>
     </tr>`;
@@ -560,7 +576,7 @@ function renderGroup(gk,tbId,barsId){
   const arr=Object.values(g).sort((a,b)=>b.v-a.v);
   arr.forEach(x=>{['r1d','r1m','rYTD','r1y'].forEach(pe=>{let ws=0,wt=0;x.pos.forEach(h=>{if(!h.yf)return;const r=pd[h.t]?.[pe];const v=valSGD(h);if(r!=null&&v>0){ws+=v*r;wt+=v;}});x[pe]=wt>0?ws/wt:null;});});
   const max=arr[0]?.v||1;
-  el(tbId).innerHTML=arr.map(x=>`<tr><td><strong>${x.key}</strong></td><td class="r" style="font-weight:700">${fmtS(x.v)}</td><td class="r">${(x.v/nw*100).toFixed(1)}%</td><td class="r hide-sm">${pill(x.r1d)}</td><td class="r">${pill(x.r1m)}</td><td class="r hide-sm">${pill(x.rYTD)}</td><td class="r hide-sm">${pill(x.r1y)}</td></tr>`).join('');
+  el(tbId).innerHTML=arr.map(x=>`<tr><td><strong>${x.key}</strong></td><td class="r" style="font-weight:700">${vS(x.v)}</td><td class="r">${(x.v/nw*100).toFixed(1)}%</td><td class="r hide-sm">${pill(x.r1d)}</td><td class="r">${pill(x.r1m)}</td><td class="r hide-sm">${pill(x.rYTD)}</td><td class="r hide-sm">${pill(x.r1y)}</td></tr>`).join('');
   el(barsId).innerHTML=arr.map(x=>`<div style="display:grid;grid-template-columns:200px 1fr 70px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)"><span style="font-size:12px">${x.key}</span><div style="background:var(--surf2);height:6px;border-radius:3px;overflow:hidden"><div style="height:100%;border-radius:3px;background:var(--accent);width:${(x.v/max*100).toFixed(1)}%"></div></div><span style="font-size:12px;color:var(--muted);text-align:right">${(x.v/nw*100).toFixed(1)}%</span></div>`).join('');
 }
 
@@ -575,7 +591,7 @@ function renderClassTable(){
   let html='';
   arr.forEach(x=>{
     const open=expandedClass===x.key;
-    html+=`<tr class="clickable" onclick="toggleClass('${x.key}')"><td><span style="display:inline-block;width:14px;color:var(--accent)">${open?'▾':'▸'}</span><strong>${x.key}</strong></td><td class="r" style="font-weight:700">${fmtS(x.v)}</td><td class="r">${(x.v/nw*100).toFixed(1)}%</td><td class="r hide-sm">${pill(x.r1d)}</td><td class="r">${pill(x.r1m)}</td><td class="r hide-sm">${pill(x.rYTD)}</td><td class="r hide-sm">${pill(x.r1y)}</td></tr>`;
+    html+=`<tr class="clickable" onclick="toggleClass('${x.key}')"><td><span style="display:inline-block;width:14px;color:var(--accent)">${open?'▾':'▸'}</span><strong>${x.key}</strong></td><td class="r" style="font-weight:700">${vS(x.v)}</td><td class="r">${(x.v/nw*100).toFixed(1)}%</td><td class="r hide-sm">${pill(x.r1d)}</td><td class="r">${pill(x.r1m)}</td><td class="r hide-sm">${pill(x.rYTD)}</td><td class="r hide-sm">${pill(x.r1y)}</td></tr>`;
     if(open) html+=`<tr><td colspan="7" style="background:var(--surf2);padding:0"><div style="padding:12px 16px">${classDetail(x)}</div></td></tr>`;
   });
   el('class-tbody').innerHTML=html;
@@ -587,14 +603,14 @@ function classDetail(x){
     const cg={};x.pos.forEach(h=>{const c=h.cur;if(!cg[c])cg[c]={cur:c,v:0,native:0};cg[c].v+=valSGD(h);cg[c].native+=(h.manualNative||0);});
     const carr=Object.values(cg).sort((a,b)=>b.v-a.v);const tot=x.v;
     let s='<div class="sh">Cash by currency</div><table><thead><tr><th>Currency</th><th class="r">Native amount</th><th class="r">Value SGD</th><th class="r">% of cash</th></tr></thead><tbody>';
-    s+=carr.map(c=>`<tr><td><span class="cur-badge">${c.cur}</span></td><td class="r">${c.cur} ${fmt(c.native,0)}</td><td class="r" style="font-weight:700">${fmtS(c.v)}</td><td class="r">${(c.v/tot*100).toFixed(1)}%</td></tr>`).join('');
-    s+=`<tr style="border-top:2px solid var(--border)"><td><strong>Total cash</strong></td><td></td><td class="r" style="font-weight:800">${fmtS(tot)}</td><td class="r">100%</td></tr></tbody></table>`;
-    s+='<div class="sh" style="margin-top:14px">Accounts</div><table><tbody>'+[...x.pos].sort((a,b)=>valSGD(b)-valSGD(a)).map(h=>`<tr><td>${h.n}</td><td><span class="cur-badge">${h.cur}</span></td><td class="r" style="color:var(--muted)">${h.cur} ${fmt(h.manualNative||0,0)}</td><td class="r" style="font-weight:700">${fmtS(valSGD(h))}</td></tr>`).join('')+'</tbody></table>';
+    s+=carr.map(c=>`<tr><td><span class="cur-badge">${c.cur}</span></td><td class="r">${c.cur} ${fmt(c.native,0)}</td><td class="r" style="font-weight:700">${vS(c.v)}</td><td class="r">${(c.v/tot*100).toFixed(1)}%</td></tr>`).join('');
+    s+=`<tr style="border-top:2px solid var(--border)"><td><strong>Total cash</strong></td><td></td><td class="r" style="font-weight:800">${vS(tot)}</td><td class="r">100%</td></tr></tbody></table>`;
+    s+='<div class="sh" style="margin-top:14px">Accounts</div><table><tbody>'+[...x.pos].sort((a,b)=>valSGD(b)-valSGD(a)).map(h=>`<tr><td>${h.n}</td><td><span class="cur-badge">${h.cur}</span></td><td class="r" style="color:var(--muted)">${h.cur} ${fmt(h.manualNative||0,0)}</td><td class="r" style="font-weight:700">${vS(valSGD(h))}</td></tr>`).join('')+'</tbody></table>';
     return s;
   }
   const pricedV=x.pos.reduce((s,h)=>s+((h.yf&&pd[h.t]?.r1m!=null)?valSGD(h):0),0);
   let s='<table><thead><tr><th>Holding</th><th>Cur</th><th class="r">Value SGD</th><th class="r">% class</th><th class="r">1M</th><th class="r">YTD</th><th class="r">1M contrib</th></tr></thead><tbody>';
-  s+=[...x.pos].sort((a,b)=>valSGD(b)-valSGD(a)).map(h=>{const v=valSGD(h);const r1m=pd[h.t]?.r1m;const contrib=(h.yf&&r1m!=null&&pricedV>0)?(v/pricedV)*r1m:null;const clk=h.yf?`class="clickable" onclick="openModal(${h.id})"`:'';return `<tr ${clk}><td>${h.n}</td><td><span class="cur-badge">${h.cur}</span></td><td class="r" style="font-weight:700">${fmtS(v)}</td><td class="r">${(v/x.v*100).toFixed(1)}%</td><td class="r">${h.yf?pill(r1m):'—'}</td><td class="r">${h.yf?pill(pd[h.t]?.rYTD):'—'}</td><td class="r">${contrib!=null?pill(contrib):'—'}</td></tr>`;}).join('');
+  s+=[...x.pos].sort((a,b)=>valSGD(b)-valSGD(a)).map(h=>{const v=valSGD(h);const r1m=pd[h.t]?.r1m;const contrib=(h.yf&&r1m!=null&&pricedV>0)?(v/pricedV)*r1m:null;const clk=h.yf?`class="clickable" onclick="openModal(${h.id})"`:'';return `<tr ${clk}><td>${h.n}</td><td><span class="cur-badge">${h.cur}</span></td><td class="r" style="font-weight:700">${vS(v)}</td><td class="r">${(v/x.v*100).toFixed(1)}%</td><td class="r">${h.yf?pill(r1m):'—'}</td><td class="r">${h.yf?pill(pd[h.t]?.rYTD):'—'}</td><td class="r">${contrib!=null?pill(contrib):'—'}</td></tr>`;}).join('');
   s+='</tbody></table>';
   return s;
 }
@@ -608,14 +624,61 @@ function renderAttribution(){
   if(!totV){el('attr-tbody').innerHTML='<tr><td colspan="6" style="color:var(--muted);text-align:center;padding:16px">No live data yet — click Refresh.</td></tr>';return;}
   const rows=priced.map(h=>{const v=valSGD(h);const r=pd[h.t][attrPeriod];const w=v/totV;return {h,v,w,r,c:w*r};}).sort((a,b)=>b.c-a.c);
   const port=rows.reduce((s,x)=>s+x.c,0);
-  el('attr-tbody').innerHTML=rows.map(x=>`<tr class="clickable" onclick="openModal(${x.h.id})"><td>${x.h.n}</td><td class="hide-sm"><span class="cur-badge">${x.h.cur}</span></td><td class="r hide-sm">${fmtS(x.v)}</td><td class="r">${(x.w*100).toFixed(1)}%</td><td class="r hide-sm">${pill(x.r)}</td><td class="r" style="font-weight:700">${pill(x.c)}</td></tr>`).join('')
+  el('attr-tbody').innerHTML=rows.map(x=>`<tr class="clickable" onclick="openModal(${x.h.id})"><td>${x.h.n}</td><td class="hide-sm"><span class="cur-badge">${x.h.cur}</span></td><td class="r hide-sm">${vS(x.v)}</td><td class="r">${(x.w*100).toFixed(1)}%</td><td class="r hide-sm">${pill(x.r)}</td><td class="r" style="font-weight:700">${pill(x.c)}</td></tr>`).join('')
     +`<tr style="border-top:2px solid var(--border)"><td colspan="5"><strong>Total (${ATTR_LABEL[attrPeriod]})</strong></td><td class="r" style="font-weight:800">${pill(port)}</td></tr>`;
+  // diverging bar chart
+  const maxAbs=Math.max(...rows.map(x=>Math.abs(x.c)),1e-6);
+  el('attr-bars').innerHTML=rows.map(x=>{const pct=Math.abs(x.c)/maxAbs*50;const pos=x.c>=0;return `<div style="display:flex;align-items:center;gap:6px;margin:3px 0" class="clickable" onclick="openModal(${x.h.id})"><div style="width:34%;font-size:11px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">${x.h.n}</div><div style="flex:1;position:relative;height:13px;background:var(--surf2);border-radius:3px"><div style="position:absolute;top:0;bottom:0;left:50%;width:1px;background:var(--border)"></div><div style="position:absolute;top:0;height:100%;${pos?'left:50%':'right:50%'};width:${pct}%;background:${pos?'var(--green)':'var(--red)'};border-radius:2px"></div></div><div style="width:50px;text-align:right;font-size:11px;font-weight:700;color:${pos?'var(--green)':'var(--red)'}">${fmtP(x.c)}</div></div>`;}).join('');
 }
+
+// ── Heat maps (squarified treemap; size = value, colour = 1M return) ──
+function squarify(data,X,Y,W,Hh){
+  const items=data.filter(d=>d.value>0).sort((a,b)=>b.value-a.value);
+  const total=items.reduce((s,d)=>s+d.value,0); if(!total) return [];
+  const scale=(W*Hh)/total; items.forEach(d=>d._a=d.value*scale);
+  const out=[]; let rect={x:X,y:Y,w:W,h:Hh}; let i=0;
+  const worst=(row,len)=>{const s=row.reduce((a,b)=>a+b._a,0);const mx=Math.max(...row.map(r=>r._a)),mn=Math.min(...row.map(r=>r._a));return Math.max((len*len*mx)/(s*s),(s*s)/(len*len*mn));};
+  while(i<items.length){
+    const len=Math.min(rect.w,rect.h); const row=[items[i]]; let j=i+1;
+    while(j<items.length){ if(worst(row.concat(items[j]),len)<=worst(row,len)){row.push(items[j]);j++;} else break; }
+    const s=row.reduce((a,b)=>a+b._a,0);
+    if(rect.w>=rect.h){ const sw=s/rect.h; let yy=rect.y; row.forEach(r=>{const hh=r._a/sw;out.push({...r,x:rect.x,y:yy,w:sw,h:hh});yy+=hh;}); rect.x+=sw;rect.w-=sw; }
+    else { const sh=s/rect.w; let xx=rect.x; row.forEach(r=>{const ww=r._a/sh;out.push({...r,x:xx,y:rect.y,w:ww,h:sh});xx+=ww;}); rect.y+=sh;rect.h-=sh; }
+    i=j;
+  }
+  return out;
+}
+function mix(a,b,t){return a.map((v,i)=>Math.round(v+(b[i]-v)*t));}
+function heatColor(r){ if(r==null)return 'rgb(160,160,158)'; const t=Math.max(0,Math.min(1,Math.abs(r)/0.08)); const base=r>=0?[22,163,74]:[220,38,38]; const c=mix([240,240,238],base,0.18+0.82*t); return `rgb(${c[0]},${c[1]},${c[2]})`; }
+function heatText(r){ const t=r==null?0:Math.min(1,Math.abs(r)/0.08); return t>0.45?'#fff':'#1c1917'; }
+function renderHeat(svgId,key){
+  const eq=H.filter(h=>h.ac==='Equity'&&valSGD(h)>0&&h[key]);
+  const g={}; eq.forEach(h=>{const k=h[key];if(!g[k])g[k]={key:k,value:0,pos:[]};g[k].value+=valSGD(h);g[k].pos.push(h);});
+  const arr=Object.values(g);
+  arr.forEach(x=>{let ws=0,wt=0;x.pos.forEach(h=>{const r=pd[h.t]?.r1m;const v=valSGD(h);if(r!=null&&v>0){ws+=v*r;wt+=v;}});x.r1m=wt>0?ws/wt:null;});
+  const totalV=arr.reduce((s,a)=>s+a.value,0)||1;
+  const tiles=squarify(arr,0,0,1000,560);
+  let svg='';
+  tiles.forEach(t=>{
+    const col=heatColor(t.r1m),tx=heatText(t.r1m);
+    svg+=`<rect x="${t.x.toFixed(1)}" y="${t.y.toFixed(1)}" width="${t.w.toFixed(1)}" height="${t.h.toFixed(1)}" fill="${col}" stroke="#fff" stroke-width="2"/>`;
+    const nm=t.key.length>16?t.key.slice(0,15)+'…':t.key;
+    if(t.w>120&&t.h>54){
+      svg+=`<text x="${(t.x+8).toFixed(1)}" y="${(t.y+25).toFixed(1)}" font-size="21" font-weight="700" fill="${tx}">${nm}</text>`;
+      svg+=`<text x="${(t.x+8).toFixed(1)}" y="${(t.y+48).toFixed(1)}" font-size="18" fill="${tx}">${(t.value/totalV*100).toFixed(1)}% · ${t.r1m!=null?fmtP(t.r1m):'n/a'}</text>`;
+    } else if(t.w>58&&t.h>22){
+      svg+=`<text x="${(t.x+5).toFixed(1)}" y="${(t.y+17).toFixed(1)}" font-size="15" font-weight="700" fill="${tx}">${t.key.length>9?t.key.slice(0,8)+'…':t.key}</text>`;
+    }
+  });
+  el(svgId).innerHTML=svg;
+}
+function renderHeatLegend(){ el('heat-legend').innerHTML=`<div style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted);margin-bottom:10px;flex-wrap:wrap"><span>1M return:</span>${[-0.08,-0.04,0,0.04,0.08].map(v=>`<span style="display:inline-flex;align-items:center;gap:3px"><span style="width:15px;height:15px;border-radius:3px;background:${heatColor(v)};display:inline-block;border:1px solid var(--border)"></span>${v>0?'+':''}${(v*100).toFixed(0)}%</span>`).join('')}</div>`; }
+function renderHeatmaps(){ renderHeat('heat-sector','sector'); renderHeat('heat-region','region'); renderHeatLegend(); }
 function renderCurrency(){
   const nw=totalNW();const g={};
   H.forEach(h=>{if(!g[h.cur])g[h.cur]={cur:h.cur,v:0};g[h.cur].v+=valSGD(h);});
   const arr=Object.values(g).sort((a,b)=>b.v-a.v);const max=arr[0]?.v||1;
-  el('currency-tbody').innerHTML=arr.map(x=>`<tr><td><strong>${x.cur}</strong></td><td class="r" style="font-weight:700">${fmtS(x.v)}</td><td class="r">${(x.v/nw*100).toFixed(1)}%</td><td class="r">${x.cur==='SGD'?'1.000':fmt(FX[x.cur],4)}</td></tr>`).join('');
+  el('currency-tbody').innerHTML=arr.map(x=>`<tr><td><strong>${x.cur}</strong></td><td class="r" style="font-weight:700">${vS(x.v)}</td><td class="r">${(x.v/nw*100).toFixed(1)}%</td><td class="r">${x.cur==='SGD'?'1.000':fmt(FX[x.cur],4)}</td></tr>`).join('');
   el('currency-bars').innerHTML=arr.map(x=>`<div style="display:grid;grid-template-columns:80px 1fr 70px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)"><span style="font-size:12px">${x.cur}</span><div style="background:var(--surf2);height:6px;border-radius:3px;overflow:hidden"><div style="height:100%;border-radius:3px;background:var(--accent);width:${(x.v/max*100).toFixed(1)}%"></div></div><span style="font-size:12px;color:var(--muted);text-align:right">${(x.v/nw*100).toFixed(1)}%</span></div>`).join('');
 }
 
@@ -632,7 +695,7 @@ function renderDonut(svgId,legId,gk){
 function renderTopHoldings(){
   const nw=totalNW();
   const arr=[...H].sort((a,b)=>valSGD(b)-valSGD(a)).slice(0,10);
-  el('top-holdings').innerHTML=arr.map(h=>`<tr class="${h.yf?'clickable':''}" ${h.yf?`onclick="openModal(${h.id})"`:''}><td>${h.n}</td><td class="r" style="font-weight:700">${fmtS(valSGD(h))}</td><td class="r" style="color:var(--muted)">${(valSGD(h)/nw*100).toFixed(1)}%</td></tr>`).join('');
+  el('top-holdings').innerHTML=arr.map(h=>`<tr class="${h.yf?'clickable':''}" ${h.yf?`onclick="openModal(${h.id})"`:''}><td>${h.n}</td><td class="r" style="font-weight:700">${vS(valSGD(h))}</td><td class="r" style="color:var(--muted)">${(valSGD(h)/nw*100).toFixed(1)}%</td></tr>`).join('');
 }
 function renderMovers(){
   const arr=H.filter(h=>h.yf&&pd[h.t]?.r1d!=null).map(h=>({...h,r1d:pd[h.t].r1d})).sort((a,b)=>b.r1d-a.r1d);
@@ -649,7 +712,7 @@ function openModal(id){
   el('m-stats').innerHTML=`
     <div class="stat-item"><label>Quantity</label><span>${h.qty!=null?h.qty.toLocaleString('en-SG'):'—'}</span></div>
     <div class="stat-item"><label>Value (${h.cur})</label><span>${nv!=null?fmt(nv,0):'—'}</span></div>
-    <div class="stat-item"><label>Value (SGD)</label><span>${fmtS(valSGD(h))}</span></div>
+    <div class="stat-item"><label>Value (SGD)</label><span>${vS(valSGD(h))}</span></div>
     <div class="stat-item"><label>52W High</label><span>${d.high52!=null?fmt(d.high52,2):'—'}</span></div>
     <div class="stat-item"><label>52W Low</label><span>${d.low52!=null?fmt(d.low52,2):'—'}</span></div>
     <div class="stat-item"><label>1W</label><span class="${clr(d.r1w)}">${fmtP(d.r1w)}</span></div>
@@ -684,6 +747,7 @@ function setChartPeriod(p){
 function showTab(id,b){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active'));el('panel-'+id).classList.add('active');b.classList.add('active');}
 function el(id){return document.getElementById(id);}
 function setStatus(c,m){el('status-text').innerHTML=`<span class="dot ${c}"></span>${m}`;}
+let _rzT; window.addEventListener('resize',()=>{clearTimeout(_rzT);_rzT=setTimeout(renderAll,200);});
 if(sessionStorage.getItem(SESSION_KEY)==='1'){renderAll();setTimeout(loadAll,300);}
 </script>
 </body>
