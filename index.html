@@ -471,6 +471,9 @@ async function fetchOne(h){
       for(let i=0;i<ts.length;i++){if(q0.close[i]==null)continue;hist.push({time:new Date(ts[i]*1000).toISOString().slice(0,10),open:q0.open?.[i]??q0.close[i],high:q0.high?.[i]??q0.close[i],low:q0.low?.[i]??q0.close[i],close:q0.close[i],volume:q0.volume?.[i]??0});}
       rec.history=hist;
       const n=hist.length;
+      // If the live quote price is missing, fall back to the last traded (most recent close)
+      if(rec.price==null && n>0){ rec.price=hist[n-1].close; rec.priceStale=true; rec.asOf=hist[n-1].time; }
+      else { rec.priceStale=false; }
       if(n>=2){
         const cur=rec.price??hist[n-1].close;
         const pct=i=>i>=0&&i<n?(cur/hist[i].close)-1:null;
@@ -706,7 +709,7 @@ function renderMovers(){
 // ═══ MODAL ═══
 function openModal(id){
   const h=H.find(x=>x.id===id);if(!h||!h.yf)return;const d=pd[h.t]||{};
-  el('m-ticker').textContent=h.t;el('m-name').textContent=d.name||h.n;
+  el('m-ticker').textContent=h.t;el('m-name').textContent=(d.name||h.n)+(d.priceStale&&d.asOf?` · last traded ${d.asOf}`:'');
   if(d.price!=null){el('m-price').textContent=fmt(d.price,d.price<10?4:d.price<100?3:2)+' '+(d.currency||h.cur);el('m-chg').textContent=d.r1d!=null?(d.r1d>=0?'+':'')+(d.r1d*100).toFixed(2)+'%':'—';el('m-chg').className='modal-chg '+clr(d.r1d);}else{el('m-price').textContent='No data';el('m-chg').textContent='';}
   const nv=nativeVal(h);
   el('m-stats').innerHTML=`
