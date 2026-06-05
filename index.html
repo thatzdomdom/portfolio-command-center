@@ -286,7 +286,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v15 (no password) · Live: Yahoo Finance · Static: bank/fund/property statements · Personal use only</span>
+  <span style="margin-left:auto;">build v16 (no password) · Live: Yahoo Finance · Static: bank/fund/property statements · Personal use only</span>
 </div>
 
 <div class="overlay" id="modal-overlay" onclick="closeModal(event)">
@@ -477,6 +477,13 @@ function fxArrow(key){
   const up=chg>0;
   return `<span title="${(chg>=0?'+':'')+(chg*100).toFixed(2)}% today" style="color:${up?'var(--green)':'var(--red)'};font-size:9px;margin-left:2px">${up?'▲':'▼'}</span>`;
 }
+// daily-move arrow for KPI numbers (chg as a fraction)
+function moveArrow(chg,size){size=size||13;
+  if(chg==null) return '';
+  if(Math.abs(chg)<0.00005) return `<span style="color:var(--muted);font-size:${size-3}px;margin-left:6px;vertical-align:middle">→</span>`;
+  const up=chg>0;
+  return `<span title="${(chg>=0?'+':'')+(chg*100).toFixed(2)}% today" style="color:${up?'var(--green)':'var(--red)'};font-size:${size}px;margin-left:6px;vertical-align:middle">${up?'▲':'▼'}</span>`;
+}
 
 // One call per ticker: v8/chart gives BOTH current price (meta) and daily candles.
 async function fetchOne(h){
@@ -549,14 +556,17 @@ function renderAll(){
   const liq=H.filter(h=>['Equity','Cash','Fund'].includes(h.ac)).reduce((s,h)=>s+valSGD(h),0);
   const illq=H.filter(h=>['Property','Private Equity'].includes(h.ac)).reduce((s,h)=>s+valSGD(h),0);
   const sec=H.filter(h=>h.ac==='Equity').reduce((s,h)=>s+valSGD(h),0);
-  el('kpi-nw').textContent=fmtSk(nw);el('kpi-nw').className='kpi-val';
-  el('kpi-nw-sub').textContent=fmt(nw,0)+' SGD total';
-  el('kpi-liq').textContent=fmtSk(liq);
-  el('kpi-illq').textContent=fmtSk(illq);
-  el('kpi-sec').textContent=fmtSk(sec);
   const r1d=secReturn('r1d');
   const dayPnL=r1d!=null?sec*r1d/(1+r1d):null;
-  el('kpi-day').textContent=dayPnL!=null?(dayPnL>=0?'+':'')+fmtS(dayPnL):'—';el('kpi-day').className='kpi-val '+clr(dayPnL);
+  // daily change of each aggregate (only listed securities move day-to-day)
+  const nwChg = (dayPnL!=null && (nw-dayPnL)>0) ? dayPnL/(nw-dayPnL) : null;
+  const liqChg = (dayPnL!=null && (liq-dayPnL)>0) ? dayPnL/(liq-dayPnL) : null;
+  el('kpi-nw').innerHTML=fmtSk(nw)+moveArrow(nwChg);el('kpi-nw').className='kpi-val';
+  el('kpi-nw-sub').textContent=fmt(nw,0)+' SGD total';
+  el('kpi-liq').innerHTML=fmtSk(liq)+moveArrow(liqChg);
+  el('kpi-illq').innerHTML=fmtSk(illq)+moveArrow(0);
+  el('kpi-sec').innerHTML=fmtSk(sec)+moveArrow(r1d);
+  el('kpi-day').innerHTML=(dayPnL!=null?(dayPnL>=0?'+':'')+fmtS(dayPnL):'—')+moveArrow(r1d);el('kpi-day').className='kpi-val '+clr(dayPnL);
   el('kpi-day-sub').textContent=r1d!=null?fmtP(r1d)+' weighted':'vs prev close';
   el('kpi-fx').innerHTML=[['USD',fmt(FX.USD,3)],['HKD',fmt(1/FX.HKD,2)],['CNY',fmt(1/FX.CNY,2)],['MYR',fmt(1/FX.MYR,2)]].map(([c,v])=>`<span class="fxchip"><b>${c}</b>${v}${fxArrow(c)}</span>`).join('');
   // period grid
