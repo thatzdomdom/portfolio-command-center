@@ -51,9 +51,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 @media(max-width:600px){.grid3,.grid2{grid-template-columns:1fr}}
 @media(max-width:600px){
   th,td{padding:6px 4px;font-size:11px;white-space:normal;}
-  .tbl-wrap>table{table-layout:fixed;width:100%;}
+  .tbl-wrap>table{width:100%;}
   .tbl-wrap>table th,.tbl-wrap>table td{white-space:normal!important;}
-  .tbl-wrap>table td:first-child,.tbl-wrap>table th:first-child{width:40%;word-break:break-word;overflow-wrap:anywhere;}
+  .tbl-wrap>table td:first-child,.tbl-wrap>table th:first-child{max-width:150px;word-break:break-word;overflow-wrap:anywhere;}
   .hide-sm{display:none!important;}
   .main{padding:14px 12px;}
   .kpi{min-width:128px;padding:12px 14px;}
@@ -69,6 +69,7 @@ th.r,td.r{text-align:right;}
 th:hover{color:var(--text);}
 td{padding:8px 10px;border-bottom:1px solid var(--border);white-space:nowrap;}
 tr.clickable:hover td{background:rgba(245,158,11,.06);cursor:pointer;}
+tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.05em;padding:9px 10px;border-bottom:1px solid var(--border);}
 .ticker-badge{font-size:11px;font-weight:700;background:rgba(245,158,11,.12);color:var(--accent);padding:2px 7px;border-radius:4px;}
 .cur-badge{font-size:10px;font-weight:700;color:var(--muted);background:var(--surf2);padding:1px 6px;border-radius:4px;}
 .pill{display:inline-flex;align-items:center;padding:1px 7px;border-radius:99px;font-size:11px;font-weight:600;}
@@ -282,7 +283,7 @@ tr.clickable:hover td{background:rgba(245,158,11,.06);cursor:pointer;}
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v11 (no password) · Live: Yahoo Finance · Static: bank/fund/property statements · Personal use only</span>
+  <span style="margin-left:auto;">build v12 (no password) · Live: Yahoo Finance · Static: bank/fund/property statements · Personal use only</span>
 </div>
 
 <div class="overlay" id="modal-overlay" onclick="closeModal(event)">
@@ -552,34 +553,52 @@ function setFilter(f,b){filt=f;document.querySelectorAll('.filter-pill').forEach
 function filterHoldings(){search=el('pos-search').value.toLowerCase();renderHoldings();}
 function sortHold(k){if(sortKey===k)sortAsc=!sortAsc;else{sortKey=k;sortAsc=false;}renderHoldings();}
 
+const AC_ORDER=['Equity','Fund','Cash','Private Equity','Property'];
+const AC_LABEL={Equity:'Equities',Fund:'Funds',Cash:'Cash & Deposits','Private Equity':'Private Equity',Property:'Property'};
+function holdRow(h,nw){
+  const d=pd[h.t]||{};const v=valSGD(h);
+  const priced=!!h.yf;
+  const priceStr=priced?(d.price!=null?fmt(d.price,d.price<10?4:d.price<100?3:2):'<span class="ld"><span class="spin"></span></span>'):'—';
+  const qtyStr=h.qty!=null?h.qty.toLocaleString('en-SG'):'—';
+  return `<tr class="${priced?'clickable':''}" ${priced?`onclick="openModal(${h.id})"`:''}>
+    <td>${h.n}</td>
+    <td class="hide-sm">${h.t&&h.t!=='CASH'&&h.t!=='PROP'&&h.t!=='PE'?`<span class="ticker-badge">${h.t}</span>`:'<span style="color:var(--muted)">—</span>'}</td>
+    <td class="hide-sm" style="color:var(--muted)">${h.ac}</td>
+    <td class="hide-sm" style="color:var(--muted)">${h.region}</td>
+    <td class="hide-sm"><span class="cur-badge">${h.cur}</span></td>
+    <td class="r hide-sm">${qtyStr}</td>
+    <td class="r hide-sm">${priceStr}</td>
+    <td class="r" style="font-weight:700">${vS(v)}</td>
+    <td class="r hide-sm">${priced?pill(d.r1d):'—'}</td>
+    <td class="r">${priced?pill(d.r1m):'—'}</td>
+    <td class="r hide-sm">${priced?pill(d.rYTD):'—'}</td>
+    <td class="r hide-sm">${priced?pill(d.r1y):'—'}</td>
+    <td class="r">${(v/nw*100).toFixed(1)}%</td>
+  </tr>`;
+}
 function renderHoldings(){
   const nw=totalNW();
   let rows=[...H];
   if(filt!=='all')rows=rows.filter(h=>h.ac===filt);
   if(search)rows=rows.filter(h=>h.n.toLowerCase().includes(search)||(h.t||'').toLowerCase().includes(search));
   const gv=(h,k)=>k==='sgd'?valSGD(h):k==='price'?(pd[h.t]?.price??0):k==='qty'?(h.qty??0):['r1d','r1m','rYTD','r1y'].includes(k)?(pd[h.t]?.[k]??-99):h[k]??h.n;
-  rows.sort((a,b)=>{const va=gv(a,sortKey),vb=gv(b,sortKey);return sortAsc?(va>vb?1:-1):(va<vb?1:-1);});
-  el('hold-tbody').innerHTML=rows.map(h=>{
-    const d=pd[h.t]||{};const v=valSGD(h);
-    const priced=!!h.yf;
-    const priceStr=priced?(d.price!=null?fmt(d.price,d.price<10?4:d.price<100?3:2):'<span class="ld"><span class="spin"></span></span>'):'—';
-    const qtyStr=h.qty!=null?h.qty.toLocaleString('en-SG'):'—';
-    return `<tr class="${priced?'clickable':''}" ${priced?`onclick="openModal(${h.id})"`:''}>
-      <td>${h.n}</td>
-      <td class="hide-sm">${h.t&&h.t!=='CASH'&&h.t!=='PROP'&&h.t!=='PE'?`<span class="ticker-badge">${h.t}</span>`:'<span style="color:var(--muted)">—</span>'}</td>
-      <td class="hide-sm" style="color:var(--muted)">${h.ac}</td>
-      <td class="hide-sm" style="color:var(--muted)">${h.region}</td>
-      <td class="hide-sm"><span class="cur-badge">${h.cur}</span></td>
-      <td class="r hide-sm">${qtyStr}</td>
-      <td class="r hide-sm">${priceStr}</td>
-      <td class="r" style="font-weight:700">${vS(v)}</td>
-      <td class="r hide-sm">${priced?pill(d.r1d):'—'}</td>
-      <td class="r">${priced?pill(d.r1m):'—'}</td>
-      <td class="r hide-sm">${priced?pill(d.rYTD):'—'}</td>
-      <td class="r hide-sm">${priced?pill(d.r1y):'—'}</td>
-      <td class="r">${(v/nw*100).toFixed(1)}%</td>
-    </tr>`;
-  }).join('');
+  const sortFn=(a,b)=>{const va=gv(a,sortKey),vb=gv(b,sortKey);return sortAsc?(va>vb?1:-1):(va<vb?1:-1);};
+  if(filt==='all'){
+    // grouped view: Equities → Funds → Cash → Private Equity → Property
+    const order=[...AC_ORDER,...[...new Set(rows.map(h=>h.ac))].filter(a=>!AC_ORDER.includes(a))];
+    let html='';
+    order.forEach(ac=>{
+      const gr=rows.filter(h=>h.ac===ac); if(!gr.length)return;
+      gr.sort(sortFn);
+      const sub=gr.reduce((s,h)=>s+valSGD(h),0);
+      html+=`<tr class="grp"><td colspan="13">${AC_LABEL[ac]||ac} · ${gr.length} · ${vS(sub)} · ${(sub/nw*100).toFixed(1)}% of NW</td></tr>`;
+      html+=gr.map(h=>holdRow(h,nw)).join('');
+    });
+    el('hold-tbody').innerHTML=html;
+  } else {
+    rows.sort(sortFn);
+    el('hold-tbody').innerHTML=rows.map(h=>holdRow(h,nw)).join('');
+  }
 }
 
 function renderGroup(gk,tbId,barsId){
