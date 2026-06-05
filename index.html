@@ -37,6 +37,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 .kpi-val{font-size:20px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
 .kpi-sub{font-size:11px;color:var(--muted);margin-top:3px;}
 .pos{color:var(--green);}.neg{color:var(--red);}.neu{color:var(--muted);}
+.fxgrid{display:grid;grid-template-columns:auto auto;gap:3px 16px;margin:3px 0;}
+.fxchip{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.fxchip b{display:inline-block;min-width:30px;color:var(--muted);font-weight:700;font-size:10px;letter-spacing:.03em;}
 .nav{background:var(--surf);border-bottom:1px solid var(--border);display:flex;padding:0 20px;overflow-x:auto;}
 .nav-btn{padding:11px 14px;font-size:12px;font-weight:600;color:var(--muted);border:none;border-bottom:2px solid transparent;background:none;cursor:pointer;white-space:nowrap;}
 .nav-btn:hover{color:var(--text);}
@@ -150,7 +153,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
   <div class="kpi"><div class="kpi-label">Illiquid (Property + PE)</div><div class="kpi-val" id="kpi-illq">—</div><div class="kpi-sub">property + private equity</div></div>
   <div class="kpi"><div class="kpi-label">Listed Securities Day P&amp;L</div><div class="kpi-val" id="kpi-day">—</div><div class="kpi-sub" id="kpi-day-sub">vs prev close</div></div>
   <div class="kpi"><div class="kpi-label">Securities Value</div><div class="kpi-val" id="kpi-sec">—</div><div class="kpi-sub">live-priced equities</div></div>
-  <div class="kpi"><div class="kpi-label">FX</div><div class="kpi-val" id="kpi-fx" style="font-size:14px;">—</div><div class="kpi-sub">SGD/USD · HKD·CNY·MYR per SGD</div></div>
+  <div class="kpi" style="min-width:178px;"><div class="kpi-label">FX Rates</div><div class="fxgrid" id="kpi-fx">—</div><div class="kpi-sub">per 1 SGD · USD as SGD/USD</div></div>
 </div>
 
 <div class="nav">
@@ -283,7 +286,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v13 (no password) · Live: Yahoo Finance · Static: bank/fund/property statements · Personal use only</span>
+  <span style="margin-left:auto;">build v14 (no password) · Live: Yahoo Finance · Static: bank/fund/property statements · Personal use only</span>
 </div>
 
 <div class="overlay" id="modal-overlay" onclick="closeModal(event)">
@@ -540,7 +543,7 @@ function renderAll(){
   const dayPnL=r1d!=null?sec*r1d/(1+r1d):null;
   el('kpi-day').textContent=dayPnL!=null?(dayPnL>=0?'+':'')+fmtS(dayPnL):'—';el('kpi-day').className='kpi-val '+clr(dayPnL);
   el('kpi-day-sub').textContent=r1d!=null?fmtP(r1d)+' weighted':'vs prev close';
-  el('kpi-fx').textContent=`${fmt(FX.USD,3)}·${fmt(1/FX.HKD,2)}·${fmt(1/FX.CNY,2)}·${fmt(1/FX.MYR,2)}`;
+  el('kpi-fx').innerHTML=[['USD',fmt(FX.USD,3)],['HKD',fmt(1/FX.HKD,2)],['CNY',fmt(1/FX.CNY,2)],['MYR',fmt(1/FX.MYR,2)]].map(([c,v])=>`<span class="fxchip"><b>${c}</b>${v}</span>`).join('');
   // period grid
   [['r1d','pp-1d'],['r1w','pp-1w'],['r1m','pp-1m'],['r3m','pp-3m'],['rYTD','pp-ytd'],['r1y','pp-1y']].forEach(([k,id])=>{const r=secReturn(k);el(id).textContent=fmtP(r);el(id).className='pp-val '+clr(r);});
   renderHoldings();
