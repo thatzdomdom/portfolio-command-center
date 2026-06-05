@@ -358,13 +358,13 @@ const H = [
   // ── SGX/CDP LEGACY TAIL (penny, suspended & USD-quoted, ~60 names) ──
   {id:32,n:"SGX/CDP Legacy Tail (penny/suspended, excl. Healthbank)", t:"TAIL", yf:null, ac:"Equity", region:"Singapore", cur:"SGD", manualNative:119717},
   // ── FOREIGN SECURITIES (POEMS custodian, live-priced) ──
-  {id:33,n:"Tencent Holdings",        t:"0700", yf:"0700.HK", ac:"Equity", region:"China/HK", cur:"HKD", qty:1100},
-  {id:34,n:"SMIC",                    t:"0981", yf:"0981.HK", ac:"Equity", region:"China/HK", cur:"HKD", qty:11000},
-  {id:35,n:"Xiaomi Corp",             t:"1810", yf:"1810.HK", ac:"Equity", region:"China/HK", cur:"HKD", qty:14000},
-  {id:36,n:"VanEck Gold Miners (GDX)",t:"GDX",  yf:"GDX",     ac:"Equity", region:"Global",   cur:"USD", qty:1000},
-  {id:37,n:"ETFMG Jr Silver Miners",  t:"SILJ", yf:"SILJ",    ac:"Equity", region:"Global",   cur:"USD", qty:2500},
-  {id:38,n:"iShares Global Silver",   t:"SLVP", yf:"SLVP",    ac:"Equity", region:"Global",   cur:"USD", qty:2000},
-  {id:39,n:"VanEck Vietnam (VNM)",    t:"VNM",  yf:"VNM",     ac:"Equity", region:"Vietnam",  cur:"USD", qty:450},
+  {id:33,n:"Tencent Holdings",        t:"0700", yf:"0700.HK", ac:"Equity", region:"China/HK", cur:"HKD", qty:1100,  book:83200},
+  {id:34,n:"SMIC",                    t:"0981", yf:"0981.HK", ac:"Equity", region:"China/HK", cur:"HKD", qty:11000, book:144000},
+  {id:35,n:"Xiaomi Corp",             t:"1810", yf:"1810.HK", ac:"Equity", region:"China/HK", cur:"HKD", qty:14000, book:65200},
+  {id:36,n:"VanEck Gold Miners (GDX)",t:"GDX",  yf:"GDX",     ac:"Equity", region:"Global",   cur:"USD", qty:1000,  book:111000},
+  {id:37,n:"ETFMG Jr Silver Miners",  t:"SILJ", yf:"SILJ",    ac:"Equity", region:"Global",   cur:"USD", qty:2500,  book:95000},
+  {id:38,n:"iShares Global Silver",   t:"SLVP", yf:"SLVP",    ac:"Equity", region:"Global",   cur:"USD", qty:2000,  book:90000},
+  {id:39,n:"VanEck Vietnam (VNM)",    t:"VNM",  yf:"VNM",     ac:"Equity", region:"Vietnam",  cur:"USD", qty:450,   book:10500},
   {id:40,n:"China Greenfresh (penny)",t:"CGF",  yf:null,      ac:"Equity", region:"China/HK", cur:"HKD", manualNative:0},
   // ── FUND ──
   {id:41,n:"Astral Value Fund VCC",   t:"ASTRAL", yf:null, ac:"Fund", region:"Global", cur:"USD", manualNative:154342.57},
@@ -425,21 +425,28 @@ async function loadAll(){
     setStatus('amber','Fetching FX rates…');
     await Promise.allSettled([['USD','USDSGD=X'],['HKD','HKDSGD=X'],['CNY','CNYSGD=X'],['MYR','MYRSGD=X']].map(([k,s])=>fetchFx(k,s)));
     renderAll();
-    // Prices + history in one call each
+    // Prices + history in one call each.
+    // Fetch foreign (US/HK) tickers FIRST — they're most prone to proxy rate-limiting if left for last.
     setStatus('amber','Fetching prices & charts…');
+    const order=[...priced].sort((a,b)=>{const fa=a.cur!=='SGD'?0:1, fb=b.cur!=='SGD'?0:1; return fa-fb;});
     let done=0;
-    for(let i=0;i<priced.length;i+=3){
-      await Promise.allSettled(priced.slice(i,i+3).map(h=>fetchOne(h)));
-      done=Math.min(priced.length,i+3);
-      setStatus('amber',`Fetching prices & charts… ${done}/${priced.length}`);
+    for(let i=0;i<order.length;i+=3){
+      await Promise.allSettled(order.slice(i,i+3).map(h=>fetchOne(h)));
+      done=Math.min(order.length,i+3);
+      setStatus('amber',`Fetching prices & charts… ${done}/${order.length}`);
       renderAll();
       await sleep(350);
     }
-    // retry any that failed to get a price
-    const missed=priced.filter(h=>pd[h.t]?.price==null);
-    if(missed.length){setStatus('amber',`Retrying ${missed.length} slow tickers…`);
-      for(let i=0;i<missed.length;i+=3){await Promise.allSettled(missed.slice(i,i+3).map(h=>fetchOne(h)));renderAll();await sleep(400);}}
-    const now=new Date();el('last-updated').textContent='Updated '+now.toLocaleTimeString('en-SG');setStatus('green','Live — '+now.toLocaleString('en-SG'));
+    // retry any that still failed — several persistent rounds
+    for(let round=0;round<4;round++){
+      const missed=priced.filter(h=>pd[h.t]?.price==null);
+      if(!missed.length)break;
+      setStatus('amber',`Retrying ${missed.length} slow ticker(s) — round ${round+1}…`);
+      for(let i=0;i<missed.length;i+=2){await Promise.allSettled(missed.slice(i,i+2).map(h=>fetchOne(h)));renderAll();await sleep(550);}
+    }
+    const still=priced.filter(h=>pd[h.t]?.price==null).length;
+    const now=new Date();el('last-updated').textContent='Updated '+now.toLocaleTimeString('en-SG');
+    setStatus(still?'amber':'green',still?`Live — ${still} ticker(s) using last-known value`:'Live — '+now.toLocaleString('en-SG'));
   }catch(e){setStatus('red','Error: '+e.message);renderAll();}
 }
 
