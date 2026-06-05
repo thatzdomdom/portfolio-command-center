@@ -286,7 +286,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v14 (no password) · Live: Yahoo Finance · Static: bank/fund/property statements · Personal use only</span>
+  <span style="margin-left:auto;">build v15 (no password) · Live: Yahoo Finance · Static: bank/fund/property statements · Personal use only</span>
 </div>
 
 <div class="overlay" id="modal-overlay" onclick="closeModal(event)">
@@ -399,6 +399,7 @@ const SECTOR={1:'Financials',2:'Consumer Staples',3:'Industrials',4:'Materials',
 H.forEach(h=>{h.sector=SECTOR[h.id]||null;});
 
 const FX={SGD:1, USD:1.34, HKD:0.172, CNY:0.186, MYR:0.30};
+const FXPREV={}; // previous-day SGD-per-unit, for daily-move arrows
 const pd={};
 let sortKey='sgd', sortAsc=false, filt='all', search='';
 let chart=null, modalHist=null;
@@ -458,9 +459,23 @@ async function loadAll(){
 async function fetchFx(key,sym){
   try{
     const data=await yfFetch(`https://query1.finance.yahoo.com/v8/finance/chart/${sym}?interval=1d&range=5d`);
-    const m=data?.chart?.result?.[0]?.meta;
+    const res=data?.chart?.result?.[0];const m=res?.meta;
     if(m&&m.regularMarketPrice) FX[key]=m.regularMarketPrice;
+    const closes=(res?.indicators?.quote?.[0]?.close||[]).filter(x=>x!=null);
+    if(closes.length>=2) FXPREV[key]=closes[closes.length-2];
+    else if(m&&m.chartPreviousClose) FXPREV[key]=m.chartPreviousClose;
   }catch(_){}
+}
+// daily move of the DISPLAYED rate (USD shown SGD/USD; others foreign-per-SGD) → green ▲ / red ▼
+function fxArrow(key){
+  const prev=FXPREV[key]; if(prev==null) return '';
+  const nowDisp=key==='USD'?FX.USD:1/FX[key];
+  const prevDisp=key==='USD'?prev:1/prev;
+  if(!(prevDisp>0)||!(nowDisp>0)) return '';
+  const chg=nowDisp/prevDisp-1;
+  if(Math.abs(chg)<0.0005) return '<span style="color:var(--muted);font-size:9px;margin-left:2px">→</span>';
+  const up=chg>0;
+  return `<span title="${(chg>=0?'+':'')+(chg*100).toFixed(2)}% today" style="color:${up?'var(--green)':'var(--red)'};font-size:9px;margin-left:2px">${up?'▲':'▼'}</span>`;
 }
 
 // One call per ticker: v8/chart gives BOTH current price (meta) and daily candles.
@@ -543,7 +558,7 @@ function renderAll(){
   const dayPnL=r1d!=null?sec*r1d/(1+r1d):null;
   el('kpi-day').textContent=dayPnL!=null?(dayPnL>=0?'+':'')+fmtS(dayPnL):'—';el('kpi-day').className='kpi-val '+clr(dayPnL);
   el('kpi-day-sub').textContent=r1d!=null?fmtP(r1d)+' weighted':'vs prev close';
-  el('kpi-fx').innerHTML=[['USD',fmt(FX.USD,3)],['HKD',fmt(1/FX.HKD,2)],['CNY',fmt(1/FX.CNY,2)],['MYR',fmt(1/FX.MYR,2)]].map(([c,v])=>`<span class="fxchip"><b>${c}</b>${v}</span>`).join('');
+  el('kpi-fx').innerHTML=[['USD',fmt(FX.USD,3)],['HKD',fmt(1/FX.HKD,2)],['CNY',fmt(1/FX.CNY,2)],['MYR',fmt(1/FX.MYR,2)]].map(([c,v])=>`<span class="fxchip"><b>${c}</b>${v}${fxArrow(c)}</span>`).join('');
   // period grid
   [['r1d','pp-1d'],['r1w','pp-1w'],['r1m','pp-1m'],['r3m','pp-3m'],['rYTD','pp-ytd'],['r1y','pp-1y']].forEach(([k,id])=>{const r=secReturn(k);el(id).textContent=fmtP(r);el(id).className='pp-val '+clr(r);});
   renderHoldings();
