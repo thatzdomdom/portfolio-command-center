@@ -150,7 +150,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
   <div class="kpi"><div class="kpi-label">Illiquid (Property + PE)</div><div class="kpi-val" id="kpi-illq">—</div><div class="kpi-sub">property + private equity</div></div>
   <div class="kpi"><div class="kpi-label">Listed Securities Day P&amp;L</div><div class="kpi-val" id="kpi-day">—</div><div class="kpi-sub" id="kpi-day-sub">vs prev close</div></div>
   <div class="kpi"><div class="kpi-label">Securities Value</div><div class="kpi-val" id="kpi-sec">—</div><div class="kpi-sub">live-priced equities</div></div>
-  <div class="kpi"><div class="kpi-label">FX → SGD</div><div class="kpi-val" id="kpi-fx" style="font-size:14px;">—</div><div class="kpi-sub">USD·HKD·CNY·MYR</div></div>
+  <div class="kpi"><div class="kpi-label">FX</div><div class="kpi-val" id="kpi-fx" style="font-size:14px;">—</div><div class="kpi-sub">SGD/USD · HKD·CNY·MYR per SGD</div></div>
 </div>
 
 <div class="nav">
@@ -237,7 +237,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 </div>
 
 <div class="panel" id="panel-currency">
-  <div class="card"><div class="sh">Currency Exposure (pre-hedge)</div><div class="tbl-wrap"><table><thead><tr><th>Currency</th><th class="r">Value SGD</th><th class="r">% NW</th><th class="r">FX → SGD</th></tr></thead><tbody id="currency-tbody"></tbody></table></div></div>
+  <div class="card"><div class="sh">Currency Exposure (pre-hedge)</div><div class="tbl-wrap"><table><thead><tr><th>Currency</th><th class="r">Value SGD</th><th class="r">% NW</th><th class="r">FX rate</th></tr></thead><tbody id="currency-tbody"></tbody></table></div></div>
   <div class="card" style="margin-top:16px;"><div class="sh">Weights</div><div id="currency-bars"></div></div>
 </div>
 
@@ -283,7 +283,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v12 (no password) · Live: Yahoo Finance · Static: bank/fund/property statements · Personal use only</span>
+  <span style="margin-left:auto;">build v13 (no password) · Live: Yahoo Finance · Static: bank/fund/property statements · Personal use only</span>
 </div>
 
 <div class="overlay" id="modal-overlay" onclick="closeModal(event)">
@@ -513,6 +513,12 @@ const fmtS=n=>n==null?'—':'S$'+Math.round(n).toLocaleString('en-SG');
 const isMobile=()=>window.matchMedia('(max-width:600px)').matches;
 const fmtScompact=n=>n==null?'—':(Math.abs(n)>=1e6?'S$'+(n/1e6).toFixed(2)+'M':Math.abs(n)>=1e3?'S$'+Math.round(n/1e3)+'K':'S$'+Math.round(n));
 const vS=n=>isMobile()?fmtScompact(n):fmtS(n); // mobile-aware SGD value (compact on phones)
+// FX rate display: USD as SGD-per-USD; HKD/CNY/MYR flipped to foreign-per-SGD (calc unchanged)
+function fxCell(cur){
+  if(cur==='SGD') return '1.0000';
+  if(cur==='USD') return fmt(FX.USD,4)+' <span style="color:var(--muted);font-size:10px">SGD/USD</span>';
+  return fmt(1/(FX[cur]||1),4)+` <span style="color:var(--muted);font-size:10px">${cur}/SGD</span>`;
+}
 const fmtSk=n=>n==null?'—':Math.abs(n)>=1e6?'S$'+(n/1e6).toFixed(2)+'M':'S$'+Math.round(n).toLocaleString('en-SG');
 const clr=n=>n==null?'neu':n>0?'pos':n<0?'neg':'neu';
 const pill=n=>`<span class="pill ${clr(n)}">${fmtP(n)}</span>`;
@@ -534,7 +540,7 @@ function renderAll(){
   const dayPnL=r1d!=null?sec*r1d/(1+r1d):null;
   el('kpi-day').textContent=dayPnL!=null?(dayPnL>=0?'+':'')+fmtS(dayPnL):'—';el('kpi-day').className='kpi-val '+clr(dayPnL);
   el('kpi-day-sub').textContent=r1d!=null?fmtP(r1d)+' weighted':'vs prev close';
-  el('kpi-fx').textContent=`${fmt(FX.USD,3)}·${fmt(FX.HKD,3)}·${fmt(FX.CNY,3)}·${fmt(FX.MYR,3)}`;
+  el('kpi-fx').textContent=`${fmt(FX.USD,3)}·${fmt(1/FX.HKD,2)}·${fmt(1/FX.CNY,2)}·${fmt(1/FX.MYR,2)}`;
   // period grid
   [['r1d','pp-1d'],['r1w','pp-1w'],['r1m','pp-1m'],['r3m','pp-3m'],['rYTD','pp-ytd'],['r1y','pp-1y']].forEach(([k,id])=>{const r=secReturn(k);el(id).textContent=fmtP(r);el(id).className='pp-val '+clr(r);});
   renderHoldings();
@@ -709,7 +715,7 @@ function renderCurrency(){
   const nw=totalNW();const g={};
   H.forEach(h=>{if(!g[h.cur])g[h.cur]={cur:h.cur,v:0};g[h.cur].v+=valSGD(h);});
   const arr=Object.values(g).sort((a,b)=>b.v-a.v);const max=arr[0]?.v||1;
-  el('currency-tbody').innerHTML=arr.map(x=>`<tr><td><strong>${x.cur}</strong></td><td class="r" style="font-weight:700">${vS(x.v)}</td><td class="r">${(x.v/nw*100).toFixed(1)}%</td><td class="r">${x.cur==='SGD'?'1.000':fmt(FX[x.cur],4)}</td></tr>`).join('');
+  el('currency-tbody').innerHTML=arr.map(x=>`<tr><td><strong>${x.cur}</strong></td><td class="r" style="font-weight:700">${vS(x.v)}</td><td class="r">${(x.v/nw*100).toFixed(1)}%</td><td class="r">${fxCell(x.cur)}</td></tr>`).join('');
   el('currency-bars').innerHTML=arr.map(x=>`<div style="display:grid;grid-template-columns:80px 1fr 70px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)"><span style="font-size:12px">${x.cur}</span><div style="background:var(--surf2);height:6px;border-radius:3px;overflow:hidden"><div style="height:100%;border-radius:3px;background:var(--accent);width:${(x.v/max*100).toFixed(1)}%"></div></div><span style="font-size:12px;color:var(--muted);text-align:right">${(x.v/nw*100).toFixed(1)}%</span></div>`).join('');
 }
 
