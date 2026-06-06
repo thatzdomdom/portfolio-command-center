@@ -287,7 +287,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v18 (no password) · Live: Yahoo Finance · Static: bank/fund/property statements · Personal use only</span>
+  <span style="margin-left:auto;">build v19 (no password) · Live: Yahoo Finance · Static: bank/fund/property statements · Personal use only</span>
 </div>
 
 <div class="overlay" id="modal-overlay" onclick="closeModal(event)">
@@ -362,7 +362,7 @@ const H = [
   {id:30,n:"SingPost",                t:"S08",  yf:"S08.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:10000,  book:3450},
   {id:31,n:"Asian Pay TV Trust",      t:"S7OU", yf:"S7OU.SI", ac:"Equity", region:"Asia",      cur:"SGD", qty:34573,  book:3008},
   // ── SGX/CDP LEGACY TAIL (penny, suspended & USD-quoted, ~60 names) ──
-  {id:32,n:"SGX/CDP Legacy Tail (penny/suspended, excl. Healthbank)", t:"TAIL", yf:null, ac:"Equity", region:"Singapore", cur:"SGD", manualNative:119717},
+  {id:32,n:"SGX/CDP Legacy Tail (penny/suspended, excl. Healthbank)", t:"TAIL", yf:null, ac:"Equity", region:"Singapore", cur:"SGD", manualNative:110672},
   // ── FOREIGN SECURITIES (POEMS custodian, live-priced) ──
   {id:33,n:"Tencent Holdings",        t:"0700", yf:"0700.HK", ac:"Equity", region:"China/HK", cur:"HKD", qty:1100,  book:83200},
   {id:34,n:"SMIC",                    t:"0981", yf:"0981.HK", ac:"Equity", region:"China/HK", cur:"HKD", qty:11000, book:144000},
@@ -396,6 +396,8 @@ const H = [
   // ── IBKR (ProRealTime) margin account — leveraged unallocated silver, net equity S$114,557 ──
   {id:57,n:"Silver — unallocated (IBKR)",     t:"XAG",  yf:"SI=F", ac:"Commodity", region:"Global", cur:"USD", qty:1777, book:170797},
   {id:58,n:"IBKR Margin Loan (net)",          t:"LOAN", yf:null,   ac:"Cash",      region:"Global", cur:"SGD", manualNative:-56240},
+  // ── CDP (a/c 8014) cash-equivalents — Singapore Savings Bond + SGS T-bills (Jun 2026 statement) ──
+  {id:59,n:"Singapore Savings Bond + T-bills (CDP)", t:"SSB", yf:null, ac:"Cash", region:"Singapore", cur:"SGD", manualNative:204000},
 ];
 
 // Sector tags (by holding id) for the sector heat map
