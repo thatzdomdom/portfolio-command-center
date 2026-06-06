@@ -120,6 +120,9 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 .leg-name{flex:1;color:var(--text);}
 .leg-pct{color:var(--muted);font-variant-numeric:tabular-nums;}
 .note{background:rgba(245,158,11,.08);border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 6px 6px 0;font-size:12px;color:var(--text);margin-bottom:16px;}
+.ddbtn{margin-top:8px;background:none;border:1px solid var(--border);color:var(--accent);font-weight:700;font-size:12px;padding:4px 12px;border-radius:6px;cursor:pointer;font-family:inherit;}
+.ddbtn:hover{border-color:var(--accent);background:rgba(245,158,11,.06);}
+.ddbody{margin-top:8px;font-size:13px;line-height:1.55;color:var(--text);background:var(--surf2);border-radius:6px;padding:11px 13px;}
 </style>
 </head>
 <body>
@@ -171,6 +174,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 <div class="main">
 
 <div class="panel active" id="panel-overview">
+  <div id="intel-alert" style="display:none;margin-bottom:16px;"></div>
   <div style="margin-bottom:16px;">
     <div class="sh">Listed Securities Performance by Period (value-weighted)</div>
     <div class="perf-period-grid">
@@ -319,7 +323,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v21 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v22 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="modal-overlay" onclick="closeModal(event)">
@@ -862,46 +866,69 @@ async function loadIntel(){
     if(!r.ok) throw new Error('not published yet');
     intelData=await r.json(); intelLoaded=true;
     el('smart-updated').textContent=intelData.updated?('updated '+new Date(intelData.updated).toLocaleString('en-SG')):'';
-    renderSmart();
+    renderSmart(); renderIntelAlert();
   }catch(e){
     el('smart-body').innerHTML='<div class="card" style="text-align:center;color:var(--muted)"><p style="font-size:14px;margin-bottom:6px;">⏳ First Intel refresh is pending.</p><p style="font-size:12px;">The scheduled agent will publish Congress trades, super-investor moves and insider activity (with written analysis) here on its next run.</p></div>';
   }
 }
 function smCard(inner){return `<div class="card" style="margin-bottom:10px;">${inner}</div>`;}
 function pillTag(t){const u=(t||'').toLowerCase();const c=/buy|new|add|increas/.test(u)?'pos':/sell|exit|reduc|decreas/.test(u)?'neg':'neu';return `<span class="pill ${c}">${t}</span>`;}
+// match intel tickers (e.g. "DBS","Tencent","0700.HK") to held positions (codes like D05/0700 + name words)
+const STOP=new Set(['LTD','LIMITED','GROUP','HOLDINGS','HOLDING','CORP','CORPORATION','TRUST','REIT','INC','THE','PLC','BHD','CO','LAND','INTERNATIONAL','INT','GLOBAL','FUND','BOND','CASH','ETF','COMM','TR','SGD','USD','VCC','PTE','CHINA','ASIA','UNALLOCATED','MARGIN','LOAN','NET','SSB','BILLS','DIGITAL']);
+const HELDKEYS=(()=>{const s=new Set();H.filter(h=>h.yf).forEach(h=>{s.add(h.t.toUpperCase());h.n.toUpperCase().replace(/[^A-Z0-9 ]/g,' ').split(/\s+/).forEach(w=>{if(w.length>=3&&!STOP.has(w))s.add(w);});});[['0700','TENCENT'],['0981','SMIC'],['1810','XIAOMI'],['D05','DBS'],['Z74','SINGTEL'],['F99','FRASER'],['WJP','VICOM'],['Z25','YANLORD'],['5E2','SEATRIUM']].forEach(([c,a])=>{s.add(c);s.add(a);});return s;})();
+function heldMatch(t){if(!t)return false;return HELDKEYS.has(t.toUpperCase().replace(/\.(SI|HK|L|US)$/,''));}
+let ddc=0;
+function ddBlock(x){ if(!x.deepDive) return ''; const id='dd'+(ddc++);
+  return `<button class="ddbtn" onclick="var e=document.getElementById('${id}');var o=e.style.display==='none';e.style.display=o?'block':'none';this.textContent=o?'Hide analysis ▴':'See why ▸';">See why ▸</button><div id="${id}" class="ddbody" style="display:none;">${x.deepDive}</div>`; }
+// alert on Overview when intel touches a held ticker
+function renderIntelAlert(){
+  const box=el('intel-alert'); if(!box||!intelData) return;
+  const hits=[];
+  (intelData.congress||[]).forEach(x=>{if(heldMatch(x.ticker))hits.push({tag:'Congress',t:x.ticker,who:x.representative,act:x.type,note:x.rationale});});
+  (intelData.superInvestors||[]).forEach(x=>{if(heldMatch(x.ticker))hits.push({tag:'Investor',t:x.ticker,who:x.name,act:x.action,note:x.rationale});});
+  (intelData.insiders||[]).forEach(x=>{if(heldMatch(x.ticker))hits.push({tag:'Insider',t:x.ticker,who:x.insider,act:x.type,note:x.rationale});});
+  if(!hits.length){box.style.display='none';return;}
+  box.style.display='';
+  box.innerHTML=`<div class="card" style="border-left:3px solid var(--accent);"><div class="sh">🔔 Smart-money activity on your holdings (${hits.length})</div>`+
+    hits.map(h=>`<div style="padding:7px 0;border-bottom:1px solid var(--border);font-size:13px;">${pillTag(h.act)} <span class="ticker-badge">${h.t}</span> <strong>${h.tag}</strong> · ${h.who}<div style="color:var(--muted);font-size:12px;margin-top:2px;">${h.note||''}</div></div>`).join('')+
+    `<div class="small" style="margin-top:8px;"><span onclick="document.querySelectorAll('.nav-btn').forEach(b=>{if(b.textContent.includes('Smart Money'))b.click();});" style="color:var(--accent);cursor:pointer;font-weight:700;">Open Smart Money →</span></div></div>`;
+}
 function renderSmart(){
   if(!intelData){return;}
-  const held=new Set(H.filter(h=>h.yf).map(h=>h.t.toUpperCase()));
+  ddc=0;
   if(smartView==='congress'){
     const a=intelData.congress||[];
     el('smart-body').innerHTML = a.length? a.map(x=>smCard(`
       <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;">
-        <div><span class="ticker-badge">${x.ticker||'—'}</span> ${held.has((x.ticker||'').toUpperCase())?'🟡 ':''}<strong>${x.representative||''}</strong></div>
+        <div><span class="ticker-badge">${x.ticker||'—'}</span> ${heldMatch(x.ticker)?'🟡 ':''}<strong>${x.representative||''}</strong></div>
         <div style="text-align:right;">${pillTag(x.type)} <span class="small" style="color:var(--muted)">${x.date||''}</span></div>
       </div>
       <div class="small" style="margin:4px 0;color:var(--muted)">Amount: ${x.amount||'—'}</div>
       <div style="font-size:13px;">${x.rationale||''}</div>
+      ${ddBlock(x)}
       ${x.sources?`<div class="small" style="margin-top:6px;color:var(--muted)">Sources: ${x.sources.join(' · ')}</div>`:''}`)).join('')
       : '<div class="card small" style="color:var(--muted)">No congress trades in the latest refresh.</div>';
   } else if(smartView==='investors'){
     const a=intelData.superInvestors||[];
     el('smart-body').innerHTML = a.length? a.map(x=>smCard(`
       <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;">
-        <div><strong>${x.name||''}</strong> → <span class="ticker-badge">${x.ticker||'—'}</span> ${held.has((x.ticker||'').toUpperCase())?'🟡':''}</div>
+        <div><strong>${x.name||''}</strong> → <span class="ticker-badge">${x.ticker||'—'}</span> ${heldMatch(x.ticker)?'🟡':''}</div>
         <div style="text-align:right;">${pillTag(x.action)} <span class="small" style="color:var(--muted)">${x.date||x.quarter||''}</span></div>
       </div>
       <div class="small" style="margin:4px 0;color:var(--muted)">${[x.shares?('Shares: '+x.shares):'',x.value?('Value: '+x.value):''].filter(Boolean).join(' · ')}</div>
-      <div style="font-size:13px;">${x.rationale||''}</div>`)).join('')
+      <div style="font-size:13px;">${x.rationale||''}</div>
+      ${ddBlock(x)}`)).join('')
       : '<div class="card small" style="color:var(--muted)">No super-investor moves in the latest refresh.</div>';
   } else {
     const a=intelData.insiders||[];
     el('smart-body').innerHTML = a.length? a.map(x=>smCard(`
       <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;">
-        <div><span class="ticker-badge">${x.ticker||'—'}</span> ${held.has((x.ticker||'').toUpperCase())?'🟡 ':''}<strong>${x.insider||''}</strong> <span class="small" style="color:var(--muted)">${x.role||''}</span></div>
+        <div><span class="ticker-badge">${x.ticker||'—'}</span> ${heldMatch(x.ticker)?'🟡 ':''}<strong>${x.insider||''}</strong> <span class="small" style="color:var(--muted)">${x.role||''}</span></div>
         <div style="text-align:right;">${pillTag(x.type)} <span class="small" style="color:var(--muted)">${x.date||''}</span></div>
       </div>
       <div class="small" style="margin:4px 0;color:var(--muted)">${[x.shares?('Shares: '+x.shares):'',x.value?('Value: '+x.value):''].filter(Boolean).join(' · ')}</div>
-      <div style="font-size:13px;">${x.rationale||''}</div>`)).join('')
+      <div style="font-size:13px;">${x.rationale||''}</div>
+      ${ddBlock(x)}`)).join('')
       : '<div class="card small" style="color:var(--muted)">No insider transactions on your holdings in the latest refresh.</div>';
   }
 }
@@ -936,7 +963,7 @@ async function loadReddit(force){
 function el(id){return document.getElementById(id);}
 function setStatus(c,m){el('status-text').innerHTML=`<span class="dot ${c}"></span>${m}`;}
 let _rzT; window.addEventListener('resize',()=>{clearTimeout(_rzT);_rzT=setTimeout(renderAll,200);});
-if(!GATE_ON||sessionStorage.getItem(SESSION_KEY)==='1'){renderAll();setTimeout(loadAll,300);}
+if(!GATE_ON||sessionStorage.getItem(SESSION_KEY)==='1'){renderAll();setTimeout(loadAll,300);setTimeout(loadIntel,600);}
 </script>
 </body>
 </html>
