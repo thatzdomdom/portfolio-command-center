@@ -164,6 +164,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
   <button class="nav-btn" onclick="showTab('currency',this)">Currency</button>
   <button class="nav-btn" onclick="showTab('analytics',this)">Analytics</button>
   <button class="nav-btn" onclick="showTab('reddit',this)">🔥 Reddit Trends</button>
+  <button class="nav-btn" onclick="showTab('smart',this)">💼 Smart Money</button>
   <button class="nav-btn" onclick="showTab('about',this)">Sources &amp; Notes</button>
 </div>
 
@@ -245,6 +246,17 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
   <div class="card" style="margin-top:16px;"><div class="sh">Weights</div><div id="currency-bars"></div></div>
 </div>
 
+<div class="panel" id="panel-smart">
+  <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:14px;">
+    <button class="filter-pill active" id="sm-congress" onclick="setSmart('congress',this)">🏛️ Congress Trades</button>
+    <button class="filter-pill" id="sm-investors" onclick="setSmart('investors',this)">🐋 Super Investors</button>
+    <button class="filter-pill" id="sm-insiders" onclick="setSmart('insiders',this)">👤 Insiders (my holdings)</button>
+    <span id="smart-updated" class="small" style="margin-left:auto;color:var(--muted);font-size:11px;"></span>
+  </div>
+  <div id="smart-body"></div>
+  <p style="font-size:11px;color:var(--muted);margin-top:14px;">Researched &amp; written by a scheduled Claude "Intel" agent from public disclosures (US House/Senate STOCK Act filings, SEC 13F &amp; Form 4). Not financial advice. Refreshes daily.</p>
+</div>
+
 <div class="panel" id="panel-reddit">
   <div class="card">
     <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;">
@@ -307,7 +319,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v20 (no password) · Live: Yahoo Finance + ApeWisdom · Personal use only</span>
+  <span style="margin-left:auto;">build v21 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="modal-overlay" onclick="closeModal(event)">
@@ -837,7 +849,62 @@ function setChartPeriod(p){
 }
 
 function showTab(id,b){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active'));el('panel-'+id).classList.add('active');b.classList.add('active');
-  if(id==='reddit'&&!redditLoaded) loadReddit();}
+  if(id==='reddit'&&!redditLoaded) loadReddit();
+  if(id==='smart'&&!intelLoaded) loadIntel();}
+
+// ── Smart Money (Congress / Super Investors / Insiders) from published data/intel.json ──
+let intelLoaded=false, intelData=null, smartView='congress';
+function setSmart(v,btn){smartView=v;document.querySelectorAll('#sm-congress,#sm-investors,#sm-insiders').forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderSmart();}
+async function loadIntel(){
+  el('smart-body').innerHTML='<div class="ld"><span class="spin"></span>Loading intel…</div>';
+  try{
+    const r=await fetch('data/intel.json?cb='+Date.now());
+    if(!r.ok) throw new Error('not published yet');
+    intelData=await r.json(); intelLoaded=true;
+    el('smart-updated').textContent=intelData.updated?('updated '+new Date(intelData.updated).toLocaleString('en-SG')):'';
+    renderSmart();
+  }catch(e){
+    el('smart-body').innerHTML='<div class="card" style="text-align:center;color:var(--muted)"><p style="font-size:14px;margin-bottom:6px;">⏳ First Intel refresh is pending.</p><p style="font-size:12px;">The scheduled agent will publish Congress trades, super-investor moves and insider activity (with written analysis) here on its next run.</p></div>';
+  }
+}
+function smCard(inner){return `<div class="card" style="margin-bottom:10px;">${inner}</div>`;}
+function pillTag(t){const u=(t||'').toLowerCase();const c=/buy|new|add|increas/.test(u)?'pos':/sell|exit|reduc|decreas/.test(u)?'neg':'neu';return `<span class="pill ${c}">${t}</span>`;}
+function renderSmart(){
+  if(!intelData){return;}
+  const held=new Set(H.filter(h=>h.yf).map(h=>h.t.toUpperCase()));
+  if(smartView==='congress'){
+    const a=intelData.congress||[];
+    el('smart-body').innerHTML = a.length? a.map(x=>smCard(`
+      <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;">
+        <div><span class="ticker-badge">${x.ticker||'—'}</span> ${held.has((x.ticker||'').toUpperCase())?'🟡 ':''}<strong>${x.representative||''}</strong></div>
+        <div style="text-align:right;">${pillTag(x.type)} <span class="small" style="color:var(--muted)">${x.date||''}</span></div>
+      </div>
+      <div class="small" style="margin:4px 0;color:var(--muted)">Amount: ${x.amount||'—'}</div>
+      <div style="font-size:13px;">${x.rationale||''}</div>
+      ${x.sources?`<div class="small" style="margin-top:6px;color:var(--muted)">Sources: ${x.sources.join(' · ')}</div>`:''}`)).join('')
+      : '<div class="card small" style="color:var(--muted)">No congress trades in the latest refresh.</div>';
+  } else if(smartView==='investors'){
+    const a=intelData.superInvestors||[];
+    el('smart-body').innerHTML = a.length? a.map(x=>smCard(`
+      <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;">
+        <div><strong>${x.name||''}</strong> → <span class="ticker-badge">${x.ticker||'—'}</span> ${held.has((x.ticker||'').toUpperCase())?'🟡':''}</div>
+        <div style="text-align:right;">${pillTag(x.action)} <span class="small" style="color:var(--muted)">${x.date||x.quarter||''}</span></div>
+      </div>
+      <div class="small" style="margin:4px 0;color:var(--muted)">${[x.shares?('Shares: '+x.shares):'',x.value?('Value: '+x.value):''].filter(Boolean).join(' · ')}</div>
+      <div style="font-size:13px;">${x.rationale||''}</div>`)).join('')
+      : '<div class="card small" style="color:var(--muted)">No super-investor moves in the latest refresh.</div>';
+  } else {
+    const a=intelData.insiders||[];
+    el('smart-body').innerHTML = a.length? a.map(x=>smCard(`
+      <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;">
+        <div><span class="ticker-badge">${x.ticker||'—'}</span> ${held.has((x.ticker||'').toUpperCase())?'🟡 ':''}<strong>${x.insider||''}</strong> <span class="small" style="color:var(--muted)">${x.role||''}</span></div>
+        <div style="text-align:right;">${pillTag(x.type)} <span class="small" style="color:var(--muted)">${x.date||''}</span></div>
+      </div>
+      <div class="small" style="margin:4px 0;color:var(--muted)">${[x.shares?('Shares: '+x.shares):'',x.value?('Value: '+x.value):''].filter(Boolean).join(' · ')}</div>
+      <div style="font-size:13px;">${x.rationale||''}</div>`)).join('')
+      : '<div class="card small" style="color:var(--muted)">No insider transactions on your holdings in the latest refresh.</div>';
+  }
+}
 
 // ── Reddit trending (ApeWisdom feed via proxy) ──
 let redditLoaded=false, redditFilter='all-stocks';
