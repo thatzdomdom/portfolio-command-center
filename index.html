@@ -163,6 +163,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
   <button class="nav-btn" onclick="showTab('region',this)">Region</button>
   <button class="nav-btn" onclick="showTab('currency',this)">Currency</button>
   <button class="nav-btn" onclick="showTab('analytics',this)">Analytics</button>
+  <button class="nav-btn" onclick="showTab('reddit',this)">🔥 Reddit Trends</button>
   <button class="nav-btn" onclick="showTab('about',this)">Sources &amp; Notes</button>
 </div>
 
@@ -244,6 +245,25 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
   <div class="card" style="margin-top:16px;"><div class="sh">Weights</div><div id="currency-bars"></div></div>
 </div>
 
+<div class="panel" id="panel-reddit">
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;">
+      <div class="sh" style="margin:0;">🔥 Reddit Trending Stocks</div>
+      <div style="margin-left:auto;display:flex;gap:6px;align-items:center;">
+        <button class="filter-pill active" id="rd-all" onclick="setReddit('all-stocks',this)">All Subreddits</button>
+        <button class="filter-pill" id="rd-wsb" onclick="setReddit('wallstreetbets',this)">r/wallstreetbets</button>
+        <button class="btn" onclick="loadReddit(true)">↻</button>
+      </div>
+    </div>
+    <div class="small" id="reddit-status" style="color:var(--muted);font-size:12px;margin-bottom:8px;">Loading trending stocks…</div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>#</th><th>Ticker</th><th class="hide-sm">Name</th><th class="r">24h Δ rank</th><th class="r">Mentions</th><th class="r hide-sm">Δ ment.</th><th class="r hide-sm">Upvotes</th></tr></thead>
+      <tbody id="reddit-tbody"></tbody>
+    </table></div>
+    <p style="font-size:11px;color:var(--muted);margin-top:10px;">Live from ApeWisdom (Reddit mentions across investing subs). 🟡 = a ticker you hold. Green ▲ = climbing the rankings. <strong>Deep AI analysis of the biggest movers is coming via the scheduled Intel agent.</strong></p>
+  </div>
+</div>
+
 <div class="panel" id="panel-analytics">
   <div class="card"><div class="sh">Performance Attribution — Listed Securities</div>
     <p style="font-size:12px;color:var(--muted);margin-bottom:8px;">Each security's contribution to the listed-securities return for the period. Contribution = (security value ÷ total securities value) × its return. Bars are centred at zero; the table sums to the total.</p>
@@ -287,7 +307,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v19 (no password) · Live: Yahoo Finance · Static: bank/fund/property statements · Personal use only</span>
+  <span style="margin-left:auto;">build v20 (no password) · Live: Yahoo Finance + ApeWisdom · Personal use only</span>
 </div>
 
 <div class="overlay" id="modal-overlay" onclick="closeModal(event)">
@@ -816,7 +836,36 @@ function setChartPeriod(p){
   chart.timeScale().fitContent();}catch(e){box.innerHTML='<div style="height:100%;display:flex;align-items:center;justify-content:center;color:var(--muted)">Chart error</div>';}
 }
 
-function showTab(id,b){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active'));el('panel-'+id).classList.add('active');b.classList.add('active');}
+function showTab(id,b){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active'));el('panel-'+id).classList.add('active');b.classList.add('active');
+  if(id==='reddit'&&!redditLoaded) loadReddit();}
+
+// ── Reddit trending (ApeWisdom feed via proxy) ──
+let redditLoaded=false, redditFilter='all-stocks';
+const HELD=new Set(H.filter(h=>h.yf).map(h=>h.t.toUpperCase()));
+function setReddit(f,btn){redditFilter=f;document.querySelectorAll('#rd-all,#rd-wsb').forEach(x=>x.classList.remove('active'));btn.classList.add('active');loadReddit(true);}
+async function loadReddit(force){
+  if(redditLoaded&&!force) return;
+  el('reddit-status').innerHTML='<span class="ld"><span class="spin"></span>Loading trending stocks…</span>';
+  try{
+    const data=await yfFetch(`https://apewisdom.io/api/v1.0/filter/${redditFilter}/page/1`);
+    const rows=(data?.results||[]).slice(0,25);
+    if(!rows.length) throw new Error('no data');
+    el('reddit-tbody').innerHTML=rows.map(r=>{
+      const prev=r.rank_24h_ago||0; const chg=prev>0?(prev-r.rank):null; // + = climbed
+      const arrow=chg==null?'<span style="color:var(--muted)">new</span>'
+        :chg>0?`<span style="color:var(--green)">▲ ${chg}</span>`
+        :chg<0?`<span style="color:var(--red)">▼ ${-chg}</span>`
+        :'<span style="color:var(--muted)">—</span>';
+      const mchg=(r.mentions_24h_ago!=null)?r.mentions-r.mentions_24h_ago:null;
+      const mchgStr=mchg==null?'—':`<span style="color:${mchg>=0?'var(--green)':'var(--red)'}">${mchg>=0?'+':''}${mchg}</span>`;
+      const held=HELD.has((r.ticker||'').toUpperCase());
+      const name=(r.name||'').replace(/&amp;/g,'&');
+      return `<tr><td style="color:var(--muted)">${r.rank}</td><td><span class="ticker-badge">${r.ticker}</span>${held?' 🟡':''}</td><td class="hide-sm" style="color:var(--muted)">${name}</td><td class="r">${arrow}</td><td class="r" style="font-weight:700">${r.mentions.toLocaleString('en-SG')}</td><td class="r hide-sm">${mchgStr}</td><td class="r hide-sm" style="color:var(--muted)">${(r.upvotes||0).toLocaleString('en-SG')}</td></tr>`;
+    }).join('');
+    redditLoaded=true;
+    el('reddit-status').textContent=`Top ${rows.length} · ${redditFilter==='all-stocks'?'all investing subreddits':'r/wallstreetbets'} · updated ${new Date().toLocaleTimeString('en-SG')}`;
+  }catch(e){ el('reddit-status').innerHTML=`<span style="color:var(--red)">Couldn't load Reddit feed (${e.message}). Tap ↻ to retry.</span>`; }
+}
 function el(id){return document.getElementById(id);}
 function setStatus(c,m){el('status-text').innerHTML=`<span class="dot ${c}"></span>${m}`;}
 let _rzT; window.addEventListener('resize',()=>{clearTimeout(_rzT);_rzT=setTimeout(renderAll,200);});
