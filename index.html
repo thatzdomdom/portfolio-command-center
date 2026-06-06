@@ -272,6 +272,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
       <li><strong>Cash &amp; deposits</strong> — DBS/POSB &amp; UOB screenshots (SGD). Static values.</li>
       <li><strong>Foreign cash</strong> — HK BOC: CNY 1.7M + USD 130K. China house-sale proceeds: CNY 7M. Static.</li>
       <li><strong>Fund</strong> — Astral Value Fund VCC: USD 154,342.57 (684.30 sh @ NAV 225.55, 30 Apr 2026). Static NAV.</li>
+      <li><strong>IBKR (ProRealTime) margin a/c</strong> — leveraged unallocated silver: 1,777 oz (live-priced via SI=F) less a net margin loan of ~S$56,240, netting to the account NAV of S$114,557 (31 May 2026). Silver moves live; the loan is fixed, so the account's equity swings ~1.5× with silver.</li>
       <li><strong>Private equity</strong> — China PE deal: CNY 2M. Static.</li>
       <li><strong>Property</strong> — HDB Marine Crescent S$1M · Hundred Palms EC S$2M · 2× Johor Bahru MYR 1.5M. Static user estimates.</li>
     </ul>
@@ -286,7 +287,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v17 (no password) · Live: Yahoo Finance · Static: bank/fund/property statements · Personal use only</span>
+  <span style="margin-left:auto;">build v18 (no password) · Live: Yahoo Finance · Static: bank/fund/property statements · Personal use only</span>
 </div>
 
 <div class="overlay" id="modal-overlay" onclick="closeModal(event)">
@@ -392,6 +393,9 @@ const H = [
   {id:54,n:"Hundred Palms EC",                t:"PROP", yf:null, ac:"Property", region:"Singapore", cur:"SGD", manualNative:2000000},
   {id:55,n:"HDB Flat — Marine Crescent",      t:"PROP", yf:null, ac:"Property", region:"Singapore", cur:"SGD", manualNative:1000000},
   {id:56,n:"Johor Bahru Properties (2×)",     t:"PROP", yf:null, ac:"Property", region:"Malaysia",  cur:"MYR", manualNative:1500000},
+  // ── IBKR (ProRealTime) margin account — leveraged unallocated silver, net equity S$114,557 ──
+  {id:57,n:"Silver — unallocated (IBKR)",     t:"XAG",  yf:"SI=F", ac:"Commodity", region:"Global", cur:"USD", qty:1777, book:170797},
+  {id:58,n:"IBKR Margin Loan (net)",          t:"LOAN", yf:null,   ac:"Cash",      region:"Global", cur:"SGD", manualNative:-56240},
 ];
 
 // Sector tags (by holding id) for the sector heat map
@@ -553,7 +557,7 @@ function secReturn(key){let ws=0,wt=0;H.forEach(h=>{if(!h.yf)return;const r=pd[h
 
 function renderAll(){
   const nw=totalNW();
-  const liq=H.filter(h=>['Equity','Cash','Fund'].includes(h.ac)).reduce((s,h)=>s+valSGD(h),0);
+  const liq=H.filter(h=>['Equity','Commodity','Cash','Fund'].includes(h.ac)).reduce((s,h)=>s+valSGD(h),0);
   const illq=H.filter(h=>['Property','Private Equity'].includes(h.ac)).reduce((s,h)=>s+valSGD(h),0);
   const sec=H.filter(h=>h.ac==='Equity').reduce((s,h)=>s+valSGD(h),0);
   const r1d=secReturn('r1d');
@@ -587,8 +591,8 @@ function setFilter(f,b){filt=f;document.querySelectorAll('.filter-pill').forEach
 function filterHoldings(){search=el('pos-search').value.toLowerCase();renderHoldings();}
 function sortHold(k){if(sortKey===k)sortAsc=!sortAsc;else{sortKey=k;sortAsc=false;}renderHoldings();}
 
-const AC_ORDER=['Equity','Fund','Cash','Private Equity','Property'];
-const AC_LABEL={Equity:'Equities',Fund:'Funds',Cash:'Cash & Deposits','Private Equity':'Private Equity',Property:'Property'};
+const AC_ORDER=['Equity','Commodity','Fund','Cash','Private Equity','Property'];
+const AC_LABEL={Equity:'Equities',Commodity:'Commodities',Fund:'Funds',Cash:'Cash & Deposits','Private Equity':'Private Equity',Property:'Property'};
 function holdRow(h,nw){
   const d=pd[h.t]||{};const v=valSGD(h);
   const priced=!!h.yf;
