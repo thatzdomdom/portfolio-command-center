@@ -157,6 +157,9 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 .conv-row:last-child{border-bottom:none;}
 .conv-row:hover{background:rgba(245,158,11,.05);}
 .conv-rank{width:26px;height:26px;border-radius:50%;background:var(--surf2);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0;}
+.cp-filters{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;}
+.cpf{padding:5px 14px;border:1px solid var(--border);border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;background:none;color:var(--muted);font-family:inherit;}
+.cpf.active{border-color:var(--accent);color:var(--accent);background:rgba(245,158,11,.08);}
 </style>
 </head>
 <body>
@@ -223,8 +226,14 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
     </div>
   </div>
   <div class="card" style="margin-bottom:16px;">
-    <div class="sh">🏆 Top Conviction Plays — most new positions opened</div>
-    <p style="font-size:12px;color:var(--muted);margin:-4px 0 8px;" id="conviction-sub">Stocks the most super investors newly bought last quarter. Tap to see who &amp; when.</p>
+    <div class="sh">🏆 Top Conviction Plays — super-investor consensus</div>
+    <p style="font-size:12px;color:var(--muted);margin:-4px 0 8px;" id="conviction-sub">Stocks the most super investors traded last quarter. Tap a play to see who, when &amp; how much.</p>
+    <div class="cp-filters" id="cp-filters">
+      <button class="cpf active" data-a="New" onclick="setConvAction('New')">New</button>
+      <button class="cpf" data-a="Added" onclick="setConvAction('Added')">Added</button>
+      <button class="cpf" data-a="Reduced" onclick="setConvAction('Reduced')">Reduced</button>
+      <button class="cpf" data-a="Exited" onclick="setConvAction('Exited')">Exited</button>
+    </div>
     <div id="conviction-body"><div class="ld"><span class="spin"></span>Loading…</div></div>
   </div>
   <div class="card" style="margin-bottom:16px;">
@@ -371,7 +380,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v30 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v31 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="cp-overlay" onclick="closeCP(event)">
@@ -983,29 +992,38 @@ function showTab(id,b){document.querySelectorAll('.panel').forEach(p=>p.classLis
   if(id==='investors'&&!investorsLoaded) loadInvestors();}
 
 // ── Conviction Plays (Overview) + drill-down ──
+let convAction='New';
+const ACT_VERB={New:'opened new positions',Added:'added to positions',Reduced:'reduced positions',Exited:'exited positions'};
+const ACT_BADGE={New:'New Position',Added:'Added',Reduced:'Reduced',Exited:'Exited'};
+const actGood=a=>a==='New'||a==='Added';
+function convList(cp){ if(!cp) return []; if(cp.actions) return cp.actions[convAction]||[]; return convAction==='New'?(cp.plays||[]):[]; }
+function setConvAction(a){ convAction=a; document.querySelectorAll('#cp-filters .cpf').forEach(b=>b.classList.toggle('active',b.dataset.a===a)); renderConviction(); }
 function renderConviction(){
   const box=el('conviction-body'); if(!box) return;
-  const cp=investorsData&&investorsData.convictionPlays;
-  if(!cp||!cp.plays||!cp.plays.length){box.innerHTML='<div class="small" style="color:var(--muted)">Conviction data pending the next agent refresh.</div>';return;}
+  const cp=investorsData&&investorsData.convictionPlays; if(!cp){box.innerHTML='<div class="small" style="color:var(--muted)">Conviction data pending the next agent refresh.</div>';return;}
   if(el('conviction-sub')&&cp.note) el('conviction-sub').textContent=cp.note;
-  box.innerHTML=cp.plays.slice(0,5).map((p,i)=>{const held=heldMatch(p.ticker);const names=(p.investors||[]).slice(0,2).map(x=>x.name+(x.manager?` (${x.manager})`:'')).join(' · ');return `<div class="conv-row" onclick="openCP('${p.ticker}')">
+  const list=convList(cp);
+  if(!list.length){box.innerHTML=`<div class="small" style="color:var(--muted);padding:10px 0">No <strong>${convAction}</strong> consensus published yet — added on the next Dataroma refresh.</div>`;return;}
+  const col=actGood(convAction)?'var(--green)':'var(--red)';
+  box.innerHTML=list.slice(0,5).map((p,i)=>{const held=heldMatch(p.ticker);const names=(p.investors||[]).slice(0,2).map(x=>x.name+(x.manager?` (${x.manager})`:'')).join(' · ');const uniq=new Set((p.investors||[]).map(x=>x.name)).size;return `<div class="conv-row" onclick="openCP('${p.ticker}')">
     <div class="conv-rank">${i+1}</div>
     <div style="flex:1;min-width:0">
       <div>${tkr(p.ticker)}${held?' 🟡':''} <span class="small" style="color:var(--muted)">${p.name||''}</span></div>
-      <div style="color:var(--green);font-weight:700;font-size:13px;margin-top:2px">${p.count} investors opened new positions</div>
-      <div class="small" style="color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${names}${p.count>2?` +${p.count-2} more`:''}</div>
+      <div style="color:${col};font-weight:700;font-size:13px;margin-top:2px">${p.count} investors ${ACT_VERB[convAction]}</div>
+      <div class="small" style="color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${names}${p.count>uniq?` +${p.count-uniq} more`:''}</div>
     </div>
     <div style="color:var(--accent);font-size:20px;flex-shrink:0">›</div>
   </div>`;}).join('');
 }
 function openCP(ticker){
-  const cp=investorsData.convictionPlays; const p=(cp.plays||[]).find(x=>x.ticker===ticker); if(!p) return;
-  el('cp-content').innerHTML=`<div class="modal-ticker">${p.ticker} <span class="pill pos" style="font-size:11px;vertical-align:middle">${p.action||'New'}</span></div><div class="modal-name">${p.name||''} · ${p.count} super investors opened new positions · ${cp.quarter||''}</div>${p.context?`<p style="font-size:13px;color:var(--muted);margin:10px 0 4px">${p.context}</p>`:''}<div class="small" style="color:var(--muted);margin-bottom:12px">Each investor who opened a position — newest 13F filings:</div>`
-   +(p.investors||[]).map(inv=>{const isOpt=/option/i.test(inv.type||'');const priceLbl=isOpt?'Avg price':'Buy price';const price=inv.buyPrice||inv.avgPrice||'—';return `<div class="card" style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><div><strong>${inv.name}</strong>${inv.manager?` <span class="small" style="color:var(--muted)">${inv.manager}</span>`:''}<div class="small" style="color:var(--muted);margin-top:3px">${tkr(p.ticker)}</div></div><span class="pill pos">New Position</span></div>
+  const cp=investorsData.convictionPlays; const p=convList(cp).find(x=>x.ticker===ticker); if(!p) return;
+  const good=actGood(convAction); const valCol=good?'var(--green)':'var(--red)'; const pillCls=good?'pos':'neg';
+  el('cp-content').innerHTML=`<div class="modal-ticker">${p.ticker} <span class="pill ${pillCls}" style="font-size:11px;vertical-align:middle">${convAction}</span></div><div class="modal-name">${p.name||''} · ${p.count} super investors ${ACT_VERB[convAction]} · ${cp.quarter||''}</div>${p.context?`<p style="font-size:13px;color:var(--muted);margin:10px 0 4px">${p.context}</p>`:''}<div class="small" style="color:var(--muted);margin-bottom:12px">Each investor — newest 13F filings:</div>`
+   +(p.investors||[]).map(inv=>{const isOpt=/option/i.test(inv.type||'');const priceLbl=isOpt?'Avg price':(good?'Buy price':'Avg price');const price=inv.buyPrice||inv.avgPrice||'—';return `<div class="card" style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><div><strong>${inv.name}</strong>${inv.manager?` <span class="small" style="color:var(--muted)">${inv.manager}</span>`:''}<div class="small" style="color:var(--muted);margin-top:3px">${tkr(p.ticker)}</div></div><span class="pill ${pillCls}">${ACT_BADGE[convAction]}</span></div>
      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px 12px;margin-top:12px">
-       <div><div class="gl-sub">Shares changed</div><div style="font-weight:700;color:var(--green)">${inv.sharesChanged||'—'}</div></div>
-       <div><div class="gl-sub">Trade value</div><div style="font-weight:700;color:var(--green)">${inv.tradeValue||'—'}</div></div>
-       <div><div class="gl-sub">Position change</div><div style="font-weight:700;color:var(--green)">New</div></div>
+       <div><div class="gl-sub">Shares changed</div><div style="font-weight:700;color:${valCol}">${inv.sharesChanged||'—'}</div></div>
+       <div><div class="gl-sub">Trade value</div><div style="font-weight:700;color:${valCol}">${inv.tradeValue||'—'}</div></div>
+       <div><div class="gl-sub">Position change</div><div style="font-weight:700;color:${valCol}">${convAction}</div></div>
        <div><div class="gl-sub">Position value</div><div style="font-weight:700">${inv.positionValue||'—'}</div></div>
        <div><div class="gl-sub">${priceLbl}</div><div style="font-weight:700">${price}</div></div>
        <div><div class="gl-sub">Filed</div><div style="font-weight:700">${inv.filed||'—'}</div></div>
