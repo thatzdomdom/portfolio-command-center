@@ -228,6 +228,10 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
   <div class="card" style="margin-bottom:16px;">
     <div class="sh">🏆 Top Conviction Plays — super-investor consensus</div>
     <p style="font-size:12px;color:var(--muted);margin:-4px 0 8px;" id="conviction-sub">Stocks the most super investors traded last quarter. Tap a play to see who, when &amp; how much.</p>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <select id="conv-quarter" onchange="setConvQuarter(this.value)" style="background:var(--surf2);border:1px solid var(--border);color:var(--text);padding:5px 11px;border-radius:8px;font-size:12px;font-weight:800;cursor:pointer"></select>
+      <span class="small" style="color:var(--muted)">quarter</span>
+    </div>
     <div class="cp-filters" id="cp-filters">
       <button class="cpf active" data-a="New" onclick="setConvAction('New')">New</button>
       <button class="cpf" data-a="Added" onclick="setConvAction('Added')">Added</button>
@@ -380,7 +384,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v32 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v34 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="cp-overlay" onclick="closeCP(event)">
@@ -996,14 +1000,20 @@ let convAction='New';
 const ACT_VERB={New:'opened new positions',Added:'added to positions',Reduced:'reduced positions',Exited:'exited positions'};
 const ACT_BADGE={New:'New Position',Added:'Added',Reduced:'Reduced',Exited:'Exited'};
 const actGood=a=>a==='New'||a==='Added';
-function convList(cp){ if(!cp) return []; if(cp.actions) return cp.actions[convAction]||[]; return convAction==='New'?(cp.plays||[]):[]; }
+let convQuarter=null;
+function convList(cp){ if(!cp) return []; if(cp.byQuarter){const q=convQuarter||cp.current||Object.keys(cp.byQuarter)[0]; return ((cp.byQuarter[q]||{})[convAction])||[];} if(cp.actions) return cp.actions[convAction]||[]; return convAction==='New'?(cp.plays||[]):[]; }
+function setConvQuarter(q){ convQuarter=q; renderConviction(); }
 function setConvAction(a){ convAction=a; document.querySelectorAll('#cp-filters .cpf').forEach(b=>b.classList.toggle('active',b.dataset.a===a)); renderConviction(); }
 function renderConviction(){
   const box=el('conviction-body'); if(!box) return;
   const cp=investorsData&&investorsData.convictionPlays; if(!cp){box.innerHTML='<div class="small" style="color:var(--muted)">Conviction data pending the next agent refresh.</div>';return;}
   if(el('conviction-sub')&&cp.note) el('conviction-sub').textContent=cp.note;
+  // populate quarter selector
+  const qsel=el('conv-quarter');
+  if(qsel&&cp.quarters){ if(!convQuarter) convQuarter=cp.current||cp.quarters[cp.quarters.length-1];
+    qsel.innerHTML=cp.quarters.slice().reverse().map(q=>`<option ${q===convQuarter?'selected':''}>${q}</option>`).join(''); }
   const list=convList(cp);
-  if(!list.length){box.innerHTML=`<div class="small" style="color:var(--muted);padding:10px 0">No <strong>${convAction}</strong> consensus published yet — added on the next Dataroma refresh.</div>`;return;}
+  if(!list.length){box.innerHTML=`<div class="small" style="color:var(--muted);padding:10px 0">No <strong>${convAction}</strong> data for <strong>${convQuarter||cp.current}</strong> yet — the daily agent backfills recent quarters.</div>`;return;}
   const col=actGood(convAction)?'var(--green)':'var(--red)';
   box.innerHTML=list.slice(0,5).map((p,i)=>{const held=heldMatch(p.ticker);const names=(p.investors||[]).slice(0,2).map(x=>x.name+(x.manager?` (${x.manager})`:'')).join(' · ');const uniq=new Set((p.investors||[]).map(x=>x.name)).size;return `<div class="conv-row" onclick="openCP('${p.ticker}')">
     <div class="conv-rank">${i+1}</div>
@@ -1049,10 +1059,52 @@ async function loadInvestors(){
     investorsData=await r.json(); investorsLoaded=true; renderInvestorList(); renderConviction();
   }catch(e){ el('investors-body').innerHTML='<div class="card" style="text-align:center;color:var(--muted)"><p style="font-size:14px;margin-bottom:6px;">⏳ Investor profiles pending.</p><p style="font-size:12px;">The scheduled agent will publish detailed super-investor profiles here.</p></div>'; }
 }
-function renderInvestorList(){
-  const profs=investorsData?.profiles||{}; const keys=Object.keys(profs);
-  if(!keys.length){el('investors-body').innerHTML='<div class="card small" style="color:var(--muted)">No profiles yet.</div>';return;}
-  el('investors-body').innerHTML='<div class="sh">Super Investor Profiles</div><div class="grid2">'+keys.map(k=>{const p=profs[k];const g=p.glance||{};return `<div class="inv-card" onclick="openProfile('${k}')"><div style="font-size:20px;font-weight:800;letter-spacing:-.02em">${p.name}</div><div class="prof-sub" style="margin-top:4px">${p.subtitle||''}</div><div style="display:flex;gap:20px;margin-top:12px;flex-wrap:wrap"><div><div style="font-size:16px;font-weight:800">${g.activity||'—'}</div><div class="gl-sub">activity value</div></div><div><div style="font-size:16px;font-weight:800;color:var(--blue)">${g.purchases||'—'}</div><div class="gl-sub">purchases</div></div></div><div style="margin-top:12px;color:var(--accent);font-size:12px;font-weight:700">View profile →</div></div>`;}).join('')+'</div>';
+function renderInvestorList(){ renderInvestorsHub(); }
+let notableFilter='All';
+function profCardHTML(k,p){const g=p.glance||{};return `<div class="inv-card" onclick="openProfile('${k}')"><div style="font-size:20px;font-weight:800;letter-spacing:-.02em">${p.name}</div><div class="prof-sub" style="margin-top:4px">${p.subtitle||''}</div><div style="display:flex;gap:20px;margin-top:12px;flex-wrap:wrap"><div><div style="font-size:16px;font-weight:800">${g.activity||'—'}</div><div class="gl-sub">activity value</div></div><div><div style="font-size:16px;font-weight:800;color:var(--blue)">${g.purchases||'—'}</div><div class="gl-sub">purchases</div></div></div><div style="margin-top:12px;color:var(--accent);font-size:12px;font-weight:700">View profile →</div></div>`;}
+function renderProfilesGrid(){const grid=el('inv-profiles'); if(!grid) return; const profs=investorsData?.profiles||{}; grid.innerHTML=Object.keys(profs).map(k=>profCardHTML(k,profs[k])).join('')||'<div class="small" style="color:var(--muted)">No profiles yet.</div>';}
+function renderInvestorsHub(){
+  const box=el('investors-body'); if(!box) return; const si=investorsData.superInvestors||{};
+  box.innerHTML=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div class="sh" style="margin:0">🐋 Super Investors</div><button class="btn" style="padding:2px 9px;font-size:14px" onclick="openCurated()" title="About">ⓘ</button>${si.count?`<span class="small" style="color:var(--muted)">${si.count} tracked</span>`:''}</div>
+  <input class="search-input" id="inv-search" placeholder="Search super investors…" oninput="filterRoster(this.value)" style="margin-bottom:14px;width:100%">
+  <div class="card" style="margin-bottom:16px"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><div class="sh" style="margin:0">⏱ Latest Notable Trades</div><select id="nt-filter" onchange="renderNotable(this.value)" style="background:var(--surf2);border:1px solid var(--border);color:var(--text);padding:4px 8px;border-radius:8px;font-size:12px;font-weight:700"><option>All</option><option>New Position</option><option>Added</option><option>Reduced</option><option>Exited</option></select></div><div id="notable-body" style="margin-top:10px"></div></div>
+  <div class="card" style="margin-bottom:16px"><div class="sh">◔ Sector Capital Concentration</div><div id="sector-chart"></div></div>
+  <div class="sh">Profiles</div><div class="grid2" id="inv-profiles"></div>`;
+  renderNotable('All'); renderSectorChart(); renderProfilesGrid();
+}
+function renderNotable(filter){
+  notableFilter=filter||'All'; const box=el('notable-body'); if(!box) return;
+  let list=investorsData.notableTrades||[];
+  if(notableFilter!=='All'){const key=notableFilter.toLowerCase().split(' ')[0];list=list.filter(t=>(t.action||'').toLowerCase().includes(key));}
+  if(!list.length){box.innerHTML='<div class="small" style="color:var(--muted)">No trades for this filter.</div>';return;}
+  box.innerHTML=list.map(t=>{const sell=/exit|reduc|sold|sell/i.test(t.action)||String(t.tradeValue||'').trim().startsWith('-');const cls=sell?'neg':'pos';const verb=sell?'sold':'bought';return `<div class="card" style="margin-bottom:8px;border-left:3px solid ${sell?'var(--red)':'var(--green)'}">
+    <div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><div><strong>${t.fund}</strong>${t.manager?` <span class="small" style="color:var(--muted)">${t.manager}</span>`:''}<div style="margin-top:3px">${tkr(t.ticker)} <span class="small" style="color:var(--muted)">${t.name||''}</span></div></div><span class="pill ${cls}">${t.action}</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:8px;gap:8px"><div class="small" style="color:var(--muted)">${t.shares||''} shares ${verb}${t.price?` at ${t.price}`:''}</div><div style="font-weight:800;color:${sell?'var(--red)':'var(--green)'};white-space:nowrap">${t.tradeValue||''}</div></div></div>`;}).join('');
+}
+function renderSectorChart(){
+  const sc=investorsData.sectorConcentration; const box=el('sector-chart'); if(!box||!sc) return;
+  const qs=sc.quarters, secs=sc.sectors, n=qs.length, last=n-1; const W=1000,H=300,padB=40,padL=2,gap=8; const slot=(W-padL)/n, bw=slot-gap;
+  let bars='';
+  for(let qi=0;qi<n;qi++){ const total=secs.reduce((s,se)=>s+(se.values[qi]||0),0)||100; let y=H-padB; const x=padL+qi*slot+gap/2;
+    secs.forEach(se=>{ const h=(se.values[qi]||0)/total*(H-padB-4); y-=h; if(h>0) bars+=`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" fill="${se.color}"/>`; });
+    bars+=`<text x="${(x+bw/2).toFixed(1)}" y="${H-padB+24}" font-size="15" fill="#78716c" text-anchor="end" transform="rotate(-35 ${(x+bw/2).toFixed(1)} ${H-padB+24})">${qs[qi]}</text>`; }
+  const leg=secs.slice().sort((a,b)=>b.values[last]-a.values[last]);
+  box.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="height:auto;display:block;margin-top:8px">${bars}</svg>
+    <div style="font-weight:800;margin:10px 0 6px">${qs[last]}</div>
+    ${leg.map(se=>`<div style="display:flex;align-items:center;gap:8px;padding:3px 0;font-size:13px"><span style="width:11px;height:11px;border-radius:2px;background:${se.color};display:inline-block;flex-shrink:0"></span><span style="flex:1">${se.name}</span><span style="font-weight:700;font-variant-numeric:tabular-nums">${(se.values[last]||0).toFixed(2)}%</span></div>`).join('')}
+    <div class="small" style="color:var(--muted);margin-top:8px">${sc.note||''}</div>`;
+}
+function openCurated(){
+  const si=investorsData.superInvestors||{};
+  el('cp-content').innerHTML=`<div style="text-align:center;font-size:34px;color:var(--blue)">ⓘ</div><div class="modal-ticker" style="font-size:22px;text-align:center;color:var(--blue);margin-top:4px">Curated Super Investors</div><div style="font-size:14px;line-height:1.7;margin-top:14px;white-space:pre-wrap">${si.definition||''}</div>${(si.roster&&si.roster.length)?`<div class="sh" style="margin-top:16px">Tracked funds (${si.roster.length})</div><div style="display:flex;flex-wrap:wrap;gap:6px">${si.roster.map(r=>`<span class="chip">${r.name}${r.manager?` · ${r.manager}`:''}</span>`).join('')}</div>`:''}`;
+  el('cp-overlay').classList.add('open');
+}
+function filterRoster(q){ q=(q||'').toLowerCase().trim(); const grid=el('inv-profiles'); if(!grid) return;
+  if(!q){ renderProfilesGrid(); return; }
+  const profs=investorsData.profiles||{}; const roster=(investorsData.superInvestors||{}).roster||[];
+  const profHits=Object.keys(profs).filter(k=>profs[k].name.toLowerCase().includes(q));
+  const rosterHits=roster.filter(r=>(r.name||'').toLowerCase().includes(q)||(r.manager||'').toLowerCase().includes(q)).filter(r=>!profHits.some(k=>profs[k].name===r.name));
+  grid.innerHTML=(profHits.map(k=>profCardHTML(k,profs[k])).join('')+rosterHits.map(r=>`<div class="inv-card" style="cursor:default"><div style="font-size:16px;font-weight:800">${r.name}</div><div class="prof-sub" style="margin-top:4px">${r.manager||''}</div><div class="small" style="color:var(--muted);margin-top:8px">Tracked super investor</div></div>`).join(''))||'<div class="small" style="color:var(--muted)">No match.</div>';
 }
 function openProfile(key){
   const p=investorsData?.profiles?.[key]; if(!p) return;
