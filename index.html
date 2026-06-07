@@ -371,7 +371,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v26 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v27 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="cp-overlay" onclick="closeCP(event)">
@@ -395,6 +395,8 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
     </div>
     <div class="chart-box" id="m-chart-box"></div>
     <div style="font-size:11px;color:var(--muted);margin-top:8px;">Click &amp; drag to zoom · Scroll to pan · Daily OHLCV candles</div>
+    <div id="m-about"></div>
+    <div id="m-why"></div>
   </div>
 </div>
 </div>
@@ -646,9 +648,51 @@ const esc=s=>String(s).replace(/'/g,"\\'");
 const tkr=sym=>{const c=String(sym||'').trim();return c?`<span class="ticker-badge" style="cursor:pointer" onclick="event.stopPropagation();openTicker('${esc(c)}')">${c}</span>`:'<span style="color:var(--muted)">—</span>';};
 const chipT=sym=>{const c=String(sym||'').trim();return `<span class="chip" style="cursor:pointer" onclick="event.stopPropagation();openTicker('${esc(c)}')">${c}</span>`;};
 function symToYf(sym){let s=String(sym).trim().split(/[\s(]/)[0].toUpperCase();if(/^\d{3,5}$/.test(s))return s.padStart(4,'0')+'.HK';return s;}
+// live company description (Wikipedia, CORS-friendly) + cache
+const WIKI={};
+function wikiCandidates(name){
+  const out=[]; let base=String(name).replace(/[.,]/g,'').trim(); if(base) out.push(base);
+  const suf=/\s+(Inc|Incorporated|Corporation|Corp|Holdings?|Company|Co|Ltd|Limited|plc|PLC|Group|Technologies|Technology|Platforms|Trust|REIT|SA|NV|AG|ADR)$/i;
+  let x=base; while(suf.test(x)){ x=x.replace(suf,'').trim(); out.push(x); }
+  const w=base.split(/\s+/); if(w.length>2) out.push(w.slice(0,2).join(' ')); if(w.length>1) out.push(w[0]);
+  return [...new Set(out)].filter(Boolean);
+}
+async function resolveName(ticker){
+  try{ const d=await yfFetch(`https://query1.finance.yahoo.com/v1/finance/search?q=${encodeURIComponent(ticker)}`);
+    const ys=symToYf(ticker).toUpperCase(); const q=(d.quotes||[]).find(x=>(x.symbol||'').toUpperCase()===ys)||(d.quotes||[]).find(x=>x.longname||x.shortname); return q?(q.longname||q.shortname):null; }catch(_){return null;}
+}
+async function wikiSummary(name){
+  if(!name) return null; if(WIKI[name]!==undefined) return WIKI[name];
+  for(const t of wikiCandidates(name)){ try{ const r=await fetch('https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(t.replace(/ /g,'_')),{signal:AbortSignal.timeout(6000)}); if(r.ok){ const j=await r.json(); if(j.extract && j.type!=='disambiguation' && /\b(company|corporation|inc|firm|manufacturer|bank|fund|holding|technolog|platform|retailer|maker|trust|reit|business|multinational|provider|operator)\b/i.test(j.extract)){ WIKI[name]=j.extract; return j.extract; } } }catch(_){} }
+  WIKI[name]=null; return null;
+}
+// gather "why it's flagged" from the loaded intel/investor data, by ticker
+function gatherWhy(ticker){
+  const t=(ticker||'').toUpperCase(); const out=[];
+  try{ if(investorsData){ const cp=investorsData.convictionPlays; ((cp&&cp.plays)||[]).forEach(p=>{ if((p.ticker||'').toUpperCase()===t) out.push({src:`🏆 Conviction play — ${p.count} investors opened new positions`,text:p.context||p.summary||''}); }); } }catch(_){}
+  try{ if(intelData){
+    (intelData.signals||[]).forEach(s=>{ if((s.ticker||'').toUpperCase()===t) out.push({src:`🎯 Signal — ${s.label||'consensus'}`,text:s.takeaway||s.detail||''}); });
+    (intelData.congress||[]).forEach(c=>{ if((c.ticker||'').toUpperCase()===t) out.push({src:`🏛️ Congress — ${c.representative} ${c.type} (${c.date||''})`,text:c.rationale||'',deep:c.deepDive}); });
+    (intelData.superInvestors||[]).forEach(s=>{ if((s.ticker||'').toUpperCase()===t) out.push({src:`🐋 ${s.name} — ${s.action}`,text:s.rationale||'',deep:s.deepDive}); });
+    (intelData.insiders||[]).forEach(s=>{ if((s.ticker||'').toUpperCase()===t) out.push({src:`👤 Insider — ${s.insider} ${s.type}`,text:s.rationale||'',deep:s.deepDive}); });
+  } }catch(_){}
+  return out.slice(0,6);
+}
+let aboutSeq=0;
+async function fillAbout(ticker, name){
+  const seq=++aboutSeq; const about=el('m-about'), whyBox=el('m-why');
+  if(whyBox){ const w=gatherWhy(ticker); whyBox.innerHTML=w.length?('<div class="sh" style="margin-top:16px">Why it\'s flagged</div>'+w.map((x,i)=>{const id='why'+seq+'_'+i;return `<div class="card" style="margin-bottom:8px"><div style="font-size:12px;font-weight:700;color:var(--accent)">${x.src}</div><div style="font-size:13px;margin-top:3px;line-height:1.5">${x.text||''}</div>${x.deep?`<button class="ddbtn" onclick="var e=document.getElementById('${id}');var o=e.style.display==='none';e.style.display=o?'block':'none';this.textContent=o?'Hide ▴':'See why ▸';">See why ▸</button><div id="${id}" class="ddbody" style="display:none">${x.deep}</div>`:''}</div>`;}).join('')):''; }
+  if(about){ about.innerHTML='<div class="small" style="color:var(--muted);margin-top:12px"><span class="ld"><span class="spin"></span>Loading company profile…</span></div>';
+    let nm=name; if(!nm||nm.toUpperCase()===String(ticker).toUpperCase()){ nm=await resolveName(ticker)||nm; }
+    const desc=await wikiSummary(nm);
+    if(seq!==aboutSeq) return; // a newer modal opened
+    about.innerHTML=desc?`<div class="sh" style="margin-top:14px">What ${ticker} does</div><div style="font-size:13px;line-height:1.6">${desc}</div><div class="small" style="color:var(--muted);margin-top:4px">Source: Wikipedia</div>`:`<div class="small" style="color:var(--muted);margin-top:12px">No company profile found for ${ticker}.</div>`;
+  }
+}
 async function openTicker(sym){
   if(!sym) return; const disp=String(sym).trim().split(/[\s(]/)[0].toUpperCase(); const ys=symToYf(sym);
   el('m-ticker').textContent=disp; el('m-name').textContent='Loading…'; el('m-price').textContent=''; el('m-chg').textContent=''; el('m-stats').innerHTML=''; modalHist=null;
+  if(el('m-about'))el('m-about').innerHTML=''; if(el('m-why'))el('m-why').innerHTML='';
   el('modal-overlay').classList.add('open'); el('m-chart-box').innerHTML='<div style="height:100%;display:flex;align-items:center;justify-content:center;color:var(--muted)"><span class="ld"><span class="spin"></span>Loading chart…</span></div>';
   try{
     const data=await yfFetch(`https://query1.finance.yahoo.com/v8/finance/chart/${ys}?interval=1d&range=2y`);
@@ -663,6 +707,7 @@ async function openTicker(sym){
     const r1d=pct(n-2); el('m-chg').textContent=r1d!=null?(r1d>=0?'+':'')+(r1d*100).toFixed(2)+'%':''; el('m-chg').className='modal-chg '+clr(r1d);
     el('m-stats').innerHTML=`<div class="stat-item"><label>1W</label><span class="${clr(pct(n-6))}">${fmtP(pct(Math.max(0,n-6)))}</span></div><div class="stat-item"><label>1M</label><span class="${clr(pct(n-23))}">${fmtP(pct(Math.max(0,n-23)))}</span></div><div class="stat-item"><label>3M</label><span class="${clr(pct(n-67))}">${fmtP(pct(Math.max(0,n-67)))}</span></div><div class="stat-item"><label>1Y</label><span class="${clr(pct(n-253))}">${fmtP(pct(Math.max(0,n-253)))}</span></div><div class="stat-item"><label>52W High</label><span>${m.fiftyTwoWeekHigh!=null?fmt(m.fiftyTwoWeekHigh,2):'—'}</span></div><div class="stat-item"><label>52W Low</label><span>${m.fiftyTwoWeekLow!=null?fmt(m.fiftyTwoWeekLow,2):'—'}</span></div>`;
     setChartPeriod('1Y');
+    fillAbout(disp, m.longName||m.shortName||disp);
   }catch(e){ el('m-name').textContent=disp; el('m-chart-box').innerHTML='<div style="height:100%;display:flex;align-items:center;justify-content:center;color:var(--muted)">No chart data for '+disp+'</div>'; }
 }
 
@@ -907,6 +952,8 @@ function openModal(id){
     <div class="stat-item"><label>YTD</label><span class="${clr(d.rYTD)}">${fmtP(d.rYTD)}</span></div>
     <div class="stat-item"><label>1Y</label><span class="${clr(d.r1y)}">${fmtP(d.r1y)}</span></div>`;
   modalHist=d.history||null;el('modal-overlay').classList.add('open');
+  if(el('m-about'))el('m-about').innerHTML=''; if(el('m-why'))el('m-why').innerHTML='';
+  fillAbout(h.t, d.name||h.n);
   if(modalHist&&modalHist.length){setChartPeriod('1Y');}
   else{
     el('m-chart-box').innerHTML='<div style="height:100%;display:flex;align-items:center;justify-content:center;color:var(--muted)"><span class="ld"><span class="spin"></span>Loading chart…</span></div>';
@@ -1052,7 +1099,7 @@ function renderSignals(){
   Object.entries(m).forEach(([t,v])=>{ if((v.c.size+v.i.size)>=2 && !sig.find(s=>(s.ticker||'').toUpperCase()===t)){ const p=[]; if(v.i.size)p.push(`${v.i.size} super investor${v.i.size>1?'s':''}`); if(v.c.size)p.push(`${v.c.size} congress member${v.c.size>1?'s':''}`); sig.push({ticker:t,label:'Cross-source buying',detail:p.join(' + ')+' accumulating',takeaway:[...v.i,...v.c].join(', ')}); } });
   if(!sig.length){box.innerHTML='<div class="small" style="color:var(--muted)">No strong consensus signals in the latest refresh.</div>';return;}
   box.innerHTML='<div class="grid3">'+sig.slice(0,9).map(s=>{const held=heldMatch(s.ticker);return `<div style="border:1px solid var(--border);border-radius:8px;padding:12px;background:var(--surf2);">
-    <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">${tkr(s.ticker)}${held?'🟡':''}<span class="pill pos" style="margin-left:auto;font-size:10px;">${s.label||'Consensus'}</span></div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">${tkr(s.ticker)}${held?'🟡':''}<span class="pill pos" style="margin-left:auto;font-size:10px;">${s.label||'Consensus'}</span></div>${s.name?`<div class="small" style="color:var(--muted);margin:-2px 0 5px">${s.name}</div>`:''}
     <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:4px;">${s.detail||''}</div>
     <div style="font-size:12px;color:var(--text);line-height:1.5;">${s.takeaway||''}</div>
     ${s.sources?`<div class="small" style="margin-top:6px;color:var(--muted);">${s.sources.join(' · ')}</div>`:''}
