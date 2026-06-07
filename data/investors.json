@@ -1,0 +1,63 @@
+{
+  "updated": "2026-06-07T02:30:00Z",
+  "profiles": {
+    "trump": {
+      "name": "Donald J. Trump",
+      "subtitle": "45th & 47th President · Q1 2026",
+      "blurb": "First sitting president in roughly six decades to disclose active individual-securities trading. Over ~11 weeks: 3,711 transactions, filed late. This page aggregates publicly disclosed ranges reported by named news outlets; figures use the midpoints of disclosed bands. Not financial advice.",
+      "source": "https://disclosures-clerk.house.gov/",
+      "glance": {
+        "transactions": "3,711", "transactionsSub": "2026 Q1",
+        "activity": "~$475M", "activitySub": "Range $220M–$730M",
+        "purchases": "2,196", "purchasesSub": "~$248M deployed",
+        "note": "Midpoints of disclosed ranges from named news outlets."
+      },
+      "topBuys": [
+        {"ticker": "AAPL", "name": "Apple Inc.", "value": 4.59},
+        {"ticker": "COST", "name": "Costco Wholesale Corporation", "value": 4.05},
+        {"ticker": "ORCL", "name": "Oracle Corporation", "value": 3.58},
+        {"ticker": "COMT", "name": "iShares GSCI Commodity Dynamic Roll", "value": 3.55},
+        {"ticker": "TXN", "name": "Texas Instruments Incorporated", "value": 3.43},
+        {"ticker": "PG", "name": "The Procter & Gamble Company", "value": 3.30},
+        {"ticker": "NOW", "name": "ServiceNow, Inc.", "value": 3.29},
+        {"ticker": "ADBE", "name": "Adobe Inc.", "value": 3.19},
+        {"ticker": "SNPS", "name": "Synopsys, Inc.", "value": 3.18}
+      ],
+      "preNews": [
+        {"ticker": "DELL", "name": "Dell Technologies Inc.", "date": "Feb 10, 2026", "perf": "+107% YTD", "size": "$1M – $5M", "note": "President publicly endorsed Dell at a White House event on May 8, 2026. The stock rose ~12% the same day, closing at a record. The disclosed purchase predates the endorsement by roughly three months.", "sources": ["TheStreet, May 11 2026", "Benzinga, May 8 2026", "Yahoo Finance / MoneyWise"]},
+        {"ticker": "INTC", "name": "Intel Corporation", "date": "Mar 2, 2026", "perf": "+150%", "size": "Series of purchases · Some \"unsolicited\"", "note": "Follows the U.S. government's August 22, 2025 decision to take a 9.9% equity stake in Intel for $8.9B (CHIPS Act + DoD Secure Enclave funds converted to equity). Intel shares subsequently re-rated sharply higher.", "sources": ["Quiver Quantitative, May 14 2026", "CNN Business, Aug 22 2025"]}
+      ],
+      "policyMoves": [
+        {"tag": "Semiconductor Policy", "title": "U.S. equity stake in Intel + AI chip licensing reversal", "bullets": ["Aug 22, 2025: U.S. government took a 9.9% stake in Intel for $8.9B (CHIPS Act + DoD Secure Enclave funds converted to equity).", "Jan 13, 2026: Commerce Dept's BIS revised NVIDIA H200 and AMD MI325X export licensing from \"presumption of denial\" to \"case-by-case review.\""], "tickers": ["INTC", "NVDA", "AMD"], "sources": ["CNN Business, Aug 22 2025", "CNBC, Aug 22 2025"]},
+        {"tag": "Retirement & Crypto", "title": "401(k) alternative-asset access + crypto-friendly rules", "bullets": ["Aug 2025 executive order directs the Labor Dept to ease access to private equity, real estate and crypto inside 401(k) retirement plans.", "Pro-crypto regulatory posture and a strategic digital-asset stockpile proposal support broad crypto and alt-asset names."], "tickers": ["COIN", "BLK", "BTC"], "sources": ["White House, Aug 2025", "Reuters, Aug 2025"]}
+      ],
+      "rotation": {
+        "headline": "The Mega-Cap Rotation",
+        "summary": "Feb 10, 2026 carried four sell tickets in the $5M–$25M range — ~$60M total at midpoint, the quarter's largest single-session sales. The proceeds funded the AI-stack purchases made the same week.",
+        "soldTotal": "~$60M", "soldSub": "4 tickets · $5–25M each",
+        "boughtTotal": "~$15M+", "boughtSub": "15+ tickets · $1–5M each",
+        "bars": [
+          {"ticker": "MSFT", "dir": "sold", "mag": 1.0},
+          {"ticker": "AMZN", "dir": "sold", "mag": 0.96},
+          {"ticker": "META", "dir": "sold", "mag": 0.9},
+          {"ticker": "VIG", "dir": "sold", "mag": 0.84},
+          {"ticker": "DELL", "dir": "bought", "mag": 0.74},
+          {"ticker": "JBL", "dir": "bought", "mag": 0.72},
+          {"ticker": "NVDA", "dir": "bought", "mag": 0.70},
+          {"ticker": "AXON", "dir": "bought", "mag": 0.68},
+          {"ticker": "TDG", "dir": "bought", "mag": 0.62},
+          {"ticker": "LII", "dir": "bought", "mag": 0.34}
+        ]
+      },
+      "aiStack": [
+        {"layer": "Apps & Cloud", "tickers": ["ORCL", "NOW", "ADBE", "WDAY"]},
+        {"layer": "EDA Tools", "tickers": ["SNPS", "CDNS"]},
+        {"layer": "Chips", "tickers": ["NVDA", "AMD", "AVGO", "TXN", "INTC"]},
+        {"layer": "Semiconductor Equipment", "tickers": ["LRCX", "APH"]},
+        {"layer": "Servers / Hardware", "tickers": ["DELL", "SMCI", "JBL"]},
+        {"layer": "Infrastructure", "tickers": ["ETN", "LII", "LIN"]},
+        {"layer": "Debt Financing", "tickers": ["CRWV (9.00% sr notes due 2031)"]}
+      ]
+    }
+  }
+}

@@ -123,6 +123,36 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 .ddbtn{margin-top:8px;background:none;border:1px solid var(--border);color:var(--accent);font-weight:700;font-size:12px;padding:4px 12px;border-radius:6px;cursor:pointer;font-family:inherit;}
 .ddbtn:hover{border-color:var(--accent);background:rgba(245,158,11,.06);}
 .ddbody{margin-top:8px;font-size:13px;line-height:1.55;color:var(--text);background:var(--surf2);border-radius:6px;padding:11px 13px;}
+/* Super Investor Profile */
+.inv-card{background:var(--surf);border:1px solid var(--border);border-radius:10px;padding:16px;cursor:pointer;transition:border-color .15s;}
+.inv-card:hover{border-color:var(--accent);}
+.prof-hero{background:linear-gradient(135deg,var(--surf2),var(--surf));border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:16px;}
+.prof-name{font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1.05;}
+.prof-sub{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:6px;}
+.prof-blurb{font-size:13px;color:var(--text);margin-top:12px;line-height:1.6;max-width:760px;}
+.glance{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-top:16px;}
+.glance>div{background:var(--surf);padding:14px 16px;text-align:center;}
+.glance .gl-lbl{font-size:11px;color:var(--muted);margin-bottom:4px;}
+.glance .gl-val{font-size:22px;font-weight:800;letter-spacing:-.02em;}
+.glance .gl-val.blue{color:var(--blue);}
+.glance .gl-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+.prof-tabs{display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid var(--border);margin:4px 0 16px;}
+.prof-tab{padding:9px 12px;font-size:13px;font-weight:700;color:var(--muted);border:none;border-bottom:2px solid transparent;background:none;cursor:pointer;white-space:nowrap;}
+.prof-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.buybar{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);}
+.buybar .bb-tick{font-weight:800;font-size:14px;width:64px;flex-shrink:0;}
+.buybar .bb-name{font-size:11px;color:var(--muted);}
+.buybar .bb-val{font-weight:800;color:var(--green);font-size:14px;white-space:nowrap;}
+.buybar-track{height:6px;background:var(--surf2);border-radius:3px;overflow:hidden;margin-top:5px;}
+.buybar-track>div{height:100%;background:var(--green);border-radius:3px;}
+.chip{display:inline-flex;align-items:center;gap:4px;background:var(--surf2);border:1px solid var(--border);border-radius:99px;padding:3px 10px;font-size:12px;font-weight:700;margin:3px 4px 0 0;}
+.rot-bar{display:grid;grid-template-columns:1fr 70px 1fr;align-items:center;gap:8px;height:22px;margin:5px 0;}
+.rot-left{display:flex;justify-content:flex-end;}
+.rot-right{display:flex;justify-content:flex-start;}
+.rot-seg{height:14px;border-radius:3px;}
+.rot-tick{text-align:center;font-size:12px;font-weight:800;}
+.aistack-row{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:8px;margin-bottom:8px;}
+.aistack-num{font-size:18px;font-weight:800;opacity:.5;width:28px;flex-shrink:0;}
 </style>
 </head>
 <body>
@@ -162,6 +192,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 <div class="nav">
   <button class="nav-btn active" onclick="showTab('overview',this)">Overview</button>
   <button class="nav-btn" onclick="showTab('smart',this)">💼 Smart Money</button>
+  <button class="nav-btn" onclick="showTab('investors',this)">🐋 Investors</button>
   <button class="nav-btn" onclick="showTab('reddit',this)">🔥 Reddit Trends</button>
   <button class="nav-btn" onclick="showTab('analytics',this)">Analytics</button>
   <span style="border-left:1px solid var(--border);margin:6px 4px;"></span>
@@ -254,6 +285,10 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
   <div class="card" style="margin-top:16px;"><div class="sh">Weights</div><div id="currency-bars"></div></div>
 </div>
 
+<div class="panel" id="panel-investors">
+  <div id="investors-body"><div class="ld"><span class="spin"></span>Loading investor profiles…</div></div>
+</div>
+
 <div class="panel" id="panel-smart">
   <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:14px;">
     <button class="filter-pill active" id="sm-congress" onclick="setSmart('congress',this)">🏛️ Congress Trades</button>
@@ -327,7 +362,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v23 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v24 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="modal-overlay" onclick="closeModal(event)">
@@ -860,7 +895,53 @@ function setChartPeriod(p){
 
 function showTab(id,b){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active'));el('panel-'+id).classList.add('active');b.classList.add('active');
   if(id==='reddit'&&!redditLoaded) loadReddit();
-  if(id==='smart'&&!intelLoaded) loadIntel();}
+  if(id==='smart'&&!intelLoaded) loadIntel();
+  if(id==='investors'&&!investorsLoaded) loadInvestors();}
+
+// ── Super Investor Profiles (data/investors.json) ──
+let investorsLoaded=false, investorsData=null, profTab='topBuys';
+const PROF_LBL={topBuys:'Top Buys',preNews:'Pre-News Trades',policyMoves:'Policy Moves',rotation:'Rotation',aiStack:'AI Stack'};
+async function loadInvestors(){
+  if(investorsLoaded) return;
+  try{
+    const r=await fetch('data/investors.json?cb='+Date.now());
+    if(!r.ok) throw new Error('pending');
+    investorsData=await r.json(); investorsLoaded=true; renderInvestorList();
+  }catch(e){ el('investors-body').innerHTML='<div class="card" style="text-align:center;color:var(--muted)"><p style="font-size:14px;margin-bottom:6px;">⏳ Investor profiles pending.</p><p style="font-size:12px;">The scheduled agent will publish detailed super-investor profiles here.</p></div>'; }
+}
+function renderInvestorList(){
+  const profs=investorsData?.profiles||{}; const keys=Object.keys(profs);
+  if(!keys.length){el('investors-body').innerHTML='<div class="card small" style="color:var(--muted)">No profiles yet.</div>';return;}
+  el('investors-body').innerHTML='<div class="sh">Super Investor Profiles</div><div class="grid2">'+keys.map(k=>{const p=profs[k];const g=p.glance||{};return `<div class="inv-card" onclick="openProfile('${k}')"><div style="font-size:20px;font-weight:800;letter-spacing:-.02em">${p.name}</div><div class="prof-sub" style="margin-top:4px">${p.subtitle||''}</div><div style="display:flex;gap:20px;margin-top:12px;flex-wrap:wrap"><div><div style="font-size:16px;font-weight:800">${g.activity||'—'}</div><div class="gl-sub">activity value</div></div><div><div style="font-size:16px;font-weight:800;color:var(--blue)">${g.purchases||'—'}</div><div class="gl-sub">purchases</div></div></div><div style="margin-top:12px;color:var(--accent);font-size:12px;font-weight:700">View profile →</div></div>`;}).join('')+'</div>';
+}
+function openProfile(key){
+  const p=investorsData?.profiles?.[key]; if(!p) return;
+  const tabs=Object.keys(PROF_LBL).filter(k=>p[k]&&(Array.isArray(p[k])?p[k].length:Object.keys(p[k]).length));
+  profTab=tabs[0]||'topBuys';
+  let html=`<button class="btn" onclick="renderInvestorList()" style="margin-bottom:12px">← All investors</button>`;
+  html+=`<div class="prof-hero"><div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start"><div><div class="prof-name">${p.name}</div><div class="prof-sub">${p.subtitle||''}</div></div>${p.source?`<a href="${p.source}" target="_blank" class="btn" style="flex-shrink:0;text-decoration:none">↗ Source</a>`:''}</div>${p.blurb?`<div class="prof-blurb">${p.blurb}</div>`:''}`;
+  if(p.glance){const g=p.glance;html+=`<div class="glance"><div><div class="gl-lbl">Total transactions</div><div class="gl-val">${g.transactions||'—'}</div><div class="gl-sub">${g.transactionsSub||''}</div></div><div><div class="gl-lbl">Activity value</div><div class="gl-val">${g.activity||'—'}</div><div class="gl-sub">${g.activitySub||''}</div></div><div><div class="gl-lbl">Purchases</div><div class="gl-val blue">${g.purchases||'—'}</div><div class="gl-sub">${g.purchasesSub||''}</div></div></div>${g.note?`<div class="small" style="color:var(--muted);margin-top:8px;text-align:center">ⓘ ${g.note}</div>`:''}`;}
+  html+=`</div><div class="prof-tabs" id="prof-tabs">${tabs.map(k=>`<button class="prof-tab${k===profTab?' active':''}" onclick="setProfTab('${key}','${k}')">${PROF_LBL[k]}</button>`).join('')}</div><div id="prof-section"></div>`;
+  el('investors-body').innerHTML=html; renderProfSection(key);
+}
+function setProfTab(key,t){profTab=t;document.querySelectorAll('#prof-tabs .prof-tab').forEach(b=>b.classList.toggle('active',b.textContent.trim()===PROF_LBL[t]));renderProfSection(key);}
+function renderProfSection(key){
+  const p=investorsData.profiles[key]; const box=el('prof-section'); if(!box) return;
+  if(profTab==='topBuys'){
+    const arr=p.topBuys||[]; const max=Math.max(...arr.map(x=>x.value),1);
+    box.innerHTML='<div class="sh">Where the new money went</div><p class="small" style="color:var(--muted);margin:-4px 0 10px">Largest net new positions — purchases minus sales, midpoint estimates ($M).</p><div class="card">'+arr.map(x=>`<div class="buybar"><div style="flex:1"><span class="bb-tick">${x.ticker}</span><span class="bb-name">${x.name||''}</span><div class="buybar-track"><div style="width:${(x.value/max*100).toFixed(0)}%"></div></div></div><div class="bb-val">+$${x.value.toFixed(2)}M</div></div>`).join('')+'</div>';
+  } else if(profTab==='preNews'){
+    box.innerHTML='<div class="sh">Trades before the news</div><p class="small" style="color:var(--muted);margin:-4px 0 10px">Purchases that preceded administration actions, endorsements, or corporate developments affecting the stock.</p>'+(p.preNews||[]).map(x=>`<div class="card" style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start;flex-wrap:wrap"><div><strong style="font-size:15px">${x.ticker}</strong> <span class="small" style="color:var(--muted)">${x.name||''}</span><div class="small" style="color:var(--muted)">${x.date||''}</div></div>${x.perf?`<span class="pill pos">${x.perf}</span>`:''}</div><div class="small" style="margin:8px 0;color:var(--muted)">SIZE · ${x.size||''}</div><div style="font-size:13px;line-height:1.55">${x.note||''}</div>${x.sources?`<div class="small" style="margin-top:8px;color:var(--muted)">Sources: ${x.sources.join(' · ')}</div>`:''}</div>`).join('');
+  } else if(profTab==='policyMoves'){
+    box.innerHTML='<div class="sh">Policy moves that benefit the book</div><p class="small" style="color:var(--muted);margin:-4px 0 10px">Administration actions that directly affect companies in the disclosures.</p>'+(p.policyMoves||[]).map(x=>`<div class="card" style="margin-bottom:10px"><span class="pill" style="background:rgba(37,99,235,.12);color:var(--blue)">● ${(x.tag||'').toUpperCase()}</span><div style="font-size:15px;font-weight:800;margin:8px 0">${x.title||''}</div><ul style="margin:0 0 6px;padding-left:18px;font-size:13px;line-height:1.5">${(x.bullets||[]).map(b=>`<li style="margin:4px 0">${b}</li>`).join('')}</ul><div style="margin-top:8px">${(x.tickers||[]).map(t=>`<span class="chip">${t}</span>`).join('')}</div>${x.sources?`<div class="small" style="margin-top:8px;color:var(--muted)">Sources: ${x.sources.join(' · ')}</div>`:''}</div>`).join('');
+  } else if(profTab==='rotation'){
+    const r=p.rotation||{}; const bars=r.bars||[];
+    box.innerHTML=`<div class="sh">${r.headline||'Rotation'}</div><p class="small" style="color:var(--muted);margin:-4px 0 12px">${r.summary||''}</p><div class="grid2" style="margin-bottom:14px"><div class="card" style="border-left:3px solid var(--red)"><div class="small" style="color:var(--red);font-weight:800">SOLD</div><div style="font-size:24px;font-weight:800;color:var(--red)">${r.soldTotal||''}</div><div class="small" style="color:var(--muted)">${r.soldSub||''}</div></div><div class="card" style="border-left:3px solid var(--green)"><div class="small" style="color:var(--green);font-weight:800">BOUGHT</div><div style="font-size:24px;font-weight:800;color:var(--green)">${r.boughtTotal||''}</div><div class="small" style="color:var(--muted)">${r.boughtSub||''}</div></div></div><div class="card">`+bars.map(b=>{const sold=b.dir==='sold';const w=(b.mag*100).toFixed(0);return `<div class="rot-bar"><div class="rot-left">${sold?`<div class="rot-seg" style="width:${w}%;background:var(--red)"></div>`:''}</div><div class="rot-tick">${b.ticker}</div><div class="rot-right">${!sold?`<div class="rot-seg" style="width:${w}%;background:var(--green)"></div>`:''}</div></div>`;}).join('')+'</div>';
+  } else if(profTab==='aiStack'){
+    const layers=p.aiStack||[]; const cols=['#4e79a7','#b07aa1','#59a14f','#edc949','#f28e2b','#76b7b2','#9c755f'];
+    box.innerHTML='<div class="sh">The AI stack: every layer is owned</div><p class="small" style="color:var(--muted);margin:-4px 0 12px">From software and cloud down through chips, equipment and infrastructure — each layer appears as a net-buyer position.</p>'+layers.map((l,i)=>{const c=cols[i%cols.length];return `<div class="aistack-row" style="background:${c}1a;border-left:3px solid ${c}"><div class="aistack-num" style="color:${c}">${String(i+1).padStart(2,'0')}</div><div style="flex:1"><div style="font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:${c}">${l.layer}</div><div style="margin-top:6px">${(l.tickers||[]).map(t=>`<span class="chip">${t}</span>`).join('')}</div></div></div>`;}).join('');
+  }
+}
 
 // ── Smart Money (Congress / Super Investors / Insiders) from published data/intel.json ──
 let intelLoaded=false, intelData=null, smartView='congress';
