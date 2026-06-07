@@ -161,14 +161,15 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="nav">
   <button class="nav-btn active" onclick="showTab('overview',this)">Overview</button>
-  <button class="nav-btn" onclick="showTab('holdings',this)">All Holdings</button>
+  <button class="nav-btn" onclick="showTab('smart',this)">💼 Smart Money</button>
+  <button class="nav-btn" onclick="showTab('reddit',this)">🔥 Reddit Trends</button>
+  <button class="nav-btn" onclick="showTab('analytics',this)">Analytics</button>
+  <span style="border-left:1px solid var(--border);margin:6px 4px;"></span>
+  <button class="nav-btn" onclick="showTab('holdings',this)">Holdings</button>
   <button class="nav-btn" onclick="showTab('class',this)">Asset Class</button>
   <button class="nav-btn" onclick="showTab('region',this)">Region</button>
   <button class="nav-btn" onclick="showTab('currency',this)">Currency</button>
-  <button class="nav-btn" onclick="showTab('analytics',this)">Analytics</button>
-  <button class="nav-btn" onclick="showTab('reddit',this)">🔥 Reddit Trends</button>
-  <button class="nav-btn" onclick="showTab('smart',this)">💼 Smart Money</button>
-  <button class="nav-btn" onclick="showTab('about',this)">Sources &amp; Notes</button>
+  <button class="nav-btn" onclick="showTab('about',this)">Sources</button>
 </div>
 
 <div class="main">
@@ -186,10 +187,10 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
       <div class="perf-cell"><div class="pp-label">1Y</div><div class="pp-val" id="pp-1y">—</div></div>
     </div>
   </div>
-  <div class="grid3" style="margin-bottom:16px;">
-    <div class="card"><div class="sh">By Asset Class</div><div class="donut-section"><svg id="donut-class" width="140" height="140" viewBox="0 0 140 140"></svg><div class="legend" id="legend-class"></div></div></div>
-    <div class="card"><div class="sh">By Region</div><div class="donut-section"><svg id="donut-region" width="140" height="140" viewBox="0 0 140 140"></svg><div class="legend" id="legend-region"></div></div></div>
-    <div class="card"><div class="sh">By Currency</div><div class="donut-section"><svg id="donut-currency" width="140" height="140" viewBox="0 0 140 140"></svg><div class="legend" id="legend-currency"></div></div></div>
+  <div class="card" style="margin-bottom:16px;">
+    <div class="sh">🎯 Suggested Trades — smart-money consensus</div>
+    <p style="font-size:12px;color:var(--muted);margin:-4px 0 10px;">Stocks multiple super investors and/or congress members are buying at once. Signals, not recommendations.</p>
+    <div id="signals-body"></div>
   </div>
   <div class="grid2">
     <div class="card"><div class="sh">Largest Listed Holdings (live-priced)</div><table><thead><tr><th>Name</th><th class="r">Value SGD</th><th class="r">1M</th><th class="r">% NW</th></tr></thead><tbody id="top-holdings"></tbody></table></div>
@@ -232,6 +233,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 </div>
 
 <div class="panel" id="panel-class">
+  <div class="card" style="margin-bottom:16px;"><div class="sh">Allocation by Asset Class</div><div class="donut-section"><svg id="donut-class" width="150" height="150" viewBox="0 0 140 140"></svg><div class="legend" id="legend-class"></div></div></div>
   <div class="card"><div class="sh">Net Worth by Asset Class</div>
     <p style="font-size:12px;color:var(--muted);margin-bottom:8px;">Click any class to expand — <strong>Cash</strong> breaks down by currency; other classes list their holdings.</p>
     <div class="tbl-wrap"><table><thead><tr><th>Asset Class</th><th class="r">Value SGD</th><th class="r">% NW</th><th class="r hide-sm">1D*</th><th class="r">1M*</th><th class="r hide-sm">YTD*</th><th class="r hide-sm">1Y*</th></tr></thead><tbody id="class-tbody"></tbody></table></div>
@@ -241,11 +243,13 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 </div>
 
 <div class="panel" id="panel-region">
+  <div class="card" style="margin-bottom:16px;"><div class="sh">Allocation by Region</div><div class="donut-section"><svg id="donut-region" width="150" height="150" viewBox="0 0 140 140"></svg><div class="legend" id="legend-region"></div></div></div>
   <div class="card"><div class="sh">Net Worth by Region</div><div class="tbl-wrap"><table><thead><tr><th>Region</th><th class="r">Value SGD</th><th class="r">% NW</th><th class="r hide-sm">1D*</th><th class="r">1M*</th><th class="r hide-sm">YTD*</th><th class="r hide-sm">1Y*</th></tr></thead><tbody id="region-tbody"></tbody></table></div></div>
   <div class="card" style="margin-top:16px;"><div class="sh">Weights</div><div id="region-bars"></div></div>
 </div>
 
 <div class="panel" id="panel-currency">
+  <div class="card" style="margin-bottom:16px;"><div class="sh">Allocation by Currency</div><div class="donut-section"><svg id="donut-currency" width="150" height="150" viewBox="0 0 140 140"></svg><div class="legend" id="legend-currency"></div></div></div>
   <div class="card"><div class="sh">Currency Exposure (pre-hedge)</div><div class="tbl-wrap"><table><thead><tr><th>Currency</th><th class="r">Value SGD</th><th class="r">% NW</th><th class="r">FX rate</th></tr></thead><tbody id="currency-tbody"></tbody></table></div></div>
   <div class="card" style="margin-top:16px;"><div class="sh">Weights</div><div id="currency-bars"></div></div>
 </div>
@@ -323,7 +327,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v22 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v23 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="modal-overlay" onclick="closeModal(event)">
@@ -789,14 +793,16 @@ function renderCurrency(){
   el('currency-bars').innerHTML=arr.map(x=>`<div style="display:grid;grid-template-columns:80px 1fr 70px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)"><span style="font-size:12px">${x.cur}</span><div style="background:var(--surf2);height:6px;border-radius:3px;overflow:hidden"><div style="height:100%;border-radius:3px;background:var(--accent);width:${(x.v/max*100).toFixed(1)}%"></div></div><span style="font-size:12px;color:var(--muted);text-align:right">${(x.v/nw*100).toFixed(1)}%</span></div>`).join('');
 }
 
-const COLORS=['#f59e0b','#3b82f6','#22c55e','#ef4444','#a855f7','#14b8a6','#f97316','#ec4899','#84cc16','#06b6d4','#7c3aed','#0ea5e9'];
+// Cohesive Tableau-style categorical palette (harmonious, not neon)
+const COLORS=['#4e79a7','#f28e2b','#59a14f','#e15759','#76b7b2','#edc949','#b07aa1','#ff9da7','#9c755f','#bab0ac','#86bcb6','#8cd17d'];
 function renderDonut(svgId,legId,gk){
+  const svg=el(svgId), leg=el(legId); if(!svg) return;
   const g={};H.forEach(h=>{g[h[gk]]=(g[h[gk]]||0)+valSGD(h);});
-  const arr=Object.entries(g).sort((a,b)=>b[1]-a[1]);const tot=arr.reduce((s,[,v])=>s+v,0);
-  const cx=70,cy=70,r=55,inner=32;let ang=-Math.PI/2,paths='';const items=[];
-  arr.forEach(([name,val],i)=>{const f=val/tot,sw=f*Math.PI*2;const x1=cx+r*Math.cos(ang),y1=cy+r*Math.sin(ang);ang+=sw;const x2=cx+r*Math.cos(ang),y2=cy+r*Math.sin(ang);const ix1=cx+inner*Math.cos(ang-sw),iy1=cy+inner*Math.sin(ang-sw),ix2=cx+inner*Math.cos(ang),iy2=cy+inner*Math.sin(ang);const lg=sw>Math.PI?1:0,c=COLORS[i%COLORS.length];paths+=`<path d="M${ix1},${iy1}L${x1},${y1}A${r},${r} 0 ${lg},1 ${x2},${y2}L${ix2},${iy2}A${inner},${inner} 0 ${lg},0 ${ix1},${iy1}" fill="${c}" opacity=".9"/>`;items.push({name,pct:(f*100).toFixed(1),c});});
-  el(svgId).innerHTML=paths+`<circle cx="${cx}" cy="${cy}" r="${inner}" fill="var(--surf)"/>`;
-  el(legId).innerHTML=items.slice(0,9).map(it=>`<div class="legend-row"><div class="leg-dot" style="background:${it.c}"></div><span class="leg-name">${it.name}</span><span class="leg-pct">${it.pct}%</span></div>`).join('');
+  const arr=Object.entries(g).sort((a,b)=>b[1]-a[1]);const tot=arr.reduce((s,[,v])=>s+v,0)||1;
+  const cx=70,cy=70,r=58,inner=38;let ang=-Math.PI/2,paths='';const items=[];
+  arr.forEach(([name,val],i)=>{const f=val/tot,sw=f*Math.PI*2;const x1=cx+r*Math.cos(ang),y1=cy+r*Math.sin(ang);ang+=sw;const x2=cx+r*Math.cos(ang),y2=cy+r*Math.sin(ang);const ix1=cx+inner*Math.cos(ang-sw),iy1=cy+inner*Math.sin(ang-sw),ix2=cx+inner*Math.cos(ang),iy2=cy+inner*Math.sin(ang);const lg=sw>Math.PI?1:0,c=COLORS[i%COLORS.length];paths+=`<path d="M${ix1},${iy1}L${x1},${y1}A${r},${r} 0 ${lg},1 ${x2},${y2}L${ix2},${iy2}A${inner},${inner} 0 ${lg},0 ${ix1},${iy1}" fill="${c}" stroke="var(--surf)" stroke-width="1.5"/>`;items.push({name,pct:(f*100).toFixed(1),c});});
+  svg.innerHTML=paths+`<text x="${cx}" y="${cy-1}" text-anchor="middle" font-size="14" font-weight="800" fill="var(--text)">${fmtSk(tot)}</text><text x="${cx}" y="${cy+12}" text-anchor="middle" font-size="7.5" letter-spacing="1" fill="var(--muted)">TOTAL</text>`;
+  if(leg) leg.innerHTML=items.slice(0,10).map(it=>`<div class="legend-row"><div class="leg-dot" style="background:${it.c}"></div><span class="leg-name">${it.name}</span><span class="leg-pct">${it.pct}%</span></div>`).join('');
 }
 
 function renderTopHoldings(){
@@ -866,7 +872,7 @@ async function loadIntel(){
     if(!r.ok) throw new Error('not published yet');
     intelData=await r.json(); intelLoaded=true;
     el('smart-updated').textContent=intelData.updated?('updated '+new Date(intelData.updated).toLocaleString('en-SG')):'';
-    renderSmart(); renderIntelAlert();
+    renderSmart(); renderIntelAlert(); renderSignals();
   }catch(e){
     el('smart-body').innerHTML='<div class="card" style="text-align:center;color:var(--muted)"><p style="font-size:14px;margin-bottom:6px;">⏳ First Intel refresh is pending.</p><p style="font-size:12px;">The scheduled agent will publish Congress trades, super-investor moves and insider activity (with written analysis) here on its next run.</p></div>';
   }
@@ -880,6 +886,23 @@ function heldMatch(t){if(!t)return false;return HELDKEYS.has(t.toUpperCase().rep
 let ddc=0;
 function ddBlock(x){ if(!x.deepDive) return ''; const id='dd'+(ddc++);
   return `<button class="ddbtn" onclick="var e=document.getElementById('${id}');var o=e.style.display==='none';e.style.display=o?'block':'none';this.textContent=o?'Hide analysis ▴':'See why ▸';">See why ▸</button><div id="${id}" class="ddbody" style="display:none;">${x.deepDive}</div>`; }
+// Suggested trades: consensus across super investors / congress (agent-provided + client-computed clusters)
+function renderSignals(){
+  const box=el('signals-body'); if(!box) return;
+  if(!intelData){box.innerHTML='<div class="small" style="color:var(--muted)">Loading…</div>';return;}
+  let sig=(intelData.signals||[]).slice();
+  const m={};
+  (intelData.congress||[]).filter(x=>/buy/i.test(x.type)).forEach(x=>{const t=(x.ticker||'').toUpperCase();(m[t]=m[t]||{c:new Set(),i:new Set()}).c.add(x.representative);});
+  (intelData.superInvestors||[]).filter(x=>/new|add/i.test(x.action)).forEach(x=>{const t=(x.ticker||'').toUpperCase();(m[t]=m[t]||{c:new Set(),i:new Set()}).i.add(x.name);});
+  Object.entries(m).forEach(([t,v])=>{ if((v.c.size+v.i.size)>=2 && !sig.find(s=>(s.ticker||'').toUpperCase()===t)){ const p=[]; if(v.i.size)p.push(`${v.i.size} super investor${v.i.size>1?'s':''}`); if(v.c.size)p.push(`${v.c.size} congress member${v.c.size>1?'s':''}`); sig.push({ticker:t,label:'Cross-source buying',detail:p.join(' + ')+' accumulating',takeaway:[...v.i,...v.c].join(', ')}); } });
+  if(!sig.length){box.innerHTML='<div class="small" style="color:var(--muted)">No strong consensus signals in the latest refresh.</div>';return;}
+  box.innerHTML='<div class="grid3">'+sig.slice(0,9).map(s=>{const held=heldMatch(s.ticker);return `<div style="border:1px solid var(--border);border-radius:8px;padding:12px;background:var(--surf2);">
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;"><span class="ticker-badge">${s.ticker}</span>${held?'🟡':''}<span class="pill pos" style="margin-left:auto;font-size:10px;">${s.label||'Consensus'}</span></div>
+    <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:4px;">${s.detail||''}</div>
+    <div style="font-size:12px;color:var(--text);line-height:1.5;">${s.takeaway||''}</div>
+    ${s.sources?`<div class="small" style="margin-top:6px;color:var(--muted);">${s.sources.join(' · ')}</div>`:''}
+  </div>`;}).join('')+'</div>';
+}
 // alert on Overview when intel touches a held ticker
 function renderIntelAlert(){
   const box=el('intel-alert'); if(!box||!intelData) return;
