@@ -371,7 +371,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v25 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v26 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="cp-overlay" onclick="closeCP(event)">
@@ -641,6 +641,30 @@ function fxCell(cur){
 const fmtSk=n=>n==null?'—':Math.abs(n)>=1e6?'S$'+(n/1e6).toFixed(2)+'M':'S$'+Math.round(n).toLocaleString('en-SG');
 const clr=n=>n==null?'neu':n>0?'pos':n<0?'neg':'neu';
 const pill=n=>`<span class="pill ${clr(n)}">${fmtP(n)}</span>`;
+// clickable ticker badge / chip -> opens a live chart for any symbol
+const esc=s=>String(s).replace(/'/g,"\\'");
+const tkr=sym=>{const c=String(sym||'').trim();return c?`<span class="ticker-badge" style="cursor:pointer" onclick="event.stopPropagation();openTicker('${esc(c)}')">${c}</span>`:'<span style="color:var(--muted)">—</span>';};
+const chipT=sym=>{const c=String(sym||'').trim();return `<span class="chip" style="cursor:pointer" onclick="event.stopPropagation();openTicker('${esc(c)}')">${c}</span>`;};
+function symToYf(sym){let s=String(sym).trim().split(/[\s(]/)[0].toUpperCase();if(/^\d{3,5}$/.test(s))return s.padStart(4,'0')+'.HK';return s;}
+async function openTicker(sym){
+  if(!sym) return; const disp=String(sym).trim().split(/[\s(]/)[0].toUpperCase(); const ys=symToYf(sym);
+  el('m-ticker').textContent=disp; el('m-name').textContent='Loading…'; el('m-price').textContent=''; el('m-chg').textContent=''; el('m-stats').innerHTML=''; modalHist=null;
+  el('modal-overlay').classList.add('open'); el('m-chart-box').innerHTML='<div style="height:100%;display:flex;align-items:center;justify-content:center;color:var(--muted)"><span class="ld"><span class="spin"></span>Loading chart…</span></div>';
+  try{
+    const data=await yfFetch(`https://query1.finance.yahoo.com/v8/finance/chart/${ys}?interval=1d&range=2y`);
+    const res=data?.chart?.result?.[0]; if(!res) throw new Error('no data');
+    const m=res.meta||{}, ts=res.timestamp, q0=res.indicators?.quote?.[0]; if(!ts||!q0?.close) throw new Error('no data');
+    const hist=[]; for(let i=0;i<ts.length;i++){if(q0.close[i]==null)continue;hist.push({time:new Date(ts[i]*1000).toISOString().slice(0,10),open:q0.open?.[i]??q0.close[i],high:q0.high?.[i]??q0.close[i],low:q0.low?.[i]??q0.close[i],close:q0.close[i],volume:q0.volume?.[i]??0});}
+    modalHist=hist; const n=hist.length; const cur=(m.currency||'USD').toUpperCase();
+    const price=m.regularMarketPrice??(n?hist[n-1].close:null);
+    el('m-name').textContent=(m.longName||m.shortName||disp)+' · '+cur;
+    if(price!=null){el('m-price').textContent=fmt(price,price<10?4:price<100?3:2)+' '+cur;}
+    const last=price??(n?hist[n-1].close:0); const pct=i=>i>=0&&i<n?(last/hist[i].close)-1:null;
+    const r1d=pct(n-2); el('m-chg').textContent=r1d!=null?(r1d>=0?'+':'')+(r1d*100).toFixed(2)+'%':''; el('m-chg').className='modal-chg '+clr(r1d);
+    el('m-stats').innerHTML=`<div class="stat-item"><label>1W</label><span class="${clr(pct(n-6))}">${fmtP(pct(Math.max(0,n-6)))}</span></div><div class="stat-item"><label>1M</label><span class="${clr(pct(n-23))}">${fmtP(pct(Math.max(0,n-23)))}</span></div><div class="stat-item"><label>3M</label><span class="${clr(pct(n-67))}">${fmtP(pct(Math.max(0,n-67)))}</span></div><div class="stat-item"><label>1Y</label><span class="${clr(pct(n-253))}">${fmtP(pct(Math.max(0,n-253)))}</span></div><div class="stat-item"><label>52W High</label><span>${m.fiftyTwoWeekHigh!=null?fmt(m.fiftyTwoWeekHigh,2):'—'}</span></div><div class="stat-item"><label>52W Low</label><span>${m.fiftyTwoWeekLow!=null?fmt(m.fiftyTwoWeekLow,2):'—'}</span></div>`;
+    setChartPeriod('1Y');
+  }catch(e){ el('m-name').textContent=disp; el('m-chart-box').innerHTML='<div style="height:100%;display:flex;align-items:center;justify-content:center;color:var(--muted)">No chart data for '+disp+'</div>'; }
+}
 
 function totalNW(){return H.reduce((s,h)=>s+valSGD(h),0);}
 function secReturn(key){let ws=0,wt=0;H.forEach(h=>{if(!h.yf)return;const r=pd[h.t]?.[key];const v=valSGD(h);if(r!=null&&v>0){ws+=v*r;wt+=v;}});return wt>0?ws/wt:null;}
@@ -920,7 +944,7 @@ function renderConviction(){
   box.innerHTML=cp.plays.slice(0,5).map((p,i)=>{const held=heldMatch(p.ticker);const names=(p.investors||[]).slice(0,2).map(x=>x.name+(x.manager?` (${x.manager})`:'')).join(' · ');return `<div class="conv-row" onclick="openCP('${p.ticker}')">
     <div class="conv-rank">${i+1}</div>
     <div style="flex:1;min-width:0">
-      <div><span class="ticker-badge">${p.ticker}</span>${held?' 🟡':''} <span class="small" style="color:var(--muted)">${p.name||''}</span></div>
+      <div>${tkr(p.ticker)}${held?' 🟡':''} <span class="small" style="color:var(--muted)">${p.name||''}</span></div>
       <div style="color:var(--green);font-weight:700;font-size:13px;margin-top:2px">${p.count} investors opened new positions</div>
       <div class="small" style="color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${names}${p.count>2?` +${p.count-2} more`:''}</div>
     </div>
@@ -930,7 +954,7 @@ function renderConviction(){
 function openCP(ticker){
   const cp=investorsData.convictionPlays; const p=(cp.plays||[]).find(x=>x.ticker===ticker); if(!p) return;
   el('cp-content').innerHTML=`<div class="modal-ticker">${p.ticker} <span class="pill pos" style="font-size:11px;vertical-align:middle">${p.action||'New'}</span></div><div class="modal-name">${p.name||''} · ${p.count} super investors opened new positions · ${cp.quarter||''}</div>${p.context?`<p style="font-size:13px;color:var(--muted);margin:10px 0 4px">${p.context}</p>`:''}<div class="small" style="color:var(--muted);margin-bottom:12px">Each investor who opened a position — newest 13F filings:</div>`
-   +(p.investors||[]).map(inv=>`<div class="card" style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><div><strong>${inv.name}</strong>${inv.manager?` <span class="small" style="color:var(--muted)">${inv.manager}</span>`:''}<div class="small" style="color:var(--muted);margin-top:3px"><span class="ticker-badge">${p.ticker}</span></div></div><span class="pill pos">New Position</span></div>
+   +(p.investors||[]).map(inv=>`<div class="card" style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><div><strong>${inv.name}</strong>${inv.manager?` <span class="small" style="color:var(--muted)">${inv.manager}</span>`:''}<div class="small" style="color:var(--muted);margin-top:3px">${tkr(p.ticker)}</div></div><span class="pill pos">New Position</span></div>
      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px 12px;margin-top:12px">
        <div><div class="gl-sub">Shares changed</div><div style="font-weight:700;color:var(--green)">${inv.sharesChanged||'—'}</div></div>
        <div><div class="gl-sub">Trade value</div><div style="font-weight:700;color:var(--green)">${inv.tradeValue||'—'}</div></div>
@@ -979,17 +1003,17 @@ function renderProfSection(key){
   const p=investorsData.profiles[key]; const box=el('prof-section'); if(!box) return;
   if(profTab==='topBuys'){
     const arr=p.topBuys||[]; const max=Math.max(...arr.map(x=>x.value),1);
-    box.innerHTML='<div class="sh">Where the new money went</div><p class="small" style="color:var(--muted);margin:-4px 0 10px">Largest net new positions — purchases minus sales, midpoint estimates ($M).</p><div class="card">'+arr.map(x=>`<div class="buybar"><div style="flex:1"><span class="bb-tick">${x.ticker}</span><span class="bb-name">${x.name||''}</span><div class="buybar-track"><div style="width:${(x.value/max*100).toFixed(0)}%"></div></div></div><div class="bb-val">+$${x.value.toFixed(2)}M</div></div>`).join('')+'</div>';
+    box.innerHTML='<div class="sh">Where the new money went</div><p class="small" style="color:var(--muted);margin:-4px 0 10px">Largest net new positions — purchases minus sales, midpoint estimates ($M).</p><div class="card">'+arr.map(x=>`<div class="buybar"><div style="flex:1"><span class="bb-tick" style="cursor:pointer" onclick="openTicker('${x.ticker}')">${x.ticker}</span><span class="bb-name">${x.name||''}</span><div class="buybar-track"><div style="width:${(x.value/max*100).toFixed(0)}%"></div></div></div><div class="bb-val">+$${x.value.toFixed(2)}M</div></div>`).join('')+'</div>';
   } else if(profTab==='preNews'){
-    box.innerHTML='<div class="sh">Trades before the news</div><p class="small" style="color:var(--muted);margin:-4px 0 10px">Purchases that preceded administration actions, endorsements, or corporate developments affecting the stock.</p>'+(p.preNews||[]).map(x=>`<div class="card" style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start;flex-wrap:wrap"><div><strong style="font-size:15px">${x.ticker}</strong> <span class="small" style="color:var(--muted)">${x.name||''}</span><div class="small" style="color:var(--muted)">${x.date||''}</div></div>${x.perf?`<span class="pill pos">${x.perf}</span>`:''}</div><div class="small" style="margin:8px 0;color:var(--muted)">SIZE · ${x.size||''}</div><div style="font-size:13px;line-height:1.55">${x.note||''}</div>${x.sources?`<div class="small" style="margin-top:8px;color:var(--muted)">Sources: ${x.sources.join(' · ')}</div>`:''}</div>`).join('');
+    box.innerHTML='<div class="sh">Trades before the news</div><p class="small" style="color:var(--muted);margin:-4px 0 10px">Purchases that preceded administration actions, endorsements, or corporate developments affecting the stock.</p>'+(p.preNews||[]).map(x=>`<div class="card" style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start;flex-wrap:wrap"><div><strong style="font-size:15px;cursor:pointer" onclick="openTicker('${x.ticker}')">${x.ticker}</strong> <span class="small" style="color:var(--muted)">${x.name||''}</span><div class="small" style="color:var(--muted)">${x.date||''}</div></div>${x.perf?`<span class="pill pos">${x.perf}</span>`:''}</div><div class="small" style="margin:8px 0;color:var(--muted)">SIZE · ${x.size||''}</div><div style="font-size:13px;line-height:1.55">${x.note||''}</div>${x.sources?`<div class="small" style="margin-top:8px;color:var(--muted)">Sources: ${x.sources.join(' · ')}</div>`:''}</div>`).join('');
   } else if(profTab==='policyMoves'){
-    box.innerHTML='<div class="sh">Policy moves that benefit the book</div><p class="small" style="color:var(--muted);margin:-4px 0 10px">Administration actions that directly affect companies in the disclosures.</p>'+(p.policyMoves||[]).map(x=>`<div class="card" style="margin-bottom:10px"><span class="pill" style="background:rgba(37,99,235,.12);color:var(--blue)">● ${(x.tag||'').toUpperCase()}</span><div style="font-size:15px;font-weight:800;margin:8px 0">${x.title||''}</div><ul style="margin:0 0 6px;padding-left:18px;font-size:13px;line-height:1.5">${(x.bullets||[]).map(b=>`<li style="margin:4px 0">${b}</li>`).join('')}</ul><div style="margin-top:8px">${(x.tickers||[]).map(t=>`<span class="chip">${t}</span>`).join('')}</div>${x.sources?`<div class="small" style="margin-top:8px;color:var(--muted)">Sources: ${x.sources.join(' · ')}</div>`:''}</div>`).join('');
+    box.innerHTML='<div class="sh">Policy moves that benefit the book</div><p class="small" style="color:var(--muted);margin:-4px 0 10px">Administration actions that directly affect companies in the disclosures.</p>'+(p.policyMoves||[]).map(x=>`<div class="card" style="margin-bottom:10px"><span class="pill" style="background:rgba(37,99,235,.12);color:var(--blue)">● ${(x.tag||'').toUpperCase()}</span><div style="font-size:15px;font-weight:800;margin:8px 0">${x.title||''}</div><ul style="margin:0 0 6px;padding-left:18px;font-size:13px;line-height:1.5">${(x.bullets||[]).map(b=>`<li style="margin:4px 0">${b}</li>`).join('')}</ul><div style="margin-top:8px">${(x.tickers||[]).map(t=>`${chipT(t)}`).join('')}</div>${x.sources?`<div class="small" style="margin-top:8px;color:var(--muted)">Sources: ${x.sources.join(' · ')}</div>`:''}</div>`).join('');
   } else if(profTab==='rotation'){
     const r=p.rotation||{}; const bars=r.bars||[];
-    box.innerHTML=`<div class="sh">${r.headline||'Rotation'}</div><p class="small" style="color:var(--muted);margin:-4px 0 12px">${r.summary||''}</p><div class="grid2" style="margin-bottom:14px"><div class="card" style="border-left:3px solid var(--red)"><div class="small" style="color:var(--red);font-weight:800">SOLD</div><div style="font-size:24px;font-weight:800;color:var(--red)">${r.soldTotal||''}</div><div class="small" style="color:var(--muted)">${r.soldSub||''}</div></div><div class="card" style="border-left:3px solid var(--green)"><div class="small" style="color:var(--green);font-weight:800">BOUGHT</div><div style="font-size:24px;font-weight:800;color:var(--green)">${r.boughtTotal||''}</div><div class="small" style="color:var(--muted)">${r.boughtSub||''}</div></div></div><div class="card">`+bars.map(b=>{const sold=b.dir==='sold';const w=(b.mag*100).toFixed(0);return `<div class="rot-bar"><div class="rot-left">${sold?`<div class="rot-seg" style="width:${w}%;background:var(--red)"></div>`:''}</div><div class="rot-tick">${b.ticker}</div><div class="rot-right">${!sold?`<div class="rot-seg" style="width:${w}%;background:var(--green)"></div>`:''}</div></div>`;}).join('')+'</div>';
+    box.innerHTML=`<div class="sh">${r.headline||'Rotation'}</div><p class="small" style="color:var(--muted);margin:-4px 0 12px">${r.summary||''}</p><div class="grid2" style="margin-bottom:14px"><div class="card" style="border-left:3px solid var(--red)"><div class="small" style="color:var(--red);font-weight:800">SOLD</div><div style="font-size:24px;font-weight:800;color:var(--red)">${r.soldTotal||''}</div><div class="small" style="color:var(--muted)">${r.soldSub||''}</div></div><div class="card" style="border-left:3px solid var(--green)"><div class="small" style="color:var(--green);font-weight:800">BOUGHT</div><div style="font-size:24px;font-weight:800;color:var(--green)">${r.boughtTotal||''}</div><div class="small" style="color:var(--muted)">${r.boughtSub||''}</div></div></div><div class="card">`+bars.map(b=>{const sold=b.dir==='sold';const w=(b.mag*100).toFixed(0);return `<div class="rot-bar"><div class="rot-left">${sold?`<div class="rot-seg" style="width:${w}%;background:var(--red)"></div>`:''}</div><div class="rot-tick" style="cursor:pointer" onclick="openTicker('${b.ticker}')">${b.ticker}</div><div class="rot-right">${!sold?`<div class="rot-seg" style="width:${w}%;background:var(--green)"></div>`:''}</div></div>`;}).join('')+'</div>';
   } else if(profTab==='aiStack'){
     const layers=p.aiStack||[]; const cols=['#4e79a7','#b07aa1','#59a14f','#edc949','#f28e2b','#76b7b2','#9c755f'];
-    box.innerHTML='<div class="sh">The AI stack: every layer is owned</div><p class="small" style="color:var(--muted);margin:-4px 0 12px">From software and cloud down through chips, equipment and infrastructure — each layer appears as a net-buyer position.</p>'+layers.map((l,i)=>{const c=cols[i%cols.length];return `<div class="aistack-row" style="background:${c}1a;border-left:3px solid ${c}"><div class="aistack-num" style="color:${c}">${String(i+1).padStart(2,'0')}</div><div style="flex:1"><div style="font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:${c}">${l.layer}</div><div style="margin-top:6px">${(l.tickers||[]).map(t=>`<span class="chip">${t}</span>`).join('')}</div></div></div>`;}).join('');
+    box.innerHTML='<div class="sh">The AI stack: every layer is owned</div><p class="small" style="color:var(--muted);margin:-4px 0 12px">From software and cloud down through chips, equipment and infrastructure — each layer appears as a net-buyer position.</p>'+layers.map((l,i)=>{const c=cols[i%cols.length];return `<div class="aistack-row" style="background:${c}1a;border-left:3px solid ${c}"><div class="aistack-num" style="color:${c}">${String(i+1).padStart(2,'0')}</div><div style="flex:1"><div style="font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:${c}">${l.layer}</div><div style="margin-top:6px">${(l.tickers||[]).map(t=>`${chipT(t)}`).join('')}</div></div></div>`;}).join('');
   }
 }
 
@@ -1028,7 +1052,7 @@ function renderSignals(){
   Object.entries(m).forEach(([t,v])=>{ if((v.c.size+v.i.size)>=2 && !sig.find(s=>(s.ticker||'').toUpperCase()===t)){ const p=[]; if(v.i.size)p.push(`${v.i.size} super investor${v.i.size>1?'s':''}`); if(v.c.size)p.push(`${v.c.size} congress member${v.c.size>1?'s':''}`); sig.push({ticker:t,label:'Cross-source buying',detail:p.join(' + ')+' accumulating',takeaway:[...v.i,...v.c].join(', ')}); } });
   if(!sig.length){box.innerHTML='<div class="small" style="color:var(--muted)">No strong consensus signals in the latest refresh.</div>';return;}
   box.innerHTML='<div class="grid3">'+sig.slice(0,9).map(s=>{const held=heldMatch(s.ticker);return `<div style="border:1px solid var(--border);border-radius:8px;padding:12px;background:var(--surf2);">
-    <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;"><span class="ticker-badge">${s.ticker}</span>${held?'🟡':''}<span class="pill pos" style="margin-left:auto;font-size:10px;">${s.label||'Consensus'}</span></div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">${tkr(s.ticker)}${held?'🟡':''}<span class="pill pos" style="margin-left:auto;font-size:10px;">${s.label||'Consensus'}</span></div>
     <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:4px;">${s.detail||''}</div>
     <div style="font-size:12px;color:var(--text);line-height:1.5;">${s.takeaway||''}</div>
     ${s.sources?`<div class="small" style="margin-top:6px;color:var(--muted);">${s.sources.join(' · ')}</div>`:''}
@@ -1044,7 +1068,7 @@ function renderIntelAlert(){
   if(!hits.length){box.style.display='none';return;}
   box.style.display='';
   box.innerHTML=`<div class="card" style="border-left:3px solid var(--accent);"><div class="sh">🔔 Smart-money activity on your holdings (${hits.length})</div>`+
-    hits.map(h=>`<div style="padding:7px 0;border-bottom:1px solid var(--border);font-size:13px;">${pillTag(h.act)} <span class="ticker-badge">${h.t}</span> <strong>${h.tag}</strong> · ${h.who}<div style="color:var(--muted);font-size:12px;margin-top:2px;">${h.note||''}</div></div>`).join('')+
+    hits.map(h=>`<div style="padding:7px 0;border-bottom:1px solid var(--border);font-size:13px;">${pillTag(h.act)} ${tkr(h.t)} <strong>${h.tag}</strong> · ${h.who}<div style="color:var(--muted);font-size:12px;margin-top:2px;">${h.note||''}</div></div>`).join('')+
     `<div class="small" style="margin-top:8px;"><span onclick="document.querySelectorAll('.nav-btn').forEach(b=>{if(b.textContent.includes('Smart Money'))b.click();});" style="color:var(--accent);cursor:pointer;font-weight:700;">Open Smart Money →</span></div></div>`;
 }
 function renderSmart(){
@@ -1054,7 +1078,7 @@ function renderSmart(){
     const a=intelData.congress||[];
     el('smart-body').innerHTML = a.length? a.map(x=>smCard(`
       <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;">
-        <div><span class="ticker-badge">${x.ticker||'—'}</span> ${heldMatch(x.ticker)?'🟡 ':''}<strong>${x.representative||''}</strong></div>
+        <div>${x.ticker?tkr(x.ticker):'<span style=\'color:var(--muted)\'>—</span>'} ${heldMatch(x.ticker)?'🟡 ':''}<strong>${x.representative||''}</strong></div>
         <div style="text-align:right;">${pillTag(x.type)} <span class="small" style="color:var(--muted)">${x.date||''}</span></div>
       </div>
       <div class="small" style="margin:4px 0;color:var(--muted)">Amount: ${x.amount||'—'}</div>
@@ -1066,7 +1090,7 @@ function renderSmart(){
     const a=intelData.superInvestors||[];
     el('smart-body').innerHTML = a.length? a.map(x=>smCard(`
       <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;">
-        <div><strong>${x.name||''}</strong> → <span class="ticker-badge">${x.ticker||'—'}</span> ${heldMatch(x.ticker)?'🟡':''}</div>
+        <div><strong>${x.name||''}</strong> → ${x.ticker?tkr(x.ticker):'<span style=\'color:var(--muted)\'>—</span>'} ${heldMatch(x.ticker)?'🟡':''}</div>
         <div style="text-align:right;">${pillTag(x.action)} <span class="small" style="color:var(--muted)">${x.date||x.quarter||''}</span></div>
       </div>
       <div class="small" style="margin:4px 0;color:var(--muted)">${[x.shares?('Shares: '+x.shares):'',x.value?('Value: '+x.value):''].filter(Boolean).join(' · ')}</div>
@@ -1077,7 +1101,7 @@ function renderSmart(){
     const a=intelData.insiders||[];
     el('smart-body').innerHTML = a.length? a.map(x=>smCard(`
       <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;">
-        <div><span class="ticker-badge">${x.ticker||'—'}</span> ${heldMatch(x.ticker)?'🟡 ':''}<strong>${x.insider||''}</strong> <span class="small" style="color:var(--muted)">${x.role||''}</span></div>
+        <div>${x.ticker?tkr(x.ticker):'<span style=\'color:var(--muted)\'>—</span>'} ${heldMatch(x.ticker)?'🟡 ':''}<strong>${x.insider||''}</strong> <span class="small" style="color:var(--muted)">${x.role||''}</span></div>
         <div style="text-align:right;">${pillTag(x.type)} <span class="small" style="color:var(--muted)">${x.date||''}</span></div>
       </div>
       <div class="small" style="margin:4px 0;color:var(--muted)">${[x.shares?('Shares: '+x.shares):'',x.value?('Value: '+x.value):''].filter(Boolean).join(' · ')}</div>
@@ -1108,7 +1132,7 @@ async function loadReddit(force){
       const mchgStr=mchg==null?'—':`<span style="color:${mchg>=0?'var(--green)':'var(--red)'}">${mchg>=0?'+':''}${mchg}</span>`;
       const held=HELD.has((r.ticker||'').toUpperCase());
       const name=(r.name||'').replace(/&amp;/g,'&');
-      return `<tr><td style="color:var(--muted)">${r.rank}</td><td><span class="ticker-badge">${r.ticker}</span>${held?' 🟡':''}</td><td class="hide-sm" style="color:var(--muted)">${name}</td><td class="r">${arrow}</td><td class="r" style="font-weight:700">${r.mentions.toLocaleString('en-SG')}</td><td class="r hide-sm">${mchgStr}</td><td class="r hide-sm" style="color:var(--muted)">${(r.upvotes||0).toLocaleString('en-SG')}</td></tr>`;
+      return `<tr><td style="color:var(--muted)">${r.rank}</td><td>${tkr(r.ticker)}${held?' 🟡':''}</td><td class="hide-sm" style="color:var(--muted)">${name}</td><td class="r">${arrow}</td><td class="r" style="font-weight:700">${r.mentions.toLocaleString('en-SG')}</td><td class="r hide-sm">${mchgStr}</td><td class="r hide-sm" style="color:var(--muted)">${(r.upvotes||0).toLocaleString('en-SG')}</td></tr>`;
     }).join('');
     redditLoaded=true;
     el('reddit-status').textContent=`Top ${rows.length} · ${redditFilter==='all-stocks'?'all investing subreddits':'r/wallstreetbets'} · updated ${new Date().toLocaleTimeString('en-SG')}`;
