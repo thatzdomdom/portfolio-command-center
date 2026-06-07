@@ -384,7 +384,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v35 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v36 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="cp-overlay" onclick="closeCP(event)">
@@ -1060,17 +1060,27 @@ async function loadInvestors(){
   }catch(e){ el('investors-body').innerHTML='<div class="card" style="text-align:center;color:var(--muted)"><p style="font-size:14px;margin-bottom:6px;">⏳ Investor profiles pending.</p><p style="font-size:12px;">The scheduled agent will publish detailed super-investor profiles here.</p></div>'; }
 }
 function renderInvestorList(){ renderInvestorsHub(); }
-let notableFilter='All';
+let notableFilter='All', invSub='activity';
+function setInvSub(s){ invSub=s; document.querySelectorAll('#investors-body .cpf[data-s]').forEach(b=>b.classList.toggle('active',b.dataset.s===s)); const a=el('inv-activity'),pw=el('inv-profiles-wrap'); if(a)a.style.display=s==='activity'?'block':'none'; if(pw)pw.style.display=s==='profiles'?'block':'none'; }
 function profCardHTML(k,p){const g=p.glance||{};return `<div class="inv-card" onclick="openProfile('${k}')"><div style="font-size:20px;font-weight:800;letter-spacing:-.02em">${p.name}</div><div class="prof-sub" style="margin-top:4px">${p.subtitle||''}</div><div style="display:flex;gap:20px;margin-top:12px;flex-wrap:wrap"><div><div style="font-size:16px;font-weight:800">${g.activity||'—'}</div><div class="gl-sub">activity value</div></div><div><div style="font-size:16px;font-weight:800;color:var(--blue)">${g.purchases||'—'}</div><div class="gl-sub">purchases</div></div></div><div style="margin-top:12px;color:var(--accent);font-size:12px;font-weight:700">View profile →</div></div>`;}
 function renderProfilesGrid(){const grid=el('inv-profiles'); if(!grid) return; const profs=investorsData?.profiles||{}; grid.innerHTML=Object.keys(profs).map(k=>profCardHTML(k,profs[k])).join('')||'<div class="small" style="color:var(--muted)">No profiles yet.</div>';}
 function renderInvestorsHub(){
   const box=el('investors-body'); if(!box) return; const si=investorsData.superInvestors||{};
   const siN=(si.roster&&si.roster.length)||si.count||0;
+  const nProf=Object.keys(investorsData.profiles||{}).length;
   box.innerHTML=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div class="sh" style="margin:0">🐋 Super Investors</div><button class="btn" style="padding:2px 9px;font-size:14px" onclick="openCurated()" title="About">ⓘ</button>${siN?`<span class="small" style="color:var(--muted)">${siN} tracked</span>`:''}</div>
-  <input class="search-input" id="inv-search" placeholder="Search super investors…" oninput="filterRoster(this.value)" style="margin-bottom:14px;width:100%">
-  <div class="card" style="margin-bottom:16px"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><div class="sh" style="margin:0">⏱ Latest Notable Trades</div><select id="nt-filter" onchange="renderNotable(this.value)" style="background:var(--surf2);border:1px solid var(--border);color:var(--text);padding:4px 8px;border-radius:8px;font-size:12px;font-weight:700"><option>All</option><option>New Position</option><option>Added</option><option>Reduced</option><option>Exited</option></select></div><div id="notable-body" style="margin-top:10px"></div></div>
-  <div class="card" style="margin-bottom:16px"><div class="sh">◔ Sector Capital Concentration</div><div id="sector-chart"></div></div>
-  <div class="sh">Profiles</div><div class="grid2" id="inv-profiles"></div>`;
+  <input class="search-input" id="inv-search" placeholder="Search super investors…" oninput="filterRoster(this.value)" style="margin-bottom:12px;width:100%">
+  <div class="cp-filters" style="margin-bottom:14px">
+    <button class="cpf ${invSub==='activity'?'active':''}" data-s="activity" onclick="setInvSub('activity')">Activity &amp; Sectors</button>
+    <button class="cpf ${invSub==='profiles'?'active':''}" data-s="profiles" onclick="setInvSub('profiles')">Profiles${nProf?` (${nProf})`:''}</button>
+  </div>
+  <div id="inv-activity" style="display:${invSub==='activity'?'block':'none'}">
+    <div class="card" style="margin-bottom:16px"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><div class="sh" style="margin:0">⏱ Latest Notable Trades</div><select id="nt-filter" onchange="renderNotable(this.value)" style="background:var(--surf2);border:1px solid var(--border);color:var(--text);padding:4px 8px;border-radius:8px;font-size:12px;font-weight:700"><option>All</option><option>New Position</option><option>Added</option><option>Reduced</option><option>Exited</option></select></div><div id="notable-body" style="margin-top:10px"></div></div>
+    <div class="card"><div class="sh">◔ Sector Capital Concentration</div><div id="sector-chart"></div></div>
+  </div>
+  <div id="inv-profiles-wrap" style="display:${invSub==='profiles'?'block':'none'}">
+    <div class="grid2" id="inv-profiles"></div>
+  </div>`;
   renderNotable('All'); renderSectorChart(); renderProfilesGrid();
 }
 function renderNotable(filter){
@@ -1084,13 +1094,14 @@ function renderNotable(filter){
 }
 function renderSectorChart(){
   const sc=investorsData.sectorConcentration; const box=el('sector-chart'); if(!box||!sc) return;
-  const qs=sc.quarters, secs=sc.sectors, n=qs.length, last=n-1; const W=1000,H=300,padB=40,padL=2,gap=8; const slot=(W-padL)/n, bw=slot-gap;
+  const qs=sc.quarters, secs=sc.sectors, n=qs.length, last=n-1; const W=1000,chartH=260,padB=92,gap=10; const slot=W/n, bw=slot-gap;
   let bars='';
-  for(let qi=0;qi<n;qi++){ const total=secs.reduce((s,se)=>s+(se.values[qi]||0),0)||100; let y=H-padB; const x=padL+qi*slot+gap/2;
-    secs.forEach(se=>{ const h=(se.values[qi]||0)/total*(H-padB-4); y-=h; if(h>0) bars+=`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" fill="${se.color}"/>`; });
-    bars+=`<text x="${(x+bw/2).toFixed(1)}" y="${H-padB+24}" font-size="15" fill="#78716c" text-anchor="end" transform="rotate(-35 ${(x+bw/2).toFixed(1)} ${H-padB+24})">${qs[qi]}</text>`; }
+  for(let qi=0;qi<n;qi++){ const total=secs.reduce((s,se)=>s+(se.values[qi]||0),0)||100; let y=chartH; const x=qi*slot+gap/2;
+    secs.forEach(se=>{ const h=(se.values[qi]||0)/total*chartH; y-=h; if(h>0) bars+=`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" fill="${se.color}"/>`; });
+    const lx=(x+bw/2).toFixed(1), ly=chartH+24;
+    bars+=`<text x="${lx}" y="${ly}" font-size="21" fill="#78716c" text-anchor="end" transform="rotate(-35 ${lx} ${ly})">${qs[qi]}</text>`; }
   const leg=secs.slice().sort((a,b)=>b.values[last]-a.values[last]);
-  box.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="height:auto;display:block;margin-top:8px">${bars}</svg>
+  box.innerHTML=`<svg viewBox="-50 0 ${W+70} ${chartH+padB}" width="100%" style="height:auto;display:block;margin-top:8px">${bars}</svg>
     <div style="font-weight:800;margin:10px 0 6px">${qs[last]}</div>
     ${leg.map(se=>`<div style="display:flex;align-items:center;gap:8px;padding:3px 0;font-size:13px"><span style="width:11px;height:11px;border-radius:2px;background:${se.color};display:inline-block;flex-shrink:0"></span><span style="flex:1">${se.name}</span><span style="font-weight:700;font-variant-numeric:tabular-nums">${(se.values[last]||0).toFixed(2)}%</span></div>`).join('')}
     <div class="small" style="color:var(--muted);margin-top:8px">${sc.note||''}</div>`;
@@ -1103,6 +1114,7 @@ function openCurated(){
   el('cp-overlay').classList.add('open');
 }
 function filterRoster(q){ q=(q||'').toLowerCase().trim(); const grid=el('inv-profiles'); if(!grid) return;
+  if(q) setInvSub('profiles'); // jump to profiles when searching
   if(!q){ renderProfilesGrid(); return; }
   const profs=investorsData.profiles||{}; const roster=(investorsData.superInvestors||{}).roster||[];
   const profHits=Object.keys(profs).filter(k=>profs[k].name.toLowerCase().includes(q));
