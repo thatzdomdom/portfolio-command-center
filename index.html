@@ -153,6 +153,10 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 .rot-tick{text-align:center;font-size:12px;font-weight:800;}
 .aistack-row{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:8px;margin-bottom:8px;}
 .aistack-num{font-size:18px;font-weight:800;opacity:.5;width:28px;flex-shrink:0;}
+.conv-row{display:flex;align-items:center;gap:12px;padding:11px 2px;border-bottom:1px solid var(--border);cursor:pointer;}
+.conv-row:last-child{border-bottom:none;}
+.conv-row:hover{background:rgba(245,158,11,.05);}
+.conv-rank{width:26px;height:26px;border-radius:50%;background:var(--surf2);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0;}
 </style>
 </head>
 <body>
@@ -217,6 +221,11 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
       <div class="perf-cell"><div class="pp-label">YTD</div><div class="pp-val" id="pp-ytd">—</div></div>
       <div class="perf-cell"><div class="pp-label">1Y</div><div class="pp-val" id="pp-1y">—</div></div>
     </div>
+  </div>
+  <div class="card" style="margin-bottom:16px;">
+    <div class="sh">🏆 Top Conviction Plays — most new positions opened</div>
+    <p style="font-size:12px;color:var(--muted);margin:-4px 0 8px;" id="conviction-sub">Stocks the most super investors newly bought last quarter. Tap to see who &amp; when.</p>
+    <div id="conviction-body"><div class="ld"><span class="spin"></span>Loading…</div></div>
   </div>
   <div class="card" style="margin-bottom:16px;">
     <div class="sh">🎯 Suggested Trades — smart-money consensus</div>
@@ -362,7 +371,11 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v24 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v25 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
+</div>
+
+<div class="overlay" id="cp-overlay" onclick="closeCP(event)">
+  <div class="modal"><button class="modal-close-btn" onclick="closeCP()">✕</button><div id="cp-content"></div></div>
 </div>
 
 <div class="overlay" id="modal-overlay" onclick="closeModal(event)">
@@ -898,6 +911,43 @@ function showTab(id,b){document.querySelectorAll('.panel').forEach(p=>p.classLis
   if(id==='smart'&&!intelLoaded) loadIntel();
   if(id==='investors'&&!investorsLoaded) loadInvestors();}
 
+// ── Conviction Plays (Overview) + drill-down ──
+function renderConviction(){
+  const box=el('conviction-body'); if(!box) return;
+  const cp=investorsData&&investorsData.convictionPlays;
+  if(!cp||!cp.plays||!cp.plays.length){box.innerHTML='<div class="small" style="color:var(--muted)">Conviction data pending the next agent refresh.</div>';return;}
+  if(el('conviction-sub')&&cp.note) el('conviction-sub').textContent=cp.note;
+  box.innerHTML=cp.plays.slice(0,5).map((p,i)=>{const held=heldMatch(p.ticker);const names=(p.investors||[]).slice(0,2).map(x=>x.name+(x.manager?` (${x.manager})`:'')).join(' · ');return `<div class="conv-row" onclick="openCP('${p.ticker}')">
+    <div class="conv-rank">${i+1}</div>
+    <div style="flex:1;min-width:0">
+      <div><span class="ticker-badge">${p.ticker}</span>${held?' 🟡':''} <span class="small" style="color:var(--muted)">${p.name||''}</span></div>
+      <div style="color:var(--green);font-weight:700;font-size:13px;margin-top:2px">${p.count} investors opened new positions</div>
+      <div class="small" style="color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${names}${p.count>2?` +${p.count-2} more`:''}</div>
+    </div>
+    <div style="color:var(--accent);font-size:20px;flex-shrink:0">›</div>
+  </div>`;}).join('');
+}
+function openCP(ticker){
+  const cp=investorsData.convictionPlays; const p=(cp.plays||[]).find(x=>x.ticker===ticker); if(!p) return;
+  el('cp-content').innerHTML=`<div class="modal-ticker">${p.ticker} <span class="pill pos" style="font-size:11px;vertical-align:middle">${p.action||'New'}</span></div><div class="modal-name">${p.name||''} · ${p.count} super investors opened new positions · ${cp.quarter||''}</div>${p.context?`<p style="font-size:13px;color:var(--muted);margin:10px 0 4px">${p.context}</p>`:''}<div class="small" style="color:var(--muted);margin-bottom:12px">Each investor who opened a position — newest 13F filings:</div>`
+   +(p.investors||[]).map(inv=>`<div class="card" style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><div><strong>${inv.name}</strong>${inv.manager?` <span class="small" style="color:var(--muted)">${inv.manager}</span>`:''}<div class="small" style="color:var(--muted);margin-top:3px"><span class="ticker-badge">${p.ticker}</span></div></div><span class="pill pos">New Position</span></div>
+     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px 12px;margin-top:12px">
+       <div><div class="gl-sub">Shares changed</div><div style="font-weight:700;color:var(--green)">${inv.sharesChanged||'—'}</div></div>
+       <div><div class="gl-sub">Trade value</div><div style="font-weight:700;color:var(--green)">${inv.tradeValue||'—'}</div></div>
+       <div><div class="gl-sub">Position change</div><div style="font-weight:700;color:var(--green)">New</div></div>
+       <div><div class="gl-sub">Position value</div><div style="font-weight:700">${inv.positionValue||'—'}</div></div>
+       <div><div class="gl-sub">Buy price</div><div style="font-weight:700">${inv.buyPrice||'—'}</div></div>
+       <div><div class="gl-sub">Filed</div><div style="font-weight:700">${inv.filed||'—'}</div></div>
+     </div></div>`).join('')+(p.count>(p.investors||[]).length?`<div class="small" style="color:var(--muted);text-align:center;padding:8px">+${p.count-(p.investors||[]).length} more investors — detail added by the daily agent</div>`:'');
+  el('cp-overlay').classList.add('open');
+}
+function closeCP(e){if(e&&e.target!==el('cp-overlay'))return;el('cp-overlay').classList.remove('open');}
+function openSources(key){
+  const p=investorsData.profiles[key]; const groups=p.sourceGroups||[];
+  el('cp-content').innerHTML=`<div class="modal-ticker" style="font-size:24px">All Data Sources</div><div class="modal-name">${p.name} · public disclosures &amp; named news outlets</div>`+groups.map(g=>`<div style="margin-top:18px"><div class="sh" style="color:var(--blue);margin-bottom:4px">${g.title}</div>`+(g.links||[]).map(l=>`<a href="${l.url}" target="_blank" style="display:block;padding:9px 0;border-bottom:1px solid var(--border);text-decoration:none"><div style="font-weight:700;font-size:13px">${l.name} ↗</div><div class="small" style="color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${l.url}</div></a>`).join('')+`</div>`).join('');
+  el('cp-overlay').classList.add('open');
+}
+
 // ── Super Investor Profiles (data/investors.json) ──
 let investorsLoaded=false, investorsData=null, profTab='topBuys';
 const PROF_LBL={topBuys:'Top Buys',preNews:'Pre-News Trades',policyMoves:'Policy Moves',rotation:'Rotation',aiStack:'AI Stack'};
@@ -906,7 +956,7 @@ async function loadInvestors(){
   try{
     const r=await fetch('data/investors.json?cb='+Date.now());
     if(!r.ok) throw new Error('pending');
-    investorsData=await r.json(); investorsLoaded=true; renderInvestorList();
+    investorsData=await r.json(); investorsLoaded=true; renderInvestorList(); renderConviction();
   }catch(e){ el('investors-body').innerHTML='<div class="card" style="text-align:center;color:var(--muted)"><p style="font-size:14px;margin-bottom:6px;">⏳ Investor profiles pending.</p><p style="font-size:12px;">The scheduled agent will publish detailed super-investor profiles here.</p></div>'; }
 }
 function renderInvestorList(){
@@ -919,7 +969,7 @@ function openProfile(key){
   const tabs=Object.keys(PROF_LBL).filter(k=>p[k]&&(Array.isArray(p[k])?p[k].length:Object.keys(p[k]).length));
   profTab=tabs[0]||'topBuys';
   let html=`<button class="btn" onclick="renderInvestorList()" style="margin-bottom:12px">← All investors</button>`;
-  html+=`<div class="prof-hero"><div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start"><div><div class="prof-name">${p.name}</div><div class="prof-sub">${p.subtitle||''}</div></div>${p.source?`<a href="${p.source}" target="_blank" class="btn" style="flex-shrink:0;text-decoration:none">↗ Source</a>`:''}</div>${p.blurb?`<div class="prof-blurb">${p.blurb}</div>`:''}`;
+  html+=`<div class="prof-hero"><div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start"><div><div class="prof-name">${p.name}</div><div class="prof-sub">${p.subtitle||''}</div></div>${(p.sourceGroups&&p.sourceGroups.length)?`<button class="btn" style="flex-shrink:0" onclick="openSources('${key}')">↗ Source</button>`:(p.source?`<a href="${p.source}" target="_blank" class="btn" style="flex-shrink:0;text-decoration:none">↗ Source</a>`:'')}</div>${p.blurb?`<div class="prof-blurb">${p.blurb}</div>`:''}`;
   if(p.glance){const g=p.glance;html+=`<div class="glance"><div><div class="gl-lbl">Total transactions</div><div class="gl-val">${g.transactions||'—'}</div><div class="gl-sub">${g.transactionsSub||''}</div></div><div><div class="gl-lbl">Activity value</div><div class="gl-val">${g.activity||'—'}</div><div class="gl-sub">${g.activitySub||''}</div></div><div><div class="gl-lbl">Purchases</div><div class="gl-val blue">${g.purchases||'—'}</div><div class="gl-sub">${g.purchasesSub||''}</div></div></div>${g.note?`<div class="small" style="color:var(--muted);margin-top:8px;text-align:center">ⓘ ${g.note}</div>`:''}`;}
   html+=`</div><div class="prof-tabs" id="prof-tabs">${tabs.map(k=>`<button class="prof-tab${k===profTab?' active':''}" onclick="setProfTab('${key}','${k}')">${PROF_LBL[k]}</button>`).join('')}</div><div id="prof-section"></div>`;
   el('investors-body').innerHTML=html; renderProfSection(key);
@@ -1067,7 +1117,7 @@ async function loadReddit(force){
 function el(id){return document.getElementById(id);}
 function setStatus(c,m){el('status-text').innerHTML=`<span class="dot ${c}"></span>${m}`;}
 let _rzT; window.addEventListener('resize',()=>{clearTimeout(_rzT);_rzT=setTimeout(renderAll,200);});
-if(!GATE_ON||sessionStorage.getItem(SESSION_KEY)==='1'){renderAll();setTimeout(loadAll,300);setTimeout(loadIntel,600);}
+if(!GATE_ON||sessionStorage.getItem(SESSION_KEY)==='1'){renderAll();setTimeout(loadAll,300);setTimeout(loadIntel,600);setTimeout(loadInvestors,900);}
 </script>
 </body>
 </html>
