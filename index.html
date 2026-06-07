@@ -384,7 +384,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v34 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v35 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="cp-overlay" onclick="closeCP(event)">
@@ -1065,7 +1065,8 @@ function profCardHTML(k,p){const g=p.glance||{};return `<div class="inv-card" on
 function renderProfilesGrid(){const grid=el('inv-profiles'); if(!grid) return; const profs=investorsData?.profiles||{}; grid.innerHTML=Object.keys(profs).map(k=>profCardHTML(k,profs[k])).join('')||'<div class="small" style="color:var(--muted)">No profiles yet.</div>';}
 function renderInvestorsHub(){
   const box=el('investors-body'); if(!box) return; const si=investorsData.superInvestors||{};
-  box.innerHTML=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div class="sh" style="margin:0">🐋 Super Investors</div><button class="btn" style="padding:2px 9px;font-size:14px" onclick="openCurated()" title="About">ⓘ</button>${si.count?`<span class="small" style="color:var(--muted)">${si.count} tracked</span>`:''}</div>
+  const siN=(si.roster&&si.roster.length)||si.count||0;
+  box.innerHTML=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div class="sh" style="margin:0">🐋 Super Investors</div><button class="btn" style="padding:2px 9px;font-size:14px" onclick="openCurated()" title="About">ⓘ</button>${siN?`<span class="small" style="color:var(--muted)">${siN} tracked</span>`:''}</div>
   <input class="search-input" id="inv-search" placeholder="Search super investors…" oninput="filterRoster(this.value)" style="margin-bottom:14px;width:100%">
   <div class="card" style="margin-bottom:16px"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><div class="sh" style="margin:0">⏱ Latest Notable Trades</div><select id="nt-filter" onchange="renderNotable(this.value)" style="background:var(--surf2);border:1px solid var(--border);color:var(--text);padding:4px 8px;border-radius:8px;font-size:12px;font-weight:700"><option>All</option><option>New Position</option><option>Added</option><option>Reduced</option><option>Exited</option></select></div><div id="notable-body" style="margin-top:10px"></div></div>
   <div class="card" style="margin-bottom:16px"><div class="sh">◔ Sector Capital Concentration</div><div id="sector-chart"></div></div>
@@ -1096,7 +1097,9 @@ function renderSectorChart(){
 }
 function openCurated(){
   const si=investorsData.superInvestors||{};
-  el('cp-content').innerHTML=`<div style="text-align:center;font-size:34px;color:var(--blue)">ⓘ</div><div class="modal-ticker" style="font-size:22px;text-align:center;color:var(--blue);margin-top:4px">Curated Super Investors</div><div style="font-size:14px;line-height:1.7;margin-top:14px;white-space:pre-wrap">${si.definition||''}</div>${(si.roster&&si.roster.length)?`<div class="sh" style="margin-top:16px">Tracked funds (${si.roster.length})</div><div style="display:flex;flex-wrap:wrap;gap:6px">${si.roster.map(r=>`<span class="chip">${r.name}${r.manager?` · ${r.manager}`:''}</span>`).join('')}</div>`:''}`;
+  const siN=(si.roster&&si.roster.length)||si.count||0;
+  const def=(si.definition||'').replace(/\{count\}/g,siN);
+  el('cp-content').innerHTML=`<div style="text-align:center;font-size:34px;color:var(--blue)">ⓘ</div><div class="modal-ticker" style="font-size:22px;text-align:center;color:var(--blue);margin-top:4px">Curated Super Investors</div><div style="font-size:14px;line-height:1.7;margin-top:14px;white-space:pre-wrap">${def}</div>${(si.roster&&si.roster.length)?`<div class="sh" style="margin-top:16px">Tracked funds (${si.roster.length})</div><div style="display:flex;flex-wrap:wrap;gap:6px">${si.roster.map(r=>`<span class="chip">${r.name}${r.manager?` · ${r.manager}`:''}</span>`).join('')}</div>`:''}`;
   el('cp-overlay').classList.add('open');
 }
 function filterRoster(q){ q=(q||'').toLowerCase().trim(); const grid=el('inv-profiles'); if(!grid) return;
