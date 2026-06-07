@@ -371,7 +371,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v27 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v28 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="cp-overlay" onclick="closeCP(event)">
@@ -1001,15 +1001,16 @@ function renderConviction(){
 function openCP(ticker){
   const cp=investorsData.convictionPlays; const p=(cp.plays||[]).find(x=>x.ticker===ticker); if(!p) return;
   el('cp-content').innerHTML=`<div class="modal-ticker">${p.ticker} <span class="pill pos" style="font-size:11px;vertical-align:middle">${p.action||'New'}</span></div><div class="modal-name">${p.name||''} · ${p.count} super investors opened new positions · ${cp.quarter||''}</div>${p.context?`<p style="font-size:13px;color:var(--muted);margin:10px 0 4px">${p.context}</p>`:''}<div class="small" style="color:var(--muted);margin-bottom:12px">Each investor who opened a position — newest 13F filings:</div>`
-   +(p.investors||[]).map(inv=>`<div class="card" style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><div><strong>${inv.name}</strong>${inv.manager?` <span class="small" style="color:var(--muted)">${inv.manager}</span>`:''}<div class="small" style="color:var(--muted);margin-top:3px">${tkr(p.ticker)}</div></div><span class="pill pos">New Position</span></div>
+   +(p.investors||[]).map(inv=>{const isOpt=/option/i.test(inv.type||'');const priceLbl=isOpt?'Avg price':'Buy price';const price=inv.buyPrice||inv.avgPrice||'—';return `<div class="card" style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><div><strong>${inv.name}</strong>${inv.manager?` <span class="small" style="color:var(--muted)">${inv.manager}</span>`:''}<div class="small" style="color:var(--muted);margin-top:3px">${tkr(p.ticker)}</div></div><span class="pill pos">New Position</span></div>
      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px 12px;margin-top:12px">
        <div><div class="gl-sub">Shares changed</div><div style="font-weight:700;color:var(--green)">${inv.sharesChanged||'—'}</div></div>
        <div><div class="gl-sub">Trade value</div><div style="font-weight:700;color:var(--green)">${inv.tradeValue||'—'}</div></div>
        <div><div class="gl-sub">Position change</div><div style="font-weight:700;color:var(--green)">New</div></div>
        <div><div class="gl-sub">Position value</div><div style="font-weight:700">${inv.positionValue||'—'}</div></div>
-       <div><div class="gl-sub">Buy price</div><div style="font-weight:700">${inv.buyPrice||'—'}</div></div>
+       <div><div class="gl-sub">${priceLbl}</div><div style="font-weight:700">${price}</div></div>
        <div><div class="gl-sub">Filed</div><div style="font-weight:700">${inv.filed||'—'}</div></div>
-     </div></div>`).join('')+(p.count>(p.investors||[]).length?`<div class="small" style="color:var(--muted);text-align:center;padding:8px">+${p.count-(p.investors||[]).length} more investors — detail added by the daily agent</div>`:'');
+     </div>
+     <div style="display:flex;justify-content:space-between;margin-top:10px;padding-top:8px;border-top:1px solid var(--border);color:var(--muted);font-size:11px"><span>${inv.quarter||cp.quarter||''}</span><span>${inv.type||'Stock'}</span></div></div>`;}).join('')+(p.count>(new Set((p.investors||[]).map(x=>x.name)).size)?`<div class="small" style="color:var(--muted);text-align:center;padding:8px">+${p.count-(new Set((p.investors||[]).map(x=>x.name)).size)} more investors — full detail on the next Dataroma refresh</div>`:'');
   el('cp-overlay').classList.add('open');
 }
 function closeCP(e){if(e&&e.target!==el('cp-overlay'))return;el('cp-overlay').classList.remove('open');}
