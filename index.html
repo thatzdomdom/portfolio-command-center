@@ -384,7 +384,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v38 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v40 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="cp-overlay" onclick="closeCP(event)">
@@ -1140,17 +1140,26 @@ function renderProfSection(key){
   const p=investorsData.profiles[key]; const box=el('prof-section'); if(!box) return;
   if(profTab==='holdings'){
     const hold=(p.holdings||[]).slice(); const brk=p.breakdown||{};
+    const pf=p.portfolio;
     const secs=(brk.bySector&&brk.bySector.length)?brk.bySector.slice():computeSectors(hold);
     secs.forEach((s,i)=>{ if(!s.color) s.color=COLORS[i%COLORS.length]; });
     const assets=(brk.byAsset||[]);
     const maxw=Math.max(...hold.map(_holdWeight),1);
-    box.innerHTML=`<div class="sh">Portfolio breakdown</div>
-      <div class="card" style="margin-bottom:14px"><div class="donut-section"><div>${donutSVG(secs.slice(0,11),150)}</div><div class="legend">${secs.slice(0,11).map(s=>`<div class="legend-row"><span class="leg-dot" style="background:${s.color}"></span><span class="leg-name">${s.name}</span><span class="leg-pct">${s.pct.toFixed(1)}%</span></div>`).join('')}</div></div>
+    let html='';
+    if(pf&&(pf.categories||[]).length){
+      const cats=pf.categories.slice(); cats.forEach((c,i)=>{ if(!c.color) c.color=COLORS[i%COLORS.length]; });
+      html+=`<div class="card" style="margin-bottom:14px;text-align:center;border-left:4px solid var(--accent)"><div class="gl-sub" style="text-transform:uppercase;letter-spacing:.06em">Total portfolio value (est.)</div><div style="font-size:30px;font-weight:800;letter-spacing:-.02em">${pf.totalValue||'—'}</div>${pf.totalRange?`<div class="small" style="color:var(--muted)">range ${pf.totalRange}${pf.asOf?` · ${pf.asOf}`:''}</div>`:''}</div>`;
+      html+=`<div class="sh">Total portfolio by category</div><div class="card" style="margin-bottom:14px"><div class="donut-section"><div>${donutSVG(cats,150)}</div><div class="legend">${cats.map(c=>`<div class="legend-row"><span class="leg-dot" style="background:${c.color}"></span><span class="leg-name">${c.name}</span><span class="leg-pct">${c.pct.toFixed(1)}%${c.value?` · ${c.value}`:''}</span></div>`).join('')}</div></div></div>`;
+      html+=`<div class="sh">Investments — actively-traded securities${pf.securitiesBookValue?` · ${pf.securitiesBookValue}`:''}</div><p class="small" style="color:var(--muted);margin:-4px 0 10px">The disclosed stock / ETF / bond / crypto book he actively trades — a small slice of total net worth.</p>`;
+    } else { html+=`<div class="sh">Portfolio breakdown</div>`; }
+    html+=`<div class="card" style="margin-bottom:14px"><div class="donut-section"><div>${donutSVG(secs.slice(0,11),150)}</div><div class="legend">${secs.slice(0,11).map(s=>`<div class="legend-row"><span class="leg-dot" style="background:${s.color}"></span><span class="leg-name">${s.name}</span><span class="leg-pct">${s.pct.toFixed(1)}%</span></div>`).join('')}</div></div>
       ${assets.length?`<div style="margin-top:14px"><div class="gl-sub" style="margin-bottom:6px">By asset class</div>${assets.map((a,i)=>`<div style="display:grid;grid-template-columns:130px 1fr 54px;gap:8px;align-items:center;padding:4px 0"><span style="font-size:12px">${a.name}</span><div style="background:var(--surf2);height:6px;border-radius:3px;overflow:hidden"><div style="height:100%;border-radius:3px;background:${COLORS[i%COLORS.length]};width:${a.pct.toFixed(0)}%"></div></div><span class="small" style="text-align:right;color:var(--muted)">${a.pct.toFixed(1)}%</span></div>`).join('')}</div>`:''}</div>
       <div class="sh">Largest positions</div>
-      <p class="small" style="color:var(--muted);margin:-4px 0 10px">Top disclosed holdings (midpoint estimates). Tap a ticker for its chart.</p>
+      <p class="small" style="color:var(--muted);margin:-4px 0 10px">Disclosed traded positions (range midpoints). Tap a ticker for its chart.</p>
       <div class="card">${hold.length?hold.map((h,i)=>{const w=_holdWeight(h);return `<div class="buybar"><div style="width:22px;color:var(--muted);font-weight:800;font-size:13px;text-align:center;flex-shrink:0">${i+1}</div><div style="flex:1;min-width:0"><span class="bb-tick" style="cursor:pointer" onclick="openTicker('${h.ticker}')">${h.ticker}</span><span class="bb-name">${h.name||''}${h.sector?` · ${h.sector}`:''}</span><div class="buybar-track"><div style="width:${(w/maxw*100).toFixed(0)}%;background:${secs.find(s=>s.name===h.sector)?.color||'var(--accent)'}"></div></div></div><div class="bb-val" style="color:var(--text)">${h.value||(h.weightPct?h.weightPct.toFixed(1)+'%':'')}</div></div>`;}).join(''):'<div class="small" style="color:var(--muted)">Holdings pending the next refresh.</div>'}</div>
-      ${brk.note?`<div class="small" style="color:var(--muted);margin-top:10px">${brk.note}</div>`:''}`;
+      ${(pf&&pf.note)?`<div class="small" style="color:var(--muted);margin-top:10px">${pf.note}</div>`:''}
+      ${brk.note?`<div class="small" style="color:var(--muted);margin-top:8px">${brk.note}</div>`:''}`;
+    box.innerHTML=html;
   } else if(profTab==='topBuys'){
     const arr=p.topBuys||[]; const max=Math.max(...arr.map(x=>x.value),1);
     box.innerHTML='<div class="sh">Where the new money went</div><p class="small" style="color:var(--muted);margin:-4px 0 10px">Largest net new positions — purchases minus sales, midpoint estimates ($M).</p><div class="card">'+arr.map(x=>`<div class="buybar"><div style="flex:1"><span class="bb-tick" style="cursor:pointer" onclick="openTicker('${x.ticker}')">${x.ticker}</span><span class="bb-name">${x.name||''}</span><div class="buybar-track"><div style="width:${(x.value/max*100).toFixed(0)}%"></div></div></div><div class="bb-val">+$${x.value.toFixed(2)}M</div></div>`).join('')+'</div>';
