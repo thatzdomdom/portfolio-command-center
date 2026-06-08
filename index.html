@@ -384,7 +384,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v36 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v37 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="cp-overlay" onclick="closeCP(event)">
@@ -1050,7 +1050,11 @@ function openSources(key){
 
 // ── Super Investor Profiles (data/investors.json) ──
 let investorsLoaded=false, investorsData=null, profTab='topBuys';
-const PROF_LBL={topBuys:'Top Buys',preNews:'Pre-News Trades',policyMoves:'Policy Moves',rotation:'Rotation',aiStack:'AI Stack'};
+const PROF_LBL={holdings:'Holdings',topBuys:'Top Buys',preNews:'Pre-News Trades',policyMoves:'Policy Moves',rotation:'Rotation',aiStack:'AI Stack'};
+function _pv(v){const s=String(v||'').replace(/[$,+~]/g,'').trim();const u=s.slice(-1);const m=u==='B'?1e9:u==='M'?1e6:u==='K'?1e3:1;const num=parseFloat(s);return isNaN(num)?0:num*m;}
+function _holdWeight(h){return (typeof h.weightPct==='number'&&h.weightPct>0)?h.weightPct:_pv(h.value);}
+function computeSectors(hold){const g={};hold.forEach(h=>{const s=h.sector||'Other';g[s]=(g[s]||0)+_holdWeight(h);});const tot=Object.values(g).reduce((a,b)=>a+b,0)||1;return Object.entries(g).map(([name,v])=>({name,pct:v/tot*100})).sort((a,b)=>b.pct-a.pct);}
+function donutSVG(items,size){size=size||150;const cx=size/2,cy=size/2,r=size/2-6,inner=size/2-26;const tot=items.reduce((s,x)=>s+(x.pct||0),0)||1;let ang=-Math.PI/2,paths='';items.forEach((it,i)=>{const f=(it.pct||0)/tot,sw=f*Math.PI*2;const x1=cx+r*Math.cos(ang),y1=cy+r*Math.sin(ang);ang+=sw;const x2=cx+r*Math.cos(ang),y2=cy+r*Math.sin(ang);const ix1=cx+inner*Math.cos(ang-sw),iy1=cy+inner*Math.sin(ang-sw),ix2=cx+inner*Math.cos(ang),iy2=cy+inner*Math.sin(ang);const lg=sw>Math.PI?1:0,c=it.color||COLORS[i%COLORS.length];paths+=`<path d="M${ix1},${iy1}L${x1},${y1}A${r},${r} 0 ${lg},1 ${x2},${y2}L${ix2},${iy2}A${inner},${inner} 0 ${lg},0 ${ix1},${iy1}" fill="${c}"/>`;});return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">${paths}<circle cx="${cx}" cy="${cy}" r="${inner}" fill="var(--surf)"/></svg>`;}
 async function loadInvestors(){
   if(investorsLoaded) return;
   try{
@@ -1134,7 +1138,20 @@ function openProfile(key){
 function setProfTab(key,t){profTab=t;document.querySelectorAll('#prof-tabs .prof-tab').forEach(b=>b.classList.toggle('active',b.textContent.trim()===PROF_LBL[t]));renderProfSection(key);}
 function renderProfSection(key){
   const p=investorsData.profiles[key]; const box=el('prof-section'); if(!box) return;
-  if(profTab==='topBuys'){
+  if(profTab==='holdings'){
+    const hold=(p.holdings||[]).slice(); const brk=p.breakdown||{};
+    const secs=(brk.bySector&&brk.bySector.length)?brk.bySector.slice():computeSectors(hold);
+    secs.forEach((s,i)=>{ if(!s.color) s.color=COLORS[i%COLORS.length]; });
+    const assets=(brk.byAsset||[]);
+    const maxw=Math.max(...hold.map(_holdWeight),1);
+    box.innerHTML=`<div class="sh">Portfolio breakdown</div>
+      <div class="card" style="margin-bottom:14px"><div class="donut-section"><div>${donutSVG(secs.slice(0,11),150)}</div><div class="legend">${secs.slice(0,11).map(s=>`<div class="legend-row"><span class="leg-dot" style="background:${s.color}"></span><span class="leg-name">${s.name}</span><span class="leg-pct">${s.pct.toFixed(1)}%</span></div>`).join('')}</div></div>
+      ${assets.length?`<div style="margin-top:14px"><div class="gl-sub" style="margin-bottom:6px">By asset class</div>${assets.map((a,i)=>`<div style="display:grid;grid-template-columns:130px 1fr 54px;gap:8px;align-items:center;padding:4px 0"><span style="font-size:12px">${a.name}</span><div style="background:var(--surf2);height:6px;border-radius:3px;overflow:hidden"><div style="height:100%;border-radius:3px;background:${COLORS[i%COLORS.length]};width:${a.pct.toFixed(0)}%"></div></div><span class="small" style="text-align:right;color:var(--muted)">${a.pct.toFixed(1)}%</span></div>`).join('')}</div>`:''}</div>
+      <div class="sh">Largest positions</div>
+      <p class="small" style="color:var(--muted);margin:-4px 0 10px">Top disclosed holdings (midpoint estimates). Tap a ticker for its chart.</p>
+      <div class="card">${hold.length?hold.map((h,i)=>{const w=_holdWeight(h);return `<div class="buybar"><div style="width:22px;color:var(--muted);font-weight:800;font-size:13px;text-align:center;flex-shrink:0">${i+1}</div><div style="flex:1;min-width:0"><span class="bb-tick" style="cursor:pointer" onclick="openTicker('${h.ticker}')">${h.ticker}</span><span class="bb-name">${h.name||''}${h.sector?` · ${h.sector}`:''}</span><div class="buybar-track"><div style="width:${(w/maxw*100).toFixed(0)}%;background:${secs.find(s=>s.name===h.sector)?.color||'var(--accent)'}"></div></div></div><div class="bb-val" style="color:var(--text)">${h.value||(h.weightPct?h.weightPct.toFixed(1)+'%':'')}</div></div>`;}).join(''):'<div class="small" style="color:var(--muted)">Holdings pending the next refresh.</div>'}</div>
+      ${brk.note?`<div class="small" style="color:var(--muted);margin-top:10px">${brk.note}</div>`:''}`;
+  } else if(profTab==='topBuys'){
     const arr=p.topBuys||[]; const max=Math.max(...arr.map(x=>x.value),1);
     box.innerHTML='<div class="sh">Where the new money went</div><p class="small" style="color:var(--muted);margin:-4px 0 10px">Largest net new positions — purchases minus sales, midpoint estimates ($M).</p><div class="card">'+arr.map(x=>`<div class="buybar"><div style="flex:1"><span class="bb-tick" style="cursor:pointer" onclick="openTicker('${x.ticker}')">${x.ticker}</span><span class="bb-name">${x.name||''}</span><div class="buybar-track"><div style="width:${(x.value/max*100).toFixed(0)}%"></div></div></div><div class="bb-val">+$${x.value.toFixed(2)}M</div></div>`).join('')+'</div>';
   } else if(profTab==='preNews'){
