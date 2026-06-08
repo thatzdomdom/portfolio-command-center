@@ -198,6 +198,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="nav">
   <button class="nav-btn active" onclick="showTab('overview',this)">Overview</button>
+  <button class="nav-btn" onclick="showTab('opportunity',this)">🎯 Opportunity Matrix</button>
   <button class="nav-btn" onclick="showTab('smart',this)">💼 Smart Money</button>
   <button class="nav-btn" onclick="showTab('investors',this)">🐋 Investors</button>
   <button class="nav-btn" onclick="showTab('reddit',this)">🔥 Reddit Trends</button>
@@ -248,6 +249,43 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
   <div class="grid2">
     <div class="card"><div class="sh">Largest Listed Holdings (live-priced)</div><table><thead><tr><th>Name</th><th class="r">Value SGD</th><th class="r">1M</th><th class="r">% NW</th></tr></thead><tbody id="top-holdings"></tbody></table></div>
     <div class="card"><div class="sh">Listed Movers (1D)</div><table><thead><tr><th>Name</th><th class="r">Price</th><th class="r">1D</th></tr></thead><tbody id="movers"></tbody></table></div>
+  </div>
+</div>
+
+<div class="panel" id="panel-opportunity">
+  <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px;">
+    <div style="font-size:18px;font-weight:800;letter-spacing:-.02em;">🎯 Opportunity Matrix</div>
+    <div style="font-size:12px;color:var(--muted);">Systematic, probability-first. Directional odds &amp; expected value across horizons — built to raise return <em>and</em> cut drawdown.</div>
+  </div>
+  <div id="opp-regime" style="margin-bottom:14px;"></div>
+  <div id="opp-status" class="small" style="color:var(--muted);margin-bottom:12px;"></div>
+  <div id="opp-alerts" style="margin-bottom:16px;"></div>
+  <div class="card" style="margin-bottom:16px;">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;">
+      <div class="sh" style="margin:0;">The Matrix — every instrument scored</div>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:6px;">
+        <span class="small" style="color:var(--muted)">horizon:</span>
+        <select id="opp-horizon" onchange="setOppHorizon(this.value)" style="background:var(--surf2);border:1px solid var(--border);color:var(--text);padding:5px 11px;border-radius:8px;font-size:12px;font-weight:800;cursor:pointer">
+          <option value="1m">1 Month</option>
+          <option value="3m" selected>3 Months</option>
+          <option value="12m">12 Months</option>
+        </select>
+      </div>
+    </div>
+    <div class="cp-filters" id="opp-filters" style="margin-bottom:10px;">
+      <button class="cpf active" data-g="all" onclick="setOppGroup('all')">All</button>
+      <button class="cpf" data-g="Equity" onclick="setOppGroup('Equity')">Equities/Regions</button>
+      <button class="cpf" data-g="Factor" onclick="setOppGroup('Factor')">Factors/Sectors</button>
+      <button class="cpf" data-g="Commodity" onclick="setOppGroup('Commodity')">Commodities</button>
+      <button class="cpf" data-g="Crypto" onclick="setOppGroup('Crypto')">Crypto</button>
+      <button class="cpf" data-g="Bond" onclick="setOppGroup('Bond')">Bonds/Rates</button>
+      <button class="cpf" data-g="buys" onclick="setOppGroup('buys')">★ Buy-rated only</button>
+    </div>
+    <div class="tbl-wrap"><div id="opp-matrix"><div class="ld"><span class="spin"></span>Loading market universe…</div></div></div>
+  </div>
+  <div class="card" style="margin-bottom:16px;">
+    <div class="sh">How the model works — methodology</div>
+    <div id="opp-method" style="font-size:12.5px;line-height:1.75;color:var(--text)"></div>
   </div>
 </div>
 
@@ -384,11 +422,15 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v40 (no password) · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v41 · 🎯 Opportunity Matrix · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="cp-overlay" onclick="closeCP(event)">
   <div class="modal"><button class="modal-close-btn" onclick="closeCP()">✕</button><div id="cp-content"></div></div>
+</div>
+
+<div class="overlay" id="opp-overlay" onclick="closeOpp(event)">
+  <div class="modal"><button class="modal-close-btn" onclick="closeOpp()">✕</button><div id="opp-content"></div></div>
 </div>
 
 <div class="overlay" id="modal-overlay" onclick="closeModal(event)">
@@ -993,7 +1035,8 @@ function setChartPeriod(p){
 function showTab(id,b){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active'));el('panel-'+id).classList.add('active');b.classList.add('active');
   if(id==='reddit'&&!redditLoaded) loadReddit();
   if(id==='smart'&&!intelLoaded) loadIntel();
-  if(id==='investors'&&!investorsLoaded) loadInvestors();}
+  if(id==='investors'&&!investorsLoaded) loadInvestors();
+  if(id==='opportunity'&&!modelStarted) loadModel();}
 
 // ── Conviction Plays (Overview) + drill-down ──
 let convAction='New';
@@ -1297,6 +1340,299 @@ async function loadReddit(force){
     el('reddit-status').textContent=`Top ${rows.length} · ${redditFilter==='all-stocks'?'all investing subreddits':'r/wallstreetbets'} · updated ${new Date().toLocaleTimeString('en-SG')}`;
   }catch(e){ el('reddit-status').innerHTML=`<span style="color:var(--red)">Couldn't load Reddit feed (${e.message}). Tap ↻ to retry.</span>`; }
 }
+// ═══════════════════════════════════════════════════════════════════════
+// 🎯 OPPORTUNITY MATRIX — systematic, probability-first cross-asset model
+// Drift-diffusion (GBM) engine: a multi-factor drift estimate + realized
+// vol → calibrated P(up) and Expected Value per horizon, all from live data.
+// ═══════════════════════════════════════════════════════════════════════
+let modelStarted=false, modelLoaded=false, modelMacro=null, modelData={}, modelSmartSectors=null, MODEL_RESULTS=[], oppHorizon='3m', oppGroup='all', MACRO_TILT={};
+const GLABEL={Equity:'Equity / Region',Factor:'Factor / Sector',Commodity:'Commodity',Crypto:'Crypto',Bond:'Bond / Rate'};
+// universe — must stay aligned across app. {t ticker, yf, n name, g group, mc macro-class, prior μ-prior, cap drift-cap, fit portfolio-fit}
+const MODEL_UNIVERSE=[
+  // Equities / Regions
+  {t:'SPY',yf:'SPY',n:'S&P 500',g:'Equity',mc:'US Equity (broad)',prior:.07,cap:.20,fit:'diversifier'},
+  {t:'QQQ',yf:'QQQ',n:'Nasdaq 100',g:'Equity',mc:'US Equity (broad)',prior:.08,cap:.22,fit:'neutral'},
+  {t:'IWM',yf:'IWM',n:'US Small Caps',g:'Equity',mc:'US Equity (broad)',prior:.07,cap:.22,fit:'diversifier'},
+  {t:'EFA',yf:'EFA',n:'Intl Developed',g:'Equity',mc:'Intl Developed Equity',prior:.06,cap:.18,fit:'diversifier'},
+  {t:'EEM',yf:'EEM',n:'Emerging Markets',g:'Equity',mc:'EM Equity',prior:.07,cap:.22,fit:'overlap'},
+  {t:'VGK',yf:'VGK',n:'Europe',g:'Equity',mc:'Intl Developed Equity',prior:.06,cap:.18,fit:'diversifier'},
+  {t:'EWJ',yf:'EWJ',n:'Japan',g:'Equity',mc:'Intl Developed Equity',prior:.06,cap:.18,fit:'diversifier'},
+  {t:'INDA',yf:'INDA',n:'India',g:'Equity',mc:'EM Equity',prior:.08,cap:.24,fit:'diversifier'},
+  {t:'FXI',yf:'FXI',n:'China Large Cap',g:'Equity',mc:'EM Equity',prior:.07,cap:.28,fit:'overlap'},
+  // Factors / Sectors
+  {t:'MTUM',yf:'MTUM',n:'US Momentum',g:'Factor',mc:'US Equity (sectors/factors)',prior:.07,cap:.20,fit:'neutral'},
+  {t:'QUAL',yf:'QUAL',n:'US Quality',g:'Factor',mc:'US Equity (sectors/factors)',prior:.07,cap:.18,fit:'diversifier'},
+  {t:'USMV',yf:'USMV',n:'US Min Volatility',g:'Factor',mc:'US Equity (sectors/factors)',prior:.06,cap:.14,fit:'diversifier'},
+  {t:'VLUE',yf:'VLUE',n:'US Value',g:'Factor',mc:'US Equity (sectors/factors)',prior:.06,cap:.20,fit:'neutral'},
+  {t:'XLK',yf:'XLK',n:'Technology',g:'Factor',mc:'US Equity (sectors/factors)',prior:.08,cap:.24,fit:'overlap'},
+  {t:'SMH',yf:'SMH',n:'Semiconductors',g:'Factor',mc:'US Equity (sectors/factors)',prior:.10,cap:.32,fit:'overlap'},
+  {t:'XLF',yf:'XLF',n:'Financials',g:'Factor',mc:'US Equity (sectors/factors)',prior:.07,cap:.22,fit:'overlap'},
+  {t:'XLE',yf:'XLE',n:'Energy',g:'Factor',mc:'Broad commodities / energy',prior:.05,cap:.26,fit:'diversifier'},
+  {t:'XLV',yf:'XLV',n:'Healthcare',g:'Factor',mc:'US Equity (sectors/factors)',prior:.06,cap:.16,fit:'diversifier'},
+  {t:'XLI',yf:'XLI',n:'Industrials',g:'Factor',mc:'US Equity (sectors/factors)',prior:.07,cap:.20,fit:'neutral'},
+  {t:'XLU',yf:'XLU',n:'Utilities',g:'Factor',mc:'US Equity (sectors/factors)',prior:.05,cap:.16,fit:'diversifier'},
+  {t:'XLP',yf:'XLP',n:'Consumer Staples',g:'Factor',mc:'US Equity (sectors/factors)',prior:.05,cap:.14,fit:'diversifier'},
+  {t:'XLY',yf:'XLY',n:'Consumer Discretionary',g:'Factor',mc:'US Equity (sectors/factors)',prior:.07,cap:.22,fit:'neutral'},
+  // Commodities
+  {t:'GLD',yf:'GLD',n:'Gold',g:'Commodity',mc:'Gold',prior:.045,cap:.18,fit:'overlap'},
+  {t:'SLV',yf:'SLV',n:'Silver',g:'Commodity',mc:'Silver / PM miners',prior:.05,cap:.30,fit:'overlap'},
+  {t:'DBC',yf:'DBC',n:'Broad Commodities',g:'Commodity',mc:'Broad commodities / energy',prior:.03,cap:.16,fit:'diversifier'},
+  {t:'USO',yf:'USO',n:'Crude Oil',g:'Commodity',mc:'Broad commodities / energy',prior:.02,cap:.34,fit:'diversifier'},
+  {t:'URA',yf:'URA',n:'Uranium',g:'Commodity',mc:'Broad commodities / energy',prior:.08,cap:.40,fit:'diversifier'},
+  {t:'COPX',yf:'COPX',n:'Copper Miners',g:'Commodity',mc:'Broad commodities / energy',prior:.05,cap:.34,fit:'diversifier'},
+  {t:'DBA',yf:'DBA',n:'Agriculture',g:'Commodity',mc:'Broad commodities / energy',prior:.02,cap:.18,fit:'diversifier'},
+  // Crypto
+  {t:'BTC-USD',yf:'BTC-USD',n:'Bitcoin',g:'Crypto',mc:'Crypto',prior:.25,cap:.80,fit:'diversifier'},
+  {t:'ETH-USD',yf:'ETH-USD',n:'Ethereum',g:'Crypto',mc:'Crypto',prior:.25,cap:.90,fit:'neutral'},
+  {t:'SOL-USD',yf:'SOL-USD',n:'Solana',g:'Crypto',mc:'Crypto',prior:.30,cap:1.0,fit:'neutral'},
+  // Bonds / Rates / Credit
+  {t:'TLT',yf:'TLT',n:'20+yr Treasuries',g:'Bond',mc:'Long Duration / Treasuries',prior:.035,cap:.16,fit:'diversifier'},
+  {t:'IEF',yf:'IEF',n:'7-10yr Treasuries',g:'Bond',mc:'Short / Intermediate Treasuries',prior:.03,cap:.10,fit:'diversifier'},
+  {t:'SHY',yf:'SHY',n:'1-3yr Treasuries',g:'Bond',mc:'Short / Intermediate Treasuries',prior:.025,cap:.05,fit:'diversifier'},
+  {t:'TIP',yf:'TIP',n:'TIPS (inflation)',g:'Bond',mc:'Inflation-linked (TIPS)',prior:.03,cap:.10,fit:'diversifier'},
+  {t:'LQD',yf:'LQD',n:'IG Corp Bonds',g:'Bond',mc:'Credit (IG/HY/EM)',prior:.035,cap:.12,fit:'diversifier'},
+  {t:'HYG',yf:'HYG',n:'High Yield Credit',g:'Bond',mc:'Credit (IG/HY/EM)',prior:.05,cap:.14,fit:'neutral'},
+  {t:'EMB',yf:'EMB',n:'EM Bonds',g:'Bond',mc:'Credit (IG/HY/EM)',prior:.05,cap:.14,fit:'neutral'},
+  {t:'BND',yf:'BND',n:'US Total Bond',g:'Bond',mc:'Short / Intermediate Treasuries',prior:.03,cap:.08,fit:'diversifier'}
+];
+// sector→ETF map for smart-money (super-investor sector concentration) overlay
+const SMART_MAP={XLK:'Technology',SMH:'Technology',QQQ:'Technology',XLF:'Financial Services',XLE:'Energy',XLV:'Healthcare',XLI:'Industrials',XLY:'Consumer Cyclical',XLP:'Consumer Defensive',XLU:'Utilities',COPX:'Basic Materials'};
+const FIT_NOTE={diversifier:'Diversifier — low overlap with your SGX-REIT + precious-metals book; adding it tends to lower portfolio drawdown.',overlap:'Overlaps your existing book (precious metals / Asia / rate-sensitive) — adds to, rather than diversifies, your current risk.',neutral:'Roughly neutral correlation to your current book.'};
+const clip=(x,a,b)=>Math.max(a,Math.min(b,x));
+function normCdf(x){const t=1/(1+0.2316419*Math.abs(x)),d=0.3989422804014327*Math.exp(-x*x/2);let p=d*t*(0.31938153+t*(-0.356563782+t*(1.781477937+t*(-1.821255978+t*1.330274429))));return x>0?1-p:p;}
+const STANCE_TILT={'OW':0.02,'Overweight':0.02,'modest OW':0.012,'Neutral':0,'modest UW':-0.012,'UW':-0.02,'Underweight':-0.02};
+const coarseClass=g=>g==='Bond'?'Bonds':g==='Crypto'?'Crypto':g==='Commodity'?'Commodities':'Equity';
+function buildMacroTilt(){MACRO_TILT={};(modelMacro?.macro?.byAssetClass||[]).forEach(a=>{MACRO_TILT[a.assetClass]={tilt:(a.tilt!=null?a.tilt:(STANCE_TILT[a.stance]??0)),stance:a.stance};});}
+function macroTiltFor(cls){return MACRO_TILT[cls]?.tilt||0;}
+function macroStanceFor(cls){return MACRO_TILT[cls]?.stance||'—';}
+function smartTiltFor(u){if(!modelSmartSectors||!SMART_MAP[u.t])return 0;const s=(modelSmartSectors.sectors||[]).find(x=>x.name===SMART_MAP[u.t]);if(!s||!s.values||s.values.length<2)return 0;const v=s.values,qoq=v[v.length-1]-v[v.length-2];return clip(qoq*0.006,-0.02,0.02);}
+function analystTiltFor(t){const c=(modelMacro?.calls||[]).find(x=>x.ticker===t);if(!c)return 0;let tl=0;if(c.ev12!=null)tl+=clip(c.ev12*0.15,-0.03,0.03);if(c.pUp12!=null)tl+=clip((c.pUp12-0.5)*0.06,-0.02,0.02);return tl;}
+async function ensureSmart(){if(investorsData?.sectorConcentration){modelSmartSectors=investorsData.sectorConcentration;return;}try{const r=await fetch('data/investors.json?t='+Date.now());if(r.ok){modelSmartSectors=(await r.json()).sectorConcentration||null;}}catch(_){}}
+
+// — the engine: turn 2y of daily closes into directional probabilities & EV —
+function buildModel(u){
+  const rec=modelData[u.t]; if(!rec||!rec.hist||rec.hist.length<60) return null;
+  const C=rec.hist.map(h=>h.close), n=C.length, price=rec.price||C[n-1];
+  const sma=k=>{const s=C.slice(Math.max(0,n-k));return s.reduce((a,b)=>a+b,0)/s.length;};
+  const sma50=sma(50), sma200=sma(200);
+  const logR=[]; for(let i=1;i<n;i++) logR.push(Math.log(C[i]/C[i-1]));
+  const std=a=>{if(a.length<2)return 0;const m=a.reduce((x,y)=>x+y,0)/a.length;return Math.sqrt(a.reduce((s,v)=>s+(v-m)*(v-m),0)/(a.length-1));};
+  const vol90=std(logR.slice(-90))*Math.sqrt(252), vol252=std(logR.slice(-252))*Math.sqrt(252);
+  let sigma=0.6*vol90+0.4*vol252; if(!(sigma>0)) sigma=0.05; sigma=Math.max(sigma,0.04);
+  const dr=w=>{const a=logR.slice(-w);return a.length?a.reduce((x,y)=>x+y,0)/a.length*252:0;};
+  const drift252=dr(252), drift60=dr(60);
+  const px=k=>C[Math.max(0,n-1-k)];
+  const mom12_1=n>252?px(21)/px(252)-1:(n>40?price/px(Math.min(n-1,Math.floor(n*0.5)))-1:0);
+  // RSI(14)
+  let g=0,l=0; const w=Math.min(14,n-1); for(let i=n-w;i<n;i++){const ch=C[i]-C[i-1];if(ch>=0)g+=ch;else l-=ch;}
+  const avgL=l/w, rsi=avgL===0?100:100-100/(1+(g/w)/avgL);
+  // factor signals → composite trend-momentum score
+  const t200=clip((price/sma200-1)/0.12,-1,1), t50=clip((sma50/sma200-1)/0.06,-1,1), momS=clip(mom12_1/0.20,-1,1), mrS=clip((50-rsi)/25,-1,1);
+  const Slong=0.45*t200+0.30*momS+0.25*t50, Sshort=0.35*t200+0.20*momS+0.15*t50+0.30*mrS;
+  // drift tilts (macro regime stance + smart-money sector flow) — modest nudges to the statistical drift
+  const macroCls=coarseClass(u.g), macroTilt=macroTiltFor(macroCls), smartTilt=smartTiltFor(u), kappa=0.10;
+  let muLong=clip(0.30*drift252+0.50*u.prior+kappa*Slong+macroTilt+smartTilt,-u.cap,u.cap);
+  let muShort=clip(0.30*drift60+0.50*u.prior+kappa*Sshort+macroTilt+smartTilt,-u.cap,u.cap);
+  const horizon=(T,mu)=>{const mLog=(mu-0.5*sigma*sigma)*T,s=sigma*Math.sqrt(T);return{pUp:clip(normCdf(mLog/s),0.05,0.95),ev:Math.exp(mu*T)-1,q05:Math.exp(mLog-1.645*s)-1,q95:Math.exp(mLog+1.645*s)-1};};
+  // QUANT estimates (live statistics)
+  const q1=horizon(21/252,muShort), q3=horizon(63/252,muLong), q12=horizon(252/252,muLong);
+  // RESEARCH panel priors (CIO workflow) → blend at the probability level. Research weight scales with its confidence, capped so live stats stay primary.
+  const rc=(modelMacro?.calls||[]).find(c=>c.ticker===u.t)||null;
+  const rw=rc?clip(0.20+0.50*(rc.confidence??0.5),0.20,0.55):0;
+  const mix=(q,rp,re)=>rc?{pUp:clip((1-rw)*q.pUp+rw*rp,0.05,0.95),ev:(1-rw)*q.ev+rw*re,q05:q.q05,q95:q.q95}:q;
+  const h1=mix(q1,rc?.pUp1m,rc?.ev1m), h3=mix(q3,rc?.pUp3m,rc?.ev3m), h12=mix(q12,rc?.pUp12m,rc?.ev12m);
+  // risk
+  const w1y=C.slice(-252); let peak=w1y[0],maxDD=0; for(const c of w1y){if(c>peak)peak=c;const dd=c/peak-1;if(dd<maxDD)maxDD=dd;}
+  const hi52=Math.max(...w1y), curDD=price/hi52-1, sharpe=(muLong-0.04)/sigma;
+  const uptrend=price>sma200&&sma50>sma200, downtrend=price<sma200&&sma50<sma200;
+  // flags
+  const flags=[];
+  if(uptrend)flags.push({k:'up',t:'Uptrend'}); if(downtrend)flags.push({k:'down',t:'Downtrend'});
+  if(rsi>72)flags.push({k:'warn',t:'Overbought'}); if(rsi<28)flags.push({k:'good',t:'Oversold'});
+  if(sigma>=0.40)flags.push({k:'warn',t:'High vol'}); if(sigma<=0.12)flags.push({k:'good',t:'Low vol'});
+  if(curDD<=-0.20)flags.push({k:'warn',t:'Deep drawdown'});
+  // composite score (built to favour high-edge, high-Sharpe, trend-confirmed)
+  const raw=0.35*((h3.pUp-0.5)/0.5)+0.25*((h12.pUp-0.5)/0.5)+0.20*clip(sharpe,-1,1)+0.20*Slong;
+  const score=clip(50+50*raw,0,100);
+  let label; if(downtrend&&muLong<0)label='RISK-OFF'; else if(score>=70)label='STRONG BUY'; else if(score>=60)label='BUY'; else if(score>=53)label='ACCUMULATE'; else if(score>=47)label='HOLD'; else if(score>=40)label='REDUCE'; else label='AVOID';
+  // drivers
+  const drivers=[];
+  drivers.push(`${uptrend?'Uptrend':downtrend?'Downtrend':'Mixed trend'}: price ${(price/sma200-1>=0?'+':'')}${((price/sma200-1)*100).toFixed(0)}% vs 200-day SMA`);
+  drivers.push(`12-1 momentum ${(mom12_1>=0?'+':'')}${(mom12_1*100).toFixed(0)}%`);
+  drivers.push(`RSI ${Math.round(rsi)}${rsi>70?' — overbought (pullback risk)':rsi<30?' — oversold (bounce setup)':''}`);
+  drivers.push(`Realized vol ${(sigma*100).toFixed(0)}%/yr · max drawdown ${(maxDD*100).toFixed(0)}% (1y)`);
+  if(Math.abs(macroTilt)>=0.005)drivers.push(`Macro ${macroTilt>0?'tailwind':'headwind'} — ${macroCls} ${macroStanceFor(macroCls)} (${(macroTilt>=0?'+':'')}${(macroTilt*100).toFixed(1)}%/yr)`);
+  if(Math.abs(smartTilt)>=0.006)drivers.push(`Super-investors ${smartTilt>0?'adding to':'rotating out of'} this sector`);
+  if(rc)drivers.push(`CIO research panel: ${Math.round(rw*100)}% weight (confidence ${Math.round((rc.confidence||0.5)*100)}%)`);
+  return {...u,glabel:GLABEL[u.g],price,sma50,sma200,rsi,sigma,mom12_1,drift252,maxDD,curDD,sharpe,t200,t50,Slong,macroCls,macroTilt,smartTilt,muLong,muShort,flags,score,label,drivers,'1m':h1,'3m':h3,'12m':h12,quant:{'1m':q1,'3m':q3,'12m':q12},research:rc,rw};
+}
+
+async function fetchModelOne(u){
+  try{
+    const data=await yfFetch(`https://query1.finance.yahoo.com/v8/finance/chart/${u.yf}?interval=1d&range=2y`);
+    const res=data?.chart?.result?.[0]; if(!res)return;
+    const ts=res.timestamp,q0=res.indicators?.quote?.[0]; if(!ts||!q0?.close)return;
+    const hist=[]; for(let i=0;i<ts.length;i++){if(q0.close[i]==null)continue;hist.push({time:new Date(ts[i]*1000).toISOString().slice(0,10),close:q0.close[i]});}
+    if(hist.length<60)return;
+    modelData[u.t]={hist,price:(res.meta?.regularMarketPrice>0)?res.meta.regularMarketPrice:hist[hist.length-1].close,name:res.meta?.longName||res.meta?.shortName||u.n};
+  }catch(_){}
+}
+async function loadModel(){
+  if(modelStarted)return; modelStarted=true;
+  el('opp-status').innerHTML='<span class="spin"></span> Loading macro regime…';
+  try{const r=await fetch('data/model.json?t='+Date.now());if(r.ok)modelMacro=await r.json();}catch(_){}
+  buildMacroTilt(); await ensureSmart(); renderRegime(); renderMethod();
+  const U=MODEL_UNIVERSE; let done=0;
+  for(let i=0;i<U.length;i+=3){
+    await Promise.allSettled(U.slice(i,i+3).map(u=>fetchModelOne(u)));
+    done=Math.min(U.length,i+3);
+    el('opp-status').innerHTML=`<span class="spin"></span> Pricing instruments & computing odds… ${done}/${U.length}`;
+    renderModel(); await sleep(280);
+  }
+  for(let round=0;round<3;round++){
+    const miss=U.filter(u=>!modelData[u.t]); if(!miss.length)break;
+    el('opp-status').innerHTML=`<span class="spin"></span> Retrying ${miss.length} slow instrument(s)…`;
+    for(let i=0;i<miss.length;i+=2){await Promise.allSettled(miss.slice(i,i+2).map(u=>fetchModelOne(u)));renderModel();await sleep(500);}
+  }
+  const got=U.filter(u=>modelData[u.t]).length; modelLoaded=true; renderModel();
+  el('opp-status').innerHTML=`✓ Model live · ${got}/${U.length} instruments priced${modelMacro?.asOf?` · macro input ${modelMacro.asOf}`:''} · ${new Date().toLocaleTimeString('en-SG')}`;
+}
+function renderModel(){MODEL_RESULTS=MODEL_UNIVERSE.map(buildModel).filter(Boolean);renderRegime();renderAlerts();renderMatrix();}
+
+function sigStyle(label){const m={'STRONG BUY':['#065f46','rgba(16,185,129,.18)'],'BUY':['#15803d','rgba(34,197,94,.16)'],'ACCUMULATE':['#3f6212','rgba(132,204,22,.18)'],'HOLD':['#57534e','rgba(120,113,108,.14)'],'REDUCE':['#b45309','rgba(245,158,11,.16)'],'AVOID':['#b91c1c','rgba(239,68,68,.14)'],'RISK-OFF':['#fff','#b91c1c']};const[c,bg]=m[label]||m.HOLD;return `color:${c};background:${bg};`;}
+function pUpStyle(p){return p>=0.58?'color:var(--green)':p<=0.42?'color:var(--red)':'color:var(--muted)';}
+function flagChip(f){const m={up:['#15803d','▲'],down:['#dc2626','▼'],warn:['#b45309','⚠'],good:['#15803d','✓']};const[c,ic]=m[f.k]||['#78716c','•'];return `<span style="font-size:10px;font-weight:700;color:${c};background:${c}1a;padding:1px 6px;border-radius:5px;margin:0 3px 3px 0;display:inline-block;white-space:nowrap">${ic} ${f.t}</span>`;}
+function scoreBar(s){const c=s>=60?'var(--green)':s>=47?'var(--accent)':'var(--red)';return `<div style="display:flex;align-items:center;gap:6px"><div style="flex:1;min-width:34px;height:6px;background:var(--surf2);border-radius:3px;overflow:hidden"><div style="width:${Math.round(s)}%;height:100%;background:${c}"></div></div><b style="font-size:11px;width:20px;text-align:right">${Math.round(s)}</b></div>`;}
+function oppRow(m){const h=m[oppHorizon];return `<tr class="clickable" onclick="openOppDetail('${m.t}')">
+  <td><span class="ticker-badge">${m.t}</span> <span class="hide-sm" style="color:var(--muted);font-size:11px">${m.n}</span></td>
+  <td class="hide-sm" style="color:var(--muted)">${m.glabel}</td>
+  <td><span style="font-size:10px;font-weight:800;padding:2px 7px;border-radius:5px;${sigStyle(m.label)}">${m.label}</span></td>
+  <td class="r"><b style="${pUpStyle(h.pUp)}">${Math.round(h.pUp*100)}%</b></td>
+  <td class="r ${clr(h.ev)}">${fmtP(h.ev)}</td>
+  <td class="r hide-sm">${Math.round(m.sigma*100)}%</td>
+  <td class="r hide-sm neg">${(m.maxDD*100).toFixed(0)}%</td>
+  <td class="hide-sm">${m.flags.slice(0,2).map(flagChip).join('')||'<span style="color:var(--muted)">—</span>'}</td>
+  <td style="min-width:84px">${scoreBar(m.score)}</td></tr>`;}
+function renderMatrix(){
+  const box=el('opp-matrix'); if(!box)return;
+  if(!MODEL_RESULTS.length){box.innerHTML='<div class="ld"><span class="spin"></span>Computing…</div>';return;}
+  let arr=MODEL_RESULTS.slice();
+  if(oppGroup==='buys')arr=arr.filter(m=>['STRONG BUY','BUY','ACCUMULATE'].includes(m.label));
+  else if(oppGroup!=='all')arr=arr.filter(m=>m.g===oppGroup);
+  arr.sort((a,b)=>b.score-a.score);
+  const hl={'1m':'1M','3m':'3M','12m':'12M'}[oppHorizon];
+  let html=`<table><thead><tr><th>Instrument</th><th class="hide-sm">Class</th><th>Signal</th><th class="r">P↑ ${hl}</th><th class="r">EV ${hl}</th><th class="r hide-sm">Vol</th><th class="r hide-sm">Max DD 1y</th><th class="hide-sm">Trend</th><th>Score</th></tr></thead><tbody>`;
+  html+=arr.map(oppRow).join('')+'</tbody></table>';
+  const loaded=MODEL_RESULTS.length,total=MODEL_UNIVERSE.length;
+  if(loaded<total&&!modelLoaded)html+=`<div class="small" style="color:var(--muted);margin-top:8px"><span class="spin"></span> ${loaded}/${total} instruments priced…</div>`;
+  box.innerHTML=html;
+}
+function stanceChip(stance){const s=stance||'';const c=/O[W]|Overweight/.test(s)?['#15803d','rgba(34,197,94,.14)']:/U[W]|Underweight/.test(s)?['#b91c1c','rgba(239,68,68,.14)']:['#57534e','rgba(120,113,108,.14)'];return `color:${c[0]};background:${c[1]}`;}
+function renderRegime(){
+  const box=el('opp-regime'); if(!box)return; const M=modelMacro?.macro; if(!M){box.innerHTML='';return;}
+  const ro=Math.round((M.riskOnProb??0.5)*100);
+  const drivers=(M.drivers||[]).slice(0,6).map(d=>{const o=typeof d==='string'?{factor:d.split(/:\s/)[0],read:(d.split(/:\s(.+)/)[1]||''),impact:''}:d;const c=/support/.test(o.impact||'')?'var(--green)':/(caution|head)/.test(o.impact||'')?'var(--red)':'var(--accent)';return `<div style="font-size:11.5px;line-height:1.5;padding:6px 9px;background:var(--surf2);border:1px solid var(--border);border-radius:7px"><b style="color:${c}">${o.factor}</b>${o.read?` — ${o.read}`:''}</div>`;}).join('');
+  const stances=(M.byAssetClass||[]).map(a=>`<span title="${(a.note||'').replace(/"/g,'&quot;')}" style="font-size:11px;font-weight:700;padding:3px 9px;border-radius:6px;${stanceChip(a.stance)};white-space:nowrap">${a.assetClass} · ${a.stance}</span>`).join(' ');
+  const nsrc=(M.sources||[]).length;
+  box.innerHTML=`<div class="card" style="border-left:3px solid var(--accent)">
+    <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:10px">
+      <div><div class="sh" style="margin:0 0 2px">Macro regime · CIO read</div><div style="font-size:16px;font-weight:800">${M.regime}</div></div>
+      <div style="margin-left:auto;min-width:200px;flex:1;max-width:320px">
+        <div class="small" style="color:var(--muted);margin-bottom:3px">Risk-on probability <b style="color:var(--text)">${ro}%</b></div>
+        <div style="height:8px;background:var(--surf2);border-radius:4px;overflow:hidden"><div style="width:${ro}%;height:100%;background:linear-gradient(90deg,var(--red),var(--accent),var(--green))"></div></div>
+        <div class="small" style="display:flex;justify-content:space-between;color:var(--muted);margin-top:2px"><span>risk-off</span><span>risk-on</span></div>
+      </div>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">${stances}</div>
+    <p style="font-size:12.5px;line-height:1.65;margin-bottom:10px">${M.narrative}</p>
+    <div class="grid2" style="gap:6px">${drivers}</div>
+    <div class="small" style="color:var(--muted);margin-top:10px">Research panel · ${nsrc} cited sources · macro input ${modelMacro?.asOf||''}. Tap any instrument for its full quant + research breakdown.</div></div>`;
+}
+function renderAlerts(){
+  const box=el('opp-alerts'); if(!box)return; if(!MODEL_RESULTS.length){box.innerHTML='';return;}
+  const byScore=[...MODEL_RESULTS].sort((a,b)=>b.score-a.score);
+  const buys=byScore.filter(m=>['STRONG BUY','BUY','ACCUMULATE'].includes(m.label)).slice(0,6);
+  const iv=buys.map(m=>1/Math.max(m.sigma,0.05)), ivs=iv.reduce((a,b)=>a+b,0)||1;
+  const buyCards=buys.map((m,i)=>{const wt=Math.round(iv[i]/ivs*100);return `<div onclick="openOppDetail('${m.t}')" style="cursor:pointer;border:1px solid var(--border);border-radius:8px;padding:10px;background:var(--surf)">
+    <div style="display:flex;align-items:center;gap:6px"><span class="ticker-badge">${m.t}</span><span style="font-size:10px;font-weight:800;padding:1px 6px;border-radius:5px;${sigStyle(m.label)}">${m.label}</span><b style="margin-left:auto;font-size:12px">${Math.round(m.score)}</b></div>
+    <div style="font-size:11px;color:var(--muted);margin:4px 0 6px">${m.n}</div>
+    <div style="display:flex;gap:12px;font-size:11px"><span>P↑3M <b style="${pUpStyle(m['3m'].pUp)}">${Math.round(m['3m'].pUp*100)}%</b></span><span>EV12M <b class="${clr(m['12m'].ev)}">${fmtP(m['12m'].ev)}</b></span></div>
+    <div style="font-size:10.5px;color:var(--muted);margin-top:5px">Risk-budget wt ~<b>${wt}%</b> · σ ${Math.round(m.sigma*100)}%</div></div>`;}).join('');
+  const HED=['TLT','IEF','SHY','GLD','USMV','BND','TIP'];
+  const hedges=byScore.filter(m=>HED.includes(m.t)).slice(0,5);
+  const hedgeCards=hedges.map(m=>`<div onclick="openOppDetail('${m.t}')" style="cursor:pointer;border:1px solid var(--border);border-radius:8px;padding:9px;background:var(--surf)">
+    <div style="display:flex;align-items:center;gap:6px"><span class="ticker-badge">${m.t}</span><span style="margin-left:auto;font-size:11px;${pUpStyle(m['3m'].pUp)}"><b>${Math.round(m['3m'].pUp*100)}%</b> P↑3M</span></div>
+    <div style="font-size:11px;color:var(--muted);margin-top:4px">${m.n} · σ ${Math.round(m.sigma*100)}% · DD ${(m.maxDD*100).toFixed(0)}%</div></div>`).join('');
+  const risk=[...MODEL_RESULTS].filter(m=>m.label==='RISK-OFF'||m.flags.some(f=>f.k==='down')||(m.flags.some(f=>f.t==='Overbought')&&m['1m'].ev<0)).sort((a,b)=>a.score-b.score).slice(0,5);
+  const riskCards=risk.map(m=>`<div onclick="openOppDetail('${m.t}')" style="cursor:pointer;border:1px solid var(--border);border-radius:8px;padding:9px;background:var(--surf)">
+    <div style="display:flex;align-items:center;gap:6px"><span class="ticker-badge">${m.t}</span><span style="font-size:10px;font-weight:800;padding:1px 6px;border-radius:5px;${sigStyle(m.label)}">${m.label}</span></div>
+    <div style="font-size:11px;color:var(--muted);margin-top:4px">${m.flags.map(f=>f.t).join(' · ')||m.n}</div></div>`).join('');
+  box.innerHTML=`<div class="grid3">
+    <div class="card"><div class="sh">🟢 Buy candidates — highest edge</div><div class="small" style="color:var(--muted);margin:-4px 0 10px">Top composite scores. Risk-budget weight is inverse-vol (lower vol → bigger size) to cap drawdown.</div><div style="display:flex;flex-direction:column;gap:8px">${buyCards||'<span class="small" style="color:var(--muted)">None meet the buy threshold right now.</span>'}</div></div>
+    <div class="card"><div class="sh">🛡️ Drawdown-control ballast</div><div class="small" style="color:var(--muted);margin:-4px 0 10px">Low-overlap diversifiers &amp; hedges. Raising these lowers portfolio max-drawdown.</div><div style="display:flex;flex-direction:column;gap:8px">${hedgeCards||'<span class="small" style="color:var(--muted)">—</span>'}</div></div>
+    <div class="card"><div class="sh">🔴 Risk warnings — trim / avoid</div><div class="small" style="color:var(--muted);margin:-4px 0 10px">Downtrend, overbought-into-weakness, or risk-off — reduce/hedge, especially names overlapping your book.</div><div style="display:flex;flex-direction:column;gap:8px">${riskCards||'<span class="small" style="color:var(--muted)">No acute risk flags.</span>'}</div></div></div>`;
+}
+function openOppDetail(t){
+  const m=MODEL_RESULTS.find(x=>x.t===t); if(!m)return;
+  const row=(lbl,h)=>`<tr><td style="font-weight:700">${lbl}</td><td class="r"><b style="${pUpStyle(h.pUp)}">${Math.round(h.pUp*100)}%</b></td><td class="r ${clr(h.ev)}">${fmtP(h.ev)}</td><td class="r ${clr(h.q05)}">${fmtP(h.q05)}</td><td class="r ${clr(h.q95)}">${fmtP(h.q95)}</td></tr>`;
+  const f=(lbl,val,extra)=>`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border)"><span style="color:var(--muted)">${lbl}</span><span style="font-weight:700">${val}${extra?` <span style="color:var(--muted);font-weight:400">${extra}</span>`:''}</span></div>`;
+  el('opp-content').innerHTML=`
+   <div style="display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:10px">
+     <div><div style="font-size:26px;font-weight:800">${m.t}</div><div style="font-size:12px;color:var(--muted)">${m.n} · ${m.glabel}</div></div>
+     <div style="margin-left:auto;text-align:right"><span style="font-size:12px;font-weight:800;padding:3px 10px;border-radius:6px;${sigStyle(m.label)}">${m.label}</span><div style="font-size:12px;color:var(--muted);margin-top:4px">Score ${Math.round(m.score)}/100</div></div></div>
+   <div style="display:flex;flex-wrap:wrap;margin-bottom:12px">${m.flags.map(flagChip).join('')||'<span class="small" style="color:var(--muted)">no acute flags</span>'}</div>
+   <div class="sh">Directional odds &amp; expected value by horizon</div>
+   <div class="tbl-wrap"><table style="margin-bottom:6px"><thead><tr><th>Horizon</th><th class="r">P(up)</th><th class="r">Expected value</th><th class="r">5% case</th><th class="r">95% case</th></tr></thead><tbody>${row('1 Month',m['1m'])}${row('3 Months',m['3m'])}${row('12 Months',m['12m'])}</tbody></table></div>
+   <div class="small" style="color:var(--muted);margin-bottom:14px">P(up)=Φ((μ−½σ²)√T ÷ σ); EV=e^(μT)−1. The 5%/95% columns are the lognormal return quantiles — your realistic drawdown / upside band for that horizon.${m.research?` Values above blend the live quant model with the CIO research panel at <b>${Math.round(m.rw*100)}%</b> research weight.`:' No CIO research call for this instrument — pure quant.'}</div>
+   ${m.research?`<div style="background:var(--surf2);border-radius:8px;margin-bottom:14px;padding:12px">
+     <div class="sh" style="margin-bottom:8px">Quant model vs CIO research panel → blend</div>
+     <div class="tbl-wrap"><table><thead><tr><th>Horizon</th><th class="r">Quant P↑</th><th class="r">Research P↑</th><th class="r">Blend P↑</th><th class="r">Blend EV</th></tr></thead><tbody>
+       ${['1m','3m','12m'].map((k,i)=>`<tr><td>${['1 Month','3 Months','12 Months'][i]}</td><td class="r" style="${pUpStyle(m.quant[k].pUp)}">${Math.round(m.quant[k].pUp*100)}%</td><td class="r" style="${pUpStyle(m.research['pUp'+k])}">${Math.round(m.research['pUp'+k]*100)}%</td><td class="r"><b style="${pUpStyle(m[k].pUp)}">${Math.round(m[k].pUp*100)}%</b></td><td class="r ${clr(m[k].ev)}">${fmtP(m[k].ev)}</td></tr>`).join('')}
+     </tbody></table></div>
+     <div class="sh" style="margin:12px 0 6px">CIO research drivers · confidence ${Math.round((m.research.confidence||0.5)*100)}%</div>
+     <ul style="font-size:12px;line-height:1.65;padding-left:16px;margin:0">${(m.research.drivers||[]).map(d=>`<li>${d}</li>`).join('')}</ul>
+   </div>`:''}
+   <div class="grid2">
+     <div><div class="sh">Statistical factors (live)</div>
+       ${f('Price vs 200-day SMA',((m.price/m.sma200-1)*100).toFixed(1)+'%')}
+       ${f('50-day vs 200-day',((m.sma50/m.sma200-1)*100).toFixed(1)+'%')}
+       ${f('12-1 momentum',(m.mom12_1>=0?'+':'')+(m.mom12_1*100).toFixed(0)+'%')}
+       ${f('RSI (14)',Math.round(m.rsi))}
+       ${f('Realized vol (annualized)',(m.sigma*100).toFixed(0)+'%')}
+       ${f('Max drawdown (1y)',(m.maxDD*100).toFixed(0)+'%')}
+       ${f('Drawdown from 52w high',(m.curDD*100).toFixed(0)+'%')}
+       ${f('Sharpe proxy (μ−rf)/σ',m.sharpe.toFixed(2))}</div>
+     <div><div class="sh">Model drift &amp; tilts (annualized)</div>
+       ${f('Long-horizon drift μ',(m.muLong*100).toFixed(1)+'%')}
+       ${f('Short-horizon drift μ',(m.muShort*100).toFixed(1)+'%')}
+       ${f('Macro regime tilt',(m.macroTilt>=0?'+':'')+(m.macroTilt*100).toFixed(1)+'%',m.macroCls+' '+macroStanceFor(m.macroCls))}
+       ${f('Smart-money tilt',(m.smartTilt>=0?'+':'')+(m.smartTilt*100).toFixed(1)+'%')}
+       ${f('CIO research weight',m.research?Math.round(m.rw*100)+'%':'—',m.research?'confidence '+Math.round((m.research.confidence||0.5)*100)+'%':'no call')}
+       <div class="sh" style="margin-top:12px">Why</div>
+       <ul style="font-size:12px;line-height:1.7;padding-left:16px">${m.drivers.map(d=>`<li>${d}</li>`).join('')}</ul></div></div>
+   <div style="margin-top:12px;padding:10px;background:var(--surf2);border-radius:8px;font-size:12px"><b>Portfolio fit:</b> ${FIT_NOTE[m.fit]||''}</div>
+   <div style="margin-top:14px;text-align:center"><button class="btn btn-primary" onclick="closeOpp();openTicker('${m.t}')">View live candlestick chart →</button></div>
+   <div class="small" style="color:var(--muted);margin-top:10px;text-align:center">Statistical model · decision-support only · not financial advice. Probabilities are model estimates, not guarantees.</div>`;
+  el('opp-overlay').classList.add('open');
+}
+function closeOpp(e){if(e&&e.target!==el('opp-overlay'))return;el('opp-overlay').classList.remove('open');}
+function setOppHorizon(v){oppHorizon=v;renderMatrix();}
+function setOppGroup(g){oppGroup=g;document.querySelectorAll('#opp-filters .cpf').forEach(b=>b.classList.toggle('active',b.dataset.g===g));renderMatrix();}
+function renderMethod(){
+  const box=el('opp-method'); if(!box)return;
+  box.innerHTML=`<p style="margin-bottom:8px">Decisions here are <b>probability- and statistics-driven, not opinions</b>. Every instrument is run through the same engine on 2 years of live daily data:</p>
+  <ol style="padding-left:18px;line-height:1.8;margin-bottom:10px">
+    <li><b>Multi-factor drift (μ).</b> A forward annualized return estimate blends the instrument's own trailing drift (shrunk 30%), a long-run asset-class prior (50%), and a trend-momentum tilt (κ·S): 200-day trend, 50/200 cross, and 12-1 momentum — the factors with the most robust historical premia. μ is capped per asset class so a 2-year bull can't run away.</li>
+    <li><b>Realized volatility (σ).</b> Blend of 90-day and 252-day log-return vol, annualized.</li>
+    <li><b>Geometric-Brownian-motion probabilities.</b> Treating returns as lognormal, <b>P(up) = Φ((μ−½σ²)√T ÷ σ)</b> and <b>Expected Value = e^(μT) − 1</b> for each horizon T (1M, 3M, 12M). P(up) and EV come from the <em>same</em> (μ,σ), so they're always internally consistent. The 5% / 95% columns are the return quantiles — your realistic loss / gain band.</li>
+    <li><b>Macro &amp; smart-money tilts to μ.</b> A <b>macro-regime</b> stance per asset class (currently <em>${(modelMacro?.macro?.regime)||'—'}</em>) and a <b>smart-money</b> tilt from super-investor sector concentration (quarter-over-quarter) nudge the quant drift. Tilts are small by design — the price data leads.</li>
+    <li><b>CIO research panel blend.</b> A multi-agent research workflow (with adversarial verification and ${(modelMacro?.macro?.sources||[]).length||'cited'} sources) produces a forward-looking P(up) &amp; EV per instrument per horizon. We <b>blend</b> it with the live quant estimate at the probability level — research weight scales with its stated confidence and is <b>capped at 55%</b>, so the statistical engine stays primary. Every instrument's drill-down shows quant vs research vs blend side by side.</li>
+    <li><b>Drawdown control.</b> Sizing uses <b>inverse-volatility (risk-parity) weights</b> so low-vol names get larger allocations — this is the single biggest lever on portfolio max-drawdown. The model surfaces ballast (Treasuries, gold, min-vol) as a deliberate counterweight to your equity/REIT/precious-metals book, and flags overbought, downtrending and high-vol names to trim.</li>
+    <li><b>Composite score &amp; signal.</b> 0–100 from the 3M and 12M edge over 50/50, the Sharpe proxy, and trend — mapped to STRONG BUY → AVOID, with a RISK-OFF override when an asset is in a confirmed downtrend with negative drift.</li>
+  </ol>
+  <p style="color:var(--muted)">Tap any row for the full factor breakdown and a live candlestick chart. This is decision-support for your own analysis — <b>not financial advice</b>, and the dashboard never places trades. Model refreshes its macro input daily; technicals recompute live each time you open the tab.</p>`;
+}
+
 function el(id){return document.getElementById(id);}
 function setStatus(c,m){el('status-text').innerHTML=`<span class="dot ${c}"></span>${m}`;}
 let _rzT; window.addEventListener('resize',()=>{clearTimeout(_rzT);_rzT=setTimeout(renderAll,200);});
