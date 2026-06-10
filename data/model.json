@@ -1,32 +1,37 @@
 {
-  "updated": "2026-06-09",
-  "asOf": "2026-06-09",
+  "updated": "2026-06-10",
+  "asOf": "2026-06-10",
   "note": "CIO research-panel macro regime + per-instrument probabilistic priors, produced by a multi-agent research workflow with adversarial verification and cited sources. The live in-browser quant engine (GBM drift-diffusion on 2y daily history) blends with these forward-looking priors to produce the displayed P(up) and EV. Refreshed by the scheduled intel agent.",
   "macro": {
-    "regime": "stagflation-lite (energy shock fading, yields-led risk-off)",
-    "regimeScore": 0.44,
-    "riskOnProb": 0.44,
-    "asOf": "2026-06-09",
-    "narrative": "The macro picture is shifting from a pure energy shock toward a yields-led, late-cycle risk-off. The real economy is still hot — May payrolls printed +172k (vs ~80-85k expected), unemployment 4.3%, Q2 GDP tracking ~3% — and that strong jobs report repriced the Fed hawkish, lifting the 10y to ~4.5% and the 30y near 5% while crushing gold to its lowest since March and sending Bitcoin to a 19-month low near $61k. On the geopolitical side the oil premium is deflating: after the April spike to a ~$138 Brent peak from the Strait of Hormuz crisis, Iran declared its operations over and a new ~60-day U.S.-brokered ceasefire is reportedly close, so even a brief June 8 exchange of strikes only spiked Brent above $97 intraday before it settled back to ~$94 (WTI ~$91); OPEC+ has now approved a fourth output hike (+188k b/d from July). The June 16-17 FOMC is ~95% priced for no change, leaving the May CPI report (due June 10) as the swing catalyst: a hot print revives the ~35-45% year-end hike pricing under new Chair Warsh, a benign one reopens cut hopes. With the S&P at a CAPE in the high-30s/low-40s, a near-zero equity risk premium and AI capex itself now feeding the inflation data, we stay modestly defensive — favoring cash/USD and still-structurally-bid real assets over richly priced equities and historically tight credit — but stop short of full risk-off given no recession or credit stress and a fading energy tail.",
+    "regime": "late-cycle hawkish repricing (CPI-day binary, yields-led risk-off)",
+    "regimeScore": 0.42,
+    "riskOnProb": 0.42,
+    "asOf": "2026-06-10",
+    "narrative": "The regime has hardened from a fading energy shock into a yields-led, late-cycle hawkish repricing, and today (June 10) is the binary: the May CPI prints at 8:30am ET with consensus at +0.5% m/m and 4.2% y/y headline (up from 3.8%) — which would be the hottest since April 2023 — plus core ~2.9%. The real economy is still hot — May payrolls printed +172k (vs ~80-85k expected), unemployment 4.3%, Q2 GDP tracking ~3% — and that jobs report repriced the Fed sharply hawkish: CME FedWatch now puts year-end HIKE odds near ~72% (up from ~35-45% a week ago), the 10y has pushed to ~4.57% (a two-week high) and the 30y sits near 5%. Higher real yields and a firm dollar have pulled gold back ~8% from its ~$4,724 month-ago peak to ~$4,344 (still +31% y/y) and dragged Bitcoin to ~$62.6k after a $64.1k→$61.6k flush that triggered ~$1.1B of liquidations. The energy tail keeps deflating: Iran and Israel have agreed to halt attacks, Brent has fallen from its ~$138 April peak toward the low-$90s and WTI to ~$86-91, and OPEC+ has approved a fourth output hike (+188k b/d from July). The June 16-17 FOMC is still ~95% priced for a hold, so CPI is the swing: a hot print cements the year-end hike scenario under Chair Warsh and extends the rates/risk-off squeeze, a benign one reopens cut hopes and relieves duration, gold and crypto. With the S&P at a CAPE in the high-30s/low-40s, a near-zero equity risk premium, AI capex itself now visible in the inflation data and the 9-week win streak just broken (-2.6% on June 5), we stay modestly defensive — favoring cash/USD and still-structurally-bid real assets over richly priced equities and historically tight credit — but stop short of full risk-off given no recession or credit stress and a deflating energy tail.",
     "drivers": [
       {
-        "factor": "Fed reaction function under Chair Warsh + May CPI (June 10)",
-        "read": "June 16-17 FOMC ~95% priced for a hold; markets still price ~35-45% odds of a HIKE by year-end after the hot May jobs report. The May CPI on June 10 is the binary near-term swing — a hot print hardens hike risk, a soft one reopens cut hopes.",
+        "factor": "May CPI today (June 10) — the binary catalyst",
+        "read": "Consensus +0.5% m/m and 4.2% y/y headline (up from 3.8%, hottest since April 2023), core ~2.9%. A hot print cements year-end hike pricing and extends the rates/risk-off squeeze; an in-line/soft print reopens cut hopes and relieves duration, gold and crypto.",
         "impact": "cautionary"
       },
       {
-        "factor": "Iran-Israel ceasefire / Strait of Hormuz",
-        "read": "De-escalating: Iran declared operations over and a ~60-day ceasefire is reportedly close; a June 8 strike exchange spiked Brent >$97 intraday but it faded to ~$94. A signed, durable ceasefire is the dominant disinflationary/bullish catalyst; re-escalation is the tail risk.",
+        "factor": "Fed reaction function under Chair Warsh",
+        "read": "June 16-17 FOMC ~95% priced for a hold, but CME FedWatch now prices ~72% odds of a HIKE by year-end (up from ~35-45% a week ago) after the hot May jobs report. The hawkish repricing is the dominant driver of the yields/USD move.",
+        "impact": "cautionary"
+      },
+      {
+        "factor": "Iran-Israel de-escalation / Strait of Hormuz",
+        "read": "Iran and Israel have agreed to halt attacks and a durable ceasefire is reportedly close after the April Strait of Hormuz spike. A signed, lasting truce is the dominant disinflationary/bullish catalyst; re-escalation is the tail risk.",
         "impact": "supportive"
       },
       {
         "factor": "Oil/energy de-rating",
-        "read": "Brent has fallen from a ~$138 April peak to ~$94 (WTI ~$91) on ceasefire optimism and a fourth OPEC+ output hike (+188k b/d from July), easing the supply-side inflation impulse but removing a key tailwind for energy equities and broad commodities.",
+        "read": "Brent has fallen from a ~$138 April peak toward the low-$90s (WTI ~$86-91) on de-escalation and a fourth OPEC+ output hike (+188k b/d from July), easing the supply-side inflation impulse but removing a key tailwind for energy equities and broad commodities.",
         "impact": "mixed"
       },
       {
         "factor": "Rising real yields / risk-off rotation",
-        "read": "The strong jobs report drove the 10y to ~4.5% and 30y near 5%, mechanically hitting long-duration equities, gold (lowest since March) and crypto (BTC 19-month low). A stronger dollar is compounding the squeeze on non-yielding assets.",
+        "read": "The strong jobs report drove the 10y to ~4.57% (two-week high) and 30y near 5%, mechanically hitting long-duration equities, gold (-8% from its month-ago peak to ~$4,344) and crypto (BTC ~$62.6k after a $1.1B liquidation flush). A firm dollar is compounding the squeeze on non-yielding assets.",
         "impact": "cautionary"
       },
       {
@@ -45,28 +50,28 @@
         "assetClass": "Equity",
         "stance": "Neutral",
         "pUp12m": 0.55,
-        "note": "Solid earnings (~24% EPS growth, Street targets ~7800-8000) and no recession argue up over 12m, but a record-low equity risk premium, a high-30s/low-40s CAPE, rising real yields and extreme AI concentration cap upside and fatten the downside tail; the 9-week win streak just broke with a -2.6% Friday.",
+        "note": "Solid earnings (~24% EPS growth, Street targets ~7800-8000) and no recession argue up over 12m, but a record-low equity risk premium, a high-30s/low-40s CAPE, rising real yields (10y ~4.57%) and extreme AI concentration cap upside and fatten the downside tail; the 9-week win streak just broke with a -2.6% June 5, and today's CPI is a binary risk event.",
         "tilt": 0.0
       },
       {
         "assetClass": "Commodities",
         "stance": "modest OW",
         "pUp12m": 0.57,
-        "note": "Still the cleanest stagflation hedge — structural central-bank gold demand and a tight Q2 oil balance — but the call is downgraded to modest OW as Brent de-rates from ~$138 to ~$94 on ceasefire progress and a fourth OPEC+ hike; gold's jobs-driven slide to a March low adds near-term two-way risk.",
+        "note": "Still the cleanest stagflation hedge — structural central-bank gold demand keeps gold +31% y/y at ~$4,344 even after an ~8% pullback from its month-ago peak — but the call stays modest OW as Brent de-rates from ~$138 toward the low-$90s on de-escalation and a fourth OPEC+ hike; the rates/USD-driven gold slide adds near-term two-way risk.",
         "tilt": 0.012
       },
       {
         "assetClass": "Crypto",
         "stance": "UW",
         "pUp12m": 0.5,
-        "note": "BTC has slid to a ~19-month low near $61k on sustained ETF outflows, higher-for-longer rates and a stronger dollar; highest beta to liquidity makes it the first casualty if the yields/risk-off move extends, with genuinely two-sided 12m odds.",
+        "note": "BTC has slid to ~$62.6k after a $64.1k→$61.6k flush that triggered ~$1.1B of liquidations, pressured by ETF outflows, higher-for-longer rates and a firm dollar; highest beta to liquidity makes it the first casualty if the yields/risk-off move extends, with genuinely two-sided 12m odds.",
         "tilt": -0.02
       },
       {
         "assetClass": "Bonds",
         "stance": "Neutral",
         "pUp12m": 0.55,
-        "note": "Yields (10y ~4.5%, 30y near 5%) offer attractive carry and a recession hedge, but with the Fed's next move possibly a hike and CPI still ~3.8%, near-term duration risk keeps us off OW; modest up-bias over 12m as the cycle eventually turns.",
+        "note": "Yields (10y ~4.57%, 30y near 5%) offer attractive carry and a recession hedge, but with the Fed's next move now priced ~72% toward a hike and headline CPI pushing toward ~4.2%, near-term duration risk keeps us off OW; modest up-bias over 12m as the cycle eventually turns.",
         "tilt": 0.0
       },
       {
@@ -80,15 +85,15 @@
     "sources": [
       "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
       "https://www.bls.gov/news.release/cpi.nr0.htm",
-      "https://www.cnbc.com/2026/06/05/jobs-report-may-2026.html",
-      "https://www.cnbc.com/2026/06/08/oil-prices-today-us-iran-missile-middle-east-israel-opec.html",
-      "https://www.tradingkey.com/analysis/commodities/oil/261953422-iran-oil-wti-brent-trump-iea-hormuz-price-tradingkey",
-      "https://www.cnbc.com/2026/06/08/china-oil-iran-war-us-israel-energy-prices-strait-hormuz.html",
+      "https://www.kiplinger.com/investing/economy/cpi-report-may-2026-what-to-expect",
+      "https://insight.factset.com/consumer-price-index-cpi-for-may-2026-is-projected-to-rise-4.2-year-over-year",
+      "https://www.cbsnews.com/news/inflation-rate-cpi-2026-may-report/",
+      "https://www.cnbc.com/2026/06/03/treasury-yields-edge-higher-as-traders-await-economic-data.html",
       "https://www.schwab.com/learn/story/stock-market-update-open",
-      "https://www.capitalstreetfx.com/market-analysis/usdcad-boc-crossroads-gold-collapses-nfp-shock-bitcoin-19-month-low-us-weekly-6-june-2026/",
+      "https://fortune.com/article/current-price-of-gold-06-09-2026/",
+      "https://fortune.com/article/price-of-bitcoin-06-09-2026/",
       "https://www.investing.com/rates-bonds/u.s.-10-year-bond-yield",
-      "https://en.wikipedia.org/wiki/2026_Strait_of_Hormuz_crisis",
-      "https://www.schwab.com/learn/story/us-stock-market-outlook"
+      "https://en.wikipedia.org/wiki/2026_Strait_of_Hormuz_crisis"
     ]
   },
   "calls": [
@@ -499,10 +504,10 @@
       "ev3m": 0.02,
       "ev12m": 0.08,
       "drivers": [
-        "Acute near-term correction: gold fell to its lowest since March as the strong May jobs report lifted real yields (10y ~4.5%) and the dollar, repricing hike risk — the single biggest 3-12m swing factor",
-        "Structural central-bank demand (~580t/quarter) and a multi-year uptrend provide a durable floor beneath the drawdown",
-        "The Iran geopolitical premium is unwinding as a ceasefire nears, removing a recent safe-haven bid",
-        "A hot May CPI (June 10) or a confirmed Fed hike would extend the slide; a benign print or any pivot signal is strongly bullish"
+        "Near-term correction: gold has pulled back ~8% from its ~$4,724 month-ago peak to ~$4,344 as the strong May jobs report lifted real yields (10y ~4.57%) and the dollar and repriced ~72% hike odds — the single biggest 3-12m swing factor",
+        "Still +31% y/y: structural central-bank demand (~580t/quarter) and a multi-year uptrend provide a durable floor beneath the drawdown",
+        "The Iran geopolitical premium is unwinding as Iran and Israel halt attacks, removing a recent safe-haven bid",
+        "Today's May CPI (June 10, consensus 4.2%) is the binary: a hot print or a confirmed Fed hike extends the slide; a benign print or any pivot signal is strongly bullish"
       ],
       "confidence": 0.6
     },
@@ -625,9 +630,9 @@
       "ev3m": -0.04,
       "ev12m": 0.0,
       "drivers": [
-        "BTC printed a ~19-month low near $61k on sustained spot-ETF outflows and a strong-dollar, higher-yields risk-off impulse after the May jobs report",
-        "Higher-for-longer Fed path (next move possibly a hike) withdraws the liquidity premium; BTC is highest-beta to global dollar liquidity",
-        "Clawed back above $61k from the lows; IV running above realized vol creates a positive variance-risk-premium that slightly supports mean-reversion at 1-3m",
+        "BTC sits ~$62.6k after a $64.1k→$61.6k flush that triggered ~$1.1B of liquidations, driven by spot-ETF outflows and a strong-dollar, higher-yields risk-off impulse after the May jobs report",
+        "Higher-for-longer Fed path (~72% year-end hike odds) withdraws the liquidity premium; BTC is highest-beta to global dollar liquidity",
+        "Bounced off the ~$61.6k flush low; IV running above realized vol creates a positive variance-risk-premium that slightly supports mean-reversion at 1-3m",
         "12m genuinely two-sided: a Fed pivot and post-halving positioning are structural longs versus stagflation-lite crowding-out; base case is symmetric near 50/50"
       ],
       "confidence": 0.55
@@ -679,7 +684,7 @@
       "ev3m": -0.01,
       "ev12m": 0.05,
       "drivers": [
-        "30y near 5% and 10y ~4.5%; hike pricing and the strong May payrolls (+172k) keep near-term upward yield pressure on this ~17y-duration vehicle",
+        "30y near 5% and 10y ~4.57% (two-week high); ~72% year-end hike pricing and the strong May payrolls (+172k) keep near-term upward yield pressure on this ~17y-duration vehicle, with today's CPI a binary risk",
         "Has already fallen well off its 2025 highs, pricing in substantial bad news but not a full hike-cycle extension",
         "Carry of ~4.3% annualized cushions total return; if the cycle eventually turns, long duration snaps back sharply — base rates favor a positive 12m total return once carry is included",
         "Elevated Treasury issuance and soft foreign auction demand keep a term-premium bid in long yields, capping the rally"
@@ -697,7 +702,7 @@
       "ev3m": -0.003,
       "ev12m": 0.052,
       "drivers": [
-        "10y yield at 4.56%, near the 12m high of 4.67% set May 19 — a further push through 4.67% (plausible on another hot inflation print) would create incremental losses on the ~7-8y duration, but proximity to resistance limits downside",
+        "10y yield ~4.57% (two-week high), near the 12m high of 4.67% set May 19 — a further push through 4.67% (plausible on a hot May CPI today) would create incremental losses on the ~7-8y duration, but proximity to resistance limits downside",
         "SEC yield of 4.27% provides meaningful carry that can offset modest price declines over 3-12m; the belly of the curve has better risk/reward than the long end in a higher-for-longer regime",
         "Fed hike fully priced by year-end is partially absorbed; IEF benefits if data softens and pricing reverts, giving an asymmetric payoff — vol is lower than TLT so Sharpe is superior in base case",
         "Down ~1% YTD and ~1% over 1m signals a grinding negative trend; momentum argues against a quick reversal until inflation data turns"
