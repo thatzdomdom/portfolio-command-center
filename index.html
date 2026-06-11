@@ -183,7 +183,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
   </div>
   <div class="topbar-right">
     <span id="last-updated" class="topbar-sub">Not loaded</span>
-    <button class="btn btn-primary" onclick="loadAll()">↻ Refresh</button>
+    <button class="btn btn-primary" onclick="refreshAll()">↻ Refresh</button>
   </div>
 </div>
 
@@ -422,7 +422,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v41 · 🎯 Opportunity Matrix · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v42 · 🎯 Opportunity Matrix · Refresh re-pulls matrix · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="cp-overlay" onclick="closeCP(event)">
@@ -1345,7 +1345,9 @@ async function loadReddit(force){
 // Drift-diffusion (GBM) engine: a multi-factor drift estimate + realized
 // vol → calibrated P(up) and Expected Value per horizon, all from live data.
 // ═══════════════════════════════════════════════════════════════════════
-let modelStarted=false, modelLoaded=false, modelMacro=null, modelData={}, modelSmartSectors=null, MODEL_RESULTS=[], oppHorizon='3m', oppGroup='all', MACRO_TILT={};
+let modelStarted=false, modelLoading=false, modelLoaded=false, modelMacro=null, modelData={}, modelSmartSectors=null, MODEL_RESULTS=[], oppHorizon='3m', oppGroup='all', MACRO_TILT={};
+// Refresh button: re-price holdings AND (if the matrix was ever opened) re-pull the Opportunity Matrix — fresh macro + fresh prices.
+function refreshAll(){ loadAll(); if(modelStarted) loadModel(true); }
 const GLABEL={Equity:'Equity / Region',Factor:'Factor / Sector',Commodity:'Commodity',Crypto:'Crypto',Bond:'Bond / Rate'};
 // universe — must stay aligned across app. {t ticker, yf, n name, g group, mc macro-class, prior μ-prior, cap drift-cap, fit portfolio-fit}
 const MODEL_UNIVERSE=[
@@ -1477,8 +1479,8 @@ async function fetchModelOne(u){
     modelData[u.t]={hist,price:(res.meta?.regularMarketPrice>0)?res.meta.regularMarketPrice:hist[hist.length-1].close,name:res.meta?.longName||res.meta?.shortName||u.n};
   }catch(_){}
 }
-async function loadModel(){
-  if(modelStarted)return; modelStarted=true;
+async function loadModel(force){
+  if(modelLoading)return; if(modelStarted&&!force)return; modelStarted=true; modelLoading=true;
   el('opp-status').innerHTML='<span class="spin"></span> Loading macro regime…';
   try{const r=await fetch('data/model.json?t='+Date.now());if(r.ok)modelMacro=await r.json();}catch(_){}
   buildMacroTilt(); await ensureSmart(); renderRegime(); renderMethod();
@@ -1495,7 +1497,8 @@ async function loadModel(){
     for(let i=0;i<miss.length;i+=2){await Promise.allSettled(miss.slice(i,i+2).map(u=>fetchModelOne(u)));renderModel();await sleep(500);}
   }
   const got=U.filter(u=>modelData[u.t]).length; modelLoaded=true; renderModel();
-  el('opp-status').innerHTML=`✓ Model live · ${got}/${U.length} instruments priced${modelMacro?.asOf?` · macro input ${modelMacro.asOf}`:''} · ${new Date().toLocaleTimeString('en-SG')}`;
+  el('opp-status').innerHTML=`✓ Model live · ${got}/${U.length} instruments priced${modelMacro?.asOf?` · macro input ${modelMacro.asOf}`:''} · technicals as of ${new Date().toLocaleString('en-SG')} · tap ↻ Refresh to re-pull`;
+  modelLoading=false;
 }
 function renderModel(){MODEL_RESULTS=MODEL_UNIVERSE.map(buildModel).filter(Boolean);renderRegime();renderAlerts();renderMatrix();}
 
