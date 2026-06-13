@@ -226,6 +226,21 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
       <div class="perf-cell"><div class="pp-label">1Y</div><div class="pp-val" id="pp-1y">—</div></div>
     </div>
   </div>
+  <div class="sh" style="margin-bottom:8px;">Market Sentiment &amp; Global Flows</div>
+  <div class="grid3" id="market-row" style="margin-bottom:16px;align-items:start;">
+    <div class="card">
+      <div class="sh">😱 Fear &amp; Greed</div>
+      <div id="fg-body"><div class="ld"><span class="spin"></span>Loading…</div></div>
+    </div>
+    <div class="card">
+      <div class="sh">📊 Market Breadth</div>
+      <div id="breadth-body"><div class="ld"><span class="spin"></span>Loading…</div></div>
+    </div>
+    <div class="card">
+      <div class="sh">🌍 Global Cash Movement</div>
+      <div id="flows-body"><div class="ld"><span class="spin"></span>Loading…</div></div>
+    </div>
+  </div>
   <div class="card" style="margin-bottom:16px;">
     <div class="sh">🏆 Top Conviction Plays — super-investor consensus</div>
     <p style="font-size:12px;color:var(--muted);margin:-4px 0 8px;" id="conviction-sub">Stocks the most super investors traded last quarter. Tap a play to see who, when &amp; how much.</p>
@@ -422,7 +437,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v42 · 🎯 Opportunity Matrix · Refresh re-pulls matrix · Live: Yahoo Finance + ApeWisdom · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v43 · 🎯 Opportunity Matrix · Fear&amp;Greed · Breadth · Global Flows · Live: Yahoo + CNN + ApeWisdom · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="cp-overlay" onclick="closeCP(event)">
@@ -1347,7 +1362,7 @@ async function loadReddit(force){
 // ═══════════════════════════════════════════════════════════════════════
 let modelStarted=false, modelLoading=false, modelLoaded=false, modelMacro=null, modelData={}, modelSmartSectors=null, MODEL_RESULTS=[], oppHorizon='3m', oppGroup='all', MACRO_TILT={};
 // Refresh button: re-price holdings AND (if the matrix was ever opened) re-pull the Opportunity Matrix — fresh macro + fresh prices.
-function refreshAll(){ loadAll(); if(modelStarted) loadModel(true); }
+function refreshAll(){ loadAll(); loadMarket(true); if(modelStarted) loadModel(true); }
 const GLABEL={Equity:'Equity / Region',Factor:'Factor / Sector',Commodity:'Commodity',Crypto:'Crypto',Bond:'Bond / Rate'};
 // universe — must stay aligned across app. {t ticker, yf, n name, g group, mc macro-class, prior μ-prior, cap drift-cap, fit portfolio-fit}
 const MODEL_UNIVERSE=[
@@ -1636,10 +1651,86 @@ function renderMethod(){
   <p style="color:var(--muted)">Tap any row for the full factor breakdown and a live candlestick chart. This is decision-support for your own analysis — <b>not financial advice</b>, and the dashboard never places trades. Model refreshes its macro input daily; technicals recompute live each time you open the tab.</p>`;
 }
 
+// ═══════════════════════════════════════════════════════════════════════
+// MARKET SENTIMENT & GLOBAL FLOWS — overview widgets
+// Fear&Greed: live (CNN via proxy + crypto via alternative.me), baked fallback.
+// Breadth & Flows: researched/baked daily in data/market.json (no free API).
+// ═══════════════════════════════════════════════════════════════════════
+let marketData=null, marketStarted=false;
+const tc=s=>String(s||'').replace(/\b\w/g,c=>c.toUpperCase());
+const fgLabel=v=>v<25?'Extreme Fear':v<45?'Fear':v<55?'Neutral':v<75?'Greed':'Extreme Greed';
+const fgColor=v=>v<25?'#dc2626':v<45?'#ea580c':v<55?'#ca8a04':v<75?'#65a30d':'#15803d';
+const sigCol=s=>{s=(s||'').toLowerCase();return /(greed|bull|expand|broad|positive|inflow|risk-on)/.test(s)?'var(--green)':/(fear|bear|narrow|deterior|negative|outflow|risk-off)/.test(s)?'var(--red)':'var(--accent)';};
+function srcLine(asOf,sources,live){
+  const s=(sources&&sources.length)?` · ${(()=>{try{return new URL(sources[0]).hostname.replace(/^www\./,'')}catch(_){return sources[0]}})()}`:'';
+  return `<div class="small" style="color:var(--muted);margin-top:8px">${live?'<span style="color:var(--green)">● live</span> · ':''}as of ${asOf||'—'}${s}</div>`;
+}
+async function loadMarket(force){
+  if(marketStarted&&!force)return; marketStarted=true;
+  try{const r=await fetch('data/market.json?t='+Date.now()); if(r.ok) marketData=await r.json();}catch(_){}
+  renderFearGreed(marketData&&marketData.fearGreed); renderBreadth(marketData&&marketData.breadth); renderFlows(marketData&&marketData.flows);
+  fetchFearGreedLive();
+}
+async function fetchFearGreedLive(){
+  try{
+    const j=await yfFetch('https://production.dataviz.cnn.io/index/fearandgreed/graphdata');
+    const f=j&&j.fear_and_greed;
+    if(f&&f.score!=null){
+      const live=(marketData&&marketData.fearGreed)?{...marketData.fearGreed}:{components:[],sources:['cnn.com']};
+      live.value=Math.round(f.score); live.rating=fgLabel(Math.round(f.score));
+      if(f.previous_close!=null)live.prevClose=Math.round(f.previous_close);
+      if(f.previous_1_week!=null)live.prev1w=Math.round(f.previous_1_week);
+      if(f.previous_1_month!=null)live.prev1m=Math.round(f.previous_1_month);
+      if(f.previous_1_year!=null)live.prev1y=Math.round(f.previous_1_year);
+      const cmap=[['market_momentum_sp500','Market Momentum'],['stock_price_strength','Stock Price Strength'],['stock_price_breadth','Stock Price Breadth'],['put_call_options','Put/Call Options'],['market_volatility_vix','Market Volatility'],['safe_haven_demand','Safe-Haven Demand'],['junk_bond_demand','Junk Bond Demand']];
+      const comps=[]; cmap.forEach(([k,nm])=>{const c=j[k]; if(c&&c.rating)comps.push({name:nm,reading:tc(c.rating),signal:c.rating});});
+      if(comps.length)live.components=comps;
+      if(f.timestamp)live.asOf=new Date(f.timestamp).toISOString().slice(0,10);
+      live.live=true; live.sources=live.sources&&live.sources.length?live.sources:['https://www.cnn.com/markets/fear-and-greed'];
+      marketData=marketData||{}; marketData.fearGreed=live; renderFearGreed(live);
+    }
+  }catch(_){}
+  try{
+    const r=await fetch('https://api.alternative.me/fng/?limit=1');
+    if(r.ok){const j=await r.json(); const d=j&&j.data&&j.data[0]; if(d&&marketData&&marketData.fearGreed){marketData.fearGreed.cryptoValue=+d.value; marketData.fearGreed.cryptoRating=d.value_classification; renderFearGreed(marketData.fearGreed);}}
+  }catch(_){}
+}
+function renderFearGreed(fg){
+  const box=el('fg-body'); if(!box)return;
+  if(!fg||fg.value==null){box.innerHTML='<div class="small" style="color:var(--muted)">No data yet — refreshes daily.</div>';return;}
+  const v=Math.round(fg.value), col=fgColor(v);
+  const R=78,cx=100,cy=98, pt=(val,rr)=>{const a=Math.PI*(1-val/100);return [cx+rr*Math.cos(a),cy-rr*Math.sin(a)];};
+  const poly=(a,b,c)=>{let p='';for(let val=a;val<=b;val+=1){const q=pt(val,R);p+=`${q[0].toFixed(1)},${q[1].toFixed(1)} `;}return `<polyline points="${p.trim()}" fill="none" stroke="${c}" stroke-width="13"/>`;};
+  const arcs=[[0,25,'#dc2626'],[25,45,'#ea580c'],[45,55,'#ca8a04'],[55,75,'#65a30d'],[75,100,'#15803d']].map(z=>poly(z[0],z[1],z[2])).join('');
+  const n=pt(v,R-13), l=pt(0,R+9), rr=pt(100,R+9);
+  const svg=`<svg viewBox="0 0 200 112" width="100%" style="max-width:230px;display:block;margin:2px auto 0">${arcs}<line x1="${cx}" y1="${cy}" x2="${n[0].toFixed(1)}" y2="${n[1].toFixed(1)}" stroke="var(--text)" stroke-width="2.5"/><circle cx="${cx}" cy="${cy}" r="4.5" fill="var(--text)"/><text x="${(l[0]-6).toFixed(0)}" y="108" font-size="9" fill="var(--muted)">0</text><text x="${(rr[0]-6).toFixed(0)}" y="108" font-size="9" fill="var(--muted)">100</text></svg>`;
+  const prev=[['Prev',fg.prevClose],['1wk',fg.prev1w],['1mo',fg.prev1m],['1yr',fg.prev1y]].filter(x=>x[1]!=null).map(x=>`<span style="font-size:10.5px;color:var(--muted)">${x[0]} <b style="color:${fgColor(x[1])}">${x[1]}</b></span>`).join('<span style="color:var(--border)">·</span>');
+  const comps=(fg.components||[]).map(c=>`<div style="display:flex;align-items:center;gap:6px;padding:2.5px 0;font-size:11px"><span style="width:7px;height:7px;border-radius:50%;background:${sigCol(c.signal||c.reading)};flex:none"></span><span style="color:var(--muted)">${c.name}</span><b style="margin-left:auto;color:${sigCol(c.signal||c.reading)}">${c.reading||''}</b></div>`).join('');
+  const crypto=fg.cryptoValue!=null?`<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-size:11px;display:flex;justify-content:space-between"><span style="color:var(--muted)">Crypto F&amp;G</span><b style="color:${fgColor(fg.cryptoValue)}">${fg.cryptoValue} · ${fg.cryptoRating||fgLabel(fg.cryptoValue)}</b></div>`:'';
+  box.innerHTML=`${svg}<div style="text-align:center;margin-top:-4px"><span style="font-size:34px;font-weight:800;color:${col};line-height:1">${v}</span><div style="font-size:13px;font-weight:800;color:${col};text-transform:uppercase;letter-spacing:.04em">${fg.rating||fgLabel(v)}</div></div><div style="display:flex;gap:8px;justify-content:center;margin:8px 0 4px;flex-wrap:wrap">${prev}</div>${comps?`<div style="margin-top:6px;border-top:1px solid var(--border);padding-top:4px">${comps}</div>`:''}${crypto}${srcLine(fg.asOf,fg.sources,fg.live)}`;
+}
+function renderBreadth(b){
+  const box=el('breadth-body'); if(!box)return;
+  if(!b||!b.metrics||!b.metrics.length){box.innerHTML='<div class="small" style="color:var(--muted)">No data yet — refreshes daily.</div>';return;}
+  const rows=b.metrics.map(m=>{
+    const col=sigCol(m.signal);
+    const bar=m.pct!=null?`<div style="height:5px;background:var(--surf2);border-radius:3px;margin-top:5px"><div style="width:${clip(m.pct,0,100)}%;height:100%;background:${col};border-radius:3px"></div></div>`:'';
+    return `<div style="padding:7px 0;border-bottom:1px solid var(--border)"><div style="display:flex;justify-content:space-between;gap:8px;align-items:baseline"><span style="color:var(--muted);font-size:11.5px">${m.label}</span>${m.signal?`<span style="font-size:9.5px;font-weight:800;color:${col};text-transform:uppercase;letter-spacing:.03em;white-space:nowrap">${m.signal}</span>`:''}</div><div style="font-size:11.5px;color:${col};font-weight:600;margin-top:2px;line-height:1.45">${m.value}</div>${bar}</div>`;
+  }).join('');
+  box.innerHTML=`${rows}${b.note?`<div class="small" style="margin-top:8px;line-height:1.5">${b.note}</div>`:''}${srcLine(b.asOf,b.sources)}`;
+}
+function renderFlows(f){
+  const box=el('flows-body'); if(!box)return;
+  if(!f||!f.regions||!f.regions.length){box.innerHTML='<div class="small" style="color:var(--muted)">No data yet — refreshes daily.</div>';return;}
+  const mx=Math.max(...f.regions.map(r=>Math.abs(r.amountUSD||0)),1);
+  const regions=f.regions.map(r=>{const inflow=/in/i.test(r.direction);const col=inflow?'var(--green)':'var(--red)';const has=r.amountUSD!=null;const w=has?Math.round(Math.abs(r.amountUSD)/mx*100):0;return `<div style="padding:5px 0" title="${(r.note||'').replace(/"/g,'&quot;')}"><div style="display:flex;justify-content:space-between;gap:8px;align-items:baseline"><span style="font-size:11.5px">${r.region}</span><b style="font-size:11px;color:${col};text-align:right">${inflow?'▲':'▼'} ${r.amount}</b></div>${has?`<div style="height:7px;background:var(--surf2);border-radius:4px;overflow:hidden;margin-top:4px"><div style="width:${w}%;height:100%;background:${col}"></div></div>`:`<div style="font-size:10.5px;color:var(--muted);margin-top:1px;line-height:1.4">${r.note||''}</div>`}</div>`;}).join('');
+  const moves=(f.movements||[]).map(m=>`<div style="font-size:11px;padding:4px 0;border-top:1px solid var(--border)"><b>${m.from}</b> <span style="color:var(--accent);font-weight:800">→</span> <b>${m.to}</b> <span style="color:var(--muted)">${m.amount}</span>${m.note?`<div style="color:var(--muted);font-size:10.5px">${m.note}</div>`:''}</div>`).join('');
+  box.innerHTML=`${f.narrative?`<div style="font-size:11.5px;line-height:1.55;margin-bottom:8px">${f.narrative}</div>`:''}${regions}${moves?`<div style="margin-top:8px"><div class="small" style="color:var(--muted);margin-bottom:2px">Biggest rotations</div>${moves}</div>`:''}<div class="small" style="color:var(--muted);margin-top:6px">${f.period||''}</div>${srcLine(f.asOf,f.sources)}`;
+}
 function el(id){return document.getElementById(id);}
 function setStatus(c,m){el('status-text').innerHTML=`<span class="dot ${c}"></span>${m}`;}
 let _rzT; window.addEventListener('resize',()=>{clearTimeout(_rzT);_rzT=setTimeout(renderAll,200);});
-if(!GATE_ON||sessionStorage.getItem(SESSION_KEY)==='1'){renderAll();setTimeout(loadAll,300);setTimeout(loadIntel,600);setTimeout(loadInvestors,900);}
+if(!GATE_ON||sessionStorage.getItem(SESSION_KEY)==='1'){renderAll();setTimeout(loadAll,300);setTimeout(loadMarket,500);setTimeout(loadIntel,600);setTimeout(loadInvestors,900);}
 </script>
 </body>
 </html>

@@ -1,0 +1,222 @@
+{
+  "updated": "2026-06-12",
+  "note": "Market sentiment & global flows for the overview. Fear&Greed is fetched LIVE in-browser (CNN equity index via proxy + crypto via alternative.me) with the baked value as fallback; breadth & regional flows are researched and baked (no free real-time API) and refreshed daily by the scheduled intel agent.",
+  "fearGreed": {
+    "value": 34,
+    "rating": "Fear",
+    "asOf": "2026-06-12",
+    "prevClose": 30,
+    "prev1w": 42,
+    "prev1m": 65,
+    "prev1y": 65,
+    "cryptoValue": 13,
+    "cryptoRating": "Extreme Fear",
+    "components": [
+      {
+        "name": "Market Momentum",
+        "reading": "S&P 500 vs its 125-day moving average; component score 64.6. The index sits above its 125-day average, the one bullish component on the board.",
+        "signal": "greed"
+      },
+      {
+        "name": "Stock Price Strength",
+        "reading": "Net 52-week highs vs lows on the NYSE; score 32.4. More stocks hitting lows than the recent norm.",
+        "signal": "fear"
+      },
+      {
+        "name": "Stock Price Breadth",
+        "reading": "McClellan Volume Summation (advancing vs declining volume); score 21.4, rated extreme fear. Declining volume is outpacing advancing volume.",
+        "signal": "fear"
+      },
+      {
+        "name": "Put/Call Options",
+        "reading": "5-day put/call ratio; score 33.8. Options buyers are leaning defensive, favoring puts.",
+        "signal": "fear"
+      },
+      {
+        "name": "Market Volatility",
+        "reading": "VIX vs its 50-day moving average; score 50.0, rated neutral. Volatility is in line with its recent average — neither calm nor panicked.",
+        "signal": "neutral"
+      },
+      {
+        "name": "Safe Haven Demand",
+        "reading": "20-day stock vs Treasury bond return spread; score 28.6. Bonds have outperformed stocks, signaling a flight to safety consistent with the yields-led risk-off tape.",
+        "signal": "fear"
+      },
+      {
+        "name": "Junk Bond Demand",
+        "reading": "Yield spread between junk bonds and investment-grade; score 7.2, the weakest component (extreme fear). Investors are demanding a wide premium to hold risky credit.",
+        "signal": "fear"
+      }
+    ],
+    "sources": [
+      "https://production.dataviz.cnn.io/index/fearandgreed/graphdata",
+      "https://www.cnn.com/markets/fear-and-greed",
+      "https://api.alternative.me/fng/?limit=1"
+    ]
+  },
+  "breadth": {
+    "asOf": "2026-06-12",
+    "metrics": [
+      {
+        "label": "% of S&P 500 stocks above 200-day MA",
+        "value": "61.0% (Barchart $S5TH, +3.0 on the day)",
+        "signal": "neutral",
+        "pct": 61.03
+      },
+      {
+        "label": "% of S&P 500 stocks above 50-day MA",
+        "value": "60.4% (Barchart $S5FI, +8.6 on the day)",
+        "signal": "neutral",
+        "pct": 60.43
+      },
+      {
+        "label": "NYSE advancers vs decliners (latest session)",
+        "value": "~2.33-to-1 advancers over decliners (Barchart $ADRN, latest reading 06/09/26; June 12 was a strong up session)",
+        "signal": "bullish",
+        "pct": null
+      },
+      {
+        "label": "52-week New Highs minus New Lows (NYSE)",
+        "value": "Net positive on the June 12 bounce but unremarkable; precise live counts not extractable from JS-rendered tables (approximate: modestly positive, < ~80 net new highs)",
+        "signal": "neutral",
+        "pct": null
+      },
+      {
+        "label": "NYSE McClellan Oscillator / Summation Index",
+        "value": "McClellan Oscillator has been below zero since May 11, so the McClellan Summation Index has been falling (mcoscillator.com); a one-day breadth pop on June 12 has not reversed the downtrend. Same gauge plunged to -184 in mid-March stress (approximate; exact 06/12 NYMO value not published in accessible sources)",
+        "signal": "bearish",
+        "pct": null
+      },
+      {
+        "label": "Cumulative NYSE Advance-Decline line trend",
+        "value": "Rolled over with the Summation Index since mid-May; failing to confirm the cap-weighted index's prior highs as participation narrows (approximate trend read, not a single figure)",
+        "signal": "bearish",
+        "pct": null
+      },
+      {
+        "label": "% of 11 S&P sectors above their 200-DMA",
+        "value": "Approximate ~64% (roughly 7 of 11 sector ETFs), with leadership concentrated in Energy and Information Technology; defensives/laggards below their 200-DMA (inferred from index-level breadth and sector leadership, not a directly published sector count)",
+        "signal": "neutral",
+        "pct": 64
+      }
+    ],
+    "note": "The rally is narrow and internally deteriorating: a sharp one-day broadening on June 12 (both MA-breadth gauges jumped, NYSE advancers led ~2:1) sits on top of a medium-term breadth downtrend, with the McClellan Oscillator below zero since May 11 and the Summation Index/cumulative A-D line falling, so index strength remains propped up by AI mega-caps rather than broad participation.",
+    "sources": [
+      "https://www.barchart.com/stocks/quotes/$S5TH",
+      "https://www.barchart.com/stocks/quotes/$S5FI",
+      "https://www.barchart.com/stocks/quotes/$ADRN",
+      "https://www.barchart.com/stocks/highs-lows/highs?screener=nyse&timeFrame=1y",
+      "https://www.barchart.com/stocks/highs-lows/lows?screener=nyse&timeFrame=1y",
+      "https://www.mcoscillator.com/",
+      "https://chartschool.stockcharts.com/table-of-contents/market-indicators/mcclellan-summation-index",
+      "https://stockcharts.com/h-sc/ui?s=$nymo",
+      "https://streetstats.finance/markets/breadth-momentum/SP500",
+      "https://en.macromicro.me/charts/98990/sp500-sectors-200ma-breadth",
+      "https://markets.financialcontent.com/stocks/article/marketminute-2026-3-12-the-concentration-cliff-market-breadth-narratives-shift-as-records-mask-underlying-rot",
+      "https://cryptodaily.co.uk/2026/05/sp500-breadth-beyond-big-tech"
+    ]
+  },
+  "flows": {
+    "regions": [
+      {
+        "region": "US equities",
+        "direction": "outflow",
+        "amount": "-$12.57B",
+        "amountUSD": -12570000000,
+        "note": "Lipper: first US net sales in 3wk; BofA diverges (11-wk inflow streak); prior wk clients sold record -$14.2B single stocks."
+      },
+      {
+        "region": "Europe / Intl DM equities",
+        "direction": "inflow",
+        "amount": "+$6.74B",
+        "amountUSD": 6740000000,
+        "note": "Lipper: top US-rotation destination; BofA +$0.6B; YTD ~$104B DM vs ~$25B US."
+      },
+      {
+        "region": "Emerging Markets",
+        "direction": "outflow",
+        "amount": "-$3.4B (Lipper) vs +$4.5B (BofA)",
+        "amountUSD": null,
+        "note": "Conflict: Lipper EM equity -$3.4B; BofA EM +$4.5B (Korea-led)."
+      },
+      {
+        "region": "China",
+        "direction": "outflow",
+        "amount": "n/a",
+        "amountUSD": null,
+        "note": "No clean weekly figure; outflow-leaning, unconfirmed."
+      },
+      {
+        "region": "Japan equities",
+        "direction": "outflow",
+        "amount": "-$2.8B",
+        "amountUSD": -2800000000,
+        "note": "BofA: 4th straight weekly outflow."
+      },
+      {
+        "region": "Money-Market / Cash",
+        "direction": "outflow",
+        "amount": "-$18.21B",
+        "amountUSD": -18210000000,
+        "note": "Lipper: reversed prior ~$154.6B inflow; BofA -$2.5B."
+      },
+      {
+        "region": "Bonds / Credit",
+        "direction": "inflow",
+        "amount": "+$18.27B",
+        "amountUSD": 18270000000,
+        "note": "Lipper 10-wk streak; BofA: HY/EM bond outflows, IG drew cash."
+      },
+      {
+        "region": "Gold",
+        "direction": "outflow",
+        "amount": "-$1.86B to -$2.3B",
+        "amountUSD": -2300000000,
+        "note": "4th straight outflow; crypto -$6.6B/5wk per BofA."
+      }
+    ],
+    "movements": [
+      {
+        "from": "US equities",
+        "to": "Europe / Intl DM equities",
+        "amount": "~$6.7B",
+        "note": "Lipper: US -$12.57B vs Europe +$6.74B."
+      },
+      {
+        "from": "US equities",
+        "to": "Asia / Intl equities",
+        "amount": "~$6.4B",
+        "note": "Lipper: Asia +$6.37B."
+      },
+      {
+        "from": "Money-market & cash",
+        "to": "Equities & bonds",
+        "amount": "~$18B",
+        "note": "MMFs -$18.21B fed equity and bonds (+$18.27B)."
+      },
+      {
+        "from": "Gold & crypto",
+        "to": "Equities (esp. tech)",
+        "amount": "gold ~-$2.3B; crypto ~-$6.6B/5wk",
+        "note": "Vs record tech inflows (BofA +$12.3B; Lipper +$7.05B)."
+      },
+      {
+        "from": "High-yield & EM bonds",
+        "to": "IG / short-duration bonds",
+        "amount": "qualitative",
+        "note": "BofA: HY/EM out, IG/short in."
+      }
+    ],
+    "sources": [
+      "https://www.investing.com/news/stock-market-news/bofas-hartnett-says-investors-remain-frozen-bullish-despite-5-longbond-yields-4739166",
+      "https://www.bnnbloomberg.ca/business/international/2026/06/12/global-equity-funds-draw-third-weekly-inflow-as-investors-buy-the-dip/",
+      "https://www.investing.com/news/stock-market-news/bofa-flow-data-shows-historic-selling-in-tech-led-by-institutional-clients-4735218",
+      "https://www.arabictrader.com/en/news/stock-market/217372/global-equity-funds-register-the-longest-inflow-streak-in-weeks",
+      "https://www.axios.com/2026/05/20/fund-managers-stocks-bofa",
+      "https://epfr.com/insights/global-navigator/emerging-market-funds-seeing-the-light/"
+    ],
+    "asOf": "2026-06-12",
+    "period": "Week ended June 10, 2026 (reported June 12, 2026); weekly/lagged. Prior week ended June 5 cited for BofA client data.",
+    "narrative": "Rotation out of the US into the rest of the world. LSEG Lipper shows ~$12.6B leaving US equity funds (first net sales in 3 weeks) while Europe (+$6.7B) and Asia (+$6.4B) absorbed it. Cash/MMFs saw big outflows, global bond funds extended a 10-week inflow streak (+$18.3B), and gold logged a 4th straight outflow. Divergence: BofA EPFR Flow Show shows US in an 11-week inflow streak and EM +$4.5B, vs Lipper's US and EM-equity outflows; the structural 2026 theme is a Great Rotation with the US taking only ~$26 of every $100 of global equity inflows.</narrative>\n</invoke>\n"
+  }
+}
