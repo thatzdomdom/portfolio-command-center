@@ -437,7 +437,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v43 · 🎯 Opportunity Matrix · Fear&amp;Greed · Breadth · Global Flows · Live: Yahoo + CNN + ApeWisdom · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v44 · 🎯 Opportunity Matrix · Fear&amp;Greed (tap factors) · Live breadth · Global Flows · Live: Yahoo + CNN + ApeWisdom · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="cp-overlay" onclick="closeCP(event)">
@@ -446,6 +446,10 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="overlay" id="opp-overlay" onclick="closeOpp(event)">
   <div class="modal"><button class="modal-close-btn" onclick="closeOpp()">✕</button><div id="opp-content"></div></div>
+</div>
+
+<div class="overlay" id="fg-overlay" onclick="closeFg(event)">
+  <div class="modal" style="max-width:560px"><button class="modal-close-btn" onclick="closeFg()">✕</button><div id="fg-modal-content"></div></div>
 </div>
 
 <div class="overlay" id="modal-overlay" onclick="closeModal(event)">
@@ -1665,11 +1669,58 @@ function srcLine(asOf,sources,live){
   const s=(sources&&sources.length)?` · ${(()=>{try{return new URL(sources[0]).hostname.replace(/^www\./,'')}catch(_){return sources[0]}})()}`:'';
   return `<div class="small" style="color:var(--muted);margin-top:8px">${live?'<span style="color:var(--green)">● live</span> · ':''}as of ${asOf||'—'}${s}</div>`;
 }
+// live sector participation (% of the 11 GICS sector ETFs above their 200/50-day MA), computed in-browser
+const SECTOR_ETFS=['XLB','XLC','XLE','XLF','XLI','XLK','XLP','XLRE','XLU','XLV','XLY'];
+let liveBreadth=null;
+async function computeLiveBreadth(){
+  const a200=[],a50=[]; let n=0;
+  await Promise.allSettled(SECTOR_ETFS.map(async sym=>{
+    try{
+      const d=await yfFetch(`https://query1.finance.yahoo.com/v8/finance/chart/${sym}?interval=1d&range=1y`);
+      const res=d&&d.chart&&d.chart.result&&d.chart.result[0]; const q=res&&res.indicators&&res.indicators.quote&&res.indicators.quote[0];
+      const closes=((q&&q.close)||[]).filter(x=>x!=null); if(closes.length<60)return;
+      const price=(res.meta&&res.meta.regularMarketPrice>0)?res.meta.regularMarketPrice:closes[closes.length-1];
+      const sma=k=>{const s=closes.slice(Math.max(0,closes.length-k));return s.reduce((p,c)=>p+c,0)/s.length;};
+      n++; if(price>sma(200))a200.push(sym); if(price>sma(50))a50.push(sym);
+    }catch(_){}
+  }));
+  if(n<6){liveBreadth=null;return;}
+  const p200=Math.round(a200.length/n*100), p50=Math.round(a50.length/n*100), sig=p=>p>=70?'bullish':p>=40?'neutral':'bearish';
+  liveBreadth=[
+    {label:'Sectors above 200-day MA',value:`${a200.length} / ${n} sectors (${p200}%)`,pct:p200,signal:sig(p200),live:true},
+    {label:'Sectors above 50-day MA',value:`${a50.length} / ${n} sectors (${p50}%)`,pct:p50,signal:sig(p50),live:true}
+  ];
+  renderBreadth(marketData&&marketData.breadth);
+}
+// CNN Fear & Greed — what each of the 7 sub-indicators measures & how it's computed
+const FG_DEFS={
+  marketmomentum:{title:'Market Momentum',what:'How far the S&amp;P 500 has run above or below its own recent trend.',how:'Compares the S&amp;P 500 to its 125-day (≈6-month) moving average. Trading well ABOVE that average reads as greed (strong momentum); slipping below it reads as fear.'},
+  stockpricestrength:{title:'Stock Price Strength',what:'How many stocks are hitting new highs versus new lows.',how:'Counts the net number of NYSE stocks at 52-week highs vs 52-week lows. Lots of new highs = healthy participation (greed); more new lows = fear.'},
+  stockpricebreadth:{title:'Stock Price Breadth',what:'Whether rising or falling stocks are getting the trading volume.',how:'Uses the McClellan Volume Summation Index — advancing-stock volume minus declining-stock volume on the NYSE, accumulated over time. Rising = greed; declining volume dominating = fear.'},
+  putcalloptions:{title:'Put/Call Options',what:'Whether options traders are positioned bullishly or hedging for a fall.',how:'The 5-day average put/call ratio. More calls than puts = greed; a jump in put buying (downside protection) = fear.'},
+  marketvolatility:{title:'Market Volatility',what:'How nervous the options market is about near-term swings.',how:'The VIX (the “fear gauge”) versus its own 50-day moving average. A calm or falling VIX = greed; a spiking VIX = fear. CNN keeps this near neutral unless the VIX really moves.'},
+  safehavendemand:{title:'Safe-Haven Demand',what:'Whether money prefers stocks or the safety of bonds.',how:'The difference between 20-day returns on stocks and on Treasury bonds. Stocks outperforming = risk appetite (greed); bonds outperforming (flight to safety) = fear.'},
+  junkbonddemand:{title:'Junk Bond Demand',what:'How much extra yield investors demand to hold risky company debt.',how:'The yield spread between junk (high-yield) bonds and safer investment-grade bonds. A narrow spread = investors reaching for risk (greed); a widening spread = fear.'}
+};
+const fgKey=s=>String(s||'').toLowerCase().replace(/[^a-z]/g,'');
+function openFgDef(name){
+  const def=FG_DEFS[fgKey(name)]; const comp=((marketData&&marketData.fearGreed&&marketData.fearGreed.components)||[]).find(c=>fgKey(c.name)===fgKey(name));
+  const col=sigCol(comp&&comp.signal); const badge=comp?tc(comp.signal):'—';
+  el('fg-modal-content').innerHTML=`
+    <div style="font-size:20px;font-weight:800;letter-spacing:-.01em">${def?def.title:name}</div>
+    <div style="display:inline-block;font-size:11px;font-weight:800;padding:3px 9px;border-radius:6px;color:#fff;background:${col};text-transform:uppercase;margin-top:6px">${badge}${comp&&comp.score!=null?` · ${comp.score}/100`:''}</div>
+    <div style="margin-top:16px"><div class="sh">What it measures</div><p style="font-size:13px;line-height:1.65;margin-top:2px">${def?def.what:'—'}</p></div>
+    <div style="margin-top:13px"><div class="sh">How it's calculated</div><p style="font-size:13px;line-height:1.65;margin-top:2px">${def?def.how:'—'}</p></div>
+    <div style="margin-top:13px"><div class="sh">Today's reading &amp; why it's ${badge}</div><p style="font-size:13px;line-height:1.65;margin-top:2px">${comp?comp.reading:'—'}</p></div>
+    <div class="small" style="color:var(--muted);margin-top:16px;line-height:1.5">One of 7 indicators CNN averages into the 0-100 Fear &amp; Greed score. Below 25 = Extreme Fear, above 75 = Extreme Greed. Source: cnn.com/markets/fear-and-greed.</div>`;
+  el('fg-overlay').classList.add('open');
+}
+function closeFg(e){if(e&&e.target!==el('fg-overlay'))return; el('fg-overlay').classList.remove('open');}
 async function loadMarket(force){
   if(marketStarted&&!force)return; marketStarted=true;
   try{const r=await fetch('data/market.json?t='+Date.now()); if(r.ok) marketData=await r.json();}catch(_){}
   renderFearGreed(marketData&&marketData.fearGreed); renderBreadth(marketData&&marketData.breadth); renderFlows(marketData&&marketData.flows);
-  fetchFearGreedLive();
+  fetchFearGreedLive(); computeLiveBreadth();
 }
 async function fetchFearGreedLive(){
   try{
@@ -1683,7 +1734,8 @@ async function fetchFearGreedLive(){
       if(f.previous_1_month!=null)live.prev1m=Math.round(f.previous_1_month);
       if(f.previous_1_year!=null)live.prev1y=Math.round(f.previous_1_year);
       const cmap=[['market_momentum_sp500','Market Momentum'],['stock_price_strength','Stock Price Strength'],['stock_price_breadth','Stock Price Breadth'],['put_call_options','Put/Call Options'],['market_volatility_vix','Market Volatility'],['safe_haven_demand','Safe-Haven Demand'],['junk_bond_demand','Junk Bond Demand']];
-      const comps=[]; cmap.forEach(([k,nm])=>{const c=j[k]; if(c&&c.rating)comps.push({name:nm,reading:tc(c.rating),signal:c.rating});});
+      const baked=(marketData&&marketData.fearGreed&&marketData.fearGreed.components)||[];
+      const comps=[]; cmap.forEach(([k,nm])=>{const c=j[k]; if(c&&c.rating){const bk=baked.find(x=>fgKey(x.name)===fgKey(nm)); const sc=(c.score!=null?Math.round(c.score):null); comps.push({name:nm,signal:c.rating,score:sc,reading:(bk&&bk.reading)||`Rated ${tc(c.rating)}${sc!=null?` — component score ${sc}/100`:''}.`});}});
       if(comps.length)live.components=comps;
       if(f.timestamp)live.asOf=new Date(f.timestamp).toISOString().slice(0,10);
       live.live=true; live.sources=live.sources&&live.sources.length?live.sources:['https://www.cnn.com/markets/fear-and-greed'];
@@ -1705,19 +1757,22 @@ function renderFearGreed(fg){
   const n=pt(v,R-13), l=pt(0,R+9), rr=pt(100,R+9);
   const svg=`<svg viewBox="0 0 200 112" width="100%" style="max-width:230px;display:block;margin:2px auto 0">${arcs}<line x1="${cx}" y1="${cy}" x2="${n[0].toFixed(1)}" y2="${n[1].toFixed(1)}" stroke="var(--text)" stroke-width="2.5"/><circle cx="${cx}" cy="${cy}" r="4.5" fill="var(--text)"/><text x="${(l[0]-6).toFixed(0)}" y="108" font-size="9" fill="var(--muted)">0</text><text x="${(rr[0]-6).toFixed(0)}" y="108" font-size="9" fill="var(--muted)">100</text></svg>`;
   const prev=[['Prev',fg.prevClose],['1wk',fg.prev1w],['1mo',fg.prev1m],['1yr',fg.prev1y]].filter(x=>x[1]!=null).map(x=>`<span style="font-size:10.5px;color:var(--muted)">${x[0]} <b style="color:${fgColor(x[1])}">${x[1]}</b></span>`).join('<span style="color:var(--border)">·</span>');
-  const comps=(fg.components||[]).map(c=>`<div style="display:flex;align-items:center;gap:6px;padding:2.5px 0;font-size:11px"><span style="width:7px;height:7px;border-radius:50%;background:${sigCol(c.signal||c.reading)};flex:none"></span><span style="color:var(--muted)">${c.name}</span><b style="margin-left:auto;color:${sigCol(c.signal||c.reading)}">${c.reading||''}</b></div>`).join('');
+  const comps=(fg.components||[]).map(c=>{const lab=tc(c.signal)||c.reading||'';return `<div onclick="openFgDef('${esc(c.name)}')" style="display:flex;align-items:center;gap:6px;padding:3px 0;font-size:11px;cursor:pointer" title="Tap to see what this measures and why">\n    <span style="width:7px;height:7px;border-radius:50%;background:${sigCol(c.signal)};flex:none"></span><span style="color:var(--muted)">${c.name}</span><b style="margin-left:auto;color:${sigCol(c.signal)}">${lab}</b><span style="color:var(--muted);font-size:10px;margin-left:4px">ⓘ</span></div>`;}).join('');
   const crypto=fg.cryptoValue!=null?`<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-size:11px;display:flex;justify-content:space-between"><span style="color:var(--muted)">Crypto F&amp;G</span><b style="color:${fgColor(fg.cryptoValue)}">${fg.cryptoValue} · ${fg.cryptoRating||fgLabel(fg.cryptoValue)}</b></div>`:'';
-  box.innerHTML=`${svg}<div style="text-align:center;margin-top:-4px"><span style="font-size:34px;font-weight:800;color:${col};line-height:1">${v}</span><div style="font-size:13px;font-weight:800;color:${col};text-transform:uppercase;letter-spacing:.04em">${fg.rating||fgLabel(v)}</div></div><div style="display:flex;gap:8px;justify-content:center;margin:8px 0 4px;flex-wrap:wrap">${prev}</div>${comps?`<div style="margin-top:6px;border-top:1px solid var(--border);padding-top:4px">${comps}</div>`:''}${crypto}${srcLine(fg.asOf,fg.sources,fg.live)}`;
+  box.innerHTML=`${svg}<div style="text-align:center;margin-top:-4px"><span style="font-size:34px;font-weight:800;color:${col};line-height:1">${v}</span><div style="font-size:13px;font-weight:800;color:${col};text-transform:uppercase;letter-spacing:.04em">${fg.rating||fgLabel(v)}</div></div><div style="display:flex;gap:8px;justify-content:center;margin:8px 0 4px;flex-wrap:wrap">${prev}</div>${comps?`<div style="margin-top:6px;border-top:1px solid var(--border);padding-top:4px">${comps}<div class="small" style="color:var(--muted);margin-top:5px;text-align:center">Tap any factor to see how it's measured ⓘ</div></div>`:''}${crypto}${srcLine(fg.asOf,fg.sources,fg.live)}`;
 }
 function renderBreadth(b){
   const box=el('breadth-body'); if(!box)return;
-  if(!b||!b.metrics||!b.metrics.length){box.innerHTML='<div class="small" style="color:var(--muted)">No data yet — refreshes daily.</div>';return;}
-  const rows=b.metrics.map(m=>{
+  const live=liveBreadth||[], baked=(b&&b.metrics)||[];
+  if(!live.length&&!baked.length){box.innerHTML='<div class="small" style="color:var(--muted)">No data yet — refreshes daily.</div>';return;}
+  const metricRow=m=>{
     const col=sigCol(m.signal);
     const bar=m.pct!=null?`<div style="height:5px;background:var(--surf2);border-radius:3px;margin-top:5px"><div style="width:${clip(m.pct,0,100)}%;height:100%;background:${col};border-radius:3px"></div></div>`:'';
-    return `<div style="padding:7px 0;border-bottom:1px solid var(--border)"><div style="display:flex;justify-content:space-between;gap:8px;align-items:baseline"><span style="color:var(--muted);font-size:11.5px">${m.label}</span>${m.signal?`<span style="font-size:9.5px;font-weight:800;color:${col};text-transform:uppercase;letter-spacing:.03em;white-space:nowrap">${m.signal}</span>`:''}</div><div style="font-size:11.5px;color:${col};font-weight:600;margin-top:2px;line-height:1.45">${m.value}</div>${bar}</div>`;
-  }).join('');
-  box.innerHTML=`${rows}${b.note?`<div class="small" style="margin-top:8px;line-height:1.5">${b.note}</div>`:''}${srcLine(b.asOf,b.sources)}`;
+    return `<div style="padding:7px 0;border-bottom:1px solid var(--border)"><div style="display:flex;justify-content:space-between;gap:8px;align-items:baseline"><span style="color:var(--muted);font-size:11.5px">${m.live?'<span style="color:var(--green)">● </span>':''}${m.label}</span>${m.signal?`<span style="font-size:9.5px;font-weight:800;color:${col};text-transform:uppercase;letter-spacing:.03em;white-space:nowrap">${m.signal}</span>`:''}</div><div style="font-size:11.5px;color:${col};font-weight:600;margin-top:2px;line-height:1.45">${m.value}</div>${bar}</div>`;
+  };
+  const liveRows=live.map(metricRow).join('');
+  const bakedRows=baked.map(metricRow).join('');
+  box.innerHTML=`${live.length?`<div class="small" style="color:var(--green);font-weight:700;margin-bottom:2px">● live · sector participation (computed in-browser)</div>${liveRows}`:''}${baked.length?`${live.length?`<div class="small" style="color:var(--muted);margin:9px 0 2px">Daily research — broader breadth</div>`:''}${bakedRows}`:''}${b&&b.note?`<div class="small" style="margin-top:8px;line-height:1.5">${b.note}</div>`:''}${srcLine(b&&b.asOf,b&&b.sources)}`;
 }
 function renderFlows(f){
   const box=el('flows-body'); if(!box)return;
