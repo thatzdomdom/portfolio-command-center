@@ -199,6 +199,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 <div class="nav">
   <button class="nav-btn active" onclick="showTab('overview',this)">Overview</button>
   <button class="nav-btn" onclick="showTab('opportunity',this)">🎯 Opportunity Matrix</button>
+  <button class="nav-btn" onclick="showTab('risk',this)">🛡️ Portfolio Risk</button>
   <button class="nav-btn" onclick="showTab('smart',this)">💼 Smart Money</button>
   <button class="nav-btn" onclick="showTab('investors',this)">🐋 Investors</button>
   <button class="nav-btn" onclick="showTab('reddit',this)">🔥 Reddit Trends</button>
@@ -302,6 +303,23 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
     <div class="sh">How the model works — methodology</div>
     <div id="opp-method" style="font-size:12.5px;line-height:1.75;color:var(--text)"></div>
   </div>
+</div>
+
+<div class="panel" id="panel-risk">
+  <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px;">
+    <div style="font-size:18px;font-weight:800;letter-spacing:-.02em;">🛡️ Portfolio Risk &amp; Scenarios</div>
+    <div style="font-size:12px;color:var(--muted);">Your actual book through the same quant + macro lens — risk, concentration, stress tests, and where you're offside vs the regime.</div>
+  </div>
+  <div id="risk-status" class="small" style="color:var(--muted);margin-bottom:12px;"><span class="spin"></span> Loading…</div>
+  <div id="risk-kpis" class="grid3" style="margin-bottom:16px;"></div>
+  <div class="grid2" style="margin-bottom:16px;align-items:start">
+    <div class="card"><div class="sh">Risk concentration — who's really driving your risk</div><div id="risk-concentration"></div></div>
+    <div class="card"><div class="sh">Exposure & leverage</div><div id="risk-exposure"></div></div>
+  </div>
+  <div class="card" style="margin-bottom:16px;"><div class="sh">⚡ Scenario stress tests — estimated impact on your liquid book</div><div class="tbl-wrap"><div id="risk-scenarios"></div></div></div>
+  <div class="card" style="margin-bottom:16px;"><div class="sh">🚩 Where your book is offside vs the current regime</div><div id="risk-offside"></div></div>
+  <div class="card" style="margin-bottom:16px;"><div class="sh">Model read on your holdings (same engine as the Opportunity Matrix)</div><div class="tbl-wrap"><div id="risk-holdings"></div></div></div>
+  <div class="card" style="margin-bottom:16px;"><div class="sh">Methodology & caveats</div><div id="risk-method" style="font-size:12.5px;line-height:1.7"></div></div>
 </div>
 
 <div class="panel" id="panel-holdings">
@@ -437,7 +455,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v44 · 🎯 Opportunity Matrix · Fear&amp;Greed (tap factors) · Live breadth · Global Flows · Live: Yahoo + CNN + ApeWisdom · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v45 · 🛡️ Portfolio Risk &amp; Scenarios · 🎯 Opportunity Matrix · Fear&amp;Greed · Live breadth · Flows · Live: Yahoo + CNN · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="cp-overlay" onclick="closeCP(event)">
@@ -1055,7 +1073,8 @@ function showTab(id,b){document.querySelectorAll('.panel').forEach(p=>p.classLis
   if(id==='reddit'&&!redditLoaded) loadReddit();
   if(id==='smart'&&!intelLoaded) loadIntel();
   if(id==='investors'&&!investorsLoaded) loadInvestors();
-  if(id==='opportunity'&&!modelStarted) loadModel();}
+  if(id==='opportunity'&&!modelStarted) loadModel();
+  if(id==='risk'&&!riskStarted) loadRisk();}
 
 // ── Conviction Plays (Overview) + drill-down ──
 let convAction='New';
@@ -1366,7 +1385,7 @@ async function loadReddit(force){
 // ═══════════════════════════════════════════════════════════════════════
 let modelStarted=false, modelLoading=false, modelLoaded=false, modelMacro=null, modelData={}, modelSmartSectors=null, MODEL_RESULTS=[], oppHorizon='3m', oppGroup='all', MACRO_TILT={};
 // Refresh button: re-price holdings AND (if the matrix was ever opened) re-pull the Opportunity Matrix — fresh macro + fresh prices.
-function refreshAll(){ loadAll(); loadMarket(true); if(modelStarted) loadModel(true); }
+function refreshAll(){ loadAll(); loadMarket(true); if(modelStarted) loadModel(true); if(riskStarted) loadRisk(true); }
 const GLABEL={Equity:'Equity / Region',Factor:'Factor / Sector',Commodity:'Commodity',Crypto:'Crypto',Bond:'Bond / Rate'};
 // universe — must stay aligned across app. {t ticker, yf, n name, g group, mc macro-class, prior μ-prior, cap drift-cap, fit portfolio-fit}
 const MODEL_UNIVERSE=[
@@ -1781,6 +1800,181 @@ function renderFlows(f){
   const regions=f.regions.map(r=>{const inflow=/in/i.test(r.direction);const col=inflow?'var(--green)':'var(--red)';const has=r.amountUSD!=null;const w=has?Math.round(Math.abs(r.amountUSD)/mx*100):0;return `<div style="padding:5px 0" title="${(r.note||'').replace(/"/g,'&quot;')}"><div style="display:flex;justify-content:space-between;gap:8px;align-items:baseline"><span style="font-size:11.5px">${r.region}</span><b style="font-size:11px;color:${col};text-align:right">${inflow?'▲':'▼'} ${r.amount}</b></div>${has?`<div style="height:7px;background:var(--surf2);border-radius:4px;overflow:hidden;margin-top:4px"><div style="width:${w}%;height:100%;background:${col}"></div></div>`:`<div style="font-size:10.5px;color:var(--muted);margin-top:1px;line-height:1.4">${r.note||''}</div>`}</div>`;}).join('');
   const moves=(f.movements||[]).map(m=>`<div style="font-size:11px;padding:4px 0;border-top:1px solid var(--border)"><b>${m.from}</b> <span style="color:var(--accent);font-weight:800">→</span> <b>${m.to}</b> <span style="color:var(--muted)">${m.amount}</span>${m.note?`<div style="color:var(--muted);font-size:10.5px">${m.note}</div>`:''}</div>`).join('');
   box.innerHTML=`${f.narrative?`<div style="font-size:11.5px;line-height:1.55;margin-bottom:8px">${f.narrative}</div>`:''}${regions}${moves?`<div style="margin-top:8px"><div class="small" style="color:var(--muted);margin-bottom:2px">Biggest rotations</div>${moves}</div>`:''}<div class="small" style="color:var(--muted);margin-top:6px">${f.period||''}</div>${srcLine(f.asOf,f.sources)}`;
+}
+// ═══════════════════════════════════════════════════════════════════════
+// 🛡️ PORTFOLIO RISK & SCENARIOS — runs the ACTUAL book through a risk lens.
+// All computed in-browser from the 2y daily histories already fetched (pd[]):
+// covariance/vol, VaR/ES, max-DD, risk-contribution (MCTR), factor-beta
+// stress tests, regime-offside flags, and a model read on each holding.
+// ═══════════════════════════════════════════════════════════════════════
+let riskStarted=false, riskLoading=false, riskFactors={}, riskResult=null;
+const FACTORS=['SPY','TLT','GLD','FXI','UUP'];
+const FACTOR_LABEL={SPY:'Global Equity',TLT:'Long Bonds/Rates',GLD:'Gold',FXI:'China/EM',UUP:'US Dollar'};
+const SCENARIOS=[
+  {name:'Rates spike +100bp',desc:'10y +100bp · long bonds −12%, equities −4%, gold −5%',sh:{SPY:-0.04,TLT:-0.12,GLD:-0.05,FXI:-0.05,UUP:0.02}},
+  {name:'Global equity selloff −20%',desc:'Broad risk-off · SPY −20%, China −25%, gold +5%, bonds +8%',sh:{SPY:-0.20,FXI:-0.25,GLD:0.05,TLT:0.08,UUP:0.04}},
+  {name:'Precious-metals correction −15%',desc:'Gold −15% (silver ~1.7×), equities flat',sh:{GLD:-0.15,SPY:0,FXI:0,TLT:0,UUP:0.02}},
+  {name:'China hard-landing',desc:'China −25%, regional spillover · SPY −6%, gold +3%',sh:{FXI:-0.25,SPY:-0.06,GLD:0.03,TLT:0.03,UUP:0.03}},
+  {name:'USD surge +5%',desc:'DXY +5% · gold −6%, EM −8%, equities −2%',sh:{UUP:0.05,GLD:-0.06,FXI:-0.08,SPY:-0.02,TLT:-0.01}},
+  {name:'Stagflation shock',desc:'Equities −10%, bonds −6%, gold +10%',sh:{SPY:-0.10,TLT:-0.06,GLD:0.10,FXI:-0.08,UUP:0.02}},
+  {name:'2020 COVID-style crash',desc:'SPY −34%, China −20%, gold −12% (liquidity), bonds +10%',sh:{SPY:-0.34,FXI:-0.20,GLD:-0.12,TLT:0.10,UUP:0.05}}
+];
+function retSeries(hist){const dates=[],r=[];for(let i=1;i<hist.length;i++){if(hist[i].close>0&&hist[i-1].close>0){dates.push(hist[i].time);r.push(hist[i].close/hist[i-1].close-1);}}const map={};dates.forEach((d,i)=>map[d]=r[i]);return {dates,r,map};}
+// solve k×k linear system A x = b (Gaussian elimination w/ partial pivot)
+function solveLin(A,b){const k=b.length,M=A.map((row,i)=>row.concat(b[i]));for(let c=0;c<k;c++){let p=c;for(let i=c+1;i<k;i++)if(Math.abs(M[i][c])>Math.abs(M[p][c]))p=i;[M[c],M[p]]=[M[p],M[c]];if(Math.abs(M[c][c])<1e-12)return null;for(let i=0;i<k;i++){if(i===c)continue;const f=M[i][c]/M[c][c];for(let j=c;j<=k;j++)M[i][j]-=f*M[c][j];}}return M.map((row,i)=>row[k]/row[i]);}
+// multivariate OLS of holding returns on the 5 factors → betas.
+// Demean and solve the factor covariance system (well-conditioned; no intercept-scale blow-up).
+function factorBetas(hser){
+  const rows=[]; hser.dates.forEach((d,i)=>{if(FACTORS.every(f=>riskFactors[f]&&riskFactors[f].map[d]!=null))rows.push([hser.r[i],...FACTORS.map(f=>riskFactors[f].map[d])]);});
+  if(rows.length<60)return null;
+  const N=rows.length, k=FACTORS.length, mean=new Array(k+1).fill(0);
+  rows.forEach(r=>r.forEach((v,j)=>mean[j]+=v/N));
+  const C=Array.from({length:k},()=>new Array(k).fill(0)), d=new Array(k).fill(0);
+  rows.forEach(r=>{const yd=r[0]-mean[0];for(let a=0;a<k;a++){const fa=r[a+1]-mean[a+1];d[a]+=fa*yd;for(let b=0;b<k;b++)C[a][b]+=fa*(r[b+1]-mean[b+1]);}});
+  const sol=solveLin(C,d); if(!sol||sol.some(x=>!isFinite(x)))return null;
+  const betas={}; FACTORS.forEach((f,i)=>betas[f]=sol[i]); return betas;
+}
+function olsBeta(xs,ys){const n=xs.length;if(n<30)return null;const mx=xs.reduce((a,b)=>a+b,0)/n,my=ys.reduce((a,b)=>a+b,0)/n;let cov=0,vx=0;for(let i=0;i<n;i++){cov+=(xs[i]-mx)*(ys[i]-my);vx+=(xs[i]-mx)*(xs[i]-mx);}return vx>0?cov/vx:null;}
+async function loadRiskFactors(){
+  await Promise.allSettled(FACTORS.map(async f=>{ if(riskFactors[f])return;
+    try{const d=await yfFetch(`https://query1.finance.yahoo.com/v8/finance/chart/${f}?interval=1d&range=2y`);const res=d&&d.chart&&d.chart.result&&d.chart.result[0];const ts=res&&res.timestamp,q=res&&res.indicators&&res.indicators.quote&&res.indicators.quote[0];
+      if(ts&&q&&q.close){const hist=[];for(let i=0;i<ts.length;i++){if(q.close[i]!=null)hist.push({time:new Date(ts[i]*1000).toISOString().slice(0,10),close:q.close[i]});}if(hist.length>60)riskFactors[f]=retSeries(hist);}
+    }catch(_){}}));
+}
+function computeRisk(){
+  const sleeve=H.filter(h=>h.yf&&pd[h.t]&&pd[h.t].history&&pd[h.t].history.length>40&&valSGD(h)>0);
+  if(!sleeve.length)return null;
+  const ser=sleeve.map(h=>({h,...retSeries(pd[h.t].history)}));
+  const dset={}; ser.forEach(s=>s.dates.forEach(d=>dset[d]=1));
+  let dates=Object.keys(dset).sort(); const W=Math.min(252,dates.length); dates=dates.slice(-W);
+  const T=dates.length, n=sleeve.length;
+  const R=ser.map(s=>dates.map(d=>s.map[d]!=null?s.map[d]:0)); // zero-fill cross-market holidays
+  const vals=sleeve.map(h=>valSGD(h)), Vsleeve=vals.reduce((a,b)=>a+b,0), w=vals.map(v=>v/Vsleeve);
+  const means=R.map(row=>row.reduce((a,b)=>a+b,0)/T);
+  const cov=(i,j)=>{let s=0;for(let t=0;t<T;t++)s+=(R[i][t]-means[i])*(R[j][t]-means[j]);return s/(T-1);};
+  const Sw=new Array(n).fill(0); for(let i=0;i<n;i++){let s=0;for(let j=0;j<n;j++)s+=cov(i,j)*w[j];Sw[i]=s;}
+  const varD=Math.max(w.reduce((a,wi,i)=>a+wi*Sw[i],0),1e-12);
+  const sigSleeve=Math.sqrt(varD*252);
+  const rc=w.map((wi,i)=>wi*Sw[i]/varD); // % contribution to variance
+  const Rp=dates.map((d,t)=>w.reduce((a,wi,i)=>a+wi*R[i][t],0)); // reconstructed sleeve daily return
+  const sorted=[...Rp].sort((a,b)=>a-b);
+  const qf=p=>sorted[Math.max(0,Math.min(sorted.length-1,Math.floor(p*sorted.length)))];
+  const var95=-qf(0.05), var99=-qf(0.01);
+  const tailN=Math.max(1,Math.floor(0.05*sorted.length)); const es95=-(sorted.slice(0,tailN).reduce((a,b)=>a+b,0)/tailN);
+  let eq=1,peak=1,mdd=0,worst=0; Rp.forEach(r=>{eq*=(1+r);if(eq>peak)peak=eq;const dd=eq/peak-1;if(dd<mdd)mdd=dd;if(r<worst)worst=r;});
+  // liquid base (exclude property & PE)
+  const liq=H.filter(h=>['Equity','Commodity','Cash','Fund'].includes(h.ac)); const Vliq=liq.reduce((a,h)=>a+valSGD(h),0);
+  const nw=H.reduce((a,h)=>a+valSGD(h),0); const illiq=H.filter(h=>['Property','Private Equity'].includes(h.ac)).reduce((a,h)=>a+valSGD(h),0);
+  const sleeveShare=Vliq>0?Vsleeve/Vliq:0; const sigPort=sigSleeve*sleeveShare;
+  // benchmark beta (SPY) of the sleeve
+  let beta=null; if(riskFactors.SPY){const xs=[],ys=[];dates.forEach((d,t)=>{if(riskFactors.SPY.map[d]!=null){xs.push(riskFactors.SPY.map[d]);ys.push(Rp[t]);}}); beta=olsBeta(xs,ys);}
+  // per-holding factor betas (for scenarios) + model score
+  const rows=sleeve.map((h,i)=>{const fb=factorBetas(ser[i]); const sc=scoreHolding(h); return {h,val:vals[i],w:w[i],rc:rc[i],fb,sc,vol:Math.sqrt(Math.max(cov(i,i),0)*252)};});
+  // scenarios
+  const scen=SCENARIOS.map(s=>{let pnl=0; const contrib=[]; rows.forEach(r=>{ if(!r.fb)return; let ret=0; FACTORS.forEach(f=>ret+=(r.fb[f]||0)*(s.sh[f]||0)); const d=r.val*ret; pnl+=d; contrib.push({n:r.h.n,d,ret}); }); contrib.sort((a,b)=>a.d-b.d); return {name:s.name,desc:s.desc,pnl,pct:Vliq>0?pnl/Vliq:0,worst:contrib.slice(0,3)};});
+  // exposure buckets (of liquid book)
+  const bucket=fn=>H.filter(fn).reduce((a,h)=>a+valSGD(h),0);
+  const reit=bucket(h=>h.sector==='Real Estate'), metals=bucket(h=>h.sector==='Gold/Silver Miners'||(h.ac==='Commodity')), chinaHK=bucket(h=>h.region==='China/HK'&&h.ac==='Equity'), cash=bucket(h=>h.ac==='Cash');
+  // leverage: IBKR silver gross vs net equity
+  const silG=valSGD(H.find(h=>h.id===57)||{}), loan=valSGD(H.find(h=>h.id===58)||{}); const ibkrNav=silG+loan; const lev=ibkrNav>0?silG/ibkrNav:null;
+  // currency exposure
+  const curMap={}; liq.forEach(h=>{curMap[h.cur]=(curMap[h.cur]||0)+valSGD(h);});
+  const metalsRisk=rows.filter(r=>r.h.sector==='Gold/Silver Miners'||r.h.ac==='Commodity').reduce((a,r)=>a+r.rc,0);
+  return {sleeve,rows,dates:T,Vsleeve,Vliq,nw,illiq,sleeveShare,sigSleeve,sigPort,var95,var99,es95,mdd,worst,beta,scen,
+    exp:{reit,metals,chinaHK,cash,metalsRisk},lev,silG,ibkrNav,curMap};
+}
+function scoreHolding(h){
+  const hist=pd[h.t]&&pd[h.t].history; if(!hist||hist.length<60)return null;
+  const C=hist.map(x=>x.close),n=C.length,price=(pd[h.t].price>0?pd[h.t].price:C[n-1]);
+  const sma=k=>{const s=C.slice(Math.max(0,n-k));return s.reduce((a,b)=>a+b,0)/s.length;};
+  const sma50=sma(50),sma200=sma(200);
+  const lr=[];for(let i=1;i<n;i++)lr.push(Math.log(C[i]/C[i-1]));
+  const std=a=>{if(a.length<2)return 0;const m=a.reduce((x,y)=>x+y,0)/a.length;return Math.sqrt(a.reduce((s,v)=>s+(v-m)*(v-m),0)/(a.length-1));};
+  let sigma=0.6*std(lr.slice(-90))*Math.sqrt(252)+0.4*std(lr.slice(-252))*Math.sqrt(252); sigma=Math.max(sigma,0.04);
+  const dr=ww=>{const a=lr.slice(-ww);return a.length?a.reduce((x,y)=>x+y,0)/a.length*252:0;};
+  const px=k=>C[Math.max(0,n-1-k)]; const mom=n>252?px(21)/px(252)-1:0;
+  const t200=clip((price/sma200-1)/0.12,-1,1),t50=clip((sma50/sma200-1)/0.06,-1,1),momS=clip(mom/0.20,-1,1);
+  const S=0.45*t200+0.30*momS+0.25*t50;
+  const cls=h.ac==='Commodity'?'Commodities':'Equity';
+  const mu=clip(0.30*dr(252)+0.50*(h.ac==='Commodity'?0.05:0.07)+0.10*S+macroTiltFor(cls),-(h.ac==='Commodity'?0.30:0.22),(h.ac==='Commodity'?0.30:0.22));
+  const hz=Tt=>{const mLog=(mu-0.5*sigma*sigma)*Tt,s=sigma*Math.sqrt(Tt);return {pUp:clip(normCdf(mLog/s),0.05,0.95),ev:Math.exp(mu*Tt)-1};};
+  const h3=hz(63/252),h12=hz(252/252),up=price>sma200&&sma50>sma200,down=price<sma200&&sma50<sma200;
+  const score=clip(50+50*(0.4*((h3.pUp-0.5)/0.5)+0.3*((h12.pUp-0.5)/0.5)+0.3*S),0,100);
+  let label=(down&&mu<0)?'TRIM ⚠':score>=62?'ADD-OK':score>=52?'HOLD':score>=42?'WATCH':'TRIM';
+  return {price,sigma,mom,score,label,p3:h3.pUp,p12:h12.ev,p12p:h12.pUp,trend:up?'up':down?'down':'mixed'};
+}
+async function loadRisk(force){
+  if(riskLoading)return; if(riskStarted&&!force)return; riskStarted=true; riskLoading=true;
+  el('risk-status').innerHTML='<span class="spin"></span> Loading factor benchmarks & pricing your book…';
+  await loadRiskFactors();
+  if(!modelMacro){try{const r=await fetch('data/model.json?t='+Date.now());if(r.ok){modelMacro=await r.json();buildMacroTilt();}}catch(_){}}
+  if(!marketData){try{const r=await fetch('data/market.json?t='+Date.now());if(r.ok)marketData=await r.json();}catch(_){}}
+  riskResult=computeRisk(); renderRisk(); renderRiskMethod(); riskLoading=false;
+  el('risk-status').innerHTML=riskResult?`✓ ${riskResult.sleeve.length} live-priced positions modeled over ${riskResult.dates} trading days · ${new Date().toLocaleString('en-SG')} · tap ↻ Refresh to re-pull`:'<span style="color:var(--red)">Prices still loading — tap ↻ Refresh in a moment.</span>';
+}
+function riskKpi(label,val,sub,col){return `<div class="card"><div class="kpi-label">${label}</div><div style="font-size:22px;font-weight:800;letter-spacing:-.02em;color:${col||'var(--text)'}">${val}</div><div class="kpi-sub">${sub||''}</div></div>`;}
+function renderRisk(){
+  const R=riskResult; if(!R){el('risk-kpis').innerHTML='<div class="small" style="color:var(--muted)">Waiting for prices…</div>';return;}
+  const var$=R.var95*R.Vsleeve*Math.sqrt(21), varPct=R.Vliq>0?var$/R.Vliq:0, es$=R.es95*R.Vsleeve*Math.sqrt(21);
+  el('risk-kpis').innerHTML=[
+    riskKpi('Portfolio volatility',(R.sigPort*100).toFixed(1)+'%','annualized, incl. cash drag · sleeve '+(R.sigSleeve*100).toFixed(0)+'%',(R.sigPort>0.18?'var(--red)':R.sigPort>0.12?'var(--accent)':'var(--green)')),
+    riskKpi('1-month VaR (95%)',fmtS(var$),'≈'+(varPct*100).toFixed(1)+'% of liquid book · worst expected month','var(--red)'),
+    riskKpi('Expected shortfall',fmtS(es$),'avg loss in the worst 5% of months','var(--red)'),
+    riskKpi('Max drawdown (2y, sleeve)',(R.mdd*100).toFixed(1)+'%','worst peak-to-trough of your securities','var(--red)'),
+    riskKpi('Beta to global equities',R.beta!=null?R.beta.toFixed(2):'—','sleeve sensitivity to SPY',null),
+    riskKpi('Liquid vs illiquid',(R.Vliq/R.nw*100).toFixed(0)+'% / '+(R.illiq/R.nw*100).toFixed(0)+'%','tradable book vs property+PE',null)
+  ].join('');
+  // concentration: $ weight vs risk contribution
+  const conc=[...R.rows].sort((a,b)=>b.rc-a.rc).slice(0,10);
+  el('risk-concentration').innerHTML=`<div class="small" style="color:var(--muted);margin-bottom:8px">Sorted by contribution to portfolio variance. When <b>risk %</b> ≫ <b>weight %</b>, that position punches above its size (vol + correlation).</div>
+   <table><thead><tr><th>Position</th><th class="r">Weight</th><th class="r">Risk %</th><th class="r hide-sm">Vol</th></tr></thead><tbody>
+   ${conc.map(r=>{const hot=r.rc>r.w*1.3;return `<tr><td>${r.h.n}</td><td class="r">${(r.w*100).toFixed(1)}%</td><td class="r" style="font-weight:700;color:${hot?'var(--red)':'var(--text)'}">${(r.rc*100).toFixed(1)}%</td><td class="r hide-sm" style="color:var(--muted)">${(r.vol*100).toFixed(0)}%</td></tr>`;}).join('')}
+   </tbody></table>`;
+  // exposure & leverage
+  const e=R.exp, pc=v=>(v/R.Vliq*100).toFixed(0)+'%';
+  const expRow=(lab,v,col,note)=>`<div style="padding:6px 0;border-bottom:1px solid var(--border)"><div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">${lab}</span><b style="color:${col||'var(--text)'}">${pc(v)}</b></div>${note?`<div class="small" style="color:var(--muted)">${note}</div>`:''}</div>`;
+  const curr=Object.entries(R.curMap).sort((a,b)=>b[1]-a[1]).map(([c,v])=>`<span class="fxchip" style="margin-right:10px"><b>${c}</b> ${(v/R.Vliq*100).toFixed(0)}%</span>`).join('');
+  el('risk-exposure').innerHTML=`${expRow('Rate-sensitive (REITs)',e.reit,e.reit/R.Vliq>0.2?'var(--red)':'var(--accent)','rises-with-yields headwind in a hawkish regime')}
+   ${expRow('Precious metals (incl. levered silver)',e.metals,e.metalsRisk>0.3?'var(--red)':'var(--accent)',`your single biggest risk theme · <b style="color:var(--red)">${(e.metalsRisk*100).toFixed(0)}% of portfolio risk</b>`)}
+   ${expRow('China / HK equities',e.chinaHK,e.chinaHK/R.Vliq>0.15?'var(--accent)':'var(--text)','facing regional outflows')}
+   ${expRow('Cash & equivalents',e.cash,'var(--green)','dry powder · ~4% carry, USD/Cash is OW')}
+   <div style="margin-top:10px"><div class="sh" style="margin-bottom:4px">Currency exposure (liquid)</div>${curr}</div>
+   ${R.lev?`<div style="margin-top:10px;padding:9px;background:var(--surf2);border-radius:8px;font-size:12px"><b>IBKR leverage:</b> S$${Math.round(R.silG).toLocaleString('en-SG')} silver on S$${Math.round(R.ibkrNav).toLocaleString('en-SG')} equity = <b style="color:var(--red)">${R.lev.toFixed(2)}× levered</b>. Silver moves hit your equity ~${R.lev.toFixed(1)}×.</div>`:''}`;
+  // scenarios
+  el('risk-scenarios').innerHTML=`<table><thead><tr><th>Scenario</th><th class="r">Impact</th><th class="r hide-sm">S$</th><th class="hide-sm">Hit hardest</th></tr></thead><tbody>
+   ${R.scen.map(s=>`<tr><td><b>${s.name}</b><div class="small" style="color:var(--muted)">${s.desc}</div></td><td class="r" style="font-weight:800;color:${s.pct<0?'var(--red)':'var(--green)'}">${(s.pct*100).toFixed(1)}%</td><td class="r hide-sm" style="color:${s.pnl<0?'var(--red)':'var(--green)'}">${(s.pnl>=0?'+':'')}${fmtS(s.pnl)}</td><td class="hide-sm small" style="color:var(--muted)">${s.worst.filter(c=>c.d<0).slice(0,2).map(c=>c.n).join(', ')||'—'}</td></tr>`).join('')}
+   </tbody></table><div class="small" style="color:var(--muted);margin-top:8px">Factor-model estimate: each holding's betas to Global Equity / Rates / Gold / China-EM / USD × the scenario's factor shocks, applied to your liquid book. Property & PE excluded.</div>`;
+  renderOffside(); renderRiskHoldings();
+}
+function renderOffside(){
+  const R=riskResult, M=modelMacro&&modelMacro.macro; const flags=[];
+  const moneyPct=v=>(v/R.Vliq*100).toFixed(0)+'%', sleevePct=v=>R.Vsleeve>0?(v/R.Vsleeve*100).toFixed(0)+'%':'—';
+  const topRc=R.rows.length?[...R.rows].sort((a,b)=>b.rc-a.rc)[0]:null;
+  if(R.exp.metalsRisk>0.30) flags.push({sev:'high',t:`Precious metals are ${moneyPct(R.exp.metals)} of your money but ${(R.exp.metalsRisk*100).toFixed(0)}% of your portfolio risk`,d:`This is your dominant, concentrated bet${R.lev?`, amplified by ${R.lev.toFixed(2)}× IBKR silver leverage`:''}. Commodities are only "modest OW" and gold is in near-term outflows — the upside is real but a 15% metals pullback hurts disproportionately. Size it deliberately, don't let it ride by default.`});
+  if(topRc&&topRc.rc>0.18) flags.push({sev:'high',t:`Single-position risk: ${topRc.h.n} alone is ${(topRc.rc*100).toFixed(0)}% of portfolio variance (only ${(topRc.w*100).toFixed(1)}% of value)`,d:`High vol (${(topRc.vol*100).toFixed(0)}%/yr)${R.lev&&/silver/i.test(topRc.h.n)?' + leverage':''} means it punches far above its dollar weight. A single name driving a fifth of your risk is the textbook definition of concentration.`});
+  if(R.exp.reit/R.Vsleeve>0.12) flags.push({sev:'med',t:`Rate-sensitive REITs are ${sleevePct(R.exp.reit)} of your invested sleeve`,d:`Regime is "${M?M.regime:'late-cycle hawkish'}" with rising real yields and bonds only Neutral — a discount-rate headwind to REIT valuations/distributions. Modest in dollar terms, but watch refinancing/gearing on the names.`});
+  if(R.exp.chinaHK/R.Vsleeve>0.12) flags.push({sev:'med',t:`China/HK equities ${sleevePct(R.exp.chinaHK)} of sleeve into EM/China outflows`,d:`Flows are leaving China (per the flows panel) and EM stance is Neutral. SMIC in particular is both a big risk contributor and policy/sanction-exposed — watch for stabilization or trim into strength.`});
+  if(R.beta!=null&&R.beta<0.7) flags.push({sev:'ok',t:`Book beta ${R.beta.toFixed(2)} — genuine diversification from US equities`,d:`Your metals + Asia tilt means you're only ~${R.beta.toFixed(2)}:1 with the S&P. That's a real strength; just note the flip side is heavy idiosyncratic metals/China risk rather than broad-market risk.`});
+  else if(R.beta!=null&&R.beta>0.95) flags.push({sev:'med',t:`Book beta ${R.beta.toFixed(2)} — you move ~1:1 with global equities`,d:`Limited equity-factor diversification. The Matrix's ballast (Treasuries, min-vol, T-bills) would lower this.`});
+  if(R.exp.cash/R.Vliq>0.25) flags.push({sev:'ok',t:`Cash is ${moneyPct(R.exp.cash)} of the liquid book — well-positioned`,d:`USD/Cash is the regime's OW; you have ~4% carry and serious dry powder to deploy on the Matrix's buy candidates or to add drawdown ballast. Confirm it's actually earning yield (T-bills/MMF), not sitting idle in low-rate accounts.`});
+  el('risk-offside').innerHTML=flags.length?`<div style="display:flex;flex-direction:column;gap:8px">${flags.map(f=>{const c=f.sev==='high'?'var(--red)':f.sev==='med'?'var(--accent)':'var(--green)';const ic=f.sev==='ok'?'✓':f.sev==='high'?'🔴':'🟠';return `<div style="border-left:3px solid ${c};background:var(--surf2);border-radius:0 8px 8px 0;padding:9px 12px"><div style="font-weight:700;font-size:12.5px">${ic} ${f.t}</div><div class="small" style="margin-top:3px;line-height:1.5">${f.d}</div></div>`;}).join('')}</div>`:'<div class="small" style="color:var(--muted)">No major offside flags.</div>';
+}
+function renderRiskHoldings(){
+  const R=riskResult; const rows=R.rows.filter(r=>r.sc).sort((a,b)=>b.val-a.val);
+  const lc=l=>/ADD/.test(l)?'var(--green)':/HOLD/.test(l)?'var(--muted)':/WATCH/.test(l)?'var(--accent)':'var(--red)';
+  el('risk-holdings').innerHTML=`<table><thead><tr><th>Holding</th><th class="r">Value</th><th class="r hide-sm">Wt</th><th class="hide-sm">Trend</th><th class="r">P↑3M</th><th class="r hide-sm">EV 12M</th><th class="r">Signal</th></tr></thead><tbody>
+   ${rows.map(r=>{const s=r.sc;const tc2=s.trend==='up'?'▲':s.trend==='down'?'▼':'→';const tcol=s.trend==='up'?'var(--green)':s.trend==='down'?'var(--red)':'var(--muted)';return `<tr class="clickable" onclick="openTicker('${esc(r.h.t)}')"><td>${r.h.n}</td><td class="r">${vS(r.val)}</td><td class="r hide-sm">${(r.w*100).toFixed(1)}%</td><td class="hide-sm" style="color:${tcol}">${tc2}</td><td class="r" style="font-weight:700;color:${s.p3>=0.55?'var(--green)':s.p3<=0.45?'var(--red)':'var(--muted)'}">${Math.round(s.p3*100)}%</td><td class="r hide-sm ${clr(s.p12)}">${fmtP(s.p12)}</td><td class="r"><span style="font-size:10px;font-weight:800;color:${lc(s.label)}">${s.label}</span></td></tr>`;}).join('')}
+   </tbody></table><div class="small" style="color:var(--muted);margin-top:8px">Same GBM + macro engine as the Opportunity Matrix, applied to YOUR positions. ADD-OK = trend & odds support adding · HOLD/WATCH · TRIM = momentum/regime against it. Tap a row for the live chart. Not advice.</div>`;
+}
+function renderRiskMethod(){
+  el('risk-method').innerHTML=`<ol style="padding-left:18px;line-height:1.75;margin:0">
+   <li><b>Risk sleeve.</b> Your live-priced securities + the leveraged IBKR silver (counted at its full ~S$ gross exposure, so leverage shows up in the risk). Cash, T-bills, the margin loan, the penny tail and the Astral fund are the zero/low-vol cushion; property & PE are illiquid and excluded from daily risk.</li>
+   <li><b>Volatility, VaR & drawdown</b> come from the covariance of 2y daily returns across your holdings (so correlation is captured — concentrated, correlated bets show higher vol). VaR/ES are historical (the actual worst 5%/1% days), scaled to a month; max-drawdown is your sleeve's real 2y peak-to-trough. Portfolio vol includes the cash drag.</li>
+   <li><b>Risk contribution (MCTR)</b> splits total variance by position — it answers "what actually drives my risk", which is usually <em>not</em> the same as "what's my biggest dollar holding".</li>
+   <li><b>Stress tests</b> regress each holding on 5 factors (Global Equity, Rates, Gold, China/EM, USD) and apply historical-style shocks — a real factor model on your actual book.</li>
+   <li><b>Offside flags & holding scores</b> cross your exposures and each position against the live macro regime + the same quant engine as the Matrix.</li>
+   <li><b>Caveats:</b> returns are in local price terms (FX shown separately as currency exposure); cross-market holidays are zero-filled; factor betas are estimates; this is decision-support, <b>not advice</b>, and never executes trades.</li>
+  </ol>`;
 }
 function el(id){return document.getElementById(id);}
 function setStatus(c,m){el('status-text').innerHTML=`<span class="dot ${c}"></span>${m}`;}
