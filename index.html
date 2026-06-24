@@ -455,7 +455,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v45 · 🛡️ Portfolio Risk &amp; Scenarios · 🎯 Opportunity Matrix · Fear&amp;Greed · Live breadth · Flows · Live: Yahoo + CNN · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v46 · per-section "as of" date stamps · 🛡️ Portfolio Risk · 🎯 Opportunity Matrix · Fear&amp;Greed · Live breadth · Flows · Live: Yahoo + CNN · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="cp-overlay" onclick="closeCP(event)">
@@ -1104,7 +1104,7 @@ function renderConviction(){
       <div class="small" style="color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${names}${p.count>uniq?` +${p.count-uniq} more`:''}</div>
     </div>
     <div style="color:var(--accent);font-size:20px;flex-shrink:0">›</div>
-  </div>`;}).join('');
+  </div>`;}).join('') + stamp(investorsData&&investorsData.updated,{label:'Super-investor 13F data',note:(convQuarter||cp.current||'')+' filings · refreshed daily'});
 }
 function openCP(ticker){
   const cp=investorsData.convictionPlays; const p=convList(cp).find(x=>x.ticker===ticker); if(!p) return;
@@ -1154,7 +1154,8 @@ function renderInvestorsHub(){
   const siN=(si.roster&&si.roster.length)||si.count||0;
   const nProf=Object.keys(investorsData.profiles||{}).length;
   box.innerHTML=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div class="sh" style="margin:0">🐋 Super Investors</div><button class="btn" style="padding:2px 9px;font-size:14px" onclick="openCurated()" title="About">ⓘ</button>${siN?`<span class="small" style="color:var(--muted)">${siN} tracked</span>`:''}</div>
-  <input class="search-input" id="inv-search" placeholder="Search super investors…" oninput="filterRoster(this.value)" style="margin-bottom:12px;width:100%">
+  ${stamp(investorsData&&investorsData.updated,{label:'13F holdings & sector data',note:'refreshed daily · filings quarterly/lagged'})}
+  <input class="search-input" id="inv-search" placeholder="Search super investors…" oninput="filterRoster(this.value)" style="margin-bottom:12px;width:100%;margin-top:10px">
   <div class="cp-filters" style="margin-bottom:14px">
     <button class="cpf ${invSub==='activity'?'active':''}" data-s="activity" onclick="setInvSub('activity')">Activity &amp; Sectors</button>
     <button class="cpf ${invSub==='profiles'?'active':''}" data-s="profiles" onclick="setInvSub('profiles')">Profiles${nProf?` (${nProf})`:''}</button>
@@ -1266,7 +1267,7 @@ async function loadIntel(){
     const r=await fetch('data/intel.json?cb='+Date.now());
     if(!r.ok) throw new Error('not published yet');
     intelData=await r.json(); intelLoaded=true;
-    el('smart-updated').textContent=intelData.updated?('updated '+new Date(intelData.updated).toLocaleString('en-SG')):'';
+    el('smart-updated').innerHTML=intelData.updated?(`<span style="color:${freshCol(intelData.updated)}">●</span> as of ${fmtStamp(intelData.updated)} · ${agoTxt(intelData.updated)} · Congress/13F lagged`):'';
     renderSmart(); renderIntelAlert(); renderSignals();
   }catch(e){
     el('smart-body').innerHTML='<div class="card" style="text-align:center;color:var(--muted)"><p style="font-size:14px;margin-bottom:6px;">⏳ First Intel refresh is pending.</p><p style="font-size:12px;">The scheduled agent will publish Congress trades, super-investor moves and insider activity (with written analysis) here on its next run.</p></div>';
@@ -1296,7 +1297,7 @@ function renderSignals(){
     <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:4px;">${s.detail||''}</div>
     <div style="font-size:12px;color:var(--text);line-height:1.5;">${s.takeaway||''}</div>
     ${s.sources?`<div class="small" style="margin-top:6px;color:var(--muted);">${s.sources.join(' · ')}</div>`:''}
-  </div>`;}).join('')+'</div>';
+  </div>`;}).join('')+'</div>'+stamp(intelData&&intelData.updated,{label:'Smart-money signals',note:'Congress & 13F are lagged disclosures'});
 }
 // alert on Overview when intel touches a held ticker
 function renderIntelAlert(){
@@ -1587,7 +1588,7 @@ function renderRegime(){
     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">${stances}</div>
     <p style="font-size:12.5px;line-height:1.65;margin-bottom:10px">${M.narrative}</p>
     <div class="grid2" style="gap:6px">${drivers}</div>
-    <div class="small" style="color:var(--muted);margin-top:10px">Research panel · ${nsrc} cited sources · macro input ${modelMacro?.asOf||''}. Tap any instrument for its full quant + research breakdown.</div></div>`;
+    <div class="small" style="color:var(--muted);margin-top:10px"><span style="color:${freshCol(M.asOf)}">●</span> <b>Macro commentary</b> as of ${fmtStamp(M.asOf)} · ${agoTxt(M.asOf)} · ${nsrc} cited sources · technicals recompute live on every load. Tap any instrument for its full quant + research breakdown.</div></div>`;
 }
 function renderAlerts(){
   const box=el('opp-alerts'); if(!box)return; if(!MODEL_RESULTS.length){box.innerHTML='';return;}
@@ -1684,10 +1685,16 @@ const tc=s=>String(s||'').replace(/\b\w/g,c=>c.toUpperCase());
 const fgLabel=v=>v<25?'Extreme Fear':v<45?'Fear':v<55?'Neutral':v<75?'Greed':'Extreme Greed';
 const fgColor=v=>v<25?'#dc2626':v<45?'#ea580c':v<55?'#ca8a04':v<75?'#65a30d':'#15803d';
 const sigCol=s=>{s=(s||'').toLowerCase();return /(greed|bull|expand|broad|positive|inflow|risk-on)/.test(s)?'var(--green)':/(fear|bear|narrow|deterior|negative|outflow|risk-off)/.test(s)?'var(--red)':'var(--accent)';};
-function srcLine(asOf,sources,live){
-  const s=(sources&&sources.length)?` · ${(()=>{try{return new URL(sources[0]).hostname.replace(/^www\./,'')}catch(_){return sources[0]}})()}`:'';
-  return `<div class="small" style="color:var(--muted);margin-top:8px">${live?'<span style="color:var(--green)">● live</span> · ':''}as of ${asOf||'—'}${s}</div>`;
-}
+// ── unified freshness stamps (so every section shows when it was last refreshed) ──
+function fmtStamp(d){if(!d)return '—';try{const dt=new Date(d);if(isNaN(dt))return String(d);const ds=dt.toLocaleDateString('en-SG',{day:'2-digit',month:'short',year:'numeric'});return /[T]/.test(String(d))?ds+', '+dt.toLocaleTimeString('en-SG',{hour:'2-digit',minute:'2-digit'}):ds;}catch(_){return String(d);}}
+function daysAgo(d){try{const dt=new Date(d);if(isNaN(dt))return null;return Math.floor((Date.now()-dt.getTime())/86400000);}catch(_){return null;}}
+function freshCol(d){const a=daysAgo(d);return a==null?'var(--muted)':a<=1?'var(--green)':a<=5?'var(--accent)':'var(--red)';}
+function agoTxt(d){const a=daysAgo(d);return a==null?'':a<=0?'today':a===1?'yesterday':a+' days ago';}
+function srcHost(sources){return (sources&&sources.length)?` · ${(()=>{try{return new URL(sources[0]).hostname.replace(/^www\./,'')}catch(_){return sources[0]}})()}`:'';}
+// stamp(date,{live,label,note,sources}) → "● as of 24 Jun 2026 · today · note · source"
+function stamp(d,o){o=o||{};if(o.live)return `<div class="small" style="color:var(--muted);margin-top:8px"><span style="color:var(--green)">● live</span> · updated ${new Date().toLocaleTimeString('en-SG',{hour:'2-digit',minute:'2-digit'})}${srcHost(o.sources)}</div>`;
+  const a=agoTxt(d);return `<div class="small" style="color:var(--muted);margin-top:8px"><span style="color:${freshCol(d)}">●</span> ${o.label?`<b>${o.label}</b> `:''}as of ${fmtStamp(d)}${a?` · ${a}`:''}${o.note?` · ${o.note}`:''}${srcHost(o.sources)}</div>`;}
+function srcLine(asOf,sources,live){return stamp(asOf,{sources,live});}
 // live sector participation (% of the 11 GICS sector ETFs above their 200/50-day MA), computed in-browser
 const SECTOR_ETFS=['XLB','XLC','XLE','XLF','XLI','XLK','XLP','XLRE','XLU','XLV','XLY'];
 let liveBreadth=null;
@@ -1799,7 +1806,7 @@ function renderFlows(f){
   const mx=Math.max(...f.regions.map(r=>Math.abs(r.amountUSD||0)),1);
   const regions=f.regions.map(r=>{const inflow=/in/i.test(r.direction);const col=inflow?'var(--green)':'var(--red)';const has=r.amountUSD!=null;const w=has?Math.round(Math.abs(r.amountUSD)/mx*100):0;return `<div style="padding:5px 0" title="${(r.note||'').replace(/"/g,'&quot;')}"><div style="display:flex;justify-content:space-between;gap:8px;align-items:baseline"><span style="font-size:11.5px">${r.region}</span><b style="font-size:11px;color:${col};text-align:right">${inflow?'▲':'▼'} ${r.amount}</b></div>${has?`<div style="height:7px;background:var(--surf2);border-radius:4px;overflow:hidden;margin-top:4px"><div style="width:${w}%;height:100%;background:${col}"></div></div>`:`<div style="font-size:10.5px;color:var(--muted);margin-top:1px;line-height:1.4">${r.note||''}</div>`}</div>`;}).join('');
   const moves=(f.movements||[]).map(m=>`<div style="font-size:11px;padding:4px 0;border-top:1px solid var(--border)"><b>${m.from}</b> <span style="color:var(--accent);font-weight:800">→</span> <b>${m.to}</b> <span style="color:var(--muted)">${m.amount}</span>${m.note?`<div style="color:var(--muted);font-size:10.5px">${m.note}</div>`:''}</div>`).join('');
-  box.innerHTML=`${f.narrative?`<div style="font-size:11.5px;line-height:1.55;margin-bottom:8px">${f.narrative}</div>`:''}${regions}${moves?`<div style="margin-top:8px"><div class="small" style="color:var(--muted);margin-bottom:2px">Biggest rotations</div>${moves}</div>`:''}<div class="small" style="color:var(--muted);margin-top:6px">${f.period||''}</div>${srcLine(f.asOf,f.sources)}`;
+  box.innerHTML=`${f.narrative?`<div style="font-size:11.5px;line-height:1.55;margin-bottom:8px">${f.narrative}</div>`:''}${regions}${moves?`<div style="margin-top:8px"><div class="small" style="color:var(--muted);margin-bottom:2px">Biggest rotations</div>${moves}</div>`:''}<div class="small" style="color:var(--muted);margin-top:6px">${f.period||''}</div>${stamp(f.asOf,{sources:f.sources,note:'weekly fund-flow data (reported with a lag)'})}`;
 }
 // ═══════════════════════════════════════════════════════════════════════
 // 🛡️ PORTFOLIO RISK & SCENARIOS — runs the ACTUAL book through a risk lens.
