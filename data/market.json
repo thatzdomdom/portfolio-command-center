@@ -1,50 +1,50 @@
 {
-  "updated": "2026-06-12",
+  "updated": "2026-06-24",
   "note": "Market sentiment & global flows for the overview. Fear&Greed is fetched LIVE in-browser (CNN equity index via proxy + crypto via alternative.me) with the baked value as fallback; breadth & regional flows are researched and baked (no free real-time API) and refreshed daily by the scheduled intel agent.",
   "fearGreed": {
-    "value": 34,
+    "value": 28,
     "rating": "Fear",
-    "asOf": "2026-06-12",
-    "prevClose": 30,
-    "prev1w": 42,
-    "prev1m": 65,
-    "prev1y": 65,
-    "cryptoValue": 13,
-    "cryptoRating": "Extreme Fear",
+    "asOf": "2026-06-23",
+    "prevClose": 31,
+    "prev1w": 34,
+    "prev1m": 46,
+    "prev1y": 64,
+    "cryptoValue": 26,
+    "cryptoRating": "Fear",
     "components": [
       {
         "name": "Market Momentum",
-        "reading": "S&P 500 vs its 125-day moving average; component score 64.6. The index sits above its 125-day average, the one bullish component on the board.",
-        "signal": "greed"
+        "reading": "S&P 500 vs its 125-day moving average. The June 23 tech-led rout (S&P -1.4%, Nasdaq sharply lower, semis crushed as Korea's KOSPI fell ~double-digits) knocked the index back toward its 125-day average; momentum has flipped from the one bullish component to neutral-to-soft.",
+        "signal": "neutral"
       },
       {
         "name": "Stock Price Strength",
-        "reading": "Net 52-week highs vs lows on the NYSE; score 32.4. More stocks hitting lows than the recent norm.",
+        "reading": "Net 52-week highs vs lows on the NYSE. With the semiconductor complex leading a sharp drawdown, new lows are expanding again and the net-highs reading has weakened.",
         "signal": "fear"
       },
       {
         "name": "Stock Price Breadth",
-        "reading": "McClellan Volume Summation (advancing vs declining volume); score 21.4, rated extreme fear. Declining volume is outpacing advancing volume.",
+        "reading": "McClellan Volume Summation (advancing vs declining volume). The brief mid-June broadening reversed on the June 23 tech selloff; declining volume is again outpacing advancing volume.",
         "signal": "fear"
       },
       {
         "name": "Put/Call Options",
-        "reading": "5-day put/call ratio; score 33.8. Options buyers are leaning defensive, favoring puts.",
+        "reading": "5-day put/call ratio. Options buyers turned defensive into the semis drawdown and the hawkish FOMC dot-plot, favoring puts.",
         "signal": "fear"
       },
       {
         "name": "Market Volatility",
-        "reading": "VIX vs its 50-day moving average; score 50.0, rated neutral. Volatility is in line with its recent average — neither calm nor panicked.",
+        "reading": "VIX vs its 50-day moving average. Volatility popped on the June 23 tech rout but remains off the early-June war-scare highs — elevated but not panicked.",
         "signal": "neutral"
       },
       {
         "name": "Safe Haven Demand",
-        "reading": "20-day stock vs Treasury bond return spread; score 28.6. Bonds have outperformed stocks, signaling a flight to safety consistent with the yields-led risk-off tape.",
+        "reading": "20-day stock vs Treasury bond return spread. Bonds have outperformed stocks over the trailing window as equities sold off, signaling defensive positioning.",
         "signal": "fear"
       },
       {
         "name": "Junk Bond Demand",
-        "reading": "Yield spread between junk bonds and investment-grade; score 7.2, the weakest component (extreme fear). Investors are demanding a wide premium to hold risky credit.",
+        "reading": "Yield spread between junk bonds and investment-grade. Spreads remain historically tight (HY OAS near ~280bp) but the demand for risky credit has cooled with the equity wobble.",
         "signal": "fear"
       }
     ],
@@ -55,168 +55,156 @@
     ]
   },
   "breadth": {
-    "asOf": "2026-06-12",
+    "asOf": "2026-06-23",
     "metrics": [
       {
         "label": "% of S&P 500 stocks above 200-day MA",
-        "value": "61.0% (Barchart $S5TH, +3.0 on the day)",
+        "value": "~58% (Barchart $S5TH; approximate, eased back from ~61% mid-June after the June 23 tech-led drawdown)",
         "signal": "neutral",
-        "pct": 61.03
+        "pct": 58
       },
       {
         "label": "% of S&P 500 stocks above 50-day MA",
-        "value": "60.4% (Barchart $S5FI, +8.6 on the day)",
+        "value": "~52% (Barchart $S5FI; approximate, fell from ~60% as the semis rout dragged the average down)",
         "signal": "neutral",
-        "pct": 60.43
+        "pct": 52
       },
       {
         "label": "NYSE advancers vs decliners (latest session)",
-        "value": "~2.33-to-1 advancers over decliners (Barchart $ADRN, latest reading 06/09/26; June 12 was a strong up session)",
-        "signal": "bullish",
+        "value": "Decliners led on June 23 as the tech/semiconductor complex sold off broadly; the prior mid-June up-sessions had favored advancers (~2:1) but that has reversed (approximate, $ADRN)",
+        "signal": "bearish",
         "pct": null
       },
       {
         "label": "52-week New Highs minus New Lows (NYSE)",
-        "value": "Net positive on the June 12 bounce but unremarkable; precise live counts not extractable from JS-rendered tables (approximate: modestly positive, < ~80 net new highs)",
+        "value": "Slipped back toward neutral/negative on the June 23 selloff as semiconductor and AI-adjacent names rolled over; precise live counts not extractable from JS-rendered tables (approximate)",
         "signal": "neutral",
         "pct": null
       },
       {
         "label": "NYSE McClellan Oscillator / Summation Index",
-        "value": "McClellan Oscillator has been below zero since May 11, so the McClellan Summation Index has been falling (mcoscillator.com); a one-day breadth pop on June 12 has not reversed the downtrend. Same gauge plunged to -184 in mid-March stress (approximate; exact 06/12 NYMO value not published in accessible sources)",
+        "value": "McClellan Oscillator has spent most of the period below zero, so the Summation Index has kept trending lower (mcoscillator.com); the mid-June risk-on pop did not durably reverse the downtrend and the June 23 tech rout reinforced it (approximate; exact daily NYMO not published in accessible sources)",
         "signal": "bearish",
         "pct": null
       },
       {
         "label": "Cumulative NYSE Advance-Decline line trend",
-        "value": "Rolled over with the Summation Index since mid-May; failing to confirm the cap-weighted index's prior highs as participation narrows (approximate trend read, not a single figure)",
+        "value": "Still failing to confirm the cap-weighted index's prior highs; participation remains narrow and rolled over again with the June 23 semiconductor-led decline (approximate trend read, not a single figure)",
         "signal": "bearish",
         "pct": null
       },
       {
         "label": "% of 11 S&P sectors above their 200-DMA",
-        "value": "Approximate ~64% (roughly 7 of 11 sector ETFs), with leadership concentrated in Energy and Information Technology; defensives/laggards below their 200-DMA (inferred from index-level breadth and sector leadership, not a directly published sector count)",
+        "value": "Approximate ~55% (roughly 6 of 11 sector ETFs) after Technology's ~4% June 23 drop pushed the largest sector lower; leadership has rotated toward Industrials and Financials while Energy lagged on the oil de-rate (inferred from index-level breadth and sector leadership)",
         "signal": "neutral",
-        "pct": 64
+        "pct": 55
       }
     ],
-    "note": "The rally is narrow and internally deteriorating: a sharp one-day broadening on June 12 (both MA-breadth gauges jumped, NYSE advancers led ~2:1) sits on top of a medium-term breadth downtrend, with the McClellan Oscillator below zero since May 11 and the Summation Index/cumulative A-D line falling, so index strength remains propped up by AI mega-caps rather than broad participation.",
+    "note": "Breadth deteriorated late in the period: a record-flow, risk-on mid-June rally (huge equity-fund inflows in the week to June 17) gave way to a sharp June 23 semiconductor-led drawdown (Technology -~4%, KOSPI -~10%) after a hawkish FOMC dot-plot and a BofA rate-hike warning. The McClellan Oscillator/Summation Index and cumulative A-D line never durably reversed their multi-week downtrend, so the tape remains internally narrow with index strength still propped up by a handful of mega-caps rather than broad participation.",
     "sources": [
       "https://www.barchart.com/stocks/quotes/$S5TH",
       "https://www.barchart.com/stocks/quotes/$S5FI",
       "https://www.barchart.com/stocks/quotes/$ADRN",
-      "https://www.barchart.com/stocks/highs-lows/highs?screener=nyse&timeFrame=1y",
-      "https://www.barchart.com/stocks/highs-lows/lows?screener=nyse&timeFrame=1y",
       "https://www.mcoscillator.com/",
       "https://chartschool.stockcharts.com/table-of-contents/market-indicators/mcclellan-summation-index",
-      "https://stockcharts.com/h-sc/ui?s=$nymo",
+      "https://en.macromicro.me/series/22718/sp-500-200ma-breadth",
       "https://streetstats.finance/markets/breadth-momentum/SP500",
-      "https://en.macromicro.me/charts/98990/sp500-sectors-200ma-breadth",
-      "https://markets.financialcontent.com/stocks/article/marketminute-2026-3-12-the-concentration-cliff-market-breadth-narratives-shift-as-records-mask-underlying-rot",
-      "https://cryptodaily.co.uk/2026/05/sp500-breadth-beyond-big-tech"
+      "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-23-2026"
     ]
   },
   "flows": {
+    "asOf": "2026-06-17",
+    "period": "Week ended June 17, 2026 (reported June 19, 2026); weekly/lagged. NOTE: this record risk-on week PREDATES the June 23 tech/semiconductor selloff, so it captures the post-Iran-deal 'buy-the-dip' surge, not the late-week reversal.",
+    "narrative": "A violent risk-on reversal. After the prior week's US-led outflows, LSEG Lipper data showed a net ~$55.2B poured into global equity funds in the week to June 17 — the strongest weekly inflow since November 2024 — as the June 15 US-Iran framework deal collapsed the war premium and investors aggressively bought the dip. Technology funds drew a record ~$21.5B (largest weekly tech allocation ever), Europe took ~$10.7B and Asia ~$3.9B, while industrials added ~$2.5B. Emerging-market equity funds were the lone holdout, bleeding ~$2.9B for an eighth straight weekly outflow as a hawkish-leaning Fed and firm dollar weighed. The flows are weekly and lagged, and the subsequent June 23 semiconductor-led rout suggests this euphoric tech allocation was poorly timed.",
     "regions": [
       {
         "region": "US equities",
-        "direction": "outflow",
-        "amount": "-$12.57B",
-        "amountUSD": -12570000000,
-        "note": "Lipper: first US net sales in 3wk; BofA diverges (11-wk inflow streak); prior wk clients sold record -$14.2B single stocks."
+        "direction": "inflow",
+        "amount": "~+$43B (derived)",
+        "amountUSD": 43000000000,
+        "note": "Sharp reversal from the prior week's ~-$12.6B outflow; implied as the residual of the ~$55.2B global total net of Europe/Asia/EM, driven by record tech-fund demand (~$21.5B)."
       },
       {
         "region": "Europe / Intl DM equities",
         "direction": "inflow",
-        "amount": "+$6.74B",
-        "amountUSD": 6740000000,
-        "note": "Lipper: top US-rotation destination; BofA +$0.6B; YTD ~$104B DM vs ~$25B US."
+        "amount": "+$10.66B",
+        "amountUSD": 10660000000,
+        "note": "Lipper: European equity funds drew $10.66B, a standout week as the Iran de-escalation lifted risk appetite and the Germany fiscal impulse story persisted."
       },
       {
         "region": "Emerging Markets",
         "direction": "outflow",
-        "amount": "-$3.4B (Lipper) vs +$4.5B (BofA)",
-        "amountUSD": null,
-        "note": "Conflict: Lipper EM equity -$3.4B; BofA EM +$4.5B (Korea-led)."
+        "amount": "-$2.88B",
+        "amountUSD": -2880000000,
+        "note": "Lipper: eighth consecutive weekly EM-equity outflow on hawkish-Fed/firm-USD headwinds, the clear laggard amid the global risk-on."
       },
       {
         "region": "China",
         "direction": "outflow",
         "amount": "n/a",
         "amountUSD": null,
-        "note": "No clean weekly figure; outflow-leaning, unconfirmed."
+        "note": "No clean weekly figure; China remains within the EM outflow bucket, outflow-leaning and unconfirmed."
       },
       {
         "region": "Japan equities",
-        "direction": "outflow",
-        "amount": "-$2.8B",
-        "amountUSD": -2800000000,
-        "note": "BofA: 4th straight weekly outflow."
+        "direction": "inflow",
+        "amount": "part of ~+$3.9B Asia",
+        "amountUSD": null,
+        "note": "Lipper: Asian equity funds took ~$3.9B; Japan a contributor as the yen stabilized and BoJ normalization supported banks."
       },
       {
         "region": "Money-Market / Cash",
         "direction": "outflow",
-        "amount": "-$18.21B",
-        "amountUSD": -18210000000,
-        "note": "Lipper: reversed prior ~$154.6B inflow; BofA -$2.5B."
+        "amount": "outflow-leaning",
+        "amountUSD": null,
+        "note": "Cash was redeployed into the equity surge; no clean single weekly MMF figure for this week, but flow direction was out of cash into risk."
       },
       {
         "region": "Bonds / Credit",
         "direction": "inflow",
-        "amount": "+$18.27B",
-        "amountUSD": 18270000000,
-        "note": "Lipper 10-wk streak; BofA: HY/EM bond outflows, IG drew cash."
+        "amount": "inflow (continued)",
+        "amountUSD": null,
+        "note": "Global bond funds extended their multi-week inflow streak; demand skewed to IG/short-duration over HY in a higher-for-longer rate backdrop."
       },
       {
         "region": "Gold",
         "direction": "outflow",
-        "amount": "-$1.86B to -$2.3B",
-        "amountUSD": -2300000000,
-        "note": "4th straight outflow; crypto -$6.6B/5wk per BofA."
+        "amount": "outflow-leaning",
+        "amountUSD": null,
+        "note": "Gold ETFs continued to bleed as the war premium unwound and gold slid to ~$4,136; precise weekly figure not isolated."
       }
     ],
     "movements": [
       {
-        "from": "US equities",
-        "to": "Europe / Intl DM equities",
-        "amount": "~$6.7B",
-        "note": "Lipper: US -$12.57B vs Europe +$6.74B."
+        "from": "Cash & defensives",
+        "to": "Global equities (esp. tech)",
+        "amount": "~$55B into equities; tech ~$21.5B",
+        "note": "Record post-Iran-deal 'buy-the-dip' surge; tech-fund inflow the largest weekly on record."
       },
       {
-        "from": "US equities",
-        "to": "Asia / Intl equities",
-        "amount": "~$6.4B",
-        "note": "Lipper: Asia +$6.37B."
-      },
-      {
-        "from": "Money-market & cash",
-        "to": "Equities & bonds",
-        "amount": "~$18B",
-        "note": "MMFs -$18.21B fed equity and bonds (+$18.27B)."
-      },
-      {
-        "from": "Gold & crypto",
-        "to": "Equities (esp. tech)",
-        "amount": "gold ~-$2.3B; crypto ~-$6.6B/5wk",
-        "note": "Vs record tech inflows (BofA +$12.3B; Lipper +$7.05B)."
-      },
-      {
-        "from": "High-yield & EM bonds",
-        "to": "IG / short-duration bonds",
+        "from": "Gold & safe havens",
+        "to": "Risk assets",
         "amount": "qualitative",
-        "note": "BofA: HY/EM out, IG/short in."
+        "note": "War-premium unwind pulled money out of gold and Treasuries into equities as the ceasefire framework held."
+      },
+      {
+        "from": "Emerging markets",
+        "to": "Developed-market equities (Europe, US)",
+        "amount": "EM ~-$2.9B vs Europe +$10.7B",
+        "note": "Eighth straight EM-equity outflow week; hawkish Fed/firm USD kept the rotation toward DM."
+      },
+      {
+        "from": "US single stocks (prior week)",
+        "to": "US equity funds (this week)",
+        "amount": "~-$12.6B → ~+$43B",
+        "note": "A whipsaw reversal in US equity-fund flows week-over-week as the war scare flipped to a relief rally."
       }
     ],
     "sources": [
-      "https://www.investing.com/news/stock-market-news/bofas-hartnett-says-investors-remain-frozen-bullish-despite-5-longbond-yields-4739166",
-      "https://www.bnnbloomberg.ca/business/international/2026/06/12/global-equity-funds-draw-third-weekly-inflow-as-investors-buy-the-dip/",
-      "https://www.investing.com/news/stock-market-news/bofa-flow-data-shows-historic-selling-in-tech-led-by-institutional-clients-4735218",
-      "https://www.arabictrader.com/en/news/stock-market/217372/global-equity-funds-register-the-longest-inflow-streak-in-weeks",
-      "https://www.axios.com/2026/05/20/fund-managers-stocks-bofa",
-      "https://epfr.com/insights/global-navigator/emerging-market-funds-seeing-the-light/"
-    ],
-    "asOf": "2026-06-12",
-    "period": "Week ended June 10, 2026 (reported June 12, 2026); weekly/lagged. Prior week ended June 5 cited for BofA client data.",
-    "narrative": "Rotation out of the US into the rest of the world. LSEG Lipper shows ~$12.6B leaving US equity funds (first net sales in 3 weeks) while Europe (+$6.7B) and Asia (+$6.4B) absorbed it. Cash/MMFs saw big outflows, global bond funds extended a 10-week inflow streak (+$18.3B), and gold logged a 4th straight outflow. Divergence: BofA EPFR Flow Show shows US in an 11-week inflow streak and EM +$4.5B, vs Lipper's US and EM-equity outflows; the structural 2026 theme is a Great Rotation with the US taking only ~$26 of every $100 of global equity inflows.</narrative>\n</invoke>\n"
+      "https://www.thewealthadvisor.com/article/global-investor-sentiment-strengthened-markedly-week-ending-june-17",
+      "https://lipperalpha.refinitiv.com/category/lipper-global-fund-flows/",
+      "https://www.globalbankingandfinance.com/global-equity-funds-draw-third-weekly-inflow-investors-buy/",
+      "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-23-2026"
+    ]
   }
 }
