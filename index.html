@@ -295,6 +295,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
       <button class="cpf" data-g="Commodity" onclick="setOppGroup('Commodity')">Commodities</button>
       <button class="cpf" data-g="Crypto" onclick="setOppGroup('Crypto')">Crypto</button>
       <button class="cpf" data-g="Bond" onclick="setOppGroup('Bond')">Bonds/Rates</button>
+      <button class="cpf" data-g="RareEarth" onclick="setOppGroup('RareEarth')">⛏️ Rare Earth</button>
       <button class="cpf" data-g="buys" onclick="setOppGroup('buys')">★ Buy-rated only</button>
     </div>
     <div class="tbl-wrap"><div id="opp-matrix"><div class="ld"><span class="spin"></span>Loading market universe…</div></div></div>
@@ -455,7 +456,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v46 · per-section "as of" date stamps · 🛡️ Portfolio Risk · 🎯 Opportunity Matrix · Fear&amp;Greed · Live breadth · Flows · Live: Yahoo + CNN · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v47 · ⛏️ Rare-earth basket in Matrix · per-section date stamps · 🛡️ Portfolio Risk · 🎯 Opportunity Matrix · Live: Yahoo + CNN · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="cp-overlay" onclick="closeCP(event)">
@@ -1387,7 +1388,7 @@ async function loadReddit(force){
 let modelStarted=false, modelLoading=false, modelLoaded=false, modelMacro=null, modelData={}, modelSmartSectors=null, MODEL_RESULTS=[], oppHorizon='3m', oppGroup='all', MACRO_TILT={};
 // Refresh button: re-price holdings AND (if the matrix was ever opened) re-pull the Opportunity Matrix — fresh macro + fresh prices.
 function refreshAll(){ loadAll(); loadMarket(true); if(modelStarted) loadModel(true); if(riskStarted) loadRisk(true); }
-const GLABEL={Equity:'Equity / Region',Factor:'Factor / Sector',Commodity:'Commodity',Crypto:'Crypto',Bond:'Bond / Rate'};
+const GLABEL={Equity:'Equity / Region',Factor:'Factor / Sector',Commodity:'Commodity',Crypto:'Crypto',Bond:'Bond / Rate',RareEarth:'Rare Earth'};
 // universe — must stay aligned across app. {t ticker, yf, n name, g group, mc macro-class, prior μ-prior, cap drift-cap, fit portfolio-fit}
 const MODEL_UNIVERSE=[
   // Equities / Regions
@@ -1434,7 +1435,17 @@ const MODEL_UNIVERSE=[
   {t:'LQD',yf:'LQD',n:'IG Corp Bonds',g:'Bond',mc:'Credit (IG/HY/EM)',prior:.035,cap:.12,fit:'diversifier'},
   {t:'HYG',yf:'HYG',n:'High Yield Credit',g:'Bond',mc:'Credit (IG/HY/EM)',prior:.05,cap:.14,fit:'neutral'},
   {t:'EMB',yf:'EMB',n:'EM Bonds',g:'Bond',mc:'Credit (IG/HY/EM)',prior:.05,cap:.14,fit:'neutral'},
-  {t:'BND',yf:'BND',n:'US Total Bond',g:'Bond',mc:'Short / Intermediate Treasuries',prior:.03,cap:.08,fit:'diversifier'}
+  {t:'BND',yf:'BND',n:'US Total Bond',g:'Bond',mc:'Short / Intermediate Treasuries',prior:.03,cap:.08,fit:'diversifier'},
+  // Rare-earth / critical-minerals (China-control theme) — researched & verified Jun 2026
+  {t:'REMX',yf:'REMX',n:'Rare Earth/Strategic Metals ETF',g:'RareEarth',mc:'Commodities',prior:.07,cap:.34,fit:'diversifier'},
+  {t:'REXC',yf:'REXC',n:'Rare Earths Ex-China ETF (new)',g:'RareEarth',mc:'Commodities',prior:.08,cap:.36,fit:'diversifier'},
+  {t:'MP',yf:'MP',n:'MP Materials (US integrated)',g:'RareEarth',mc:'Commodities',prior:.10,cap:.45,fit:'diversifier'},
+  {t:'LYC.AX',yf:'LYC.AX',n:'Lynas Rare Earths (Australia)',g:'RareEarth',mc:'Commodities',prior:.08,cap:.40,fit:'diversifier'},
+  {t:'UUUU',yf:'UUUU',n:'Energy Fuels (US refiner)',g:'RareEarth',mc:'Commodities',prior:.08,cap:.45,fit:'diversifier'},
+  {t:'USAR',yf:'USAR',n:'USA Rare Earth (mine-to-magnet)',g:'RareEarth',mc:'Commodities',prior:.10,cap:.55,fit:'diversifier'},
+  {t:'NEO.TO',yf:'NEO.TO',n:'Neo Performance (ex-China midstream)',g:'RareEarth',mc:'Commodities',prior:.08,cap:.40,fit:'diversifier'},
+  {t:'ILU.AX',yf:'ILU.AX',n:'Iluka Resources (Australia)',g:'RareEarth',mc:'Commodities',prior:.06,cap:.35,fit:'diversifier'},
+  {t:'6680.HK',yf:'6680.HK',n:'JL MAG Rare-Earth (China magnet)',g:'RareEarth',mc:'Commodities',prior:.08,cap:.45,fit:'overlap'}
 ];
 // sector→ETF map for smart-money (super-investor sector concentration) overlay
 const SMART_MAP={XLK:'Technology',SMH:'Technology',QQQ:'Technology',XLF:'Financial Services',XLE:'Energy',XLV:'Healthcare',XLI:'Industrials',XLY:'Consumer Cyclical',XLP:'Consumer Defensive',XLU:'Utilities',COPX:'Basic Materials'};
@@ -1442,7 +1453,7 @@ const FIT_NOTE={diversifier:'Diversifier — low overlap with your SGX-REIT + pr
 const clip=(x,a,b)=>Math.max(a,Math.min(b,x));
 function normCdf(x){const t=1/(1+0.2316419*Math.abs(x)),d=0.3989422804014327*Math.exp(-x*x/2);let p=d*t*(0.31938153+t*(-0.356563782+t*(1.781477937+t*(-1.821255978+t*1.330274429))));return x>0?1-p:p;}
 const STANCE_TILT={'OW':0.02,'Overweight':0.02,'modest OW':0.012,'Neutral':0,'modest UW':-0.012,'UW':-0.02,'Underweight':-0.02};
-const coarseClass=g=>g==='Bond'?'Bonds':g==='Crypto'?'Crypto':g==='Commodity'?'Commodities':'Equity';
+const coarseClass=g=>g==='Bond'?'Bonds':g==='Crypto'?'Crypto':(g==='Commodity'||g==='RareEarth')?'Commodities':'Equity';
 function buildMacroTilt(){MACRO_TILT={};(modelMacro?.macro?.byAssetClass||[]).forEach(a=>{MACRO_TILT[a.assetClass]={tilt:(a.tilt!=null?a.tilt:(STANCE_TILT[a.stance]??0)),stance:a.stance};});}
 function macroTiltFor(cls){return MACRO_TILT[cls]?.tilt||0;}
 function macroStanceFor(cls){return MACRO_TILT[cls]?.stance||'—';}
