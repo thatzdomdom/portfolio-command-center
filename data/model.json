@@ -1,42 +1,47 @@
 {
-  "updated": "2026-06-24",
-  "asOf": "2026-06-24",
+  "updated": "2026-06-26",
+  "asOf": "2026-06-26",
   "note": "CIO research-panel macro regime + per-instrument probabilistic priors, produced by a multi-agent research workflow with adversarial verification and cited sources. The live in-browser quant engine (GBM drift-diffusion on 2y daily history) blends with these forward-looking priors to produce the displayed P(up) and EV. Refreshed by the scheduled intel agent.",
   "macro": {
-    "regime": "late-cycle hawkish hold confirmed (dot-plot flipped to a hike), war premium gone, AI/semis wobble",
-    "regimeScore": 0.46,
-    "riskOnProb": 0.46,
-    "asOf": "2026-06-24",
-    "narrative": "Two binaries resolved and both leaned hawkish/cautionary even as the geopolitical tail collapsed. (1) The June 16-17 FOMC, Chair Warsh's first, held the funds rate at 3.50-3.75% on a 12-0 vote but delivered a hawkish surprise in the projections: the median dot for end-2026 jumped to 3.8% (from 3.4% in March), 9 of 18 members now pencil in at least one more hike this year and 6 see two — flipping the prior implied cut into an implied HIKE. Warsh, characteristically, submitted no dot of his own and pared the statement to ~130 words. (2) On June 15 the US and Iran announced a framework MoU — a 60-day ceasefire, reopening of the Strait of Hormuz to commercial shipping, lifting of the US naval blockade, and a 60-day US license letting Iran sell oil internationally — followed June 21-22 by a 'roadmap' to a final deal within 60 days (the MoU is holding but under strain). That removed the dominant war premium: Brent collapsed to ~$77 and WTI to ~$74 (well below the ~$86 of a week earlier), a powerful forward-disinflationary impulse. But the combination of a hawkish dot-plot, a BofA rate-hike warning and a brutal Asian semiconductor session (KOSPI -~10%) triggered a sharp June 23 risk-off in US tech (S&P -1.4%, Technology sector -~4%, semis leading), even though equity funds had just logged a RECORD ~$55B risk-on inflow week (tech +$21.5B, an all-time weekly high) through June 17. Rates eased modestly on the oil de-rate and Iran de-escalation (10y ~4.49%, off the 4.67% May high) but the hawkish dots cap any rally; gold slid further to ~$4,136 and Bitcoin softened to ~$62.5k. Net: we stay modestly defensive — favoring USD/cash (rate support reinforced by the dots) and structurally-bid real assets over richly-valued, AI-concentrated equities (CAPE high-30s/low-40s, near-zero ERP) and historically tight credit — with the next swing factors the late-July FOMC, mid-July June CPI, and whether the Iran roadmap converts to a durable final deal.",
+    "regime": "late-cycle hawkish hold (hike-biased dots), war premium gone, semis rebound on Micron, breadth broadening, hot core PCE",
+    "regimeScore": 0.48,
+    "riskOnProb": 0.48,
+    "asOf": "2026-06-26",
+    "narrative": "The hawkish-Fed/no-war regime persists, but the equity tape healed and broadened into late June. (1) The June 16-17 FOMC, Chair Warsh's first, held the funds rate at 3.50-3.75% but the projections leaned hawkish: nine of eighteen members now pencil in at least one hike by year-end (Warsh notably submitted no dot of his own), and the committee withheld forward guidance. A June 25/26 core-PCE print at 3.4% y/y (headline 4.1%, the hottest since 2023) and a BofA call for a series of hikes have pushed market-implied September hike odds up toward ~50-68%. (2) The June 15 US-Iran framework MoU (60-day ceasefire, Strait of Hormuz reopened, naval blockade lifted, Iran oil-sales license) and a June 21-22 roadmap to a final deal are holding but fragile (Lebanon clashes, periodic Hormuz threats). That kept the war premium out: WTI fell below $70 and Brent below $74 (lowest since February, ~40% off the wartime peak), a forward-disinflationary offset to sticky core. (3) The June 23 Asian-led semiconductor rout did NOT extend — Micron's blowout fiscal-Q3 (AI/HBM memory demand) sparked a June 25 rebound (SanDisk +14.7%, Micron +12%), and breadth broadened impressively: the Russell 2000 hit a record 3,000, the small-cap A-D line made an all-time high, and ~62% of the S&P sits above its 200-DMA. Equity-fund flows rotated hard into the US (a record US-equity week, tech +~$21.5B). Rates eased (10y ~4.4%, a 6-week low; 2y ~4.20%; 30y ~4.94%) but the hot PCE and hike-biased dots cap any rally; gold slid to ~$4,040, BTC ~$60-67k and ETH ~$1.6k as crypto sentiment cratered to Extreme Fear (13). NEW this week: China blacklisted MP Materials and USA Rare Earth (June 22), re-igniting the ex-China rare-earth/critical-minerals trade. Net: we hold a modest defensive tilt — OW USD/cash and structurally-bid real assets over richly-valued, concentrated equities (CAPE ~39.7, near-zero ERP) and historically tight credit — but nudge slightly less defensive given the healthier breadth, with the next swings the July 14 June CPI and the July 28-29 FOMC.",
     "drivers": [
       {
-        "factor": "FOMC June 17 resolved — hold, but dot-plot flipped hawkish",
-        "read": "Held at 3.50-3.75% (12-0), but the median end-2026 dot leapt to 3.8% (from 3.4%); 9 of 18 see >=1 hike in 2026 and 6 see two, flipping the prior implied cut into an implied hike. Warsh gave no dot and cut the statement to ~130 words. A genuinely hawkish surprise.",
+        "factor": "Hawkish, hike-biased Fed reinforced by hot core PCE",
+        "read": "The June 17 FOMC held at 3.50-3.75% with nine members projecting a 2026 hike and no forward guidance (Warsh submitted no dot). A June 25/26 core-PCE at 3.4% y/y (headline 4.1%, hottest since 2023) plus a BofA 'series of hikes' call lifted market-implied September hike odds toward ~50-68%. Genuinely hawkish.",
         "impact": "cautionary"
       },
       {
-        "factor": "US-Iran framework MoU / Hormuz reopened",
-        "read": "A June 15 MoU set a 60-day ceasefire, reopened the Strait of Hormuz, lifted the US naval blockade and granted Iran a 60-day oil-sales license; a June 21-22 roadmap targets a final deal within 60 days. The dominant disinflationary/risk-positive catalyst has largely played out, though the MoU is under strain and a breakdown is the tail.",
+        "factor": "Semis rebound — Micron beat reverses the June 23 rout",
+        "read": "The June 23 Asian-led chip selloff did not extend: Micron's blowout fiscal-Q3 on AI/HBM memory demand drove a June 25 rebound (SanDisk +14.7%, Micron +12%), and tech funds kept drawing record inflows (~+$21.5B). The crowded AI trade re-found its footing rather than unwinding.",
         "impact": "supportive"
       },
       {
-        "factor": "Oil collapse extends the energy de-rate",
-        "read": "Brent has fallen to ~$77 and WTI to ~$74 (down from ~$86 a week earlier and ~30% off the 2026 peak) on the Iran deal, the Iran oil license and a fourth OPEC+ output hike. Strongly disinflationary for forward headline CPI but a clear headwind for energy equities and broad commodities.",
+        "factor": "Breadth broadens — small-cap leadership, record Russell 2000",
+        "read": "The Russell 2000 crossed 3,000 for the first time ever (June 22) with the small-cap A-D line at an all-time high; ~62% of the S&P is above its 200-DMA, advancers beat decliners and leadership rotated beyond mega-cap tech. A healthier, less-narrow internal than earlier in June.",
+        "impact": "supportive"
+      },
+      {
+        "factor": "US-Iran framework holds; oil de-rate persists",
+        "read": "The June 15 MoU and June 21-22 roadmap are holding but fragile (Lebanon clashes, Hormuz threats). The war premium stays out: WTI <$70, Brent <$74 (lowest since February, ~40% off the wartime peak) — disinflationary for forward headline CPI but a headwind for energy equities and broad commodities.",
         "impact": "mixed"
       },
       {
-        "factor": "Semis/AI risk-off vs record equity inflows",
-        "read": "Equity funds logged a record ~$55B risk-on week to June 17 (tech +$21.5B, an all-time high) on the war-premium unwind — then a June 23 semiconductor rout (KOSPI -~10%, US Technology -~4%, BofA rate-hike note) exposed how crowded and richly-valued the AI trade is. Whipsaw positioning in the most concentrated part of the market.",
+        "factor": "Real yields firm / gold, crypto slip",
+        "read": "10y ~4.4% (a 6-week low on Iran de-escalation), 2y ~4.20%, 30y ~4.94%; the firm real-yield + firm-dollar backdrop pushed gold to ~$4,040 (still +30%+ y/y on central-bank demand), BTC to ~$60-67k and ETH to ~$1.6k, with crypto Fear & Greed at Extreme Fear (13). The squeeze on non-yielding assets persists.",
         "impact": "cautionary"
       },
       {
-        "factor": "Real yields firm / gold and crypto slip",
-        "read": "10y ~4.49% (off the 4.67% May high but anchored by the hawkish dots), 30y near 5%; the firm real-yield + firm-dollar backdrop pushed gold to ~$4,136 (still +30%+ y/y on central-bank demand) and Bitcoin to ~$62.5k. The squeeze on non-yielding assets persists.",
-        "impact": "cautionary"
+        "factor": "Rare-earth escalation — China blacklists MP & USA Rare Earth",
+        "read": "On June 22 China's MOFCOM added MP Materials, USA Rare Earth and ~8 other US firms to its export-control list (retaliation for expanded US restrictions). With DoD a stakeholder in MP and Lynas ramping ex-China supply, the critical-minerals/rare-earth re-rating theme is live again.",
+        "impact": "supportive"
       },
       {
         "factor": "Equity valuation, AI concentration & tight credit",
-        "read": "S&P CAPE in the high-30s/low-40s with a near-zero equity risk premium, top ~10 names ~40% of the index, and IG (~80bp) / HY (~280bp) spreads near multi-decade tights leave little cushion for an earnings, capex or growth disappointment — and the June 23 semis wobble is a live reminder.",
+        "read": "S&P CAPE ~39.7 (forward P/E ~23) with a near-zero equity risk premium, top ~10 names ~40% of the index, and IG (~80bp) / HY (~265-285bp) spreads near multi-decade tights leave little cushion for an earnings, capex or growth disappointment — though the June 25 breadth broadening eases the single-stock fragility somewhat.",
         "impact": "cautionary"
       }
     ],
@@ -44,48 +49,48 @@
       {
         "assetClass": "Equity",
         "stance": "Neutral",
-        "pUp12m": 0.54,
-        "note": "Solid earnings (~24% EPS growth, Street targets ~7800-8000) and no recession argue up over 12m, but a record-low equity risk premium, a high-30s/low-40s CAPE, firm real yields (10y ~4.49%) and extreme AI concentration cap upside and fatten the downside tail; the FOMC dot-plot flipped to an implied hike and the June 23 semis rout shows how crowded the AI leadership is — the next risk events are mid-July June CPI and the late-July FOMC.",
+        "pUp12m": 0.55,
+        "note": "Solid earnings (Street year-end targets ~8000, DB) and no recession argue up over 12m, and late-June breadth broadened materially (record Russell 2000, ~62% of the S&P above its 200-DMA, Micron-led semis rebound) — easing the single-stock fragility — but a record-low equity risk premium, a ~39.7 CAPE, firm real yields and a hot 3.4% core-PCE keep us Neutral; the next risk events are the July 14 June CPI and the July 28-29 FOMC.",
         "tilt": 0.0
       },
       {
         "assetClass": "Commodities",
         "stance": "modest OW",
         "pUp12m": 0.55,
-        "note": "Still the cleanest stagflation hedge — structural central-bank gold demand keeps gold +30%+ y/y at ~$4,136 even after a ~13% pullback from its peak — but the call stays only modest OW as Brent has collapsed to ~$77 on the signed US-Iran framework, the new Iran oil license and a fourth OPEC+ hike; the rates/USD-driven gold slide and the energy de-rate add near-term two-way risk.",
+        "note": "Still the cleanest stagflation hedge — structural central-bank gold demand keeps gold +30%+ y/y at ~$4,040 even after a deeper pullback from its ~$4,724 peak — and the new China rare-earth export curbs (MP/USA Rare Earth blacklisted June 22) add a fresh critical-minerals tailwind; but the call stays only modest OW as WTI has fallen below $70 on the holding US-Iran framework and the rates/USD-driven precious-metals slide adds near-term two-way risk.",
         "tilt": 0.012
       },
       {
         "assetClass": "Crypto",
         "stance": "modest UW",
         "pUp12m": 0.5,
-        "note": "BTC has softened to ~$62.5k as the hawkish FOMC dot-plot and firm dollar offset the US-Iran peace dividend; spot-ETF flows stay choppy (ETH ETFs bled for 14 straight sessions while SOL/XRP drew small inflows). Higher-for-longer rates keep crypto the highest-beta casualty if risk-off re-extends; 12m odds are genuinely two-sided.",
+        "note": "BTC is ~$60-67k and ETH ~$1.6k as the hike-biased Fed, hot core PCE and firm dollar offset the US-Iran peace dividend; crypto Fear & Greed cratered to Extreme Fear (13) and spot funds shed ~$6.6B over five weeks (with a tentative late-June stabilization, BTC ETFs +$39M June 23). Higher-for-longer rates keep crypto the highest-beta casualty; 12m odds are genuinely two-sided.",
         "tilt": -0.012
       },
       {
         "assetClass": "Bonds",
         "stance": "Neutral",
         "pUp12m": 0.54,
-        "note": "Yields (10y ~4.49%, 30y near 5%) offer attractive carry and a recession hedge, and the oil de-rate lowers forward headline CPI, but the FOMC dot-plot now implies a 2026 HIKE (median 3.8%), so near-term duration risk is higher and keeps us off OW; modest up-bias over 12m as the cycle eventually turns and the energy tail keeps deflating.",
+        "note": "Yields (10y ~4.4% — a 6-week low — 30y ~4.94%) offer attractive carry and a recession hedge, and the oil de-rate lowers forward headline CPI, but a hike-biased Fed and a hot 3.4% core-PCE keep near-term duration risk elevated and us off OW; modest up-bias over 12m as the cycle eventually turns and the energy tail keeps deflating.",
         "tilt": 0.0
       },
       {
         "assetClass": "USD/Cash",
         "stance": "OW",
         "pUp12m": 0.58,
-        "note": "The dollar's rate support was reinforced by the hawkish June dot-plot (median end-2026 3.8%, an implied hike); cash yields ~3.7-4% with optionality, making USD/cash a high-Sharpe holding while the late-July FOMC, June CPI and the durability of the US-Iran roadmap stay unresolved.",
+        "note": "The dollar's rate support was reinforced by the hike-biased June FOMC and the hot core-PCE print (September hike odds ~50-68%); cash yields ~3.7-4% with optionality, making USD/cash a high-Sharpe holding while the July 14 June CPI, the July 28-29 FOMC and the durability of the US-Iran roadmap stay unresolved.",
         "tilt": 0.02
       }
     ],
     "sources": [
       "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260617a.htm",
-      "https://www.cnbc.com/2026/06/17/fed-interest-rate-decision-june-2026.html",
-      "https://www.foxbusiness.com/economy/federal-reserve-interest-rate-decision-june-17-2026",
-      "https://www.npr.org/2026/06/15/nx-s1-5858590/us-iran-deal-updates",
+      "https://www.cnbc.com/amp/2026/06/17/fed-projections-call-for-a-rate-hike-in-2026-but-chairman-warsh-likely-abstained.html",
+      "https://fortune.com/2026/06/22/fed-rate-hikes-outlook-sticky-inflation-kevin-warsh-job-growth-oil-prices/",
+      "https://www.aljazeera.com/news/2026/6/22/us-iran-agree-on-roadmap-towards-final-deal-in-switzerland-talks",
       "https://www.cnbc.com/2026/06/22/us-iran-roadmap-final-deal-switzerland-talks-lebanon-deconfliction.html",
-      "https://fortune.com/article/price-of-oil-06-22-2026/",
-      "https://tradingeconomics.com/commodity/brent-crude-oil",
-      "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-23-2026",
+      "https://tradingeconomics.com/commodity/crude-oil",
+      "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-25-2026",
+      "https://www.mining.com/china-blacklists-mp-materials-usa-rare-earth-in-critical-minerals-war/",
       "https://fred.stlouisfed.org/series/DGS10",
       "https://fred.stlouisfed.org/series/BAMLH0A0HYM2"
     ]
@@ -102,10 +107,10 @@
       "ev3m": 0.014,
       "ev12m": 0.048,
       "drivers": [
-        "Street targets ~7800-8000 supported by ~24% EPS growth; no recession in the base case provides a soft earnings floor",
-        "CAPE high-30s/low-40s with a near-zero equity risk premium and 10y real yields above 2% severely compress forward returns and widen the left tail",
-        "The June 17 FOMC held but flipped the dot-plot to an implied 2026 hike (median 3.8%), and a June 23 semiconductor rout (Tech -~4%) showed the AI leadership is crowded; mid-July June CPI and the late-July FOMC are the next catalysts",
-        "AI concentration (top ~10 names ~40% of the index) absorbs most of the bull case and just demonstrated its two-way risk in the June 23 semis selloff, capping broad-index upside"
+        "S&P ~7,357 (June 25); Street year-end targets ~8000 (DB) supported by solid EPS growth and no recession in the base case — a soft earnings floor",
+        "CAPE ~39.7 with a near-zero equity risk premium and firm real yields severely compress forward returns and widen the left tail; a hot 3.4% core-PCE keeps the Fed hike-biased",
+        "Late-June breadth broadened — the Russell 2000 hit a record 3,000, the small-cap A-D line made an all-time high and ~62% of the S&P is above its 200-DMA — easing the single-stock fragility that the June 23 semis rout exposed",
+        "Micron's blowout earnings sparked a June 25 semis rebound; the July 14 June CPI and the July 28-29 FOMC are the next catalysts, with AI concentration (top ~10 ~40% of the index) still capping broad-index upside"
       ],
       "confidence": 0.6
     },
@@ -120,10 +125,10 @@
       "ev3m": 0.022,
       "ev12m": 0.07,
       "drivers": [
-        "Mega-cap AI capex ($630-770bn projected for 2026) and 25-30% Magnificent Seven EPS growth sustain fundamental momentum",
-        "QQQ +20% YTD, near all-time high; trend persistence favors continued outperformance over 12m but short-run mean-reversion risk elevated",
-        "Forward P/E ~26x still historically stretched vs. real yield backdrop; concentration in top 5 holdings (~47%) amplifies idiosyncratic risk — exposed by the June 23 semis rout",
-        "Hawkish June FOMC dot-plot (median end-2026 3.8%) lifts the discount rate on long-duration growth; near-term momentum is fragile after the Asian-led chip selloff"
+        "Mega-cap AI capex ($630-770bn projected for 2026) and 25-30% Magnificent Seven EPS growth sustain fundamental momentum; Micron's blowout fiscal-Q3 (AI/HBM memory) drove a June 25 rebound that healed the June 23 chip rout",
+        "QQQ near all-time high; trend persistence favors continued outperformance over 12m, though a June 25 Mag-7 wobble (Apple/MSFT price-hike headlines) shows mega-cap leadership is fully priced",
+        "Forward P/E still historically stretched vs. the real-yield backdrop; concentration in top 5 holdings (~47%) amplifies idiosyncratic risk",
+        "A hike-biased June FOMC and a hot 3.4% core-PCE lift the discount rate on long-duration growth, capping multiple expansion even as earnings deliver"
       ],
       "confidence": 0.6
     },
@@ -131,19 +136,19 @@
       "ticker": "IWM",
       "name": "iShares Russell 2000 ETF",
       "assetClass": "Equity / Regions",
-      "pUp1m": 0.47,
-      "pUp3m": 0.45,
-      "pUp12m": 0.48,
-      "ev1m": -0.005,
-      "ev3m": -0.015,
-      "ev12m": -0.01,
+      "pUp1m": 0.52,
+      "pUp3m": 0.5,
+      "pUp12m": 0.51,
+      "ev1m": 0.006,
+      "ev3m": 0.005,
+      "ev12m": 0.025,
       "drivers": [
-        "41-46% of Russell 2000 companies cannot cover interest expense with operating profits; $1.35tn floating-rate debt maturity wall in 2026 is an acute refinancing risk",
-        "32% of R2K debt at floating rates vs. 6% for S&P 500; higher-for-longer Fed (no cuts priced near-term) is structurally punishing for small caps",
-        "Stagflation-lite regime historically punishes small caps disproportionately — they lack pricing power and have higher input cost exposure",
-        "Recent YTD outperformance appears to reflect a technical squeeze; stretched vs. fundamentals and vulnerable to any credit spread widening"
+        "Regime shift: small caps are now LEADING — the Russell 2000 crossed 3,000 for the first time ever (June 22, ~+21% YTD) and the small-cap A-D line made an all-time high, a powerful momentum and breadth signal",
+        "But the bull case fights the Fed: ~32% of R2K debt is floating-rate vs ~6% for the S&P 500, and a hike-biased Fed plus a hot 3.4% core-PCE is structurally punishing for the refinancing wall (~$1.35tn maturing in 2026)",
+        "41-46% of Russell 2000 companies cannot cover interest expense with operating profits; any credit-spread widening hits the index disproportionately",
+        "Net: momentum and broadening participation pull the near-term odds back toward a coin-flip from outright bearish, but rate-sensitivity and weak fundamentals cap the 12m upside and fatten the tail"
       ],
-      "confidence": 0.63
+      "confidence": 0.55
     },
     {
       "ticker": "EFA",
@@ -347,19 +352,19 @@
       "ticker": "SMH",
       "name": "VanEck Semiconductor ETF",
       "assetClass": "Factors / Sectors",
-      "pUp1m": 0.45,
-      "pUp3m": 0.49,
-      "pUp12m": 0.57,
-      "ev1m": -0.018,
-      "ev3m": 0.0,
+      "pUp1m": 0.51,
+      "pUp3m": 0.52,
+      "pUp12m": 0.58,
+      "ev1m": 0.005,
+      "ev3m": 0.012,
       "ev12m": 0.13,
       "drivers": [
-        "Sharp June 23 drawdown: an Asian-led chip rout (KOSPI -~10%) dragged the US semiconductor complex down ~4%+, exposing how crowded the AI trade had become after record tech-fund inflows the prior week",
-        "Still up strongly YTD on a generational AI chip supercycle; NVDA, TSM, AVGO dominate at ~36% combined weight with hyperscaler capex $500B+ and HBM shortage underpinning multi-year demand",
-        "Near-term (1-3m) risk/reward skews lower: the run requires continued wide earnings beats, and the hawkish FOMC dot-plot plus any Taiwan/export-curb shock = outsized drawdown given the concentration",
-        "12-month: positive base case if global semiconductor sales hit $975B+ target, but valuation and concentrated top-line exposure cap conviction after the volatility spike"
+        "V-shaped reversal: the June 23 Asian-led chip rout (SMH -~7%) was bought back within two sessions as Micron's blowout fiscal-Q3 (AI/HBM memory demand, pricing) drove a June 25 surge (Micron +12%, SanDisk +14.7%) — the dip proved shallow, not the start of an unwind",
+        "Generational AI chip supercycle intact; NVDA, TSM, AVGO dominate at ~36% combined weight with hyperscaler capex $500B+ and the HBM shortage underpinning multi-year demand",
+        "Near-term risk/reward improved post-Micron, but the run still requires continued wide beats, and a hike-biased Fed plus any Taiwan/export-curb shock would hit hard given the concentration",
+        "12-month: positive base case if global semiconductor sales hit the $975B+ target, but valuation and concentrated top-line exposure cap conviction"
       ],
-      "confidence": 0.5
+      "confidence": 0.52
     },
     {
       "ticker": "XLF",
@@ -390,9 +395,9 @@
       "ev3m": 0.008,
       "ev12m": 0.07,
       "drivers": [
-        "Brent has de-rated to ~$77 (WTI ~$74) on the signed US-Iran framework MoU, a new 60-day Iran oil-sales license and a fourth OPEC+ output hike (+188k b/d from July) — the supply premium has fully deflated",
-        "Sector still screens cheap with the highest CY2026 earnings growth and strong free-cash-flow/shareholder-return capacity, providing a valuation floor, but crude near $77 pressures near-term earnings estimates",
-        "1-3m: the Iran truce has held (the dominant bearish catalyst has played out); upside now requires an OPEC+ pause or a breakdown of the fragile MoU",
+        "Crude has de-rated further — WTI below $70 and Brent below $74 (lowest since February, ~40% off the wartime peak) on the holding US-Iran framework, the Iran oil-sales license and ample OPEC+ supply — the premium has fully deflated",
+        "Sector still screens cheap with the highest CY2026 earnings growth and strong free-cash-flow/shareholder-return capacity, providing a valuation floor, but sub-$70 WTI pressures near-term earnings estimates",
+        "1-3m: the Iran truce has held (the dominant bearish catalyst has played out); upside now requires an OPEC+ pause or a breakdown of the fragile roadmap (Lebanon clashes, periodic Hormuz threats are the live tail)",
         "12m: a stagflation-lite backdrop and a live re-escalation tail (the MoU is under strain) still argue for some structural support, but the durable-ceasefire path caps upside"
       ],
       "confidence": 0.56
@@ -498,10 +503,10 @@
       "ev3m": 0.025,
       "ev12m": 0.085,
       "drivers": [
-        "Continued correction: gold has slid to ~$4,136 (~13% off its ~$4,724 peak) as firm real yields (10y ~4.49%), a firm dollar and the now-unwound war premium weigh — the single biggest 3-12m swing factor",
+        "Continued correction: gold has slid to ~$4,040 (deeper off its ~$4,724 peak) as firm real yields (10y ~4.4%), a firm dollar and the now-unwound war premium weigh — the single biggest 3-12m swing factor",
         "Still +30%+ y/y: structural central-bank demand (~580t/quarter) and a multi-year uptrend provide a durable floor beneath the drawdown",
-        "The Iran geopolitical premium has largely unwound following the June 15 framework deal, removing the recent safe-haven bid",
-        "The June 17 FOMC delivered a hawkish dot-plot (median end-2026 3.8%, an implied hike), a headwind that extends the slide; mid-July June CPI and any eventual pivot signal are the next binaries, with a pivot strongly bullish"
+        "The Iran geopolitical premium has largely unwound following the June 15 framework deal and June 21-22 roadmap, removing the recent safe-haven bid",
+        "A hike-biased June FOMC and a hot 3.4% core-PCE (lifting September hike odds to ~50-68%) extend the slide; the July 14 June CPI and any eventual pivot signal are the next binaries, with a pivot strongly bullish"
       ],
       "confidence": 0.6
     },
@@ -516,7 +521,7 @@
       "ev3m": 0.0,
       "ev12m": 0.08,
       "drivers": [
-        "Negative technical momentum — silver is correcting alongside gold's rates-driven slide, amplified by its higher beta and a firm dollar",
+        "Volatile, rates-driven slide — silver has whipsawed in the high-$50s to low-$60s, correcting alongside gold and amplified by its higher beta and a firm dollar",
         "Sixth consecutive year of supply deficit and ~650Moz industrial fabrication (solar, EV, AI infrastructure) provide structural support beyond 6 months",
         "Dual monetary/industrial character makes silver high-beta to both gold (downside if gold corrects further) and growth (downside if the late-cycle slowdown deepens)",
         "Elevated gold/silver ratio favors silver mean-reversion outperformance over 12m once a base forms"
@@ -534,7 +539,7 @@
       "ev3m": 0.003,
       "ev12m": 0.06,
       "drivers": [
-        "Energy (~55% weight) has corrected hard as Brent fell to ~$77 on the signed US-Iran deal and the Iran oil license — a near-term NAV drag, though most of the de-rate is now done",
+        "Energy (~55% weight) has corrected hard as Brent fell below $74 (WTI <$70) on the holding US-Iran deal and the Iran oil license — a near-term NAV drag, though most of the de-rate is now done",
         "Broad commodities remain the structural stagflation hedge; late-cycle commodity outperformance base rates and any post-deal demand normalization support the 12m case",
         "Contango roll cost (~1-3% annually) is an embedded structural drag that erodes total return versus spot",
         "Diversification across energy, metals and ags offers partial offset if oil keeps correcting while metals/ags stabilize"
@@ -552,8 +557,8 @@
       "ev3m": -0.02,
       "ev12m": -0.02,
       "drivers": [
-        "Brent ~$77 and WTI ~$74 (~30% off the 2026 peak) after the signed US-Iran framework deal reopened Hormuz, lifted the naval blockade and granted Iran a 60-day oil-sales license — much of the bearish repricing has now occurred",
-        "OPEC+ approved a fourth output hike (+188k b/d from July); ample spare capacity plus late-cycle demand headwinds cap the upside even from these lower levels",
+        "WTI below $70 and Brent below $74 (lowest since February, ~40% off the wartime peak) after the US-Iran framework reopened Hormuz, lifted the naval blockade and granted Iran a 60-day oil-sales license — much of the bearish repricing has now occurred, with a fourth straight session of losses into June 25",
+        "Ample OPEC+ spare capacity plus late-cycle demand headwinds cap the upside even from these lower levels",
         "Contango and USO's daily roll structure impose persistent negative carry versus spot, dragging total return even in a flat-price tape",
         "Upside/downside tail: a breakdown of the fragile MoU or a fresh Gulf strike could reprice WTI sharply higher; full Iranian barrels returning to market is the bearish tail"
       ],
@@ -588,7 +593,7 @@
       "ev3m": -0.02,
       "ev12m": 0.07,
       "drivers": [
-        "June 30, 2026 Commerce Dept tariff review is the pivotal near-term catalyst: a definitive U.S. copper tariff decision ends stockpiling rush and Goldman Sachs models LME prices declining post-decision, pressuring miners",
+        "The June 30, 2026 Section 232 copper review is the pivotal near-term catalyst (now days away): reports point to a phased refined-copper duty (15% from Jan 2027 rising to 30% by 2028; Morgan Stanley ~43% probability) that would end the front-running/stockpiling rush and pressure prices and miners post-decision",
         "China demand structurally weak — Q4 2025 refined copper demand -8% YoY, construction still depressed; copper near $6.30/lb retreating from record highs amid tight monetary conditions",
         "Structural deficit of 150-600k tons in 2026 and electrification/EV demand growth of 2.6% annually provide a 12m+ floor, but equity miners trade at a premium that prices in optimistic scenarios",
         "Miners have operational leverage: if copper falls 10-15% post-tariff decision, COPX likely falls 20-30%; if copper holds, COPX offers beta upside — asymmetric risk skewed bearish near-term"
@@ -624,9 +629,9 @@
       "ev3m": -0.02,
       "ev12m": 0.02,
       "drivers": [
-        "BTC has softened to ~$62.5k (briefly under $66k) as the hawkish June FOMC dot-plot and a firm dollar offset the US-Iran peace dividend; the immediate war-scare downside impulse has eased but rates are now the swing",
-        "Higher-for-longer Fed path (dot-plot now implies a 2026 HIKE, median 3.8%) caps the liquidity premium; BTC remains highest-beta to global dollar liquidity",
-        "Spot-ETF flows remain the swing factor and are mixed: BTC/ETH funds saw outflows while some altcoin (SOL/XRP) products drew small inflows — rotation, not fresh broad demand",
+        "BTC is ~$60-67k (briefly under $66k) as the hike-biased June FOMC, a hot 3.4% core-PCE and a firm dollar offset the US-Iran peace dividend; the war-scare impulse has eased but rates are now the swing",
+        "Crypto sentiment is washed out — the alternative.me Fear & Greed sits at Extreme Fear (13, vs ~26 a fortnight ago), a contrarian positive but a sign of acute risk aversion",
+        "Spot-ETF flows have been the swing factor and were heavily negative in June (~$6.6B out over five weeks) before a tentative stabilization (BTC ETFs +$39.2M June 23)",
         "12m genuinely two-sided: an eventual Fed pivot and post-halving positioning are structural longs versus the higher-for-longer crowding-out; base case is symmetric near 50/50"
       ],
       "confidence": 0.55
@@ -642,7 +647,7 @@
       "ev3m": -0.05,
       "ev12m": -0.01,
       "drivers": [
-        "ETH has slipped to ~$1,800 and the spot-ETF flow backdrop is outright negative — US spot ETH ETFs bled ~$708M over 14 consecutive trading days; the ETH/BTC ratio remains compressed, consistent with higher beta and a softer institutional bid",
+        "ETH has slipped further to ~$1.6k and the spot-ETF flow backdrop stayed negative through June; the ETH/BTC ratio remains compressed, consistent with higher beta and a softer institutional bid amid Extreme-Fear crypto sentiment",
         "Glamsterdam upgrade pushed to Q3 2026 removes the near-term protocol catalyst",
         "Staking ETF approvals convert ETH into an income asset for allocators and tighten float (~30% staked) — a 6-12m structural positive, not a 1-3m one",
         "Down sharply from the 2025 ATH; mean-reversion offers some 12m support but rate headwinds to growth assets cap recovery probability"
@@ -660,7 +665,7 @@
       "ev3m": -0.02,
       "ev12m": 0.05,
       "drivers": [
-        "SOL near ~$73; recent token unlocks plus residual crypto risk-off keep near-term supply overhang acute, though spot SOL ETFs have drawn small net inflows (~$15.6M in a recent week) as allocators rotate down the cap spectrum",
+        "SOL has been the weakest major (down mid-single-digits into late June) as token unlocks plus an Extreme-Fear crypto tape (F&G 13) keep the near-term supply overhang acute, though spot SOL ETFs have drawn small net inflows as allocators rotate down the cap spectrum",
         "Alpenglow upgrade (~150ms finality) targeting Q3 2026 mainnet plus ~6%+ staking carry create an asymmetric 3-12m upside case if risk appetite recovers",
         "Network fundamentals remain strongest among L1 peers (record daily TXs, deep DeFi TVL), leaving a wide fundamental-price divergence",
         "Highest-beta asset (~1.5-2x BTC); deep drawdown from ATH creates right-skewed 12m optionality, but it is first-and-worst casualty if the liquidity tail hits — confidence held low at 0.45"
@@ -810,6 +815,132 @@
         "MBS component (~20%) benefits from a no-recession base case (prepayment risk is contained, spreads are tight), while Treasury component provides a modest flight-to-quality hedge if the geopolitical tail materializes"
       ],
       "confidence": 0.56
+    },
+    {
+      "ticker": "REMX",
+      "name": "VanEck Rare Earth & Strategic Metals ETF",
+      "assetClass": "Commodities",
+      "pUp1m": 0.54,
+      "pUp3m": 0.56,
+      "pUp12m": 0.6,
+      "ev1m": 0.02,
+      "ev3m": 0.04,
+      "ev12m": 0.12,
+      "drivers": [
+        "Live catalyst: China's MOFCOM blacklisted MP Materials, USA Rare Earth and ~8 other US firms on June 22 (retaliation for expanded US restrictions), tightening the Western supply picture and re-igniting the rare-earth re-rating theme",
+        "China controls ~70% of mining and ~90% of processing/magnets; every escalation of export curbs raises the strategic value of the ex-China basket REMX captures",
+        "But REMX holds a mix of Chinese and ex-China names, diluting the pure ex-China re-rating, and the basket is thin and highly volatile — a momentum vehicle, not a steady compounder",
+        "12m skew positive on structural Western on-shoring + DoD backing, but headline-driven and prone to sharp give-backs once a given escalation is priced"
+      ],
+      "confidence": 0.5
+    },
+    {
+      "ticker": "MP",
+      "name": "MP Materials Corp",
+      "assetClass": "Commodities",
+      "pUp1m": 0.55,
+      "pUp3m": 0.57,
+      "pUp12m": 0.62,
+      "ev1m": 0.03,
+      "ev3m": 0.05,
+      "ev12m": 0.15,
+      "drivers": [
+        "The marquee ex-China rare-earth name (Mountain Pass, CA) with the DoD as a stakeholder and $330M+ in prior defense contracts — Western government backing is a structural tailwind",
+        "China added MP to its export-control list June 22, but the curbs restrict what MP can RECEIVE from China, not its sales; net, China tightening ex-China supply raises MP's strategic pricing power and magnet-build economics",
+        "High operational leverage and a magnet-manufacturing ramp give outsized 12m upside if NdPr/dysprosium prices re-rate on the China squeeze",
+        "Risks: rich valuation prices in much of the strategic premium, execution on the downstream magnet build is unproven, and any US-China de-escalation would unwind the trade quickly"
+      ],
+      "confidence": 0.48
+    },
+    {
+      "ticker": "USAR",
+      "name": "USA Rare Earth Inc",
+      "assetClass": "Commodities",
+      "pUp1m": 0.52,
+      "pUp3m": 0.54,
+      "pUp12m": 0.58,
+      "ev1m": 0.02,
+      "ev3m": 0.04,
+      "ev12m": 0.13,
+      "drivers": [
+        "Also blacklisted by China on June 22, underscoring its place in the Western critical-minerals supply chain (Round Top deposit + Stillwater magnet plant ambitions)",
+        "Earlier-stage and pre-cash-flow vs MP, so it is the higher-beta, more speculative expression of the on-shoring/DoD-backed magnet theme",
+        "China export curbs and US policy support (reshoring, defense demand) are the upside drivers; the stock re-rates hard on escalation headlines",
+        "Risks: execution, financing and dilution risk are acute for a pre-revenue developer; a de-escalation or capital raise would pressure the equity"
+      ],
+      "confidence": 0.42
+    },
+    {
+      "ticker": "LYC.AX",
+      "name": "Lynas Rare Earths Ltd",
+      "assetClass": "Commodities",
+      "pUp1m": 0.54,
+      "pUp3m": 0.56,
+      "pUp12m": 0.61,
+      "ev1m": 0.02,
+      "ev3m": 0.045,
+      "ev12m": 0.14,
+      "drivers": [
+        "The largest rare-earth producer outside China and the first non-China commercial producer of dysprosium oxide (Malaysia) — the cleanest ex-China supply story; Macquarie reiterated a bullish view as China's export squeeze tightens the market",
+        "US DoD-backed heavy-rare-earth processing (Texas) adds a Western-government revenue/strategic leg as China curbs raise ex-China value",
+        "Cash-generative and production-scaled, so less binary than the US developers — a relatively higher-quality way to own the theme",
+        "Risks: NdPr price sensitivity, Malaysian regulatory/operational overhang, and reversal risk if China relaxes curbs or prices soften"
+      ],
+      "confidence": 0.5
+    },
+    {
+      "ticker": "NEO.TO",
+      "name": "Neo Performance Materials Inc",
+      "assetClass": "Commodities",
+      "pUp1m": 0.53,
+      "pUp3m": 0.55,
+      "pUp12m": 0.59,
+      "ev1m": 0.018,
+      "ev3m": 0.04,
+      "ev12m": 0.12,
+      "drivers": [
+        "Owns the only operating rare-earth separation facility in Europe (Estonia) plus a new magnet plant — a downstream/processing play that benefits directly as the West races to build magnet capacity outside China",
+        "China's June 22 export-control escalation lifts the strategic value of ex-China processing and magnets, Neo's core franchise",
+        "More diversified (magnetics, chemicals, rare metals) than the single-asset miners, giving steadier cash flow but a more muted pure-theme beta",
+        "Risks: cyclical end-markets (autos, electronics), execution on the magnet ramp, and sensitivity to NdPr pricing and any China de-escalation"
+      ],
+      "confidence": 0.45
+    },
+    {
+      "ticker": "UUUU",
+      "name": "Energy Fuels Inc",
+      "assetClass": "Commodities",
+      "pUp1m": 0.52,
+      "pUp3m": 0.54,
+      "pUp12m": 0.58,
+      "ev1m": 0.015,
+      "ev3m": 0.035,
+      "ev12m": 0.12,
+      "drivers": [
+        "Dual critical-minerals exposure — a US uranium producer ALSO building rare-earth (NdPr) separation at White Mesa, Utah — so it rides both the nuclear/AI-power and the ex-China rare-earth themes",
+        "China's rare-earth curbs plus sub-$85/lb uranium that retains long-run AI-driven utility contracting demand give two independent 12m catalysts",
+        "Optionality and Western-supply strategic premium support a positive skew",
+        "Risks: high operational leverage, early-stage REE separation execution, and commodity-price (uranium + NdPr) sensitivity make it volatile and headline-driven"
+      ],
+      "confidence": 0.45
+    },
+    {
+      "ticker": "6680.HK",
+      "name": "JL MAG Rare-Earth Co (H)",
+      "assetClass": "Commodities",
+      "pUp1m": 0.49,
+      "pUp3m": 0.5,
+      "pUp12m": 0.53,
+      "ev1m": -0.005,
+      "ev3m": 0.0,
+      "ev12m": 0.05,
+      "drivers": [
+        "The Chinese-incumbent counter-bet: JL MAG is a leading Chinese high-performance NdFeB magnet maker that benefits from China's dominant, protected position in processing/magnets",
+        "Double-edged: China's export curbs entrench domestic champions at home but can also crimp the overseas sales of Chinese magnet makers and invite Western substitution — a more two-sided setup than the ex-China names",
+        "Strong structural EV/wind/robotics magnet demand underpins the 12m volume story regardless of the trade fight",
+        "Risks: China-policy and export-control whiplash, HK-listing liquidity/sentiment, and the West's accelerating push to design Chinese magnets out of strategic supply chains"
+      ],
+      "confidence": 0.4
     }
   ],
   "callsNote": "Per-instrument analyst priors with directional probability (pUp) and expected value (ev) across 1m/3m/12m horizons, plus drivers and confidence. Blended into the live quant model at the probability level (research weight scales with confidence, capped so the statistical engine stays primary)."
