@@ -183,7 +183,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
   </div>
   <div class="topbar-right">
     <span id="last-updated" class="topbar-sub">Not loaded</span>
-    <button class="btn btn-primary" onclick="refreshAll()">↻ Refresh</button>
+    <button class="btn btn-primary" onclick="refreshAll()" title="Re-pulls everything LIVE right now: prices, FX, Fear&Greed, breadth, quant matrix, risk. Research layers (news, macro commentary, congress/13F/insiders) are produced by the daily 7am agent — they update when it runs, not from this button.">↻ Refresh</button>
   </div>
 </div>
 
@@ -215,6 +215,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 <div class="main">
 
 <div class="panel active" id="panel-overview">
+  <div id="stale-banner" style="display:none;margin-bottom:16px;"></div>
   <div id="intel-alert" style="display:none;margin-bottom:16px;"></div>
   <div id="action-alerts" style="display:none;margin-bottom:16px;"></div>
   <div class="card" style="margin-bottom:16px;">
@@ -471,7 +472,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v48 · 🏅 Consensus Picks · 📰 News &amp; Catalysts · 📈 Model track record · ⚠️ Trend alerts · 🛡️ Risk · 🎯 Matrix · Live: Yahoo + CNN · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v49 · consensus drill-down · staleness banner · 13F-lag explainer · 🏅 Consensus · 📰 News · 📈 Track record · 🛡️ Risk · 🎯 Matrix · Live: Yahoo + CNN · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="cp-overlay" onclick="closeCP(event)">
@@ -484,6 +485,10 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="overlay" id="fg-overlay" onclick="closeFg(event)">
   <div class="modal" style="max-width:560px"><button class="modal-close-btn" onclick="closeFg()">✕</button><div id="fg-modal-content"></div></div>
+</div>
+
+<div class="overlay" id="cons-overlay" onclick="closeCons(event)">
+  <div class="modal" style="max-width:640px"><button class="modal-close-btn" onclick="closeCons()">✕</button><div id="cons-content"></div></div>
 </div>
 
 <div class="overlay" id="modal-overlay" onclick="closeModal(event)">
@@ -1120,7 +1125,17 @@ function renderConviction(){
       <div class="small" style="color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${names}${p.count>uniq?` +${p.count-uniq} more`:''}</div>
     </div>
     <div style="color:var(--accent);font-size:20px;flex-shrink:0">›</div>
-  </div>`;}).join('') + stamp(investorsData&&investorsData.updated,{label:'Super-investor 13F data',note:(convQuarter||cp.current||'')+' filings · refreshed daily'});
+  </div>`;}).join('') + stamp(investorsData&&investorsData.updated,{label:'Super-investor 13F data',note:(convQuarter||cp.current||'')+' filings · '+q13fNote(cp.current)});
+}
+// why the "current" 13F quarter lags the calendar: filings are due 45 days after quarter-end
+function q13fNote(cur){
+  const m=/^(\d{4}) Q([1-4])$/.exec(cur||''); if(!m)return 'refreshed daily';
+  let y=+m[1], nq=+m[2]+1; if(nq>4){nq=1;y++;}
+  const end=new Date(Date.UTC(y,nq*3,0)); const due=new Date(end.getTime()+45*86400000);
+  const dueS=due.toLocaleDateString('en-SG',{day:'2-digit',month:'short',year:'numeric'});
+  return (Date.now()<due.getTime())
+    ? `${y} Q${nq} filings due by ${dueS} (SEC 45-day rule) — the quarter unlocks then; early filers are added as they appear`
+    : `refreshed daily`;
 }
 function openCP(ticker){
   const cp=investorsData.convictionPlays; const p=convList(cp).find(x=>x.ticker===ticker); if(!p) return;
@@ -1284,7 +1299,7 @@ async function loadIntel(){
     if(!r.ok) throw new Error('not published yet');
     intelData=await r.json(); intelLoaded=true;
     el('smart-updated').innerHTML=intelData.updated?(`<span style="color:${freshCol(intelData.updated)}">●</span> as of ${fmtStamp(intelData.updated)} · ${agoTxt(intelData.updated)} · Congress/13F lagged`):'';
-    renderSmart(); renderIntelAlert(); renderSignals(); buildConsensus();
+    renderSmart(); renderIntelAlert(); renderSignals(); buildConsensus(); renderStaleBanner();
   }catch(e){
     el('smart-body').innerHTML='<div class="card" style="text-align:center;color:var(--muted)"><p style="font-size:14px;margin-bottom:6px;">⏳ First Intel refresh is pending.</p><p style="font-size:12px;">The scheduled agent will publish Congress trades, super-investor moves and insider activity (with written analysis) here on its next run.</p></div>';
   }
@@ -2057,32 +2072,54 @@ async function quantScoreSym(sym){
     return {score,label:score>=62?'Uptrend':score>=45?'Mixed':'Downtrend'};
   }catch(_){return null;}
 }
+let CONS_ARR=[];
 async function buildConsensus(){
   const box=el('consensus-body'); if(!box)return;
   if(!intelData||!investorsData){return;} // wait until both feeds are in
   if(consensusBuilt)return; consensusBuilt=true;
   const M={};
-  const add=(t,pts,key,val,name)=>{t=(t||'').toUpperCase().trim();if(!t)return;const e=M[t]=M[t]||{t,score:0,parts:{},names:[]};e.score+=pts;e.parts[key]=(e.parts[key]||0)+(val==null?1:val);if(name&&!e.name)e.name=name;};
-  // 13F conviction (current quarter)
+  const ent=t=>{t=(t||'').toUpperCase().trim();if(!t)return null;return M[t]=M[t]||{t,score:0,parts:{},d:{whales:[],congress:[],insider:[],moves:[],signal:[],reddit:null,quant:null}};};
+  const add=(t,pts,key,val,name)=>{const e=ent(t);if(!e)return null;e.score+=pts;e.parts[key]=(e.parts[key]||0)+(val==null?1:val);if(name&&!e.name)e.name=name;return e;};
+  // 13F conviction (current quarter) — keep the investor lists for drill-down
   const cp=investorsData.convictionPlays, q=cp&&cp.byQuarter&&cp.byQuarter[cp.current];
-  if(q){(q.New||[]).forEach(p=>add(p.ticker,3*Math.min(p.count||1,10)/3,'whales',p.count,p.name));
-       (q.Added||[]).forEach(p=>add(p.ticker,2*Math.min(p.count||1,10)/3,'whales',p.count,p.name));}
-  // intel: super-investor moves, congress buys, insider buys
+  if(q)[['New',3],['Added',2]].forEach(([act,w])=>(q[act]||[]).forEach(p=>{const e=add(p.ticker,w*Math.min(p.count||1,10)/3,'whales',p.count,p.name);
+    if(e){e.d.whalesNote=`${p.count} super investors ${act==='New'?'opened new positions':'added'} in ${cp.current}${p.summary?' — '+p.summary:''}`;
+      (p.investors||[]).forEach(inv=>e.d.whales.push({who:inv.name,extra:(inv.manager?inv.manager+' · ':'')+act+(inv.tradeValue?' · '+inv.tradeValue:''),when:inv.filed||inv.quarter||cp.current}));}}));
+  // intel: super-investor moves, congress buys, insider buys, signals
   const uc={},ui={};
-  (intelData.superInvestors||[]).filter(x=>/new|add|increas/i.test(x.action||'')).forEach(x=>{const k=(x.ticker||'')+(x.name||'');if(ui[k])return;ui[k]=1;add(x.ticker,2,'moves',1);});
-  (intelData.congress||[]).filter(x=>/buy|purchase/i.test(x.type||'')).forEach(x=>{const k=(x.ticker||'')+(x.representative||'');if(uc[k])return;uc[k]=1;add(x.ticker,2,'congress',1);});
-  (intelData.insiders||[]).filter(x=>/buy/i.test(x.type||'')).forEach(x=>add(x.ticker,2,'insider',1));
-  (intelData.signals||[]).forEach(s=>add(s.ticker,1,'signal',1,s.name));
+  (intelData.superInvestors||[]).filter(x=>/new|add|increas/i.test(x.action||'')).forEach(x=>{const k=(x.ticker||'')+(x.name||'');if(ui[k])return;ui[k]=1;const e=add(x.ticker,2,'moves',1);if(e)e.d.moves.push({who:x.name,extra:x.action+(x.value?' · '+x.value:''),when:x.quarter||''});});
+  (intelData.congress||[]).filter(x=>/buy|purchase/i.test(x.type||'')).forEach(x=>{const k=(x.ticker||'')+(x.representative||'');if(uc[k])return;uc[k]=1;const e=add(x.ticker,2,'congress',1);if(e)e.d.congress.push({who:x.representative,extra:x.type+(x.amount?' · '+x.amount:''),when:x.date});});
+  (intelData.insiders||[]).filter(x=>/buy/i.test(x.type||'')).forEach(x=>{const e=add(x.ticker,2,'insider',1);if(e)e.d.insider.push({who:x.insider,extra:(x.role?x.role+' · ':'')+x.type+(x.value?' · '+x.value:x.shares?' · '+x.shares:''),when:x.date});});
+  (intelData.signals||[]).forEach(s=>{const e=add(s.ticker,1,'signal',1,s.name);if(e)e.d.signal.push({who:s.label||'Signal',extra:(s.detail||'')+(s.takeaway?' — '+s.takeaway:''),when:''});});
   // Reddit crowd interest
   try{
     if(!redditTop){const d=await yfFetch('https://apewisdom.io/api/v1.0/filter/all-stocks/page/1');redditTop=(d&&d.results)||[];}
-    redditTop.slice(0,30).forEach((r,i)=>{const t=(r.ticker||'').toUpperCase();if(M[t])add(t,i<10?2:1,'reddit',i+1);});
+    redditTop.slice(0,30).forEach((r,i)=>{const t=(r.ticker||'').toUpperCase();if(M[t]){add(t,i<10?2:1,'reddit',i+1);M[t].d.reddit={rank:i+1,mentions:r.mentions,upvotes:r.upvotes,name:r.name};}});
   }catch(_){}
   // rank & add quant reads for the top names
   let arr=Object.values(M).filter(e=>e.score>=3).sort((a,b)=>b.score-a.score).slice(0,10);
-  await Promise.allSettled(arr.slice(0,8).map(async e=>{e.quant=quantOf(e.t)||await quantScoreSym(e.t);}));
+  await Promise.allSettled(arr.slice(0,8).map(async e=>{e.quant=quantOf(e.t)||await quantScoreSym(e.t);if(e.quant)e.d.quant=e.quant;}));
+  CONS_ARR=arr;
   renderConsensus(arr);
 }
+function openConsDetail(t){
+  const e=CONS_ARR.find(x=>x.t===t); if(!e)return;
+  const sec=(title,rows,note)=>rows&&rows.length?`<div style="margin-top:14px"><div class="sh">${title}</div>${note?`<div class="small" style="color:var(--muted);margin-bottom:4px">${note}</div>`:''}${rows.map(r=>`<div style="display:flex;gap:8px;align-items:baseline;padding:5px 0;border-bottom:1px solid var(--border);font-size:12.5px;flex-wrap:wrap"><b>${r.who}</b><span class="small" style="color:var(--muted)">${r.extra||''}</span><span class="small" style="margin-left:auto;color:${freshCol(r.when)}">${r.when||''}</span></div>`).join('')}</div>`:'';
+  const rd=e.d.reddit?`<div style="margin-top:14px"><div class="sh">🔥 Reddit crowd interest</div><div style="font-size:12.5px;padding:5px 0">Rank <b>#${e.d.reddit.rank}</b> across investing subreddits · ${e.d.reddit.mentions!=null?`<b>${e.d.reddit.mentions}</b> mentions (24h)`:''} ${e.d.reddit.upvotes!=null?` · <b>${e.d.reddit.upvotes}</b> upvotes`:''}<div class="small" style="color:var(--muted);margin-top:2px">Source: ApeWisdom (live) · crowd attention ≠ quality — used as a sentiment input only.</div></div></div>`:'';
+  const qn=e.d.quant?`<div style="margin-top:14px"><div class="sh">🎯 Quant model read</div><div style="font-size:12.5px;padding:5px 0"><b style="color:${e.d.quant.score>=62?'var(--green)':e.d.quant.score>=45?'var(--accent)':'var(--red)'}">${e.d.quant.label} · ${Math.round(e.d.quant.score)}/100</b><div class="small" style="color:var(--muted);margin-top:2px">Live trend/momentum score (200-day trend, 50/200 cross, 12-1 momentum). ● live — recomputed on every refresh.${(MODEL_RESULTS||[]).find(x=>x.t===e.t)?' Full P(up)/EV breakdown in the 🎯 Opportunity Matrix.':''}</div></div></div>`:'';
+  el('cons-content').innerHTML=`
+   <div style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap"><div><div style="font-size:24px;font-weight:800">${e.t}</div><div class="small" style="color:var(--muted)">${e.name||''} · consensus score <b style="color:var(--accent)">${Math.round(e.score*10)/10} pts</b></div></div></div>
+   ${sec('🐋 Super investors (13F filings)',e.d.whales,e.d.whalesNote||'')}
+   ${sec('💼 Recent fund moves',e.d.moves)}
+   ${sec('🏛️ Congress trades',e.d.congress,'Disclosed up to 45 days after the trade by law.')}
+   ${sec('👤 Insider buying',e.d.insider)}
+   ${sec('⚡ Cross-source signals',e.d.signal)}
+   ${rd}${qn}
+   <div style="margin-top:16px;text-align:center"><button class="btn btn-primary" onclick="closeCons();openTicker('${esc(e.t)}')">View live candlestick chart →</button></div>
+   <div class="small" style="color:var(--muted);margin-top:10px;text-align:center">Sources agreeing is a signal, not advice — 13F/Congress data is lagged disclosure.</div>`;
+  el('cons-overlay').classList.add('open');
+}
+function closeCons(e){if(e&&e.target!==el('cons-overlay'))return;el('cons-overlay').classList.remove('open');}
 function renderConsensus(arr){
   const box=el('consensus-body'); if(!box)return;
   if(!arr||!arr.length){box.innerHTML='<div class="small" style="color:var(--muted)">Not enough cross-source agreement in the current data.</div>';return;}
@@ -2093,7 +2130,7 @@ function renderConsensus(arr){
     if(p.insider)badges.push(`<span class="chip" title="insider buying">👤 insider</span>`);
     if(p.reddit)badges.push(`<span class="chip" title="Reddit mention rank">🔥 reddit #${p.reddit}</span>`);
     if(e.quant)badges.push(`<span class="chip" title="quant model read" style="color:${e.quant.score>=62?'var(--green)':e.quant.score>=45?'var(--accent)':'var(--red)'}">🎯 ${e.quant.label||''} ${Math.round(e.quant.score)}</span>`);
-    return `<div class="conv-row" onclick="openTicker('${esc(e.t)}')">
+    return `<div class="conv-row" onclick="openConsDetail('${esc(e.t)}')">
      <div class="conv-rank">${i+1}</div>
      <div style="flex:1;min-width:0">
        <div>${tkr(e.t)}${held?' 🟡':''} <span class="small" style="color:var(--muted)">${e.name||''}</span>
@@ -2101,6 +2138,7 @@ function renderConsensus(arr){
        <div style="height:5px;background:var(--surf2);border-radius:3px;margin:5px 0"><div style="width:${Math.round(e.score/mx*100)}%;height:100%;background:var(--accent);border-radius:3px"></div></div>
        <div style="display:flex;gap:6px;flex-wrap:wrap">${badges.join('')}</div>
      </div><div style="color:var(--accent);font-size:20px;flex-shrink:0">›</div></div>`;}).join('')
+   +`<div class="small" style="color:var(--muted);margin-top:6px">Tap any pick to see exactly who's behind each badge — every whale, congress member, insider, the Reddit stats and the quant read.</div>`
    +stamp(intelData&&intelData.updated,{label:'Cross-source consensus',note:'13F/Congress inputs are lagged disclosures · quant is live'});
 }
 // ═══════════════════════════════════════════════════════════════════════
@@ -2152,6 +2190,20 @@ function renderTrack(){
    ${stamp(trackData.updated,{label:'Call history',note:snaps.length+' scoreable snapshots since '+fmtStamp(trackData.snapshots[0].date)+' · new snapshot daily'})}`;
 }
 // ═══════════════════════════════════════════════════════════════════════
+// ⏳ STALENESS BANNER — warn when the research layers haven't refreshed
+// (live prices/quant are unaffected; the 7am agent only runs while the
+//  Claude desktop app is open on the Mac)
+// ═══════════════════════════════════════════════════════════════════════
+function renderStaleBanner(){
+  const box=el('stale-banner'); if(!box)return;
+  const d=intelData&&intelData.updated; const age=daysAgo(d);
+  if(age==null||age<3){box.style.display='none';return;}
+  box.style.display='';
+  box.innerHTML=`<div class="card" style="border-left:3px solid var(--accent);background:rgba(245,158,11,.06)">
+   <div style="font-weight:800;font-size:13px">⏳ Research layers are ${age} days old (last agent run ${fmtStamp(d)})</div>
+   <div style="font-size:12.5px;line-height:1.6;margin-top:4px">Live prices, FX, Fear&nbsp;&amp;&nbsp;Greed and the quant matrix are current — but news, macro commentary, congress/13F/insider research come from the daily 7:02am agent, which only runs while the Claude app is open on your Mac. It didn't run on days the app was closed. <b>Fix:</b> leave the app open overnight, or ask Claude to "refresh the research" for an immediate update.</div></div>`;
+}
+// ═══════════════════════════════════════════════════════════════════════
 // ⚠️ ACTION ALERTS — trend breaks on YOUR positions, surfaced on the overview
 // ═══════════════════════════════════════════════════════════════════════
 function renderActionAlerts(){
@@ -2172,10 +2224,11 @@ function renderActionAlerts(){
   alerts.sort((a,b)=>b.v-a.v);
   box.style.display='';
   box.innerHTML=`<div class="card" style="border-left:3px solid var(--red)"><div class="sh">⚠️ Trend alerts on your book (${alerts.length})</div>
-   ${alerts.map(a=>`<div style="display:flex;gap:8px;align-items:baseline;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px;flex-wrap:wrap">
+   ${alerts.map(a=>{const sev=a.gap<-0.15?'▼▼':'▼';return `<div style="display:flex;gap:8px;align-items:baseline;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px;flex-wrap:wrap">
+     <span title="${a.gap<-0.15?'steep downtrend':'downtrend'} — price below falling 200-day avg" style="font-weight:800;color:var(--red);background:rgba(239,68,68,.12);border-radius:5px;padding:0 6px;white-space:nowrap">${sev}</span>
      ${tkr(a.t)}<b>${a.n}</b>${a.lev?' <span class="pill neg">1.6× levered</span>':''}
-     <span class="small" style="color:var(--muted)">confirmed downtrend · ${(a.gap*100).toFixed(0)}% below 200-day · ${(a.dd*100).toFixed(0)}% off 52w high</span>
-     <b style="margin-left:auto">${vS(a.v)}</b></div>`).join('')}
+     <span class="small" style="color:var(--muted)">${(a.gap*100).toFixed(0)}% below 200-day · ${(a.dd*100).toFixed(0)}% off 52w high</span>
+     <b style="margin-left:auto">${vS(a.v)}</b></div>`;}).join('')}
    <div class="small" style="color:var(--muted);margin-top:6px">Positions ≥S$20k trading below a falling 200-day average — the Risk tab's TRIM/WATCH logic. Review, don't auto-sell. ● live, recomputed each refresh.</div></div>`;
 }
 function el(id){return document.getElementById(id);}

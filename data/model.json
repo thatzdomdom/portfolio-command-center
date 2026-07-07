@@ -1,947 +1,987 @@
 {
-  "updated": "2026-06-26",
-  "asOf": "2026-06-26",
-  "note": "CIO research-panel macro regime + per-instrument probabilistic priors, produced by a multi-agent research workflow with adversarial verification and cited sources. The live in-browser quant engine (GBM drift-diffusion on 2y daily history) blends with these forward-looking priors to produce the displayed P(up) and EV. Refreshed by the scheduled intel agent.",
-  "macro": {
-    "regime": "late-cycle hawkish hold (hike-biased dots), war premium gone, semis rebound on Micron, breadth broadening, hot core PCE",
-    "regimeScore": 0.48,
-    "riskOnProb": 0.48,
-    "asOf": "2026-06-26",
-    "narrative": "The hawkish-Fed/no-war regime persists, but the equity tape healed and broadened into late June. (1) The June 16-17 FOMC, Chair Warsh's first, held the funds rate at 3.50-3.75% but the projections leaned hawkish: nine of eighteen members now pencil in at least one hike by year-end (Warsh notably submitted no dot of his own), and the committee withheld forward guidance. A June 25/26 core-PCE print at 3.4% y/y (headline 4.1%, the hottest since 2023) and a BofA call for a series of hikes have pushed market-implied September hike odds up toward ~50-68%. (2) The June 15 US-Iran framework MoU (60-day ceasefire, Strait of Hormuz reopened, naval blockade lifted, Iran oil-sales license) and a June 21-22 roadmap to a final deal are holding but fragile (Lebanon clashes, periodic Hormuz threats). That kept the war premium out: WTI fell below $70 and Brent below $74 (lowest since February, ~40% off the wartime peak), a forward-disinflationary offset to sticky core. (3) The June 23 Asian-led semiconductor rout did NOT extend — Micron's blowout fiscal-Q3 (AI/HBM memory demand) sparked a June 25 rebound (SanDisk +14.7%, Micron +12%), and breadth broadened impressively: the Russell 2000 hit a record 3,000, the small-cap A-D line made an all-time high, and ~62% of the S&P sits above its 200-DMA. Equity-fund flows rotated hard into the US (a record US-equity week, tech +~$21.5B). Rates eased (10y ~4.4%, a 6-week low; 2y ~4.20%; 30y ~4.94%) but the hot PCE and hike-biased dots cap any rally; gold slid to ~$4,040, BTC ~$60-67k and ETH ~$1.6k as crypto sentiment cratered to Extreme Fear (13). NEW this week: China blacklisted MP Materials and USA Rare Earth (June 22), re-igniting the ex-China rare-earth/critical-minerals trade. Net: we hold a modest defensive tilt — OW USD/cash and structurally-bid real assets over richly-valued, concentrated equities (CAPE ~39.7, near-zero ERP) and historically tight credit — but nudge slightly less defensive given the healthier breadth, with the next swings the July 14 June CPI and the July 28-29 FOMC.",
-    "drivers": [
-      {
-        "factor": "Hawkish, hike-biased Fed reinforced by hot core PCE",
-        "read": "The June 17 FOMC held at 3.50-3.75% with nine members projecting a 2026 hike and no forward guidance (Warsh submitted no dot). A June 25/26 core-PCE at 3.4% y/y (headline 4.1%, hottest since 2023) plus a BofA 'series of hikes' call lifted market-implied September hike odds toward ~50-68%. Genuinely hawkish.",
-        "impact": "cautionary"
-      },
-      {
-        "factor": "Semis rebound — Micron beat reverses the June 23 rout",
-        "read": "The June 23 Asian-led chip selloff did not extend: Micron's blowout fiscal-Q3 on AI/HBM memory demand drove a June 25 rebound (SanDisk +14.7%, Micron +12%), and tech funds kept drawing record inflows (~+$21.5B). The crowded AI trade re-found its footing rather than unwinding.",
-        "impact": "supportive"
-      },
-      {
-        "factor": "Breadth broadens — small-cap leadership, record Russell 2000",
-        "read": "The Russell 2000 crossed 3,000 for the first time ever (June 22) with the small-cap A-D line at an all-time high; ~62% of the S&P is above its 200-DMA, advancers beat decliners and leadership rotated beyond mega-cap tech. A healthier, less-narrow internal than earlier in June.",
-        "impact": "supportive"
-      },
-      {
-        "factor": "US-Iran framework holds; oil de-rate persists",
-        "read": "The June 15 MoU and June 21-22 roadmap are holding but fragile (Lebanon clashes, Hormuz threats). The war premium stays out: WTI <$70, Brent <$74 (lowest since February, ~40% off the wartime peak) — disinflationary for forward headline CPI but a headwind for energy equities and broad commodities.",
-        "impact": "mixed"
-      },
-      {
-        "factor": "Real yields firm / gold, crypto slip",
-        "read": "10y ~4.4% (a 6-week low on Iran de-escalation), 2y ~4.20%, 30y ~4.94%; the firm real-yield + firm-dollar backdrop pushed gold to ~$4,040 (still +30%+ y/y on central-bank demand), BTC to ~$60-67k and ETH to ~$1.6k, with crypto Fear & Greed at Extreme Fear (13). The squeeze on non-yielding assets persists.",
-        "impact": "cautionary"
-      },
-      {
-        "factor": "Rare-earth escalation — China blacklists MP & USA Rare Earth",
-        "read": "On June 22 China's MOFCOM added MP Materials, USA Rare Earth and ~8 other US firms to its export-control list (retaliation for expanded US restrictions). With DoD a stakeholder in MP and Lynas ramping ex-China supply, the critical-minerals/rare-earth re-rating theme is live again.",
-        "impact": "supportive"
-      },
-      {
-        "factor": "Equity valuation, AI concentration & tight credit",
-        "read": "S&P CAPE ~39.7 (forward P/E ~23) with a near-zero equity risk premium, top ~10 names ~40% of the index, and IG (~80bp) / HY (~265-285bp) spreads near multi-decade tights leave little cushion for an earnings, capex or growth disappointment — though the June 25 breadth broadening eases the single-stock fragility somewhat.",
-        "impact": "cautionary"
-      }
-    ],
-    "byAssetClass": [
-      {
-        "assetClass": "Equity",
-        "stance": "Neutral",
-        "pUp12m": 0.55,
-        "note": "Solid earnings (Street year-end targets ~8000, DB) and no recession argue up over 12m, and late-June breadth broadened materially (record Russell 2000, ~62% of the S&P above its 200-DMA, Micron-led semis rebound) — easing the single-stock fragility — but a record-low equity risk premium, a ~39.7 CAPE, firm real yields and a hot 3.4% core-PCE keep us Neutral; the next risk events are the July 14 June CPI and the July 28-29 FOMC.",
-        "tilt": 0.0
-      },
-      {
-        "assetClass": "Commodities",
-        "stance": "modest OW",
-        "pUp12m": 0.55,
-        "note": "Still the cleanest stagflation hedge — structural central-bank gold demand keeps gold +30%+ y/y at ~$4,040 even after a deeper pullback from its ~$4,724 peak — and the new China rare-earth export curbs (MP/USA Rare Earth blacklisted June 22) add a fresh critical-minerals tailwind; but the call stays only modest OW as WTI has fallen below $70 on the holding US-Iran framework and the rates/USD-driven precious-metals slide adds near-term two-way risk.",
-        "tilt": 0.012
-      },
-      {
-        "assetClass": "Crypto",
-        "stance": "modest UW",
-        "pUp12m": 0.5,
-        "note": "BTC is ~$60-67k and ETH ~$1.6k as the hike-biased Fed, hot core PCE and firm dollar offset the US-Iran peace dividend; crypto Fear & Greed cratered to Extreme Fear (13) and spot funds shed ~$6.6B over five weeks (with a tentative late-June stabilization, BTC ETFs +$39M June 23). Higher-for-longer rates keep crypto the highest-beta casualty; 12m odds are genuinely two-sided.",
-        "tilt": -0.012
-      },
-      {
-        "assetClass": "Bonds",
-        "stance": "Neutral",
-        "pUp12m": 0.54,
-        "note": "Yields (10y ~4.4% — a 6-week low — 30y ~4.94%) offer attractive carry and a recession hedge, and the oil de-rate lowers forward headline CPI, but a hike-biased Fed and a hot 3.4% core-PCE keep near-term duration risk elevated and us off OW; modest up-bias over 12m as the cycle eventually turns and the energy tail keeps deflating.",
-        "tilt": 0.0
-      },
-      {
-        "assetClass": "USD/Cash",
-        "stance": "OW",
-        "pUp12m": 0.58,
-        "note": "The dollar's rate support was reinforced by the hike-biased June FOMC and the hot core-PCE print (September hike odds ~50-68%); cash yields ~3.7-4% with optionality, making USD/cash a high-Sharpe holding while the July 14 June CPI, the July 28-29 FOMC and the durability of the US-Iran roadmap stay unresolved.",
-        "tilt": 0.02
-      }
-    ],
-    "sources": [
-      "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260617a.htm",
-      "https://www.cnbc.com/amp/2026/06/17/fed-projections-call-for-a-rate-hike-in-2026-but-chairman-warsh-likely-abstained.html",
-      "https://fortune.com/2026/06/22/fed-rate-hikes-outlook-sticky-inflation-kevin-warsh-job-growth-oil-prices/",
-      "https://www.aljazeera.com/news/2026/6/22/us-iran-agree-on-roadmap-towards-final-deal-in-switzerland-talks",
-      "https://www.cnbc.com/2026/06/22/us-iran-roadmap-final-deal-switzerland-talks-lebanon-deconfliction.html",
-      "https://tradingeconomics.com/commodity/crude-oil",
-      "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-25-2026",
-      "https://www.mining.com/china-blacklists-mp-materials-usa-rare-earth-in-critical-minerals-war/",
-      "https://fred.stlouisfed.org/series/DGS10",
-      "https://fred.stlouisfed.org/series/BAMLH0A0HYM2"
-    ]
-  },
-  "calls": [
-    {
-      "ticker": "SPY",
-      "name": "S&P 500 SPDR ETF",
-      "assetClass": "Equity / Regions",
-      "pUp1m": 0.51,
-      "pUp3m": 0.53,
-      "pUp12m": 0.55,
-      "ev1m": 0.004,
-      "ev3m": 0.014,
-      "ev12m": 0.048,
-      "drivers": [
-        "S&P ~7,357 (June 25); Street year-end targets ~8000 (DB) supported by solid EPS growth and no recession in the base case — a soft earnings floor",
-        "CAPE ~39.7 with a near-zero equity risk premium and firm real yields severely compress forward returns and widen the left tail; a hot 3.4% core-PCE keeps the Fed hike-biased",
-        "Late-June breadth broadened — the Russell 2000 hit a record 3,000, the small-cap A-D line made an all-time high and ~62% of the S&P is above its 200-DMA — easing the single-stock fragility that the June 23 semis rout exposed",
-        "Micron's blowout earnings sparked a June 25 semis rebound; the July 14 June CPI and the July 28-29 FOMC are the next catalysts, with AI concentration (top ~10 ~40% of the index) still capping broad-index upside"
-      ],
-      "confidence": 0.6
-    },
-    {
-      "ticker": "QQQ",
-      "name": "Invesco Nasdaq-100 ETF",
-      "assetClass": "Equity / Regions",
-      "pUp1m": 0.52,
-      "pUp3m": 0.55,
-      "pUp12m": 0.56,
-      "ev1m": 0.006,
-      "ev3m": 0.022,
-      "ev12m": 0.07,
-      "drivers": [
-        "Mega-cap AI capex ($630-770bn projected for 2026) and 25-30% Magnificent Seven EPS growth sustain fundamental momentum; Micron's blowout fiscal-Q3 (AI/HBM memory) drove a June 25 rebound that healed the June 23 chip rout",
-        "QQQ near all-time high; trend persistence favors continued outperformance over 12m, though a June 25 Mag-7 wobble (Apple/MSFT price-hike headlines) shows mega-cap leadership is fully priced",
-        "Forward P/E still historically stretched vs. the real-yield backdrop; concentration in top 5 holdings (~47%) amplifies idiosyncratic risk",
-        "A hike-biased June FOMC and a hot 3.4% core-PCE lift the discount rate on long-duration growth, capping multiple expansion even as earnings deliver"
-      ],
-      "confidence": 0.6
-    },
-    {
-      "ticker": "IWM",
-      "name": "iShares Russell 2000 ETF",
-      "assetClass": "Equity / Regions",
-      "pUp1m": 0.52,
-      "pUp3m": 0.5,
-      "pUp12m": 0.51,
-      "ev1m": 0.006,
-      "ev3m": 0.005,
-      "ev12m": 0.025,
-      "drivers": [
-        "Regime shift: small caps are now LEADING — the Russell 2000 crossed 3,000 for the first time ever (June 22, ~+21% YTD) and the small-cap A-D line made an all-time high, a powerful momentum and breadth signal",
-        "But the bull case fights the Fed: ~32% of R2K debt is floating-rate vs ~6% for the S&P 500, and a hike-biased Fed plus a hot 3.4% core-PCE is structurally punishing for the refinancing wall (~$1.35tn maturing in 2026)",
-        "41-46% of Russell 2000 companies cannot cover interest expense with operating profits; any credit-spread widening hits the index disproportionately",
-        "Net: momentum and broadening participation pull the near-term odds back toward a coin-flip from outright bearish, but rate-sensitivity and weak fundamentals cap the 12m upside and fatten the tail"
-      ],
-      "confidence": 0.55
-    },
-    {
-      "ticker": "EFA",
-      "name": "iShares MSCI EAFE ETF",
-      "assetClass": "Equity / Regions",
-      "pUp1m": 0.54,
-      "pUp3m": 0.57,
-      "pUp12m": 0.58,
-      "ev1m": 0.008,
-      "ev3m": 0.022,
-      "ev12m": 0.075,
-      "drivers": [
-        "International ETFs crushing US peers YTD; European equity funds drew a standout ~$10.7B in the week to June 17 (part of a record global-equity inflow week) and dollar softness provides a persistent translation tailwind",
-        "Europe + Japan valuations materially cheaper than US; mean-reversion base rates favor non-US developed markets when CAPE gap is as wide as today",
-        "ECB easing and Germany's EUR 127bn fiscal push support European demand; BoJ tightening anchors yen and supports Japanese banking margins",
-        "Geopolitical tail risk (Hormuz/Iran) is negative for energy-importing Europe but partially hedged by commodities OW at the portfolio level"
-      ],
-      "confidence": 0.6
-    },
-    {
-      "ticker": "EEM",
-      "name": "iShares MSCI Emerging Markets ETF",
-      "assetClass": "Equity / Regions",
-      "pUp1m": 0.5,
-      "pUp3m": 0.53,
-      "pUp12m": 0.57,
-      "ev1m": 0.001,
-      "ev3m": 0.018,
-      "ev12m": 0.065,
-      "drivers": [
-        "EM forward P/E at 12x vs. 10-year average; dollar weakening is the single most powerful EM tailwind and the macro read supports further USD softness",
-        "But near-term flows are negative: EM equity funds bled ~$2.9B in the week to June 17, an eighth straight weekly outflow, as the hawkish Fed and firm dollar weigh — a clear positioning headwind despite cheap valuations",
-        "The Hormuz/energy tail has eased with the US-Iran framework deal (a net positive for oil-importing EM), removing the acute geopolitical downside that dominated early June",
-        "EM dispersion is wide: China stimulus uncertainty, India valuation stretch, and Taiwan/Korea AI cycle create mixed regional signals within the index"
-      ],
-      "confidence": 0.55
-    },
-    {
-      "ticker": "VGK",
-      "name": "Vanguard FTSE Europe ETF",
-      "assetClass": "Equity / Regions",
-      "pUp1m": 0.54,
-      "pUp3m": 0.57,
-      "pUp12m": 0.6,
-      "ev1m": 0.009,
-      "ev3m": 0.025,
-      "ev12m": 0.08,
-      "drivers": [
-        "Germany EUR 127bn infrastructure/defense fiscal impulse is the largest European fiscal stimulus in a generation; industrials and financials are primary beneficiaries",
-        "EUR/USD near 1.16, below long-term fair value of ~1.20; currency cheapness and dollar softness provide dual upside for USD-denominated returns",
-        "EU GDP forecast 1.4% for 2026 with inflation risks to the downside; peak tariff shock appears passed, reducing a key overhang",
-        "Strong 2026 flows into European equities; valuation discount to US remains historically wide and supports mean-reversion over a 12m horizon"
-      ],
-      "confidence": 0.62
-    },
-    {
-      "ticker": "EWJ",
-      "name": "iShares MSCI Japan ETF",
-      "assetClass": "Equity / Regions",
-      "pUp1m": 0.52,
-      "pUp3m": 0.55,
-      "pUp12m": 0.6,
-      "ev1m": 0.007,
-      "ev3m": 0.025,
-      "ev12m": 0.08,
-      "drivers": [
-        "Multi-year return driven by corporate governance reforms and shareholder return improvements; structural re-rating still has runway as ROE improvement continues",
-        "BoJ at 0.75% with real rates still negative — gradual hike path is not equity-negative; banking sector benefits from wider net interest margins",
-        "Yen expected to stabilize at 140-145 vs USD; yen appreciation would boost EWJ's USD returns but may compress export-sector earnings",
-        "BoJ planned divestiture of its JPY 83tn ETF portfolio (~JPY 330bn/year) is a modest but psychologically important technical headwind"
-      ],
-      "confidence": 0.58
-    },
-    {
-      "ticker": "INDA",
-      "name": "iShares MSCI India ETF",
-      "assetClass": "Equity / Regions",
-      "pUp1m": 0.48,
-      "pUp3m": 0.52,
-      "pUp12m": 0.57,
-      "ev1m": 0,
-      "ev3m": 0.015,
-      "ev12m": 0.08,
-      "drivers": [
-        "India GDP growth forecast 6.9% (Goldman Sachs) — fastest major economy; earnings expected to re-accelerate to 16% growth in 2026 after prior-year disappointment",
-        "INDA near 52-week low; oversold FPI positioning and potential for 15-25% re-rating over 6-12m per analyst consensus",
-        "US-India trade deal reduces tariff uncertainty; RBI easing stance, GST 2.0 reforms and consumption tax relief are positive near-term catalysts",
-        "Market cap/GDP at 128% (modestly overvalued); Hormuz/energy shock is a structural negative for India as a large oil importer"
-      ],
-      "confidence": 0.57
-    },
-    {
-      "ticker": "FXI",
-      "name": "iShares China Large-Cap ETF",
-      "assetClass": "Equity / Regions",
-      "pUp1m": 0.47,
-      "pUp3m": 0.5,
-      "pUp12m": 0.5,
-      "ev1m": -0.005,
-      "ev3m": 0.003,
-      "ev12m": 0.025,
-      "drivers": [
-        "FXI well below 52-week high; property market stabilizing but not rebounding — 10-14% decline in sales projected for 2026",
-        "GDP growth slowing to 4.5% in 2026 from 5% in 2025; deflation risk persists and domestic demand stimulus remains 'support not rescue' in character",
-        "Geopolitical tail: escalating US tariffs and technology restrictions represent the primary downside catalyst with binary policy risk",
-        "Stimulus optionality is the key upside: any forceful PBOC/fiscal action to backstop the property sector could produce a sharp, fast rally in large-caps — creates positive skew even at neutral pUp"
-      ],
-      "confidence": 0.58
-    },
-    {
-      "ticker": "MTUM",
-      "name": "iShares MSCI USA Momentum Factor ETF",
-      "assetClass": "Factors / Sectors",
-      "pUp1m": 0.54,
-      "pUp3m": 0.57,
-      "pUp12m": 0.61,
-      "ev1m": 0.018,
-      "ev3m": 0.045,
-      "ev12m": 0.13,
-      "drivers": [
-        "24% YTD gain has embedded strong trend persistence; 12-month momentum historically continues ~55-60% of the time in non-recessionary environments",
-        "Top holdings tilted to AI/semiconductor names (NVDA, MU, AMD, AVGO) which remain in positive earnings revision cycle",
-        "Momentum factor benefits from stagflation-lite regime where trend-following outperforms mean-reversion if no recession materializes",
-        "Key risk: rebalancing into next semi-annual reconstitution could rotate toward beaten-down names, and momentum crashes are severe when crowding unwinds"
-      ],
-      "confidence": 0.55
-    },
-    {
-      "ticker": "QUAL",
-      "name": "iShares MSCI USA Quality Factor ETF",
-      "assetClass": "Factors / Sectors",
-      "pUp1m": 0.52,
-      "pUp3m": 0.55,
-      "pUp12m": 0.6,
-      "ev1m": 0.012,
-      "ev3m": 0.03,
-      "ev12m": 0.11,
-      "drivers": [
-        "Quality factor historically outperforms in late-cycle environments as investors pay premium for high ROIC, low leverage, and stable earnings",
-        "6% YTD gain modest vs. broader tape; not yet crowded or expensive relative to historical quality spread",
-        "High-quality names defensively attractive if growth scare materializes, providing asymmetric tail hedge vs. junk/momentum",
-        "Risk: quality premium compresses when risk-on broadens; high overlap with mega-cap tech creates concentration risk at record CAPE"
-      ],
-      "confidence": 0.57
-    },
-    {
-      "ticker": "USMV",
-      "name": "iShares MSCI USA Min Vol Factor ETF",
-      "assetClass": "Factors / Sectors",
-      "pUp1m": 0.46,
-      "pUp3m": 0.48,
-      "pUp12m": 0.53,
-      "ev1m": -0.005,
-      "ev3m": -0.005,
-      "ev12m": 0.06,
-      "drivers": [
-        "Flat YTD (~0.3%) signals persistent structural headwind from rising real yields compressing defensive multiples",
-        "Min-vol factor has historically underperformed in stagflation vs. value and momentum; energy and cyclical tilts crowd out low-vol utilities/staples",
-        "Modest upside only materializes if recession probability rises sharply and investors seek drawdown protection; 1-month return outlook nearly coin-flip",
-        "Dividend yield ~2.5% provides partial carry offset against negative price drift risk in high-rate environment"
-      ],
-      "confidence": 0.52
-    },
-    {
-      "ticker": "VLUE",
-      "name": "iShares MSCI USA Value Factor ETF",
-      "assetClass": "Factors / Sectors",
-      "pUp1m": 0.51,
-      "pUp3m": 0.54,
-      "pUp12m": 0.58,
-      "ev1m": 0.005,
-      "ev3m": 0.03,
-      "ev12m": 0.1,
-      "drivers": [
-        "12% YTD, driven by large IT/semi value tilt (MU, INTC, 35% IT weighting) that captured AI capex theme at cheaper multiples",
-        "Energy and financials sub-exposures aligned with stagflation-lite OW commodity/OW cash macro regime",
-        "Value factor base rate: outperforms in late-cycle when earnings yield > 10y real yield; current ERP compression at record lows partially undermines the spread",
-        "Headwind: recent -4.2% daily drawdown signals volatility; if XLF re-rates down on credit cycle concerns, VLUE suffers outsized drag"
-      ],
-      "confidence": 0.5
-    },
-    {
-      "ticker": "XLK",
-      "name": "Technology Select Sector SPDR ETF",
-      "assetClass": "Factors / Sectors",
-      "pUp1m": 0.52,
-      "pUp3m": 0.54,
-      "pUp12m": 0.57,
-      "ev1m": 0.015,
-      "ev3m": 0.035,
-      "ev12m": 0.1,
-      "drivers": [
-        "32-33% YTD driven by AI capex cycle; NVDA/AAPL/MSFT concentration (~40%) creates path dependence on continued AI earnings delivery",
-        "Elevated valuation (P/B top decile, sector CAPE well above 42.5 broad market average) raises mean-reversion risk; limited ERP cushion",
-        "12-month probability biased up but modestly: tech earnings revision cycle still positive, AI infrastructure spending ($500B+ hyperscaler capex) durable",
-        "1-3 month risk: geopolitical Taiwan/export restriction tail, Fed hawkishness repricing, and exhausted momentum set up for consolidation"
-      ],
-      "confidence": 0.53
-    },
-    {
-      "ticker": "SMH",
-      "name": "VanEck Semiconductor ETF",
-      "assetClass": "Factors / Sectors",
-      "pUp1m": 0.51,
-      "pUp3m": 0.52,
-      "pUp12m": 0.58,
-      "ev1m": 0.005,
-      "ev3m": 0.012,
-      "ev12m": 0.13,
-      "drivers": [
-        "V-shaped reversal: the June 23 Asian-led chip rout (SMH -~7%) was bought back within two sessions as Micron's blowout fiscal-Q3 (AI/HBM memory demand, pricing) drove a June 25 surge (Micron +12%, SanDisk +14.7%) — the dip proved shallow, not the start of an unwind",
-        "Generational AI chip supercycle intact; NVDA, TSM, AVGO dominate at ~36% combined weight with hyperscaler capex $500B+ and the HBM shortage underpinning multi-year demand",
-        "Near-term risk/reward improved post-Micron, but the run still requires continued wide beats, and a hike-biased Fed plus any Taiwan/export-curb shock would hit hard given the concentration",
-        "12-month: positive base case if global semiconductor sales hit the $975B+ target, but valuation and concentrated top-line exposure cap conviction"
-      ],
-      "confidence": 0.52
-    },
-    {
-      "ticker": "XLF",
-      "name": "Financial Select Sector SPDR ETF",
-      "assetClass": "Factors / Sectors",
-      "pUp1m": 0.46,
-      "pUp3m": 0.48,
-      "pUp12m": 0.55,
-      "ev1m": -0.005,
-      "ev3m": -0.003,
-      "ev12m": 0.07,
-      "drivers": [
-        "-5% YTD underperformance despite solid Q1 earnings growth (~15%); BofA credit cycle warning suggests market is pricing in deteriorating loan quality ahead",
-        "Rate environment: hawkish Fed (possible hike) compresses NIM optionality; XLF's top holdings BRK/JPM/V/MA are mixed rate-sensitivity — fee-based names better positioned than banks",
-        "12-month recovery possible if credit cycle concern proves transitory and earnings reset thesis materializes (EPS growth ~13% projected Q2 2026)",
-        "Key risk: if higher-for-longer rates trigger consumer credit stress, XLF faces both NIM compression and loan loss provision headwinds simultaneously"
-      ],
-      "confidence": 0.5
-    },
-    {
-      "ticker": "XLE",
-      "name": "Energy Select Sector SPDR ETF",
-      "assetClass": "Factors / Sectors",
-      "pUp1m": 0.46,
-      "pUp3m": 0.49,
-      "pUp12m": 0.55,
-      "ev1m": -0.012,
-      "ev3m": 0.008,
-      "ev12m": 0.07,
-      "drivers": [
-        "Crude has de-rated further — WTI below $70 and Brent below $74 (lowest since February, ~40% off the wartime peak) on the holding US-Iran framework, the Iran oil-sales license and ample OPEC+ supply — the premium has fully deflated",
-        "Sector still screens cheap with the highest CY2026 earnings growth and strong free-cash-flow/shareholder-return capacity, providing a valuation floor, but sub-$70 WTI pressures near-term earnings estimates",
-        "1-3m: the Iran truce has held (the dominant bearish catalyst has played out); upside now requires an OPEC+ pause or a breakdown of the fragile roadmap (Lebanon clashes, periodic Hormuz threats are the live tail)",
-        "12m: a stagflation-lite backdrop and a live re-escalation tail (the MoU is under strain) still argue for some structural support, but the durable-ceasefire path caps upside"
-      ],
-      "confidence": 0.56
-    },
-    {
-      "ticker": "XLV",
-      "name": "Health Care Select Sector SPDR ETF",
-      "assetClass": "Factors / Sectors",
-      "pUp1m": 0.47,
-      "pUp3m": 0.5,
-      "pUp12m": 0.55,
-      "ev1m": -0.005,
-      "ev3m": 0.003,
-      "ev12m": 0.07,
-      "drivers": [
-        "-5 to -7% YTD underperformance: drug pricing regulatory risk, managed care margin caps, and GLP-1 binary newsflow have structurally depressed the sector",
-        "Sector lacks AI narrative leverage; XLV has zero meaningful AI acceleration driver vs. tech, semis, and industrials — crowded out of capital allocation",
-        "Mean-reversion argument: healthcare historically offers recession protection; if growth scare materializes in H2, XLV could benefit from defensive rotation",
-        "Risk/reward skewed neutral at best: valuation not compelling (defensive P/E still elevated), policy uncertainty from drug price negotiation ongoing through 2026 election cycle"
-      ],
-      "confidence": 0.5
-    },
-    {
-      "ticker": "XLI",
-      "name": "Industrial Select Sector SPDR ETF",
-      "assetClass": "Factors / Sectors",
-      "pUp1m": 0.54,
-      "pUp3m": 0.58,
-      "pUp12m": 0.61,
-      "ev1m": 0.015,
-      "ev3m": 0.04,
-      "ev12m": 0.11,
-      "drivers": [
-        "+12% YTD leadership driven by AI physical infrastructure (power grids, data center cooling, automation), defense spending ($2.9T global record), and reshoring capex from bonus depreciation revival",
-        "GE Aerospace, defense names, and electrical equipment capturing AI buildout demand with durable multi-year order books; institutional inflows of ~$2B confirm thesis",
-        "Stagflation-lite regime historically benefits capital goods and defense: pricing power through inflation, government contract revenue streams reduce cyclical sensitivity",
-        "Key risk: if global growth slows sharply and capex cycle stalls, industrials are highly cyclical and subject to order book deceleration; stretched YTD gain narrows margin of safety"
-      ],
-      "confidence": 0.58
-    },
-    {
-      "ticker": "XLU",
-      "name": "Utilities Select Sector SPDR ETF",
-      "assetClass": "Factors / Sectors",
-      "pUp1m": 0.45,
-      "pUp3m": 0.47,
-      "pUp12m": 0.52,
-      "ev1m": -0.005,
-      "ev3m": -0.005,
-      "ev12m": 0.05,
-      "drivers": [
-        "+5% YTD but lagging significantly; real yield headwind (10y ~4.49%, hawkish dot-plot) structurally compresses regulated utility multiples — utilities trade as bond proxies with duration ~20+",
-        "Data center power demand thesis (grid infrastructure, nuclear revival) provides partial offset but benefits are more directly captured by XLI industrial names",
-        "Dividend yield ~3-3.5% provides carry floor; if Fed pivots and rates fall materially, XLU would outperform sharply — but pivot not in base case",
-        "In stagflation-lite, utilities face cost pass-through regulatory lag: input cost inflation runs ahead of rate case approvals, compressing margins near-term"
-      ],
-      "confidence": 0.52
-    },
-    {
-      "ticker": "XLP",
-      "name": "Consumer Staples Select Sector SPDR ETF",
-      "assetClass": "Factors / Sectors",
-      "pUp1m": 0.51,
-      "pUp3m": 0.52,
-      "pUp12m": 0.56,
-      "ev1m": 0.005,
-      "ev3m": 0.018,
-      "ev12m": 0.08,
-      "drivers": [
-        "+7-10% YTD; staples benefit from pricing power in inflationary environment — large-cap consumer brands able to push through cost inflation with inelastic demand",
-        "Dividend yield ~2.5-3% provides meaningful carry in a high-rate world; historically drawdown protection is ~50% of broad market in stress scenarios",
-        "Stagflation-lite supports staples as a hybrid: inflation pass-through protects earnings, while defensive earnings quality attracts rotation if growth scare deepens",
-        "Constraint: with CPI at 3.8%, consumer real purchasing power is eroding; private label substitution and volume pressure are headwinds to volume growth offsetting price"
-      ],
-      "confidence": 0.53
-    },
-    {
-      "ticker": "XLY",
-      "name": "Consumer Discretionary Select Sector SPDR ETF",
-      "assetClass": "Factors / Sectors",
-      "pUp1m": 0.44,
-      "pUp3m": 0.45,
-      "pUp12m": 0.51,
-      "ev1m": -0.005,
-      "ev3m": -0.005,
-      "ev12m": 0.02,
-      "drivers": [
-        "Low-to-mid single digit YTD gain masks headwinds: stagflation-lite is the worst macro regime for consumer discretionary — real wage growth negative, credit card delinquencies rising",
-        "P/E of 34.95x rich for a cyclical sector; negative real income growth, higher-for-longer rates on revolving credit, and student loan reinstatement compress consumer balance sheets",
-        "AMZN and TSLA dominate the ETF (~40% combined); TSLA idiosyncratic risk (execution, competitive pressures) is a tail risk on the ETF regardless of macro",
-        "12m is a coin-flip: if no recession and AI/wealth effect sustains high-income consumer spending, modest positive; if credit stress materializes, XLY faces 15-20% downside"
-      ],
-      "confidence": 0.48
-    },
-    {
-      "ticker": "GLD",
-      "name": "SPDR Gold Shares",
-      "assetClass": "Commodities",
-      "pUp1m": 0.47,
-      "pUp3m": 0.55,
-      "pUp12m": 0.63,
-      "ev1m": -0.01,
-      "ev3m": 0.025,
-      "ev12m": 0.085,
-      "drivers": [
-        "Continued correction: gold has slid to ~$4,040 (deeper off its ~$4,724 peak) as firm real yields (10y ~4.4%), a firm dollar and the now-unwound war premium weigh — the single biggest 3-12m swing factor",
-        "Still +30%+ y/y: structural central-bank demand (~580t/quarter) and a multi-year uptrend provide a durable floor beneath the drawdown",
-        "The Iran geopolitical premium has largely unwound following the June 15 framework deal and June 21-22 roadmap, removing the recent safe-haven bid",
-        "A hike-biased June FOMC and a hot 3.4% core-PCE (lifting September hike odds to ~50-68%) extend the slide; the July 14 June CPI and any eventual pivot signal are the next binaries, with a pivot strongly bullish"
-      ],
-      "confidence": 0.6
-    },
-    {
-      "ticker": "SLV",
-      "name": "iShares Silver Trust",
-      "assetClass": "Commodities",
-      "pUp1m": 0.42,
-      "pUp3m": 0.48,
-      "pUp12m": 0.59,
-      "ev1m": -0.028,
-      "ev3m": 0.0,
-      "ev12m": 0.08,
-      "drivers": [
-        "Volatile, rates-driven slide — silver has whipsawed in the high-$50s to low-$60s, correcting alongside gold and amplified by its higher beta and a firm dollar",
-        "Sixth consecutive year of supply deficit and ~650Moz industrial fabrication (solar, EV, AI infrastructure) provide structural support beyond 6 months",
-        "Dual monetary/industrial character makes silver high-beta to both gold (downside if gold corrects further) and growth (downside if the late-cycle slowdown deepens)",
-        "Elevated gold/silver ratio favors silver mean-reversion outperformance over 12m once a base forms"
-      ],
-      "confidence": 0.5
-    },
-    {
-      "ticker": "DBC",
-      "name": "Invesco DB Commodity Index Tracking Fund",
-      "assetClass": "Commodities",
-      "pUp1m": 0.44,
-      "pUp3m": 0.49,
-      "pUp12m": 0.58,
-      "ev1m": -0.018,
-      "ev3m": 0.003,
-      "ev12m": 0.06,
-      "drivers": [
-        "Energy (~55% weight) has corrected hard as Brent fell below $74 (WTI <$70) on the holding US-Iran deal and the Iran oil license — a near-term NAV drag, though most of the de-rate is now done",
-        "Broad commodities remain the structural stagflation hedge; late-cycle commodity outperformance base rates and any post-deal demand normalization support the 12m case",
-        "Contango roll cost (~1-3% annually) is an embedded structural drag that erodes total return versus spot",
-        "Diversification across energy, metals and ags offers partial offset if oil keeps correcting while metals/ags stabilize"
-      ],
-      "confidence": 0.5
-    },
-    {
-      "ticker": "USO",
-      "name": "United States Oil Fund",
-      "assetClass": "Commodities",
-      "pUp1m": 0.42,
-      "pUp3m": 0.45,
-      "pUp12m": 0.47,
-      "ev1m": -0.015,
-      "ev3m": -0.02,
-      "ev12m": -0.02,
-      "drivers": [
-        "WTI below $70 and Brent below $74 (lowest since February, ~40% off the wartime peak) after the US-Iran framework reopened Hormuz, lifted the naval blockade and granted Iran a 60-day oil-sales license — much of the bearish repricing has now occurred, with a fourth straight session of losses into June 25",
-        "Ample OPEC+ spare capacity plus late-cycle demand headwinds cap the upside even from these lower levels",
-        "Contango and USO's daily roll structure impose persistent negative carry versus spot, dragging total return even in a flat-price tape",
-        "Upside/downside tail: a breakdown of the fragile MoU or a fresh Gulf strike could reprice WTI sharply higher; full Iranian barrels returning to market is the bearish tail"
-      ],
-      "confidence": 0.55
-    },
-    {
-      "ticker": "URA",
-      "name": "Global X Uranium ETF",
-      "assetClass": "Commodities",
-      "pUp1m": 0.5,
-      "pUp3m": 0.55,
-      "pUp12m": 0.65,
-      "ev1m": 0,
-      "ev3m": 0.04,
-      "ev12m": 0.13,
-      "drivers": [
-        "AI hyperscaler nuclear commitments (Meta 7.8GW, Microsoft 800MW+) are accelerating long-term utility contracting demand; 28% projected global uranium demand growth by 2030",
-        "Uranium spot has pulled back to sub-$85/lb (2-month low), creating a potential entry point after URA's 108% run from 52-week lows — vol is elevated and near-term direction unclear",
-        "U.S. policy pivot toward domestic nuclear (reactor relicensing, SMR permitting) is a multi-year structural tailwind largely not yet priced into utility contracts",
-        "Key risks: Kazakhstan/Kazatomprom supply remains the swing factor; equity miners trade at premium to spot uranium with high operational leverage, amplifying both upside and downside"
-      ],
-      "confidence": 0.55
-    },
-    {
-      "ticker": "COPX",
-      "name": "Global X Copper Miners ETF",
-      "assetClass": "Commodities",
-      "pUp1m": 0.4,
-      "pUp3m": 0.45,
-      "pUp12m": 0.55,
-      "ev1m": -0.04,
-      "ev3m": -0.02,
-      "ev12m": 0.07,
-      "drivers": [
-        "The June 30, 2026 Section 232 copper review is the pivotal near-term catalyst (now days away): reports point to a phased refined-copper duty (15% from Jan 2027 rising to 30% by 2028; Morgan Stanley ~43% probability) that would end the front-running/stockpiling rush and pressure prices and miners post-decision",
-        "China demand structurally weak — Q4 2025 refined copper demand -8% YoY, construction still depressed; copper near $6.30/lb retreating from record highs amid tight monetary conditions",
-        "Structural deficit of 150-600k tons in 2026 and electrification/EV demand growth of 2.6% annually provide a 12m+ floor, but equity miners trade at a premium that prices in optimistic scenarios",
-        "Miners have operational leverage: if copper falls 10-15% post-tariff decision, COPX likely falls 20-30%; if copper holds, COPX offers beta upside — asymmetric risk skewed bearish near-term"
-      ],
-      "confidence": 0.57
-    },
-    {
-      "ticker": "DBA",
-      "name": "Invesco DB Agriculture Fund",
-      "assetClass": "Commodities",
-      "pUp1m": 0.51,
-      "pUp3m": 0.54,
-      "pUp12m": 0.58,
-      "ev1m": 0.01,
-      "ev3m": 0.03,
-      "ev12m": 0.07,
-      "drivers": [
-        "Severe U.S. drought (51% of states in moderate drought or worse) is an underappreciated upside catalyst for grains and livestock, potentially supporting corn, wheat, soy, and feeder cattle",
-        "Near 52-week low ($26.40 vs $28.84 high) with potential rotation dynamic: as energy and metals correct, capital may rotate into the lagging agriculture sub-sector of commodities",
-        "Stagflation regime historically favors soft commodities as food inflation is politically sticky and supply-inelastic; DBA is a cleaner stagflation hedge than energy in a ceasefire scenario",
-        "Roll yield and contango drag remain a structural headwind; DBA's diversified basket (corn, soy, wheat, coffee, sugar, cattle) reduces single-commodity weather risk"
-      ],
-      "confidence": 0.48
-    },
-    {
-      "ticker": "BTC-USD",
-      "name": "Bitcoin",
-      "assetClass": "Crypto",
-      "pUp1m": 0.48,
-      "pUp3m": 0.49,
-      "pUp12m": 0.51,
-      "ev1m": -0.01,
-      "ev3m": -0.02,
-      "ev12m": 0.02,
-      "drivers": [
-        "BTC is ~$60-67k (briefly under $66k) as the hike-biased June FOMC, a hot 3.4% core-PCE and a firm dollar offset the US-Iran peace dividend; the war-scare impulse has eased but rates are now the swing",
-        "Crypto sentiment is washed out — the alternative.me Fear & Greed sits at Extreme Fear (13, vs ~26 a fortnight ago), a contrarian positive but a sign of acute risk aversion",
-        "Spot-ETF flows have been the swing factor and were heavily negative in June (~$6.6B out over five weeks) before a tentative stabilization (BTC ETFs +$39.2M June 23)",
-        "12m genuinely two-sided: an eventual Fed pivot and post-halving positioning are structural longs versus the higher-for-longer crowding-out; base case is symmetric near 50/50"
-      ],
-      "confidence": 0.55
-    },
-    {
-      "ticker": "ETH-USD",
-      "name": "Ethereum",
-      "assetClass": "Crypto",
-      "pUp1m": 0.43,
-      "pUp3m": 0.45,
-      "pUp12m": 0.49,
-      "ev1m": -0.035,
-      "ev3m": -0.05,
-      "ev12m": -0.01,
-      "drivers": [
-        "ETH has slipped further to ~$1.6k and the spot-ETF flow backdrop stayed negative through June; the ETH/BTC ratio remains compressed, consistent with higher beta and a softer institutional bid amid Extreme-Fear crypto sentiment",
-        "Glamsterdam upgrade pushed to Q3 2026 removes the near-term protocol catalyst",
-        "Staking ETF approvals convert ETH into an income asset for allocators and tighten float (~30% staked) — a 6-12m structural positive, not a 1-3m one",
-        "Down sharply from the 2025 ATH; mean-reversion offers some 12m support but rate headwinds to growth assets cap recovery probability"
-      ],
-      "confidence": 0.5
-    },
-    {
-      "ticker": "SOL-USD",
-      "name": "Solana",
-      "assetClass": "Crypto",
-      "pUp1m": 0.41,
-      "pUp3m": 0.46,
-      "pUp12m": 0.52,
-      "ev1m": -0.045,
-      "ev3m": -0.02,
-      "ev12m": 0.05,
-      "drivers": [
-        "SOL has been the weakest major (down mid-single-digits into late June) as token unlocks plus an Extreme-Fear crypto tape (F&G 13) keep the near-term supply overhang acute, though spot SOL ETFs have drawn small net inflows as allocators rotate down the cap spectrum",
-        "Alpenglow upgrade (~150ms finality) targeting Q3 2026 mainnet plus ~6%+ staking carry create an asymmetric 3-12m upside case if risk appetite recovers",
-        "Network fundamentals remain strongest among L1 peers (record daily TXs, deep DeFi TVL), leaving a wide fundamental-price divergence",
-        "Highest-beta asset (~1.5-2x BTC); deep drawdown from ATH creates right-skewed 12m optionality, but it is first-and-worst casualty if the liquidity tail hits — confidence held low at 0.45"
-      ],
-      "confidence": 0.45
-    },
-    {
-      "ticker": "TLT",
-      "name": "iShares 20+ Year Treasury Bond ETF",
-      "assetClass": "Bonds / Rates / Credit",
-      "pUp1m": 0.42,
-      "pUp3m": 0.44,
-      "pUp12m": 0.55,
-      "ev1m": -0.008,
-      "ev3m": -0.008,
-      "ev12m": 0.05,
-      "drivers": [
-        "30y near 5% and 10y ~4.49% (off the 4.67% May high on the Iran de-escalation/oil de-rate); but the June FOMC dot-plot now implies a 2026 HIKE (median 3.8%), keeping upward yield pressure on this ~17y-duration vehicle",
-        "Has already fallen well off its 2025 highs, pricing in substantial bad news but not a full hike-cycle extension",
-        "Carry of ~4.3% annualized cushions total return; if the cycle eventually turns, long duration snaps back sharply — base rates favor a positive 12m total return once carry is included",
-        "Elevated Treasury issuance and soft foreign auction demand keep a term-premium bid in long yields, capping the rally"
-      ],
-      "confidence": 0.52
-    },
-    {
-      "ticker": "IEF",
-      "name": "iShares 7-10 Year Treasury Bond ETF",
-      "assetClass": "Bonds / Rates / Credit",
-      "pUp1m": 0.44,
-      "pUp3m": 0.48,
-      "pUp12m": 0.56,
-      "ev1m": -0.003,
-      "ev3m": 0.001,
-      "ev12m": 0.052,
-      "drivers": [
-        "10y yield ~4.49%, off the 4.67% May high — the Iran de-escalation and oil de-rate relieved some pressure on the ~7-8y duration, though the hawkish FOMC dot-plot (implied 2026 hike) caps the rally",
-        "SEC yield ~4.27% provides meaningful carry that can offset modest price declines over 3-12m; the belly has better risk/reward than the long end in a higher-for-longer regime",
-        "A December hike partially priced is absorbed; IEF benefits if data softens further and pricing reverts, an asymmetric payoff with lower vol than TLT",
-        "Down ~1% YTD; momentum is grinding but the deflating energy tail lowers forward headline CPI, a tailwind for nominal duration"
-      ],
-      "confidence": 0.55
-    },
-    {
-      "ticker": "SHY",
-      "name": "iShares 1-3 Year Treasury Bond ETF",
-      "assetClass": "Bonds / Rates / Credit",
-      "pUp1m": 0.52,
-      "pUp3m": 0.52,
-      "pUp12m": 0.51,
-      "ev1m": 0.003,
-      "ev3m": 0.009,
-      "ev12m": 0.038,
-      "drivers": [
-        "2y yield ~4.16% with very low duration (~1.8y) means carry (~3.4-3.9% annualized) almost entirely drives total return; price volatility is minimal, making this the closest fixed-income analog to cash",
-        "Fed hike risk is the dominant headwind — market now pricing a hike by year-end; if materialized, 1-3y yields rise and price dips slightly, but the carry from reinvestment partially offsets within 3m",
-        "Positive carry in a high-for-longer regime makes SHY a high-Sharpe, low-conviction directional bet; it earns its coupon with minimal duration drag regardless of macro outcome",
-        "1-year total return of 3.43% confirms the carry-dominant regime; upside beyond carry is negligible, downside capped by short duration — probability distribution is very tight around par"
-      ],
-      "confidence": 0.68
-    },
-    {
-      "ticker": "TIP",
-      "name": "iShares TIPS Bond ETF",
-      "assetClass": "Bonds / Rates / Credit",
-      "pUp1m": 0.49,
-      "pUp3m": 0.53,
-      "pUp12m": 0.57,
-      "ev1m": 0.003,
-      "ev3m": 0.016,
-      "ev12m": 0.056,
-      "drivers": [
-        "10y TIPS real yield near 2.1% (multi-year high) offers genuinely attractive real compensation; TIPS deliver positive real return even with CPI elevated — historically cheap vs nominal Treasuries",
-        "May headline CPI at 4.2% still exceeds the ~2.4% 10y breakeven, but the collapsing energy tail (Brent <$86) is pulling near-term breakevens lower, a modest headwind to principal accretion",
-        "Soft May core (+2.9% y/y) keeps underlying inflation sticky-but-easing; the stagflation-lite scenario remains TIPS' home turf over 12m",
-        "Duration risk (~6-7y) is still a headwind if real yields grind higher from elevated levels; recent auction demand was soft, limiting near-term momentum"
-      ],
-      "confidence": 0.6
-    },
-    {
-      "ticker": "LQD",
-      "name": "iShares iBoxx $ Investment Grade Corporate Bond ETF",
-      "assetClass": "Bonds / Rates / Credit",
-      "pUp1m": 0.39,
-      "pUp3m": 0.43,
-      "pUp12m": 0.52,
-      "ev1m": -0.005,
-      "ev3m": -0.003,
-      "ev12m": 0.048,
-      "drivers": [
-        "OAS ~80bp is near historic tights vs 132bp long-run average — spread has almost no room to compress further, and mean-reversion risk of ~50bp widening would translate to ~4-5% price loss, partially offsetting a 5.24% SEC yield",
-        "Duration ~8-9y gives substantial rate sensitivity; if 10y yields push through 4.67% resistance on a hot CPI print, LQD faces combined spread-widening and rate losses — the asymmetry is unfavorable near-term",
-        "5.24% SEC yield is the most compelling argument for LQD: at ~130bp premium over the 10y Treasury (all-in carry), investors earn meaningful income even if spreads drift slightly wider over 12m",
-        "IG credit fundamentals remain solid (low default risk, solid corporate earnings), providing a floor; but institutional positioning is rich and the stagflation-lite regime historically precedes spread widening in late cycle"
-      ],
-      "confidence": 0.54
-    },
-    {
-      "ticker": "HYG",
-      "name": "iShares iBoxx $ High Yield Corporate Bond ETF",
-      "assetClass": "Bonds / Rates / Credit",
-      "pUp1m": 0.37,
-      "pUp3m": 0.4,
-      "pUp12m": 0.5,
-      "ev1m": -0.008,
-      "ev3m": -0.003,
-      "ev12m": 0.015,
-      "drivers": [
-        "OAS ~262bp is near the long-term mean but well below recession-era wides (500-800bp); in a late-cycle stagflation-lite regime, HY spreads historically widen 50-150bp before default cycles peak — current spread is not a safety margin",
-        "Institutional put buying at historically high volumes (March 2026: 1.73M contracts, 95% puts) signals sophisticated money hedging HY credit risk aggressively — an unusual bearish signal from smart money",
-        "6.7% yield with ~4y duration provides meaningful carry, but a 100bp spread widening would generate roughly -4% price impact, fully consuming ~7 months of carry — downside skew is negative in stagflation tail",
-        "Default rate at 2.5% is currently benign but rising energy/financing costs in late-cycle environments typically push HY defaults toward 4-6% within 12-18m; forward default pricing leaves little cushion"
-      ],
-      "confidence": 0.57
-    },
-    {
-      "ticker": "EMB",
-      "name": "iShares J.P. Morgan USD Emerging Markets Bond ETF",
-      "assetClass": "Bonds / Rates / Credit",
-      "pUp1m": 0.41,
-      "pUp3m": 0.48,
-      "pUp12m": 0.54,
-      "ev1m": -0.003,
-      "ev3m": -0.002,
-      "ev12m": 0.058,
-      "drivers": [
-        "OAS ~170bp over Treasuries with an all-in yield ~6% (10y UST 4.47% + 153bp spread) offers reasonable carry pickup; in a carry-dominant regime where spread compression is unlikely, EMB investors earn their coupon with limited capital gain potential",
-        "USD strength near DXY 99 (OW call in macro framework) is a structural headwind for EM USD bonds via funding stress and capital flow reversal — a strong dollar historically drives EMB spreads wider by 20-50bp",
-        "Three macro triggers: (1) Fed hike extending higher-for-longer USD regime, (2) oil shock pressuring net-oil-importing EM sovereigns, (3) US fiscal/Moody's downgrade risk elevating risk-free rate globally — all three are live in current regime",
-        "Technical support: EM real yields exceed DM, EM inflation is falling in most countries unlike the US, and carry-seeking flows into EM debt funds provide a bid; net EM supply is low in 2026 reducing technical pressure"
-      ],
-      "confidence": 0.5
-    },
-    {
-      "ticker": "BND",
-      "name": "Vanguard Total Bond Market ETF",
-      "assetClass": "Bonds / Rates / Credit",
-      "pUp1m": 0.42,
-      "pUp3m": 0.46,
-      "pUp12m": 0.55,
-      "ev1m": -0.002,
-      "ev3m": -0.001,
-      "ev12m": 0.047,
-      "drivers": [
-        "Broad investment-grade exposure (~70% AAA/AA, mix of Treasuries, MBS, agencies, corporates) with ~6y duration means BND inherits moderate rate sensitivity — 10y yield near 4.56% caps upside near-term but 3.94% dividend yield provides ballast",
-        "Blended duration (~6y) sits in the 'belly' of the risk/reward curve — less punishing than TLT in a higher-for-longer scenario but more rewarding than SHY if yields eventually normalize; a reasonable all-weather allocation with better convexity than long-end peers",
-        "1y total return of only 0.61% reflects the drag from 2025's rate volatility; mean-reversion from depressed total returns historically improves 12m forward returns, and carry at ~4% annualized is additive from current price levels",
-        "MBS component (~20%) benefits from a no-recession base case (prepayment risk is contained, spreads are tight), while Treasury component provides a modest flight-to-quality hedge if the geopolitical tail materializes"
-      ],
-      "confidence": 0.56
-    },
-    {
-      "ticker": "REMX",
-      "name": "VanEck Rare Earth & Strategic Metals ETF",
-      "assetClass": "Commodities",
-      "pUp1m": 0.54,
-      "pUp3m": 0.56,
-      "pUp12m": 0.6,
-      "ev1m": 0.02,
-      "ev3m": 0.04,
-      "ev12m": 0.12,
-      "drivers": [
-        "Live catalyst: China's MOFCOM blacklisted MP Materials, USA Rare Earth and ~8 other US firms on June 22 (retaliation for expanded US restrictions), tightening the Western supply picture and re-igniting the rare-earth re-rating theme",
-        "China controls ~70% of mining and ~90% of processing/magnets; every escalation of export curbs raises the strategic value of the ex-China basket REMX captures",
-        "But REMX holds a mix of Chinese and ex-China names, diluting the pure ex-China re-rating, and the basket is thin and highly volatile — a momentum vehicle, not a steady compounder",
-        "12m skew positive on structural Western on-shoring + DoD backing, but headline-driven and prone to sharp give-backs once a given escalation is priced"
-      ],
-      "confidence": 0.5
-    },
-    {
-      "ticker": "MP",
-      "name": "MP Materials Corp",
-      "assetClass": "Commodities",
-      "pUp1m": 0.55,
-      "pUp3m": 0.57,
-      "pUp12m": 0.62,
-      "ev1m": 0.03,
-      "ev3m": 0.05,
-      "ev12m": 0.15,
-      "drivers": [
-        "The marquee ex-China rare-earth name (Mountain Pass, CA) with the DoD as a stakeholder and $330M+ in prior defense contracts — Western government backing is a structural tailwind",
-        "China added MP to its export-control list June 22, but the curbs restrict what MP can RECEIVE from China, not its sales; net, China tightening ex-China supply raises MP's strategic pricing power and magnet-build economics",
-        "High operational leverage and a magnet-manufacturing ramp give outsized 12m upside if NdPr/dysprosium prices re-rate on the China squeeze",
-        "Risks: rich valuation prices in much of the strategic premium, execution on the downstream magnet build is unproven, and any US-China de-escalation would unwind the trade quickly"
-      ],
-      "confidence": 0.48
-    },
-    {
-      "ticker": "USAR",
-      "name": "USA Rare Earth Inc",
-      "assetClass": "Commodities",
-      "pUp1m": 0.52,
-      "pUp3m": 0.54,
-      "pUp12m": 0.58,
-      "ev1m": 0.02,
-      "ev3m": 0.04,
-      "ev12m": 0.13,
-      "drivers": [
-        "Also blacklisted by China on June 22, underscoring its place in the Western critical-minerals supply chain (Round Top deposit + Stillwater magnet plant ambitions)",
-        "Earlier-stage and pre-cash-flow vs MP, so it is the higher-beta, more speculative expression of the on-shoring/DoD-backed magnet theme",
-        "China export curbs and US policy support (reshoring, defense demand) are the upside drivers; the stock re-rates hard on escalation headlines",
-        "Risks: execution, financing and dilution risk are acute for a pre-revenue developer; a de-escalation or capital raise would pressure the equity"
-      ],
-      "confidence": 0.42
-    },
-    {
-      "ticker": "LYC.AX",
-      "name": "Lynas Rare Earths Ltd",
-      "assetClass": "Commodities",
-      "pUp1m": 0.54,
-      "pUp3m": 0.56,
-      "pUp12m": 0.61,
-      "ev1m": 0.02,
-      "ev3m": 0.045,
-      "ev12m": 0.14,
-      "drivers": [
-        "The largest rare-earth producer outside China and the first non-China commercial producer of dysprosium oxide (Malaysia) — the cleanest ex-China supply story; Macquarie reiterated a bullish view as China's export squeeze tightens the market",
-        "US DoD-backed heavy-rare-earth processing (Texas) adds a Western-government revenue/strategic leg as China curbs raise ex-China value",
-        "Cash-generative and production-scaled, so less binary than the US developers — a relatively higher-quality way to own the theme",
-        "Risks: NdPr price sensitivity, Malaysian regulatory/operational overhang, and reversal risk if China relaxes curbs or prices soften"
-      ],
-      "confidence": 0.5
-    },
-    {
-      "ticker": "NEO.TO",
-      "name": "Neo Performance Materials Inc",
-      "assetClass": "Commodities",
-      "pUp1m": 0.53,
-      "pUp3m": 0.55,
-      "pUp12m": 0.59,
-      "ev1m": 0.018,
-      "ev3m": 0.04,
-      "ev12m": 0.12,
-      "drivers": [
-        "Owns the only operating rare-earth separation facility in Europe (Estonia) plus a new magnet plant — a downstream/processing play that benefits directly as the West races to build magnet capacity outside China",
-        "China's June 22 export-control escalation lifts the strategic value of ex-China processing and magnets, Neo's core franchise",
-        "More diversified (magnetics, chemicals, rare metals) than the single-asset miners, giving steadier cash flow but a more muted pure-theme beta",
-        "Risks: cyclical end-markets (autos, electronics), execution on the magnet ramp, and sensitivity to NdPr pricing and any China de-escalation"
-      ],
-      "confidence": 0.45
-    },
-    {
-      "ticker": "UUUU",
-      "name": "Energy Fuels Inc",
-      "assetClass": "Commodities",
-      "pUp1m": 0.52,
-      "pUp3m": 0.54,
-      "pUp12m": 0.58,
-      "ev1m": 0.015,
-      "ev3m": 0.035,
-      "ev12m": 0.12,
-      "drivers": [
-        "Dual critical-minerals exposure — a US uranium producer ALSO building rare-earth (NdPr) separation at White Mesa, Utah — so it rides both the nuclear/AI-power and the ex-China rare-earth themes",
-        "China's rare-earth curbs plus sub-$85/lb uranium that retains long-run AI-driven utility contracting demand give two independent 12m catalysts",
-        "Optionality and Western-supply strategic premium support a positive skew",
-        "Risks: high operational leverage, early-stage REE separation execution, and commodity-price (uranium + NdPr) sensitivity make it volatile and headline-driven"
-      ],
-      "confidence": 0.45
-    },
-    {
-      "ticker": "6680.HK",
-      "name": "JL MAG Rare-Earth Co (H)",
-      "assetClass": "Commodities",
-      "pUp1m": 0.49,
-      "pUp3m": 0.5,
-      "pUp12m": 0.53,
-      "ev1m": -0.005,
-      "ev3m": 0.0,
-      "ev12m": 0.05,
-      "drivers": [
-        "The Chinese-incumbent counter-bet: JL MAG is a leading Chinese high-performance NdFeB magnet maker that benefits from China's dominant, protected position in processing/magnets",
-        "Double-edged: China's export curbs entrench domestic champions at home but can also crimp the overseas sales of Chinese magnet makers and invite Western substitution — a more two-sided setup than the ex-China names",
-        "Strong structural EV/wind/robotics magnet demand underpins the 12m volume story regardless of the trade fight",
-        "Risks: China-policy and export-control whiplash, HK-listing liquidity/sentiment, and the West's accelerating push to design Chinese magnets out of strategic supply chains"
-      ],
-      "confidence": 0.4
-    }
+ "updated": "2026-07-07",
+ "asOf": "2026-07-07",
+ "note": "CIO research-panel macro regime + per-instrument probabilistic priors, produced by a multi-agent research workflow with adversarial verification and cited sources. The live in-browser quant engine (GBM drift-diffusion on 2y daily history) blends with these forward-looking priors to produce the displayed P(up) and EV. Refreshed by the scheduled intel agent.",
+ "macro": {
+  "regime": "Stagflationary hawkish hold",
+  "riskOnProb": 0.4,
+  "narrative": "The backdrop is stagflation-tinged: May CPI hit 4.2% y/y (a three-year high) and core PCE 3.4% (highest since Oct 2023), and Chair Kevin Warsh's Fed held at 3.50-3.75% in June with the dots tilting toward hikes (9 officials see at least one in 2026, market-implied odds of zero 2026 cuts ~71%). The June jobs report cracked the hike thesis — +57K payrolls vs ~110K expected with -74K of revisions — collapsing July hike odds to ~8.5% and September to ~30%, pulling the 2-year to ~4.13% and the 10-year to ~4.46%. Oil has settled at WTI ~$70.6 / Brent ~$72.9 after late-June US-Iran tit-for-tat strikes gave way to a fragile truce, renewed talks, and reopening Strait of Hormuz transit, but the risk premium re-flares on every headline. The dollar remains firm (DXY ~101, +3.5% y/y) even after its biggest weekly drop since April post-payrolls. Equities sit ~2% below the S&P 500's 7,621 record with split internals — a record advance-decline line against a median stock 13% below its 52-week high, RSI negative divergence, and Goldman flagging elevated drawdown risk amid extreme speculation. Rate-hike fear crushed hard assets in June: gold slid ~11% (now ~$4,150, 2026 gains erased), silver had its worst month since 2011 (-42% from January's $121.62 peak), and Bitcoin hit a 21-month low near $60K on record ~$4.5B ETF outflows before bouncing to ~$62K on Warsh's softer inflation-risk comments.",
+  "drivers": [
+   {
+    "factor": "Fed hike-risk repricing post-payrolls",
+    "read": "July hike odds collapsed to ~8.5% and September to ~30% after the 57K jobs miss; Warsh signaled inflation risks have 'eased' — the dominant near-term relief valve for risk assets",
+    "impact": "supportive"
+   },
+   {
+    "factor": "Inflation re-acceleration",
+    "read": "May CPI 4.2% y/y (3-year high, energy-driven) and core PCE 3.4% (highest since Oct 2023, up from 3.3%); June SEP lifted 2026 PCE to 3.6% — keeps the hike tail alive into the July 28-29 FOMC",
+    "impact": "cautionary"
+   },
+   {
+    "factor": "Labor market deterioration",
+    "read": "June NFP +57K vs ~110K expected, -74K in revisions, unemployment 4.2% only via participation falling to 2021 lows — growth is rolling over while inflation is sticky",
+    "impact": "cautionary"
+   },
+   {
+    "factor": "US-Iran conflict / Strait of Hormuz",
+    "read": "Late-June tit-for-tat strikes (US hit Iranian missile sites; Iran hit US assets in Bahrain/Kuwait) followed by a truce, renewed negotiations, and Hormuz reopening; WTI ~$70.6, Brent ~$72.9 — de-escalating but fragile",
+    "impact": "mixed"
+   },
+   {
+    "factor": "Equity breadth and speculation extremes",
+    "read": "S&P ~2% off its 7,621 record; A-D line at all-time highs but median stock -13% from its 52-week peak, 3 weeks of RSI>70 with negative divergence; Goldman warns this setup precedes larger-than-average 6-12m drawdowns",
+    "impact": "cautionary"
+   },
+   {
+    "factor": "Strong USD and liquidity drain from hard assets",
+    "read": "DXY ~101 (+3.5% y/y) defying low-90s consensus; June saw record ~$4.5B Bitcoin ETF outflows and a forced-liquidation-style metals washout — tightening financial conditions for global risk",
+    "impact": "cautionary"
+   }
   ],
-  "callsNote": "Per-instrument analyst priors with directional probability (pUp) and expected value (ev) across 1m/3m/12m horizons, plus drivers and confidence. Blended into the live quant model at the probability level (research weight scales with confidence, capped so the statistical engine stays primary)."
+  "byAssetClass": [
+   {
+    "assetClass": "Equity",
+    "stance": "Neutral",
+    "pUp12m": 0.55,
+    "note": "Index near record (7,621 ATH a month ago, ~2% off) but internals are deteriorating: median stock -13% from highs, extreme speculation flagged, and a hawkish-leaning Fed under Warsh caps multiple expansion. Softening labor cuts hike risk but also earnings momentum. Stay benchmark-weight with a quality/defensive tilt rather than chasing narrow leadership.",
+    "tilt": 0
+   },
+   {
+    "assetClass": "Commodities",
+    "stance": "Neutral",
+    "pUp12m": 0.52,
+    "note": "Two-sided: energy retains a fragile-truce Hormuz risk premium (Brent ~$73) and hedges Iran re-escalation, while precious metals momentum is broken — gold ~$4,150 after -11% June, silver -42% from January's peak on rate-hike fear and a strong dollar. Hold energy as a geopolitical hedge; wait for Fed clarity before re-adding metals.",
+    "tilt": 0
+   },
+   {
+    "assetClass": "Crypto",
+    "stance": "modest UW",
+    "pUp12m": 0.45,
+    "note": "BTC ~$62K, down from >$93K at the start of 2026 with a 21-month low near $60K and record ~$4.5B June ETF outflows — flow and rate sensitivity both hostile. The Warsh-driven bounce above $61K is a relief rally until $63.8K breaks; below $56.2K opens $50-53K. Keep sizing small; convexity improves only if the Fed pivots dovish.",
+    "tilt": -0.012
+   },
+   {
+    "assetClass": "Bonds",
+    "stance": "modest OW",
+    "pUp12m": 0.65,
+    "note": "10y ~4.46% and 2y ~4.13% offer real carry cushion, and the weak June payrolls print removed the near-term hike catalyst (July odds ~8.5%). Sticky 3.4% core PCE argues against max duration, but a cooling labor market skews the next big rate move lower. Favor the belly; add duration on any hawkish-surprise backup.",
+    "tilt": 0.012
+   },
+   {
+    "assetClass": "USD/Cash",
+    "stance": "modest OW",
+    "pUp12m": 0.6,
+    "note": "Cash yields ~3.6-3.75% at the fed funds floor with the DXY ~101 (+3.5% y/y) defying weak-dollar consensus — positive nominal carry and optionality in a regime where both a hawkish Fed surprise and an Iran re-escalation are live tails. pUp12m reflects near-certain positive cash return offset by two-way USD direction after the biggest weekly DXY drop since April.",
+    "tilt": 0.012
+   }
+  ],
+  "sources": [
+   "https://www.federalreserve.gov/monetarypolicy/fomcprojtabl20260617.htm",
+   "https://polymarket.com/event/how-many-fed-rate-cuts-in-2026",
+   "https://www.cnbc.com/2026/06/25/pce-inflation-report-may-2026-.html",
+   "https://tradingeconomics.com/united-states/core-pce-price-index-annual-change",
+   "https://www.cnbc.com/2026/07/02/jobs-report-june-2026-.html",
+   "https://finance.biggo.com/news/93a3e61b-e59d-4489-8154-285b0679e952",
+   "https://www.kiplinger.com/investing/economy/jobs-report-june-2026-what-to-expect",
+   "https://tradingeconomics.com/united-states/government-bond-yield",
+   "https://www.cnbc.com/2026/06/29/oil-prices-wti-brent-crude-us-iran-strikes-strait-hormuz-talks.html",
+   "https://www.aljazeera.com/economy/2026/6/29/oil-prices-rise-as-us-iranian-strikes-threaten-strait-of-hormuz-reopening",
+   "https://tradingeconomics.com/united-states/currency",
+   "https://fortune.com/2026/07/05/stock-market-outlook-sp500-target-7100-ai-boom-speculation-extreme-levels/",
+   "https://www.schaeffersresearch.com/content/analysis/2026/06/29/how-wall-street-has-positioned-itself-ahead-of-july-seasonality",
+   "https://www.cnbc.com/2026/06/23/gold-silver-rate-hike-fears.html",
+   "https://www.benzinga.com/markets/commodities/26/07/60215240/silver-price-crash-june-2026-slv-worst-month-since-2011",
+   "https://fortune.com/article/current-price-of-gold-07-06-2026/",
+   "https://fortune.com/article/price-of-bitcoin-07-06-2026/",
+   "https://www.coindesk.com/markets/2026/07/02/bitcoin-zooms-above-usd61-000-as-inflation-fears-soften",
+   "https://247wallst.com/investing/cryptocurrency/2026/07/02/bitcoin-price-prediction-for-july-2026/"
+  ],
+  "regimeScore": 0.4,
+  "asOf": "2026-07-07"
+ },
+ "calls": [
+  {
+   "ticker": "MTUM",
+   "name": "iShares MSCI USA Momentum Factor ETF",
+   "assetClass": "US equity factor ETF",
+   "pUp1m": 0.53,
+   "pUp3m": 0.55,
+   "pUp12m": 0.62,
+   "ev1m": 0.004,
+   "ev3m": 0.015,
+   "ev12m": 0.07,
+   "drivers": [
+    "Momentum factor up ~21% YTD 2026 but MTUM (~$317 on 7/4) sits ~8% below its $345.59 52-week high after the June tech/AI-capex pullback",
+    "Heavy embedded tech/semiconductor weight exposes the fund to the ongoing rotation: sector momentum work shows healthcare entering leadership while technology falls into the lagging quadrant",
+    "Warsh Fed shifting from expected cuts to possible hikes (funds 3.50-3.75%, 10Y ~4.48%) raises momentum-crash risk in the crowded AI trade",
+    "Semi-annual index rebalance will rotate holdings toward recent winners (industrials, utilities, healthcare), partially de-risking the tech concentration over the 3-12m horizon"
+   ],
+   "confidence": 0.5
+  },
+  {
+   "ticker": "QUAL",
+   "name": "iShares MSCI USA Quality Factor ETF",
+   "assetClass": "US equity factor ETF",
+   "pUp1m": 0.55,
+   "pUp3m": 0.58,
+   "pUp12m": 0.67,
+   "ev1m": 0.006,
+   "ev3m": 0.02,
+   "ev12m": 0.08,
+   "drivers": [
+    "QUAL ~$218 in early July 2026 with S&P 500 near record ~7,420; profitable mega-cap balance-sheet strength cushions a no-cut/possible-hike Fed regime",
+    "Q2 2026 earnings season starting mid-July: financials EPS growth projected +13.3% and hyperscaler capex >$400B support high-ROE constituents",
+    "Quality typically outperforms in late-cycle decelerations - June payrolls at 57k (half of consensus) signal slowing labor momentum that favors the factor",
+    "Main drag: valuation premium of quality mega-cap tech overlap after XLK's +33% YTD run leaves the factor exposed to any AI-spending disappointment"
+   ],
+   "confidence": 0.55
+  },
+  {
+   "ticker": "USMV",
+   "name": "iShares MSCI USA Min Vol Factor ETF",
+   "assetClass": "US equity factor ETF",
+   "pUp1m": 0.57,
+   "pUp3m": 0.58,
+   "pUp12m": 0.68,
+   "ev1m": 0.005,
+   "ev3m": 0.013,
+   "ev12m": 0.05,
+   "drivers": [
+    "USMV NAV hit $97.98 on 7/2/26 - the top of its 52-week range - as defensive flows accelerated on Fed-hike chatter, YTD NAV total return +3.55%",
+    "Rotation into utilities, staples and healthcare (its core holdings) is intact per StockCharts/Kavout sector-flow work, supporting continued relative bid",
+    "Weak June jobs (57k) raises growth-scare odds where min-vol historically outperforms with ~70-75% downside capture",
+    "Headwind: 10Y at 4.48% and a Warsh Fed leaning hawkish caps upside for bond-proxy low-vol names; expect participation, not leadership, in further rallies"
+   ],
+   "confidence": 0.6
+  },
+  {
+   "ticker": "VLUE",
+   "name": "iShares MSCI USA Value Factor ETF",
+   "assetClass": "US equity factor ETF",
+   "pUp1m": 0.52,
+   "pUp3m": 0.55,
+   "pUp12m": 0.62,
+   "ev1m": 0.003,
+   "ev3m": 0.013,
+   "ev12m": 0.06,
+   "drivers": [
+    "VLUE slipped to ~$192.97 on 7/2/26 as its energy sleeve was hit by crude's post-peace-deal collapse (WTI ~$69 from Brent ~$105 in June)",
+    "Financials exposure is a tailwind: 2s10s re-steepened to +57bp, Q2 bank EPS growth seen +13.3%, and XLF drew >$1B of fresh inflows",
+    "Cheap healthcare weight benefits from the sector's move into the leadership quadrant after being 2026's worst performer",
+    "Value vs growth spread remains historically wide after XLK +33% / SMH +59% YTD, giving 12m mean-reversion optionality if AI-capex enthusiasm cools"
+   ],
+   "confidence": 0.45
+  },
+  {
+   "ticker": "XLK",
+   "name": "Technology Select Sector SPDR Fund",
+   "assetClass": "US sector ETF (Technology)",
+   "pUp1m": 0.52,
+   "pUp3m": 0.55,
+   "pUp12m": 0.62,
+   "ev1m": 0.005,
+   "ev3m": 0.02,
+   "ev12m": 0.09,
+   "drivers": [
+    "XLK ~$183-186 on 7/6/26, still +33% YTD and the best 2026 sector, but June saw a pullback on AI-infrastructure-spending apprehension and Fed hike hints",
+    "Hyperscaler 2026 capex guided above $400B (vs ~$230B in 2024) keeps the fundamental earnings engine intact into Q2 reports",
+    "Sector-momentum models show technology dropping into the lagging quadrant as institutional money rotates to healthcare/utilities/financials - near-term relative headwind",
+    "A hawkish Warsh Fed (no cuts, possible hikes; 10Y 4.48%) pressures long-duration tech multiples after the YTD re-rating; weak 57k payrolls cut both ways by delaying hikes"
+   ],
+   "confidence": 0.5
+  },
+  {
+   "ticker": "SMH",
+   "name": "VanEck Semiconductor ETF",
+   "assetClass": "US industry ETF (Semiconductors)",
+   "pUp1m": 0.5,
+   "pUp3m": 0.52,
+   "pUp12m": 0.58,
+   "ev1m": 0,
+   "ev3m": 0.015,
+   "ev12m": 0.1,
+   "drivers": [
+    "SMH ~$592-608 on 7/6/26, roughly +59% YTD and more than double its $278.55 52-week low, but ~10% below the 6/22/26 high of $671.83 - classic blow-off risk profile",
+    "AI capex supercycle intact: Microsoft/Google/Meta/Amazon combined 2026 capex >$400B flows disproportionately to chip designers, foundries, memory and litho",
+    "Extreme internal dispersion - NVDA only +3.2% YTD (funding capex with a $25B bond deal) while AMD +171% and MU +305% - signals a maturing, speculative phase of the trade",
+    "Custom-ASIC encroachment (Broadcom ASICs for Alphabet/Meta, 27% CAGR forecast vs 16% for GPU accelerators) plus io-fund 'market top' warnings raise 12m drawdown tail risk"
+   ],
+   "confidence": 0.4
+  },
+  {
+   "ticker": "XLF",
+   "name": "Financial Select Sector SPDR Fund",
+   "assetClass": "US sector ETF (Financials)",
+   "pUp1m": 0.57,
+   "pUp3m": 0.6,
+   "pUp12m": 0.66,
+   "ev1m": 0.012,
+   "ev3m": 0.03,
+   "ev12m": 0.09,
+   "drivers": [
+    "XLF $54.94 on 7/1/26 (+2.47% that day) after lagging badly YTD - a buy-low setup per Yahoo/Kavout with >$1B of recent inflows",
+    "Q2 2026 financial-sector EPS growth projected at +13.3%, with big-bank reports starting mid-July as the immediate catalyst",
+    "Yield curve normalized (2s10s +57bp after ~2 years inverted) and a no-cut Fed at 3.50-3.75% supports NIM expansion, especially for regional lenders",
+    "Risks: 57k June payrolls hints at credit-cycle softening, and any actual Warsh hike could re-flatten the curve and stall the rotation"
+   ],
+   "confidence": 0.55
+  },
+  {
+   "ticker": "XLE",
+   "name": "Energy Select Sector SPDR Fund",
+   "assetClass": "US sector ETF (Energy)",
+   "pUp1m": 0.42,
+   "pUp3m": 0.44,
+   "pUp12m": 0.5,
+   "ev1m": -0.015,
+   "ev3m": -0.02,
+   "ev12m": 0,
+   "drivers": [
+    "XLE $53.22 on 7/6/26, ~16% below its $63.46 52-week high after the landmark US-Iran peace deal reopened Hormuz flows and crushed the war premium",
+    "WTI ~$69 and falling: OPEC+ output increases plus eased Iran sanctions point to a supply glut; JPMorgan sees Brent averaging only ~$60 in 2026",
+    "Earnings downgrades lag spot crude - H1 profits were booked at ~$105 Brent, so Q3/Q4 estimate cuts are still ahead of the tape",
+    "Partial offsets: sector still +21% over H1, midstream cash flows resilient, and free-cash-flow/buyback support plus any peace-deal setback provides an upside hedge"
+   ],
+   "confidence": 0.5
+  },
+  {
+   "ticker": "XLV",
+   "name": "Health Care Select Sector SPDR Fund",
+   "assetClass": "US sector ETF (Health Care)",
+   "pUp1m": 0.58,
+   "pUp3m": 0.62,
+   "pUp12m": 0.68,
+   "ev1m": 0.013,
+   "ev3m": 0.035,
+   "ev12m": 0.09,
+   "drivers": [
+    "XLV $163.63 in early July, pressing its 52-week high of $163.90 after rallying from $155.63 on 6/29 - strongest weekly tape among sectors",
+    "RRG analysis shows healthcare entering the Leading quadrant on both relative strength and momentum just as technology falls to lagging - the primary rotation destination",
+    "Valuation support after being 2026's worst sector earlier in the year (down 3.8% YTD at the lows): ~25x P/E with a 1.63% yield vs richly priced tech",
+    "Defensive earnings insulate against the twin macro risks (hawkish Warsh Fed, softening jobs at 57k); residual policy/drug-pricing headline risk keeps confidence moderate"
+   ],
+   "confidence": 0.55
+  },
+  {
+   "ticker": "XLI",
+   "name": "Industrial Select Sector SPDR Fund",
+   "assetClass": "US sector ETF (Industrials)",
+   "pUp1m": 0.55,
+   "pUp3m": 0.57,
+   "pUp12m": 0.64,
+   "ev1m": 0.008,
+   "ev3m": 0.02,
+   "ev12m": 0.075,
+   "drivers": [
+    "XLI ~$184-186 on 7/6/26 after a +20% first half - the #3 sector of 2026 behind tech and energy",
+    "Remains in the RRG Leading quadrant alongside utilities and financials, still attracting institutional capital per StockCharts/Kalkine flow work",
+    "Structural spend tailwinds: AI data-center electrification buildout ('1970s-scale power buildout'), reshoring, and defense budgets tied to the just-ended Iran conflict",
+    "Risks after the run: tariff input-cost pass-through (GM $1B, Ford $2B hits show the template) and the 57k payroll print flagging a cyclical demand slowdown"
+   ],
+   "confidence": 0.5
+  },
+  {
+   "ticker": "XLU",
+   "name": "Utilities Select Sector SPDR Fund",
+   "assetClass": "US sector ETF (Utilities)",
+   "pUp1m": 0.55,
+   "pUp3m": 0.58,
+   "pUp12m": 0.66,
+   "ev1m": 0.007,
+   "ev3m": 0.02,
+   "ev12m": 0.07,
+   "drivers": [
+    "XLU closed $45.20 on 7/6/26, ~5% below its $47.80 52-week high, with double-digit YTD gains on the AI-power theme",
+    "Data-center grid demand set to nearly triple by 2030 (S&P Global); EIA AEO 2026 projects US generating capacity up 50-90% by 2050 - a secular rate-base growth story for NEE/SO/DUK/CEG",
+    "Dual character: defensive 2.6% yield attracts rotation flows on the weak 57k jobs print, and RRG keeps utilities in the Leading quadrant",
+    "Key risk: with the 10Y at 4.48% and the Warsh Fed edging toward hikes rather than cuts, the bond-proxy discount-rate headwind caps multiple expansion"
+   ],
+   "confidence": 0.55
+  },
+  {
+   "ticker": "XLP",
+   "name": "Consumer Staples Select Sector SPDR Fund",
+   "assetClass": "US sector ETF (Consumer Staples)",
+   "pUp1m": 0.52,
+   "pUp3m": 0.54,
+   "pUp12m": 0.6,
+   "ev1m": 0.003,
+   "ev3m": 0.01,
+   "ev12m": 0.04,
+   "drivers": [
+    "XLP $83.64 on 7/6/26, ~7% below its $90.14 52-week high - the early-2026 defensive leadership (+15% YTD by February) has largely faded",
+    "RRG places staples in Weakening but with the tail turning back toward Leading, indicating renewed defensive flows on Fed-hike and jobs-slowdown risk",
+    "Margin squeeze: tariffs and earlier oil-driven input-cost inflation hit COGS while UMich sentiment at 53.3 limits pricing power on stretched consumers",
+    "2.56% dividend yield at ~22.5x earnings offers modest support, but a hawkish 4.48% 10Y makes bond-proxy staples relatively unattractive vs healthcare/utilities defensives"
+   ],
+   "confidence": 0.5
+  },
+  {
+   "ticker": "XLY",
+   "name": "Consumer Discretionary Select Sector SPDR Fund",
+   "assetClass": "US sector ETF (Consumer Discretionary)",
+   "pUp1m": 0.5,
+   "pUp3m": 0.52,
+   "pUp12m": 0.58,
+   "ev1m": 0,
+   "ev3m": 0.008,
+   "ev12m": 0.05,
+   "drivers": [
+    "XLY ~$117-119 on 7/4/26 after a strong Q2 rebound (NAV +10.95% QTD through 5/31) that recovered part of the Q1 drawdown when AMZN was -10% and TSLA -17% YTD",
+    "Direct tariff earnings damage concentrated here: Tesla ~$300M sequential cost hit (16% operating-margin miss), GM ~$1B net income hit, Ford ~$2B - with companies guiding costs higher",
+    "Consumer paradox: UMich sentiment recessionary at 53.3 yet record retail sales ($752B in March) - spending resilient but rotating away from big-ticket autos/appliances that dominate the index",
+    "June payrolls at 57k is the clearest macro warning for the most consumer-cyclical sector; AMZN/TSLA two-stock concentration (>50% of sector cap) makes outcomes idiosyncratic"
+   ],
+   "confidence": 0.45
+  },
+  {
+   "ticker": "GLD",
+   "name": "SPDR Gold Shares",
+   "assetClass": "Precious metals ETF (gold)",
+   "pUp1m": 0.47,
+   "pUp3m": 0.5,
+   "pUp12m": 0.58,
+   "ev1m": -0.01,
+   "ev3m": 0,
+   "ev12m": 0.06,
+   "drivers": [
+    "Spot gold ~$4,140-4,150 (7/6-7/7), down ~11% in June and ~26% below the Jan-29 intraday record of $5,595 - trend is corrective, not yet reversed (TradingEconomics)",
+    "Goldman cut its YE-2026 target from $5,400 to $4,900 on 6/20 citing fading ETF inflows including the first monthly Asian ETF outflow since Aug-2025 - yet that target is still ~18% above spot, implying analysts see the correction overdone",
+    "Hawkish Fed tail is the key headwind: futures price roughly 50% odds of a rate hike by September/end-2026 with core PCE stuck at 3%+ on tariffs, keeping real rates and the dollar firm (CNBC, CME FedWatch)",
+    "Soft June payrolls trimmed hike bets, and structural central-bank buying plus record 2025 ETF inflows ($89B, holdings 4,025t) keep the 12-month skew mildly positive (World Gold Council, SSGA)"
+   ],
+   "confidence": 0.45
+  },
+  {
+   "ticker": "SLV",
+   "name": "iShares Silver Trust",
+   "assetClass": "Precious metals ETF (silver)",
+   "pUp1m": 0.5,
+   "pUp3m": 0.52,
+   "pUp12m": 0.55,
+   "ev1m": 0,
+   "ev3m": 0.02,
+   "ev12m": 0.08,
+   "drivers": [
+    "Silver ~$61.3/oz (7/7); SLV fell >20% in June - worst month since September 2011 - and sits roughly 50% below the late-January record above $120 (Benzinga, Fortune)",
+    "Crash mechanics were positioning-driven: CME margin hikes after the $100+ spike, momentum unwind, stronger dollar, and hedge-fund commodity de-grossing - positioning is now far cleaner and RSI hit deeply oversold levels (Benzinga)",
+    "Structural industrial deficit thesis (solar, electronics) remains intact, but recession fears directly threaten the ~55% industrial half of demand, making the fundamental floor uncertain",
+    "Silver trades at 1.5-2x gold beta, so direction is hostage to the Fed hike-vs-hold repricing into the September FOMC; extreme realized volatility argues for near coin-flip 1m probabilities and low confidence"
+   ],
+   "confidence": 0.3
+  },
+  {
+   "ticker": "DBC",
+   "name": "Invesco DB Commodity Index Tracking Fund",
+   "assetClass": "Broad commodity futures ETF",
+   "pUp1m": 0.45,
+   "pUp3m": 0.47,
+   "pUp12m": 0.5,
+   "ev1m": -0.01,
+   "ev3m": -0.01,
+   "ev12m": 0,
+   "drivers": [
+    "Fund ~$26.6 (6/26), mid 52-week range ($21.59-$31.79); the energy-heavy sleeve (WTI, Brent, products, natgas) is the largest weight and is drifting lower",
+    "WTI below $69 near 4-month lows as OPEC+ adds 188 kb/d for August and Strait of Hormuz flows normalize - the dominant sleeve is biased down near-term (TradingEconomics, EIA)",
+    "Precious metals sleeve is a drag: gold -11% and silver >-20% in June after the early-2026 blowoff, with hedge funds still cutting commodity exposure",
+    "Offsets cap the downside: copper ~$13,160/t sustained strength and firming agriculture (DBA +3.3% over the past month; fertilizer costs up on Mideast supply disruptions) roughly balance the 12-month outlook"
+   ],
+   "confidence": 0.4
+  },
+  {
+   "ticker": "USO",
+   "name": "United States Oil Fund LP",
+   "assetClass": "Crude oil futures ETF",
+   "pUp1m": 0.42,
+   "pUp3m": 0.44,
+   "pUp12m": 0.45,
+   "ev1m": -0.02,
+   "ev3m": -0.03,
+   "ev12m": -0.05,
+   "drivers": [
+    "WTI ~$68.6 (7/6), near its lowest since late February; USO ~$104 versus a 52-week high of $154 set during the Hormuz crisis spike - risk premium is bleeding out (TradingEconomics, Yahoo Finance)",
+    "OPEC+ approved a further 188 kb/d quota increase for next month, continuing the progressive unwind of cuts, with Saudi exports approaching pre-war levels (TradingKey, OPEC MOMR)",
+    "Strait of Hormuz shipping has normalized, eroding the geopolitical premium; sell-side scenarios flag $60 WTI downside as supply builds (TradingKey)",
+    "EIA STEO points to global inventory builds into 2027, and futures-curve roll costs add a structural drag for USO versus spot; renewed Middle East escalation is the main (unpriced) upside tail"
+   ],
+   "confidence": 0.45
+  },
+  {
+   "ticker": "URA",
+   "name": "Global X Uranium ETF",
+   "assetClass": "Uranium miners/nuclear equities ETF",
+   "pUp1m": 0.52,
+   "pUp3m": 0.55,
+   "pUp12m": 0.6,
+   "ev1m": 0.01,
+   "ev3m": 0.03,
+   "ev12m": 0.1,
+   "drivers": [
+    "URA $43.13 (7/2), ~31% below its 52-week high of $62.28 while uranium spot holds a narrow ~$85/lb range since April - equities have de-rated more than the commodity (TradingEconomics, stockanalysis)",
+    "Hyperscaler nuclear procurement is a persistent bid: Meta, Amazon and Microsoft have signed agreements for fresh nuclear capacity for AI data centers, underpinning multi-year demand growth",
+    "US policy capital is flowing into the fuel cycle: the Pentagon OSC's $725M loan to Energy Fuels (6/18, a URA holding) signals federal support for domestic uranium/critical-minerals names",
+    "Term-market price stickiness in the $80s and a thin new-mine pipeline before 2028 support the 12-month upside skew; near term the sector is catalyst-light and hostage to risk appetite"
+   ],
+   "confidence": 0.45
+  },
+  {
+   "ticker": "COPX",
+   "name": "Global X Copper Miners ETF",
+   "assetClass": "Copper miners equities ETF",
+   "pUp1m": 0.52,
+   "pUp3m": 0.54,
+   "pUp12m": 0.6,
+   "ev1m": 0.01,
+   "ev3m": 0.03,
+   "ev12m": 0.1,
+   "drivers": [
+    "Copper ~$5.97/lb (~$13,160/t) showing sustained strength near records, while COPX at $77.75 sits ~22% below its 52-week high of $99.99 - miners lag the metal, leaving catch-up room (CNBC, Kavout)",
+    "Structural deficit story intact: grid buildout, AI data centers and EV demand versus a thin mine pipeline drove COPX +93% in 2025 and +20% in January 2026 alone before the correction",
+    "Macro headwinds are real: ~50% priced odds of a 2026 Fed hike, a firmer dollar and recession fears triggered June hedge-fund de-grossing across the complex",
+    "Producer margin leverage at $13k+/t copper is exceptional, and low exchange inventories mean any demand surprise squeezes prices further - 12-month skew clearly positive"
+   ],
+   "confidence": 0.45
+  },
+  {
+   "ticker": "DBA",
+   "name": "Invesco DB Agriculture Fund",
+   "assetClass": "Agricultural commodity futures ETF",
+   "pUp1m": 0.53,
+   "pUp3m": 0.54,
+   "pUp12m": 0.55,
+   "ev1m": 0.005,
+   "ev3m": 0.01,
+   "ev12m": 0.03,
+   "drivers": [
+    "DBA ~$26.3 (June), up 3.3% over the past month and +6.2% y/y, in a tight 52-week band of $25.40-$28.84 - a low-volatility, gently rising profile (stockanalysis)",
+    "Middle East conflict supply disruptions lifted fertilizer and some non-energy commodity prices (cited in April FOMC minutes), supporting grain cost floors into the next planting cycle",
+    "Softs exposure (cocoa, coffee, sugar) remains historically elevated with two-sided weather risk; livestock (live/feeder cattle) contracts stay firm on tight US herd supply",
+    "Diversification across 11 ag futures dampens tail outcomes - highest relative confidence of the complex but also the smallest expected-return magnitudes"
+   ],
+   "confidence": 0.5
+  },
+  {
+   "ticker": "REMX",
+   "name": "VanEck Rare Earth and Strategic Metals ETF",
+   "assetClass": "Rare earth/strategic metals equities ETF",
+   "pUp1m": 0.5,
+   "pUp3m": 0.53,
+   "pUp12m": 0.58,
+   "ev1m": 0,
+   "ev3m": 0.02,
+   "ev12m": 0.08,
+   "drivers": [
+    "~$88.5 (7/1), more than double the 52-week low of $40.29 but ~21% off the $111.55 high - the strategic re-rating is well advanced, leaving less easy upside (Yahoo Finance)",
+    "China's 6/22 export-control blacklisting of MP Materials and USA Rare Earth escalates the critical-minerals war, raising the strategic value of miners but injecting two-sided policy volatility; REMX holds both Chinese and ex-China names, muddying the net effect",
+    "$1.2B of Pentagon OSC loans (Energy Fuels $725M, Phoenix Tailings $500M) in a single June week, plus the DoD's $110/kg NdPr price floor for MP, institutionalize Western price support for the sector",
+    "At ~$2.7B AUM REMX is the default flow vehicle for rare-earth headlines - any fresh escalation or DoD award produces outsized inflow-driven moves in both directions"
+   ],
+   "confidence": 0.4
+  },
+  {
+   "ticker": "REXC",
+   "name": "Sprott Rare Earths Ex-China ETF",
+   "assetClass": "Ex-China rare earth equities ETF",
+   "pUp1m": 0.5,
+   "pUp3m": 0.54,
+   "pUp12m": 0.6,
+   "ev1m": 0,
+   "ev3m": 0.03,
+   "ev12m": 0.12,
+   "drivers": [
+    "~$19.40 (6/30) vs a $25.39 52-week high - trading below its April-15 launch level despite the ex-China thesis 'working'; tiny ~$55M AUM means wide spreads and flow sensitivity (Sprott, Webull)",
+    "Pure ex-China mandate means top holdings (MP, USA Rare Earth, Lynas, Energy Fuels) are the direct recipients of Pentagon capital: $725M UUUU loan, $400M MP equity plus $110/kg price floor, $1.2B OSC lending in June alone",
+    "Near-term paradox: China's 6/22 blacklist hurts holdings' operations (dual-use equipment and input bans on MP and USAR supply chains) even as it validates the fund's entire premise",
+    "Highest-beta vehicle for the Western supply-chain buildout - 12-month upside skew is large, but launch-year concentration, execution risk at pre-commercial holdings and low liquidity cap confidence"
+   ],
+   "confidence": 0.35
+  },
+  {
+   "ticker": "MP",
+   "name": "MP Materials Corp",
+   "assetClass": "US rare earth miner/magnet producer (equity)",
+   "pUp1m": 0.52,
+   "pUp3m": 0.55,
+   "pUp12m": 0.62,
+   "ev1m": 0.01,
+   "ev3m": 0.04,
+   "ev12m": 0.15,
+   "drivers": [
+    "$53-55 (early July), down 13.4% in June after China's 6/22 export-control listing; 14-analyst consensus target $76 implies ~+40% (Motley Fool, FX Leaders, stockanalysis)",
+    "The blacklist bars Chinese-origin dual-use items reaching MP - secondary supply-chain friction on equipment and chemicals - but MP no longer sells concentrate to China, so direct revenue impact is limited",
+    "Downside is politically insured: DoD holds $400M of equity, extended a $150M loan, and guarantees a 10-year $110/kg NdPr price floor; Q1 revenue was +49% y/y with record NdPr production",
+    "Magnet ramp (Fort Worth 10X expansion, Apple and GM offtakes) is the 12-month re-rating catalyst; expect continued headline-driven chop while US-China escalation runs hot"
+   ],
+   "confidence": 0.4
+  },
+  {
+   "ticker": "LYC.AX",
+   "name": "Lynas Rare Earths Ltd",
+   "assetClass": "Australian rare earth producer (equity)",
+   "pUp1m": 0.52,
+   "pUp3m": 0.55,
+   "pUp12m": 0.6,
+   "ev1m": 0.01,
+   "ev3m": 0.04,
+   "ev12m": 0.12,
+   "drivers": [
+    "A$17.15-17.68 (early July), roughly 2x over 12 months (52-week low A$8.06) but ~21% below the A$22.37 high - strong trend, stretched valuation (Market Index, Yahoo Finance)",
+    "Not on China's 6/22 blacklist: as the largest ex-China separated-REE producer (Malaysia + Kalgoorlie), Lynas is a relative winner while US peers MP/USAR absorb Chinese input bans",
+    "Unique ex-China heavy-rare-earth (Dy/Tb) separation capacity at Kuantan commands scarcity value as Western magnet makers scramble for non-Chinese feedstock",
+    "NdPr pricing is underpinned by the US $110/kg floor precedent creating a two-tier market; downside risks are AUD strength, Malaysian licensing politics and profit-taking after the 12-month double"
+   ],
+   "confidence": 0.4
+  },
+  {
+   "ticker": "UUUU",
+   "name": "Energy Fuels Inc",
+   "assetClass": "US uranium/rare earth producer (equity)",
+   "pUp1m": 0.5,
+   "pUp3m": 0.54,
+   "pUp12m": 0.6,
+   "ev1m": 0,
+   "ev3m": 0.04,
+   "ev12m": 0.15,
+   "drivers": [
+    "$13.85 (7/6) - the 16% pop toward $17.79 on the 6/18 Pentagon loan news has fully retraced; 52-week range $5.57-$27.90 shows extreme beta (Investing.com, stockanalysis, Seeking Alpha)",
+    "The $725M, 20-year conditional DoW/OSC loan funds White Mesa rare-earth separation expansion plus a US metallization/alloy plant - transformational scale if it closes, but financial/legal/technical due-diligence conditions remain outstanding (war.gov, Mining.com)",
+    "Uranium operations provide cash-flow ballast: production targets hit early with spot holding ~$85/lb, and the company is one of the few producing US uranium miners",
+    "The post-announcement fade suggests sell-the-news plus anticipated equity/dilution financing alongside the loan; 12-month skew is strongly positive (dual uranium+REE policy darling) but path volatility is severe"
+   ],
+   "confidence": 0.35
+  },
+  {
+   "ticker": "USAR",
+   "name": "USA Rare Earth Inc",
+   "assetClass": "US rare earth magnet developer (equity)",
+   "pUp1m": 0.47,
+   "pUp3m": 0.5,
+   "pUp12m": 0.52,
+   "ev1m": -0.01,
+   "ev3m": 0.01,
+   "ev12m": 0.08,
+   "drivers": [
+    "$19.46 (7/6) after a -7.4% drop on 7/1; ~$4.4B market cap against negligible revenue; 52-week range $9.32-$43.98 following a +90% y/y run (Yahoo Finance, CNBC, stockinvest)",
+    "Directly blacklisted by China on 6/22: the ban on Chinese-origin dual-use exports threatens equipment and feedstock procurement for the Stillwater, OK magnet line - a concrete operational risk, not just sentiment (Al Jazeera, Washington Post)",
+    "Round Top heavy-REE deposit plus domestic magnet ambitions position it for potential DoD support - peers captured $1.2B of Pentagon loans in June - but USAR has not yet landed a comparable award",
+    "Pre-commercial execution risk at a rich valuation makes the 3-month call a coin flip; the positive 12-month EV rests on a high-variance right tail (DoD contract, offtake, or acquisition), so confidence is low"
+   ],
+   "confidence": 0.3
+  },
+  {
+   "ticker": "NEO.TO",
+   "name": "Neo Performance Materials Inc",
+   "assetClass": "Rare earth magnet/materials processor (equity)",
+   "pUp1m": 0.55,
+   "pUp3m": 0.57,
+   "pUp12m": 0.6,
+   "ev1m": 0.02,
+   "ev3m": 0.04,
+   "ev12m": 0.12,
+   "drivers": [
+    "C$37.25, within 2% of the C$37.85 52-week high and up ~2.6x from the C$14.38 low; Q1 EPS of C$0.471 beat C$0.263 consensus by 79% (5/12); one-year target C$42.85 (Yahoo Finance, MarketBeat)",
+    "Narva, Estonia sintered-magnet plant is Europe's first-mover in ex-China magnet production, selling into EU auto/defense without direct exposure to the US-China blacklist crossfire",
+    "Diversified China-Estonia-Thailand processing footprint gives Neo a rare operational hedge across both blocs' export regimes - it profits from bifurcation rather than being victimized by it",
+    "Momentum plus earnings upgrades versus an already-doubled share price; a 1.07% dividend adds carry, and undervaluation flags from analysts support the multi-month bid"
+   ],
+   "confidence": 0.45
+  },
+  {
+   "ticker": "ILU.AX",
+   "name": "Iluka Resources Ltd",
+   "assetClass": "Mineral sands/rare earth refiner (equity)",
+   "pUp1m": 0.53,
+   "pUp3m": 0.55,
+   "pUp12m": 0.58,
+   "ev1m": 0.01,
+   "ev3m": 0.03,
+   "ev12m": 0.1,
+   "drivers": [
+    "~A$7.00 (7/2), outperforming the All Ordinaries by ~19% over six months; consensus target A$8.01 implies ~+16% (stockanalysis, Stockopedia, Market Index)",
+    "A$1.65B non-recourse Australian government loan fully funds the Eneabba rare-earths refinery through planned mid-2027 commissioning - construction risk is largely de-risked from the balance sheet",
+    "First binding REE offtake signed with a global automaker: take-or-pay covering ~10% of early capacity with ~US$155M minimum revenue over four years, validating ex-China oxide demand at contracted prices",
+    "The core zircon/titanium dioxide business remains cyclically soft on weak China property demand, dragging near-term earnings until rare-earth revenue begins 2027-28 - the stock is a funded call option on Eneabba"
+   ],
+   "confidence": 0.4
+  },
+  {
+   "ticker": "6680.HK",
+   "name": "JL MAG Rare-Earth Co Ltd (H-shares)",
+   "assetClass": "Chinese NdFeB magnet manufacturer (equity)",
+   "pUp1m": 0.48,
+   "pUp3m": 0.5,
+   "pUp12m": 0.55,
+   "ev1m": -0.005,
+   "ev3m": 0.01,
+   "ev12m": 0.08,
+   "drivers": [
+    "HK$17.85 (6/25), sitting ~4% above the 52-week low of HK$17.07 versus a HK$29.30 high; average analyst target HK$25.33 implies ~+42% but momentum is clearly negative (Investing.com, Bloomberg)",
+    "World-scale NdFeB magnet maker supplying EV, wind and robotics majors is caught in the crossfire: Beijing's export-licensing regime constrains overseas magnet shipments, capping the export growth engine",
+    "Domestic demand tailwinds - China EV output, wind installations and the emerging humanoid-robot magnet order book - support volumes even if exports stay restricted",
+    "The June blacklist round and Western price-floor regimes are bifurcating the magnet market; the H-share geopolitical risk premium stays elevated, so the value gap to targets may persist until US-China tensions cool"
+   ],
+   "confidence": 0.35
+  },
+  {
+   "ticker": "SPY",
+   "name": "S&P 500 SPDR ETF",
+   "assetClass": "Equity / Regions",
+   "pUp1m": 0.51,
+   "pUp3m": 0.53,
+   "pUp12m": 0.55,
+   "ev1m": 0.004,
+   "ev3m": 0.014,
+   "ev12m": 0.048,
+   "drivers": [
+    "S&P ~7,357 (June 25); Street year-end targets ~8000 (DB) supported by solid EPS growth and no recession in the base case — a soft earnings floor",
+    "CAPE ~39.7 with a near-zero equity risk premium and firm real yields severely compress forward returns and widen the left tail; a hot 3.4% core-PCE keeps the Fed hike-biased",
+    "Late-June breadth broadened — the Russell 2000 hit a record 3,000, the small-cap A-D line made an all-time high and ~62% of the S&P is above its 200-DMA — easing the single-stock fragility that the June 23 semis rout exposed",
+    "Micron's blowout earnings sparked a June 25 semis rebound; the July 14 June CPI and the July 28-29 FOMC are the next catalysts, with AI concentration (top ~10 ~40% of the index) still capping broad-index upside"
+   ],
+   "confidence": 0.6
+  },
+  {
+   "ticker": "QQQ",
+   "name": "Invesco Nasdaq-100 ETF",
+   "assetClass": "Equity / Regions",
+   "pUp1m": 0.52,
+   "pUp3m": 0.55,
+   "pUp12m": 0.56,
+   "ev1m": 0.006,
+   "ev3m": 0.022,
+   "ev12m": 0.07,
+   "drivers": [
+    "Mega-cap AI capex ($630-770bn projected for 2026) and 25-30% Magnificent Seven EPS growth sustain fundamental momentum; Micron's blowout fiscal-Q3 (AI/HBM memory) drove a June 25 rebound that healed the June 23 chip rout",
+    "QQQ near all-time high; trend persistence favors continued outperformance over 12m, though a June 25 Mag-7 wobble (Apple/MSFT price-hike headlines) shows mega-cap leadership is fully priced",
+    "Forward P/E still historically stretched vs. the real-yield backdrop; concentration in top 5 holdings (~47%) amplifies idiosyncratic risk",
+    "A hike-biased June FOMC and a hot 3.4% core-PCE lift the discount rate on long-duration growth, capping multiple expansion even as earnings deliver"
+   ],
+   "confidence": 0.6
+  },
+  {
+   "ticker": "IWM",
+   "name": "iShares Russell 2000 ETF",
+   "assetClass": "Equity / Regions",
+   "pUp1m": 0.52,
+   "pUp3m": 0.5,
+   "pUp12m": 0.51,
+   "ev1m": 0.006,
+   "ev3m": 0.005,
+   "ev12m": 0.025,
+   "drivers": [
+    "Regime shift: small caps are now LEADING — the Russell 2000 crossed 3,000 for the first time ever (June 22, ~+21% YTD) and the small-cap A-D line made an all-time high, a powerful momentum and breadth signal",
+    "But the bull case fights the Fed: ~32% of R2K debt is floating-rate vs ~6% for the S&P 500, and a hike-biased Fed plus a hot 3.4% core-PCE is structurally punishing for the refinancing wall (~$1.35tn maturing in 2026)",
+    "41-46% of Russell 2000 companies cannot cover interest expense with operating profits; any credit-spread widening hits the index disproportionately",
+    "Net: momentum and broadening participation pull the near-term odds back toward a coin-flip from outright bearish, but rate-sensitivity and weak fundamentals cap the 12m upside and fatten the tail"
+   ],
+   "confidence": 0.55
+  },
+  {
+   "ticker": "EFA",
+   "name": "iShares MSCI EAFE ETF",
+   "assetClass": "Equity / Regions",
+   "pUp1m": 0.54,
+   "pUp3m": 0.57,
+   "pUp12m": 0.58,
+   "ev1m": 0.008,
+   "ev3m": 0.022,
+   "ev12m": 0.075,
+   "drivers": [
+    "International ETFs crushing US peers YTD; European equity funds drew a standout ~$10.7B in the week to June 17 (part of a record global-equity inflow week) and dollar softness provides a persistent translation tailwind",
+    "Europe + Japan valuations materially cheaper than US; mean-reversion base rates favor non-US developed markets when CAPE gap is as wide as today",
+    "ECB easing and Germany's EUR 127bn fiscal push support European demand; BoJ tightening anchors yen and supports Japanese banking margins",
+    "Geopolitical tail risk (Hormuz/Iran) is negative for energy-importing Europe but partially hedged by commodities OW at the portfolio level"
+   ],
+   "confidence": 0.6
+  },
+  {
+   "ticker": "EEM",
+   "name": "iShares MSCI Emerging Markets ETF",
+   "assetClass": "Equity / Regions",
+   "pUp1m": 0.5,
+   "pUp3m": 0.53,
+   "pUp12m": 0.57,
+   "ev1m": 0.001,
+   "ev3m": 0.018,
+   "ev12m": 0.065,
+   "drivers": [
+    "EM forward P/E at 12x vs. 10-year average; dollar weakening is the single most powerful EM tailwind and the macro read supports further USD softness",
+    "But near-term flows are negative: EM equity funds bled ~$2.9B in the week to June 17, an eighth straight weekly outflow, as the hawkish Fed and firm dollar weigh — a clear positioning headwind despite cheap valuations",
+    "The Hormuz/energy tail has eased with the US-Iran framework deal (a net positive for oil-importing EM), removing the acute geopolitical downside that dominated early June",
+    "EM dispersion is wide: China stimulus uncertainty, India valuation stretch, and Taiwan/Korea AI cycle create mixed regional signals within the index"
+   ],
+   "confidence": 0.55
+  },
+  {
+   "ticker": "VGK",
+   "name": "Vanguard FTSE Europe ETF",
+   "assetClass": "Equity / Regions",
+   "pUp1m": 0.54,
+   "pUp3m": 0.57,
+   "pUp12m": 0.6,
+   "ev1m": 0.009,
+   "ev3m": 0.025,
+   "ev12m": 0.08,
+   "drivers": [
+    "Germany EUR 127bn infrastructure/defense fiscal impulse is the largest European fiscal stimulus in a generation; industrials and financials are primary beneficiaries",
+    "EUR/USD near 1.16, below long-term fair value of ~1.20; currency cheapness and dollar softness provide dual upside for USD-denominated returns",
+    "EU GDP forecast 1.4% for 2026 with inflation risks to the downside; peak tariff shock appears passed, reducing a key overhang",
+    "Strong 2026 flows into European equities; valuation discount to US remains historically wide and supports mean-reversion over a 12m horizon"
+   ],
+   "confidence": 0.62
+  },
+  {
+   "ticker": "EWJ",
+   "name": "iShares MSCI Japan ETF",
+   "assetClass": "Equity / Regions",
+   "pUp1m": 0.52,
+   "pUp3m": 0.55,
+   "pUp12m": 0.6,
+   "ev1m": 0.007,
+   "ev3m": 0.025,
+   "ev12m": 0.08,
+   "drivers": [
+    "Multi-year return driven by corporate governance reforms and shareholder return improvements; structural re-rating still has runway as ROE improvement continues",
+    "BoJ at 0.75% with real rates still negative — gradual hike path is not equity-negative; banking sector benefits from wider net interest margins",
+    "Yen expected to stabilize at 140-145 vs USD; yen appreciation would boost EWJ's USD returns but may compress export-sector earnings",
+    "BoJ planned divestiture of its JPY 83tn ETF portfolio (~JPY 330bn/year) is a modest but psychologically important technical headwind"
+   ],
+   "confidence": 0.58
+  },
+  {
+   "ticker": "INDA",
+   "name": "iShares MSCI India ETF",
+   "assetClass": "Equity / Regions",
+   "pUp1m": 0.48,
+   "pUp3m": 0.52,
+   "pUp12m": 0.57,
+   "ev1m": 0,
+   "ev3m": 0.015,
+   "ev12m": 0.08,
+   "drivers": [
+    "India GDP growth forecast 6.9% (Goldman Sachs) — fastest major economy; earnings expected to re-accelerate to 16% growth in 2026 after prior-year disappointment",
+    "INDA near 52-week low; oversold FPI positioning and potential for 15-25% re-rating over 6-12m per analyst consensus",
+    "US-India trade deal reduces tariff uncertainty; RBI easing stance, GST 2.0 reforms and consumption tax relief are positive near-term catalysts",
+    "Market cap/GDP at 128% (modestly overvalued); Hormuz/energy shock is a structural negative for India as a large oil importer"
+   ],
+   "confidence": 0.57
+  },
+  {
+   "ticker": "FXI",
+   "name": "iShares China Large-Cap ETF",
+   "assetClass": "Equity / Regions",
+   "pUp1m": 0.47,
+   "pUp3m": 0.5,
+   "pUp12m": 0.5,
+   "ev1m": -0.005,
+   "ev3m": 0.003,
+   "ev12m": 0.025,
+   "drivers": [
+    "FXI well below 52-week high; property market stabilizing but not rebounding — 10-14% decline in sales projected for 2026",
+    "GDP growth slowing to 4.5% in 2026 from 5% in 2025; deflation risk persists and domestic demand stimulus remains 'support not rescue' in character",
+    "Geopolitical tail: escalating US tariffs and technology restrictions represent the primary downside catalyst with binary policy risk",
+    "Stimulus optionality is the key upside: any forceful PBOC/fiscal action to backstop the property sector could produce a sharp, fast rally in large-caps — creates positive skew even at neutral pUp"
+   ],
+   "confidence": 0.58
+  },
+  {
+   "ticker": "BTC-USD",
+   "name": "Bitcoin",
+   "assetClass": "Crypto",
+   "pUp1m": 0.48,
+   "pUp3m": 0.49,
+   "pUp12m": 0.51,
+   "ev1m": -0.01,
+   "ev3m": -0.02,
+   "ev12m": 0.02,
+   "drivers": [
+    "BTC is ~$60-67k (briefly under $66k) as the hike-biased June FOMC, a hot 3.4% core-PCE and a firm dollar offset the US-Iran peace dividend; the war-scare impulse has eased but rates are now the swing",
+    "Crypto sentiment is washed out — the alternative.me Fear & Greed sits at Extreme Fear (13, vs ~26 a fortnight ago), a contrarian positive but a sign of acute risk aversion",
+    "Spot-ETF flows have been the swing factor and were heavily negative in June (~$6.6B out over five weeks) before a tentative stabilization (BTC ETFs +$39.2M June 23)",
+    "12m genuinely two-sided: an eventual Fed pivot and post-halving positioning are structural longs versus the higher-for-longer crowding-out; base case is symmetric near 50/50"
+   ],
+   "confidence": 0.55
+  },
+  {
+   "ticker": "ETH-USD",
+   "name": "Ethereum",
+   "assetClass": "Crypto",
+   "pUp1m": 0.43,
+   "pUp3m": 0.45,
+   "pUp12m": 0.49,
+   "ev1m": -0.035,
+   "ev3m": -0.05,
+   "ev12m": -0.01,
+   "drivers": [
+    "ETH has slipped further to ~$1.6k and the spot-ETF flow backdrop stayed negative through June; the ETH/BTC ratio remains compressed, consistent with higher beta and a softer institutional bid amid Extreme-Fear crypto sentiment",
+    "Glamsterdam upgrade pushed to Q3 2026 removes the near-term protocol catalyst",
+    "Staking ETF approvals convert ETH into an income asset for allocators and tighten float (~30% staked) — a 6-12m structural positive, not a 1-3m one",
+    "Down sharply from the 2025 ATH; mean-reversion offers some 12m support but rate headwinds to growth assets cap recovery probability"
+   ],
+   "confidence": 0.5
+  },
+  {
+   "ticker": "SOL-USD",
+   "name": "Solana",
+   "assetClass": "Crypto",
+   "pUp1m": 0.41,
+   "pUp3m": 0.46,
+   "pUp12m": 0.52,
+   "ev1m": -0.045,
+   "ev3m": -0.02,
+   "ev12m": 0.05,
+   "drivers": [
+    "SOL has been the weakest major (down mid-single-digits into late June) as token unlocks plus an Extreme-Fear crypto tape (F&G 13) keep the near-term supply overhang acute, though spot SOL ETFs have drawn small net inflows as allocators rotate down the cap spectrum",
+    "Alpenglow upgrade (~150ms finality) targeting Q3 2026 mainnet plus ~6%+ staking carry create an asymmetric 3-12m upside case if risk appetite recovers",
+    "Network fundamentals remain strongest among L1 peers (record daily TXs, deep DeFi TVL), leaving a wide fundamental-price divergence",
+    "Highest-beta asset (~1.5-2x BTC); deep drawdown from ATH creates right-skewed 12m optionality, but it is first-and-worst casualty if the liquidity tail hits — confidence held low at 0.45"
+   ],
+   "confidence": 0.45
+  },
+  {
+   "ticker": "TLT",
+   "name": "iShares 20+ Year Treasury Bond ETF",
+   "assetClass": "Bonds / Rates / Credit",
+   "pUp1m": 0.42,
+   "pUp3m": 0.44,
+   "pUp12m": 0.55,
+   "ev1m": -0.008,
+   "ev3m": -0.008,
+   "ev12m": 0.05,
+   "drivers": [
+    "30y near 5% and 10y ~4.49% (off the 4.67% May high on the Iran de-escalation/oil de-rate); but the June FOMC dot-plot now implies a 2026 HIKE (median 3.8%), keeping upward yield pressure on this ~17y-duration vehicle",
+    "Has already fallen well off its 2025 highs, pricing in substantial bad news but not a full hike-cycle extension",
+    "Carry of ~4.3% annualized cushions total return; if the cycle eventually turns, long duration snaps back sharply — base rates favor a positive 12m total return once carry is included",
+    "Elevated Treasury issuance and soft foreign auction demand keep a term-premium bid in long yields, capping the rally"
+   ],
+   "confidence": 0.52
+  },
+  {
+   "ticker": "IEF",
+   "name": "iShares 7-10 Year Treasury Bond ETF",
+   "assetClass": "Bonds / Rates / Credit",
+   "pUp1m": 0.44,
+   "pUp3m": 0.48,
+   "pUp12m": 0.56,
+   "ev1m": -0.003,
+   "ev3m": 0.001,
+   "ev12m": 0.052,
+   "drivers": [
+    "10y yield ~4.49%, off the 4.67% May high — the Iran de-escalation and oil de-rate relieved some pressure on the ~7-8y duration, though the hawkish FOMC dot-plot (implied 2026 hike) caps the rally",
+    "SEC yield ~4.27% provides meaningful carry that can offset modest price declines over 3-12m; the belly has better risk/reward than the long end in a higher-for-longer regime",
+    "A December hike partially priced is absorbed; IEF benefits if data softens further and pricing reverts, an asymmetric payoff with lower vol than TLT",
+    "Down ~1% YTD; momentum is grinding but the deflating energy tail lowers forward headline CPI, a tailwind for nominal duration"
+   ],
+   "confidence": 0.55
+  },
+  {
+   "ticker": "SHY",
+   "name": "iShares 1-3 Year Treasury Bond ETF",
+   "assetClass": "Bonds / Rates / Credit",
+   "pUp1m": 0.52,
+   "pUp3m": 0.52,
+   "pUp12m": 0.51,
+   "ev1m": 0.003,
+   "ev3m": 0.009,
+   "ev12m": 0.038,
+   "drivers": [
+    "2y yield ~4.16% with very low duration (~1.8y) means carry (~3.4-3.9% annualized) almost entirely drives total return; price volatility is minimal, making this the closest fixed-income analog to cash",
+    "Fed hike risk is the dominant headwind — market now pricing a hike by year-end; if materialized, 1-3y yields rise and price dips slightly, but the carry from reinvestment partially offsets within 3m",
+    "Positive carry in a high-for-longer regime makes SHY a high-Sharpe, low-conviction directional bet; it earns its coupon with minimal duration drag regardless of macro outcome",
+    "1-year total return of 3.43% confirms the carry-dominant regime; upside beyond carry is negligible, downside capped by short duration — probability distribution is very tight around par"
+   ],
+   "confidence": 0.68
+  },
+  {
+   "ticker": "TIP",
+   "name": "iShares TIPS Bond ETF",
+   "assetClass": "Bonds / Rates / Credit",
+   "pUp1m": 0.49,
+   "pUp3m": 0.53,
+   "pUp12m": 0.57,
+   "ev1m": 0.003,
+   "ev3m": 0.016,
+   "ev12m": 0.056,
+   "drivers": [
+    "10y TIPS real yield near 2.1% (multi-year high) offers genuinely attractive real compensation; TIPS deliver positive real return even with CPI elevated — historically cheap vs nominal Treasuries",
+    "May headline CPI at 4.2% still exceeds the ~2.4% 10y breakeven, but the collapsing energy tail (Brent <$86) is pulling near-term breakevens lower, a modest headwind to principal accretion",
+    "Soft May core (+2.9% y/y) keeps underlying inflation sticky-but-easing; the stagflation-lite scenario remains TIPS' home turf over 12m",
+    "Duration risk (~6-7y) is still a headwind if real yields grind higher from elevated levels; recent auction demand was soft, limiting near-term momentum"
+   ],
+   "confidence": 0.6
+  },
+  {
+   "ticker": "LQD",
+   "name": "iShares iBoxx $ Investment Grade Corporate Bond ETF",
+   "assetClass": "Bonds / Rates / Credit",
+   "pUp1m": 0.39,
+   "pUp3m": 0.43,
+   "pUp12m": 0.52,
+   "ev1m": -0.005,
+   "ev3m": -0.003,
+   "ev12m": 0.048,
+   "drivers": [
+    "OAS ~80bp is near historic tights vs 132bp long-run average — spread has almost no room to compress further, and mean-reversion risk of ~50bp widening would translate to ~4-5% price loss, partially offsetting a 5.24% SEC yield",
+    "Duration ~8-9y gives substantial rate sensitivity; if 10y yields push through 4.67% resistance on a hot CPI print, LQD faces combined spread-widening and rate losses — the asymmetry is unfavorable near-term",
+    "5.24% SEC yield is the most compelling argument for LQD: at ~130bp premium over the 10y Treasury (all-in carry), investors earn meaningful income even if spreads drift slightly wider over 12m",
+    "IG credit fundamentals remain solid (low default risk, solid corporate earnings), providing a floor; but institutional positioning is rich and the stagflation-lite regime historically precedes spread widening in late cycle"
+   ],
+   "confidence": 0.54
+  },
+  {
+   "ticker": "HYG",
+   "name": "iShares iBoxx $ High Yield Corporate Bond ETF",
+   "assetClass": "Bonds / Rates / Credit",
+   "pUp1m": 0.37,
+   "pUp3m": 0.4,
+   "pUp12m": 0.5,
+   "ev1m": -0.008,
+   "ev3m": -0.003,
+   "ev12m": 0.015,
+   "drivers": [
+    "OAS ~262bp is near the long-term mean but well below recession-era wides (500-800bp); in a late-cycle stagflation-lite regime, HY spreads historically widen 50-150bp before default cycles peak — current spread is not a safety margin",
+    "Institutional put buying at historically high volumes (March 2026: 1.73M contracts, 95% puts) signals sophisticated money hedging HY credit risk aggressively — an unusual bearish signal from smart money",
+    "6.7% yield with ~4y duration provides meaningful carry, but a 100bp spread widening would generate roughly -4% price impact, fully consuming ~7 months of carry — downside skew is negative in stagflation tail",
+    "Default rate at 2.5% is currently benign but rising energy/financing costs in late-cycle environments typically push HY defaults toward 4-6% within 12-18m; forward default pricing leaves little cushion"
+   ],
+   "confidence": 0.57
+  },
+  {
+   "ticker": "EMB",
+   "name": "iShares J.P. Morgan USD Emerging Markets Bond ETF",
+   "assetClass": "Bonds / Rates / Credit",
+   "pUp1m": 0.41,
+   "pUp3m": 0.48,
+   "pUp12m": 0.54,
+   "ev1m": -0.003,
+   "ev3m": -0.002,
+   "ev12m": 0.058,
+   "drivers": [
+    "OAS ~170bp over Treasuries with an all-in yield ~6% (10y UST 4.47% + 153bp spread) offers reasonable carry pickup; in a carry-dominant regime where spread compression is unlikely, EMB investors earn their coupon with limited capital gain potential",
+    "USD strength near DXY 99 (OW call in macro framework) is a structural headwind for EM USD bonds via funding stress and capital flow reversal — a strong dollar historically drives EMB spreads wider by 20-50bp",
+    "Three macro triggers: (1) Fed hike extending higher-for-longer USD regime, (2) oil shock pressuring net-oil-importing EM sovereigns, (3) US fiscal/Moody's downgrade risk elevating risk-free rate globally — all three are live in current regime",
+    "Technical support: EM real yields exceed DM, EM inflation is falling in most countries unlike the US, and carry-seeking flows into EM debt funds provide a bid; net EM supply is low in 2026 reducing technical pressure"
+   ],
+   "confidence": 0.5
+  },
+  {
+   "ticker": "BND",
+   "name": "Vanguard Total Bond Market ETF",
+   "assetClass": "Bonds / Rates / Credit",
+   "pUp1m": 0.42,
+   "pUp3m": 0.46,
+   "pUp12m": 0.55,
+   "ev1m": -0.002,
+   "ev3m": -0.001,
+   "ev12m": 0.047,
+   "drivers": [
+    "Broad investment-grade exposure (~70% AAA/AA, mix of Treasuries, MBS, agencies, corporates) with ~6y duration means BND inherits moderate rate sensitivity — 10y yield near 4.56% caps upside near-term but 3.94% dividend yield provides ballast",
+    "Blended duration (~6y) sits in the 'belly' of the risk/reward curve — less punishing than TLT in a higher-for-longer scenario but more rewarding than SHY if yields eventually normalize; a reasonable all-weather allocation with better convexity than long-end peers",
+    "1y total return of only 0.61% reflects the drag from 2025's rate volatility; mean-reversion from depressed total returns historically improves 12m forward returns, and carry at ~4% annualized is additive from current price levels",
+    "MBS component (~20%) benefits from a no-recession base case (prepayment risk is contained, spreads are tight), while Treasury component provides a modest flight-to-quality hedge if the geopolitical tail materializes"
+   ],
+   "confidence": 0.56
+  }
+ ],
+ "callsNote": "Per-instrument analyst priors with directional probability (pUp) and expected value (ev) across 1m/3m/12m horizons, plus drivers and confidence. Blended into the live quant model at the probability level (research weight scales with confidence, capped so the statistical engine stays primary). NOTE: factor/sector, commodity & rare-earth calls refreshed 2026-07-07; equity-region, bond & crypto calls last fully refreshed 2026-06-26 (an interrupted refresh) — the macro layer and live technicals are current."
 }
