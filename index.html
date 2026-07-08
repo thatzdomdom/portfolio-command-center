@@ -472,7 +472,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v49 · consensus drill-down · staleness banner · 13F-lag explainer · 🏅 Consensus · 📰 News · 📈 Track record · 🛡️ Risk · 🎯 Matrix · Live: Yahoo + CNN · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v50 · backtested buy rail (≥60, equal-wt, concentration guard) · 🏅 Consensus · 📰 News · 📈 Track record · 🛡️ Risk · 🎯 Matrix · Live: Yahoo + CNN · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="cp-overlay" onclick="closeCP(event)">
@@ -1636,13 +1636,22 @@ function renderRegime(){
 function renderAlerts(){
   const box=el('opp-alerts'); if(!box)return; if(!MODEL_RESULTS.length){box.innerHTML='';return;}
   const byScore=[...MODEL_RESULTS].sort((a,b)=>b.score-a.score);
-  const buys=byScore.filter(m=>['STRONG BUY','BUY','ACCUMULATE'].includes(m.label)).slice(0,6);
-  const iv=buys.map(m=>1/Math.max(m.sigma,0.05)), ivs=iv.reduce((a,b)=>a+b,0)||1;
-  const buyCards=buys.map((m,i)=>{const wt=Math.round(iv[i]/ivs*100);return `<div onclick="openOppDetail('${m.t}')" style="cursor:pointer;border:1px solid var(--border);border-radius:8px;padding:10px;background:var(--surf)">
+  // BUY-or-better (score ≥60) — the bucket the 9y & 30y backtests favoured over
+  // STRONG-BUY-only (Sharpe 0.41 vs 0.33 over 30y). Equal-weight: inverse-vol
+  // sizing lost ~2-4.5pts CAGR in both backtests.
+  const qual=byScore.filter(m=>['STRONG BUY','BUY'].includes(m.label));
+  const buys=qual.slice(0,8);
+  // Concentration guard — June 2022 failure mode: 4 picks, all commodities, at the top
+  const themeN={}; qual.forEach(m=>themeN[m.glabel]=(themeN[m.glabel]||0)+1);
+  const dom=Object.entries(themeN).sort((a,b)=>b[1]-a[1])[0]||['—',0];
+  const guardOn=qual.length>0&&(qual.length<6||dom[1]/qual.length>0.5);
+  const eqw=buys.length?Math.round(100/buys.length):0;
+  const guard=guardOn?`<div style="border-left:3px solid var(--red);background:rgba(239,68,68,.07);border-radius:0 8px 8px 0;padding:8px 10px;margin-bottom:8px;font-size:11.5px;line-height:1.5"><b>⚠️ Concentration guard:</b> ${qual.length<6?`only ${qual.length} name${qual.length===1?'':'s'} qualify`:''}${qual.length<6&&dom[1]/qual.length>0.5?' and ':''}${dom[1]/qual.length>0.5?`${dom[1]} of ${qual.length} are ${dom[0]}`:''}. In the 30-year backtest this exact setup preceded the worst whipsaws (Jun 2022: 4 picks, all commodities → −23% year). Cap any single theme at ~50% of what you deploy; keep the remainder in ballast/cash.</div>`:'';
+  const buyCards=buys.map(m=>`<div onclick="openOppDetail('${m.t}')" style="cursor:pointer;border:1px solid var(--border);border-radius:8px;padding:10px;background:var(--surf)">
     <div style="display:flex;align-items:center;gap:6px"><span class="ticker-badge">${m.t}</span><span style="font-size:10px;font-weight:800;padding:1px 6px;border-radius:5px;${sigStyle(m.label)}">${m.label}</span><b style="margin-left:auto;font-size:12px">${Math.round(m.score)}</b></div>
-    <div style="font-size:11px;color:var(--muted);margin:4px 0 6px">${m.n}</div>
+    <div style="font-size:11px;color:var(--muted);margin:4px 0 6px">${m.n} · <span style="color:var(--accent)">${m.glabel}</span></div>
     <div style="display:flex;gap:12px;font-size:11px"><span>P↑3M <b style="${pUpStyle(m['3m'].pUp)}">${Math.round(m['3m'].pUp*100)}%</b></span><span>EV12M <b class="${clr(m['12m'].ev)}">${fmtP(m['12m'].ev)}</b></span></div>
-    <div style="font-size:10.5px;color:var(--muted);margin-top:5px">Risk-budget wt ~<b>${wt}%</b> · σ ${Math.round(m.sigma*100)}%</div></div>`;}).join('');
+    <div style="font-size:10.5px;color:var(--muted);margin-top:5px">Equal-weight ~<b>${eqw}%</b> of deployed amount · σ ${Math.round(m.sigma*100)}%</div></div>`).join('');
   const HED=['TLT','IEF','SHY','GLD','USMV','BND','TIP'];
   const hedges=byScore.filter(m=>HED.includes(m.t)).slice(0,5);
   const hedgeCards=hedges.map(m=>`<div onclick="openOppDetail('${m.t}')" style="cursor:pointer;border:1px solid var(--border);border-radius:8px;padding:9px;background:var(--surf)">
@@ -1653,7 +1662,7 @@ function renderAlerts(){
     <div style="display:flex;align-items:center;gap:6px"><span class="ticker-badge">${m.t}</span><span style="font-size:10px;font-weight:800;padding:1px 6px;border-radius:5px;${sigStyle(m.label)}">${m.label}</span></div>
     <div style="font-size:11px;color:var(--muted);margin-top:4px">${m.flags.map(f=>f.t).join(' · ')||m.n}</div></div>`).join('');
   box.innerHTML=`<div class="grid3">
-    <div class="card"><div class="sh">🟢 Buy candidates — highest edge</div><div class="small" style="color:var(--muted);margin:-4px 0 10px">Top composite scores. Risk-budget weight is inverse-vol (lower vol → bigger size) to cap drawdown.</div><div style="display:flex;flex-direction:column;gap:8px">${buyCards||'<span class="small" style="color:var(--muted)">None meet the buy threshold right now.</span>'}</div></div>
+    <div class="card"><div class="sh">🟢 Buy candidates — BUY or better (score ≥60)</div><div class="small" style="color:var(--muted);margin:-4px 0 10px">The backtested bucket (see methodology): equal-weighted, ${qual.length} qualifying name${qual.length===1?'':'s'}${qual.length>8?' (top 8 shown)':''}.</div>${guard}<div style="display:flex;flex-direction:column;gap:8px">${buyCards||'<span class="small" style="color:var(--muted)">None meet the ≥60 threshold right now — the backtested response is ballast/cash, not forcing a trade.</span>'}</div></div>
     <div class="card"><div class="sh">🛡️ Drawdown-control ballast</div><div class="small" style="color:var(--muted);margin:-4px 0 10px">Low-overlap diversifiers &amp; hedges. Raising these lowers portfolio max-drawdown.</div><div style="display:flex;flex-direction:column;gap:8px">${hedgeCards||'<span class="small" style="color:var(--muted)">—</span>'}</div></div>
     <div class="card"><div class="sh">🔴 Risk warnings — trim / avoid</div><div class="small" style="color:var(--muted);margin:-4px 0 10px">Downtrend, overbought-into-weakness, or risk-off — reduce/hedge, especially names overlapping your book.</div><div style="display:flex;flex-direction:column;gap:8px">${riskCards||'<span class="small" style="color:var(--muted)">No acute risk flags.</span>'}</div></div></div>`;
 }
@@ -1715,7 +1724,18 @@ function renderMethod(){
     <li><b>Drawdown control.</b> Sizing uses <b>inverse-volatility (risk-parity) weights</b> so low-vol names get larger allocations — this is the single biggest lever on portfolio max-drawdown. The model surfaces ballast (Treasuries, gold, min-vol) as a deliberate counterweight to your equity/REIT/precious-metals book, and flags overbought, downtrending and high-vol names to trim.</li>
     <li><b>Composite score &amp; signal.</b> 0–100 from the 3M and 12M edge over 50/50, the Sharpe proxy, and trend — mapped to STRONG BUY → AVOID, with a RISK-OFF override when an asset is in a confirmed downtrend with negative drift.</li>
   </ol>
-  <p style="color:var(--muted)">Tap any row for the full factor breakdown and a live candlestick chart. This is decision-support for your own analysis — <b>not financial advice</b>, and the dashboard never places trades. Model refreshes its macro input daily; technicals recompute live each time you open the tab.</p>`;
+  <p style="color:var(--muted)">Tap any row for the full factor breakdown and a live candlestick chart. This is decision-support for your own analysis — <b>not financial advice</b>, and the dashboard never places trades. Model refreshes its macro input daily; technicals recompute live each time you open the tab.</p>
+  <div style="margin-top:14px;padding:12px;background:var(--surf2);border-radius:8px">
+    <div class="sh">📜 Backtested — Jul 2026 (scripts/backtest.js, reproducible)</div>
+    <p style="margin:4px 0 6px">The exact quant scoring above (macro/research tilts excluded — they can't be reconstructed historically) was run with monthly rebalancing, dividends included, 10bps/side costs, and cash at the historical T-bill rate:</p>
+    <ul style="padding-left:18px;line-height:1.7;margin:0 0 8px">
+      <li><b>9 years (2017–26, full universe):</b> STRONG-BUY-only ≈ matched SPY with ~4pts less max drawdown (−29.5% vs −33.7%); <b>crypto drove most of the excess return</b> (CAGR 14.0% → 7.9% without it).</li>
+      <li><b>30 years (1996–2026, ex-crypto, point-in-time universe):</b> CAGR 7.7% vs SPY 10.2% — but max drawdown <b>−38.6% vs −55.2%</b>, and <b>2008: −1% vs SPY −37%</b> (by Sep-2008 it held only Treasuries). The engine is a <b>drawdown-control engine, not an alpha engine</b>.</li>
+      <li><b>BUY-or-better (score ≥60) beat STRONG-BUY-only in both windows</b> (30y Sharpe 0.41 vs 0.33) — hence this rail uses ≥60, equal-weighted (inverse-vol sizing lost 2–4.5pts CAGR in both tests).</li>
+      <li><b>Known weaknesses, on the record:</b> late re-entry after crashes (2009 +3%, 2023 +3%); concentration whipsaws when few names qualify (Jun 2022: 4 picks, all commodities → −23% year — hence the concentration guard above); dot-com drawdown overstated (no bond ETFs existed pre-2002 to rotate into).</li>
+    </ul>
+    <p style="color:var(--muted);margin:0">Backtests overstate live results as a rule. Past performance ≠ future returns.</p>
+  </div>`;
 }
 
 // ═══════════════════════════════════════════════════════════════════════
