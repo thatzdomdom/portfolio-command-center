@@ -32,24 +32,44 @@ fs.mkdirSync(CACHE, { recursive: true });
 const clip=(x,a,b)=>Math.max(a,Math.min(b,x));
 function normCdf(x){const t=1/(1+0.2316419*Math.abs(x)),d=0.3989422804014327*Math.exp(-x*x/2);let p=d*t*(0.31938153+t*(-0.356563782+t*(1.781477937+t*(-1.821255978+t*1.330274429))));return x>0?1-p:p;}
 
-async function fetchHist(sym){
-  const f=path.join(CACHE, sym.replace(/[^A-Za-z0-9.-]/g,'_')+'.json');
-  if(fs.existsSync(f)) return JSON.parse(fs.readFileSync(f,'utf8'));
-  const url=`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?interval=1d&range=10y`;
+const RANGE=process.env.RANGE||'10y';           // e.g. RANGE=max for the full-history run
+const START_DATE=process.env.START||'2017-07-01';
+async function fetchChunk(sym,p1,p2){
+  const url=`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?interval=1d&period1=${p1}&period2=${p2}`;
   const tries=[`https://corsproxy.io/?url=${encodeURIComponent(url)}`,`https://api.codetabs.com/v1/proxy/?quest=${url}`,url];
   for(const u of tries){
     try{
       const r=await fetch(u,{headers:{'Origin':'https://thatzdomdom.github.io','User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/124 Safari/537.36'},signal:AbortSignal.timeout(20000)});
       if(!r.ok) continue;
       const j=await r.json(); const res=j&&j.chart&&j.chart.result&&j.chart.result[0]; if(!res) continue;
+      if(res.meta&&res.meta.dataGranularity&&res.meta.dataGranularity!=='1d') continue; // refuse silent monthly downgrades
       const ts=res.timestamp||[], adj=(res.indicators.adjclose&&res.indicators.adjclose[0].adjclose)||[], raw=(res.indicators.quote&&res.indicators.quote[0].close)||[];
       const out=[];
       for(let i=0;i<ts.length;i++){const c=(adj[i]!=null?adj[i]:raw[i]); if(c!=null&&c>0) out.push([new Date(ts[i]*1000).toISOString().slice(0,10), c]);}
-      if(out.length>100){ fs.writeFileSync(f,JSON.stringify(out)); return out; }
+      return out;
     }catch(e){}
-    await new Promise(r=>setTimeout(r,700));
+    await new Promise(r=>setTimeout(r,600));
   }
-  return null;
+  return [];
+}
+async function fetchHist(sym){
+  const f=path.join(CACHE, sym.replace(/[^A-Za-z0-9.-]/g,'_')+'_'+RANGE+'.json');
+  if(fs.existsSync(f)) return JSON.parse(fs.readFileSync(f,'utf8'));
+  const now=Math.floor(Date.now()/1000);
+  const startEpoch=RANGE==='max'?Math.floor(Date.parse('1993-01-01')/1000):now-{'10y':315619200,'5y':157809600}[RANGE]||315619200;
+  const CH=4*365.25*86400; // 4-year chunks — Yahoo serves these as true daily bars
+  const seen={}, all=[];
+  for(let p1=startEpoch;p1<now;p1+=CH){
+    const rows=await fetchChunk(sym,Math.floor(p1),Math.floor(Math.min(p1+CH,now)));
+    for(const r of rows) if(!seen[r[0]]){seen[r[0]]=1;all.push(r);}
+    await new Promise(r=>setTimeout(r,300));
+  }
+  all.sort((a,b)=>a[0]<b[0]?-1:1);
+  if(all.length<100) return null;
+  // sanity: a multi-year daily series must have ~250 bars/yr (crypto ~365)
+  const spanY=(Date.parse(all[all.length-1][0])-Date.parse(all[0][0]))/3.15576e10;
+  if(spanY>2 && all.length<spanY*150){ console.log(`  !! ${sym}: rejected — ${all.length} bars over ${spanY.toFixed(1)}y (not daily granularity)`); return null; }
+  fs.writeFileSync(f,JSON.stringify(all)); return all;
 }
 
 // EXACT port of the quant half of buildModel() (tilts=0)
@@ -86,7 +106,7 @@ function labelAt(C,u){
 }
 
 (async()=>{
-  console.log('Fetching 10y adjusted history for', UNIVERSE.length, 'instruments…');
+  console.log('Fetching '+RANGE+' adjusted history for', UNIVERSE.length, 'instruments…');
   const hist={};
   for(const u of UNIVERSE){ const h=await fetchHist(u.t); if(h) hist[u.t]=h; else console.log('  !! no data:',u.t); await new Promise(r=>setTimeout(r,250)); }
   console.log('Got', Object.keys(hist).length, 'series.');
@@ -95,8 +115,13 @@ function labelAt(C,u){
   const map={}; for(const t in hist){ map[t]={}; hist[t].forEach(([d,c],i)=>map[t][d]=i); }
   const closesUpTo=(t,d)=>{const i=map[t][d]; return i==null?null:hist[t].slice(0,i+1).map(x=>x[1]);};
   const priceOn=(t,d)=>{const i=map[t][d]; return i==null?null:hist[t][i][1];};
-  const START=cal.findIndex(d=>d>='2017-07-01'); // 1y of warm-up on 10y data
-  const RF_D=0.03/252, COST=0.001; // 3% cash yield, 10bps per side
+  const START=cal.findIndex(d=>d>=START_DATE);
+  if(START<0){console.error('START beyond data');process.exit(1);}
+  // cash earns the actual 13-week T-bill rate (^IRX), forward-filled; 3% fallback
+  const irx=await fetchHist('^IRX'); const rfByDate={};
+  if(irx){ let j=0,last=0.03; for(const d of cal){ while(j<irx.length&&irx[j][0]<=d){ last=irx[j][1]/100; j++; } rfByDate[d]=last/252; } }
+  const rfOn=d=>rfByDate[d]!=null?rfByDate[d]:0.03/252;
+  const COST=0.001; // 10bps per side
   const variants={ 'SB-EW (STRONG BUY, equal-wt)':{sel:'sb',iv:false}, 'SB-IV (STRONG BUY, inverse-vol)':{sel:'sb',iv:true}, 'B60-EW (score>=60, equal-wt)':{sel:'b60',iv:false} };
   const results={};
   for(const [name,cfg] of Object.entries(variants)){
@@ -122,7 +147,7 @@ function labelAt(C,u){
       const d2=cal[i+1]; let ret=0, invested=0, nw2={};
       for(const t in weights){ const p1=priceOn(t,d), p2=priceOn(t,d2); const w=weights[t];
         if(p1&&p2){ ret+=w*(p2/p1-1); invested+=w; nw2[t]=w*(p2/p1); } else { ret+=0; invested+=w; nw2[t]=w; } }
-      ret+=(1-invested)*RF_D;
+      ret+=(1-invested)*rfOn(d);
       V*=(1+ret);
       const tot=Object.values(nw2).reduce((a,b)=>a+b,0)+(1-invested);
       for(const t in nw2) nw2[t]/=tot; weights=nw2;
@@ -138,7 +163,7 @@ function labelAt(C,u){
     const byY={}; eq.forEach(([d,v])=>{const y=d.slice(0,4); byY[y]=byY[y]||{first:v,last:v}; byY[y].last=v;});
     const years=Object.keys(byY).sort(); const yr={}; let prev=1;
     years.forEach(y=>{ yr[y]=byY[y].last/prev-1; prev=byY[y].last; });
-    results[name]={final:V,cagr,vol,sharpe:(cagr-0.03)/vol,maxDD:mdd,ddStart,ddDate,avgHoldings:countSum/countN,yearly:yr,picksLog};
+    results[name]={final:V,cagr,vol,sharpe:(cagr-0.03)/vol,maxDD:mdd,ddStart,ddDate,avgHoldings:countSum/countN,yearly:yr,picksLog,eq};
   }
   // SPY benchmark over the identical window
   {
@@ -149,7 +174,7 @@ function labelAt(C,u){
     let peak=0,mdd=0; for(const v of eqS){ if(v>peak)peak=v; mdd=Math.min(mdd,v/peak-1); }
     const byY={}; cal.slice(START).forEach((d,i)=>{const y=d.slice(0,4); byY[y]=byY[y]||{first:eqS[i]}; byY[y].last=eqS[i];});
     const years=Object.keys(byY).sort(); const yr={}; let prev=1; years.forEach(y=>{yr[y]=byY[y].last/prev-1; prev=byY[y].last;});
-    results['SPY buy & hold (benchmark)']={final:eqS[eqS.length-1],cagr,vol,sharpe:(cagr-0.03)/vol,maxDD:mdd,avgHoldings:1,yearly:yr};
+    results['SPY buy & hold (benchmark)']={final:eqS[eqS.length-1],cagr,vol,sharpe:(cagr-0.03)/vol,maxDD:mdd,avgHoldings:1,yearly:yr,eq:cal.slice(START).map((d,i)=>[d,eqS[i]])};
   }
   fs.writeFileSync(path.join(CACHE,'results.json'),JSON.stringify(results,null,1));
   for(const [name,r] of Object.entries(results)){
