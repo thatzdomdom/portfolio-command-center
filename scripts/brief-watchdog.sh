@@ -27,12 +27,21 @@ What to do:
 Live prices/quant on the dashboard are unaffected and current as always:
 https://thatzdomdom.github.io/portfolio-command-center/"
 
-osascript - "⚠️ Portfolio watchdog: no morning brief today" "$BODY" "$EMAIL_TO" <<'AS'
+EMAIL_FROM=$(grep '^EMAIL_FROM=' "$HOME/.claude/portfolio-brief.env" 2>/dev/null | cut -d= -f2)
+send_alert() {
+osascript - "⚠️ Portfolio watchdog: no morning brief today" "$BODY" "$EMAIL_TO" "$EMAIL_FROM" <<'AS'
 on run argv
-  tell application "Mail"
-    set msg to make new outgoing message with properties {subject:item 1 of argv, content:item 2 of argv, visible:false}
-    tell msg to make new to recipient at end of to recipients with properties {address:item 3 of argv}
-    send msg
-  end tell
+  tell application "Mail" to launch
+  delay 3
+  with timeout of 300 seconds
+    tell application "Mail"
+      set msg to make new outgoing message with properties {subject:item 1 of argv, content:item 2 of argv, visible:false}
+      if (count of argv) > 3 and item 4 of argv is not "" then set sender of msg to item 4 of argv
+      tell msg to make new to recipient at end of to recipients with properties {address:item 3 of argv}
+      send msg
+    end tell
+  end timeout
 end run
 AS
+}
+send_alert || { sleep 15; send_alert; }   # retry once — Mail cold starts have timed out before

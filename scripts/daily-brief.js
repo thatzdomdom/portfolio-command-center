@@ -80,17 +80,39 @@ if (DRY) {
   process.exit(0);
 }
 
+// once-per-day guard: the 08:15 system job owns delivery; anything else needs --force
+const FORCE = process.argv.includes('--force');
+const STATE = path.join(process.env.HOME, '.claude', 'portfolio-brief.last');
+const todayISO = new Date().toISOString().slice(0, 10);
+try { if (!FORCE && fs.readFileSync(STATE, 'utf8').trim() === todayISO) { console.log('already sent today (' + todayISO + ') — use --force to resend'); process.exit(0); } } catch (e) {}
+
 if (env.EMAIL_TO) {
+  // Send FROM a different account than the recipient (EMAIL_FROM) so Gmail
+  // treats it as genuine inbound mail — push notifications fire and it can't
+  // be hidden by self-send quirks. Launch Mail first and use a long AppleEvent
+  // timeout (cold Mail launches have caused -1712 timeouts).
   const as = `on run argv
-  tell application "Mail"
-    set msg to make new outgoing message with properties {subject:item 1 of argv, content:item 2 of argv, visible:false}
-    tell msg to make new to recipient at end of to recipients with properties {address:item 3 of argv}
-    send msg
-  end tell
+  tell application "Mail" to launch
+  delay 3
+  with timeout of 300 seconds
+    tell application "Mail"
+      set msg to make new outgoing message with properties {subject:item 1 of argv, content:item 2 of argv, visible:false}
+      if (count of argv) > 3 then set sender of msg to item 4 of argv
+      tell msg to make new to recipient at end of to recipients with properties {address:item 3 of argv}
+      send msg
+    end tell
+  end timeout
 end run`;
-  const r = spawnSync('osascript', ['-', `📊 Portfolio Morning Brief — ${today}`, fullText, env.EMAIL_TO], { input: as, encoding: 'utf8', timeout: 30000 });
+  const args = ['-', `📊 Portfolio Morning Brief — ${today}`, fullText, env.EMAIL_TO];
+  if (env.EMAIL_FROM) args.push(env.EMAIL_FROM);
+  let r = spawnSync('osascript', args, { input: as, encoding: 'utf8', timeout: 320000 });
+  if (r.status !== 0) { // one retry after a pause — Mail can be sluggish on cold start
+    spawnSync('sleep', ['10']);
+    r = spawnSync('osascript', args, { input: as, encoding: 'utf8', timeout: 320000 });
+  }
   emailOk = r.status === 0;
-  log.push('email: ' + (emailOk ? 'sent to ' + env.EMAIL_TO : 'FAILED ' + (r.stderr || '').slice(0, 200)));
+  if (emailOk) try { fs.writeFileSync(STATE, todayISO); } catch (e) {}
+  log.push('email: ' + (emailOk ? 'sent to ' + env.EMAIL_TO + ' (from ' + (env.EMAIL_FROM || env.EMAIL_TO) + ')' : 'FAILED ' + (r.stderr || '').slice(0, 200)));
 } else log.push('email: skipped (no EMAIL_TO)');
 
 if (env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_CHAT_ID) {
