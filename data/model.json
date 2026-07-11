@@ -1,98 +1,94 @@
 {
- "updated": "2026-07-08",
- "asOf": "2026-07-08",
+ "updated": "2026-07-12",
+ "asOf": "2026-07-12",
  "note": "CIO research-panel macro regime + per-instrument probabilistic priors, produced by a multi-agent research workflow with adversarial verification and cited sources. The live in-browser quant engine (GBM drift-diffusion on 2y daily history) blends with these forward-looking priors to produce the displayed P(up) and EV. Refreshed by the scheduled intel agent.",
  "macro": {
-  "regime": "Stagflationary hawkish hold",
-  "riskOnProb": 0.43,
-  "narrative": "US equities are grinding near records even as the leadership wobbles: the S&P 500 closed 7,503.85 on 7 July (-0.45%) while a fresh semiconductor rout on weak Samsung earnings and renewed DeepSeek efficiency fears sank the Nasdaq -1.16%. Sentiment has thawed from June's washout — CNN's Fear & Greed climbed back to Neutral (~44) from Fear and crypto's gauge lifted to 27 (Fear) from Extreme Fear near 12. The dominant swing factor is a hawkish-Fed repricing rather than growth fear: new Chair Kevin Warsh's Fed holds at 3.50-3.75% with nine of nineteen dots pencilling a 2026 hike, CME FedWatch prices ~27% for a July hike and roughly two-thirds by December, and the June FOMC minutes land 8 July (US) as the only on-record read on a possible September move. Soft June payrolls (+57K, -74K revisions) capped near-term hike odds and sparked a relief bid in hard assets — silver rebounded ~6% last week to ~$61-62/oz and gold steadied near $4,150 after June's brutal -11%/-42% gold/silver drawdowns. Rates sit higher-for-longer (10Y 4.50%, 2Y 4.15%, 30Y 5.00%, curve ~+35bp positive), the dollar is firm (DXY ~101), and oil firmed (WTI $70.5 +2.9%, Brent >$72) on a fragile US-Iran truce — feeding a mild inflation narrative into the 14 July June CPI, the next binary catalyst.",
+  "regime": "Hawkish hold, higher-for-longer",
+  "riskOnProb": 0.47,
+  "narrative": "US equities pushed back to records: the S&P 500 closed 7,575.39 on Friday 10 July, up more than 1% on the week, as tech leadership reasserted itself (Nvidia +4%, Meta +15% — its best week since early 2024) and SK Hynix's $26.5B ADR listing (the largest-ever US IPO by a foreign company) popped 12.8%, fully recovering the brief 7 July semiconductor wobble. Sentiment sits Neutral — CNN's Fear & Greed at ~48 and crypto's gauge lifting toward the low-30s — with breadth broad (~63% of the S&P above its 50-DMA, up from ~50% a month ago). The dominant swing factor stays a hawkish, higher-for-longer Warsh Fed rather than growth fear: the June FOMC minutes confirmed some officials saw a case for further hikes if inflation stays elevated, CME FedWatch prices ~25% for a 28-29 July hike (~75% hold), and the 14 July June CPI is now the binary — headline may print slightly negative on June's oil plunge (~-0.1% m/m, ~3.9% y/y) while core stays sticky (+0.3%, ~2.9% y/y). Rates backed up (10Y ~4.57%, highest since 22 May, +9bp on the week; 2Y ~4.15%; curve modestly positive) and the dollar firmed, pressuring hard assets: silver slipped back under $60 (~$60.4, -4% on the week) and gold eased to ~$4,050-4,075 after the prior week's bounce, while oil booked a ~4% weekly gain (Brent ~$75.5, WTI ~$71) on a renewed US-Iran flare-up and Hormuz disruption even as talks continue. Fund flows turned defensive — money-market +$56.4B, IG credit +$16.7B (best since 2020), US growth -$5.0B — a rotation into cash and quality rather than a broad risk-off.",
   "drivers": [
    {
-    "factor": "Fed hike-risk repricing & June FOMC minutes",
-    "read": "CME FedWatch prices ~27% for a 28-29 July hike and ~two-thirds by December; Warsh's Fed dropped its easing bias (9/19 dots see a 2026 hike). June minutes due 8 July (US) — the only on-record read on a September move",
-    "impact": "mixed"
-   },
-   {
-    "factor": "Inflation re-acceleration & firmer oil",
-    "read": "May CPI 4.2% y/y (3-yr high) and core PCE 3.4%; WTI back to $70.5 (+2.9%) on the fragile US-Iran truce keeps the hike tail alive into the 14 July June CPI print",
+    "factor": "Hawkish Fed & higher-for-longer rates",
+    "read": "June FOMC minutes showed some officials saw a case for further hikes if inflation stays elevated; CME FedWatch prices ~25% for a 28-29 July hike (~75% hold). The 10Y backed up to ~4.57% (highest since 22 May, +9bp on the week) and the dollar firmed",
     "impact": "cautionary"
    },
    {
-    "factor": "Labor market softening",
-    "read": "June NFP +57K vs ~115K expected with -74K revisions; participation fell to 61.5% (2021 low). Growth is rolling over, which capped hike odds (relief valve) but also earnings momentum",
+    "factor": "June CPI (14 July) — the binary",
+    "read": "Headline may flip slightly negative on June's oil plunge (~-0.1% m/m, ~3.9% y/y) but core is seen sticky at +0.3% (~2.9% y/y). A hot core re-arms the September-hike tail that crushed metals in June; a soft print buys hard assets room",
     "impact": "mixed"
    },
    {
-    "factor": "Semiconductor / AI-concentration wobble",
-    "read": "7 July semis rout on weak Samsung earnings and DeepSeek efficiency fears sank the Nasdaq -1.16%; Michael Burry disclosed fresh shorts on NVIDIA, Micron and Applied Materials arguing a ~30% chip correction — the crowded AI trade is the key single-point-of-failure",
-    "impact": "cautionary"
-   },
-   {
-    "factor": "Sentiment thaw & healthy breadth",
-    "read": "CNN Fear & Greed back to Neutral (~44) from June's Fear; ~66.6% of the S&P is above its 200-DMA and ~67.4% above the 50-DMA, VIX calm at ~15.6 — a constructive, broadening internal despite the tech wobble",
+    "factor": "AI-leadership resilience",
+    "read": "The 7 July chip wobble was fully recovered in a winning week — Nvidia +4%, Meta +15%, SK Hynix's $26.5B US listing +12.8%, and an 8 July HK-tech rip (HSTECH +5%, Alibaba +12%, SMIC +7.5%). Michael Burry's fresh NVDA/MU/AMAT shorts remain the crowded-trade counter-risk",
     "impact": "supportive"
    },
    {
-    "factor": "Precious-metals relief vs strong USD",
-    "read": "Silver rebounded ~6% last week and gold holds ~$4,150 after the soft jobs print trimmed hike bets, but a firm DXY ~101 and higher-for-longer real rates cap the recovery and keep metals hostage to the September-hike debate",
-    "impact": "mixed"
+    "factor": "Firmer oil & returning war premium",
+    "read": "Oil booked a ~4% weekly gain (Brent ~$75.5, WTI ~$71) as Trump called the Iran ceasefire 'over' and Hormuz shipping (~20% of world oil) stayed disrupted, though talks continue — a two-way inflation/geopolitics risk into the CPI print",
+    "impact": "cautionary"
+   },
+   {
+    "factor": "Sentiment neutral & healthy breadth",
+    "read": "CNN Fear & Greed ~48 (Neutral); ~63% of the S&P above its 50-DMA (up from ~50% a month ago) and roughly two-thirds above the 200-DMA, with the A-D line near highs and VIX calm in the mid-teens — a constructive, broadening internal",
+    "impact": "supportive"
+   },
+   {
+    "factor": "Precious-metals relapse vs strong USD",
+    "read": "Silver slipped back under $60 (~$60.4, -4% on the week) and gold eased to ~$4,050-4,075 as firmer oil and a backed-up 10Y (~4.57%) plus firm dollar revived higher-for-longer bets — metals stay hostage to the September-hike debate and the 14 July CPI",
+    "impact": "cautionary"
    }
   ],
   "byAssetClass": [
    {
     "assetClass": "Equity",
     "stance": "Neutral",
-    "pUp12m": 0.55,
-    "note": "S&P 7,504, near record, but leadership is fragile — a 7 July semis rout (Samsung, DeepSeek) and Burry's fresh chip shorts expose AI concentration. Offsetting that, breadth is healthy (~66% above the 200-DMA), sentiment thawed to Neutral and VIX is calm. A hawkish-leaning Warsh Fed caps multiple expansion; stay benchmark-weight with a quality/defensive tilt rather than chasing narrow tech.",
+    "pUp12m": 0.56,
+    "note": "S&P 7,575, a fresh weekly high (+>1% on the week) as tech re-led (Nvidia +4%, Meta +15%) and the 7 July chip wobble was fully recovered. Breadth is healthy (~63% above the 50-DMA, up from ~50% a month ago), sentiment Neutral and VIX calm. A hawkish, higher-for-longer Warsh Fed caps multiple expansion and Burry's chip shorts flag AI concentration; stay benchmark-weight with a quality/defensive tilt rather than chasing narrow tech.",
     "tilt": 0
    },
    {
     "assetClass": "Commodities",
     "stance": "Neutral",
-    "pUp12m": 0.52,
-    "note": "Two-sided: energy firmed (WTI $70.5 +2.9%, Brent >$72) on the fragile Hormuz truce and hedges Iran re-escalation, while precious metals are stabilising — silver +6% last week to ~$61-62, gold ~$4,150 — after June's crash. Hold energy as a geopolitical hedge; metals need confirmation that the September-hike tail is fading before re-adding aggressively.",
+    "pUp12m": 0.51,
+    "note": "Two-sided: energy booked a ~4% weekly gain (Brent ~$75.5, WTI ~$71) on the renewed US-Iran flare-up and Hormuz disruption, while precious metals relapsed — silver slipped back under $60 (~$60.4, -4% on the week) and gold eased to ~$4,050-4,075 as the 10Y backed up. Hold energy as a geopolitical hedge; metals need confirmation the September-hike tail is fading (14 July CPI) before re-adding aggressively.",
     "tilt": 0
    },
    {
     "assetClass": "Crypto",
     "stance": "modest UW",
-    "pUp12m": 0.45,
-    "note": "BTC ~$64K, ETH ~$1.8K, SOL ~$82 — still deeply off early-2026 highs but sentiment is improving (crypto Fear & Greed 27, up from ~12 extreme fear). Flow and rate sensitivity remain hostile under a hawkish Fed; keep sizing small. Convexity improves only if the Fed pivots dovish or the stalled US Strategic Bitcoin Reserve resolves constructively.",
+    "pUp12m": 0.46,
+    "note": "BTC ~$64K (+2.8% on the week), ETH ~$1.8K — still off early-2026 highs but resilient through the Middle East flare-up on ETF inflows and CLARITY-Act optimism (crypto Fear & Greed lifting toward the low-30s). Flow and rate sensitivity remain hostile under a hawkish Fed; keep sizing small. Convexity improves only if the Fed pivots dovish, CLARITY passes, or the stalled US Strategic Bitcoin Reserve resolves constructively.",
     "tilt": -0.012
    },
    {
     "assetClass": "Bonds",
     "stance": "modest OW",
-    "pUp12m": 0.62,
-    "note": "10y 4.50% and 2y 4.15% offer real carry cushion, and soft June payrolls removed the near-term hike catalyst (July odds ~27%). Sticky 3.4% core PCE and firmer oil argue against max duration; favor the belly and add on any hawkish-surprise backup. Bonds are on a record inflow streak (61st straight week).",
+    "pUp12m": 0.6,
+    "note": "10y ~4.57% (highest since 22 May, +9bp on the week) and 2y ~4.15% offer real carry, but the backup shows duration is being shunned (Treasuries -$2.7B, largest outflow in 9 weeks) while IG credit drew its biggest inflow since 2020 (+$16.7B). Favor the belly/quality credit for carry and add duration only on a hawkish-surprise backup or a soft CPI; sticky core argues against max duration.",
     "tilt": 0.012
    },
    {
     "assetClass": "USD/Cash",
     "stance": "modest OW",
     "pUp12m": 0.6,
-    "note": "Cash yields ~3.6-3.75% at the fed funds floor with the DXY ~101 defying weak-dollar consensus — positive nominal carry and optionality in a regime where both a hawkish Fed surprise and an Iran re-escalation are live tails. pUp12m reflects near-certain positive cash return offset by two-way USD direction.",
+    "note": "Cash yields ~3.6-3.75% at the fed funds floor with the dollar firm and defying weak-dollar consensus — positive nominal carry and optionality in a regime where both a hawkish Fed surprise and an Iran re-escalation are live tails. Money-market funds drew a huge +$56.4B in the week to 2 July. pUp12m reflects near-certain positive cash return offset by two-way USD direction.",
     "tilt": 0.012
    }
   ],
   "sources": [
-   "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-july-7-2026",
-   "https://247wallst.com/investing/2026/07/07/stock-market-live-july-7-2026-sp-500-spy-drops-on-tech-concerns/",
+   "https://finance.yahoo.com/markets/stocks/articles/stock-market-news-july-10-075400187.html",
+   "https://www.cnbc.com/2026/07/09/stock-market-today-live-updates.html",
    "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html",
-   "https://www.cnbc.com/2026/07/06/us-treasury-yields-investors-look-ahead-to-fomc-meeting-minutesu.html",
-   "https://www.techtimes.com/articles/319827/20260707/fed-minutes-due-wednesday-nine-hawkish-dots-warshs-deliberate-silence.htm",
-   "https://tradingeconomics.com/united-states/government-bond-yield",
-   "https://tradingeconomics.com/commodity/gold",
+   "https://www.kiplinger.com/investing/economy/june-cpi-preview-dont-let-a-negative-headline-fool-you",
+   "https://www.cnbc.com/quotes/US10Y",
    "https://tradingeconomics.com/commodity/silver",
-   "https://tradingeconomics.com/commodity/crude-oil",
+   "https://tradingeconomics.com/commodity/brent-crude-oil",
    "https://www.cnn.com/markets/fear-and-greed",
-   "https://alternative.me/crypto/fear-and-greed-index/",
-   "https://www.barchart.com/stocks/quotes/$S5TH",
-   "https://fortune.com/article/price-of-bitcoin-07-07-2026/",
-   "https://247wallst.com/investing/2026/07/03/michael-burry-shorts-micron-adding-to-his-nvidia-and-applied-materials-short-bets-against-chip-stocks/"
+   "https://finvaulta.com/research/bank-of-america/equity-client-flow-trends-2026-07-07",
+   "https://www.schwab.com/learn/story/stock-market-update-open"
   ],
-  "regimeScore": 0.43,
-  "asOf": "2026-07-08"
+  "regimeScore": 0.47,
+  "asOf": "2026-07-12"
  },
  "calls": [
   {
@@ -333,17 +329,17 @@
    "ticker": "GLD",
    "name": "SPDR Gold Shares",
    "assetClass": "Precious metals ETF (gold)",
-   "pUp1m": 0.47,
+   "pUp1m": 0.46,
    "pUp3m": 0.5,
    "pUp12m": 0.58,
-   "ev1m": -0.01,
+   "ev1m": -0.012,
    "ev3m": 0,
    "ev12m": 0.06,
    "drivers": [
-    "Spot gold ~$4,140-4,150 (7/6-7/7), down ~11% in June and ~26% below the Jan-29 intraday record of $5,595 - trend is corrective, not yet reversed (TradingEconomics)",
-    "Goldman cut its YE-2026 target from $5,400 to $4,900 on 6/20 citing fading ETF inflows including the first monthly Asian ETF outflow since Aug-2025 - yet that target is still ~18% above spot, implying analysts see the correction overdone",
-    "Hawkish Fed tail is the key headwind: futures price roughly 50% odds of a rate hike by September/end-2026 with core PCE stuck at 3%+ on tariffs, keeping real rates and the dollar firm (CNBC, CME FedWatch)",
-    "Soft June payrolls trimmed hike bets, and structural central-bank buying plus record 2025 ETF inflows ($89B, holdings 4,025t) keep the 12-month skew mildly positive (World Gold Council, SSGA)"
+    "Spot gold ~$4,050-4,075 (7/6-7/8), eased after the prior week's steadying as a firm dollar and a backed-up 10Y (~4.57%) revived higher-for-longer bets - still down ~11% from June and well below the Jan record; trend corrective, not yet reversed (TradingEconomics)",
+    "Goldman holds a ~$4,900 YE-2026 target citing fading ETF inflows, still ~20% above spot; J.P. Morgan stays bullish (~$6,000 by Q4) - a wide analyst spread that leaves the 12m skew mildly positive despite near-term chop",
+    "Hawkish Fed is the key headwind: June minutes flagged a case for further hikes if inflation stays elevated, CME FedWatch ~25% for a July hike, core sticky ~2.9% - real rates and the dollar firm cap the non-yielding hedge into the 14 July CPI",
+    "Structural central-bank buying (PBoC accumulation) plus gold-fund inflows (+$1.4B in the week to 2 July) provide a demand floor near ~$4,000 even as ETF momentum cooled (World Gold Council, BofA)"
    ],
    "confidence": 0.45
   },
@@ -351,17 +347,17 @@
    "ticker": "SLV",
    "name": "iShares Silver Trust",
    "assetClass": "Precious metals ETF (silver)",
-   "pUp1m": 0.5,
+   "pUp1m": 0.48,
    "pUp3m": 0.52,
    "pUp12m": 0.55,
-   "ev1m": 0,
+   "ev1m": -0.005,
    "ev3m": 0.02,
    "ev12m": 0.08,
    "drivers": [
-    "Silver ~$61.3/oz (7/7); SLV fell >20% in June - worst month since September 2011 - and sits roughly 50% below the late-January record above $120 (Benzinga, Fortune)",
-    "Crash mechanics were positioning-driven: CME margin hikes after the $100+ spike, momentum unwind, stronger dollar, and hedge-fund commodity de-grossing - positioning is now far cleaner and RSI hit deeply oversold levels (Benzinga)",
-    "Structural industrial deficit thesis (solar, electronics) remains intact, but recession fears directly threaten the ~55% industrial half of demand, making the fundamental floor uncertain",
-    "Silver trades at 1.5-2x gold beta, so direction is hostage to the Fed hike-vs-hold repricing into the September FOMC; extreme realized volatility argues for near coin-flip 1m probabilities and low confidence"
+    "Silver slipped back under $60 (~$60.4/oz, 7/11), ending the week down ~4% and giving back the prior week's ~6% bounce as firmer oil and US-Iran tension revived higher-for-longer bets; still ~50% below the late-January record above $120 (TradingEconomics)",
+    "The bounce-and-fade shows the June crash's positioning damage isn't fully repaired: direction remains hostage to the Fed hike-vs-hold repricing, with a backed-up 10Y (~4.57%) and firm dollar the immediate headwind into the 14 July CPI",
+    "Structural deficit thesis intact - Silver Institute pegs a widening 46.3Moz 2026 deficit and J.P. Morgan models ~$81 average - but the ~55% industrial half of demand is exposed to any growth scare",
+    "Silver trades at 1.5-2x gold beta with extreme realized volatility, arguing for near coin-flip 1m probabilities and low confidence; a hot core CPI is the key downside trigger, a soft print the upside catalyst"
    ],
    "confidence": 0.3
   },
