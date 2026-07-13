@@ -126,5 +126,18 @@ if (env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_CHAT_ID) {
   log.push('telegram: ' + (tgOk ? 'sent' : 'FAILED ' + (r.stdout || r.stderr || '').slice(0, 200)));
 } else log.push('telegram: skipped (token/chat_id not configured)');
 
+// ntfy.sh push — plain HTTPS, works from ANY context (launchd, agent, manual);
+// no credentials, no AppleScript, no TCC. User subscribes to the topic in the ntfy app.
+let ntfyOk = false;
+if (env.NTFY_TOPIC) {
+  const plain = tgText.replace(/[*_\[\]()]/g, '').replace(/📊 /, '');
+  const r = spawnSync('curl', ['-s', '-o', '/dev/null', '-w', '%{http_code}',
+    '-H', `Title: Portfolio Brief — ${today}`, '-H', 'Tags: chart_with_upwards_trend',
+    '-H', 'Priority: high', '-d', plain.slice(0, 3800),
+    `https://ntfy.sh/${env.NTFY_TOPIC}`], { encoding: 'utf8', timeout: 20000 });
+  ntfyOk = (r.stdout || '').trim() === '200';
+  log.push('ntfy push: ' + (ntfyOk ? 'sent' : 'FAILED ' + (r.stdout || r.stderr || '').slice(0, 100)));
+} else log.push('ntfy push: skipped (no NTFY_TOPIC)');
+
 console.log(log.join('\n'));
-process.exit(emailOk || tgOk ? 0 : 1);
+process.exit(emailOk || tgOk || ntfyOk ? 0 : 1);

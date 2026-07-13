@@ -5,7 +5,16 @@
 BRIEF=/Users/dominiczhao/portfolio-dashboard/data/brief.json
 TODAY=$(date +%Y-%m-%d)
 EMAIL_TO=$(grep '^EMAIL_TO=' "$HOME/.claude/portfolio-brief.env" 2>/dev/null | cut -d= -f2)
+NTFY_TOPIC=$(grep '^NTFY_TOPIC=' "$HOME/.claude/portfolio-brief.env" 2>/dev/null | cut -d= -f2)
 [ -z "$EMAIL_TO" ] && exit 0
+
+# Reap hung research runs: any scheduled claude process started in the 07:00-07:20
+# window today that is still alive at 08:45 (>85 min) is stuck — kill it so hung
+# runs stop accumulating. Time-window match avoids touching interactive sessions.
+HOUR_PAT=$(date "+%a %b %e 07:0")
+ps -axo pid,lstart,command | grep "claude-code/2.1" | grep -v grep | grep "$HOUR_PAT" | awk '{print $1}' | while read p; do
+  kill "$p" 2>/dev/null && echo "$(date '+%F %T') reaped hung 7am run pid $p"
+done
 
 BRIEF_DATE=$(/usr/bin/env node -e "try{console.log(require('$BRIEF').date.slice(0,10))}catch(e){console.log('none')}" 2>/dev/null)
 if [ "$BRIEF_DATE" = "$TODAY" ]; then exit 0; fi   # run succeeded — stay quiet
@@ -45,3 +54,7 @@ end run
 AS
 }
 send_alert || { sleep 15; send_alert; }   # retry once — Mail cold starts have timed out before
+# push alert too — plain HTTPS, immune to Mail/TCC issues
+[ -n "$NTFY_TOPIC" ] && curl -s -o /dev/null -H "Title: Portfolio watchdog alert" -H "Priority: urgent" -H "Tags: warning" \
+  -d "Morning research run did not produce today's brief (latest: ${BRIEF_DATE}). Live dashboard unaffected. Say 'refresh the research' to Claude, or tap Run now on portfolio-intel-refresh." \
+  "https://ntfy.sh/${NTFY_TOPIC}"
