@@ -1,50 +1,50 @@
 {
-  "updated": "2026-07-12",
+  "updated": "2026-07-18",
   "note": "Market sentiment & global flows for the overview. Fear&Greed is fetched LIVE in-browser (CNN equity index via proxy + crypto via alternative.me) with the baked value as fallback; breadth & regional flows are researched and baked (no free real-time API) and refreshed daily by the scheduled intel agent.",
   "fearGreed": {
-    "value": 48,
-    "rating": "Neutral",
-    "asOf": "2026-07-10",
-    "prevClose": 46,
-    "prev1w": 40,
-    "prev1m": 28,
+    "value": 43,
+    "rating": "Fear",
+    "asOf": "2026-07-17",
+    "prevClose": 47,
+    "prev1w": 48,
+    "prev1m": 34,
     "prev1y": 55,
-    "cryptoValue": 34,
+    "cryptoValue": 27,
     "cryptoRating": "Fear",
     "components": [
       {
         "name": "Market Momentum",
-        "reading": "S&P 500 vs its 125-day moving average. The index closed 7,575.39 on Friday 10 July, a fresh weekly high (+>1% on the week) back above a rising 125-day average and within ~1% of its record as tech leadership reasserted (Nvidia +4%, Meta +15% on the week) — momentum has firmed to the constructive side.",
-        "signal": "greed"
+        "reading": "S&P 500 vs its 125-day moving average. The index closed 7,457.69 on Friday 17 July (-1.15% on the day, down ~1.6% from the 10 July weekly high of 7,575) as a semiconductor rout (SOX -11% on the month, SMH -9% over four weeks) dragged the tape. The S&P still sits above a rising 125-DMA thanks to the YTD advance, but momentum has cooled to a neutral read as leadership narrowed away from tech.",
+        "signal": "neutral"
       },
       {
         "name": "Stock Price Strength",
-        "reading": "Net 52-week highs vs lows on the NYSE. Net new highs stayed positive as the tape recovered from the 7 July chip wobble; breadth broadened again with ~63% of the S&P above its 50-DMA (up from ~50% a month ago), keeping this reading neutral-to-constructive.",
+        "reading": "Net 52-week highs vs lows on the NYSE. Breadth actually broadened ex-tech — ~68.6% of the S&P sits above its 200-DMA (16 July), the highest since February — as energy, financials and industrials made new highs even while semis carved fresh lows. The offsetting new-lows in chips keep this reading neutral rather than outright strong.",
         "signal": "neutral"
       },
       {
         "name": "Stock Price Breadth",
-        "reading": "McClellan Volume Summation (advancing vs declining volume). The Summation Index resumed its climb after the brief 7 July semis rout as participation rebroadened into the 10 July winning week, pushing the short-term McClellan Oscillator back positive.",
+        "reading": "McClellan Volume Summation (advancing vs declining volume). Participation stayed reasonably broad as the rotation into energy/financials/industrials absorbed the semis unwind; the Summation Index is grinding sideways-to-higher while the short-term Oscillator dipped on the 17 July down day. A balanced, non-extreme read.",
         "signal": "neutral"
       },
       {
         "name": "Put/Call Options",
-        "reading": "5-day put/call ratio. Options buyers stayed modestly defensive into the 14 July June CPI print, but the calm tape and equity rally trimmed put demand versus late June — a neutral read rather than fear.",
-        "signal": "neutral"
+        "reading": "5-day put/call ratio. Options demand turned defensive as US airstrikes on Iran entered a sixth day (17 July) and the semis complex sold off — put buying picked up on the geopolitical and AI-capex risk, tilting this component toward fear.",
+        "signal": "fear"
       },
       {
         "name": "Market Volatility",
-        "reading": "VIX vs its 50-day moving average. The VIX stayed calm in the mid-teens through the 10 July rally — well below its 50-day average despite a firmer 10-year and the Iran-truce noise, a decidedly non-fearful read.",
-        "signal": "greed"
+        "reading": "VIX vs its 50-day moving average. Volatility firmed off its early-July calm as the Iran escalation and the tech-led pullback pushed the VIX up toward/above its 50-day average — no longer the decidedly non-fearful read of a week ago; now neutral-to-fearful.",
+        "signal": "fear"
       },
       {
         "name": "Safe-Haven Demand",
-        "reading": "20-day stock vs Treasury bond return spread. Equities outpaced Treasuries over the trailing window as the 10-year backed up ~9bp on the week to ~4.57% (highest since 22 May on firmer oil and hawkish-Fed repricing), so stocks-over-bonds performance nudges this toward neutral.",
-        "signal": "neutral"
+        "reading": "20-day stock vs Treasury bond return spread. Treasuries outperformed as equities fell and the 10-year eased to ~4.55% (from ~4.57%) on the soft June CPI and risk-off flows, so bonds-over-stocks performance nudges this toward fear.",
+        "signal": "fear"
       },
       {
         "name": "Junk Bond Demand",
-        "reading": "Yield spread between junk bonds and investment-grade. HY OAS remains historically tight and IG saw its biggest inflow since June 2020 (+$16.7B, wk to 2 July), keeping demand for credit firm but with a quality tilt — a neutral-to-mildly-greedy read.",
+        "reading": "Yield spread between junk bonds and investment-grade. ICE BofA US HY OAS remains historically tight at ~269bp (10 July) despite the equity wobble — credit is not corroborating the equity fear, keeping this the most constructive component at neutral.",
         "signal": "neutral"
       }
     ],
@@ -53,151 +53,151 @@
       "https://www.cnn.com/markets/fear-and-greed",
       "https://api.alternative.me/fng/?limit=1",
       "https://alternative.me/crypto/fear-and-greed-index/",
-      "https://www.benzinga.com/markets/market-summary/26/07/60376565/nasdaq-jumps-over-300-points-as-semiconductor-stocks-gain-investor-sentiment-improves-fear-greed-index-moves-to-neutral-zone"
+      "https://www.benzinga.com/markets/market-summary/26/07/60516921"
     ]
   },
   "breadth": {
-    "asOf": "2026-07-10",
+    "asOf": "2026-07-16",
     "metrics": [
       {
         "label": "% of S&P 500 stocks above 200-day MA",
-        "value": "~64-66% (holding near the top of its 52-week range after the 10 July winning week; the 7 July chip wobble was recovered — Barchart $S5TH, approximate/inferred from the S5FI 50-DMA reading and the index near record)",
+        "value": "~68.6% on 16 July — the highest since February and a clear broadening signal as energy, financials and industrials led. Confirms the advance is no longer semis-dependent even as chips fell (Barchart/MacroMicro $S5TH)",
         "signal": "bullish",
-        "pct": 65
+        "pct": 69
       },
       {
         "label": "% of S&P 500 stocks above 50-day MA",
-        "value": "~63% on 10 July, up from ~50% a month ago — a clear sign of broadening short-term participation (Schwab/Barchart $S5FI)",
-        "signal": "bullish",
-        "pct": 63
+        "value": "Estimated ~55-60% mid-July — the semiconductor rout (SMH -9% over four weeks) pulled tech below its 50-DMA while energy/financials/industrials stayed above, roughly offsetting; a precise dated $S5FI figure was not extractable this run (approximate/inferred)",
+        "signal": "neutral",
+        "pct": 57
       },
       {
         "label": "NYSE advancers vs decliners (latest session)",
-        "value": "Advancers led on the 10 July up session as the S&P rose 0.42% to 7,575; broad-based buying (a healthier internal than the 7 July semis-led down day)",
-        "signal": "bullish",
+        "value": "Mixed on the 17 July down session — the S&P fell 1.15% on a semis-led decline but the Russell 2000 was nearly flat (-0.06%), so the internal was narrower at the mega-cap-tech line than the small-cap tape suggested",
+        "signal": "neutral",
         "pct": null
       },
       {
         "label": "52-week New Highs minus New Lows (NYSE)",
-        "value": "Net positive and re-widening as the index reclaimed weekly highs; precise live counts not extractable from JS-rendered tables (approximate)",
+        "value": "Two-sided: fresh new highs in energy/financials/industrials against a cluster of new lows in semiconductors; net still modestly positive but no longer broadly one-directional (approximate — precise live counts not extractable)",
         "signal": "neutral",
         "pct": null
       },
       {
         "label": "NYSE McClellan Oscillator / Summation Index",
-        "value": "Summation Index trending higher on rebroadening breadth; the short-term Oscillator swung back positive after the 7 July tech rout (mcoscillator.com; exact daily NYMO not published in accessible sources; approximate)",
+        "value": "Summation Index grinding sideways-to-higher on broadening ex-tech participation; the short-term Oscillator dipped on the 17 July down day but stayed off extremes (mcoscillator.com; exact daily NYMO not published in accessible sources; approximate)",
         "signal": "neutral",
         "pct": null
       },
       {
         "label": "Cumulative NYSE Advance-Decline line trend",
-        "value": "Rising and near highs — the broad A-D line continues to confirm the tape, a healthier picture than the narrow mega-cap-only leadership of earlier in 2026 (approximate trend read)",
+        "value": "Rising and near highs — the broad A-D line kept confirming the tape as leadership rotated from chips into energy/financials/industrials rather than collapsing; a healthier internal than a narrow mega-cap-only market (approximate trend read)",
         "signal": "bullish",
         "pct": null
       },
       {
         "label": "% of 11 S&P sectors above their 200-DMA",
-        "value": "~73-82% (roughly 8-9 of 11 sector ETFs) as leadership stayed broad across Financials, Industrials, Health Care and Tech; consistent with the ~65% S5TH reading (inferred)",
+        "value": "~73-82% (roughly 8-9 of 11 sector ETFs) as Energy, Industrials, Financials, Utilities, Health Care and Staples stayed above trend; only Technology/semis flirted with breaking below — consistent with the ~69% S5TH reading (inferred)",
         "signal": "bullish",
         "pct": 78
       }
     ],
-    "note": "Breadth stayed broad and constructive into 10 July: ~63% of the S&P sits above its 50-DMA (up from ~50% a month ago) and roughly two-thirds above the 200-DMA, with the cumulative A-D line near highs and 8-9 of 11 sectors above trend. The 7 July semiconductor wobble was fully recovered as tech re-led a winning week (Nvidia +4%, Meta +15%). The open question is whether the 14 July June CPI print lets the broadening continue or re-narrows the tape around a hawkish, higher-for-longer Warsh Fed.",
+    "note": "Breadth is broadening, not breaking: ~69% of the S&P sits above its 200-DMA (highest since February) even as the index fell, because leadership rotated out of semiconductors (SMH -9% in four weeks) and into energy, financials and industrials rather than collapsing. The A-D line is near highs and 8-9 of 11 sectors hold above trend. The open questions are whether the AI-capex/semis unwind deepens into the broader tape and whether the escalating US-Iran conflict (oil ~$81) turns the oil-price tailwind for energy into a growth headwind for everything else.",
     "sources": [
-      "https://www.barchart.com/stocks/quotes/$S5TH",
+      "https://en.macromicro.me/series/22718/sp-500-200ma-breadth",
+      "https://www.barchart.com/stocks/quotes/$S5TH/technical-analysis",
       "https://www.barchart.com/stocks/quotes/$S5FI",
-      "https://www.schwab.com/learn/story/stock-market-update-open",
-      "https://en.macromicro.me/charts/98990/sp500-sectors-200ma-breadth",
-      "https://finance.yahoo.com/markets/stocks/articles/stock-market-news-july-10-075400187.html"
+      "https://www.morningstar.com/stocks/energy-industrials-stocks-take-lead-market-rotation-continues",
+      "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-july-17-2026"
     ]
   },
   "flows": {
-    "asOf": "2026-07-02",
-    "period": "Week ending 2 July 2026 (BofA 'Flow Show' citing EPFR Global). Flows are weekly and lagged; a newer week may exist but is not yet itemized in free sources.",
-    "narrative": "The rotation out of crowded US mega-cap growth into cash, duration and credit deepened. In the week to 2 July, money-market funds pulled in a huge +$56.4B and bonds +$20.5B — led by investment-grade credit's biggest inflow since June 2020 (+$16.7B) — while US growth funds bled -$5.0B (worst since March) and US mid-caps -$5.7B (worst since July 2023). Headline equity funds still netted +$2.2B, but US equities saw a second straight weekly outflow (-$1.9B) and Japan a fourth (-$2.8B); only Europe kept drawing money (+$0.6B, third straight week). Gold (+$1.4B) and crypto (+$1B) both stayed positive. Notably, Treasuries broke their long inflow streak with a -$2.7B outflow (largest in 9 weeks) as the 10-year backed up toward 4.57% — money favored spread product over duration.",
+    "asOf": "2026-07-01",
+    "period": "Week ending 1 July 2026 (ICI weekly estimated long-term fund flows), supplemented by BofA equity client-flow trends (early July 2026). Flows are weekly and lagged; the full BofA 'Flow Show' regional EPFR breakdown was not itemized in free sources this run, so several regional lines are labeled approximate or carried.",
+    "narrative": "The verifiable weekly read turned risk-off at the fund level: ICI data for the week ended 1 July showed equity funds bleeding -$10.22B (domestic -$5.83B, world -$4.39B) while bond funds drew +$3.73B — a clean rotation from stocks to fixed income. BofA's client-flow work was more nuanced: institutional/hedge-fund buyers drove the first net US-equity inflow in five weeks with record inflows into Consumer Discretionary, even as Financials saw the largest outflows and commodity/gold funds stayed weak (~$5B of gold outflows across June). The net picture into mid-July: retail de-risking equities into bonds and cash, a tactical HF bid under US large-caps, and a fading gold bid — all before the 14 July soft-CPI print and the mid-month Iran escalation reshuffled the tape.",
     "regions": [
       {
         "region": "US equities",
         "direction": "outflow",
-        "amount": "-$1.9B (BofA, wk to Jul 2)",
-        "amountUSD": -1900000000,
-        "note": "Second consecutive weekly outflow. The pain was concentrated in style: US growth -$5.0B (worst since March) and US mid-cap -$5.7B (worst since July 2023), even as the headline all-equity number stayed positive at +$2.2B."
+        "amount": "-$5.8B domestic (ICI, wk to Jul 1)",
+        "amountUSD": -5830000000,
+        "note": "ICI shows domestic-equity funds -$5.83B and world-equity -$4.39B for the week ended 1 July (total equity -$10.22B). BofA client data diverges: it flagged the first net US-equity inflow in five weeks, HF-led with record Consumer Discretionary buying and Financials the biggest outflow — measurement/window differences, so read the direction (rotation, dispersion), not a single figure."
       },
       {
         "region": "Europe / Intl DM equities",
         "direction": "inflow",
-        "amount": "+$0.6B (BofA)",
-        "amountUSD": 600000000,
-        "note": "Third straight week of European-equity inflows — the pro-international tilt of 2026 persists as investors trim US concentration."
+        "amount": "part of world-equity flows (approximate)",
+        "amountUSD": null,
+        "note": "A discrete European/DM weekly figure was not verifiable this run. The 2026 pro-international tilt has persisted in prior weeks; ICI's world-equity line was net negative (-$4.39B) for the week to 1 July, so the recent European inflow streak may have paused. Approximate/carried — treat as unconfirmed this week."
       },
       {
         "region": "Emerging Markets",
         "direction": "outflow",
-        "amount": "-$0.5B (BofA)",
-        "amountUSD": -500000000,
-        "note": "EM equity funds resumed outflows after a firmer June; flows choppy as China caps its rally and the dollar stays firm."
+        "amount": "not separately verifiable this week (approximate)",
+        "amountUSD": null,
+        "note": "No discrete EM weekly figure surfaced in free sources this run. EM flows have been choppy with the firm dollar (DXY ~100.6) and the Iran/oil shock a net negative for oil-importing EM. Approximate — unconfirmed this week."
       },
       {
         "region": "China",
         "direction": "outflow",
         "amount": "equity outflow / bond inflow (approximate)",
         "amountUSD": null,
-        "note": "Mainland-China equity funds still leaking as authorities manage the pace of the rally; offshore HK tech ripped on 8 July (HSTECH +5%, Alibaba +12%) but that is price, not fund-flow. China bond funds remain on an inflow streak. Specific weekly figure not public — approximate."
+        "note": "No specific weekly China figure public this run. Mainland-equity funds have been leaking as authorities manage the rally pace; the HK-tech complex remains volatile. China bond funds have stayed on an inflow trend. Approximate/carried."
       },
       {
         "region": "Japan equities",
         "direction": "outflow",
-        "amount": "-$2.8B (BofA)",
-        "amountUSD": -2800000000,
-        "note": "Fourth consecutive week of Japanese-equity outflows as the yen sat near 40-year lows and investors rotated away from the crowded Japan trade."
+        "amount": "not separately verifiable this week (approximate)",
+        "amountUSD": null,
+        "note": "A discrete Japan weekly figure was not verifiable this run; Japan-equity funds had bled for four straight weeks through early July on a weak yen. Approximate — unconfirmed this week."
       },
       {
         "region": "Money-Market / Cash",
         "direction": "inflow",
-        "amount": "+$56.4B (BofA)",
-        "amountUSD": 56400000000,
-        "note": "A large surge back into cash — the opposite of the prior week's redemption — as hawkish-Fed repricing and a firmer 10-year made ~3.6-3.75% parked yield attractive and risk appetite for crowded US growth cooled."
+        "amount": "positive (approximate)",
+        "amountUSD": null,
+        "note": "Money-market funds continued to draw cash into mid-July as risk appetite cooled and parked yield near ~3.6-3.75% at the fed funds floor stayed attractive; a precise weekly MMF figure was not itemized this run (the prior week to 2 July saw a +$56.4B surge). Approximate."
       },
       {
         "region": "Bonds / Credit",
         "direction": "inflow",
-        "amount": "+$20.5B (BofA)",
-        "amountUSD": 20500000000,
-        "note": "Investment-grade credit drew +$16.7B — its biggest inflow since June 2020 — but Treasuries broke their long streak with a -$2.7B outflow (largest in 9 weeks) as duration was shunned into the CPI print. The bid is for spread/carry, not rates."
+        "amount": "+$3.73B (ICI, wk to Jul 1)",
+        "amountUSD": 3730000000,
+        "note": "ICI bond funds drew +$3.73B for the week ended 1 July as the rotation from equities into fixed income continued. HY OAS stayed historically tight (~269bp), so the bid is broad-based rather than a flight strictly to quality; the 10-year eased to ~4.55% on the soft June CPI."
       },
       {
         "region": "Gold",
-        "direction": "inflow",
-        "amount": "+$1.4B (BofA)",
-        "amountUSD": 1400000000,
-        "note": "Gold funds stayed positive (+$1.4B) even as spot slipped toward $4,050-4,075 — a steady central-bank-and-hedge bid under the price despite the firm dollar."
+        "direction": "outflow",
+        "amount": "~-$5B across June (BofA)",
+        "amountUSD": -5000000000,
+        "note": "Gold/commodity funds were the weakest cohort, shedding roughly $5B across June per BofA, and the fading ETF bid showed up in price — spot gold slipped below $4,000 to ~$3,970 by 17 July. Central-bank buying remains the offsetting structural demand, but the fund-flow tide turned against the metal."
       }
     ],
     "movements": [
       {
-        "from": "US mega-cap / SMID growth",
-        "to": "Cash & money-market",
-        "amount": "US growth -$5.0B, mid-cap -$5.7B / cash +$56.4B",
-        "note": "The marquee rotation of the week — the biggest US-growth outflow since March and the biggest mid-cap outflow since July 2023, with the proceeds parked in money funds ahead of the 14 July CPI."
+        "from": "Equity funds",
+        "to": "Bond funds",
+        "amount": "Equity -$10.22B / Bonds +$3.73B (ICI, wk to Jul 1)",
+        "note": "The marquee verifiable weekly rotation — retail-heavy fund flows moved out of stocks (domestic -$5.83B, world -$4.39B) and into fixed income as risk appetite cooled ahead of the CPI print and the Iran escalation."
       },
       {
-        "from": "Treasuries / duration",
-        "to": "Investment-grade credit",
-        "amount": "Treasuries -$2.7B / IG +$16.7B",
-        "note": "Duration was shunned (largest UST outflow in 9 weeks) while IG credit saw its biggest inflow since June 2020 — investors want carry and spread, not rate risk, with the 10-year backing up toward 4.57%."
+        "from": "Financials & gold",
+        "to": "Consumer Discretionary & US large-cap (HF)",
+        "amount": "Financials biggest outflow, gold ~-$5B June / record ConsDisc inflow (BofA)",
+        "note": "BofA client data shows hedge funds driving the first US-equity inflow in five weeks with record Consumer Discretionary buying, funded partly out of Financials and a fading gold bid — a tactical, sector-rotational move under the surface of the risk-off headline."
       },
       {
-        "from": "US & Japan equities",
-        "to": "Europe & real assets",
-        "amount": "US -$1.9B, Japan -$2.8B / Europe +$0.6B, gold +$1.4B",
-        "note": "The pro-international, anti-US-concentration tilt persisted (Europe's third straight inflow week) alongside a steady gold and crypto (+$1B) bid."
+        "from": "Precious metals / commodities",
+        "to": "Cash & bonds",
+        "amount": "gold ~-$5B June / bonds +$3.73B, MMF positive",
+        "note": "The gold/commodity outflow alongside bond and money-market inflows captures the mid-July de-risking that pushed silver to 8-month lows (~$56) and gold below $4,000 despite the soft CPI and the geopolitical flare."
       }
     ],
     "sources": [
+      "https://www.ici.org/research/stats/flows",
       "https://finvaulta.com/research/bank-of-america/equity-client-flow-trends-2026-07-07",
-      "https://www.ici.org/research/stats/combined_flows",
-      "https://epfr.com/insights/",
-      "https://business.bofa.com/en-us/content/market-strategies-insights/weekly-market-recap-report.html"
+      "https://fred.stlouisfed.org/series/BAMLH0A0HYM2",
+      "https://epfr.com/insights/"
     ]
   }
 }
