@@ -12,7 +12,7 @@ NTFY_TOPIC=$(grep '^NTFY_TOPIC=' "$HOME/.claude/portfolio-brief.env" 2>/dev/null
 # window today that is still alive at 08:45 (>85 min) is stuck — kill it so hung
 # runs stop accumulating. Time-window match avoids touching interactive sessions.
 HOUR_PAT=$(date "+%a %b %e 07:0")
-ps -axo pid,lstart,command | grep "claude-code/2.1" | grep -v grep | grep "$HOUR_PAT" | awk '{print $1}' | while read p; do
+ps -axo pid,lstart,command | grep -E "claude-code/2\.1|homebrew/bin/claude" | grep -v grep | grep "$HOUR_PAT" | awk '{print $1}' | while read p; do
   kill "$p" 2>/dev/null && echo "$(date '+%F %T') reaped hung 7am run pid $p"
 done
 
