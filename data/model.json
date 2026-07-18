@@ -1,11 +1,11 @@
 {
- "updated": "2026-07-18",
- "asOf": "2026-07-18",
+ "updated": "2026-07-19",
+ "asOf": "2026-07-17",
  "note": "CIO research-panel macro regime + per-instrument probabilistic priors, produced by a multi-agent research workflow with adversarial verification and cited sources. The live in-browser quant engine (GBM drift-diffusion on 2y daily history) blends with these forward-looking priors to produce the displayed P(up) and EV. Refreshed by the scheduled intel agent.",
  "macro": {
   "regime": "Hawkish hold meets an oil-shock war",
   "riskOnProb": 0.45,
-  "narrative": "The binary resolved soft but the tape sold off anyway. June CPI (14 July) fell -0.4% m/m — the largest monthly drop since 2020 — cutting headline to +3.5% y/y with core cooling to +2.6% y/y (0.0% m/m), a cleanly disinflationary print that briefly lifted risk. But two forces overwhelmed it: an escalating US-Iran war (a sixth night of US airstrikes by 17 July, a naval blockade throttling the Strait of Hormuz to ~7 vessels/day) drove oil up ~13% in five days (Brent ~$84, WTI ~$79-82), reviving the inflation impulse that keeps the Warsh Fed hold-or-hike; and a semiconductor/AI-capex unwind (SOX -11% on the month, SMH -9% over four weeks, ~20% off the late-June peak) dragged the S&P to 7,457.69 (-1.15% on 17 July, ~1.6% off the 10 July high). Leadership rotated hard out of chips into energy, financials and industrials — breadth actually broadened (~68.6% of the S&P above its 200-DMA, highest since February). Sentiment slipped to Fear (CNN ~43; crypto 27). Hard assets were hit despite the soft CPI: silver crashed to 8-month lows (~$56, -20% on the month) and gold slid below $4,000 (~$3,970-4,050, its biggest weekly loss in six) as a firm dollar (DXY ~100.6), a growth scare and a ~$5B June gold-fund outflow overwhelmed the PBoC's 20th straight month of buying (+14.93t in June). Rates eased on the soft print (10Y ~4.55%, 2Y ~4.18%, 2s10s +37bp). The net regime: disinflation is real but the war's oil spike re-arms the hike tail (market ~37% for a 28-29 July hike vs ~63% hold), keeping metals and long-duration under pressure while energy and defensives lead.",
+  "narrative": "The binary resolved soft but the tape sold off anyway. June CPI (14 July) fell -0.4% m/m — the largest monthly drop since 2020 — cutting headline to +3.5% y/y with core cooling to +2.6% y/y (0.0% m/m), a cleanly disinflationary print that briefly lifted risk. But two forces overwhelmed it: an escalating US-Iran war (a sixth night of US airstrikes by 17 July, a naval blockade throttling the Strait of Hormuz to ~7 vessels/day) drove oil up ~13% in five days (Brent ~$84, WTI ~$79-82), reviving the inflation impulse that keeps the Warsh Fed hold-or-hike; and a semiconductor/AI-capex unwind (SOX -11% on the month, SMH -9% over four weeks, ~20% off the late-June peak) dragged the S&P to 7,457.69 (-1.15% on 17 July, ~1.6% off the 10 July high). Leadership rotated hard out of chips into energy, financials and industrials — breadth actually broadened (~68.6% of the S&P above its 200-DMA, highest since February). Sentiment slipped further into Fear (CNN ~40 by 17 July, from ~43; crypto 25). Hard assets were hit despite the soft CPI: silver crashed to 8-month lows (~$55.6, -20% on the month) and gold slid to the $4,000 shelf (~$4,017 Friday, +1% on the day but its biggest weekly loss in six) as a firm dollar (DXY ~100.6), a growth scare and a ~$5B June gold-fund outflow overwhelmed the PBoC's 20th straight month of buying (+14.93t in June). Rates eased on the soft print (10Y ~4.55%, 2Y ~4.18%, 2s10s +37bp). The net regime: disinflation is real but the war's oil spike re-arms the hike tail (market ~37% for a 28-29 July hike vs ~63% hold), keeping metals and long-duration under pressure while energy and defensives lead.",
   "drivers": [
    {
     "factor": "US-Iran war & the oil-inflation impulse",
@@ -88,7 +88,7 @@
    "https://tradingeconomics.com/commodity/crude-oil"
   ],
   "regimeScore": 0.45,
-  "asOf": "2026-07-18"
+  "asOf": "2026-07-17"
  },
  "calls": [
   {
@@ -974,5 +974,5 @@
    "confidence": 0.56
   }
  ],
- "callsNote": "Per-instrument analyst priors with directional probability (pUp) and expected value (ev) across 1m/3m/12m horizons, plus drivers and confidence. Blended into the live quant model at the probability level (research weight scales with confidence, capped so the statistical engine stays primary). Macro layer fully refreshed 2026-07-18 (S&P 7,457; 10Y 4.55%; gold ~$3,970-4,050; silver ~$56 at 8-month lows; WTI ~$79-82 on the US-Iran war; BTC ~$63-65K; F&G ~43 Fear; June CPI soft at -0.4% m/m/core +2.6%; July FOMC ~63% hold vs ~37% hike). The most macro-sensitive calls (silver/gold, energy XLE/USO, semis SMH/XLK, crypto BTC/ETH/SOL, China FXI, bonds TLT/IEF, equity-region SPY/QQQ/IWM, Lynas) were refreshed to the 17 July tape this run; factor/sector, remaining rare-earth and credit calls carry priors from 2026-07-07/08 with the macro layer and live technicals current."
+ "callsNote": "Per-instrument analyst priors with directional probability (pUp) and expected value (ev) across 1m/3m/12m horizons, plus drivers and confidence. Blended into the live quant model at the probability level (research weight scales with confidence, capped so the statistical engine stays primary). Macro layer reflects the 17 July close, re-verified this weekend run (2026-07-19, markets closed since Friday): S&P 7,457.69; 10Y ~4.56%, 2Y ~4.18%; gold steadied at ~$4,017 (the $4,000 shelf); silver ~$55.6 at 8-month lows; WTI ~$82.5 / Brent ~$88 on the US-Iran war; BTC ~$64.4K; VIX ~18.8; F&G ~40 Fear (crypto 25); June CPI soft at -0.4% m/m / core +2.6%; July FOMC (28-29) hold-vs-hike the next binary. Priors are horizon-based probabilities anchored to that Friday tape and carry unchanged over the weekend; factor/sector, remaining rare-earth and credit calls retain priors from 2026-07-07/08 with the macro layer and live technicals current."
 }

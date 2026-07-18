@@ -1,15 +1,15 @@
 {
-  "updated": "2026-07-18",
+  "updated": "2026-07-19",
   "note": "Market sentiment & global flows for the overview. Fear&Greed is fetched LIVE in-browser (CNN equity index via proxy + crypto via alternative.me) with the baked value as fallback; breadth & regional flows are researched and baked (no free real-time API) and refreshed daily by the scheduled intel agent.",
   "fearGreed": {
-    "value": 43,
+    "value": 40,
     "rating": "Fear",
     "asOf": "2026-07-17",
-    "prevClose": 47,
+    "prevClose": 43,
     "prev1w": 48,
     "prev1m": 34,
     "prev1y": 55,
-    "cryptoValue": 27,
+    "cryptoValue": 25,
     "cryptoRating": "Fear",
     "components": [
       {
@@ -112,90 +112,90 @@
     ]
   },
   "flows": {
-    "asOf": "2026-07-01",
-    "period": "Week ending 1 July 2026 (ICI weekly estimated long-term fund flows), supplemented by BofA equity client-flow trends (early July 2026). Flows are weekly and lagged; the full BofA 'Flow Show' regional EPFR breakdown was not itemized in free sources this run, so several regional lines are labeled approximate or carried.",
-    "narrative": "The verifiable weekly read turned risk-off at the fund level: ICI data for the week ended 1 July showed equity funds bleeding -$10.22B (domestic -$5.83B, world -$4.39B) while bond funds drew +$3.73B — a clean rotation from stocks to fixed income. BofA's client-flow work was more nuanced: institutional/hedge-fund buyers drove the first net US-equity inflow in five weeks with record inflows into Consumer Discretionary, even as Financials saw the largest outflows and commodity/gold funds stayed weak (~$5B of gold outflows across June). The net picture into mid-July: retail de-risking equities into bonds and cash, a tactical HF bid under US large-caps, and a fading gold bid — all before the 14 July soft-CPI print and the mid-month Iran escalation reshuffled the tape.",
+    "asOf": "2026-07-16",
+    "period": "BofA 'Flow Show' / EPFR week ending ~15-16 July 2026 (fresher than the ICI week-to-1-July line, which is carried as a cross-check). Flows are weekly and lagged; several regional lines lack a discrete free figure this run and are labeled approximate/carried.",
+    "narrative": "The freshest weekly read is defensive-not-bearish: BofA's Flow Show showed cash drawing +$39.5B and investment-grade bonds +$31.3B, with global equities still taking in a hefty +$56.4B on record-pace tech/AI inflows — even as gold (+$0.3B), crypto (+$0.5B), energy and materials saw little-to-negative demand. Under the surface, BofA private clients logged their first net US-equity inflow in five weeks (hedge-fund-led), Financials saw the heaviest selling, and buybacks slid to a six-week low. The lagged ICI cross-check (week to 1 July) still showed equity funds -$10.2B vs bonds +$3.4B — so the picture is a rotation into cash and quality credit and crowded tech, away from commodities/gold, rather than an outright risk-off dump.",
     "regions": [
       {
         "region": "US equities",
-        "direction": "outflow",
-        "amount": "-$5.8B domestic (ICI, wk to Jul 1)",
-        "amountUSD": -5830000000,
-        "note": "ICI shows domestic-equity funds -$5.83B and world-equity -$4.39B for the week ended 1 July (total equity -$10.22B). BofA client data diverges: it flagged the first net US-equity inflow in five weeks, HF-led with record Consumer Discretionary buying and Financials the biggest outflow — measurement/window differences, so read the direction (rotation, dispersion), not a single figure."
+        "direction": "inflow",
+        "amount": "first net inflow in 5 weeks (HF-led)",
+        "amountUSD": null,
+        "note": "BofA private-client data shows the first net US-equity inflow in five weeks, driven by hedge funds, with record-pace tech/AI inflows inside a +$56.4B global-equity week. Financials saw the heaviest selling and buybacks fell to a six-week low. The lagged ICI line (wk to 1 July) was still negative (domestic -$5.8B), so read the rotation/dispersion, not a single figure."
       },
       {
         "region": "Europe / Intl DM equities",
         "direction": "inflow",
-        "amount": "part of world-equity flows (approximate)",
+        "amount": "part of the +$56.4B global-equity week (approximate)",
         "amountUSD": null,
-        "note": "A discrete European/DM weekly figure was not verifiable this run. The 2026 pro-international tilt has persisted in prior weeks; ICI's world-equity line was net negative (-$4.39B) for the week to 1 July, so the recent European inflow streak may have paused. Approximate/carried — treat as unconfirmed this week."
+        "note": "No discrete European/DM weekly figure was itemized in free sources this run. The 2026 pro-international tilt has persisted; Europe/Japan are inside the positive global-equity total. Approximate/carried — treat as unconfirmed this week."
       },
       {
         "region": "Emerging Markets",
-        "direction": "outflow",
+        "direction": "inflow",
         "amount": "not separately verifiable this week (approximate)",
         "amountUSD": null,
-        "note": "No discrete EM weekly figure surfaced in free sources this run. EM flows have been choppy with the firm dollar (DXY ~100.6) and the Iran/oil shock a net negative for oil-importing EM. Approximate — unconfirmed this week."
+        "note": "No discrete EM weekly figure surfaced this run. EM flows stay choppy with a firm dollar (DXY ~100.9) and the Iran/oil shock a net negative for oil-importing EM, partly offset by softer US CPI. Approximate — unconfirmed this week."
       },
       {
         "region": "China",
         "direction": "outflow",
-        "amount": "equity outflow / bond inflow (approximate)",
+        "amount": "equity soft / bond inflow (approximate)",
         "amountUSD": null,
-        "note": "No specific weekly China figure public this run. Mainland-equity funds have been leaking as authorities manage the rally pace; the HK-tech complex remains volatile. China bond funds have stayed on an inflow trend. Approximate/carried."
+        "note": "No specific weekly China figure public this run. Mainland-equity funds stay choppy after the Q2 GDP miss (+4.3%); the HK-tech complex rebounded ~5.5% on AI catalysts. China bond funds have stayed on an inflow trend. Approximate/carried."
       },
       {
         "region": "Japan equities",
         "direction": "outflow",
         "amount": "not separately verifiable this week (approximate)",
         "amountUSD": null,
-        "note": "A discrete Japan weekly figure was not verifiable this run; Japan-equity funds had bled for four straight weeks through early July on a weak yen. Approximate — unconfirmed this week."
+        "note": "A discrete Japan weekly figure was not verifiable this run; Japan-equity funds had bled for several weeks on a weak yen. Approximate — unconfirmed this week."
       },
       {
         "region": "Money-Market / Cash",
         "direction": "inflow",
-        "amount": "positive (approximate)",
-        "amountUSD": null,
-        "note": "Money-market funds continued to draw cash into mid-July as risk appetite cooled and parked yield near ~3.6-3.75% at the fed funds floor stayed attractive; a precise weekly MMF figure was not itemized this run (the prior week to 2 July saw a +$56.4B surge). Approximate."
+        "amount": "+$39.5B (BofA Flow Show, wk to ~16 Jul)",
+        "amountUSD": 39500000000,
+        "note": "Cash was a leading destination at +$39.5B as risk appetite cooled and parked yield near ~3.6-4% at the fed-funds floor stayed attractive — validating the book's large cash pile as dry powder into the FOMC."
       },
       {
         "region": "Bonds / Credit",
         "direction": "inflow",
-        "amount": "+$3.73B (ICI, wk to Jul 1)",
-        "amountUSD": 3730000000,
-        "note": "ICI bond funds drew +$3.73B for the week ended 1 July as the rotation from equities into fixed income continued. HY OAS stayed historically tight (~269bp), so the bid is broad-based rather than a flight strictly to quality; the 10-year eased to ~4.55% on the soft June CPI."
+        "amount": "+$31.3B (BofA Flow Show, wk to ~16 Jul)",
+        "amountUSD": 31300000000,
+        "note": "Investment-grade bond demand ran strong at +$31.3B; HY OAS stayed historically tight (~269bp), so the bid is broad carry-seeking rather than a pure flight to quality. The 10-year sits ~4.56% after the soft June CPI."
       },
       {
         "region": "Gold",
         "direction": "outflow",
-        "amount": "~-$5B across June (BofA)",
-        "amountUSD": -5000000000,
-        "note": "Gold/commodity funds were the weakest cohort, shedding roughly $5B across June per BofA, and the fading ETF bid showed up in price — spot gold slipped below $4,000 to ~$3,970 by 17 July. Central-bank buying remains the offsetting structural demand, but the fund-flow tide turned against the metal."
+        "amount": "~flat/negative (+$0.3B nominal; ~-$5B across June)",
+        "amountUSD": null,
+        "note": "Gold funds drew a negligible +$0.3B this week after shedding ~$5B across June; the fading ETF bid showed up in price — gold steadied right at ~$4,000 and silver sat at 8-month lows (~$56). Central-bank buying (PBoC 20th straight month) remains the offsetting structural demand."
       }
     ],
     "movements": [
       {
-        "from": "Equity funds",
-        "to": "Bond funds",
-        "amount": "Equity -$10.22B / Bonds +$3.73B (ICI, wk to Jul 1)",
-        "note": "The marquee verifiable weekly rotation — retail-heavy fund flows moved out of stocks (domestic -$5.83B, world -$4.39B) and into fixed income as risk appetite cooled ahead of the CPI print and the Iran escalation."
+        "from": "Commodities & gold",
+        "to": "Cash & IG bonds",
+        "amount": "cash +$39.5B / IG bonds +$31.3B vs gold ~flat, energy/materials outflows (BofA Flow Show)",
+        "note": "The marquee fresh rotation — into cash and quality credit, out of gold/energy/materials — captures the mid-July de-risking that pinned silver at 8-month lows and gold at the $4,000 shelf despite the soft CPI and the war."
       },
       {
-        "from": "Financials & gold",
-        "to": "Consumer Discretionary & US large-cap (HF)",
-        "amount": "Financials biggest outflow, gold ~-$5B June / record ConsDisc inflow (BofA)",
-        "note": "BofA client data shows hedge funds driving the first US-equity inflow in five weeks with record Consumer Discretionary buying, funded partly out of Financials and a fading gold bid — a tactical, sector-rotational move under the surface of the risk-off headline."
+        "from": "Retail equity redemptions",
+        "to": "Hedge-fund US-equity buying & tech/AI",
+        "amount": "first US-equity inflow in 5 weeks; record tech inflows (BofA); ICI equity -$10.2B (wk to 1 Jul)",
+        "note": "Mutual-fund equity redemptions (lagged ICI -$10.2B) were offset by hedge-fund US-equity buying and record-pace tech/AI ETF creations — a structure/positioning shift crowding the very AI trade that just began to unwind (SMH -9%)."
       },
       {
-        "from": "Precious metals / commodities",
-        "to": "Cash & bonds",
-        "amount": "gold ~-$5B June / bonds +$3.73B, MMF positive",
-        "note": "The gold/commodity outflow alongside bond and money-market inflows captures the mid-July de-risking that pushed silver to 8-month lows (~$56) and gold below $4,000 despite the soft CPI and the geopolitical flare."
+        "from": "Financials",
+        "to": "Consumer/AI mega-cap",
+        "amount": "Financials the heaviest sector outflow; buybacks at a 6-week low (BofA)",
+        "note": "Financials saw the largest sector selling even as banks led the SGX/US tape, and corporate buybacks eased to a six-week low — a tactical sector rotation beneath the defensive cash/bond headline."
       }
     ],
     "sources": [
-      "https://www.ici.org/research/stats/flows",
       "https://finvaulta.com/research/bank-of-america/equity-client-flow-trends-2026-07-07",
+      "https://www.ici.org/research/stats/flows",
       "https://fred.stlouisfed.org/series/BAMLH0A0HYM2",
       "https://epfr.com/insights/"
     ]
