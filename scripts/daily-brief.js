@@ -115,6 +115,11 @@ end run`;
   log.push('email: ' + (emailOk ? 'sent to ' + env.EMAIL_TO + ' (from ' + (env.EMAIL_FROM || env.EMAIL_TO) + ')' : 'FAILED ' + (r.stderr || '').slice(0, 200)));
 } else log.push('email: skipped (no EMAIL_TO)');
 
+// NOTE on fallbacks tried and rejected: ntfy.sh's email gateway rejects
+// anonymous senders (HTTP 400, paid tier only) — do not re-add it. Email from
+// launchd contexts is impossible until the one-time macOS Automation "Allow"
+// (osascript -> Mail) is clicked; until then the Claude app session's daily
+// 08:21 wake-up owns delivery (it holds a working Mail.app grant).
 if (env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_CHAT_ID) {
   const r = spawnSync('curl', ['-s', '-X', 'POST',
     `https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`,
