@@ -14,7 +14,7 @@ function readEnv() {
   const out = {};
   try {
     fs.readFileSync(path.join(process.env.HOME, '.claude', 'portfolio-brief.env'), 'utf8')
-      .split('\n').forEach(l => { const m = /^([A-Z_]+)=(.*)$/.exec(l.trim()); if (m) out[m[1]] = m[2].trim(); });
+      .split('\n').forEach(l => { const m = /^([A-Z0-9_]+)=(.*)$/.exec(l.trim()); if (m) out[m[1]] = m[2].trim(); });
   } catch (e) {}
   return out;
 }
@@ -113,6 +113,20 @@ end run`;
   emailOk = r.status === 0;
   if (emailOk) try { fs.writeFileSync(STATE, todayISO); } catch (e) {}
   log.push('email: ' + (emailOk ? 'sent to ' + env.EMAIL_TO + ' (from ' + (env.EMAIL_FROM || env.EMAIL_TO) + ')' : 'FAILED ' + (r.stderr || '').slice(0, 200)));
+
+  // Second copy to another address (e.g. iCloud). Why: Mail's AppleScript
+  // compose path wraps the body in <blockquote type="cite"> (URLShare
+  // template — unavoidable; tested content-after, visible:true, plain-format
+  // pref, paragraph objects, mailto). Apple Mail renders that wrapper as
+  // perfectly normal text, but the GMAIL app styles it as purple "quoted"
+  // text. So: Gmail copy = reliable + push notifications; iCloud copy read
+  // in Apple Mail = the clean-looking version.
+  if (emailOk && env.EMAIL_TO2 && env.EMAIL_FROM2) {
+    const args2 = ['-', `📊 Portfolio Morning Brief — ${today}`, fullText, env.EMAIL_TO2, env.EMAIL_FROM2];
+    let r2 = spawnSync('osascript', args2, { input: as, encoding: 'utf8', timeout: 320000 });
+    if (r2.status !== 0) { spawnSync('sleep', ['10']); r2 = spawnSync('osascript', args2, { input: as, encoding: 'utf8', timeout: 320000 }); }
+    log.push('email copy 2: ' + (r2.status === 0 ? 'sent to ' + env.EMAIL_TO2 + ' (from ' + env.EMAIL_FROM2 + ')' : 'FAILED ' + (r2.stderr || '').slice(0, 120)));
+  }
 } else log.push('email: skipped (no EMAIL_TO)');
 
 // NOTE on fallbacks tried and rejected: ntfy.sh's email gateway rejects
