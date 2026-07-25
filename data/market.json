@@ -1,15 +1,15 @@
 {
-  "updated": "2026-07-25",
-  "note": "Saturday 07:00 SGT re-verify (weekend, pre-Asia-open) against the Fri 24 Jul US close. The mid-week oil shock partially UNWOUND on Friday — WTI fell -4.7% to ~$87.88 and Brent slipped to ~$98.38 (back under $100) — but the damage rotated: Treasury yields pushed to year-highs (10Y ~4.71%, 2Y ~4.37%) and a firm dollar (DXY ~101.5) crushed the metals complex, silver -3.5% to ~$57.64 (breaking below the $58 line) and gold -2% to ~$4,048. Equities held (S&P ~7,408, roughly flat on the day but a soft week for Dow/Nasdaq) with VIX contained ~18.6 and credit very tight (HY OAS ~268bp). Sentiment sits in FEAR (CNN ~41, crypto 28). Fear&Greed is fetched LIVE in-browser with the baked value as fallback; breadth & regional flows are researched (no free real-time API). CNN's page geoblocked (HTTP 451) again this run, so the 7 sub-components are INFERRED from the ~41 composite and cited internals (VIX ~18.6, HY ~268bp, ~69% >200-DMA) and labeled as such.",
+  "updated": "2026-07-26",
+  "note": "Sunday 07:00 SGT re-verify (weekend, pre-Asia-open) against the Fri 24 Jul US close. The mid-week oil shock partially unwound Friday — Brent slipped ~4% to ~$96.8 and WTI to ~$90.5 on US-Iran peace-talk reports — but the stress rotated: Treasury yields pushed to year-highs (10Y ~4.71% intraday, ~4.69% close, 2Y ~4.33%) and a firm dollar (DXY ~101.5) pressured the metals complex; silver broke below $58 intraday then clawed back to ~$58 (+~4.6% on the week) and gold held ~$4,055. Equities were roughly flat Friday (S&P 7,412, -0.6% on the week; Nasdaq -2.1% on the semis/AI-capex unwind) with VIX ~18.7 and credit very tight (HY OAS ~269bp). Sentiment sits in FEAR (CNN ~41, crypto ~27). Fear&Greed is fetched LIVE in-browser with the baked value as fallback; breadth & regional flows are researched (no free real-time API). CNN exposes no numeric per-gauge value this run, so the 7 sub-components are INFERRED from the ~41 composite and cited internals (VIX ~18.7, HY ~269bp, ~69% >200-DMA) and labeled as such. Flows refreshed to the fresher EPFR/BofA week ending ~23 Jul.",
   "fearGreed": {
     "value": 41,
     "rating": "Fear",
-    "asOf": "2026-07-24",
+    "asOf": "2026-07-25",
     "prevClose": 43,
     "prev1w": 41,
     "prev1m": 38,
     "prev1y": 54,
-    "cryptoValue": 28,
+    "cryptoValue": 27,
     "cryptoRating": "Fear",
     "components": [
       {
@@ -56,7 +56,7 @@
     ]
   },
   "breadth": {
-    "asOf": "2026-07-24",
+    "asOf": "2026-07-26",
     "metrics": [
       {
         "label": "% of S&P 500 stocks above 200-day MA",
@@ -110,51 +110,58 @@
     ]
   },
   "flows": {
-    "asOf": "2026-07-24",
-    "period": "BofA 'Flow Show'/EPFR week ended 8 Jul 2026 (freshest verifiable weekly), plus the prior week to 1 Jul and the July BofA Global Fund Manager Survey. Weekly flows lag ~2-6 days and PRE-DATE the late-July metals/yield stress — read the positioning theme, not any single number. Labeled EARLY-JULY 2026.",
-    "narrative": "The freshest verifiable weekly read (to ~8 Jul) was strongly risk-on: global equity funds drew +$56.6bn (the 4th-largest weekly inflow of the year) with Tech funds alone +$18.8bn, even as money-market assets swelled +$39.5bn to a record ~$7.9tn — cash is being deployed into equities AND still building. That followed a sharp -$17.2bn US-equity outflow the prior week (to ~1 Jul) that rotated into IG bonds (+$17.2bn) and Japan. The bigger tell is positioning: BofA's July Global FMS shows cash at just 3.6% of AUM ('uber-low', lowest since Feb) — tripping the contrarian Cash-Rule SELL signal — with a net +42% overweight equities and the Bull & Bear Indicator at 9.5 (also a sell signal). So flows and surveys both read stretched-bullish into the late-July rate/metals stress. Per-region weekly detail (EM/China/Europe/gold) beyond the 'rotation to Japan/bonds' note was not itemized in retrievable free sources this run.",
+    "asOf": "2026-07-26",
+    "period": "EPFR/BofA 'Flow Show' week ending ~23 Jul 2026 (freshest verifiable weekly), plus the July BofA Global Fund Manager Survey. Weekly flows lag ~2-6 days; this week now CAPTURES the front of the oil/rate/metals stress. Labeled week-to-23-Jul 2026.",
+    "narrative": "The freshest weekly read (to ~23 Jul) stayed net risk-on but rotated defensively: global equity funds drew +$30.4bn and bond funds +$14.9bn while money-market funds saw a large -$33.9bn outflow (cash being deployed, not hoarded). The standout was Financials: +$1.5bn on the week and a four-week cumulative +$8.8bn — the biggest four-week financials inflow since January 2022, consistent with the steeper curve and the sector's leadership. Gold funds added ~+$2.0bn and crypto ~+$0.9bn. BofA separately flagged China fuelling the second-largest weekly EM-equity inflow of the year — corroborating the HK/China-tech bid into the 24 Jul Politburo. Positioning remains the bigger tell: BofA's July FMS shows cash at just 3.6% of AUM (lowest since Feb), tripping the contrarian Cash-Rule SELL signal, with a net +42% equity overweight and a Bull & Bear Indicator at 9.5 (also a sell). Per-region Europe/Japan splits were not itemized in retrievable free sources this run.",
     "regions": [
       {
-        "region": "US equities",
+        "region": "US / Global equities",
         "direction": "inflow",
-        "amount": "part of +$56.6bn global equity week (to 8 Jul); -$17.2bn the prior week (to 1 Jul)",
-        "amountUSD": null,
-        "note": "Whippy: a record -$17.2bn US-equity outflow the week to 1 Jul (rotation to bonds/Japan) reversed into the big +$56.6bn global equity haul the week to 8 Jul. Pre-dates the late-July metals/yield stress; positioning is stretched-bullish into it."
+        "amount": "+$30.4bn global equities (wk to ~23 Jul)",
+        "amountUSD": 30400000000,
+        "note": "Still net risk-on but a smaller haul than early July's +$56.6bn week, as the oil/rate/metals stress set in. Positioning stays stretched-bullish (FMS cash 3.6%, net +42% equity OW), leaving the tape vulnerable into the 29 Jul FOMC."
       },
       {
-        "region": "Global equities (all)",
+        "region": "Financials (sector)",
         "direction": "inflow",
-        "amount": "+$56.6bn (BofA/EPFR wk to 8 Jul); Tech +$18.8bn",
-        "amountUSD": 56600000000,
-        "note": "The 4th-largest weekly equity inflow of 2026, Tech-led (+$18.8bn) — a risk-on surge that pre-dates the late-July stress. BofA FMS net equity OW rose to +42% (from +38% in June)."
-      },
-      {
-        "region": "Money-Market / Cash",
-        "direction": "inflow",
-        "amount": "+$39.5bn → record ~$7.9tn total; FMS cash 3.6% of AUM (sell signal)",
-        "amountUSD": 39500000000,
-        "note": "Money-market assets hit a record ~$7.9tn even as equities drew inflows — but BofA's FMS cash level (3.6% of AUM, lowest since Feb) tripped the contrarian Cash-Rule SELL signal. Parked cash still yields ~3.5-3.75% at the fed-funds floor — the book's productive dry powder into a post-FOMC metals shakeout."
+        "amount": "+$1.5bn (wk); +$8.8bn over 4 weeks",
+        "amountUSD": 1500000000,
+        "note": "The biggest four-week financials inflow since January 2022 — flows chasing the sector's leadership on a steeper curve (2s10s positive) and the +13% Q2 bank-EPS-growth setup. Corroborates the model's XLF overweight."
       },
       {
         "region": "Bonds / Credit",
         "direction": "inflow",
-        "amount": "IG bonds +$17.2bn (wk to 1 Jul)",
-        "amountUSD": 17200000000,
-        "note": "Investment-grade bond funds drew +$17.2bn the week to 1 Jul as capital rotated out of US equities; HY OAS ~268bp signals no credit stress. IG/HY weekly split for the 8 Jul week not separately itemized this run."
+        "amount": "+$14.9bn (wk to ~23 Jul)",
+        "amountUSD": 14900000000,
+        "note": "Broad bond-fund inflows continued as the year-high 10Y (~4.69%) offered real carry; HY OAS ~269bp signals no credit stress. IG/HY split not separately itemized this run."
       },
       {
-        "region": "Japan equities",
-        "direction": "inflow",
-        "amount": "net beneficiary of the ~1 Jul US-equity rotation",
-        "amountUSD": null,
-        "note": "BofA flagged Japan (with bonds) as the destination of the -$17.2bn US-equity outflow the week to 1 Jul. A discrete weekly Japan dollar figure was not itemized this run. Approximate."
+        "region": "Money-Market / Cash",
+        "direction": "outflow",
+        "amount": "-$33.9bn (wk to ~23 Jul)",
+        "amountUSD": -33900000000,
+        "note": "A large money-market OUTFLOW this week — cash being deployed into equities and bonds rather than hoarded, reversing the prior week's record build. BofA's FMS cash level (3.6% of AUM) still trips the contrarian Cash-Rule sell signal; parked cash yields ~3.5-3.75% — the book's productive dry powder into a post-FOMC shakeout."
       },
       {
-        "region": "Emerging Markets",
+        "region": "Emerging Markets / China",
         "direction": "inflow",
-        "amount": "not separately disclosed this week",
+        "amount": "second-largest weekly EM-equity inflow of 2026 (China-fuelled)",
         "amountUSD": null,
-        "note": "No discrete EM weekly figure isolated in free sources this run; EM debt has been a persistent 2026 inflow theme (>$60bn YTD). Approximate."
+        "note": "BofA flagged China as the driver of the second-largest weekly EM-equity inflow of the year — a real bid under the HK-tech core into the 24 Jul Politburo stimulus signal. Discrete China dollar figure not isolated this run."
+      },
+      {
+        "region": "Gold",
+        "direction": "inflow",
+        "amount": "+$2.0bn (wk to ~23 Jul)",
+        "amountUSD": 2000000000,
+        "note": "Gold funds kept drawing inflows on the war/safe-haven bid despite the real-yield/dollar drag that held spot ~$4,055; gold's YTD inflow remains a record. BofA still flags a gold 'death cross' and elevated net-longs into the Fed."
+      },
+      {
+        "region": "Crypto",
+        "direction": "inflow",
+        "amount": "+$0.9bn (wk to ~23 Jul)",
+        "amountUSD": 900000000,
+        "note": "Small net crypto-fund inflow even as spot softened (BTC ~$64k after a ~$225M single-day ETF outflow) — flows steadier than price. The EU's new offshore-crypto sanctions add a regulatory overhang."
       },
       {
         "region": "Europe / Intl DM equities",
@@ -162,51 +169,37 @@
         "amount": "not separately disclosed this week",
         "amountUSD": null,
         "note": "No discrete European/DM weekly figure itemized in free sources this run; the 2026 pro-international tilt has persisted. Approximate."
-      },
-      {
-        "region": "China",
-        "direction": "inflow",
-        "amount": "not separately disclosed (likely a share of EM)",
-        "amountUSD": null,
-        "note": "No specific weekly China figure public this run. HK-tech kept a firm bid on AI optimism and buybacks (Tencent/Xiaomi), so China likely contributed to EM demand; not itemized. Approximate."
-      },
-      {
-        "region": "Gold",
-        "direction": "outflow",
-        "amount": "not separately itemized this week",
-        "amountUSD": null,
-        "note": "A discrete weekly gold-fund figure was not retrievable this run; gold's YTD inflow remains a record, but the late-July -2% real-yield/dollar-driven dip to ~$4,048 and BofA's 'death cross' flags raise near-term ETF-outflow risk. Approximate."
       }
     ],
     "movements": [
       {
-        "from": "Cash / sidelines",
-        "to": "Global equities (Tech-led)",
-        "amount": "+$56.6bn global equity inflow (wk to 8 Jul); Tech +$18.8bn",
-        "note": "The marquee pre-stress rotation — a big risk-on surge into equities, Tech-led, even as money-market assets hit a record. Flows lag price; the late-July rate/metals stress now tests whether the re-entry reverses."
+        "from": "Money-market / cash",
+        "to": "Equities & bonds",
+        "amount": "-$33.9bn MMF out; +$30.4bn equities, +$14.9bn bonds (wk to ~23 Jul)",
+        "note": "Cash being redeployed into both equities and bonds even into the oil/rate stress — a still-risk-on posture, though flows lag the late-week metals/yield shock."
       },
       {
-        "from": "US equities",
-        "to": "IG bonds & Japan",
-        "amount": "-$17.2bn US-equity outflow / +$17.2bn IG bonds (wk to 1 Jul)",
-        "note": "The prior week's sharp de-risk out of US equities into investment-grade credit and Japan — a whippy, two-way tape beneath the headline bullishness."
+        "from": "Broad market",
+        "to": "Financials",
+        "amount": "+$1.5bn wk / +$8.8bn over 4 weeks",
+        "note": "The biggest four-week financials inflow since Jan 2022 — money chasing the curve-steepening/bank-earnings leadership; the cleanest sector-rotation signal in the tape and a corroboration of the XLF call."
+      },
+      {
+        "from": "Rest of EM",
+        "to": "China / HK equities",
+        "amount": "second-largest weekly EM-equity inflow of 2026 (China-fuelled)",
+        "note": "China drove the week's EM-equity haul — a real flow bid under the HK-tech core ahead of the 24 Jul Politburo's stronger-than-expected stimulus signal."
       },
       {
         "from": "Cautious positioning",
         "to": "Stretched-bullish (contrarian sell)",
         "amount": "FMS cash 3.6% of AUM; net +42% equity OW; B&B 9.5",
-        "note": "BofA's July survey shows uber-low cash and elevated equity overweights that trip TWO contrarian sell signals (Cash Rule + Bull/Bear 9.5) — the positioning backdrop into the late-July stress and the 29 Jul FOMC."
-      },
-      {
-        "from": "Gold / precious metals",
-        "to": "— (real-yield/dollar pressure)",
-        "amount": "gold -2% to ~$4,048, silver -3.5% to ~$57.64 (Fri 24 Jul)",
-        "note": "Higher real yields (10Y ~4.71%) and a firm dollar (DXY ~101.5) pressured the metals complex hardest into the Fed — the book's highest-beta pain point, with silver breaking below $58."
+        "note": "BofA's July survey shows uber-low cash and elevated equity overweights that trip TWO contrarian sell signals (Cash Rule + Bull/Bear 9.5) — the positioning backdrop into the 29 Jul FOMC."
       }
     ],
     "sources": [
-      "https://www.briefs.co/news/us-stock-funds-see-largest-weekly-outflows-in-months-bofa-re/",
-      "https://finvaulta.com/research/bank-of-america/equity-client-flow-trends-2026-07-07",
+      "https://seekingalpha.com/news/4618246-financials-funds-record-biggest-four-week-inflow-since-january-2022-bofa-data-shows",
+      "https://www.investing.com/news/stock-market-news/bofa-says-china-fueled-the-secondlargest-weekly-inflow-into-em-equities-4811406",
       "https://macenews.com/bofa-global-research-fund-manager-survey-fund-managers-reduce-cash-holdings-move-into-stocks-and-bonds-in-july/",
       "https://seekingalpha.com/news/4613555-stock-sell-signal-triggered-as-fund-manager-cash-plummets-bofa-survey"
     ]
