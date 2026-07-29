@@ -61,6 +61,55 @@ const fullText = [
   'Decision-support only — not financial advice. Nothing is ever traded automatically.'
 ].join('\n');
 
+// ── HTML body ────────────────────────────────────────────────────────────
+// Mail.app wraps ANY scripted body in <blockquote type="cite"> (its URLShare
+// template) — unavoidable on every compose path tested (content-after-create,
+// visible:true, plain-format pref, paragraph objects, mailto, html content).
+// Mail clients then style that quote block, which is what turned the brief
+// purple. The cure is not removing the wrapper but out-specifying it: every
+// element below carries an explicit inline color, and the card sets its own
+// background, so nothing inherits the client's quote styling in light OR dark
+// mode. Inline styles only — <style> blocks get stripped by many clients.
+const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const C = { ink: '#111827', body: '#1f2937', muted: '#6b7280', rule: '#e5e7eb', accent: '#b45309', card: '#ffffff', bullish: '#15803d', bearish: '#b91c1c', mixed: '#b45309' };
+const impactColor = t => /BULLISH/i.test(t) ? C.bullish : /BEARISH/i.test(t) ? C.bearish : C.mixed;
+
+// One text bullet -> HTML. Handles the "[IMPACT] headline\n → actionable"
+// shape used by the news sections, and colors the tag by direction.
+function htmlBullet(x) {
+  const raw = String(x);
+  const parts = raw.split('\n');
+  const head = parts[0];
+  const rest = parts.slice(1).map(l => l.replace(/^\s*→\s*/, '')).filter(Boolean);
+  const tag = head.match(/^\[([A-Z]+)\]\s*/);
+  const headHtml = tag
+    ? `<span style="color:${impactColor(tag[1])};font-weight:700">${esc(tag[1])}</span> <span style="color:${C.body}">${esc(head.slice(tag[0].length))}</span>`
+    : `<span style="color:${C.body}">${esc(head)}</span>`;
+  const restHtml = rest.map(l => `<div style="color:${C.muted};margin:3px 0 0 0">→ ${esc(l)}</div>`).join('');
+  return `<tr><td style="padding:0 0 10px 0;vertical-align:top;color:${C.accent};font-weight:700;width:14px">•</td><td style="padding:0 0 10px 0;color:${C.body};font-size:15px;line-height:1.5">${headHtml}${restHtml}</td></tr>`;
+}
+const htmlList = arr => `<table cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse">${arr.map(htmlBullet).join('')}</table>`;
+const htmlSection = (h, items) => `
+  <div style="margin:22px 0 0 0">
+    <div style="color:${C.accent};font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:0 0 8px 0;border-bottom:1px solid ${C.rule};margin:0 0 12px 0">${esc(h)}</div>
+    ${htmlList(items)}
+  </div>`;
+
+const fullHtml = `<div style="background-color:${C.card};color:${C.body};font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.5;padding:24px;max-width:660px;border-radius:10px">
+  <div style="color:${C.ink};font-size:20px;font-weight:800;letter-spacing:-.01em">📊 Portfolio Morning Brief</div>
+  <div style="color:${C.muted};font-size:13px;padding:4px 0 0 0">${esc(today)} · data refreshed ${esc(stamp)}</div>
+  <div style="margin:20px 0 0 0;background-color:#fffbeb;border-left:3px solid ${C.accent};padding:14px 16px;border-radius:6px">
+    <div style="color:${C.accent};font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:0 0 8px 0">TLDR</div>
+    ${htmlList(tldr)}
+  </div>
+  ${sections.map(([h, items]) => htmlSection(h, items)).join('')}
+  <div style="margin:26px 0 0 0;padding:14px 0 0 0;border-top:1px solid ${C.rule}">
+    <a href="${DASH}" style="color:${C.accent};font-weight:700;text-decoration:none;font-size:15px">Open the live dashboard →</a>
+    <div style="color:${C.muted};font-size:12px;padding:8px 0 0 0">Prices, probabilities and risk recompute in-browser on every open.</div>
+    <div style="color:${C.muted};font-size:12px;padding:10px 0 0 0">Decision-support only — not financial advice. Nothing is ever traded automatically.</div>
+  </div>
+</div>`;
+
 const tgText = [
   `📊 *Portfolio Brief — ${today}*`,
   '',
@@ -112,14 +161,14 @@ if (env.EMAIL_TO) {
   delay 2
   with timeout of 300 seconds
     tell application "Mail"
-      set msg to make new outgoing message with properties {subject:item 1 of argv, content:item 2 of argv, visible:false}
+      set msg to make new outgoing message with properties {subject:item 1 of argv, html content:item 2 of argv, visible:false}
       if (count of argv) > 3 then set sender of msg to item 4 of argv
       tell msg to make new to recipient at end of to recipients with properties {address:item 3 of argv}
       send msg
     end tell
   end timeout
 end run`;
-  const args = ['-', `📊 Portfolio Morning Brief — ${today}`, fullText, env.EMAIL_TO];
+  const args = ['-', `📊 Portfolio Morning Brief — ${today}`, fullHtml, env.EMAIL_TO];
   if (env.EMAIL_FROM) args.push(env.EMAIL_FROM);
   // Up to 3 attempts with widening gaps — a launchd 08:15 run may catch Mail
   // mid-launch, mid-account-connect, or mid-network-flap.
@@ -141,7 +190,7 @@ end run`;
   // text. So: Gmail copy = reliable + push notifications; iCloud copy read
   // in Apple Mail = the clean-looking version.
   if (emailOk && env.EMAIL_TO2 && env.EMAIL_FROM2) {
-    const args2 = ['-', `📊 Portfolio Morning Brief — ${today}`, fullText, env.EMAIL_TO2, env.EMAIL_FROM2];
+    const args2 = ['-', `📊 Portfolio Morning Brief — ${today}`, fullHtml, env.EMAIL_TO2, env.EMAIL_FROM2];
     let r2 = spawnSync('osascript', args2, { input: as, encoding: 'utf8', timeout: 320000 });
     if (r2.status !== 0) { spawnSync('sleep', ['10']); r2 = spawnSync('osascript', args2, { input: as, encoding: 'utf8', timeout: 320000 }); }
     log.push('email copy 2: ' + (r2.status === 0 ? 'sent to ' + env.EMAIL_TO2 + ' (from ' + env.EMAIL_FROM2 + ')' : 'FAILED ' + (r2.stderr || '').slice(0, 120)));
