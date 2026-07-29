@@ -91,9 +91,25 @@ if (env.EMAIL_TO) {
   // treats it as genuine inbound mail — push notifications fire and it can't
   // be hidden by self-send quirks. Launch Mail first and use a long AppleEvent
   // timeout (cold Mail launches have caused -1712 timeouts).
+  // Mail COLD-START is the historical failure mode from launchd at 08:15: the
+  // app must launch and connect 8 accounts before `send` will return, and a
+  // plain `delay 3` was not enough — `send` blocked until the AppleEvent timed
+  // out (-1712). So: launch, then POLL until Mail answers a cheap query (up to
+  // ~90s), and only then compose and send.
   const as = `on run argv
   tell application "Mail" to launch
-  delay 3
+  set ready to false
+  repeat 30 times
+    try
+      tell application "Mail" to get name of account 1
+      set ready to true
+      exit repeat
+    on error
+      delay 3
+    end try
+  end repeat
+  if not ready then error "Mail did not become ready"
+  delay 2
   with timeout of 300 seconds
     tell application "Mail"
       set msg to make new outgoing message with properties {subject:item 1 of argv, content:item 2 of argv, visible:false}
@@ -105,10 +121,13 @@ if (env.EMAIL_TO) {
 end run`;
   const args = ['-', `📊 Portfolio Morning Brief — ${today}`, fullText, env.EMAIL_TO];
   if (env.EMAIL_FROM) args.push(env.EMAIL_FROM);
-  let r = spawnSync('osascript', args, { input: as, encoding: 'utf8', timeout: 320000 });
-  if (r.status !== 0) { // one retry after a pause — Mail can be sluggish on cold start
-    spawnSync('sleep', ['10']);
-    r = spawnSync('osascript', args, { input: as, encoding: 'utf8', timeout: 320000 });
+  // Up to 3 attempts with widening gaps — a launchd 08:15 run may catch Mail
+  // mid-launch, mid-account-connect, or mid-network-flap.
+  let r = spawnSync('osascript', args, { input: as, encoding: 'utf8', timeout: 420000 });
+  for (let attempt = 2; attempt <= 3 && r.status !== 0; attempt++) {
+    log.push(`email attempt ${attempt - 1} failed (${(r.stderr || '').trim().slice(0, 80)}) — retrying`);
+    spawnSync('sleep', [String(attempt * 20)]);
+    r = spawnSync('osascript', args, { input: as, encoding: 'utf8', timeout: 420000 });
   }
   emailOk = r.status === 0;
   if (emailOk) try { fs.writeFileSync(STATE, todayISO); } catch (e) {}
