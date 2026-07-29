@@ -463,6 +463,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
     <ul style="font-size:13px;line-height:1.9;padding-left:18px;">
       <li><strong>SGX equities</strong> — CDP Statement (Apr 2026). Major liquid names tracked live individually; ~60 penny/suspended/USD-quoted names grouped into one "SGX/CDP Legacy Tail" line at statement value.</li>
       <li><strong>Foreign securities</strong> — Phillip POEMS custodian: US miners (SILJ, SLVP, GDX), VanEck Vietnam, and HK tech (Tencent, SMIC, Xiaomi). Live-priced.</li>
+      <li><strong>HK broker securities a/c</strong> — Xiaomi (1810) only, live-priced, separate from the POEMS lot. Statement (29 Jul 2026): 13,400 sh at HKD 31.88 = HKD 427,192, cost HKD 529,085.60, P&amp;L −19.26%. <strong>USD 3,000 of this position belongs to a third party and is excluded</strong> — that is ≈738 sh at USD/HKD 7.8424, so only the remaining <strong>12,662 sh</strong> are counted as yours. The carve-out is fixed in shares, not dollars, so it does not drift as Xiaomi moves.</li>
       <li><strong>Cash &amp; deposits</strong> — DBS/POSB &amp; UOB screenshots (SGD). Static values.</li>
       <li><strong>Foreign cash</strong> — HK BOC: CNY 1.7M + USD 130K. China house-sale proceeds: CNY 7M. Static.</li>
       <li><strong>Fund</strong> — Astral Value Fund VCC: USD 154,342.57 (684.30 sh @ NAV 225.55, 30 Apr 2026). Static NAV.</li>
@@ -614,10 +615,20 @@ const H = [
   {id:58,n:"IBKR Margin Loan (net)",          t:"LOAN", yf:null,   ac:"Cash",      region:"Global", cur:"SGD", manualNative:-56240},
   // ── CDP (a/c 8014) cash-equivalents — Singapore Savings Bond + SGS T-bills (Jun 2026 statement) ──
   {id:59,n:"Singapore Savings Bond + T-bills (CDP)", t:"SSB", yf:null, ac:"Cash", region:"Singapore", cur:"SGD", manualNative:204000},
+  // ── HK BROKER SECURITIES A/C (Xiaomi only; live-priced) — added 29 Jul 2026 ──
+  // Statement: 13,400 sh, current value HKD 427,192 (⇒ HKD 31.88/sh), cost HKD 529,085.60
+  // (HKD 39.48/sh), reference P&L −HKD 101,893.60 / −19.26%.
+  // THIRD-PARTY EXCLUSION: USD 3,000 of this position is not Dom's. At USD/HKD 7.8424
+  // that is HKD 23,527 ≈ 738 sh, so 738 shares are carved out and only the remaining
+  // 12,662 shares are booked here. The carve-out is fixed in SHARES (custody-for-another
+  // convention), so it stays 738 sh as the price moves rather than a floating $3k.
+  // Separate from id 35 (POEMS, 14,000 sh) — the statement's "All" tab shows Xiaomi alone,
+  // so this is a distinct account, not a restatement of the POEMS lot.
+  {id:60,n:"Xiaomi Corp (HK a/c)", t:"1810", yf:"1810.HK", ac:"Equity", region:"China/HK", cur:"HKD", qty:12662, book:66533},
 ];
 
 // Sector tags (by holding id) for the sector heat map
-const SECTOR={1:'Financials',2:'Consumer Staples',3:'Industrials',4:'Materials',5:'Real Estate',6:'Real Estate',7:'Real Estate',8:'Real Estate',9:'Real Estate',10:'Industrials',11:'Real Estate',12:'Industrials',13:'Financials',14:'Communications',15:'Real Estate',16:'Industrials',17:'Real Estate',18:'Consumer Staples',19:'Industrials',20:'Real Estate',21:'Real Estate',22:'Real Estate',23:'Real Estate',24:'Real Estate',25:'Real Estate',26:'Utilities',27:'Consumer Staples',28:'Energy',29:'Real Estate',30:'Industrials',31:'Communications',32:'Other / Tail',33:'Communications',34:'Technology',35:'Technology',36:'Gold/Silver Miners',37:'Gold/Silver Miners',38:'Gold/Silver Miners',39:'Diversified Equity',40:'Consumer Staples'};
+const SECTOR={1:'Financials',2:'Consumer Staples',3:'Industrials',4:'Materials',5:'Real Estate',6:'Real Estate',7:'Real Estate',8:'Real Estate',9:'Real Estate',10:'Industrials',11:'Real Estate',12:'Industrials',13:'Financials',14:'Communications',15:'Real Estate',16:'Industrials',17:'Real Estate',18:'Consumer Staples',19:'Industrials',20:'Real Estate',21:'Real Estate',22:'Real Estate',23:'Real Estate',24:'Real Estate',25:'Real Estate',26:'Utilities',27:'Consumer Staples',28:'Energy',29:'Real Estate',30:'Industrials',31:'Communications',32:'Other / Tail',33:'Communications',34:'Technology',35:'Technology',36:'Gold/Silver Miners',37:'Gold/Silver Miners',38:'Gold/Silver Miners',39:'Diversified Equity',40:'Consumer Staples',60:'Technology'};
 H.forEach(h=>{h.sector=SECTOR[h.id]||null;});
 
 const FX={SGD:1, USD:1.34, HKD:0.172, CNY:0.186, MYR:0.30};
@@ -2282,7 +2293,7 @@ const DESIGN=[
 ];
 // map existing holdings (by id) to design sleeves; everything unmapped & liquid = unallocated cash
 const SLEEVE_OF=id=>{
-  if([33,34,35,39].includes(id)) return 'asia';                 // Tencent, SMIC, Xiaomi, VNM
+  if([33,34,35,39,60].includes(id)) return 'asia';              // Tencent, SMIC, Xiaomi (POEMS + HK a/c), VNM
   if([36,37,38,57,58].includes(id)) return 'real';              // GDX, SILJ, SLVP, silver (incl. loan)
   if(id===41) return 'growth';                                  // Astral fund
   if(id===59) return 'sgd';                                     // SSB + T-bills
