@@ -188,10 +188,10 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 </div>
 
 <div class="kpi-strip">
-  <div class="kpi"><div class="kpi-label">Total Net Worth (SGD)</div><div class="kpi-val" id="kpi-nw">—</div><div class="kpi-sub" id="kpi-nw-sub"><span class="ld"><span class="spin"></span>Loading…</span></div></div>
+  <div class="kpi"><div class="kpi-label">NAV · Total Net Worth (SGD)</div><div class="kpi-val" id="kpi-nw">—</div><div class="kpi-sub" id="kpi-nw-sub"><span class="ld"><span class="spin"></span>Loading…</span></div></div>
   <div class="kpi"><div class="kpi-label">Liquid Investable</div><div class="kpi-val" id="kpi-liq">—</div><div class="kpi-sub">securities + cash + fund</div></div>
   <div class="kpi"><div class="kpi-label">Illiquid (Property + PE)</div><div class="kpi-val" id="kpi-illq">—</div><div class="kpi-sub">property + private equity</div></div>
-  <div class="kpi"><div class="kpi-label">Listed Securities Day P&amp;L</div><div class="kpi-val" id="kpi-day">—</div><div class="kpi-sub" id="kpi-day-sub">vs prev close</div></div>
+  <div class="kpi" style="min-width:190px;"><div class="kpi-label">NAV Day P&amp;L</div><div class="kpi-val" id="kpi-day">—</div><div class="kpi-sub" id="kpi-day-sub">vs prev close</div></div>
   <div class="kpi"><div class="kpi-label">Securities Value</div><div class="kpi-val" id="kpi-sec">—</div><div class="kpi-sub">live-priced equities</div></div>
   <div class="kpi" style="min-width:178px;"><div class="kpi-label">FX Rates</div><div class="fxgrid" id="kpi-fx">—</div><div class="kpi-sub">per 1 SGD · USD as SGD/USD</div></div>
 </div>
@@ -227,6 +227,29 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
     <div class="sh">🏅 Consensus Picks — every source combined</div>
     <p style="font-size:12px;color:var(--muted);margin:-4px 0 10px;">One ranked list linking super-investor 13Fs, Congress buys, insiders, Reddit crowd interest and the quant model. More independent sources agreeing = higher rank. Signals, not advice.</p>
     <div id="consensus-body"><div class="ld"><span class="spin"></span>Combining sources…</div></div>
+  </div>
+  <div class="card" style="margin-bottom:16px;">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;">
+      <div>
+        <div class="sh" style="margin:0;">📈 Portfolio NAV</div>
+        <div style="font-size:11.5px;color:var(--muted);">Every line marked to market in SGD, net of the IBKR margin loan</div>
+      </div>
+      <div style="text-align:right;">
+        <div id="nav-val" class="kpi-val" style="font-size:27px;">—</div>
+        <div id="nav-day" style="font-size:12.5px;font-weight:700;margin-top:2px;">—</div>
+        <div id="nav-split" class="small" style="color:var(--muted);margin-top:2px;">—</div>
+      </div>
+    </div>
+    <div class="perf-period-grid" style="margin-top:14px;">
+      <div class="perf-cell"><div class="pp-label">1D</div><div class="pp-val" id="nav-1d">—</div></div>
+      <div class="perf-cell"><div class="pp-label">1W</div><div class="pp-val" id="nav-1w">—</div></div>
+      <div class="perf-cell"><div class="pp-label">1M</div><div class="pp-val" id="nav-1m">—</div></div>
+      <div class="perf-cell"><div class="pp-label">3M</div><div class="pp-val" id="nav-3m">—</div></div>
+      <div class="perf-cell"><div class="pp-label">YTD</div><div class="pp-val" id="nav-ytd">—</div></div>
+      <div class="perf-cell"><div class="pp-label">1Y</div><div class="pp-val" id="nav-1y">—</div></div>
+    </div>
+    <div id="nav-chart" style="height:190px;margin-top:14px;"></div>
+    <div id="nav-note" class="small" style="color:var(--muted);margin-top:8px;line-height:1.55;"></div>
   </div>
   <div style="margin-bottom:16px;">
     <div class="sh">Listed Securities Performance by Period (value-weighted)</div>
@@ -765,6 +788,84 @@ function valSGD(h){
 }
 function nativeVal(h){ const p=pd[h.t]?.price; if(h.yf&&p>0) return h.qty*p; if(h.manualNative!=null) return h.manualNative; return null; }
 
+// ── NAV ENGINE ────────────────────────────────────────────────────────────
+// NAV = every line marked to market in SGD, net of the IBKR margin loan (a
+// negative holding) — i.e. exactly totalNW(). What is new here is a TRUE daily
+// NAV move: each line is revalued at YESTERDAY's close AND YESTERDAY's FX, so
+// currency swings on the CNY 8.7M / USD 130K / MYR cash and on the HK/US
+// securities are counted. The old "listed securities day P&L" ignored FX
+// entirely, which on a book this multi-currency is a material omission.
+function prevValSGD(h){
+  const fxNow=FX[h.cur]||1, fxPrev=(FXPREV[h.cur]!=null?FXPREV[h.cur]:fxNow);
+  const rec=pd[h.t]||{};
+  if(h.yf&&rec.price>0) return h.qty*(rec.prevClose>0?rec.prevClose:rec.price)*fxPrev;
+  if(h.yf&&h.book!=null) return h.book;                 // stale price → claim no move
+  if(h.manualNative!=null) return h.manualNative*fxPrev;
+  return 0;
+}
+// Exact two-factor attribution of ΔNAV (the parts sum to the whole, identically):
+//   market = Σ qty·(p − pPrev)·fxToday        what prices did
+//   fx     = Σ nativePrev·(fxToday − fxPrev)  what currencies did
+function navDay(){
+  let nav=0, prev=0, mkt=0, fxe=0;
+  H.forEach(h=>{
+    nav+=valSGD(h); prev+=prevValSGD(h);
+    const fxNow=FX[h.cur]||1, fxPrev=(FXPREV[h.cur]!=null?FXPREV[h.cur]:fxNow), rec=pd[h.t]||{};
+    let nNow=null,nPrev=null;
+    if(h.yf&&rec.price>0){ nNow=h.qty*rec.price; nPrev=h.qty*(rec.prevClose>0?rec.prevClose:rec.price); }
+    else if(!h.yf&&h.manualNative!=null){ nNow=h.manualNative; nPrev=h.manualNative; }
+    if(nNow!=null){ mkt+=(nNow-nPrev)*fxNow; fxe+=nPrev*(fxNow-fxPrev); }
+  });
+  return {nav,prev,chg:nav-prev,pct:prev>0?nav/prev-1:null,mkt,fxe};
+}
+
+// Indexed NAV curve: TODAY's holdings priced backwards through their own daily
+// history. Static lines (cash, property, PE, fund) are held flat and FX is held
+// at today's rate, so this answers "how would the book I hold today have
+// travelled?" — it is deliberately NOT a claim about actual past NAV, because
+// positions, cash and property values have all changed over the period.
+function navCurve(){
+  const priced=H.filter(h=>h.yf&&pd[h.t]?.history?.length>1);
+  if(!priced.length) return [];
+  const dates=[...new Set(priced.flatMap(h=>pd[h.t].history.map(x=>x.time)))].sort();
+  if(dates.length<2) return [];
+  const flat=H.filter(h=>!(h.yf&&pd[h.t]?.history?.length>1)).reduce((s,h)=>s+valSGD(h),0);
+  const px={}, last={};
+  priced.forEach(h=>{
+    const m={}; pd[h.t].history.forEach(x=>{m[x.time]=x.close;});
+    px[h.id]=m;
+    let seed=null; for(const x of pd[h.t].history){ if(x.time<=dates[0]) seed=x.close; else break; }
+    last[h.id]=seed!=null?seed:pd[h.t].history[0].close;
+  });
+  return dates.map(d=>{
+    let v=flat;
+    priced.forEach(h=>{ if(px[h.id][d]!=null) last[h.id]=px[h.id][d]; v+=h.qty*last[h.id]*(FX[h.cur]||1); });
+    return {time:d,value:v};
+  });
+}
+function navPeriods(curve){
+  const c=curve||navCurve(); const n=c.length; if(n<2) return {};
+  const cur=c[n-1].value, at=i=>(i>=0&&i<n&&c[i].value>0)?cur/c[i].value-1:null;
+  const yb=c.findIndex(x=>x.time.startsWith(String(new Date().getFullYear())+'-'));
+  return {r1w:at(n-6),r1m:at(n-23),r3m:at(n-67),rYTD:(yb>=0&&yb<n-1)?cur/c[yb].value-1:null,r1y:at(n-253),
+          from:c[0].time,days:n};
+}
+// A REAL NAV history accrues from the first day this runs: each visit stamps the
+// observed NAV into localStorage on this device. Unlike the curve above it
+// includes position changes (so a day you add an account shows a jump — that is
+// a contribution, not performance; the note in the card says so).
+function logNav(nav){
+  try{
+    const K='pcc-nav-log', d=new Date().toISOString().slice(0,10);
+    const log=JSON.parse(localStorage.getItem(K)||'{}');
+    log[d]=Math.round(nav);
+    const ks=Object.keys(log).sort();
+    if(ks.length>400) ks.slice(0,ks.length-400).forEach(k=>{delete log[k];});
+    localStorage.setItem(K,JSON.stringify(log));
+    return log;
+  }catch(_){ return null; }
+}
+
 const fmt=(n,d=2)=>n==null?'—':n.toLocaleString('en-SG',{minimumFractionDigits:d,maximumFractionDigits:d});
 const fmtP=n=>n==null?'—':(n>=0?'+':'')+(n*100).toFixed(2)+'%';
 const fmtS=n=>n==null?'—':'S$'+Math.round(n).toLocaleString('en-SG');
@@ -851,23 +952,61 @@ async function openTicker(sym){
 function totalNW(){return H.reduce((s,h)=>s+valSGD(h),0);}
 function secReturn(key){let ws=0,wt=0;H.forEach(h=>{if(!h.yf)return;const r=pd[h.t]?.[key];const v=valSGD(h);if(r!=null&&v>0){ws+=v*r;wt+=v;}});return wt>0?ws/wt:null;}
 
+let navChart=null, navSeries=null;
+const sgnS=n=>n==null?'—':(n>=0?'+':'−')+'S$'+Math.abs(Math.round(n)).toLocaleString('en-SG');
+function renderNav(){
+  const d=navDay();
+  el('nav-val').textContent=fmtS(d.nav);
+  el('nav-day').innerHTML=`<span class="${clr(d.chg)}">${sgnS(d.chg)} · ${fmtP(d.pct)}</span><span style="color:var(--muted);font-weight:400"> today</span>`;
+  el('nav-split').textContent=`markets ${sgnS(d.mkt)} · FX ${sgnS(d.fxe)}`;
+  const curve=navCurve(), p=navPeriods(curve);
+  el('nav-1d').textContent=fmtP(d.pct); el('nav-1d').className='pp-val '+clr(d.pct);
+  [['r1w','nav-1w'],['r1m','nav-1m'],['r3m','nav-3m'],['rYTD','nav-ytd'],['r1y','nav-1y']].forEach(([k,id])=>{
+    el(id).textContent=fmtP(p[k]); el(id).className='pp-val '+clr(p[k]);
+  });
+  // chart: build once, then just push new data (renderAll runs on every ticker)
+  if(curve.length>1){
+    const box=el('nav-chart');
+    if(!navChart&&window.LightweightCharts&&box.clientWidth>0){
+      try{
+        navChart=LightweightCharts.createChart(box,{width:box.clientWidth,height:190,
+          layout:{background:{color:'transparent'},textColor:'#78716c'},
+          grid:{vertLines:{color:'rgba(228,228,226,.5)'},horzLines:{color:'rgba(228,228,226,.5)'}},
+          rightPriceScale:{borderColor:'#e4e4e2'},timeScale:{borderColor:'#e4e4e2'},
+          handleScale:false,handleScroll:false});
+        navSeries=navChart.addAreaSeries({lineColor:'#b45309',topColor:'rgba(180,83,9,.22)',bottomColor:'rgba(180,83,9,.02)',lineWidth:2,
+          priceFormat:{type:'custom',formatter:v=>'S$'+(v/1e6).toFixed(2)+'M'}});
+        new ResizeObserver(()=>{try{navChart.applyOptions({width:box.clientWidth});}catch(_){}}).observe(box);
+      }catch(_){ navChart=null; }
+    }
+    if(navSeries){ try{ navSeries.setData(curve); navChart.timeScale().fitContent(); }catch(_){} }
+  }
+  const log=logNav(d.nav)||{}; const lk=Object.keys(log).sort();
+  el('nav-note').innerHTML=`<b>1D</b> is the true NAV move — every line revalued at yesterday's close <i>and</i> yesterday's FX, so currency swings on the CNY/USD/MYR cash count (markets ${sgnS(d.mkt)}, FX ${sgnS(d.fxe)}, which sum exactly to ${sgnS(d.chg)}). `
+    +`<b>1W–1Y and the chart</b> price <i>today's</i> holdings backwards through their own history${p.from?` from ${fmtStamp(p.from)}`:''}, holding cash/property/PE flat and FX at today's rate — so they show how the book you hold now would have travelled, <b>not</b> your actual past NAV (positions, cash and property have all changed). `
+    +`Real NAV history is being recorded on this device from each visit${lk.length>1?` — ${lk.length} days so far, since ${fmtStamp(lk[0])}`:` — started ${fmtStamp(lk[0]||new Date().toISOString().slice(0,10))}`}. Adding an account (as on 29 Jul) moves NAV without being performance.`;
+}
+
 function renderAll(){
   const nw=totalNW();
   const liq=H.filter(h=>['Equity','Commodity','Cash','Fund'].includes(h.ac)).reduce((s,h)=>s+valSGD(h),0);
   const illq=H.filter(h=>['Property','Private Equity'].includes(h.ac)).reduce((s,h)=>s+valSGD(h),0);
   const sec=H.filter(h=>h.ac==='Equity').reduce((s,h)=>s+valSGD(h),0);
   const r1d=secReturn('r1d');
-  const dayPnL=r1d!=null?sec*r1d/(1+r1d):null;
-  // daily change of each aggregate (only listed securities move day-to-day)
-  const nwChg = (dayPnL!=null && (nw-dayPnL)>0) ? dayPnL/(nw-dayPnL) : null;
-  const liqChg = (dayPnL!=null && (liq-dayPnL)>0) ? dayPnL/(liq-dayPnL) : null;
+  // True daily moves: every line revalued at yesterday's close AND yesterday's
+  // FX (see navDay), so the multi-currency cash contributes instead of being
+  // treated as static. The securities-only figure stays available as r1d.
+  const nd=navDay();
+  const liqPrev=H.filter(h=>['Equity','Commodity','Cash','Fund'].includes(h.ac)).reduce((s,h)=>s+prevValSGD(h),0);
+  const nwChg=nd.pct;
+  const liqChg=liqPrev>0?liq/liqPrev-1:null;
   el('kpi-nw').innerHTML=fmtSk(nw)+moveArrow(nwChg);el('kpi-nw').className='kpi-val';
   el('kpi-nw-sub').textContent=fmt(nw,0)+' SGD total';
   el('kpi-liq').innerHTML=fmtSk(liq)+moveArrow(liqChg);
   el('kpi-illq').innerHTML=fmtSk(illq)+moveArrow(0);
   el('kpi-sec').innerHTML=fmtSk(sec)+moveArrow(r1d);
-  el('kpi-day').innerHTML=(dayPnL!=null?(dayPnL>=0?'+':'')+fmtS(dayPnL):'—')+moveArrow(r1d);el('kpi-day').className='kpi-val '+clr(dayPnL);
-  el('kpi-day-sub').textContent=r1d!=null?fmtP(r1d)+' weighted':'vs prev close';
+  el('kpi-day').innerHTML=sgnS(nd.chg)+moveArrow(nd.pct);el('kpi-day').className='kpi-val '+clr(nd.chg);
+  el('kpi-day-sub').textContent=`${fmtP(nd.pct)} · markets ${sgnS(nd.mkt)} · FX ${sgnS(nd.fxe)}`;
   el('kpi-fx').innerHTML=[['USD',fmt(FX.USD,3)],['HKD',fmt(1/FX.HKD,2)],['CNY',fmt(1/FX.CNY,2)],['MYR',fmt(1/FX.MYR,2)]].map(([c,v])=>`<span class="fxchip"><b>${c}</b>${v}${fxArrow(c)}</span>`).join('');
   // period grid
   [['r1d','pp-1d'],['r1w','pp-1w'],['r1m','pp-1m'],['r3m','pp-3m'],['rYTD','pp-ytd'],['r1y','pp-1y']].forEach(([k,id])=>{const r=secReturn(k);el(id).textContent=fmtP(r);el(id).className='pp-val '+clr(r);});
@@ -880,7 +1019,7 @@ function renderAll(){
   renderDonut('donut-class','legend-class','ac');
   renderDonut('donut-region','legend-region','region');
   renderDonut('donut-currency','legend-currency','cur');
-  renderTopHoldings();renderMovers();renderActionAlerts();renderAllocation();
+  renderTopHoldings();renderMovers();renderActionAlerts();renderAllocation();renderNav();
 }
 
 function setFilter(f,b){filt=f;document.querySelectorAll('.filter-pill').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderHoldings();}
