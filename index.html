@@ -967,6 +967,13 @@ function renderNav(){
   // chart: build once, then just push new data (renderAll runs on every ticker)
   if(curve.length>1){
     const box=el('nav-chart');
+    // If the element has no width yet (page opened in a background tab, or the
+    // panel not laid out), createChart would produce a 0-px canvas. Wait for the
+    // first non-zero width and then build it, so the chart can never end up blank.
+    if(!navChart&&window.LightweightCharts&&!(box.clientWidth>0)&&!box.dataset.navPending){
+      box.dataset.navPending='1';
+      try{ const ro=new ResizeObserver(()=>{ if(box.clientWidth>0){ ro.disconnect(); box.dataset.navPending=''; renderNav(); } }); ro.observe(box); }catch(_){ box.dataset.navPending=''; }
+    }
     if(!navChart&&window.LightweightCharts&&box.clientWidth>0){
       try{
         navChart=LightweightCharts.createChart(box,{width:box.clientWidth,height:190,
