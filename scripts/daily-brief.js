@@ -148,7 +148,7 @@ if (env.EMAIL_TO) {
   const as = `on run argv
   tell application "Mail" to launch
   set ready to false
-  repeat 30 times
+  repeat 20 times
     try
       tell application "Mail" to get name of account 1
       set ready to true
@@ -159,7 +159,7 @@ if (env.EMAIL_TO) {
   end repeat
   if not ready then error "Mail did not become ready"
   delay 2
-  with timeout of 300 seconds
+  with timeout of 150 seconds
     tell application "Mail"
       set msg to make new outgoing message with properties {subject:item 1 of argv, html content:item 2 of argv, visible:false}
       if (count of argv) > 3 then set sender of msg to item 4 of argv
@@ -172,11 +172,18 @@ end run`;
   if (env.EMAIL_FROM) args.push(env.EMAIL_FROM);
   // Up to 3 attempts with widening gaps — a launchd 08:15 run may catch Mail
   // mid-launch, mid-account-connect, or mid-network-flap.
-  let r = spawnSync('osascript', args, { input: as, encoding: 'utf8', timeout: 420000 });
+  // The JS timeout MUST exceed the AppleScript's own budget (60s ready-poll +
+  // 2s + 150s send ≈ 215s), otherwise spawnSync SIGTERMs osascript before it can
+  // report its own error — which is exactly what happened on 30 Jul: attempts 1
+  // and 2 were killed at the old 420s ceiling with EMPTY stderr, so the failure
+  // was undiagnosable and delivery slipped from 08:15 to 08:35. Fail fast, with
+  // a real reason, and keep all three attempts inside ~13 minutes.
+  const why = r => (r.stderr || '').trim() || (r.signal ? `killed by ${r.signal} (timed out)` : `exit ${r.status}`);
+  let r = spawnSync('osascript', args, { input: as, encoding: 'utf8', timeout: 260000 });
   for (let attempt = 2; attempt <= 3 && r.status !== 0; attempt++) {
-    log.push(`email attempt ${attempt - 1} failed (${(r.stderr || '').trim().slice(0, 80)}) — retrying`);
+    log.push(`email attempt ${attempt - 1} failed: ${why(r).slice(0, 120)} — retrying`);
     spawnSync('sleep', [String(attempt * 20)]);
-    r = spawnSync('osascript', args, { input: as, encoding: 'utf8', timeout: 420000 });
+    r = spawnSync('osascript', args, { input: as, encoding: 'utf8', timeout: 260000 });
   }
   emailOk = r.status === 0;
   if (emailOk) try { fs.writeFileSync(STATE, todayISO); } catch (e) {}
