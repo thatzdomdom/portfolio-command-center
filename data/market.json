@@ -1,139 +1,139 @@
 {
-  "updated": "2026-07-30",
-  "note": "Thursday 07:00 SGT, pre-Asia-open (SGX 09:00, HKEX 09:30), after the Wed 29 Jul US close — FOMC DECISION DAY. The Fed held at 3.50-3.75% for a fifth straight meeting but the decision read HAWKISH: a 9-3 vote with three regional-president dissents (Hammack, Kashkari, Logan) preferring an immediate 25bp hike, a deliberately short statement, and Chair Warsh signaling 'won't hesitate' and that prices (not the labor market) will set policy — with no September commitment. Equities sold off hard: Dow -2.19% to 51,594 (worst day since Apr 2025), S&P 500 -1.52% to 7,316.15, Nasdaq -1.74% to 24,443, Russell 2000 -1.61%; VIX jumped +13% to 20.66. Compounding it, the US-Iran pause BROKE overnight — renewed airstrikes and Houthi Red Sea strikes sent Brent +7.9% to ~$90.7 and WTI +6.6% to ~$84.5, with energy the lone gaining sector. The semis rout extended (SMH -4%; >$1trn wiped since 24 Jul). Metals held up as havens (silver ~$57.5 flat, gold ~$4,029). Sentiment slid deeper into Fear (baked CNN ~37, crypto ~29 — the dashboard fetches Fear&Greed LIVE in-browser with these as fallback). Breadth deteriorated on the two-day risk-off. Flows are LAGGED: the freshest BofA/EPFR Flow Show is still the week to 22 Jul (the new week releases Friday) and now PRE-dates the FOMC selloff — labeled as such. CNN exposes no numeric per-gauge value this run, so the 7 sub-components are INFERRED from the composite and cited internals and labeled as such.",
+  "updated": "2026-07-31",
+  "note": "Friday 07:00 SGT, pre-Asia-open (SGX 09:00, HKEX 09:30), after the Thu 30 Jul US close. The tape SNAPPED BACK: the day after Wednesday's hawkish-hold selloff, US stocks staged a sharp relief rally — Nasdaq +2.8% to 25,122 (best day of the year, ending a six-day losing streak), S&P 500 +1.7% to a record 7,437.63, Dow +1.2% to 52,208 — led by Microsoft's record one-day market-value gain and a semiconductor rebound. After the close Amazon jumped ~9% AH (AWS +37%, capex raised to ~$220bn, re-validating AI spend) while Apple fell ~4% AH on a Services miss. Macro was 'stagflation-lite' — Q2 GDP slowed to +1.5%, June core PCE sticky at +3.3% y/y — keeping the Fed hawkish (10Y ~4.68%, 2Y fresh 2026 highs) even as the market looked through it. Gold pushed to ~$4,080 near a record; oil held >$92 Brent as the US-Iran pause stayed broken. Sentiment: CNN Fear&Greed printed ~32 ('Fear') on 30 Jul but that reading LAGS the intraday rebound; the dashboard fetches Fear&Greed LIVE in-browser (this baked value is the fallback). Breadth improved on the rally. Flows are LAGGED: the freshest BofA/EPFR Flow Show is still the week to 22 Jul (the week-to-29-Jul report releases ~Fri 31 Jul and is not yet out) — labeled as such; it pre-dates the 28-30 Jul round-trip. CNN exposes no numeric per-gauge value this run, so the 7 sub-components are INFERRED from the composite and cited internals and labeled as such.",
   "fearGreed": {
-    "value": 37,
+    "value": 34,
     "rating": "Fear",
-    "asOf": "2026-07-29",
-    "prevClose": 39,
+    "asOf": "2026-07-30",
+    "prevClose": 38,
     "prev1w": 41,
     "prev1m": 40,
     "prev1y": 55,
-    "cryptoValue": 29,
+    "cryptoValue": 34,
     "cryptoRating": "Fear",
     "components": [
       {
         "name": "Market Momentum",
-        "reading": "S&P 500 vs its 125-day moving average. The index fell -1.52% to 7,316.15 on Wed 29 Jul (FOMC day) — a second straight heavy down day that leaves it still above a rising 125-DMA but with momentum cooling fast off the 7,428 record; neutral tilting fearful. [Inferred — CNN exposes no numeric per-gauge value this run]",
-        "signal": "fear"
+        "reading": "S&P 500 vs its 125-day moving average. The index rallied +1.7% to a record 7,437.63 on Thu 30 Jul, back above a rising 125-DMA after the one-day FOMC dip — momentum turned neutral-to-constructive on the rebound. [Inferred — CNN exposes no numeric per-gauge value this run]",
+        "signal": "neutral"
       },
       {
         "name": "Stock Price Strength",
-        "reading": "Net 52-week highs vs lows on the NYSE. Net new highs turned negative on the two-day selloff (Nasdaq new lows outran new highs in the reference session) as leadership narrowed — a fearful read. [Inferred from exchange data]",
-        "signal": "fear"
+        "reading": "Net 52-week highs vs lows on the NYSE. Net new highs improved as the index reclaimed record ground on the +1.7% rally, though leadership remains concentrated in mega-cap tech — a neutral-to-mildly-fearful read. [Inferred from exchange data]",
+        "signal": "neutral"
       },
       {
         "name": "Stock Price Breadth",
-        "reading": "McClellan Volume Summation (advancing vs declining volume). NYSE decliners led (~1.4-to-1 in the reference session) across both down days and the Summation Index is falling from its 8 May peak — deteriorating breadth, fearful. [Inferred — mcoscillator/Barchart JS-gated this run]",
-        "signal": "fear"
+        "reading": "McClellan Volume Summation (advancing vs declining volume). NYSE advancers led on the +1.7% rebound day, turning the daily breadth positive after two down days; the Summation Index is still recovering off its recent roll-over — improving but not yet decisively bullish. [Inferred — mcoscillator/Barchart JS-gated this run]",
+        "signal": "neutral"
       },
       {
         "name": "Put/Call Options",
-        "reading": "5-day put/call ratio. Options demand skewed heavily hedged through the FOMC risk-off and the semis rout — a fearful tilt consistent with the mid-30s composite and the VIX spike. [Inferred]",
+        "reading": "5-day put/call ratio. Options demand had skewed heavily hedged through the FOMC risk-off; the 5-day average is still elevated (fearful) even as spot demand eased on the rally. [Inferred]",
         "signal": "fear"
       },
       {
         "name": "Market Volatility",
-        "reading": "VIX vs its 50-day moving average. VIX jumped +13.45% to 20.66 on Wed 29 Jul, back above the 20 line and above its 50-day average as the hawkish hold and oil spike hit — a fearful shift from Tuesday's contained ~18.2. [VIX 20.66 confirmed via Yahoo/Cboe]",
-        "signal": "fear"
+        "reading": "VIX vs its 50-day moving average. The VIX eased from Wednesday's spike (~20.66) back toward ~18 on Thu 30 Jul as the relief rally took hold — a de-escalation from fear toward neutral. [VIX confirmed via Yahoo/Cboe]",
+        "signal": "neutral"
       },
       {
         "name": "Safe-Haven Demand",
-        "reading": "20-day stock vs Treasury bond return spread. Stocks fell hard while Treasuries ALSO sold off (10Y rose ~7bp to ~4.64% as the market judged the Fed 'behind' on inflation) — bonds gave no haven bid; money fled to gold and oil instead. A fearful stock-vs-bond mix. [Inferred]",
+        "reading": "20-day stock vs Treasury bond return spread. Stocks rallied hard while Treasuries SOLD OFF (10Y rose ~10bp to ~4.68% on sticky 3.3% core PCE) — bonds gave no bid and money chased gold to a near-record; the 20-day stock-vs-bond spread stays fearful on the bond side. [Inferred]",
         "signal": "fear"
       },
       {
         "name": "Junk Bond Demand",
-        "reading": "Yield spread between junk bonds and investment-grade. HY OAS stayed historically tight (~280bp area, ~16-18th percentile) even through the equity selloff — credit is the last non-fearful gauge, signaling no funding stress yet. [FRED BAMLH0A0HYM2, ~277bp wk to 23 Jul; likely modestly wider on the risk-off]",
+        "reading": "Yield spread between junk bonds and investment-grade. HY OAS stayed historically tight (~277bp area, ~16th percentile) with only modest widening — credit shows no funding stress, the least-fearful gauge. [FRED BAMLH0A0HYM2, ~277bp and edging wider]",
         "signal": "neutral"
       }
     ],
     "sources": [
       "https://www.cnn.com/markets/fear-and-greed",
       "https://alternative.me/crypto/fear-and-greed-index/",
-      "https://www.fool.com/coverage/stock-market-today/2026/07/29/stock-market-today-july-29-stocks-slide-on-hawkish-fed-and-increased-middle-east-tensions/",
+      "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-july-30-2026",
       "https://fred.stlouisfed.org/series/BAMLH0A0HYM2"
     ]
   },
   "breadth": {
-    "asOf": "2026-07-29",
+    "asOf": "2026-07-30",
     "metrics": [
       {
         "label": "% of S&P 500 stocks above 200-day MA",
-        "value": "~62-66% (was ~70% on 28 Jul per Seeking Alpha, the strongest since February; the two-day, ~3.5%-cumulative index selloff on 28-29 Jul likely eased it into the low/mid-60s — a confirmed 29 Jul close value was not retrievable this run as Barchart $SPXA200R is JS-gated). Still a majority above trend, a constructive longer-term backdrop that is cooling. 52-wk range roughly 42-70",
-        "signal": "neutral",
-        "pct": 64
+        "value": "~mid-to-high 60s% (was ~68.6% on 16 Jul, the highest since February, and ~70% by 28 Jul per Seeking Alpha; the 28-29 Jul selloff eased it before Thursday's +1.7% rebound firmed it back into the mid-to-high 60s — a clean dated 30 Jul close was not retrievable as Barchart $SPXA200R is JS-gated). A majority above trend — a constructive longer-term backdrop. 52-wk range roughly 42-70",
+        "signal": "bullish",
+        "pct": 66
       },
       {
         "label": "% of S&P 500 stocks above 50-day MA",
-        "value": "~46-50% (had just crossed >50% for the first time since February on ~27-28 Jul per Seeking Alpha; the FOMC-day selloff likely knocked the shorter gauge back to/below the 50% line) — short-term participation is now borderline, consistent with a rally that rolled over into the Fed. Approximate; clean 29 Jul value not retrievable",
-        "signal": "bearish",
-        "pct": 48
+        "value": "~50-55% (had crossed >50% for the first time since February in late July per Seeking Alpha; the FOMC-day dip knocked it back but Thursday's broad +1.7% advance likely nudged it back to/above the 50% line) — short-term participation is borderline-to-improving. Approximate; clean 30 Jul value not retrievable",
+        "signal": "neutral",
+        "pct": 53
       },
       {
         "label": "NYSE advancers vs decliners (latest session)",
-        "value": "Decliners led ~1.4-to-1 across the 28-29 Jul selloff (directional; a clean NYSE-composite A/D count for the 29 Jul tape was not pullable from free sources this run) — broadly negative as the hawkish hold and oil spike hit cyclicals and tech, with only energy green",
-        "signal": "bearish",
+        "value": "Advancers led on Thu 30 Jul as the broad market rallied +1.7% (directional; a clean NYSE-composite A/D count for the 30 Jul tape was not pullable from free sources this run) — positive breadth on the rebound day after two down days, with tech/semis and cyclicals leading the recovery",
+        "signal": "bullish",
         "pct": null
       },
       {
         "label": "NYSE McClellan Oscillator / Summation Index",
-        "value": "Falling — the Summation Index has rolled over from its 8 May peak (+471) and two consecutive broad down days deepened the deterioration; a confirmed dated late-July numeric level was not retrievable from free sources this run (StockCharts $NYMO/$NYSI JS-gated). Direction clearly negative",
-        "signal": "bearish",
+        "value": "Turning up — the Oscillator swung positive on the broad rebound day after the two-day selloff pushed it negative; the Summation Index remains below its 8 May peak but is stabilizing. A confirmed dated numeric level was not retrievable from free sources this run (StockCharts $NYMO/$NYSI JS-gated). Direction improving",
+        "signal": "neutral",
         "pct": null
       },
       {
         "label": "52-week New Highs minus New Lows (NYSE)",
-        "value": "Turning negative — new lows began outrunning new highs on the two-day selloff (Nasdaq showed ~81 new lows vs ~59 new highs in the reference session) after net-positive readings mid-July; a precise NYSE-specific dated figure was not confirmed this run",
-        "signal": "bearish",
+        "value": "Improving — the record index close on 30 Jul lifted new highs back above new lows after the selloff briefly flipped them negative; a precise NYSE-specific dated figure was not confirmed this run",
+        "signal": "neutral",
         "pct": null
       },
       {
         "label": "Cumulative NYSE Advance-Decline line trend",
-        "value": "Rolling over — the A-D line held up with the ~67-70% >200-DMA breadth into mid-July but has weakened on the 28-29 Jul risk-off as leadership narrowed and the Nasdaq 100 slipped into correction (~-10% from its June peak) on the chip rout (inferred trend read)",
-        "signal": "bearish",
+        "value": "Recovering — the A-D line rolled over on the 28-29 Jul risk-off but turned back up with the broad +1.7% rebound and the record S&P close; the Nasdaq's +2.8% snapback and the semis recovery restored participation (inferred trend read)",
+        "signal": "neutral",
         "pct": null
       },
       {
         "label": "% of 11 S&P sectors above their 200-DMA",
-        "value": "Estimated ~55-64% (roughly 6-7 of 11 sector ETFs) and falling — Industrials (-3.4% Wed) and Tech (-2.4% Wed) led the drop and semis are in correction; Energy was the lone gainer on the oil spike. A clean dated count was not extractable this run (inferred from the deteriorating index-level breadth)",
-        "signal": "neutral",
-        "pct": 59
+        "value": "Estimated ~64-73% (roughly 7-8 of 11 sector ETFs) and firming — the broad rebound lifted tech/semis, discretionary and financials back above trend while Energy stays supported by the oil spike. A clean dated count was not extractable this run (inferred from the recovering index-level breadth)",
+        "signal": "bullish",
+        "pct": 68
       }
     ],
-    "note": "Longer-term breadth is still a majority-above-trend (~62-66% of S&P members over their 200-DMA) but the two-day FOMC-week selloff clearly rolled the internals over: the shorter 50-DMA gauge slipped back to/below the 50% line, decliners led ~1.4:1, net new highs turned negative and the McClellan Summation is falling. Indices dropped hard from records (S&P 7,428->7,316, Nasdaq 100 into a ~-10% correction) on the hawkish hold, the oil spike and the extending chip rout — narrowing, deteriorating participation. Several sub-metrics (exact 200-/50-DMA close, daily A/D, McClellan level, net new highs) were JS-gated or lagged this run and are labeled approximate. The open question: whether the Thu 30 Jul GDP/PCE prints and AAPL/AMZN earnings stabilize the tape or extend the risk-off.",
+    "note": "Breadth firmed on Thursday's broad relief rally: longer-term participation stays a majority-above-trend (~mid-to-high 60s% of S&P members over their 200-DMA) and the shorter 50-DMA gauge nudged back toward/above the 50% line as advancers led and the record S&P/Nasdaq snapback restored semis leadership. The internals had rolled over on the 28-29 Jul FOMC selloff; the AWS/MSFT-led rebound (Nasdaq +2.8%, best day of the year) reversed most of that damage — broadening, recovering participation rather than a narrow melt-up. Several sub-metrics (exact 200-/50-DMA close, daily A/D, McClellan level, net new highs) were JS-gated or lagged this run and are labeled approximate. The open question: whether the 31 Jul Flow Show and next week's SGX/HK earnings confirm the risk-on turn or the sticky-inflation/hawkish-Fed backdrop re-caps it.",
     "sources": [
       "https://seekingalpha.com/news/4614620-s-and-p-500-stocks-above-their-200-day-ma-highest-since-february",
       "https://seekingalpha.com/news/4619158-most-sp-500-stocks-trade-above-50-day-moving-average-for-first-time-since-february",
-      "https://www.fool.com/coverage/stock-market-today/2026/07/29/stock-market-today-july-29-stocks-slide-on-hawkish-fed-and-increased-middle-east-tensions/",
+      "https://finance.yahoo.com/markets/live/stock-market-today-thursday-july-30-dow-sp-500-nasdaq-082255995.html",
       "https://www.barchart.com/stocks/quotes/$S5FI"
     ]
   },
   "flows": {
-    "asOf": "2026-07-30",
-    "period": "BofA 'Flow Show' / EPFR week ending Wednesday 22 July 2026 (still the freshest verifiable weekly — the week-to-29-Jul report releases Friday 31 Jul and is NOT yet out). These flows now PRE-date the 28-29 Jul FOMC selloff, oil-spike and chip rout; treat the risk-on EM/China tilt as a pre-shock snapshot. Weekly flows lag ~2-6 days. Labeled week-to-22-Jul 2026.",
-    "narrative": "The freshest weekly read (to 22 Jul, pre-FOMC) showed a decisive cross-border rotation OUT of developed markets and cash INTO emerging markets — above all China, which posted its record 3rd-largest weekly inflow ever (+$21.3bn) and drove EM's 2nd-largest weekly haul on record (+$29.6bn) on H2-stimulus optimism, while US equities bled -$7.2bn and Europe -$1.6bn (UK -$1.2bn, largest since November). Korea drew +$1.5bn (a record +$16.3bn over four weeks) and Japan extended its inflow streak to a 7th straight week (+$1.5bn). Cash left money-markets (-$33.9bn) to fund equities (+$30.4bn overall), bonds (+$14.9bn), gold (+$2.0bn, largest since April) and crypto (+$0.9bn) — a barbell chasing EM/China upside while hedging FOMC-hike and geopolitical risk. IMPORTANT: this snapshot pre-dates the hawkish hold and the Iran-pause breakdown, so the next Flow Show (to 29 Jul, out Friday) will be the tell on whether the risk-on EM tilt survived the selloff. BofA's July FMS still shows cash at just 3.6% of AUM (below the 4% contrarian Cash-Rule SELL trigger); the next FMS lands mid-August.",
+    "asOf": "2026-07-31",
+    "period": "BofA 'Flow Show' / EPFR week ending Wednesday 22 July 2026 (still the freshest verifiable weekly — the week-to-29-Jul report releases ~Friday 31 Jul and is NOT yet out at this run). These flows PRE-date the 28-30 Jul FOMC selloff-and-rebound round-trip, the oil spike and the chip rout/recovery; treat the risk-on EM/China tilt as a pre-shock snapshot. Weekly flows lag ~2-6 days. Labeled week-to-22-Jul 2026.",
+    "narrative": "The freshest weekly read (to 22 Jul, pre-turmoil) showed a decisive cross-border rotation OUT of developed markets and cash INTO emerging markets — above all China, which posted its record 3rd-largest weekly inflow ever (+$21.3bn) and drove EM's 2nd-largest weekly haul on record (+$29.6bn) on H2-stimulus optimism, while US equities bled -$7.2bn and Europe -$1.6bn. Cash left money-markets (-$33.9bn) to fund equities (+$30.4bn overall), bonds (+$14.9bn), gold (+$2.0bn, largest since April) and crypto (+$0.9bn) — a barbell chasing EM/China upside while hedging FOMC-hike and geopolitical risk. This snapshot pre-dates the hawkish hold, the Iran-pause breakdown AND Thursday's AWS/MSFT-led rebound, so the next Flow Show (to 29 Jul, out ~Friday) is the tell on whether the risk-on EM tilt survived the round-trip. BofA's Bull & Bear Indicator sits at an extreme 9.6 and the July FMS shows cash at just 3.6% of AUM (below the 4% contrarian Cash-Rule SELL trigger, active since May) — stretched-bullish positioning that both amplified the Wednesday drop and fueled Thursday's snapback; the next FMS lands mid-August.",
     "regions": [
       {
         "region": "US / Global equities",
         "direction": "outflow",
         "amount": "US equities -$7.2bn (global equities +$30.4bn overall)",
         "amountUSD": -7200000000,
-        "note": "US-domestic equity funds bled -$7.2bn (wk to 22 Jul) even as the aggregate global-equity number stayed positive — money left the US for EM/China. This pre-dates the 28-29 Jul selloff; with FMS cash at just 3.6% (contrarian sell), the stretched-bullish positioning is exactly what amplified the hawkish-hold drop."
+        "note": "US-domestic equity funds bled -$7.2bn (wk to 22 Jul) even as the aggregate global-equity number stayed positive — money left the US for EM/China. This pre-dates the 28-30 Jul round-trip; with FMS cash at just 3.6% (contrarian sell), the stretched-bullish positioning amplified both the hawkish-hold drop and Thursday's rebound."
       },
       {
         "region": "Emerging Markets",
         "direction": "inflow",
         "amount": "+$29.6bn (wk to 22 Jul)",
         "amountUSD": 29600000000,
-        "note": "The 2nd-largest weekly EM-equity inflow on record, China-fuelled — the marquee flow of the week and a bid under the HK-tech core into the 24 Jul Politburo H2-stimulus signal. A pre-shock reading; watch whether it survives the FOMC risk-off."
+        "note": "The 2nd-largest weekly EM-equity inflow on record, China-fuelled — the marquee flow of the week and a bid under the HK-tech core into the 24 Jul Politburo H2-stimulus signal. A pre-shock reading; watch whether it survives in the 31 Jul Flow Show."
       },
       {
         "region": "China",
         "direction": "inflow",
         "amount": "+$21.3bn (wk to 22 Jul)",
         "amountUSD": 21300000000,
-        "note": "China's record 3rd-largest weekly inflow ever, on stronger-than-expected Politburo stimulus wording and the biggest MLF liquidity injection in five months — corroborated the HK/China-tech bid (Tencent/Alibaba/Xiaomi) even through the semis rout. Pre-dates the 29 Jul selloff."
+        "note": "China's record 3rd-largest weekly inflow ever, on stronger-than-expected Politburo stimulus wording and the biggest MLF injection in five months — but southbound Stock Connect turned to OUTFLOWS on the chip rout later in the week (e.g. Xiaomi/SMIC net sold), a caution that the 31 Jul Flow Show may show fading."
       },
       {
         "region": "Japan",
@@ -154,21 +154,21 @@
         "direction": "outflow",
         "amount": "-$33.9bn (wk to 22 Jul)",
         "amountUSD": -33900000000,
-        "note": "A large money-market OUTFLOW — cash redeployed into equities, bonds and gold rather than hoarded. BofA's FMS cash level (3.6% of AUM) still trips the contrarian Cash-Rule sell signal; parked cash yields ~3.5-3.75% — the book's productive dry powder into the post-FOMC shakeout now underway."
+        "note": "A large money-market OUTFLOW — cash redeployed into equities, bonds and gold rather than hoarded. BofA's FMS cash level (3.6% of AUM) still trips the contrarian Cash-Rule sell signal; parked cash yields ~3.5-3.75% — the book's productive dry powder through the round-trip."
       },
       {
         "region": "Bonds / Credit",
         "direction": "inflow",
         "amount": "+$14.9bn (wk to 22 Jul)",
         "amountUSD": 14900000000,
-        "note": "Broad bond-fund inflows continued as investors added duration alongside gold — a hedge that pre-dates the post-FOMC yield jump (10Y ~4.64%); HY OAS ~277bp signals no credit stress yet. IG/HY split not separately itemized this run."
+        "note": "Broad bond-fund inflows continued as investors added duration alongside gold — a hedge that pre-dates the post-FOMC yield jump (10Y ~4.68%); HY OAS ~277bp signals no credit stress yet. IG/HY split not separately itemized this run."
       },
       {
         "region": "Gold",
         "direction": "inflow",
         "amount": "+$2.0bn (wk to 22 Jul)",
         "amountUSD": 2000000000,
-        "note": "The largest weekly gold-fund inflow since April, on the FOMC-hike/geopolitical hedge bid — and validated by spot holding ~$4,029 through the FOMC-day equity selloff. Gold's YTD inflow remains a record; BofA flags elevated net-longs. (Crypto funds +$0.9bn the same week.)"
+        "note": "The largest weekly gold-fund inflow since April, on the FOMC-hike/geopolitical hedge bid — and validated by spot pushing to ~$4,080 near a record through the FOMC round-trip. Gold's YTD inflow remains a record; BofA flags elevated net-longs. (Crypto funds +$0.9bn the same week.)"
       }
     ],
     "movements": [
@@ -176,31 +176,31 @@
         "from": "US & Europe (DM equities)",
         "to": "EM / China equities",
         "amount": "US -$7.2bn, Europe -$1.6bn out; EM +$29.6bn, China +$21.3bn in",
-        "note": "The marquee rotation (wk to 22 Jul) — a decisive cross-border shift out of developed markets into EM, above all China's record 3rd-largest weekly inflow on H2-stimulus optimism. A pre-FOMC snapshot; the 31 Jul Flow Show will show whether it held through the selloff."
+        "note": "The marquee rotation (wk to 22 Jul) — a decisive cross-border shift out of developed markets into EM, above all China's record 3rd-largest weekly inflow on H2-stimulus optimism. A pre-turmoil snapshot; the 31 Jul Flow Show will show whether it held through the selloff-and-rebound."
       },
       {
         "from": "Money-market / cash",
         "to": "Equities, bonds, gold & crypto",
         "amount": "-$33.9bn MMF out; +$30.4bn equities, +$14.9bn bonds, +$2.0bn gold, +$0.9bn crypto",
-        "note": "Cash redeployed across risk AND hedges simultaneously — a barbell chasing EM/China upside while adding duration and gold against FOMC-hike and geopolitical risk. The uber-low FMS cash (3.6%) left the tape vulnerable to exactly the hawkish-hold shock that followed."
+        "note": "Cash redeployed across risk AND hedges simultaneously — a barbell chasing EM/China upside while adding duration and gold. The uber-low FMS cash (3.6%) left the tape swinging hard in both directions through the FOMC round-trip."
       },
       {
         "from": "Broad market",
         "to": "Tech & Financials",
         "amount": "Tech +$4.0bn; Financials +$1.5bn",
-        "note": "Tech drew inflows into the AI-capex-doubt narrative (wk to 22 Jul) — a bid that the subsequent >$1trn semis drawdown and the 28-29 Jul chip rout are now testing hard."
+        "note": "Tech drew inflows into the AI-capex-doubt narrative (wk to 22 Jul) — a bid vindicated by Thursday's AWS/MSFT-led rebound after the >$1trn semis drawdown had tested it."
       },
       {
         "from": "Cautious positioning",
         "to": "Stretched-bullish (contrarian sell)",
-        "amount": "FMS cash 3.6% of AUM (below 4% trigger); sentiment highest since Feb",
-        "note": "BofA's July survey showed uber-low cash tripping the contrarian Cash-Rule sell signal — the positioning backdrop that amplified the 28-29 Jul FOMC selloff. Next FMS mid-August."
+        "amount": "BofA Bull&Bear 9.6 (extreme); FMS cash 3.6% of AUM (below 4% trigger)",
+        "note": "BofA's indicators show extreme optimism and uber-low cash tripping the contrarian sell signal — the positioning backdrop that amplified BOTH the 28-29 Jul selloff and the 30 Jul snapback. Next FMS mid-August."
       },
       {
         "from": "Global risk",
         "to": "Japan & Korea (Asia DM/EM havens)",
         "amount": "Japan +$1.5bn (7th straight wk); Korea +$1.5bn (record +$16.3bn/4wk)",
-        "note": "Japan and Korea both kept drawing inflows — the persistent Asia bid within the EM-led rotation, even as the chip rout hit Korean semis."
+        "note": "Japan and Korea both kept drawing inflows — the persistent Asia bid within the EM-led rotation, even as the chip rout hit Korean semis mid-week before the rebound."
       }
     ],
     "sources": [
