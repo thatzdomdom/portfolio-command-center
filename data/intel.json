@@ -487,20 +487,6 @@
       ]
     },
     {
-      "ticker": "M44U.SI",
-      "insider": "Ng Kiat",
-      "role": "CEO & Executive Director, Mapletree Logistics Trust Mgmt",
-      "type": "Buy",
-      "shares": "~100,000",
-      "value": "~S$191K (~S$1.91/share)",
-      "date": "2026-07-06",
-      "rationale": "Mapletree Logistics Trust's CEO made an open-market purchase of ~100,000 units at ~S$1.91 in early July, boosting her personal holding by ~73% — a genuine director conviction buy in the S-REIT sleeve as the trust trades near multi-year lows on the higher-for-longer rate backdrop.",
-      "deepDive": "A CEO's own-account open-market purchase is a direct personal-conviction signal, and a ~73% boost is meaningful. It lands with MLT under pressure from higher-for-longer rates — an insider-validated reference for the industrial-S-REIT complex the book holds (Mapletree PACT, Keppel REIT peers) — a bid now tested by the post-FOMC yield backup (10Y ~4.64%).",
-      "sources": [
-        "https://links.sgx.com/"
-      ]
-    },
-    {
       "ticker": "NEM",
       "insider": "Peter Toth",
       "role": "EVP & Chief Sustainability and Development Officer",
@@ -528,5 +514,22 @@
         "https://links.sgx.com/"
       ]
     }
-  ]
+  ],
+  "dataQuality": {
+    "note": "Entries removed by the automated price cross-check (scripts/validate-intel.js): the stated price was outside the actual traded range, so the figures could not be trusted.",
+    "removed": [
+      {
+        "removedOn": "2026-07-31",
+        "section": "insiders",
+        "ticker": "M44U.SI",
+        "date": "2026-07-06",
+        "who": "Ng Kiat",
+        "assertedPrice": 1.91,
+        "assertedVia": "stated",
+        "actualRange": "1.130–1.370",
+        "onDay": "1.210–1.230",
+        "reason": "stated price outside the traded range for the ±14 days around the stated date"
+      }
+    ]
+  }
 }
