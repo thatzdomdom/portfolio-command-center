@@ -1475,6 +1475,29 @@ async function loadIntel(){
   }
 }
 function smCard(inner){return `<div class="card" style="margin-bottom:10px;">${inner}</div>`;}
+// Data-integrity surfacing (added 31 Jul 2026). An insider item was published
+// claiming a Mapletree Logistics CEO buy at S$1.91 on a day the unit traded
+// S$1.21-1.23 — it was a Dec-2020 article re-stamped with a 2026 date, naming
+// someone who left the role in 2024. A price gate now quarantines figures the
+// tape never printed, and items whose only citation is a homepage (the tell
+// that no filing was ever found) are badged here rather than shown as fact.
+function citeWarn(x){
+  if(!x||!x.citationFlag) return '';
+  return `<div class="small" style="margin-top:6px;padding:6px 9px;border-radius:6px;background:rgba(180,83,9,.08);border-left:3px solid var(--accent);color:var(--accent);font-weight:600">⚠ Unverified citation — ${x.citationFlag}. Treat as a lead, not a confirmed filing.</div>`;
+}
+function dataQualityBlock(){
+  const q=intelData&&intelData.dataQuality; if(!q) return '';
+  const rem=(q.removed||[]).slice(0,3);
+  if(!rem.length&&!q.flaggedCitations) return '';
+  return `<div class="card" style="margin-top:12px;border-left:3px solid var(--green)">
+    <div class="small" style="font-weight:800;color:var(--green);text-transform:uppercase;letter-spacing:.06em">✓ Data-integrity checks</div>
+    <div class="small" style="color:var(--muted);margin-top:5px;line-height:1.5">Every asserted insider price is cross-checked against the instrument's actual traded range before publication; anything it never printed within a year is removed and logged here instead of being shown.${q.checkedOn?` Last checked ${fmtStamp(q.checkedOn)}.`:''}${q.flaggedCitations?` ${q.flaggedCitations} item(s) carry an unverified-citation badge above.`:''}</div>
+    ${rem.map(r=>`<div class="small" style="margin-top:7px;padding-top:7px;border-top:1px solid var(--border);line-height:1.5">
+      <b>Retracted — ${r.ticker} ${r.date||''}${r.who?' · '+r.who:''}</b><br>
+      <span style="color:var(--muted)">Claimed ${r.assertedPrice}; actual range ${r.actualRange}${r.onDay?` (on the day: ${r.onDay})`:''}. ${r.verifiedCause||r.reason||''}</span>
+    </div>`).join('')}
+  </div>`;
+}
 function pillTag(t){const u=(t||'').toLowerCase();const c=/buy|new|add|increas/.test(u)?'pos':/sell|exit|reduc|decreas/.test(u)?'neg':'neu';return `<span class="pill ${c}">${t}</span>`;}
 // match intel tickers (e.g. "DBS","Tencent","0700.HK") to held positions (codes like D05/0700 + name words)
 const STOP=new Set(['LTD','LIMITED','GROUP','HOLDINGS','HOLDING','CORP','CORPORATION','TRUST','REIT','INC','THE','PLC','BHD','CO','LAND','INTERNATIONAL','INT','GLOBAL','FUND','BOND','CASH','ETF','COMM','TR','SGD','USD','VCC','PTE','CHINA','ASIA','UNALLOCATED','MARGIN','LOAN','NET','SSB','BILLS','DIGITAL']);
@@ -1548,8 +1571,9 @@ function renderSmart(){
       </div>
       <div class="small" style="margin:4px 0;color:var(--muted)">${[x.shares?('Shares: '+x.shares):'',x.value?('Value: '+x.value):''].filter(Boolean).join(' · ')}</div>
       <div style="font-size:13px;">${x.rationale||''}</div>
-      ${ddBlock(x)}`);}).join('')
+      ${citeWarn(x)}${ddBlock(x)}`);}).join('')
       : '<div class="card small" style="color:var(--muted)">No insider transactions on your holdings in the latest refresh.</div>')
+      + dataQualityBlock()
       + `<div class="small" style="color:var(--muted);margin-top:6px">ⓘ Scanned daily (last scan ${fmtStamp(intelData.updated)}), but filings themselves are inherently lagged — SGX substantial-shareholder notices take days, US Form 4s ~2 days, and Congress disclosures up to 45 days. Old dates mean no newer filings exist on your names, not a stale scan.</div>`;
   }
 }

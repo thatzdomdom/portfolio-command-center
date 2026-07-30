@@ -441,7 +441,8 @@
       "deepDive": "A global institution crossing 5% in Singtel is a meaningful vote of confidence in the telco's capital-return and asset-recycling story, and it sits on top of Singtel's own S$2B Value Realisation buyback (launched 9 Jul). Substantial-shareholder notices are a cleaner institutional signal than director trades.",
       "sources": [
         "https://links.sgx.com/"
-      ]
+      ],
+      "citationFlag": "only homepage-level sources — no specific filing/article was located"
     },
     {
       "ticker": "C09.SI",
@@ -456,7 +457,8 @@
       "sources": [
         "https://links.sgx.com/",
         "https://sginvestors.io/"
-      ]
+      ],
+      "citationFlag": "only homepage-level sources — no specific filing/article was located"
     },
     {
       "ticker": "W05.SI",
@@ -470,7 +472,8 @@
       "deepDive": "The Cheng-family-controlled developer routinely sees interest changes tied to the controlling shareholder; a fresh dated filing in a held name is a useful reference even where the granular figure is a gap. Verify direct on links.sgx.com.",
       "sources": [
         "https://links.sgx.com/"
-      ]
+      ],
+      "citationFlag": "only homepage-level sources — no specific filing/article was located"
     },
     {
       "ticker": "UUUU",
@@ -512,11 +515,12 @@
       "deepDive": "DBS has since pushed to fresh record highs into its 6 August results; the sale is a liquidity/diversification trim rather than a loss of confidence given Tan's sizeable retained stake. No within-window director/substantial-shareholder change was verifiable for DBS this run; DBS continues a S$3bn buyback through 2027.",
       "sources": [
         "https://links.sgx.com/"
-      ]
+      ],
+      "citationFlag": "only homepage-level sources — no specific filing/article was located"
     }
   ],
   "dataQuality": {
-    "note": "Entries removed by the automated price cross-check (scripts/validate-intel.js): the stated price was outside the actual traded range, so the figures could not be trusted.",
+    "note": "Entries removed by verification. The automated price gate (scripts/validate-intel.js) cross-checks every asserted insider price against actual traded OHLC and quarantines anything the instrument never printed within a year; findings are then confirmed against primary filings. Removals are logged here rather than deleted silently.",
     "removed": [
       {
         "removedOn": "2026-07-31",
@@ -528,8 +532,24 @@
         "assertedVia": "stated",
         "actualRange": "1.130–1.370",
         "onDay": "1.210–1.230",
-        "reason": "stated price outside the traded range for the ±14 days around the stated date"
+        "reason": "stated price outside the traded range for the ±14 days around the stated date",
+        "verifiedCause": "RETRACTED — not a 2026 event at all. Every figure (S$1.91/unit, ~S$191K, +73% holding, and the job title) matches a Simply Wall St trade-alert article published 19 DECEMBER 2020, when MLT traded ~S$1.96 and S$1.91 was a genuine execution. The item was a 5.5-year-old story re-stamped with a July-2026 date.",
+        "corroboration": [
+          "Ng Kiat has not been CEO/Executive Director since 2024 — resignation announced 24 May 2024; the primary SGX board filing of 22 Jan 2026 names Ms Jean Kam Sok Kam as Executive Director & CEO. Ng Kiat appears nowhere on the board.",
+          "MLT filed NOTHING on or near 6 Jul 2026 — its SGXNET feed runs unbroken with a five-week gap between 19 Jun and 14 Jul 2026. No Form 1 director/CEO acquisition was disclosed in June or July 2026.",
+          "A primary SGX Form 3 dated 15 May 2026 prices new units at S$1.176 — independently confirming the ~S$1.20 level from SGX paperwork, not just Yahoo data.",
+          "The \"~100,000 units\" figure was never stated in any document: it is arithmetic (191,000 ÷ 1.91).",
+          "Stale third-party reference data (MarketScreener) still lists Ng Kiat as sitting CEO, which likely carried the false title forward."
+        ],
+        "sourcesChecked": [
+          "https://investor.mapletreelogisticstrust.com/newsroom.html",
+          "https://links.sgx.com/1.0.0/corporate-announcements/RLHL45FBV4SYH631/872861_20260122-MLT-Changes%20to%20the%20Board%20and%20Board%20Committee.pdf",
+          "https://ir.listedcompany.com/tracker.pl?type=6&id=2614148"
+        ],
+        "caughtBy": "Owner (Dominic) spotted the impossible price; confirmed by tape check and a 3-agent primary-source verification."
       }
-    ]
+    ],
+    "flaggedCitations": 4,
+    "checkedOn": "2026-07-31"
   }
 }

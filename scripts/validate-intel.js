@@ -95,6 +95,20 @@ function ohlcWindow(sym, dateStr, days) {
   return bars ? { lo, hi, onDay, bars, currency: res.meta?.currency } : null;
 }
 
+// CITATION QUALITY. The retracted M44U item cited only "https://links.sgx.com/"
+// — a homepage with no document path. That is the tell: it means no filing was
+// ever located, and in that case the item turned out to be a 2020 article
+// re-dated to 2026. A domain-root-only citation is therefore flagged (not
+// deleted — the underlying event may be real) so the dashboard can badge it
+// as unverified instead of presenting it as established fact.
+const isBareDomain = u => { try { const p = new URL(String(u)).pathname; return p === '' || p === '/'; } catch (_) { return false; } };
+function citationFlag(x) {
+  const s = (x.sources || []).filter(Boolean);
+  if (!s.length) return 'no source cited';
+  if (s.every(isBareDomain)) return 'only homepage-level sources — no specific filing/article was located';
+  return null;
+}
+
 const d = JSON.parse(fs.readFileSync(FILE, 'utf8'));
 const sections = [['insiders', d.insiders], ['congress', d.congress]].filter(([, a]) => Array.isArray(a));
 const results = [];
@@ -120,6 +134,18 @@ for (const [name, arr] of sections) {
   }
 }
 
+// Citation sweep runs over EVERY entry, priced or not.
+const cites = [];
+for (const [name, arr] of sections) for (const x of arr) {
+  const f = citationFlag(x);
+  if (f) cites.push({ name, x, why: f }); else if (x.citationFlag) delete x.citationFlag;
+}
+if (cites.length) {
+  console.log(`citation check — ${cites.length} entr${cites.length === 1 ? 'y' : 'ies'} without a document-level source:`);
+  cites.forEach(c => console.log(`  ⚑ ${String(c.x.ticker).padEnd(9)} ${String(c.x.date || '').padEnd(11)} ${String(c.x.insider || c.x.representative || '').slice(0, 30).padEnd(31)} ${c.why}`));
+  console.log('');
+}
+
 const bad = results.filter(r => r.status === 'IMPOSSIBLE');
 const suspect = results.filter(r => r.status === 'SUSPECT');
 const f2 = n => n == null ? '—' : (+n).toFixed(n < 10 ? 3 : 2);
@@ -132,7 +158,17 @@ results.forEach(r => {
 });
 if (suspect.length) console.log(`\n${suspect.length} SUSPECT (kept, flagged for review — price is real but not near the stated date)`);
 
-if (!bad.length) { console.log(`\nno impossible prices${suspect.length ? ' (suspects above need a human look)' : ''}`); process.exit(suspect.length ? 2 : 0); }
+// Persist the citation flags even when there is nothing to quarantine, so the
+// dashboard can badge unverified items on every run.
+if (FIX) {
+  cites.forEach(c => { c.x.citationFlag = c.why; });
+  d.dataQuality = d.dataQuality || { note: '', removed: [] };
+  d.dataQuality.flaggedCitations = cites.length;
+  d.dataQuality.checkedOn = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Singapore' });
+  fs.writeFileSync(FILE, JSON.stringify(d, null, 2) + '\n');
+}
+
+if (!bad.length) { console.log(`no impossible prices${suspect.length ? ' (suspects above need a human look)' : ''}`); process.exit(suspect.length ? 2 : 0); }
 
 console.log(`\n${bad.length} entr${bad.length === 1 ? 'y' : 'ies'} assert a price the tape never printed`);
 if (!FIX) process.exit(1);
