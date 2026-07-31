@@ -38,4 +38,23 @@ else
     -d "The price gate removed an insider entry whose stated price never traded. See the Smart Money tab's data-quality note." "https://ntfy.sh/${NTFY}"
 fi
 
+# ── UNIVERSAL CHECK ───────────────────────────────────────────────────────
+# Every published file, not just insider prices: future-dated news, out-of-range
+# probabilities, stale stamps served as current, and — critically — any rewrite
+# of past track.json snapshots, which would silently flatter the model's own
+# hit rate. Report lands in data/.validation.json for the brief and dashboard.
+/opt/homebrew/bin/node scripts/validate-all.js
+VC=$?
+if [ "$VC" = "1" ]; then
+  echo "$(date '+%F %T') validate-all: PROBLEMS FOUND"
+  NTFY=$(grep '^NTFY_TOPIC=' "$HOME/.claude/portfolio-brief.env" 2>/dev/null | cut -d= -f2)
+  [ -n "$NTFY" ] && curl -s -o /dev/null -H "Title: Portfolio: data validation failed" -H "Priority: high" -H "Tags: warning" \
+    -d "$(/opt/homebrew/bin/node -e "try{const r=require('$PWD/data/.validation.json');console.log(r.problems.slice(0,4).join(' | '))}catch(e){console.log('see validate-all output')}")" "https://ntfy.sh/${NTFY}"
+else
+  echo "$(date '+%F %T') validate-all: exit $VC"
+fi
+git add data/.validation.json 2>/dev/null
+git commit -q -m "Validation report $(TZ=Asia/Singapore date +%F)" 2>/dev/null \
+  && (git push -q origin main 2>/dev/null || (git pull --rebase -q origin main && git push -q origin main))
+
 echo "=== $(date '+%F %T') research end (exit $EC) ==="

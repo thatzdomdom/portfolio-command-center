@@ -46,6 +46,45 @@ if (fresh) {
   if (intel && intel.insiders) sections.push(['LATEST INSIDER FILINGS ON YOUR NAMES', intel.insiders.slice(0, 4).map(x => `${x.date} ${x.ticker} — ${x.insider}: ${x.type}`)]);
 }
 
+// ── insider filings caught in real time since the last brief ─────────────
+// scripts/insider-watch.js polls SEC EDGAR every 20 min and queues what it
+// finds; the brief reports the last ~26h so nothing is only ever seen in a
+// push you might have missed. US names only — SGX/HKEX have no open feed.
+let insiderLines = [];
+try {
+  const q = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', '.insider-queue.json'), 'utf8'));
+  const cutoff = Date.now() - 26 * 3600 * 1000;
+  const recent = (q.items || []).filter(i => Date.parse(i.at) >= cutoff);
+  const mat = recent.filter(i => i.material), other = recent.filter(i => !i.material);
+  insiderLines = mat.map(i => `${i.ticker} — ${i.owner || 'insider'} (${i.role || ''}): ${i.summary} · filed ${i.filed}`);
+  if (other.length) insiderLines.push(`plus ${other.length} non-market filing(s) (grants / option exercises / tax withholding — compensation, not conviction)`);
+} catch (e) {}
+
+// ── what the data-integrity gates did ────────────────────────────────────
+let integrityLines = [];
+try {
+  const q = intel && intel.dataQuality;
+  if (q) {
+    const today = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Singapore' });
+    const removedToday = (q.removed || []).filter(r => r.removedOn === today);
+    if (removedToday.length) removedToday.forEach(r => integrityLines.push(
+      `REMOVED ${r.ticker} ${r.date || ''} — claimed ${r.assertedPrice}, actual range ${r.actualRange}. ${(r.verifiedCause || r.reason || '').slice(0, 180)}`));
+    if (q.flaggedCitations) integrityLines.push(`${q.flaggedCitations} item(s) flagged: no document-level source located — shown on the dashboard as leads, not confirmed filings.`);
+    if (!integrityLines.length) integrityLines.push('All asserted insider prices cross-checked against actual traded ranges — nothing failed today.');
+  }
+} catch (e) {}
+// universal file checks (scripts/validate-all.js)
+try {
+  const v = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', '.validation.json'), 'utf8'));
+  if (v.checkedOn === new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Singapore' })) {
+    if (v.problems && v.problems.length) v.problems.forEach(p => integrityLines.push(`⚠ ${p}`));
+    else integrityLines.push(`All ${v.passed.length} file checks passed (news dates & sources, model probabilities, sentiment ranges, append-only call history, 13F timing, brief freshness)${v.warnings && v.warnings.length ? ` · ${v.warnings.length} minor warning(s)` : ''}.`);
+  } else integrityLines.push('Note: the universal file check did not run today — treat the figures below with extra care.');
+} catch (e) {}
+
+if (insiderLines.length) sections.unshift(['🔔 INSIDER FILINGS CAUGHT LIVE (US names, last 24h)', insiderLines]);
+if (integrityLines.length) sections.push(['DATA-INTEGRITY CHECKS', integrityLines]);
+
 const stamp = (brief && brief.date) || (model && model.updated) || 'unknown';
 const bullets = a => a.map(x => `• ${x}`).join('\n');
 const fullText = [
