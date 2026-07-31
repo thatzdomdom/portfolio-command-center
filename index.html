@@ -201,6 +201,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
   <button class="nav-btn" onclick="showTab('opportunity',this)">🎯 Opportunity Matrix</button>
   <button class="nav-btn" onclick="showTab('risk',this)">🛡️ Portfolio Risk</button>
   <button class="nav-btn" onclick="showTab('alloc',this)">⚖️ Allocation</button>
+  <button class="nav-btn" onclick="showTab('flows',this)">🌊 Fund Flows</button>
   <button class="nav-btn" onclick="showTab('smart',this)">💼 Smart Money</button>
   <button class="nav-btn" onclick="showTab('investors',this)">🐋 Investors</button>
   <button class="nav-btn" onclick="showTab('reddit',this)">🔥 Reddit Trends</button>
@@ -429,6 +430,18 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="panel" id="panel-investors">
   <div id="investors-body"><div class="ld"><span class="spin"></span>Loading investor profiles…</div></div>
+</div>
+
+<div class="panel" id="panel-flows">
+  <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px;">
+    <div style="font-size:18px;font-weight:800;letter-spacing:-.02em;">🌊 Fund Flows by Investor Type</div>
+    <div style="font-size:12px;color:var(--muted);">Who is actually buying — foreign vs domestic institutions vs retail</div>
+  </div>
+  <p style="font-size:12.5px;color:var(--muted);margin:0 0 12px;line-height:1.6;">
+    Price tells you what happened; <b>flows tell you who did it</b>. Foreign institutions buying while retail sells is accumulation — the classic risk-on setup. Retail buying while foreigners sell is distribution, and usually the more dangerous tape. Markets differ in what they disclose: <b>Korea publishes this daily, Japan and Singapore weekly, and Hong Kong, China and the US do not publish a true retail/institutional split at all</b> — for those, only labelled proxies are shown. Nothing here is estimated; every figure carries its source and reporting period.
+  </p>
+  <div id="flows-updated" class="small" style="color:var(--muted);margin-bottom:10px;"></div>
+  <div id="flows-body"><div class="ld"><span class="spin"></span>Loading flow data…</div></div>
 </div>
 
 <div class="panel" id="panel-smart">
@@ -1265,7 +1278,8 @@ function showTab(id,b){document.querySelectorAll('.panel').forEach(p=>p.classLis
   if(id==='smart'&&!intelLoaded) loadIntel();
   if(id==='investors'&&!investorsLoaded) loadInvestors();
   if(id==='opportunity'&&!modelStarted) loadModel();
-  if(id==='risk'&&!riskStarted) loadRisk();}
+  if(id==='risk'&&!riskStarted) loadRisk();
+  if(id==='flows'&&!flowsLoaded) loadFlows();}
 
 // ── Conviction Plays (Overview) + drill-down ──
 let convAction='New';
@@ -1331,18 +1345,20 @@ function openSources(key){
 }
 
 // ── Super Investor Profiles (data/investors.json) ──
-let investorsLoaded=false, investorsData=null, profTab='topBuys';
+let investorsLoaded=false, investorsData=null, profTab='topBuys', openProfKey=null;
 const PROF_LBL={holdings:'Holdings',topBuys:'Top Buys',preNews:'Pre-News Trades',policyMoves:'Policy Moves',rotation:'Rotation',aiStack:'AI Stack'};
 function _pv(v){const s=String(v||'').replace(/[$,+~]/g,'').trim();const u=s.slice(-1);const m=u==='B'?1e9:u==='M'?1e6:u==='K'?1e3:1;const num=parseFloat(s);return isNaN(num)?0:num*m;}
 function _holdWeight(h){return (typeof h.weightPct==='number'&&h.weightPct>0)?h.weightPct:_pv(h.value);}
 function computeSectors(hold){const g={};hold.forEach(h=>{const s=h.sector||'Other';g[s]=(g[s]||0)+_holdWeight(h);});const tot=Object.values(g).reduce((a,b)=>a+b,0)||1;return Object.entries(g).map(([name,v])=>({name,pct:v/tot*100})).sort((a,b)=>b.pct-a.pct);}
 function donutSVG(items,size){size=size||150;const cx=size/2,cy=size/2,r=size/2-6,inner=size/2-26;const tot=items.reduce((s,x)=>s+(x.pct||0),0)||1;let ang=-Math.PI/2,paths='';items.forEach((it,i)=>{const f=(it.pct||0)/tot,sw=f*Math.PI*2;const x1=cx+r*Math.cos(ang),y1=cy+r*Math.sin(ang);ang+=sw;const x2=cx+r*Math.cos(ang),y2=cy+r*Math.sin(ang);const ix1=cx+inner*Math.cos(ang-sw),iy1=cy+inner*Math.sin(ang-sw),ix2=cx+inner*Math.cos(ang),iy2=cy+inner*Math.sin(ang);const lg=sw>Math.PI?1:0,c=it.color||COLORS[i%COLORS.length];paths+=`<path d="M${ix1},${iy1}L${x1},${y1}A${r},${r} 0 ${lg},1 ${x2},${y2}L${ix2},${iy2}A${inner},${inner} 0 ${lg},0 ${ix1},${iy1}" fill="${c}"/>`;});return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">${paths}<circle cx="${cx}" cy="${cy}" r="${inner}" fill="var(--surf)"/></svg>`;}
-async function loadInvestors(){
-  if(investorsLoaded) return;
+async function loadInvestors(force){
+  if(investorsLoaded&&!force) return;
   try{
     const r=await fetch('data/investors.json?cb='+Date.now());
     if(!r.ok) throw new Error('pending');
     investorsData=await r.json(); investorsLoaded=true; renderInvestorList(); renderConviction(); buildConsensus();
+    renderProfilesGrid();
+    if(openProfKey&&investorsData.profiles&&investorsData.profiles[openProfKey]) renderProfSection(openProfKey); // keep an open profile in sync
   }catch(e){ el('investors-body').innerHTML='<div class="card" style="text-align:center;color:var(--muted)"><p style="font-size:14px;margin-bottom:6px;">⏳ Investor profiles pending.</p><p style="font-size:12px;">The scheduled agent will publish detailed super-investor profiles here.</p></div>'; }
 }
 function renderInvestorList(){ renderInvestorsHub(); }
@@ -1408,8 +1424,26 @@ function filterRoster(q){ q=(q||'').toLowerCase().trim(); const grid=el('inv-pro
   const rosterHits=roster.filter(r=>(r.name||'').toLowerCase().includes(q)||(r.manager||'').toLowerCase().includes(q)).filter(r=>!profHits.some(k=>profs[k].name===r.name));
   grid.innerHTML=(profHits.map(k=>profCardHTML(k,profs[k])).join('')+rosterHits.map(r=>`<div class="inv-card" style="cursor:default"><div style="font-size:16px;font-weight:800">${r.name}</div><div class="prof-sub" style="margin-top:4px">${r.manager||''}</div><div class="small" style="color:var(--muted);margin-top:8px">Tracked super investor</div></div>`).join(''))||'<div class="small" style="color:var(--muted)">No match.</div>';
 }
+// Per-section data vintage. A profile is NOT one dataset: the headline counts
+// come from periodic-transaction reports, the holdings book from the last PTR,
+// the net-worth split from a valuation house, the policy items from dated news.
+// Those age at completely different rates, so each section states its own
+// vintage and how old it is rather than inheriting one file-level stamp.
+function sectionVintage(p,k){
+  const v=(p&&p.vintage)||{};
+  return v[k]||null;                       // {asOf, label, cadence}
+}
+function vintageLine(p,k){
+  const v=sectionVintage(p,k); if(!v) return '';
+  const a=daysAgo(v.asOf); const col=freshCol(v.asOf);
+  const nextTxt=v.next?` · next update ${v.next}`:'';
+  return `<div class="small" style="color:var(--muted);margin:8px 0 2px;padding:6px 9px;background:var(--surf);border-left:3px solid ${col};border-radius:5px;line-height:1.5">
+    <span style="color:${col}">●</span> <b>Data vintage:</b> ${v.label||fmtStamp(v.asOf)}${a!=null?` · ${a===0?'today':a===1?'yesterday':a+' days old'}`:''}${v.cadence?` · ${v.cadence}`:''}${nextTxt}
+  </div>`;
+}
 function openProfile(key){
   const p=investorsData?.profiles?.[key]; if(!p) return;
+  openProfKey=key;
   const tabs=Object.keys(PROF_LBL).filter(k=>p[k]&&(Array.isArray(p[k])?p[k].length:Object.keys(p[k]).length));
   profTab=tabs[0]||'topBuys';
   let html=`<button class="btn" onclick="renderInvestorList()" style="margin-bottom:12px">← All investors</button>`;
@@ -1421,6 +1455,9 @@ function openProfile(key){
 function setProfTab(key,t){profTab=t;document.querySelectorAll('#prof-tabs .prof-tab').forEach(b=>b.classList.toggle('active',b.textContent.trim()===PROF_LBL[t]));renderProfSection(key);}
 function renderProfSection(key){
   const p=investorsData.profiles[key]; const box=el('prof-section'); if(!box) return;
+  // stamp the section AFTER its content renders (each branch writes box.innerHTML)
+  setTimeout(()=>{ const b=el('prof-section'); if(b&&!b.dataset.stamped){ const v=vintageLine(p,profTab); if(v){ b.insertAdjacentHTML('afterbegin',v); b.dataset.stamped='1'; } } },0);
+  box.dataset.stamped='';
   if(profTab==='holdings'){
     const hold=(p.holdings||[]).slice(); const brk=p.breakdown||{};
     const pf=p.portfolio;
@@ -1457,6 +1494,51 @@ function renderProfSection(key){
     const layers=p.aiStack||[]; const cols=['#4e79a7','#b07aa1','#59a14f','#edc949','#f28e2b','#76b7b2','#9c755f'];
     box.innerHTML='<div class="sh">The AI stack: every layer is owned</div><p class="small" style="color:var(--muted);margin:-4px 0 12px">From software and cloud down through chips, equipment and infrastructure — each layer appears as a net-buyer position.</p>'+layers.map((l,i)=>{const c=cols[i%cols.length];return `<div class="aistack-row" style="background:${c}1a;border-left:3px solid ${c}"><div class="aistack-num" style="color:${c}">${String(i+1).padStart(2,'0')}</div><div style="flex:1"><div style="font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:${c}">${l.layer}</div><div style="margin-top:6px">${(l.tickers||[]).map(t=>`${chipT(t)}`).join('')}</div></div></div>`;}).join('');
   }
+}
+
+// ── Fund flows by investor type (data/flows-investors.json) ──────────────
+// Markets disclose very different things: Korea daily, Japan/Singapore weekly,
+// and HK/China/US publish no true retail-vs-institutional split at all. Rather
+// than manufacture a common format, each market carries its own cadence, its
+// own gaps, and a proxy badge on anything that is not a direct measurement.
+let flowsLoaded=false, flowsData=null;
+async function loadFlows(){
+  try{
+    const r=await fetch('data/flows-investors.json?cb='+Date.now());
+    if(!r.ok) throw new Error('not published yet');
+    flowsData=await r.json(); flowsLoaded=true; renderFlowsPanel();
+  }catch(e){
+    el('flows-body').innerHTML='<div class="card" style="text-align:center;color:var(--muted)"><p style="font-size:14px;margin-bottom:6px;">⏳ Flow data has not been published yet.</p><p style="font-size:12px;">The daily research agent will publish investor-type flows for Japan, Korea, Hong Kong, China, Singapore and the US here on its next run.</p></div>';
+  }
+}
+const flowDir=d=>d==='inflow'?{c:'var(--green)',a:'▲',w:'BUYING'}:d==='outflow'?{c:'var(--red)',a:'▼',w:'SELLING'}:{c:'var(--muted)',a:'→',w:'FLAT'};
+function renderFlowsPanel(){
+  const F=flowsData||{}; const ms=F.markets||[];
+  el('flows-updated').innerHTML=F.updated?`<span style="color:${freshCol(F.updated)}">●</span> as of ${fmtStamp(F.updated)} · ${agoTxt(F.updated)} · each market's own reporting lag is shown on its card`:'';
+  if(!ms.length){ el('flows-body').innerHTML='<div class="card small" style="color:var(--muted)">No market data in the latest refresh.</div>'; return; }
+  el('flows-body').innerHTML=ms.map(m=>{
+    const rows=(m.flows||[]).map(f=>{
+      const d=flowDir(f.direction);
+      return `<div style="display:flex;align-items:baseline;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);flex-wrap:wrap">
+        <div style="min-width:190px;font-size:13px;font-weight:700">${f.investorType}${f.isProxy?' <span class="pill" style="background:rgba(180,83,9,.12);color:var(--accent);font-size:9px;font-weight:800">PROXY</span>':''}</div>
+        <div style="font-size:14px;font-weight:800;color:${d.c};min-width:120px">${d.a} ${f.amount}</div>
+        <div class="small" style="color:${d.c};font-weight:700;min-width:62px">${d.w}</div>
+        <div class="small" style="color:var(--muted);flex:1;min-width:180px">${f.period||''}${f.note?' · '+f.note:''}</div>
+      </div>`;}).join('');
+    const gaps=(m.dataGaps||[]).length?`<div class="small" style="margin-top:8px;padding:7px 9px;border-radius:6px;background:rgba(180,83,9,.07);border-left:3px solid var(--accent);color:var(--muted);line-height:1.5"><b style="color:var(--accent)">Not published:</b> ${m.dataGaps.join(' · ')}</div>`:'';
+    return `<div class="card" style="margin-bottom:12px;${m.available?'border-left:3px solid var(--green)':'border-left:3px solid var(--muted)'}">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap">
+        <div style="font-size:15px;font-weight:800">${m.market}</div>
+        <div class="small" style="color:var(--muted)">${m.available?'official investor-type data':'no official split — proxies only'} · ${m.cadence||''}</div>
+      </div>
+      ${m.latestPeriod?`<div class="small" style="color:var(--muted);margin-top:2px">Latest period: <b style="color:var(--text)">${m.latestPeriod}</b></div>`:''}
+      <div style="margin-top:8px">${rows||'<div class="small" style="color:var(--muted)">No figures could be verified this run.</div>'}</div>
+      ${m.trend?`<div class="small" style="margin-top:8px;line-height:1.55"><b>Trend:</b> ${m.trend}</div>`:''}
+      ${m.interpretation?`<div style="font-size:13px;margin-top:6px;line-height:1.55">${m.interpretation}</div>`:''}
+      ${gaps}
+      ${srcLine(m.asOf||F.updated,m.sources)}
+    </div>`;}).join('')
+    + (F.note?`<div class="card small" style="color:var(--muted);line-height:1.6">${F.note}</div>`:'');
 }
 
 // ── Smart Money (Congress / Super Investors / Insiders) from published data/intel.json ──
@@ -1612,7 +1694,20 @@ async function loadReddit(force){
 // ═══════════════════════════════════════════════════════════════════════
 let modelStarted=false, modelLoading=false, modelLoaded=false, modelMacro=null, modelData={}, modelSmartSectors=null, MODEL_RESULTS=[], oppHorizon='3m', oppGroup='all', MACRO_TILT={};
 // Refresh button: re-price holdings AND (if the matrix was ever opened) re-pull the Opportunity Matrix — fresh macro + fresh prices.
-function refreshAll(){ loadAll(); loadMarket(true); loadNews(true); consensusBuilt=false; redditTop=null; buildConsensus(); if(modelStarted) loadModel(true); if(riskStarted) loadRisk(true); }
+// ↻ Refresh must re-pull EVERY published file, not just prices. Until 31 Jul
+// it skipped investors.json and intel.json entirely — and because their loaders
+// early-return once loaded, the Investors/Trump and Smart Money tabs kept
+// showing whatever was fetched when the tab was first opened in that browser
+// session. Clicking Refresh appeared to do nothing there, and it genuinely did
+// nothing. Forced re-fetch now, with any open profile re-rendered.
+function refreshAll(){
+  loadAll(); loadMarket(true); loadNews(true);
+  consensusBuilt=false; redditTop=null;
+  loadIntel(true); loadInvestors(true);
+  if(flowsLoaded) loadFlows(true);
+  buildConsensus();
+  if(modelStarted) loadModel(true); if(riskStarted) loadRisk(true);
+}
 const GLABEL={Equity:'Equity / Region',Factor:'Factor / Sector',Commodity:'Commodity',Crypto:'Crypto',Bond:'Bond / Rate',RareEarth:'Rare Earth'};
 // universe — must stay aligned across app. {t ticker, yf, n name, g group, mc macro-class, prior μ-prior, cap drift-cap, fit portfolio-fit}
 const MODEL_UNIVERSE=[
