@@ -518,7 +518,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v53 · 🌊 Fund Flows · ⚖️ Allocation w/ sleeve drill-down · buy rail ≥60 · 🏅 Consensus · 📰 News · 📈 Track record · 🛡️ Risk · 🎯 Matrix · Live: Yahoo + CNN · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v54 · 🌊 Fund Flows · ⚖️ Allocation w/ sleeve drill-down · buy rail ≥60 · 🏅 Consensus · 📰 News · 📈 Track record · 🛡️ Risk · 🎯 Matrix · Live: Yahoo + CNN · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="cp-overlay" onclick="closeCP(event)">
@@ -1281,7 +1281,21 @@ function showTab(id,b){document.querySelectorAll('.panel').forEach(p=>p.classLis
   if(id==='investors'&&!investorsLoaded) loadInvestors();
   if(id==='opportunity'&&!modelStarted) loadModel();
   if(id==='risk'&&!riskStarted) loadRisk();
-  if(id==='flows'&&!flowsLoaded) loadFlows();}
+  if(id==='flows'){ if(!flowsLoaded) loadFlows(); flowsWatchdog(); }}
+// If the panel is STILL on the spinner 8s after opening the tab, stop hiding the
+// failure and print the actual state. A silent spinner is unreportable; this
+// turns "nothing is showing" into a message that says which step did not finish.
+function flowsWatchdog(){
+  setTimeout(()=>{
+    const b=el('flows-body'); if(!b||!/Loading flow data/.test(b.textContent)) return;
+    let diag;
+    try{
+      diag=`loaded=${flowsLoaded} · data=${flowsData?((flowsData.markets||[]).length+' markets'):'null'}`;
+      if(flowsData) { renderFlowsPanel(); if(!/Loading flow data/.test(el('flows-body').textContent)) return; }
+    }catch(e){ diag=(diag||'')+' · render threw: '+e.message; }
+    b.innerHTML=`<div class="card small" style="color:var(--red);line-height:1.6"><b>Fund Flows could not finish loading.</b><br>State: ${diag||'unknown'}<br>Browser: ${navigator.userAgent.slice(0,90)}<br>Screenshot this line and send it to Claude — it names the step that failed.</div>`;
+  },8000);
+}
 
 // ── Conviction Plays (Overview) + drill-down ──
 let convAction='New';
@@ -1521,9 +1535,18 @@ async function loadFlows(){
 const flowDir=d=>d==='inflow'?{c:'var(--green)',a:'▲',w:'BUYING'}:d==='outflow'?{c:'var(--red)',a:'▼',w:'SELLING'}:{c:'var(--muted)',a:'→',w:'FLAT'};
 function renderFlowsPanel(){
   const F=flowsData||{}; const ms=F.markets||[];
+  // BODY FIRST, header second. Written this way deliberately: on 31 Jul the
+  // panel sat on "Loading flow data…" while the header stamp WAS populated,
+  // which is only possible if the body write is reached after the header write
+  // and something in between throws. Doing the body first means a failure can
+  // never leave the user staring at a spinner with no explanation.
+  if(!ms.length){ el('flows-body').innerHTML='<div class="card small" style="color:var(--muted)">No market data in the latest refresh.</div>'; }
+  else el('flows-body').innerHTML=ms.map(m=>{ try{ return renderFlowCard(m,F); }
+    catch(err){ return `<div class="card small" style="color:var(--red)">${m&&m.market?m.market:'A market'} failed to render: ${err.message}</div>`; } }).join('')
+    + (F.note?`<div class="card small" style="color:var(--muted);line-height:1.6">${F.note}</div>`:'');
   el('flows-updated').innerHTML=F.updated?`<span style="color:${freshCol(F.updated)}">●</span> as of ${fmtStamp(F.updated)} · ${agoTxt(F.updated)} · each market's own reporting lag is shown on its card`:'';
-  if(!ms.length){ el('flows-body').innerHTML='<div class="card small" style="color:var(--muted)">No market data in the latest refresh.</div>'; return; }
-  el('flows-body').innerHTML=ms.map(m=>{
+}
+function renderFlowCard(m,F){
     const rows=(m.flows||[]).map(f=>{
       const d=flowDir(f.direction);
       return `<div style="display:flex;align-items:baseline;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);flex-wrap:wrap">
@@ -1544,8 +1567,7 @@ function renderFlowsPanel(){
       ${m.interpretation?`<div style="font-size:13px;margin-top:6px;line-height:1.55">${m.interpretation}</div>`:''}
       ${gaps}
       ${srcLine(m.asOf||F.updated,m.sources)}
-    </div>`;}).join('')
-    + (F.note?`<div class="card small" style="color:var(--muted);line-height:1.6">${F.note}</div>`:'');
+    </div>`;
 }
 
 // ── Smart Money (Congress / Super Investors / Insiders) from published data/intel.json ──
