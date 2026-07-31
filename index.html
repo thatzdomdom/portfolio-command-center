@@ -518,7 +518,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v52 · ⚖️ Allocation w/ sleeve drill-down · buy rail ≥60 · 🏅 Consensus · 📰 News · 📈 Track record · 🛡️ Risk · 🎯 Matrix · Live: Yahoo + CNN · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v53 · 🌊 Fund Flows · ⚖️ Allocation w/ sleeve drill-down · buy rail ≥60 · 🏅 Consensus · 📰 News · 📈 Track record · 🛡️ Risk · 🎯 Matrix · Live: Yahoo + CNN · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="cp-overlay" onclick="closeCP(event)">
@@ -1508,7 +1508,12 @@ async function loadFlows(){
   try{
     const r=await fetch('data/flows-investors.json?cb='+Date.now());
     if(!r.ok) throw new Error('not published yet');
-    flowsData=await r.json(); flowsLoaded=true; renderFlowsPanel();
+    flowsData=await r.json(); flowsLoaded=true;
+    // Never leave the panel stuck on "Loading…": if the renderer throws, SAY so.
+    // A silent hang is indistinguishable from a stale cache, which cost real
+    // diagnosis time on 31 Jul.
+    try{ renderFlowsPanel(); }
+    catch(err){ el('flows-body').innerHTML=`<div class="card small" style="color:var(--red)">Flow data loaded (${(flowsData.markets||[]).length} markets) but the panel failed to render: ${err.message}. This is a display bug, not a data problem — tell Claude.</div>`; }
   }catch(e){
     el('flows-body').innerHTML='<div class="card" style="text-align:center;color:var(--muted)"><p style="font-size:14px;margin-bottom:6px;">⏳ Flow data has not been published yet.</p><p style="font-size:12px;">The daily research agent will publish investor-type flows for Japan, Korea, Hong Kong, China, Singapore and the US here on its next run.</p></div>';
   }
