@@ -140,6 +140,32 @@ else {
   }
 }
 
+// ── flows-investors.json ───────────────────────────────────────────────────
+// Cadences differ wildly by market (Korea daily, Japan/SG weekly, HK/CN/US
+// proxies only), so this checks the two things that actually mislead: a stale
+// period presented as current, and a proxy presented as a direct measurement.
+const flows = J('flows-investors.json');
+if (flows) {
+  const ms = flows.markets || [];
+  let noSrc = 0, bare = 0, unlabelled = 0;
+  ms.forEach(m => {
+    const s = (m.sources || []).filter(Boolean);
+    if (!s.length) { noSrc++; fail('flows-investors.json', `${m.market}: no source cited`); }
+    else if (s.every(isBareDomain)) bare++;
+    // markets with no official split must not present figures as direct measurement
+    if (m.available === false) {
+      const direct = (m.flows || []).filter(f => !f.isProxy && !/southbound|connect/i.test(f.investorType || ''));
+      if (direct.length) { unlabelled++; fail('flows-investors.json', `${m.market} has no official investor-type split, but ${direct.length} flow(s) are not marked isProxy`); }
+    }
+    const a = daysAgo(m.asOf);
+    if (a != null && a > 21) warn('flows-investors.json', `${m.market} data is ${a} days old — check it is labelled as carried forward`);
+  });
+  if (bare) warn('flows-investors.json', `${bare} market(s) cite only homepage-level sources`);
+  if (!noSrc && !unlabelled) ok(`flows: ${ms.length} markets, sources present, proxies labelled`);
+  const a = daysAgo(flows.updated);
+  if (a != null && a > 8) warn('flows-investors.json', `file stamp is ${a} days old`);
+}
+
 // ── brief.json ─────────────────────────────────────────────────────────────
 const brief = J('brief.json');
 if (!brief) warn('brief.json', 'missing');

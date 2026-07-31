@@ -1,0 +1,331 @@
+{
+  "updated": "2026-07-31",
+  "retrievedOn": "2026-07-31",
+  "note": "Every figure below was read off a source document and then independently re-verified by a second pass that re-opened each source. Corrections that pass forced: the US ICI series is MUTUAL-FUND-ONLY (ETFs excluded) so it is NOT a risk-off signal; the Singapore read was replaced with the verified weekly tracker after a stale monthly line contradicted it; the Korea read was moved off a +3.6% rally day to the latest completed session; and two BofA lines were dropped because their only source carried a self-disclaimer. Markets differ in what they disclose — proxies are badged, and what is simply not published is stated rather than filled in.",
+  "markets": [
+    {
+      "market": "Japan (JPX / TSE)",
+      "available": true,
+      "cadence": "Weekly — published ~15:30 JST on the 4th business day after the survey week",
+      "latestPeriod": "Week of 21–24 Jul 2026 (4 sessions; Mon 20 Jul was Marine Day)",
+      "asOf": "2026-07-24",
+      "publishedOn": "2026-07-30",
+      "flows": [
+        {
+          "investorType": "Foreigners (海外投資家) — foreign institutional",
+          "direction": "inflow",
+          "amount": "+¥351.5bn",
+          "unit": "JPY",
+          "period": "21–24 Jul",
+          "isProxy": false,
+          "note": "Flipped from −¥286.3bn the prior week — first net buy in two weeks. 66.3% of brokerage turnover."
+        },
+        {
+          "investorType": "Individuals (個人) — retail",
+          "direction": "outflow",
+          "amount": "−¥456.8bn",
+          "unit": "JPY",
+          "period": "21–24 Jul",
+          "isProxy": false,
+          "note": "Flipped from +¥407.5bn the prior week. Margin is ~83% of retail flow, so this line is leveraged and mean-reverting."
+        },
+        {
+          "investorType": "Trust banks (信託銀行) — pension money",
+          "direction": "inflow",
+          "amount": "+¥193.3bn",
+          "unit": "JPY",
+          "period": "21–24 Jul",
+          "isProxy": false,
+          "note": "Third consecutive positive week (+¥231.5bn, +¥58.8bn, +¥193.3bn)."
+        },
+        {
+          "investorType": "Investment trusts (投資信託) — domestic funds",
+          "direction": "inflow",
+          "amount": "+¥40.8bn",
+          "unit": "JPY",
+          "period": "21–24 Jul",
+          "isProxy": false,
+          "note": "Flipped from −¥75.5bn."
+        },
+        {
+          "investorType": "Business corporations — buyback indicator",
+          "direction": "inflow",
+          "amount": "+¥83.4bn",
+          "unit": "JPY",
+          "period": "21–24 Jul",
+          "isProxy": true,
+          "note": "PROXY: widely read as buybacks, but JPX does not identify buybacks — the category includes cross-shareholding unwinds."
+        },
+        {
+          "investorType": "Foreigners — TSE PRIME only (large caps)",
+          "direction": "inflow",
+          "amount": "+¥373.8bn",
+          "unit": "JPY",
+          "period": "21–24 Jul",
+          "isProxy": false,
+          "note": "EXCEEDS the all-market total: foreigners sold Standard (−¥2.0bn) and Growth (−¥20.4bn). A large-cap-only bid."
+        },
+        {
+          "investorType": "Individuals — TSE PRIME only",
+          "direction": "outflow",
+          "amount": "−¥487.4bn",
+          "unit": "JPY",
+          "period": "21–24 Jul",
+          "isProxy": false,
+          "note": "Retail BOUGHT Standard (+¥9.5bn) and Growth (+¥21.1bn) — sold large caps, rotated down-cap."
+        }
+      ],
+      "trend": "A sharp one-week reversal. Foreigners went from −¥286.3bn to +¥351.5bn; retail went the opposite way, +¥407.5bn to −¥456.8bn. Domestic institutions reinforced the foreign bid — trust banks tripled their buying and investment trusts flipped positive.",
+      "interpretation": "Textbook accumulation: foreign institutions and pension money buying large caps directly out of retail hands, with retail rotating down the cap spectrum. Risk-ON for Japanese large caps — the highest-quality flow signal in this panel because JPX publishes actual beneficial-category data, not proxies.",
+      "sources": [
+        "https://www.jpx.co.jp/markets/statistics-equities/investor-type/index.html"
+      ],
+      "dataGaps": [
+        "Trust banks is a CUSTODIAN category — it aggregates pension and other beneficial owners, so it is not a pure \"domestic institution\" read",
+        "No foreign/domestic split within investment trusts",
+        "Weekly only: no intra-week refresh, and the 27–31 Jul week will not publish until ~6 Aug"
+      ]
+    },
+    {
+      "market": "South Korea (KRX / KOSPI)",
+      "available": true,
+      "cadence": "Daily — full investor-type split published after the close",
+      "latestPeriod": "Thursday 30 Jul 2026 (last completed session)",
+      "asOf": "2026-07-30",
+      "flows": [
+        {
+          "investorType": "Foreigners (외국인)",
+          "direction": "inflow",
+          "amount": "+₩1.33trn",
+          "unit": "KRW",
+          "period": "30 Jul session",
+          "isProxy": false,
+          "note": "Bought into a −1.23% down day (KOSPI closed 5,593.56, −69.68)."
+        },
+        {
+          "investorType": "Domestic institutions (기관)",
+          "direction": "inflow",
+          "amount": "+₩66.6bn",
+          "unit": "KRW",
+          "period": "30 Jul session",
+          "isProxy": false,
+          "note": ""
+        },
+        {
+          "investorType": "Retail / individuals (개인)",
+          "direction": "outflow",
+          "amount": "−₩1.42trn",
+          "unit": "KRW",
+          "period": "30 Jul session",
+          "isProxy": false,
+          "note": "Retail sold into the decline."
+        },
+        {
+          "investorType": "Foreigners — month to date",
+          "direction": "outflow",
+          "amount": "−₩12.1trn",
+          "unit": "KRW",
+          "period": "July 2026 MTD",
+          "isProxy": false,
+          "note": "≈ −US$8.12bn. THE number that matters: the single-day buy sits inside heavy monthly distribution."
+        }
+      ],
+      "trend": "One day of foreign buying against a month of foreign selling. The index has fallen roughly 16% from its 21 Jul close of 6,747.95 to 5,593.56 on 30 Jul.",
+      "interpretation": "Risk-OFF, despite the green single-day foreign print. Foreigners are the marginal price-setter in Korea and they are −₩12.1trn for July; one session of dip-buying inside a 16% drawdown is not a turn. Treat the daily number as noise against the monthly signal.",
+      "sources": [
+        "https://www.asiae.co.kr/en/article/market-overview/2026072715535214017"
+      ],
+      "dataGaps": [
+        "KRX \"foreigners\" mixes foreign institutions and foreign retail — it is not a pure institutional read",
+        "No domestic foreign/institutional sub-split",
+        "Single-day figures are volatile; the monthly aggregate is the usable signal"
+      ]
+    },
+    {
+      "market": "Hong Kong (HKEX)",
+      "available": false,
+      "cadence": "Southbound Stock Connect: daily, published after the HK close (T+0)",
+      "latestPeriod": "30 Jul 2026",
+      "asOf": "2026-07-30",
+      "flows": [
+        {
+          "investorType": "Southbound — mainland money into HK stocks",
+          "direction": "outflow",
+          "amount": "−HK$8.57bn",
+          "unit": "HKD",
+          "period": "30 Jul session",
+          "isProxy": false,
+          "note": "Largest single-day southbound sell of the run. Parsed from HKEX daily China Connect files."
+        },
+        {
+          "investorType": "Southbound — 8-session run (21–30 Jul)",
+          "direction": "outflow",
+          "amount": "net −HK$18.3bn",
+          "unit": "HKD",
+          "period": "21–30 Jul",
+          "isProxy": false,
+          "note": "Daily series: +7.17, +7.52, −4.23, −1.52, −1.57, −2.49, −5.59, −8.57 — two buy days then six consecutive sell days, decelerating first then accelerating."
+        }
+      ],
+      "trend": "Mainland money turned from buyer to persistent seller of HK equities over the last six sessions, with the selling largest on the most recent day.",
+      "interpretation": "Direct negative for the HK-tech sleeve (Tencent, Xiaomi, SMIC). Southbound is the only high-frequency conviction signal HK offers, and it has rolled over — the \"national team put\" that supported HK on 20 Jul is not showing up in Connect flows.",
+      "sources": [
+        "https://www.hkex.com.hk/eng/csm/DailyStat/data_tab_daily_2026.htm"
+      ],
+      "dataGaps": [
+        "HKEX publishes NO retail-vs-institutional split — its Cash Market Transaction Survey was discontinued (latest edition 2020)",
+        "Northbound real-time and daily flows were withdrawn in 2024; only quarterly shareholding remains",
+        "Southbound captures mainland money only — it says nothing about international institutional flows into HK"
+      ]
+    },
+    {
+      "market": "China (A-shares)",
+      "available": false,
+      "cadence": "Margin balance: daily. Northbound: quarterly shareholding only since the 2024 disclosure change",
+      "latestPeriod": "30 Jul 2026 (margin balance)",
+      "asOf": "2026-07-30",
+      "flows": [
+        {
+          "investorType": "Margin financing balance (融资余额) — retail leverage",
+          "direction": "outflow",
+          "amount": "−¥36.8bn on the day",
+          "unit": "CNY",
+          "period": "30 Jul",
+          "isProxy": true,
+          "note": "PROXY for retail risk appetite. Balance ¥2.585trn = 2.71% of A-share free float."
+        },
+        {
+          "investorType": "Margin balance — 5-session change",
+          "direction": "outflow",
+          "amount": "−¥104.3bn",
+          "unit": "CNY",
+          "period": "5 sessions to 30 Jul",
+          "isProxy": true,
+          "note": "PROXY. Down ¥113bn over 7 sessions from ¥2.698trn on 21 Jul — a sustained deleveraging, not a single day."
+        }
+      ],
+      "trend": "Retail leverage is unwinding steadily — the margin balance has fallen for most of the last seven sessions.",
+      "interpretation": "Risk-OFF at the retail-leverage level. China is the least observable market in this panel: since Beijing withdrew real-time northbound disclosure in 2024 there is no foreign-flow read at all, so margin balance is the best available proxy — and it is deteriorating.",
+      "sources": [
+        "https://data.eastmoney.com/rzrq/"
+      ],
+      "dataGaps": [
+        "Real-time and daily NORTHBOUND foreign flows were withdrawn in Aug 2024 — only quarterly shareholding is published, so foreign positioning is effectively invisible",
+        "No official retail-vs-institutional split exists for A-shares",
+        "Margin balance is a leverage proxy, not a flow measurement"
+      ]
+    },
+    {
+      "market": "Singapore (SGX)",
+      "available": true,
+      "cadence": "Weekly — SGX Fund Flow tracker, Mon–Fri weeks",
+      "latestPeriod": "Week 30: 20–24 Jul 2026",
+      "asOf": "2026-07-24",
+      "flows": [
+        {
+          "investorType": "Institutional (SGX does not split foreign vs domestic)",
+          "direction": "outflow",
+          "amount": "−S$54.3m",
+          "unit": "SGD",
+          "period": "20–24 Jul",
+          "isProxy": false,
+          "note": "Second net-selling week in three."
+        },
+        {
+          "investorType": "Retail",
+          "direction": "inflow",
+          "amount": "+S$71.1m",
+          "unit": "SGD",
+          "period": "20–24 Jul",
+          "isProxy": false,
+          "note": "Retail absorbing institutional supply."
+        },
+        {
+          "investorType": "Market makers / active traders (MMATs)",
+          "direction": "outflow",
+          "amount": "−S$16.7m",
+          "unit": "SGD",
+          "period": "20–24 Jul",
+          "isProxy": true,
+          "note": "PROXY: the residual category as printed by the source."
+        },
+        {
+          "investorType": "Institutional — prior week",
+          "direction": "outflow",
+          "amount": "−S$318.2m",
+          "unit": "SGD",
+          "period": "13–17 Jul",
+          "isProxy": false,
+          "note": "Retail bought +S$516.8m the same week."
+        }
+      ],
+      "trend": "Institutions have been net sellers in two of the last three weeks (−S$318.2m, then −S$54.3m) while retail bought both weeks (+S$516.8m, +S$71.1m).",
+      "interpretation": "DISTRIBUTION — and this is your largest exposure. Institutions selling into retail buying, with the STI at record levels, is the pattern that historically precedes a stall rather than a breakout. It does not time anything, but it argues against adding to the SGX sleeve here.",
+      "sources": [
+        "https://klse.i3investor.com/web/blog/detail/SGXResearch/2026-07-20-story-h502278712-STI_Hits_Record_as_Focus_Shifts_to_Earnings"
+      ],
+      "dataGaps": [
+        "SGX does NOT split institutional into foreign vs domestic — the single \"institutional\" line mixes both",
+        "sgx.com itself renders as a JavaScript shell and returns HTTP 200 for non-existent paths, so figures here are cited to a full-text republication that could actually be read",
+        "Weekly cadence: no intra-week read"
+      ]
+    },
+    {
+      "market": "United States",
+      "available": false,
+      "cadence": "No official investor-type split exists. Proxies: ICI weekly (released Wed), CFTC weekly (Fri, as-of Tuesday)",
+      "latestPeriod": "ICI week ending 22 Jul 2026 · CFTC positions as of 21 Jul 2026",
+      "asOf": "2026-07-22",
+      "flows": [
+        {
+          "investorType": "Equity MUTUAL FUNDS only — ETFs excluded (ICI)",
+          "direction": "outflow",
+          "amount": "−US$36.5bn",
+          "unit": "USD",
+          "period": "week ending 22 Jul",
+          "isProxy": true,
+          "note": "PROXY, and read it carefully: ICI excludes ETFs. Persistent mutual-fund outflows are a structural migration INTO ETFs — this is NOT evidence of risk-off, and was corrected from an earlier reading that treated it as such."
+        },
+        {
+          "investorType": "Asset managers — S&P 500 futures net position (CFTC)",
+          "direction": "inflow",
+          "amount": "net long 929,159 contracts",
+          "unit": "contracts",
+          "period": "as of 21 Jul",
+          "isProxy": true,
+          "note": "PROXY for institutional positioning. Long 1,143,723 / short 214,564."
+        },
+        {
+          "investorType": "Leveraged funds — S&P 500 futures net position (CFTC)",
+          "direction": "outflow",
+          "amount": "net short 322,865 contracts",
+          "unit": "contracts",
+          "period": "as of 21 Jul",
+          "isProxy": true,
+          "note": "PROXY. Long 146,834 / short 469,699. Hedge funds positioned opposite to asset managers."
+        },
+        {
+          "investorType": "Retail net purchases (Vanda)",
+          "direction": "inflow",
+          "amount": "US$13bn (4-week rolling)",
+          "unit": "USD",
+          "period": "to 10 Jul",
+          "isProxy": true,
+          "note": "PROXY, and the stalest line here. Vanda called it the lowest 4-week level since the COVID outbreak."
+        }
+      ],
+      "trend": "Asset managers remain heavily net long index futures while leveraged funds are heavily net short — a wide institutional split. Retail buying power has faded to post-COVID lows.",
+      "interpretation": "Mixed, not risk-off. The headline \"$36.5bn of equity outflows\" is a mutual-fund-to-ETF migration artefact and should not be read as selling. The genuine signal is positioning: asset managers long, hedge funds short, and retail firepower at multi-year lows — a market with no strong marginal buyer left.",
+      "sources": [
+        "https://www.ici.org/research/stats/flows",
+        "https://www.cftc.gov/dea/futures/financial_lf.htm"
+      ],
+      "dataGaps": [
+        "The US publishes NO investor-type flow breakdown — everything here is a proxy",
+        "ICI excludes ETFs, which is where most equity flow now goes, so it measures a shrinking slice",
+        "CFTC data is 3+ days stale by publication and covers futures positioning, not cash equity flows",
+        "Both ICI and CFTC URLs are overwritten weekly — figures are stamped to the retrieval date of 31 Jul 2026"
+      ]
+    }
+  ]
+}
