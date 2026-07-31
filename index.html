@@ -440,8 +440,12 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
   <p style="font-size:12.5px;color:var(--muted);margin:0 0 12px;line-height:1.6;">
     Price tells you what happened; <b>flows tell you who did it</b>. Foreign institutions buying while retail sells is accumulation — the classic risk-on setup. Retail buying while foreigners sell is distribution, and usually the more dangerous tape. Markets differ in what they disclose: <b>Korea publishes this daily, Japan and Singapore weekly, and Hong Kong, China and the US do not publish a true retail/institutional split at all</b> — for those, only labelled proxies are shown. Nothing here is estimated; every figure carries its source and reporting period.
   </p>
-  <div id="flows-updated" class="small" style="color:var(--muted);margin-bottom:10px;"></div>
-  <div id="flows-body"><div class="ld"><span class="spin"></span>Loading flow data…</div></div>
+  <!-- IDs here are iflows-* NOT flows-*. The Overview panel already owns the
+       flows-body element for its Global Cash Movement card; the duplicate id
+       made getElementById return the Overview element, so this tab's market
+       cards were written into that card and this panel spun forever (31 Jul). -->
+  <div id="iflows-updated" class="small" style="color:var(--muted);margin-bottom:10px;"></div>
+  <div id="iflows-body"><div class="ld"><span class="spin"></span>Loading flow data…</div></div>
 </div>
 
 <div class="panel" id="panel-smart">
@@ -518,7 +522,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v55 · 🌊 Fund Flows · ⚖️ Allocation w/ sleeve drill-down · buy rail ≥60 · 🏅 Consensus · 📰 News · 📈 Track record · 🛡️ Risk · 🎯 Matrix · Live: Yahoo + CNN · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v56 · 🌊 Fund Flows · ⚖️ Allocation w/ sleeve drill-down · buy rail ≥60 · 🏅 Consensus · 📰 News · 📈 Track record · 🛡️ Risk · 🎯 Matrix · Live: Yahoo + CNN · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="cp-overlay" onclick="closeCP(event)">
@@ -1292,7 +1296,7 @@ function showTab(id,b){document.querySelectorAll('.panel').forEach(p=>p.classLis
 // because the fix simply was not running). data/version.json is fetched with a
 // cache-buster on every load; if the server is ahead of this file, reload once
 // against the new build. sessionStorage guards against a reload loop.
-const BUILD=55;
+const BUILD=56;
 async function checkBuild(){
   try{
     const r=await fetch('data/version.json?cb='+Date.now(),{cache:'no-store'});
@@ -1313,11 +1317,11 @@ async function checkBuild(){
 checkBuild();
 function flowsWatchdog(){
   setTimeout(()=>{
-    const b=el('flows-body'); if(!b||!/Loading flow data/.test(b.textContent)) return;
+    const b=el('iflows-body'); if(!b||!/Loading flow data/.test(b.textContent)) return;
     let diag;
     try{
       diag=`loaded=${flowsLoaded} · data=${flowsData?((flowsData.markets||[]).length+' markets'):'null'}`;
-      if(flowsData) { renderFlowsPanel(); if(!/Loading flow data/.test(el('flows-body').textContent)) return; }
+      if(flowsData) { renderFlowsPanel(); if(!/Loading flow data/.test(el('iflows-body').textContent)) return; }
     }catch(e){ diag=(diag||'')+' · render threw: '+e.message; }
     b.innerHTML=`<div class="card small" style="color:var(--red);line-height:1.6"><b>Fund Flows could not finish loading.</b><br>State: ${diag||'unknown'}<br>Browser: ${navigator.userAgent.slice(0,90)}<br>Screenshot this line and send it to Claude — it names the step that failed.</div>`;
   },8000);
@@ -1553,9 +1557,9 @@ async function loadFlows(){
     // A silent hang is indistinguishable from a stale cache, which cost real
     // diagnosis time on 31 Jul.
     try{ renderFlowsPanel(); }
-    catch(err){ el('flows-body').innerHTML=`<div class="card small" style="color:var(--red)">Flow data loaded (${(flowsData.markets||[]).length} markets) but the panel failed to render: ${err.message}. This is a display bug, not a data problem — tell Claude.</div>`; }
+    catch(err){ el('iflows-body').innerHTML=`<div class="card small" style="color:var(--red)">Flow data loaded (${(flowsData.markets||[]).length} markets) but the panel failed to render: ${err.message}. This is a display bug, not a data problem — tell Claude.</div>`; }
   }catch(e){
-    el('flows-body').innerHTML='<div class="card" style="text-align:center;color:var(--muted)"><p style="font-size:14px;margin-bottom:6px;">⏳ Flow data has not been published yet.</p><p style="font-size:12px;">The daily research agent will publish investor-type flows for Japan, Korea, Hong Kong, China, Singapore and the US here on its next run.</p></div>';
+    el('iflows-body').innerHTML='<div class="card" style="text-align:center;color:var(--muted)"><p style="font-size:14px;margin-bottom:6px;">⏳ Flow data has not been published yet.</p><p style="font-size:12px;">The daily research agent will publish investor-type flows for Japan, Korea, Hong Kong, China, Singapore and the US here on its next run.</p></div>';
   }
 }
 const flowDir=d=>d==='inflow'?{c:'var(--green)',a:'▲',w:'BUYING'}:d==='outflow'?{c:'var(--red)',a:'▼',w:'SELLING'}:{c:'var(--muted)',a:'→',w:'FLAT'};
@@ -1566,11 +1570,11 @@ function renderFlowsPanel(){
   // which is only possible if the body write is reached after the header write
   // and something in between throws. Doing the body first means a failure can
   // never leave the user staring at a spinner with no explanation.
-  if(!ms.length){ el('flows-body').innerHTML='<div class="card small" style="color:var(--muted)">No market data in the latest refresh.</div>'; }
-  else el('flows-body').innerHTML=ms.map(m=>{ try{ return renderFlowCard(m,F); }
+  if(!ms.length){ el('iflows-body').innerHTML='<div class="card small" style="color:var(--muted)">No market data in the latest refresh.</div>'; }
+  else el('iflows-body').innerHTML=ms.map(m=>{ try{ return renderFlowCard(m,F); }
     catch(err){ return `<div class="card small" style="color:var(--red)">${m&&m.market?m.market:'A market'} failed to render: ${err.message}</div>`; } }).join('')
     + (F.note?`<div class="card small" style="color:var(--muted);line-height:1.6">${F.note}</div>`:'');
-  el('flows-updated').innerHTML=F.updated?`<span style="color:${freshCol(F.updated)}">●</span> as of ${fmtStamp(F.updated)} · ${agoTxt(F.updated)} · each market's own reporting lag is shown on its card`:'';
+  el('iflows-updated').innerHTML=F.updated?`<span style="color:${freshCol(F.updated)}">●</span> as of ${fmtStamp(F.updated)} · ${agoTxt(F.updated)} · each market's own reporting lag is shown on its card`:'';
 }
 function renderFlowCard(m,F){
     const rows=(m.flows||[]).map(f=>{
