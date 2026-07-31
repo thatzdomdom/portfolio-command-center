@@ -518,7 +518,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v54 · 🌊 Fund Flows · ⚖️ Allocation w/ sleeve drill-down · buy rail ≥60 · 🏅 Consensus · 📰 News · 📈 Track record · 🛡️ Risk · 🎯 Matrix · Live: Yahoo + CNN · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v55 · 🌊 Fund Flows · ⚖️ Allocation w/ sleeve drill-down · buy rail ≥60 · 🏅 Consensus · 📰 News · 📈 Track record · 🛡️ Risk · 🎯 Matrix · Live: Yahoo + CNN · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="cp-overlay" onclick="closeCP(event)">
@@ -1285,6 +1285,32 @@ function showTab(id,b){document.querySelectorAll('.panel').forEach(p=>p.classLis
 // If the panel is STILL on the spinner 8s after opening the tab, stop hiding the
 // failure and print the actual state. A silent spinner is unreportable; this
 // turns "nothing is showing" into a message that says which step did not finish.
+// ── STALE-BUILD SELF-HEALING ──────────────────────────────────────────────
+// GitHub Pages serves this file with cache-control: max-age=600, so for ten
+// minutes after a push your browser will keep showing the OLD page — which on
+// 31 Jul looked exactly like a broken feature (a spinner that never resolved,
+// because the fix simply was not running). data/version.json is fetched with a
+// cache-buster on every load; if the server is ahead of this file, reload once
+// against the new build. sessionStorage guards against a reload loop.
+const BUILD=55;
+async function checkBuild(){
+  try{
+    const r=await fetch('data/version.json?cb='+Date.now(),{cache:'no-store'});
+    if(!r.ok) return;
+    const v=await r.json();
+    if(!(v.build>BUILD)) return;
+    const K='pcc-reloaded-for';
+    if(sessionStorage.getItem(K)===String(v.build)){
+      const b=document.createElement('div');
+      b.style.cssText='position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#b45309;color:#fff;font:600 13px -apple-system,sans-serif;padding:10px 14px;text-align:center';
+      b.innerHTML=`You are viewing an older cached version (build ${BUILD}; ${v.build} is available). Pull down to refresh, or press ⌘⇧R.`;
+      document.body.appendChild(b); return;
+    }
+    sessionStorage.setItem(K,String(v.build));
+    location.replace(location.pathname+'?b='+v.build);
+  }catch(_){}
+}
+checkBuild();
 function flowsWatchdog(){
   setTimeout(()=>{
     const b=el('flows-body'); if(!b||!/Loading flow data/.test(b.textContent)) return;
