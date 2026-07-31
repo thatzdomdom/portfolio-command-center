@@ -84,7 +84,50 @@
         "Trust banks is a CUSTODIAN category — it aggregates pension and other beneficial owners, so it is not a pure \"domestic institution\" read",
         "No foreign/domestic split within investment trusts",
         "Weekly only: no intra-week refresh, and the 27–31 Jul week will not publish until ~6 Aug"
-      ]
+      ],
+      "series": {
+        "unit": "JPY bn",
+        "periods": [
+          "13–17 Jul",
+          "21–24 Jul"
+        ],
+        "lines": [
+          {
+            "investorType": "Foreigners",
+            "values": [
+              -286.3,
+              351.46
+            ],
+            "isProxy": false
+          },
+          {
+            "investorType": "Individuals (retail)",
+            "values": [
+              407.48,
+              -456.81
+            ],
+            "isProxy": false
+          },
+          {
+            "investorType": "Trust banks (pension)",
+            "values": [
+              58.8,
+              193.28
+            ],
+            "isProxy": false
+          },
+          {
+            "investorType": "Investment trusts",
+            "values": [
+              -75.48,
+              40.81
+            ],
+            "isProxy": false
+          }
+        ],
+        "source": "https://www.jpx.co.jp/markets/statistics-equities/investor-type/index.html",
+        "note": "Only two weeks so far — the clean scissor shape (foreigners and retail swapping sides) is the signal, but two points is a change, not yet a trend. Extending back as further weeks are verified."
+      }
     },
     {
       "market": "South Korea (KRX / KOSPI)",
@@ -176,7 +219,38 @@
         "HKEX publishes NO retail-vs-institutional split — its Cash Market Transaction Survey was discontinued (latest edition 2020)",
         "Northbound real-time and daily flows were withdrawn in 2024; only quarterly shareholding remains",
         "Southbound captures mainland money only — it says nothing about international institutional flows into HK"
-      ]
+      ],
+      "series": {
+        "unit": "HK$ bn",
+        "periods": [
+          "21 Jul",
+          "22 Jul",
+          "23 Jul",
+          "24 Jul",
+          "25 Jul",
+          "28 Jul",
+          "29 Jul",
+          "30 Jul"
+        ],
+        "lines": [
+          {
+            "investorType": "Southbound (mainland money into HK)",
+            "values": [
+              7.17,
+              7.52,
+              -4.23,
+              -1.52,
+              -1.57,
+              -2.49,
+              -5.59,
+              -8.57
+            ],
+            "isProxy": false
+          }
+        ],
+        "source": "https://www.hkex.com.hk/eng/csm/DailyStat/data_tab_daily_2026.htm",
+        "note": "Consecutive trading sessions. Two days of buying then six of selling, largest on the most recent day — the clearest deterioration in the panel."
+      }
     },
     {
       "market": "China (A-shares)",
@@ -268,7 +342,34 @@
         "SGX does NOT split institutional into foreign vs domestic — the single \"institutional\" line mixes both",
         "sgx.com itself renders as a JavaScript shell and returns HTTP 200 for non-existent paths, so figures here are cited to a full-text republication that could actually be read",
         "Weekly cadence: no intra-week read"
-      ]
+      ],
+      "series": {
+        "unit": "S$ m",
+        "periods": [
+          "13–17 Jul",
+          "20–24 Jul"
+        ],
+        "lines": [
+          {
+            "investorType": "Institutional",
+            "values": [
+              -318.2,
+              -54.3
+            ],
+            "isProxy": false
+          },
+          {
+            "investorType": "Retail",
+            "values": [
+              516.8,
+              71.1
+            ],
+            "isProxy": false
+          }
+        ],
+        "source": "https://klse.i3investor.com/web/blog/detail/SGXResearch/2026-07-20-story-h502278712-STI_Hits_Record_as_Focus_Shifts_to_Earnings",
+        "note": "Institutions net sellers both weeks while retail bought both weeks — the distribution pattern, in your largest market. Two points only; more weeks pending verification."
+      }
     },
     {
       "market": "United States",
@@ -327,5 +428,6 @@
         "Both ICI and CFTC URLs are overwritten weekly — figures are stamped to the retrieval date of 31 Jul 2026"
       ]
     }
-  ]
+  ],
+  "chartNote": "Charts show NET flow per period: bars above the zero line are net buying, below is net selling. Series length differs by market because disclosure cadence does — Hong Kong is daily, Japan and Singapore weekly. A market with fewer than two verified periods shows no chart rather than a padded one."
 }

@@ -522,7 +522,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v56 · 🌊 Fund Flows · ⚖️ Allocation w/ sleeve drill-down · buy rail ≥60 · 🏅 Consensus · 📰 News · 📈 Track record · 🛡️ Risk · 🎯 Matrix · Live: Yahoo + CNN · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v57 · 🌊 Fund Flows · ⚖️ Allocation w/ sleeve drill-down · buy rail ≥60 · 🏅 Consensus · 📰 News · 📈 Track record · 🛡️ Risk · 🎯 Matrix · Live: Yahoo + CNN · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="cp-overlay" onclick="closeCP(event)">
@@ -1296,7 +1296,7 @@ function showTab(id,b){document.querySelectorAll('.panel').forEach(p=>p.classLis
 // because the fix simply was not running). data/version.json is fetched with a
 // cache-buster on every load; if the server is ahead of this file, reload once
 // against the new build. sessionStorage guards against a reload loop.
-const BUILD=56;
+const BUILD=57;
 async function checkBuild(){
   try{
     const r=await fetch('data/version.json?cb='+Date.now(),{cache:'no-store'});
@@ -1576,6 +1576,56 @@ function renderFlowsPanel(){
     + (F.note?`<div class="card small" style="color:var(--muted);line-height:1.6">${F.note}</div>`:'');
   el('iflows-updated').innerHTML=F.updated?`<span style="color:${freshCol(F.updated)}">●</span> as of ${fmtStamp(F.updated)} · ${agoTxt(F.updated)} · each market's own reporting lag is shown on its card`:'';
 }
+// ── FLOW TREND CHART ──────────────────────────────────────────────────────
+// Inline SVG, no library: flows are SIGNED, so the zero line is the whole
+// story and a diverging bar chart reads better than a price-style line. Bars
+// above the axis = net buying, below = net selling; one colour per investor
+// type, grouped by period. Renders whatever periods exist — a 3-point series
+// is drawn as 3 points and labelled as such rather than padded.
+const FLOW_COLORS=['#1d4ed8','#b45309','#15803d','#7c3aed','#0891b2'];
+function flowChart(s){
+  if(!s||!s.periods||s.periods.length<2||!s.lines||!s.lines.length) return '';
+  const P=s.periods.length, L=s.lines.length;
+  const W=Math.max(320,Math.min(880,90+P*Math.max(38,L*16))), H=190;
+  const padL=52,padR=10,padT=14,padB=44;
+  const plotW=W-padL-padR, plotH=H-padT-padB;
+  const vals=s.lines.flatMap(l=>l.values.filter(v=>typeof v==='number'));
+  if(!vals.length) return '';
+  const mx=Math.max(...vals,0), mn=Math.min(...vals,0);
+  const span=(mx-mn)||1, pad=span*0.12;
+  const hi=mx+pad, lo=mn-pad, rng=hi-lo;
+  const y=v=>padT+plotH*(hi-v)/rng;
+  const zeroY=y(0);
+  const groupW=plotW/P, barW=Math.max(3,Math.min(16,(groupW-8)/L));
+  let bars='';
+  s.lines.forEach((l,li)=>{
+    l.values.forEach((v,pi)=>{
+      if(typeof v!=='number') return;
+      const cx=padL+groupW*pi+groupW/2-(L*barW)/2+li*barW;
+      const yy=v>=0?y(v):zeroY, h=Math.max(1,Math.abs(zeroY-y(v)));
+      bars+=`<rect x="${cx.toFixed(1)}" y="${yy.toFixed(1)}" width="${barW.toFixed(1)}" height="${h.toFixed(1)}" fill="${FLOW_COLORS[li%FLOW_COLORS.length]}" opacity="${v>=0?0.85:0.55}" rx="1"><title>${l.investorType} · ${s.periods[pi]}: ${v>=0?'+':''}${v} ${s.unit||''}</title></rect>`;
+    });
+  });
+  // period labels: thin them out so they never collide
+  const every=Math.ceil(P/8);
+  const xlab=s.periods.map((p,i)=>i%every?'':`<text x="${(padL+groupW*i+groupW/2).toFixed(1)}" y="${H-26}" font-size="9" fill="var(--muted)" text-anchor="middle">${String(p).replace(/\s*20\d\d/,'').slice(0,11)}</text>`).join('');
+  const gy=[hi,(hi+lo)/2,lo].map(v=>`<line x1="${padL}" x2="${W-padR}" y1="${y(v).toFixed(1)}" y2="${y(v).toFixed(1)}" stroke="var(--border)" stroke-width="1"/><text x="${padL-6}" y="${(y(v)+3).toFixed(1)}" font-size="9" fill="var(--muted)" text-anchor="end">${(Math.abs(v)>=1000?(v/1000).toFixed(1)+'k':v.toFixed(Math.abs(v)<10?1:0))}</text>`).join('');
+  const legend=s.lines.map((l,li)=>`<span style="display:inline-flex;align-items:center;gap:4px;margin-right:10px;font-size:10.5px;color:var(--muted)"><span style="width:9px;height:9px;border-radius:2px;background:${FLOW_COLORS[li%FLOW_COLORS.length]};display:inline-block"></span>${l.investorType}${l.isProxy?' <b style="color:var(--accent)">·proxy</b>':''}</span>`).join('');
+  return `<div style="margin-top:10px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px">
+      <div class="small" style="font-weight:700">Trend — net flow by period <span style="color:var(--muted);font-weight:400">(${s.unit||''}; above the line = buying)</span></div>
+      <div class="small" style="color:var(--muted)">${P} period${P===1?'':'s'}</div>
+    </div>
+    <div style="overflow-x:auto"><svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" style="max-width:100%;height:auto">
+      ${gy}
+      <line x1="${padL}" x2="${W-padR}" y1="${zeroY.toFixed(1)}" y2="${zeroY.toFixed(1)}" stroke="var(--text)" stroke-width="1.4"/>
+      ${bars}${xlab}
+    </svg></div>
+    <div style="margin-top:2px">${legend}</div>
+    ${s.note?`<div class="small" style="color:var(--muted);margin-top:4px;line-height:1.5">${s.note}</div>`:''}
+    ${s.source?`<div class="small" style="color:var(--muted);margin-top:2px">series source: ${(()=>{try{return new URL(s.source).hostname.replace(/^www\./,'')}catch(_){return s.source}})()}</div>`:''}
+  </div>`;
+}
 function renderFlowCard(m,F){
     const rows=(m.flows||[]).map(f=>{
       const d=flowDir(f.direction);
@@ -1593,6 +1643,7 @@ function renderFlowCard(m,F){
       </div>
       ${m.latestPeriod?`<div class="small" style="color:var(--muted);margin-top:2px">Latest period: <b style="color:var(--text)">${m.latestPeriod}</b></div>`:''}
       <div style="margin-top:8px">${rows||'<div class="small" style="color:var(--muted)">No figures could be verified this run.</div>'}</div>
+      ${flowChart(m.series)}
       ${m.trend?`<div class="small" style="margin-top:8px;line-height:1.55"><b>Trend:</b> ${m.trend}</div>`:''}
       ${m.interpretation?`<div style="font-size:13px;margin-top:6px;line-height:1.55">${m.interpretation}</div>`:''}
       ${gaps}
