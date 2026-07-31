@@ -2537,7 +2537,7 @@ function renderActionAlerts(){
   box.innerHTML=`<div class="card" style="border-left:3px solid var(--red)"><div class="sh">⚠️ Trend alerts on your book (${alerts.length})</div>
    ${alerts.map(a=>{const sev=a.gap<-0.15?'▼▼':'▼';return `<div style="display:flex;gap:8px;align-items:baseline;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px;flex-wrap:wrap">
      <span title="${a.gap<-0.15?'steep downtrend':'downtrend'} — price below falling 200-day avg" style="font-weight:800;color:var(--red);background:rgba(239,68,68,.12);border-radius:5px;padding:0 6px;white-space:nowrap">${sev}</span>
-     ${tkr(a.t)}<b>${a.n}</b>${a.lev?' <span class="pill neg">1.6× levered</span>':''}
+     ${tkr(a.t)}<b>${a.n}</b>${a.lev?' <span class="pill neg" title="This position sits in the IBKR margin account — it is the ONLY levered line in the book. Every other holding here is owned outright." style="white-space:nowrap">⚡ margin a/c · 1.6× levered</span>':''}
      <span class="small" style="color:var(--muted)">${(a.gap*100).toFixed(0)}% below 200-day · ${(a.dd*100).toFixed(0)}% off 52w high</span>
      <b style="margin-left:auto">${vS(a.v)}</b></div>`;}).join('')}
    <div class="small" style="color:var(--muted);margin-top:6px">Positions ≥S$20k trading below a falling 200-day average — the Risk tab's TRIM/WATCH logic. Review, don't auto-sell. ● live, recomputed each refresh.</div></div>`;
