@@ -88,93 +88,129 @@
       "series": {
         "unit": "JPY bn",
         "periods": [
-          "13–17 Jul",
-          "21–24 Jul"
+          "week 25-29 May 2026",
+          "week 1-5 Jun 2026",
+          "week 8-12 Jun 2026",
+          "week 15-19 Jun 2026",
+          "week 22-26 Jun 2026",
+          "week 29 Jun-3 Jul 2026",
+          "week 6-10 Jul 2026",
+          "week 13-17 Jul 2026",
+          "week 21-24 Jul 2026"
         ],
         "lines": [
           {
             "investorType": "Foreigners",
+            "isProxy": false,
             "values": [
-              -286.3,
-              351.46
-            ],
-            "isProxy": false
+              -395.271,
+              -80.974,
+              -507.432,
+              1056.277,
+              -1237.822,
+              366.243,
+              492.966,
+              -286.302,
+              351.462
+            ]
           },
           {
             "investorType": "Individuals (retail)",
+            "isProxy": false,
             "values": [
-              407.48,
+              105.717,
+              308.114,
+              -501.017,
+              -446.997,
+              950.368,
+              -636.85,
+              -63.791,
+              407.479,
               -456.81
-            ],
-            "isProxy": false
+            ]
           },
           {
-            "investorType": "Trust banks (pension)",
+            "investorType": "Trust banks",
+            "isProxy": false,
             "values": [
+              70.822,
+              -31.03,
+              -5.716,
+              -137.341,
+              27.302,
+              9.209,
+              231.516,
               58.8,
-              193.28
-            ],
-            "isProxy": false
+              193.277
+            ]
           },
           {
             "investorType": "Investment trusts",
+            "isProxy": false,
             "values": [
-              -75.48,
-              40.81
-            ],
-            "isProxy": false
+              192.957,
+              36.304,
+              89.729,
+              -553.406,
+              330.555,
+              66.152,
+              -627.341,
+              -75.484,
+              40.813
+            ]
           }
         ],
-        "source": "https://www.jpx.co.jp/markets/statistics-equities/investor-type/index.html",
-        "note": "Only two weeks so far — the clean scissor shape (foreigners and retail swapping sides) is the signal, but two points is a change, not yet a trend. Extending back as further weeks are verified."
+        "source": "https://www.traders.co.jp/margin_derivatives/investor_trends",
+        "note": "TSE cash equities only (現物), Tokyo+Nagoya, 51-broker basis. 9 consecutive weekly prints, every value cross-checked against Nikkei/Kabutan. NOTE: the last week (21-24 Jul) is only 4 sessions — Marine Day — so its magnitudes are not like-for-like.",
+        "confidence": "verified-secondary"
       }
     },
     {
       "market": "South Korea (KRX / KOSPI)",
       "available": true,
       "cadence": "Daily — full investor-type split published after the close",
-      "latestPeriod": "Thursday 30 Jul 2026 (last completed session)",
-      "asOf": "2026-07-30",
+      "latestPeriod": "Friday 31 Jul 2026 (post-close)",
+      "asOf": "2026-07-31",
       "flows": [
         {
           "investorType": "Foreigners (외국인)",
           "direction": "inflow",
-          "amount": "+₩1.33trn",
+          "amount": "+₩7.18trn",
           "unit": "KRW",
-          "period": "30 Jul session",
+          "period": "31 Jul session",
           "isProxy": false,
-          "note": "Bought into a −1.23% down day (KOSPI closed 5,593.56, −69.68)."
+          "note": "Record single-session buying, 5.4× the prior day, as the KOSPI rose 17.91% to 6,595.45."
         },
         {
           "investorType": "Domestic institutions (기관)",
           "direction": "inflow",
-          "amount": "+₩66.6bn",
+          "amount": "+₩1.18trn",
           "unit": "KRW",
-          "period": "30 Jul session",
+          "period": "31 Jul session",
           "isProxy": false,
           "note": ""
         },
         {
           "investorType": "Retail / individuals (개인)",
           "direction": "outflow",
-          "amount": "−₩1.42trn",
+          "amount": "−₩8.25trn",
           "unit": "KRW",
-          "period": "30 Jul session",
+          "period": "31 Jul session",
           "isProxy": false,
-          "note": "Retail sold into the decline."
+          "note": "Retail sold the rally hard — the mirror image of the foreign bid."
         },
         {
           "investorType": "Foreigners — month to date",
           "direction": "outflow",
           "amount": "−₩12.1trn",
           "unit": "KRW",
-          "period": "July 2026 MTD",
+          "period": "July 2026 MTD (to 30 Jul)",
           "isProxy": false,
-          "note": "≈ −US$8.12bn. THE number that matters: the single-day buy sits inside heavy monthly distribution."
+          "note": "Context: the 31 Jul buying lands inside a month of heavy foreign distribution."
         }
       ],
-      "trend": "One day of foreign buying against a month of foreign selling. The index has fallen roughly 16% from its 21 Jul close of 6,747.95 to 5,593.56 on 30 Jul.",
-      "interpretation": "Risk-OFF, despite the green single-day foreign print. Foreigners are the marginal price-setter in Korea and they are −₩12.1trn for July; one session of dip-buying inside a 16% drawdown is not a turn. Treat the daily number as noise against the monthly signal.",
+      "trend": "Violently two-sided. Foreigners sold heavily mid-to-late July (−₩4,991bn on 28 Jul), then bought a record +₩7,182bn on 31 Jul as the index rose 17.91% in one session.",
+      "interpretation": "The single most volatile market in this panel. Foreigners are the marginal price-setter and they have just bought a record amount in one session — but they remain net sellers for July overall. Treat the 31 Jul spike as a violent short-covering/re-risking event, not yet a confirmed change of trend.",
       "sources": [
         "https://www.asiae.co.kr/en/article/market-overview/2026072715535214017"
       ],
@@ -182,7 +218,83 @@
         "KRX \"foreigners\" mixes foreign institutions and foreign retail — it is not a pure institutional read",
         "No domestic foreign/institutional sub-split",
         "Single-day figures are volatile; the monthly aggregate is the usable signal"
-      ]
+      ],
+      "series": {
+        "unit": "KRW bn",
+        "periods": [
+          "2026-07-13",
+          "2026-07-15",
+          "2026-07-16",
+          "2026-07-20",
+          "2026-07-21",
+          "2026-07-22",
+          "2026-07-24",
+          "2026-07-27",
+          "2026-07-28",
+          "2026-07-29",
+          "2026-07-30",
+          "2026-07-31"
+        ],
+        "lines": [
+          {
+            "investorType": "Foreigners (외국인)",
+            "isProxy": false,
+            "values": [
+              -1725.9,
+              2676.335,
+              -1929.2,
+              516.1,
+              595.929,
+              2622.3,
+              -3282.8,
+              -2904.5,
+              -4991.4,
+              -829.9,
+              1332.9,
+              7182
+            ]
+          },
+          {
+            "investorType": "Institutions (기관)",
+            "isProxy": false,
+            "values": [
+              -2208.3,
+              455.423,
+              -3057,
+              -921.8,
+              1647.998,
+              -1386.8,
+              -1951.3,
+              862.4,
+              636.3,
+              3707.8,
+              66.6,
+              1178.3
+            ]
+          },
+          {
+            "investorType": "Individuals / retail (개인)",
+            "isProxy": false,
+            "values": [
+              3892.5,
+              -3147.928,
+              4804.7,
+              351,
+              -2164.715,
+              -1227.8,
+              5178.3,
+              1980.4,
+              4327.5,
+              -2989.5,
+              -1419.9,
+              -8254.3
+            ]
+          }
+        ],
+        "source": "https://www.asiae.co.kr/en/article/2026073016064508315",
+        "note": "KOSPI cash market, post-close KRX figures. 12 sessions; 14 and 23 Jul omitted (no published breakdown) so spacing is uneven.",
+        "confidence": "verified-secondary"
+      }
     },
     {
       "market": "Hong Kong (HKEX)",
@@ -223,19 +335,42 @@
       "series": {
         "unit": "HK$ bn",
         "periods": [
-          "21 Jul",
-          "22 Jul",
-          "23 Jul",
-          "24 Jul",
-          "25 Jul",
-          "28 Jul",
-          "29 Jul",
-          "30 Jul"
+          "2026-07-06",
+          "2026-07-07",
+          "2026-07-08",
+          "2026-07-09",
+          "2026-07-10",
+          "2026-07-13",
+          "2026-07-14",
+          "2026-07-15",
+          "2026-07-16",
+          "2026-07-17",
+          "2026-07-20",
+          "2026-07-21",
+          "2026-07-22",
+          "2026-07-23",
+          "2026-07-24",
+          "2026-07-27",
+          "2026-07-28",
+          "2026-07-29",
+          "2026-07-30"
         ],
         "lines": [
           {
-            "investorType": "Southbound (mainland money into HK)",
+            "investorType": "Mainland investors via Southbound Stock Connect (SSE Southbound + SZSE Southbound combined)",
+            "isProxy": false,
             "values": [
+              20.53,
+              0.5,
+              14.19,
+              9.83,
+              -5.99,
+              9.04,
+              11,
+              13.36,
+              5.04,
+              -1.46,
+              -5.96,
               7.17,
               7.52,
               -4.23,
@@ -244,12 +379,12 @@
               -2.49,
               -5.59,
               -8.57
-            ],
-            "isProxy": false
+            ]
           }
         ],
-        "source": "https://www.hkex.com.hk/eng/csm/DailyStat/data_tab_daily_2026.htm",
-        "note": "Consecutive trading sessions. Two days of buying then six of selling, largest on the most recent day — the clearest deterioration in the panel."
+        "source": "https://www.hkex.com.hk/eng/csm/DailyStat/data_tab_daily_20260730e.js",
+        "note": "Southbound Stock Connect daily net, recomputed from HKEX primary files and confirmed to the cent.",
+        "confidence": "verified-primary"
       }
     },
     {
@@ -287,7 +422,89 @@
         "Real-time and daily NORTHBOUND foreign flows were withdrawn in Aug 2024 — only quarterly shareholding is published, so foreign positioning is effectively invisible",
         "No official retail-vs-institutional split exists for A-shares",
         "Margin balance is a leverage proxy, not a flow measurement"
-      ]
+      ],
+      "series": {
+        "unit": "CNY trn",
+        "periods": [
+          "2026-07-03",
+          "2026-07-06",
+          "2026-07-07",
+          "2026-07-08",
+          "2026-07-09",
+          "2026-07-10",
+          "2026-07-13",
+          "2026-07-14",
+          "2026-07-15",
+          "2026-07-16",
+          "2026-07-17",
+          "2026-07-20",
+          "2026-07-21",
+          "2026-07-22",
+          "2026-07-23",
+          "2026-07-24",
+          "2026-07-27",
+          "2026-07-28",
+          "2026-07-29",
+          "2026-07-30"
+        ],
+        "lines": [
+          {
+            "investorType": "Retail leverage proxy — margin financing balance outstanding (融资余额, RZYE)",
+            "isProxy": true,
+            "values": [
+              2.9807,
+              2.9702,
+              2.957,
+              2.9381,
+              2.9342,
+              2.9228,
+              2.8891,
+              2.8781,
+              2.8664,
+              2.8377,
+              2.7576,
+              2.6978,
+              2.6979,
+              2.6986,
+              2.6889,
+              2.6666,
+              2.6767,
+              2.6469,
+              2.6213,
+              2.5845
+            ]
+          },
+          {
+            "investorType": "Retail leverage proxy — daily net margin buying (融资净买入额, RZJME)",
+            "isProxy": true,
+            "values": [
+              -0.019734,
+              -0.010571,
+              -0.013117,
+              -0.018921,
+              -0.00395,
+              -0.01136,
+              -0.033671,
+              -0.011015,
+              -0.011764,
+              -0.028653,
+              -0.080078,
+              -0.059791,
+              0.000104,
+              0.000746,
+              -0.009764,
+              -0.022258,
+              0.010076,
+              -0.029777,
+              -0.02559,
+              -0.036791
+            ]
+          }
+        ],
+        "source": "https://datacenter-web.eastmoney.com/api/data/v1/get?sortColumns=dim_date&sortTypes=-1&pageSize=25&pageNumber=1&reportName=RPTA_RZRQ_LSHJ&columns=ALL&source=WEB&client=WEB",
+        "note": "Margin financing balance and daily net — a RETAIL LEVERAGE proxy, not a foreign-flow measure. Northbound foreign flows have not been published since 2024.",
+        "confidence": "verified-secondary"
+      }
     },
     {
       "market": "Singapore (SGX)",
@@ -346,29 +563,70 @@
       "series": {
         "unit": "S$ m",
         "periods": [
-          "13–17 Jul",
-          "20–24 Jul"
+          "week starting 2026-05-18",
+          "week starting 2026-05-25",
+          "week starting 2026-06-01",
+          "week starting 2026-06-08",
+          "week starting 2026-06-15",
+          "week starting 2026-06-22",
+          "week starting 2026-06-29",
+          "week starting 2026-07-06",
+          "week starting 2026-07-13",
+          "week starting 2026-07-20 (20-24 Jul 2026)"
         ],
         "lines": [
           {
-            "investorType": "Institutional",
+            "investorType": "Institutional investors",
+            "isProxy": false,
             "values": [
+              211.8,
+              -435.8,
+              14.4,
+              254.6,
+              196.6,
+              211.8,
+              -236.6,
+              126.7,
               -318.2,
               -54.3
-            ],
-            "isProxy": false
+            ]
           },
           {
-            "investorType": "Retail",
+            "investorType": "Retail investors",
+            "isProxy": false,
             "values": [
+              -136.3,
+              78.9,
+              208.4,
+              402.2,
+              -513.1,
+              143.1,
+              63.8,
+              -225.3,
               516.8,
               71.1
-            ],
-            "isProxy": false
+            ]
+          },
+          {
+            "investorType": "Market makers / active traders (MMAT)",
+            "isProxy": false,
+            "values": [
+              -75.5,
+              356.8,
+              -222.8,
+              -656.8,
+              316.5,
+              -354.9,
+              172.9,
+              98.6,
+              -198.6,
+              -16.7
+            ]
           }
         ],
-        "source": "https://klse.i3investor.com/web/blog/detail/SGXResearch/2026-07-20-story-h502278712-STI_Hits_Record_as_Focus_Shifts_to_Earnings",
-        "note": "Institutions net sellers both weeks while retail bought both weeks — the distribution pattern, in your largest market. Two points only; more weeks pending verification."
+        "source": "https://sginvestors.io/market/sgx-fund-flow-summary",
+        "note": "SGX whole-market weekly net fund flow, institutional vs retail.",
+        "confidence": "verified-secondary"
       }
     },
     {
@@ -426,7 +684,67 @@
         "ICI excludes ETFs, which is where most equity flow now goes, so it measures a shrinking slice",
         "CFTC data is 3+ days stale by publication and covers futures positioning, not cash equity flows",
         "Both ICI and CFTC URLs are overwritten weekly — figures are stamped to the retrieval date of 31 Jul 2026"
-      ]
+      ],
+      "series": {
+        "unit": "US$ mn",
+        "periods": [
+          "week ended 3 Jun 2026",
+          "week ended 10 Jun 2026",
+          "week ended 17 Jun 2026",
+          "week ended 24 Jun 2026",
+          "week ended 1 Jul 2026",
+          "week ended 8 Jul 2026",
+          "week ended 15 Jul 2026",
+          "week ended 22 Jul 2026"
+        ],
+        "lines": [
+          {
+            "investorType": "Long-term EQUITY mutual funds, total (ICI weekly estimate, EXCLUDES ETFs)",
+            "isProxy": true,
+            "values": [
+              -37375,
+              -20428,
+              -25214,
+              -16482,
+              -29914,
+              -9664,
+              -18104,
+              -36490
+            ]
+          },
+          {
+            "investorType": "— of which domestic equity mutual funds (ICI, ex-ETF)",
+            "isProxy": true,
+            "values": [
+              -27036,
+              -16327,
+              -21806,
+              -13443,
+              -22100,
+              -7113,
+              -14456,
+              -19032
+            ]
+          },
+          {
+            "investorType": "— of which world/international equity mutual funds (ICI, ex-ETF)",
+            "isProxy": true,
+            "values": [
+              -10339,
+              -4102,
+              -3408,
+              -3039,
+              -7814,
+              -2551,
+              -3648,
+              -17459
+            ]
+          }
+        ],
+        "source": "https://www.ici.org/research/stats/flows",
+        "note": "ICI long-term equity MUTUAL FUND flows — ETFs are EXCLUDED, so this is a fund-migration proxy, not a risk-on/off signal.",
+        "confidence": "verified-primary"
+      }
     }
   ],
   "chartNote": "Charts show NET flow per period: bars above the zero line are net buying, below is net selling. Series length differs by market because disclosure cadence does — Hong Kong is daily, Japan and Singapore weekly. A market with fewer than two verified periods shows no chart rather than a padded one."
