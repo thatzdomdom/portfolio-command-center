@@ -522,7 +522,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="statusbar">
   <span id="status-text"><span class="dot amber"></span>Ready — click Refresh</span>
-  <span style="margin-left:auto;">build v57 · 🌊 Fund Flows · ⚖️ Allocation w/ sleeve drill-down · buy rail ≥60 · 🏅 Consensus · 📰 News · 📈 Track record · 🛡️ Risk · 🎯 Matrix · Live: Yahoo + CNN · Intel: scheduled agent · Personal use only</span>
+  <span style="margin-left:auto;">build v58 · 🌊 Fund Flows · ⚖️ Allocation w/ sleeve drill-down · buy rail ≥60 · 🏅 Consensus · 📰 News · 📈 Track record · 🛡️ Risk · 🎯 Matrix · Live: Yahoo + CNN · Intel: scheduled agent · Personal use only</span>
 </div>
 
 <div class="overlay" id="cp-overlay" onclick="closeCP(event)">
@@ -1296,7 +1296,7 @@ function showTab(id,b){document.querySelectorAll('.panel').forEach(p=>p.classLis
 // because the fix simply was not running). data/version.json is fetched with a
 // cache-buster on every load; if the server is ahead of this file, reload once
 // against the new build. sessionStorage guards against a reload loop.
-const BUILD=57;
+const BUILD=58;
 async function checkBuild(){
   try{
     const r=await fetch('data/version.json?cb='+Date.now(),{cache:'no-store'});
@@ -1547,12 +1547,17 @@ function renderProfSection(key){
 // and HK/China/US publish no true retail-vs-institutional split at all. Rather
 // than manufacture a common format, each market carries its own cadence, its
 // own gaps, and a proxy badge on anything that is not a direct measurement.
-let flowsLoaded=false, flowsData=null;
+let flowsLoaded=false, flowsData=null, flowsHistory=null;
+// which collected daily series belongs to which market card
+const HIST_FOR={'Hong Kong':{key:'hkSouthbound',title:'Cumulative southbound flow — mainland money into HK equities',unit:'HK$bn'}};
 async function loadFlows(){
   try{
     const r=await fetch('data/flows-investors.json?cb='+Date.now());
     if(!r.ok) throw new Error('not published yet');
     flowsData=await r.json(); flowsLoaded=true;
+    // Daily history collected by scripts/flow-collector.js. Optional: the panel
+    // renders fine without it, it just loses the cumulative lines.
+    try{ const hr=await fetch('data/flows-history.json?cb='+Date.now()); if(hr.ok) flowsHistory=await hr.json(); }catch(_){}
     // Never leave the panel stuck on "Loading…": if the renderer throws, SAY so.
     // A silent hang is indistinguishable from a stale cache, which cost real
     // diagnosis time on 31 Jul.
@@ -1583,6 +1588,50 @@ function renderFlowsPanel(){
 // type, grouped by period. Renders whatever periods exist — a 3-point series
 // is drawn as 3 points and labelled as such rather than padded.
 const FLOW_COLORS=['#1d4ed8','#b45309','#15803d','#7c3aed','#0891b2'];
+// ── CUMULATIVE FLOW LINE ──────────────────────────────────────────────────
+// The question is "are institutions leaving or entering this market?", and a
+// bar per period cannot answer it — you cannot eyeball a running total. The
+// CUMULATIVE net line can: rising = money accumulating in the market, falling =
+// money leaving, and the slope shows whether it is speeding up or fading.
+// Rebased to 0 at the series start, so the y-axis reads as "net HK$bn added or
+// removed since <date>".
+function cumLine(days,opts){
+  opts=opts||{};
+  const ks=Object.keys(days||{}).sort();
+  if(ks.length<3) return '';
+  const W=760,H=210,padL=54,padR=12,padT=12,padB=30;
+  const plotW=W-padL-padR, plotH=H-padT-padB;
+  let run=0; const pts=ks.map(k=>{run+=days[k];return {d:k,v:run};});
+  const vs=pts.map(p=>p.v), mx=Math.max(...vs,0), mn=Math.min(...vs,0);
+  const pad=((mx-mn)||1)*0.1, hi=mx+pad, lo=mn-pad, rng=hi-lo;
+  const X=i=>padL+plotW*(ks.length===1?0:i/(ks.length-1));
+  const Y=v=>padT+plotH*(hi-v)/rng;
+  const d=pts.map((p,i)=>`${i?'L':'M'}${X(i).toFixed(1)},${Y(p.v).toFixed(1)}`).join('');
+  const zeroY=Y(0);
+  const area=`${d}L${X(pts.length-1).toFixed(1)},${zeroY.toFixed(1)}L${X(0).toFixed(1)},${zeroY.toFixed(1)}Z`;
+  const end=pts[pts.length-1].v, up=end>=0;
+  const col=up?'#15803d':'#b91c1c';
+  const gy=[hi,(hi+lo)/2,lo].map(v=>`<line x1="${padL}" x2="${W-padR}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}" stroke="var(--border)"/><text x="${padL-6}" y="${(Y(v)+3).toFixed(1)}" font-size="9" fill="var(--muted)" text-anchor="end">${v.toFixed(0)}</text>`).join('');
+  const every=Math.max(1,Math.ceil(ks.length/7));
+  const xl=ks.map((k,i)=>i%every?'':`<text x="${X(i).toFixed(1)}" y="${H-12}" font-size="9" fill="var(--muted)" text-anchor="middle">${k.slice(5)}</text>`).join('');
+  // 20-period slope tells you whether the drain is accelerating or easing
+  const recent=pts.slice(-20), slope=recent.length>1?(recent[recent.length-1].v-recent[0].v):0;
+  return `<div style="margin-top:12px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px">
+      <div class="small" style="font-weight:700">${opts.title||'Cumulative net flow'} <span style="color:var(--muted);font-weight:400">(${opts.unit||''} — rising = money entering, falling = leaving)</span></div>
+      <div class="small" style="font-weight:800;color:${col}">${up?'+':''}${end.toFixed(1)} ${opts.unit||''} since ${ks[0]}</div>
+    </div>
+    <div style="overflow-x:auto"><svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" style="max-width:100%;height:auto">
+      ${gy}
+      <path d="${area}" fill="${col}" opacity="0.10"/>
+      <line x1="${padL}" x2="${W-padR}" y1="${zeroY.toFixed(1)}" y2="${zeroY.toFixed(1)}" stroke="var(--text)" stroke-width="1.2" stroke-dasharray="3,3"/>
+      <path d="${d}" fill="none" stroke="${col}" stroke-width="2.2" stroke-linejoin="round"/>
+      <circle cx="${X(pts.length-1).toFixed(1)}" cy="${Y(end).toFixed(1)}" r="3.5" fill="${col}"/>
+      ${xl}
+    </svg></div>
+    <div class="small" style="color:var(--muted);margin-top:2px">${ks.length} trading sessions · last 20 sessions ${slope>=0?'added':'removed'} <b style="color:${slope>=0?'var(--green)':'var(--red)'}">${slope>=0?'+':''}${slope.toFixed(1)} ${opts.unit||''}</b>${opts.note?' · '+opts.note:''}</div>
+  </div>`;
+}
 function flowChart(s){
   if(!s||!s.periods||s.periods.length<2||!s.lines||!s.lines.length) return '';
   const P=s.periods.length, L=s.lines.length;
@@ -1643,6 +1692,9 @@ function renderFlowCard(m,F){
       </div>
       ${m.latestPeriod?`<div class="small" style="color:var(--muted);margin-top:2px">Latest period: <b style="color:var(--text)">${m.latestPeriod}</b></div>`:''}
       <div style="margin-top:8px">${rows||'<div class="small" style="color:var(--muted)">No figures could be verified this run.</div>'}</div>
+      ${(()=>{ const h=Object.keys(HIST_FOR).find(k=>m.market.startsWith(k)); if(!h||!flowsHistory) return '';
+        const cfg=HIST_FOR[h], blk=flowsHistory[cfg.key]; if(!blk||!blk.days) return '';
+        return cumLine(blk.days,{title:cfg.title,unit:cfg.unit,note:blk.note?'':''}); })()}
       ${flowChart(m.series)}
       ${m.trend?`<div class="small" style="margin-top:8px;line-height:1.55"><b>Trend:</b> ${m.trend}</div>`:''}
       ${m.interpretation?`<div style="font-size:13px;margin-top:6px;line-height:1.55">${m.interpretation}</div>`:''}
