@@ -174,7 +174,33 @@ const STATE = path.join(process.env.HOME, '.claude', 'portfolio-brief.last');
 const todayISO = new Date().toISOString().slice(0, 10);
 try { if (!FORCE && fs.readFileSync(STATE, 'utf8').trim() === todayISO) { console.log('already sent today (' + todayISO + ') — use --force to resend'); process.exit(0); } } catch (e) {}
 
-if (env.EMAIL_TO) {
+// ── PREFERRED PATH: raw MIME over SMTP ────────────────────────────────────
+// Mail.app's AppleScript compose wraps every body in <blockquote type="cite">
+// (its URLShare template) plus a multipart/related part with an embedded PNG,
+// so clients render the brief as quoted/forwarded text. Eight compose paths
+// were tested; all wrap, it is not configurable. Sending raw MIME ourselves
+// removes the wrapper entirely. Falls back to Mail.app if SMTP is unconfigured
+// or fails, so delivery never depends on this working.
+let smtpDone = false;
+if (env.EMAIL_TO && env.SMTP_HOST && env.SMTP_USER && env.SMTP_PASS) {
+  const os = require('os');
+  const tf = path.join(os.tmpdir(), `pcc-brief-${process.pid}.txt`);
+  const hf = path.join(os.tmpdir(), `pcc-brief-${process.pid}.html`);
+  fs.writeFileSync(tf, fullText); fs.writeFileSync(hf, fullHtml);
+  const r = spawnSync(process.execPath, [path.join(__dirname, 'send-smtp.js'),
+    `📊 Portfolio Morning Brief — ${today}`, tf, hf, env.EMAIL_TO, env.EMAIL_FROM || env.SMTP_USER],
+    { encoding: 'utf8', timeout: 120000 });
+  try { fs.unlinkSync(tf); fs.unlinkSync(hf); } catch (_) {}
+  if (r.status === 0) {
+    smtpDone = true; emailOk = true;
+    try { fs.writeFileSync(STATE, todayISO); } catch (_) {}
+    log.push('email: ' + (r.stdout || '').trim());
+  } else {
+    log.push('smtp failed, falling back to Mail.app: ' + ((r.stderr || r.stdout || '').trim() || `exit ${r.status}`).slice(0, 140));
+  }
+}
+
+if (env.EMAIL_TO && !smtpDone) {
   // Send FROM a different account than the recipient (EMAIL_FROM) so Gmail
   // treats it as genuine inbound mail — push notifications fire and it can't
   // be hidden by self-send quirks. Launch Mail first and use a long AppleEvent
