@@ -226,14 +226,27 @@ if (env.EMAIL_TO && !smtpDone) {
   delay 2
   with timeout of 150 seconds
     tell application "Mail"
-      set msg to make new outgoing message with properties {subject:item 1 of argv, html content:item 2 of argv, visible:false}
+      set msg to make new outgoing message with properties {subject:item 1 of argv, content:item 2 of argv, visible:false}
+      -- Strip the account signature. Mail was attaching image004.png (a
+      -- Microsoft Office-generated signature graphic) to every brief, which
+      -- added a corporate-forward look on top of the quote wrapper.
+      try
+        set message signature of msg to missing value
+      end try
       if (count of argv) > 3 then set sender of msg to item 4 of argv
       tell msg to make new to recipient at end of to recipients with properties {address:item 3 of argv}
       send msg
     end tell
   end timeout
 end run`;
-  const args = ['-', `📊 Portfolio Morning Brief — ${today}`, fullHtml, env.EMAIL_TO];
+  // PLAIN TEXT via Mail.app — deliberately NOT the styled HTML card.
+  // Mail wraps every scripted body in <blockquote type="cite">. With plain text
+  // that wrapper is invisible (Apple neutralises its border), which is why the
+  // brief looked normal before 29 Jul. Putting a white styled card inside that
+  // quote block made it read as an embedded/forwarded message, and from 30 Jul
+  // Mail also started attaching a multipart/related PNG. The card only belongs
+  // on the SMTP path, where there is no wrapper at all.
+  const args = ['-', `📊 Portfolio Morning Brief — ${today}`, fullText, env.EMAIL_TO];
   if (env.EMAIL_FROM) args.push(env.EMAIL_FROM);
   // Up to 3 attempts with widening gaps — a launchd 08:15 run may catch Mail
   // mid-launch, mid-account-connect, or mid-network-flap.
