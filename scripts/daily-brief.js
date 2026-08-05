@@ -86,9 +86,26 @@ if (insiderLines.length) sections.unshift(['🔔 INSIDER FILINGS CAUGHT LIVE (US
 if (integrityLines.length) sections.push(['DATA-INTEGRITY CHECKS', integrityLines]);
 
 const stamp = (brief && brief.date) || (model && model.updated) || 'unknown';
+// STALENESS GUARD. On 5 Aug the research run died instantly ("Not logged in"),
+// so brief.json was yesterday's — and the 36-hour `fresh` window happily sent
+// yesterday's analysis under today's date and subject. The validator caught it;
+// the sender never asked. Now the sender checks too, and says so LOUDLY in both
+// the subject and the first line rather than quietly shipping stale content.
+// Singapore date, explicitly — toISOString() is UTC and would report the wrong
+// day for a run just after midnight SGT.
+const todaySGT = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Singapore' });
+const briefDay = brief && brief.date ? String(brief.date).slice(0, 10) : null;
+const isStale = briefDay !== todaySGT;
+const staleBanner = isStale
+  ? `⚠️  STALE — THIS IS NOT TODAY'S RESEARCH\n`
+    + `The ${new Date().toLocaleDateString('en-SG', { day: 'numeric', month: 'short' })} research run did not complete, so everything below is from ${briefDay || 'an earlier run'}.\n`
+    + `Prices, probabilities and risk on the dashboard still recompute live; only this written analysis is stale.\n`
+    + `${'─'.repeat(60)}\n\n`
+  : '';
 const bullets = a => a.map(x => `• ${x}`).join('\n');
+const SUBJ = `📊 Portfolio Morning Brief — ${today}${isStale ? ' ⚠️ STALE (research did not run)' : ''}`;
 const fullText = [
-  `PORTFOLIO MORNING BRIEF — ${today}`,
+  staleBanner + `PORTFOLIO MORNING BRIEF — ${today}`,
   `Data refreshed: ${stamp}`,
   '',
   '━━ TLDR ━━━━━━━━━━━━━━━━━━━━━━━',
@@ -188,7 +205,7 @@ if (env.EMAIL_TO && env.SMTP_HOST && env.SMTP_USER && env.SMTP_PASS) {
   const hf = path.join(os.tmpdir(), `pcc-brief-${process.pid}.html`);
   fs.writeFileSync(tf, fullText); fs.writeFileSync(hf, fullHtml);
   const r = spawnSync(process.execPath, [path.join(__dirname, 'send-smtp.js'),
-    `📊 Portfolio Morning Brief — ${today}`, tf, hf, env.EMAIL_TO, env.EMAIL_FROM || env.SMTP_USER],
+    SUBJ, tf, hf, env.EMAIL_TO, env.EMAIL_FROM || env.SMTP_USER],
     { encoding: 'utf8', timeout: 120000 });
   try { fs.unlinkSync(tf); fs.unlinkSync(hf); } catch (_) {}
   if (r.status === 0) {
@@ -246,7 +263,7 @@ end run`;
   // quote block made it read as an embedded/forwarded message, and from 30 Jul
   // Mail also started attaching a multipart/related PNG. The card only belongs
   // on the SMTP path, where there is no wrapper at all.
-  const args = ['-', `📊 Portfolio Morning Brief — ${today}`, fullText, env.EMAIL_TO];
+  const args = ['-', SUBJ, fullText, env.EMAIL_TO];
   if (env.EMAIL_FROM) args.push(env.EMAIL_FROM);
   // Up to 3 attempts with widening gaps — a launchd 08:15 run may catch Mail
   // mid-launch, mid-account-connect, or mid-network-flap.

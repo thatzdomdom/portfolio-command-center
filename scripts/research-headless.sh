@@ -48,8 +48,19 @@ VC=$?
 if [ "$VC" = "1" ]; then
   echo "$(date '+%F %T') validate-all: PROBLEMS FOUND"
   NTFY=$(grep '^NTFY_TOPIC=' "$HOME/.claude/portfolio-brief.env" 2>/dev/null | cut -d= -f2)
-  [ -n "$NTFY" ] && curl -s -o /dev/null -H "Title: Portfolio: data validation failed" -H "Priority: high" -H "Tags: warning" \
-    -d "$(/opt/homebrew/bin/node -e "try{const r=require('$PWD/data/.validation.json');console.log(r.problems.slice(0,4).join(' | '))}catch(e){console.log('see validate-all output')}")" "https://ntfy.sh/${NTFY}"
+  # Read the problems via a FILE, not an inline node -e inside "$( )". The
+  # nested double quotes were mangled by the shell (5 Aug: `tryconst r=require`
+  # + "curl: blank argument"), so the one time validation actually caught a real
+  # problem, the alert about it could not be sent.
+  PROB=$(/opt/homebrew/bin/node -e '
+    try { const r = require(process.argv[1]); console.log((r.problems||[]).slice(0,4).join(" | ")); }
+    catch (e) { console.log("see validate-all output"); }
+  ' "$PWD/data/.validation.json" 2>/dev/null)
+  [ -z "$PROB" ] && PROB="see validate-all output"
+  if [ -n "$NTFY" ]; then
+    curl -s -o /dev/null -H "Title: Portfolio: data validation failed" -H "Priority: high" -H "Tags: warning" \
+      -d "$PROB" "https://ntfy.sh/${NTFY}"
+  fi
 else
   echo "$(date '+%F %T') validate-all: exit $VC"
 fi
