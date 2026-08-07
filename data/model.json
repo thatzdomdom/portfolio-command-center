@@ -1,42 +1,42 @@
 {
-  "updated": "2026-08-07",
-  "asOf": "2026-08-07",
+  "updated": "2026-08-08",
+  "asOf": "2026-08-08",
   "note": "CIO research-panel macro regime + per-instrument probabilistic priors, produced by a multi-agent research workflow with adversarial verification and cited sources. The live in-browser quant engine (GBM drift-diffusion on 2y daily history) blends with these forward-looking priors to produce the displayed P(up) and EV. Refreshed by the scheduled intel agent.",
   "macro": {
-    "regime": "Hawkish repricing under record equities",
-    "riskOnProb": 0.49,
-    "regimeScore": 0.49,
-    "narrative": "Re-anchored 7 Aug from an in-session run. Covers through the 6 Aug US close. The 7 Aug Asia session is NOT included — this run gathered data on 6 Aug and the 7 Aug sessions had not closed when it was verified. The 4 Aug de-escalation trade has NOT settled: the S&P made its record 7,736.52 on 4 Aug, edged off it on 5 Aug, then fell on 6 Aug as Brent rebounded ~4% on renewed Hormuz concern — even though WTI is still down ~11% over three sessions to ~$75 after Iran and Oman agreed a shipping route. The bigger shift is the Fed: September is now priced roughly 65% for a HIKE, not a cut, after a 9-3 July vote and Governor Cook saying plainly that inflation is too high and she is prepared to raise. ISM Services printed 54.1 with Prices at 70.3 and Employment back in contraction at 47.4 — stagflation-lite — while Challenger layoffs hit a two-year low and claims held under 200k, denying the Fed any labour-market cover to ease. Yet precious metals rallied straight through the hawkish repricing: silver $62.20 and gold $4,270.62 (+2.38%), the first open above $4,300 since 17 July. Asia diverged violently: Korea crashed -4.58% (SK Hynix -10.37%), the Hang Seng fell 1.5%, but Shanghai bucked it and DBS posted a record S$3.08b quarter and RAISED FY guidance.",
+    "regime": "Dovish repricing — the hike threat recedes",
+    "riskOnProb": 0.61,
+    "regimeScore": 0.61,
+    "narrative": "Re-anchored Sat 8 Aug (in-session) on the Friday 7 Aug closes. The week turned decisively: US July payrolls CONTRACTED 23,000 against ~+80,000 expected, with 103,000 of downward revisions to May and June, and September hike odds collapsed from ~55-58% to ~40-44% — no longer the base case, against ~65% priced as recently as 6 Aug. Risk assets and metals rallied together: the S&P set a record 7,757.64 (+3.6% on the week, best since April), silver ripped 3.3% to $63.54 (intraday $65.05) and gold 2.4% to $4,343.43, with GDX +7.1% capping a 20%-plus week. Singapore delivered fundamentally — OCBC a record S$2.22b (+22%) after DBS's S$3.08b, and the STI within 15 points of its all-time high. The clear caveat is the bond market: a payrolls contraction plus 103k of revisions moved the 10Y only ~3bp to ~4.61-4.65% and the 30Y to 5.20%, so fixed income is still pricing an inflation problem consistent with ISM Services prices at 70.3. Oil fell ~7% on the week but bounced Friday with Hormuz unresolved. The 12 Aug CPI is the resolution point.",
     "drivers": [
       {
-        "factor": "September FOMC priced for a HIKE (~65%)",
-        "read": "Fed Governor Cook 5 Aug: inflation \"too high\", \"prepared to act by raising rates\"; July vote was 9-3 with three hike dissents. This is the dominant swing factor and it is hostile to every rate-sensitive sleeve.",
-        "impact": "cautionary"
-      },
-      {
-        "factor": "Precious metals rallying INTO the hawkish repricing",
-        "read": "Silver $62.20 (from ~$58.5 on 4 Aug) and gold $4,270.62 +2.38%, gold rising even as the 10Y backed up 5bp to 4.67%. The metals are no longer trading purely off real rates — a genuine change of character in the book's largest risk.",
+        "factor": "September hike no longer the base case",
+        "read": "Odds collapsed to ~40-44% from ~55-58% after payrolls contracted 23,000 with 103,000 of downward revisions. Against ~65% priced on 6 Aug, this is a regime shift and the engine of the whole rally.",
         "impact": "supportive"
       },
       {
-        "factor": "Hormuz de-escalation is NOT settled",
-        "read": "WTI -11% over three sessions to ~$75 on an Iran-Oman shipping agreement, but Brent rebounded ~4% on 6 Aug on renewed concern. Oil has round-tripped a meaningful part of the crash; do not treat the risk premium as removed.",
-        "impact": "mixed"
+        "factor": "Precious metals in a genuine trend reversal",
+        "read": "Silver $63.54 (+3.3%, intraday $65.05), gold $4,343.43 (+2.4%, two-month high), GDX +7.1% on the day and +20% on the week. Silver is ~+14% from its late-July low.",
+        "impact": "supportive"
       },
       {
-        "factor": "US labour: soft surveys, firm hard data",
-        "read": "ADP +44k (weakest of the year) against Challenger layoffs at a two-year low and claims at 199k. Continuing claims rising to 1.801m says the re-hire rate is slowing, but nothing here forces the Fed to ease.",
+        "factor": "The long end refuses to confirm",
+        "read": "A payrolls contraction moved the 10Y only ~3bp to ~4.61-4.65% and the 30Y to 5.20%. Bonds are still pricing inflation — ISM Services prices 70.3 — warning the equity/metals reaction may be ahead of what fixed income will validate.",
         "impact": "cautionary"
       },
       {
-        "factor": "Asia dispersion is extreme",
-        "read": "Korea -4.58% with SK Hynix -10.37%, Hang Seng -1.5%, yet Shanghai rose and Japan had run +3.66% on 5 Aug. Single \"Asia\" exposure is misleading right now; the sleeves must be read separately.",
+        "factor": "Singapore banks delivering fundamentally",
+        "read": "OCBC record S$2.22b (+22%, first quarter above S$2b, loan guidance raised) after DBS record S$3.08b with guidance raised; UOB +10% but cut fee guidance. STI within 15 points of its record.",
+        "impact": "supportive"
+      },
+      {
+        "factor": "Asia dispersion persists",
+        "read": "Hang Seng +0.54% and Shanghai +1.02% (a three-week high, +2.81% on the week) on a strong China trade beat (exports +23.9%), but Korea fell a further 0.60% with SK Hynix -5.22% — the AI/memory unwind is not over.",
         "impact": "mixed"
       },
       {
-        "factor": "DBS record quarter and raised guidance",
-        "read": "Q2 net profit +9% to a record S$3.08b, quarterly income above S$6b for the first time, FY2026 guidance RAISED. Direct support for the largest single SGX holding.",
-        "impact": "supportive"
+        "factor": "Oil relief only half-delivered",
+        "read": "Brent settled ~$83.55, +1.3% on the day but -7% on the week, with Hormuz unresolved. The inflation tail is reduced, not removed — the main threat to the dovish repricing.",
+        "impact": "mixed"
       }
     ],
     "byAssetClass": [
@@ -84,7 +84,7 @@
       "https://finance.yahoo.com/personal-finance/investing/article/silver-prices-today-monday-august-3-2026-silver-prices-open-higher-thanks-to-paused-airstrikes-123103873.html",
       "https://www.ig.com/en/news-and-trade-ideas/weekly-market-navigator-3-aug-2026-260803"
     ],
-    "asOf": "2026-08-07"
+    "asOf": "2026-08-08"
   },
   "calls": [
     {
