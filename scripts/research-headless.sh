@@ -6,6 +6,26 @@ exec >>"$LOG" 2>&1
 echo "=== $(date '+%F %T') research start ==="
 cd /Users/dominiczhao/portfolio-dashboard || exit 1
 
+# ── AUTH: long-lived token, not the expiring OAuth session ────────────────
+# The interactive OAuth refresh token lasts ~a month. Yours expired
+# 2026-08-04 02:13 UTC and the 07:02 job then failed silently for two days
+# ("Not logged in · Please run /login") while still emailing yesterday's brief.
+# A `claude setup-token` credential lasts ~a year and is built for unattended
+# use. Renew with: claude setup-token  → paste into ~/.claude/claude-token.env
+[ -f "$HOME/.claude/claude-token.env" ] && . "$HOME/.claude/claude-token.env"
+export CLAUDE_CODE_OAUTH_TOKEN
+
+# Fail LOUDLY and early rather than burning the run and shipping stale data.
+AUTH=$(/opt/homebrew/bin/claude auth status 2>/dev/null | /opt/homebrew/bin/node -e 'let s="";process.stdin.on("data",c=>s+=c).on("end",()=>{try{console.log(JSON.parse(s).loggedIn?"ok":"no")}catch(e){console.log("no")}})')
+if [ "$AUTH" != "ok" ] && [ -z "$CLAUDE_CODE_OAUTH_TOKEN" ]; then
+  echo "$(date '+%F %T') ABORT — not authenticated and no long-lived token set."
+  NT=$(grep '^NTFY_TOPIC=' "$HOME/.claude/portfolio-brief.env" 2>/dev/null | cut -d= -f2)
+  [ -n "$NT" ] && curl -s -o /dev/null -H "Title: Portfolio: research BLOCKED — logged out" -H "Priority: urgent" -H "Tags: warning" \
+    -d "The Claude CLI is logged out, so no research ran and the morning brief will be stale. Fix on the Mac: claude setup-token, then paste the token into ~/.claude/claude-token.env" "https://ntfy.sh/${NT}"
+  echo "=== $(date '+%F %T') research end (exit 78 — auth) ==="
+  exit 78
+fi
+
 /opt/homebrew/bin/claude -p "Execute the instructions in /Users/dominiczhao/.claude/scheduled-tasks/portfolio-intel-refresh/SKILL.md exactly and completely. Work efficiently — hard time budget 45 minutes; if a source stalls twice, skip it and continue; partial-but-published beats complete-but-late." \
   --permission-mode bypassPermissions \
   --add-dir /Users/dominiczhao/portfolio-dashboard \
