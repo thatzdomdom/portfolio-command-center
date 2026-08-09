@@ -1,91 +1,140 @@
 {
-  "updated": "2026-08-09",
-  "note": "Sunday 9 Aug weekend check (in-session; the headless CLI has been logged out since 4 Aug). No market has traded since the Friday 7 Aug close, so this run deliberately gathered ONLY weekend developments rather than re-reporting Friday — and the weekend was NOT quiet. Nine weekend items verified against loaded sources; Friday's decisive items are carried below, clearly dated 7 Aug.",
+  "updated": "2026-08-10",
+  "note": "Monday 10 Aug in-session run (CLI logged out since 4 Aug; it aborted cleanly at 07:02 with exit 78). 21 items verified, 1 dropped. This run graded our own Sunday forward call on oil and reports it as a partial miss. It also caught two data-quality traps: a wrong reference price that would have inflated the apparent oil move 2.7x, and futures-vs-cash comparison errors (S&P future vs cash record; Nasdaq 100 future vs Nasdaq Composite; Dec gold vs spot). One gap is declared rather than filled: no Hang Seng futures level could be confirmed.",
   "items": [
     {
-      "date": "2026-08-08",
-      "headline": "IRGC missile hits ADNOC tanker in Strait of Hormuz — Gulf states condemn \"act of piracy\"",
-      "summary": "In the early hours of Saturday 8 August, an ADNOC-owned tanker transiting the Strait of Hormuz was struck by a missile, which the UAE attributed to Iran's Revolutionary Guard Corps. No casualties in this strike, but 15 ADNOC vessels have been attacked by missiles and drones since the conflict began, with one crew member killed and 20 injured in total. The UAE called it \"an act of piracy by Iran's Revolutionary Guard Corps\"; Qatar rejected the use of the waterway \"as a bargaining chip\" and called for it to reopen without conditions; Saudi Arabia condemned the targeting \"in the strongest terms\" as \"a grave breach of international law\"; the GCC called it a \"dangerous and unacceptable escalation.\" This is a genuine weekend escalation that lands directly against the -7% weekly move in crude the dashboard already carries.",
-      "category": "Geopolitics",
-      "impact": "bullish",
+      "date": "2026-08-10",
+      "headline": "OUR CALL, GRADED: oil gapped up — but ~1%, not dollars, and it gave half back within two hours",
+      "summary": "Sunday we said crude had over-discounted a Hormuz reopening and to watch the futures open. Verdict: directionally right, magnitude overstated. Brent Oct-26 opened and traded to $84.36 vs Friday's $83.55 settle (+1.0%); WTI Sep-26 $78.75 vs $78.18 (+0.73%). At the highs the pop was larger — Brent 84.97 (+1.7%), WTI 79.41 (+1.6%) — but roughly half faded within about two hours. Independent readings put the move between +0.73% and +1.0%; all reconcile to Friday's settles. Our \"over-discounted\" framing implied asymmetric upside; what printed was a spike sellers met.",
+      "category": "Fed/Macro",
+      "impact": "mixed",
       "tickers": [
         "CL=F",
         "BZ=F",
         "USO",
-        "XLE",
-        "GDX"
-      ],
-      "actionable": "Crude closed Friday around Brent $83.55 / WTI $78.2 after a -7% week priced on de-escalation hopes. A live tanker strike on Saturday is the kind of event that can reverse part of that at Sunday-evening futures open. Watch the Brent open (Monday ~06:00 SGT) as the first tradeable read; also a potential safe-haven tailwind for the gold/silver sleeve, which does not price until Monday.",
-      "sources": [
-        "https://www.aljazeera.com/news/2026/8/8/uae-says-iran-targeted-adnoc-tanker-in-hormuz-no-casualties-2"
-      ]
-    },
-    {
-      "date": "2026-08-08",
-      "headline": "Iran decouples Hormuz reopening from the Oman deal, hardens conditions on Washington",
-      "summary": "On Saturday IRGC spokesman Gen. Hossein Mohebbi said reopening the Strait of Hormuz is \"completely independent\" of the Iran-Oman negotiation process (ABC News live blog, 9:22am EDT). Hours later Supreme National Security Council secretary Mohammad Bagher Zolghadr said the strait \"will never fully reopen\" until the US \"corrects its behavior\" (1:55pm EDT). Al Jazeera's Saturday liveblog reports Zolghadr's conditions as including US compensation payments and an end to the naval blockade. This directly contradicts the market's working assumption that an Iran-Oman lane agreement equals a reopening.",
-      "category": "Geopolitics",
-      "impact": "bullish",
-      "tickers": [
-        "CL=F",
-        "GDX",
-        "SILJ",
-        "SLVP"
-      ],
-      "actionable": "Oil fell ~7% last week and Brent sits ~$83 partly on reopening optimism. Saturday's messaging says the Oman deal does not reopen the strait — Iran is holding that as separate leverage over Washington. Treat Friday's crude weakness as having over-discounted a reopening, and expect a firmer Monday/Tuesday open in energy. The same hardening is supportive for the gold/silver miner complex after its 20%+ week.",
-      "sources": [
-        "https://abcnews.com/International/live-updates/iran-live-updates-trump-deal-imminent-iran-oman/?id=135317231"
-      ]
-    },
-    {
-      "date": "2026-08-08",
-      "headline": "Iran attaches conditions: strait will not fully reopen until US \"corrects its behaviour\"",
-      "summary": "Also on Saturday 8 August, Foreign Minister Abbas Araghchi said the Oman agreement was \"very close\" but that a full reopening of the strait depends on the US honouring commitments made in the June memorandum of understanding. Iran's stated conditions include: uphold the June MoU, halt Israeli attacks on Lebanon, unfreeze blocked Iranian assets, withdraw the naval blockade, and remove military assets from the region. Iran's Supreme National Security Council framed it as US \"behaviour correction\" first. Per the same report, maritime traffic in the strait remained minimal but showed signs of recovery, Iran's currency strengthened and its stock exchange rose over 2%.",
-      "category": "Geopolitics",
-      "impact": "mixed",
-      "tickers": [
-        "CL=F",
-        "BZ=F"
-      ],
-      "actionable": "The gap between \"framework finalized\" and \"strait stays shut until Washington concedes\" is the whole trade. An Oman deal that does not actually restore transit traffic leaves the energy risk premium in place even as headlines read constructive. Watch tanker transit counts rather than deal headlines as the confirming signal.",
-      "sources": [
-        "https://www.aljazeera.com/news/2026/8/8/iran-deliberates-hormuz-arrangement-amid-uncertain-prospects-with-us"
-      ]
-    },
-    {
-      "date": "2026-08-08",
-      "headline": "White House response: Vance says US is \"really in the middle of the game,\" offers no concession",
-      "summary": "Asked on Saturday 8 August about the state of negotiations, Vice President JD Vance said: \"I try to remind people we're really in the middle of the game here... we're applying a whole host of tools, diplomatic, economic, military tools to ensure that we get the best outcome,\" adding that \"this thing is not over\" (ABC News live blog, 12:59pm EDT). No US concession was offered in response to Iran's stated conditions.",
-      "category": "Geopolitics",
-      "impact": "bullish",
-      "tickers": [
-        "CL=F",
-        "USO"
-      ],
-      "actionable": "This is the answer to the White House question: no softening. With Iran demanding force withdrawal and sanctions relief and Washington signalling continued pressure, the gap between the two positions did not narrow this weekend. Keeps the Gulf risk premium intact into Monday.",
-      "sources": [
-        "https://abcnews.com/International/live-updates/iran-live-updates-trump-deal-imminent-iran-oman/?id=135317231"
-      ]
-    },
-    {
-      "date": "2026-08-08",
-      "headline": "Iran-Oman lane framework near-final: northern inbound Iranian lane, southern Omani outbound, ~60-day interim",
-      "summary": "Foreign Minister Abbas Araghchi said the arrangement is \"very close,\" with inbound traffic using a northern lane through Iranian waters and outbound traffic via a southern Omani lane. The framework is reported as an interim arrangement of roughly 60 days with extension options, and still awaits sign-off from higher Iranian authorities. Al Jazeera notes Brent around $83, Iran's rial firming to 1.85m per dollar and the Tehran exchange up over 2% on the diplomatic prospect. Separately, the Oman-Iran joint statement circulating in search results is dated 23 June 2026, not this weekend — worth flagging so it is not mistaken for fresh news.",
-      "category": "Energy",
-      "impact": "mixed",
-      "tickers": [
-        "USO",
         "XLE"
       ],
-      "actionable": "The mechanics are real progress but the framework is explicitly interim (~60 days) and unapproved, and per Saturday's IRGC comments does not itself reopen the strait. Any headline reading \"Iran-Oman deal signed\" should not be traded as a supply-normalisation event — check whether Tehran has also conceded on the US conditions before assuming crude downside.",
+      "actionable": "Log this as a partial miss, not a win. For the oil sleeve it is a small positive mark, not a re-rating. The level that matters now: if Brent loses Friday's $83.55 settle during Asian hours, the weekend escalation has been fully round-tripped and the reopening trade reasserts.",
       "sources": [
-        "https://www.aljazeera.com/news/2026/8/8/iran-deliberates-hormuz-arrangement-amid-uncertain-prospects-with-us"
+        "https://www.investing.com/commodities/brent-oil"
+      ]
+    },
+    {
+      "date": "2026-08-10",
+      "headline": "DATA TRAP CAUGHT: a bad reference price would have made that call look 2.7x better than it was",
+      "summary": "Investing.com's Brent page quotes the price correctly ($84.36) but states a previous close of $82.21 — not Friday's $83.55 ICE settle — headlining +2.62%. TradingEconomics' change fields also fail to reconcile: its Brent delta implies a $83.29 prior close, and its gold/silver deltas (+2.44%, +3.32%) are demonstrably FRIDAY's moves being shown as current. Barchart and oilprice.com both reconcile exactly to the real settles. Had the dashboard taken the headline percentage, it would have reported our own forecast as 2.7x more correct than reality.",
+      "category": "Fed/Macro",
+      "impact": "mixed",
+      "tickers": [
+        "BZ=F",
+        "CL=F"
+      ],
+      "actionable": "New standing rule for this pipeline: only trust a published percent-change when the quoted previous close matches the known prior settle; otherwise compute the delta manually. This is the second time a self-flattering number nearly reached your dashboard.",
+      "sources": [
+        "https://www.investing.com/commodities/brent-oil"
       ]
     },
     {
       "date": "2026-08-09",
-      "headline": "CALENDAR: SGX closed Monday 10 August for National Day — the entire Singapore book is untradeable",
-      "summary": "Singapore's National Day falls on Sunday 9 August 2026, so the public holiday is observed Monday 10 August and the Singapore Exchange is fully closed that day. This is a calendar fact, not news, but it is the single most operationally relevant item for Monday.",
+      "headline": "Iran hardens further: six published conditions for reopening, and \"no possibility of resuming negotiations\"",
+      "summary": "Tehran published six conditions for reopening the strait, and Foreign Minister Araghchi said Sunday there is \"no possibility of resuming negotiations\" with the US, even while describing the Oman lane deal as \"very close\". Trump said the US is \"low-keying it\", leaning on economic pressure. The gap between the two positions widened rather than narrowed over the weekend.",
+      "category": "Geopolitics",
+      "impact": "bearish",
+      "tickers": [
+        "CL=F",
+        "USO",
+        "XLE",
+        "GDX"
+      ],
+      "actionable": "This is why crude did not gap dollars: a reopening was never actually imminent, so there was less mispricing to correct than we implied. It also means the Gulf risk premium is structural for now, not a headline spike.",
+      "sources": [
+        "https://oilprice.com/Latest-Energy-News/World-News/Iran-Says-Hormuz-Stays-Closed-Until-US-Meets-Six-Sweeping-Demands.html and https://oilprice.com/Latest-Energy-News/World-News/ADNOC-Reports-15-Vessel-Attacks-as-Hormuz-Risks-Mount.html"
+      ]
+    },
+    {
+      "date": "2026-08-09",
+      "headline": "Houthis claim a drone strike on Aramco's Jazan refinery; Saudi confirms the fire was extinguished, no casualties",
+      "summary": "Houthi forces claimed a drone strike on Saudi Aramco's Jazan refinery early Sunday. Saudi Arabia confirmed a fire that was extinguished with no casualties. Separately, Hormuz traffic is running about 33% below normal.",
+      "category": "Geopolitics",
+      "impact": "bearish",
+      "tickers": [
+        "CL=F",
+        "BZ=F",
+        "XLE"
+      ],
+      "actionable": "The conflict is widening beyond the strait to Saudi production infrastructure. Combined with traffic down a third, this is a slow supply squeeze rather than a single event — supportive for energy and, indirectly, for the metals bid.",
+      "sources": [
+        "https://www.aljazeera.com/news/2026/8/9/saudi-arabia-says-fire-extinguished-at-aramco-facility-in-jizan"
+      ]
+    },
+    {
+      "date": "2026-08-10",
+      "headline": "WEDNESDAY IS THE WEEK: US July CPI and Tencent Q2 results land on the same day",
+      "summary": "US July CPI is released Wednesday 12 August at 08:30 ET, and Tencent reports interim results the same day with an interim dividend on the agenda. September Fed hike odds sit at roughly 40-44% after Friday's payrolls contraction.",
+      "category": "Fed/Macro",
+      "impact": "mixed",
+      "tickers": [
+        "SLV",
+        "GDX",
+        "0700.HK"
+      ],
+      "actionable": "Two of your largest exposures resolve on one day — the levered silver leg via CPI, and your single biggest HK holding via Tencent. With SGX shut today, you have Tuesday alone to position the Singapore sleeve beforehand.",
+      "sources": [
+        "https://www.usinflationcalculator.com/inflation/consumer-price-index-release-schedule/"
+      ]
+    },
+    {
+      "date": "2026-08-09",
+      "headline": "Metals barely reacted: gold futures literally unchanged, silver +0.70%",
+      "summary": "Gold Dec-26 futures are pinned to their prior settle of 4,399.70 — successive Sunday-evening ticks printed 4,401.51 and 4,399.30, i.e. unchanged. Silver Sep-26 is 63.943, +0.70%, with previous close confirmed at 63.499. Note the contract-vs-spot distinction: Dec gold near 4,400 is not comparable to Friday's spot close of 4,343.43, which carries no forward premium.",
+      "category": "Precious Metals",
+      "impact": "mixed",
+      "tickers": [
+        "GC=F",
+        "SI=F",
+        "SLV",
+        "GDX"
+      ],
+      "actionable": "After a 20%+ week in GDX, the weekend escalation produced no follow-through and no give-back. On 1.6x leverage a +0.70% silver move is ~+1.1% on the position — immaterial. The complex is waiting for CPI, which is the real driver here, not Hormuz.",
+      "sources": [
+        "https://www.investing.com/commodities/real-time-futures"
+      ]
+    },
+    {
+      "date": "2026-08-09",
+      "headline": "US equity futures essentially flat — no weekend risk-off despite the tanker strike",
+      "summary": "S&P 500 Sep-26 futures 7,772.25 (-0.10%), Nasdaq 100 Sep-26 29,872.00 (+0.12%, fading to flat), Dow Sep-26 54,044.00 (-0.20%), all measured against Friday FUTURES settles, not cash closes. Two comparison traps flagged: the S&P cash record was 7,757.64, about 22 points below the futures settle, so 7,772 is not a new high; and the Nasdaq 100 future (29,872) is a different index from the Nasdaq Composite (26,690.62) and must not be compared to it.",
+      "category": "US Equities",
+      "impact": "mixed",
+      "tickers": [
+        "SPY",
+        "QQQ"
+      ],
+      "actionable": "The market is treating Hormuz as contained — consistent with the muted crude response. Wednesday's CPI, not the Gulf, is the week's risk event.",
+      "sources": [
+        "https://www.investing.com/indices/indices-futures"
+      ]
+    },
+    {
+      "date": "2026-08-09",
+      "headline": "China July inflation undershoots: CPI +0.5% y/y, PPI +3.5% y/y — energy doing the deflating",
+      "summary": "China's July CPI rose 0.5% year-on-year and PPI 3.5%, both below expectations, released Sunday 9 August by the National Bureau of Statistics. Energy is the main deflating component.",
+      "category": "China/HK Tech",
+      "impact": "mixed",
+      "tickers": [
+        "FXI",
+        "0700.HK",
+        "1810.HK"
+      ],
+      "actionable": "A soft print lands straight into this morning's HK open. Weak inflation keeps the policy-easing case alive for China, which supports your HK tech sleeve — but it also says domestic demand is not yet firing.",
+      "sources": [
+        "http://en.people.cn/n3/2026/0809/c90000-20486836.html"
+      ]
+    },
+    {
+      "date": "2026-08-10",
+      "headline": "SGX confirmed fully closed today for National Day — the Singapore sleeve does not mark until Tuesday",
+      "summary": "Singapore Exchange is fully closed Monday 10 August for the National Day holiday (observed). Your Singapore banks, REITs and developers do not trade or mark today.",
       "category": "SGX/Singapore",
       "impact": "mixed",
       "tickers": [
@@ -94,136 +143,54 @@
         "C09.SI",
         "K71U.SI"
       ],
-      "actionable": "SG banks, REITs and developers do not trade Monday — no ability to react to the OCBC/DBS record-results follow-through or to any weekend Hormuz repricing until Tuesday 11 Aug. Anything Dom wants to do in the Singapore sleeve ahead of Wednesday's CPI must be queued for Tuesday, giving him one session rather than two.",
+      "actionable": "One session — Tuesday — to act on the record DBS and OCBC results or reposition ahead of Wednesday's CPI.",
       "sources": [
-        "https://markethours.io/market-holidays/sgx"
-      ]
-    },
-    {
-      "date": "2026-08-06",
-      "headline": "CALENDAR: US July CPI lands Wednesday 12 August, 8:30am ET — TD Securities forecasts core +0.20% m/m, 2.4% y/y",
-      "summary": "TD Securities forecasts July headline CPI at +0.15% m/m and 3.4% y/y, core at +0.20% m/m and 2.4% y/y, expecting underlying inflation to rebound after June's unexpected softness — services \"the main driver to the upside\" and core goods prices adding to inflation \"for the first time in three months.\" TD sees risks skewed to the upside if the bounce back from June's one-off declines proves firmer than modelled. These are TD's house forecasts, not market consensus. The 12 August 8:30am ET release timing is per the BLS schedule; the preview itself only refers to \"next week's CPI data.\" Flagging honestly: this preview is dated 6 August and therefore predates Friday's payrolls contraction — the forecasts are unchanged by it, but the market's reaction function is not.",
-      "category": "Fed/Macro",
-      "impact": "mixed",
-      "tickers": [
-        "SLV",
-        "GDX",
-        "TLT"
-      ],
-      "actionable": "This is the week's decisive print for the September hike question, which collapsed to ~40-44% on Friday's payrolls. A hot core would revive the hike case into a labour market that just contracted — the stagflationary combination that has been driving the gold/silver bid. A soft print kills the September hike and is the cleaner bullish outcome for the levered silver position, his largest risk. Given SGX is shut Monday, he effectively has one session (Tuesday) to adjust the SG sleeve pre-CPI.",
-      "sources": [
-        "https://www.fxstreet.com/news/united-states-core-cpi-momentum-seen-returning-in-july-td-securities-202608061312"
+        "https://market-holiday.com/markets/sgx/holidays/2026"
       ]
     },
     {
       "date": "2026-08-09",
-      "headline": "Crypto essentially flat through the weekend — BTC $64,904, ETH $1,916, no catalyst",
-      "summary": "Read live from CoinGecko at roughly 07:50 SGT Sunday 9 August: Bitcoin $64,904.42, +0.1% over 24 hours and +3.4% over 7 days, with a 24-hour range of $64,800.12-$65,140.24 and BTC dominance ~56.7% on a total crypto market cap of $2.299trn. Ethereum $1,916.28, +0.1% over 24 hours and +4.0% over 7 days, 24-hour range $1,911.39-$1,924.43. The weekend produced no move worth the name and no identifiable catalyst. The notable read-through: crypto did not rally on the dovish repricing of the Fed after Friday's payrolls contraction — it just sat still.",
+      "headline": "Bitcoin quiet at $64,873, -0.12% in a tight overnight range",
+      "summary": "Bitcoin traded a narrow overnight range at roughly $64,873, down 0.12%, with no weekend catalyst.",
       "category": "Crypto",
       "impact": "mixed",
       "tickers": [
-        "BTC-USD",
-        "ETH-USD"
-      ],
-      "actionable": "Nothing to act on. The signal is the non-reaction: a 24-hour range under 0.6% and no bid off a materially dovish rates repricing suggests the crypto sleeve is not currently trading off the macro that is driving your metals and rates exposure.",
-      "sources": [
-        "https://www.coingecko.com/en/coins/bitcoin"
-      ]
-    },
-    {
-      "date": "2026-08-08",
-      "headline": "PM Lawrence Wong's National Day Message: H1 growth \"robust\", flags Middle East energy-cost drag, promises family-support review",
-      "summary": "Broadcast Saturday 8 August. Wong said growth has been robust in the first half of the year with expectations for continued momentum, the labour market remains stable with ongoing job creation, and Singapore is benefiting from AI expansion in the semiconductor sector. He flagged the offsetting pressures: rising trade barriers, spreading conflicts, and specifically from Middle East volatility \"higher energy prices, disrupted supply chains, and increased costs for households and businesses.\" He noted an assistance package already introduced for households and businesses, and announced a major review of family support policies covering child-raising costs and affordable childcare, with details to come at the National Day Rally. No new fiscal numbers, no new market-relevant policy.",
-      "category": "SGX/Singapore",
-      "impact": "mixed",
-      "tickers": [
-        "^STI",
-        "D05.SI"
-      ],
-      "actionable": "Rhetorical rather than substantive — treat as a tone check on the SG banks/REITs/developers sleeve rather than news. The confirmation of robust H1 growth and a stable labour market is consistent with the record Q2 numbers OCBC and DBS just posted. The actual event to diarise is the National Day Rally, where the family-support detail lands.",
-      "sources": [
-        "https://www.pmo.gov.sg/newsroom/national-day-message-2026/"
-      ]
-    },
-    {
-      "date": "2026-08-07",
-      "headline": "US July payrolls CONTRACT 23,000 vs ~+80,000 expected — and May/June revised down 103,000",
-      "summary": "Nonfarm payrolls FELL 23,000 in July against consensus of roughly +80,000 to +83,000, the first outright decline in months. May was cut from 129,000 to 63,000 and June from 57,000 to 20,000 — 103,000 of downward revisions combined. Unemployment fell to 4.1% from 4.2%, but for a bad reason: 264,000 left the labour force and participation dropped to 61.4%, a near 5.5-year low. Wage growth slowed to +3.2% y/y from +3.4%. Losses led by leisure/hospitality (-40,000) and local government education (-50,000). NOTE: bls.gov returns HTTP 403, so these are from document-level press coverage that reconciles across Reuters/Forbes/Quartz, not the BLS release itself.",
-      "category": "Fed/Macro",
-      "impact": "mixed",
-      "tickers": [
-        "SLV",
-        "GDX",
-        "SILJ",
-        "SLVP"
-      ],
-      "actionable": "The most important input for your book this week. A contracting labour market with cooling wages removes the Fed's justification for the September hike — directly dovish for your levered silver and the miners. But read the falling unemployment rate as cosmetic: it fell because people stopped looking, not because anyone got hired. The revisions matter more than the headline — four months of apparent \"stabilisation\" were an illusion.",
-      "sources": [
-        "https://finance.yahoo.com/news/us-nonfarm-payrolls-fall-july-124023322.html"
-      ]
-    },
-    {
-      "date": "2026-08-07",
-      "headline": "September Fed hike odds collapse to ~40-44%, from ~55-58% before the report — no longer the base case",
-      "summary": "Fed funds futures repriced hard. Sources put the post-release hike probability between 40% and 44% (Reuters 44% from 57%; Yahoo 40% from 55%; CME hold probability 56%, implying ~44% hike). The range reflects different snapshot times through the session; all agree a September hike ceased to be the base case.",
-      "category": "Fed/Macro",
-      "impact": "bullish",
-      "tickers": [
-        "SLV",
-        "GDX",
         "BTC-USD"
       ],
-      "actionable": "A regime shift from where your dashboard stood on 6 Aug, when September was priced ~65% for a HIKE. For a 1.6x levered silver position on IBKR margin this is a double benefit — less real-rate pressure on the metal AND a cap on your financing cost. The risk is a violent reversal on the 12 Aug CPI print, especially with ISM Services prices at 70.3.",
+      "actionable": "Second weekend running that crypto has failed to join a metals rally — the debasement trade is not moving as one.",
       "sources": [
-        "https://tradingeconomics.com/united-states/government-bond-yield"
+        "https://www.investing.com/crypto/bitcoin"
       ]
     },
     {
       "date": "2026-08-07",
-      "headline": "Silver rips to $63.54 (+3.3%), intraday high $65.05; gold $4,343.43 (+2.4%), a two-month high",
-      "summary": "Silver closed $63.54, up 3.32% (+$2.04), with an intraday high of $65.05 — a seven-week high. Gold closed $4,343.43, +2.44% (+$103.58), a two-month high, with futures printing $4,411.70 intraday. One source (Fortune) reported silver around $64.3 / +4.1%; the $63.54 close is corroborated by three separate readings and is used here, with the discrepancy noted rather than averaged.",
-      "category": "Precious Metals",
-      "impact": "bullish",
+      "headline": "Saudi Arabia, Turkey and Pakistan sign the Mecca Joint Deterrence Agreement",
+      "summary": "Signed Friday 7 August, a NATO-style mutual-defence arrangement between Saudi Arabia, Turkey and Pakistan — landing days before the Sunday Houthi strike on Aramco's Jazan refinery.",
+      "category": "Geopolitics",
+      "impact": "mixed",
       "tickers": [
-        "SI=F",
-        "SLV",
-        "XAG",
-        "GC=F"
+        "XLE",
+        "CL=F"
       ],
-      "actionable": "Your single largest risk is now working hard. Silver has gone from ~$55.6 in late July to $63.54 — roughly +14% — and is far above the $60 level that was the concern. At 1.6x leverage that is a substantial equity gain in the IBKR account. Consider whether the position size you set for a falling market is still the one you want in a rising one.",
+      "actionable": "Structural, not tradeable today, but it raises the ceiling on regional escalation risk that sits behind your energy and metals exposure.",
       "sources": [
-        "https://tradingeconomics.com/commodity/silver"
+        "https://www.aljazeera.com/news/2026/8/7/turkiye-saudi-arabi-pakistan-sign-joint-defence-agreement-whats-in-it"
       ]
     },
     {
-      "date": "2026-08-07",
-      "headline": "Gold miners go vertical: GDX +7.10% to $89.88, capping a 20%-plus week",
-      "summary": "The VanEck Gold Miners ETF rose 7.10% on Friday to $89.88, completing a gain of more than 20% on the week as the Fed repricing drove leveraged exposure to the metal.",
-      "category": "Precious Metals",
-      "impact": "bullish",
+      "date": "2026-08-10",
+      "headline": "GAP DECLARED: no live Hang Seng futures level could be confirmed this run",
+      "summary": "No Hang Seng futures quote could be verified on a loaded page before the 09:30 SGT cash open, so no HK pre-open level is published. China July credit and money-supply data are also not yet out — the PBoC release window is 10-15 August.",
+      "category": "China/HK Tech",
+      "impact": "mixed",
       "tickers": [
-        "GDX",
-        "SILJ",
-        "SLVP"
+        "0700.HK",
+        "1810.HK",
+        "0981.HK"
       ],
-      "actionable": "Direct read-through to your GDX, SILJ and SLVP holdings, which had been among the worst performers on the dashboard's trend alerts. A 20% week does not undo a 38% drawdown from the 52-week high, but it is the first genuine trend reversal signal in this sleeve since June.",
+      "actionable": "Stated as a gap rather than filled with an inferred number. Tencent, Xiaomi and SMIC open at 09:30 SGT into the soft China CPI print.",
       "sources": [
-        "https://www.investing.com/etfs/market-vectors-gold-miners-historical-data"
-      ]
-    },
-    {
-      "date": "2026-08-07",
-      "headline": "OCBC Q2 profit +22% to a record S$2.22b — first ever quarter above S$2b — and raises loan guidance",
-      "summary": "OCBC reported Q2 net profit up 22% to S$2.22b, its first quarter above S$2b, and raised its loan growth guidance.",
-      "category": "SGX/Singapore",
-      "impact": "bullish",
-      "tickers": [
-        "O39.SI",
-        "D05.SI"
-      ],
-      "actionable": "With DBS (record S$3.08b, guidance raised) this completes a strong SG bank season. Your Singapore bank exposure is delivering fundamentally, and it remains the natural hedge against the rate path that threatens the metals sleeve.",
-      "sources": [
-        "https://www.thestar.com.my/business/business-news/2026/08/07/singapore039s-ocbc-uob-beat-forecasts-as-wealth-income-cushions-margin-pressure"
+        "https://www.investing.com/indices/hong-kong-40-futures"
       ]
     }
   ]
