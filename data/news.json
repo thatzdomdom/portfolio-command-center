@@ -1,7 +1,25 @@
 {
   "updated": "2026-08-11",
-  "note": "Tue 11 Aug, 00:15 SGT in-session run (CLI logged out since 4 Aug; aborted cleanly at 07:02 exit 78). Monday ASIA closes are FINAL; US figures are INTRADAY and clearly labelled — a top-up run at 05:22 SGT replaces them with actual closes before the 08:15 email. 16 items verified, 1 dropped. Two bad vendor prints rejected (see the data-integrity item).",
+  "note": "Tue 11 Aug 07:40 SGT. Monday (Asia + US) is complete and unchanged from the 05:25 close top-up. A targeted check of the ~3.5 hours since the US close found ONE new item (below) and no price reversal — deliberately not a full re-sweep, since nothing has traded. Four MORE bad vendor prints were rejected tonight, including Brent quoted \"+4.99%\" which is Monday-vs-Friday being re-served as if it were an overnight change. Declared gap: after-hours US corporate news could not be verified (stockanalysis/CNBC/CNN all returned 403/451), and no Hang Seng futures indication was available, so the Asia open is uncharacterised.",
   "items": [
+    {
+      "date": "2026-08-10",
+      "headline": "NEW overnight: Iran's parliament is legislating a Hormuz toll-and-restriction regime — committee stage, not law",
+      "summary": "Filed 17:44 ET Monday, 1h44m after the US cash close. A bill titled \"Strategic Action to Ensure the Sustainable Security of the Strait of Hormuz and the Persian Gulf\" would ban transit of assets and equipment owned by the US, Israel and other states Tehran deems hostile, IMPOSE CHARGES for maritime services to ships using the strait, tighten rules on hostile-linked vessels, and earmark the revenue for security and monitoring infrastructure. Status is committee stage only: the National Security & Foreign Policy and Construction committees approved the general outlines, and the Internal Affairs committee approved the first five articles on 10 Aug. Remaining articles and full parliamentary approval are still pending. Separately and post-close, Iran integrated its Armed Forces General Staff with Khatam al-Anbiya Central HQ, unifying military command.",
+      "category": "Geopolitics",
+      "impact": "bearish",
+      "tickers": [
+        "CL=F",
+        "BZ=F",
+        "USO",
+        "XLE",
+        "GDX"
+      ],
+      "actionable": "Tehran is institutionalising a toll/closure regime rather than trading it away — directionally consistent with Monday's 5% crude settle rather than a reason to fade it. But calibrate it honestly: this is a committee vote on a bill, not an enacted law, so read it as confirmation of the hard line rather than fresh escalation. No new vessel incident occurred overnight, and no OPEC or IEA comment was found.",
+      "sources": [
+        "https://www.iranintl.com/en/202608102970"
+      ]
+    },
     {
       "date": "2026-08-10",
       "headline": "ANSWERED: Brent did NOT round-trip — it held $83.55 and broke out to ~$86.5 (+3.5%), a 4th straight up session",
