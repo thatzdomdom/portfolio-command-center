@@ -1,196 +1,215 @@
 {
-  "updated": "2026-08-10",
-  "note": "Monday 10 Aug in-session run (CLI logged out since 4 Aug; it aborted cleanly at 07:02 with exit 78). 21 items verified, 1 dropped. This run graded our own Sunday forward call on oil and reports it as a partial miss. It also caught two data-quality traps: a wrong reference price that would have inflated the apparent oil move 2.7x, and futures-vs-cash comparison errors (S&P future vs cash record; Nasdaq 100 future vs Nasdaq Composite; Dec gold vs spot). One gap is declared rather than filled: no Hang Seng futures level could be confirmed.",
+  "updated": "2026-08-11",
+  "note": "Tue 11 Aug, 00:15 SGT in-session run (CLI logged out since 4 Aug; aborted cleanly at 07:02 exit 78). Monday ASIA closes are FINAL; US figures are INTRADAY and clearly labelled — a top-up run at 05:22 SGT replaces them with actual closes before the 08:15 email. 16 items verified, 1 dropped. Two bad vendor prints rejected (see the data-integrity item).",
   "items": [
     {
       "date": "2026-08-10",
-      "headline": "OUR CALL, GRADED: oil gapped up — but ~1%, not dollars, and it gave half back within two hours",
-      "summary": "Sunday we said crude had over-discounted a Hormuz reopening and to watch the futures open. Verdict: directionally right, magnitude overstated. Brent Oct-26 opened and traded to $84.36 vs Friday's $83.55 settle (+1.0%); WTI Sep-26 $78.75 vs $78.18 (+0.73%). At the highs the pop was larger — Brent 84.97 (+1.7%), WTI 79.41 (+1.6%) — but roughly half faded within about two hours. Independent readings put the move between +0.73% and +1.0%; all reconcile to Friday's settles. Our \"over-discounted\" framing implied asymmetric upside; what printed was a spike sellers met.",
-      "category": "Fed/Macro",
-      "impact": "mixed",
+      "headline": "ANSWERED: Brent did NOT round-trip — it held $83.55 and broke out to ~$86.5 (+3.5%), a 4th straight up session",
+      "summary": "The level we told him to watch. Front-month Brent traded $86.50 intraday (+$2.95, +3.53%) and WTI $80.98 (+$2.80, +3.58%), both reconciled against Friday's $83.55 and $78.18 settles. There was never a meaningful break back below. IMPORTANT CURVE NUANCE: the move was NOT prompt-led — deferred contracts rallied harder (Nov +3.82%, Dec +3.88%, Jan-27 +3.83% vs Oct +3.53%), so the Oct-Nov spread narrowed from ~1.90 to 1.69 and Oct-Dec from 3.56 to 3.39. The curve stayed backwardated but FLATTENED, meaning the bid was in deferred barrels rather than prompt scarcity — more a repricing of the whole strip than an acute supply squeeze. These are INTRADAY futures, not settles; the US session is still open.",
+      "category": "Energy",
+      "impact": "bullish",
       "tickers": [
-        "CL=F",
         "BZ=F",
+        "CL=F",
         "USO",
         "XLE"
       ],
-      "actionable": "Log this as a partial miss, not a win. For the oil sleeve it is a small positive mark, not a re-rating. The level that matters now: if Brent loses Friday's $83.55 settle during Asian hours, the weekend escalation has been fully round-tripped and the reopening trade reasserts.",
+      "actionable": "The Gulf premium is sticking rather than fading, which is the opposite of the last several geopolitical spikes — so Sunday's thesis was right on direction and Monday's early fade was the head-fake, not the signal. But read the flat curve honestly: this is the market repricing the whole strip, not panicking about prompt barrels. The second-order effect is the one that matters to you — crude +3.5% is reviving the inflation impulse that Friday's payrolls had just dismantled.",
       "sources": [
-        "https://www.investing.com/commodities/brent-oil"
+        "https://oilprice.com/futures/brent/"
       ]
     },
     {
       "date": "2026-08-10",
-      "headline": "DATA TRAP CAUGHT: a bad reference price would have made that call look 2.7x better than it was",
-      "summary": "Investing.com's Brent page quotes the price correctly ($84.36) but states a previous close of $82.21 — not Friday's $83.55 ICE settle — headlining +2.62%. TradingEconomics' change fields also fail to reconcile: its Brent delta implies a $83.29 prior close, and its gold/silver deltas (+2.44%, +3.32%) are demonstrably FRIDAY's moves being shown as current. Barchart and oilprice.com both reconcile exactly to the real settles. Had the dashboard taken the headline percentage, it would have reported our own forecast as 2.7x more correct than reality.",
+      "headline": "10Y yield climbs to a month high at 4.70% as oil revives inflation worry; September hike odds ~46%, down from ~64% a week ago",
+      "summary": "The US 10-year yield rose to 4.68% Monday — its highest level so far this month — explicitly attributed to rising oil prices adding to inflation concerns, itself tied to 'growing uncertainty over a deal between the US and Iran to end the war and reopen the Strait of Hormuz.' The same page's data header showed 4.70%, +0.044 on the day; a separate mid-morning read had 4.684%, +0.028. Both imply the same prior close of ~4.656%, so the move is about +4.4bp and I quote the 4.68-4.70% band rather than a single figure. The 30-year is 5.24% on the same page, roughly +4bp against the 5.20% Friday reference — the long end is selling off in step, not lagging. Fed pricing: September hike odds now around 46%, no-change about 54%. Note the direction the source actually supports is DOWN over the week, from roughly 64% a week ago, driven by Friday's payrolls contraction; I have no verified intraday Friday low, so I make no claim that odds have 'firmed back' within the last session.",
       "category": "Fed/Macro",
-      "impact": "mixed",
+      "impact": "bearish",
       "tickers": [
-        "BZ=F",
-        "CL=F"
+        "TLT",
+        "IEF",
+        "K71U.SI",
+        "N2IU.SI",
+        "C09.SI"
       ],
-      "actionable": "New standing rule for this pipeline: only trust a published percent-change when the quoted previous close matches the known prior settle; otherwise compute the delta manually. This is the second time a self-flattering number nearly reached your dashboard.",
+      "actionable": "This is the cross-current. Oil at +3.5% has pushed the 10Y to a one-month high of 4.70%, rebuilding the September hike case that the payrolls contraction had dismantled three sessions ago. Your S-REITs and developers — which get their first mark tomorrow after the SGX holiday — face a higher discount rate than when they last traded.",
       "sources": [
-        "https://www.investing.com/commodities/brent-oil"
+        "https://tradingeconomics.com/united-states/government-bond-yield"
       ]
     },
     {
-      "date": "2026-08-09",
-      "headline": "Iran hardens further: six published conditions for reopening, and \"no possibility of resuming negotiations\"",
-      "summary": "Tehran published six conditions for reopening the strait, and Foreign Minister Araghchi said Sunday there is \"no possibility of resuming negotiations\" with the US, even while describing the Oman lane deal as \"very close\". Trump said the US is \"low-keying it\", leaning on economic pressure. The gap between the two positions widened rather than narrowed over the weekend.",
-      "category": "Geopolitics",
-      "impact": "bearish",
+      "date": "2026-08-10",
+      "headline": "Silver hits a seven-week high at ~$65.1 spot (+2.5%) — the largest position in the book is working hard",
+      "summary": "Spot silver traded $65.11 per troy ounce, +$1.57 (+2.47%), an implied previous close of exactly $63.54 matching Friday's published spot close, so the percent change is verified. That is silver's highest level in seven weeks (the source's own summary text still references a seven-week high at 'over $63.50', lagging the current quote). Drivers cited: repricing of Fed hike expectations after July's payrolls contraction lowering the holding cost of non-yielding assets, plus industrial demand — Chinese imports of silver-bearing ores surged 62.5% year-on-year in June to 219,000 tonnes on solar and grid buildout. CORRECTION TO A FIGURE THAT CIRCULATED EARLIER: gold is NOT $4,406-4,417. Gold is $4,361.34, +$17.91 (+0.41%), against Friday's $4,343.43 spot close — a firm but unremarkable day, roughly a quarter of the move the higher figure implied. These are INTRADAY/spot levels, not settles.",
+      "category": "Precious Metals",
+      "impact": "bullish",
       "tickers": [
-        "CL=F",
-        "USO",
-        "XLE",
+        "SI=F",
+        "SLV",
+        "XAG",
+        "SILJ"
+      ],
+      "actionable": "Silver has run from ~$55.6 in late July to ~$65.1 — roughly +17%, and at 1.6x leverage that is a substantial gain on the IBKR equity. It is now rallying on the oil-driven inflation impulse, which is a different engine from last week's dovish-Fed rally. Note the tension: the same impulse that is lifting silver could revive the September hike that would hurt it.",
+      "sources": [
+        "https://tradingeconomics.com/commodity/silver"
+      ]
+    },
+    {
+      "date": "2026-08-10",
+      "headline": "DIVERGENCE: GDX -0.14% while gold +0.41% near a two-month high and SILJ runs +2.09% — gold miners not confirming",
+      "summary": "GDX INTRADAY $89.76 at 12:18 PM ET, change -$0.13 = -0.14%, previous close $89.89 (Friday 7 Aug close), volume 10,643,695 shares [finviz.com/quote.ashx?t=GDX]. So gold miners are marginally RED on a day gold spot is +0.41% ($4,361.34/oz, +$17.91) and sits near its highest in two months — TradingEconomics' text reads 'near the highest in two months,' not a fresh two-month high, so the metal is approaching the level rather than printing it [tradingeconomics.com/commodity/gold]. By contrast SILJ (junior silver miners) INTRADAY $29.75 at 12:18 PM ET, +$0.61 = +2.09%, previous close $29.14, volume 3,010,335 [finviz.com/quote.ashx?t=SILJ] — tracking silver's move closely. SILJ's one-week performance is +19.81% and one-month +16.99%, though it remains -6.30% on the quarter and -9.22% over six months, and sits well below its $41.10 52-week high against a $16.16 low. Both are INTRADAY levels, US session in progress. The split is clean and sector-specific: it is a gold-miner phenomenon, not a mining-equity phenomenon, since the silver miners are performing exactly as the metal would imply.",
+      "category": "Precious Metals",
+      "impact": "mixed",
+      "tickers": [
+        "GDX",
+        "SILJ",
+        "SLVP"
+      ],
+      "actionable": "Worth watching closely: the gold miners are NOT following gold today (GDX -0.14% against gold +0.41%) while the silver miners are (SILJ +2.09%). After GDX's 20%+ week that is either healthy consolidation or the first sign the miner rally has run ahead of the metal. Do not assume the sleeve moves as one.",
+      "sources": [
+        "https://finviz.com/quote.ashx?t=GDX"
+      ]
+    },
+    {
+      "date": "2026-08-10",
+      "headline": "Hang Seng closed 25,937.49 (+1.05%); Hang Seng Tech 4,919 (+1.3%) — final closes",
+      "summary": "FINAL CLOSE, Asia session complete. Hang Seng Index finished at 25,937.49, up 269.46 points or +1.05%, on turnover of HK$240.28bn. Hang Seng Tech Index closed 4,919, up 61 points or +1.3%. I verified the index level against Friday's confirmed 25,668.03 close: 25,668.03 + 269.46 = 25,937.49, and 269.46/25,668.03 = 1.0498%, so both level and change are correct as stated. This matters because TradingEconomics was simultaneously publishing the level as 26,010 with the same (correct) +269.46 change — a ~73-point error I rejected. Breadth leadership came from consumer, property and precious-metals names; chipmakers and AI stocks fell. Guotai Junan International was in focus ahead of a trading resumption following its parent's HK$28.6bn privatisation proposal.",
+      "category": "China/HK Tech",
+      "impact": "bullish",
+      "tickers": [
+        "^HSI",
+        "0700.HK",
+        "1810.HK"
+      ],
+      "actionable": "A clean +1.05% close on healthy HK$240bn turnover — but the gain came from consumer, property and precious-metals names, NOT tech. Do not read Hang Seng Tech +1.3% as broad tech strength; chips were negative underneath it.",
+      "sources": [
+        "https://www.investing.com/indices/hang-sen-40-historical-data"
+      ]
+    },
+    {
+      "date": "2026-08-10",
+      "headline": "HK tech split on soft China CPI/PPI: Xiaomi +2.07%, Tencent +0.54%, SMIC -1.05% — all final closes",
+      "summary": "FINAL CLOSES for all three of his HK tech holdings. Xiaomi (1810.HK) closed HK$27.62 vs HK$27.06 Friday, +HK$0.56 or +2.07% — I computed this myself from the two closes and it matches the published figure. Tencent (0700.HK) closed HK$481.40 vs HK$478.80, +HK$2.60 or +0.54% — also recomputed and matched. SMIC (0981.HK) closed HK$66.20 vs HK$66.90, -HK$0.70 or -1.05%, giving back part of Friday's +2.37%. So the response to China's undershooting July CPI (+0.5%, a six-month low) and PPI (+3.5%) was not a uniform tech bid: the platform and hardware names took the softer-inflation/easier-policy read positively, while the semiconductor name went the other way in sympathy with the region-wide AI/memory de-rating. On his 26,662 Xiaomi units the day's move is worth approximately +HK$14,931 (my arithmetic: 26,662 x HK$0.56). Earlier vendor snapshots circulating for these names (Tencent +0.7%, Xiaomi +0.4%) were intraday prints, not closes, and disagree with the verified closing data — I used the settled figures.",
+      "category": "China/HK Tech",
+      "impact": "mixed",
+      "tickers": [
+        "1810.HK",
+        "0700.HK",
+        "0981.HK"
+      ],
+      "actionable": "Xiaomi did the heavy lifting: +2.07% is worth roughly +HK$14,900 on your 26,662 units. It behaved like a consumer stock, which is exactly where the money rotated. SMIC (-1.05%) is the name exposed to the AI/memory de-rating spreading through Asian semis — that is the one to watch, not Tencent, which is trading defensively into Wednesday's results.",
+      "sources": [
+        "https://www.investing.com/equities/xiaomi-historical-data"
+      ]
+    },
+    {
+      "date": "2026-08-10",
+      "headline": "Mainland closed higher but rotated hard out of AI and chips into precious metals — Shanghai 3,966.59 (+0.67%)",
+      "summary": "FINAL CLOSES. Shanghai Composite 3,966.59, up 26.55 points or +0.67%, verified against Friday's confirmed 3,940.04 close (26.55/3,940.04 = 0.674%). Shenzhen Component 14,316, up 5 points or +0.04% — essentially unchanged, and effectively flat despite the Shanghai gain, which itself tells you the growth-heavy board was capped. Turnover was heavy: roughly RMB1.17trn in Shanghai and RMB1.36trn in Shenzhen. The sector split was the story and it was violent for a day the index closed up: the CSI 300 Telecommunication Services Index fell 3.5%, the CSI AI Index fell 3%, and the Cloud Computing Index lost 2%, while poultry, dairy and precious-metals sectors led gains. Note the Shenzhen figure is single-sourced to RTHK; I flag that, though RTHK's other two index figures (HSI 25,937 and Shanghai 3,966) both reconciled exactly against independently verified closes, which gives reasonable confidence in the third.",
+      "category": "China/HK Tech",
+      "impact": "mixed",
+      "tickers": [
+        "FXI",
+        "000001.SS",
         "GDX"
       ],
-      "actionable": "This is why crude did not gap dollars: a reopening was never actually imminent, so there was less mispricing to correct than we implied. It also means the Gulf risk premium is structural for now, not a headline spike.",
+      "actionable": "The cleanest read of the day. With CPI at +0.5% and PPI +3.5% both undershooting, mainland money did NOT buy reflation — it bought defensives and precious-metals miners and sold AI (CSI AI Index -3%, Telecom -3.5%, Cloud -2%) on RMB2.5trn of combined turnover. That rotation supports your miners and works against the chip end of your HK exposure.",
       "sources": [
-        "https://oilprice.com/Latest-Energy-News/World-News/Iran-Says-Hormuz-Stays-Closed-Until-US-Meets-Six-Sweeping-Demands.html and https://oilprice.com/Latest-Energy-News/World-News/ADNOC-Reports-15-Vessel-Attacks-as-Hormuz-Risks-Mount.html"
-      ]
-    },
-    {
-      "date": "2026-08-09",
-      "headline": "Houthis claim a drone strike on Aramco's Jazan refinery; Saudi confirms the fire was extinguished, no casualties",
-      "summary": "Houthi forces claimed a drone strike on Saudi Aramco's Jazan refinery early Sunday. Saudi Arabia confirmed a fire that was extinguished with no casualties. Separately, Hormuz traffic is running about 33% below normal.",
-      "category": "Geopolitics",
-      "impact": "bearish",
-      "tickers": [
-        "CL=F",
-        "BZ=F",
-        "XLE"
-      ],
-      "actionable": "The conflict is widening beyond the strait to Saudi production infrastructure. Combined with traffic down a third, this is a slow supply squeeze rather than a single event — supportive for energy and, indirectly, for the metals bid.",
-      "sources": [
-        "https://www.aljazeera.com/news/2026/8/9/saudi-arabia-says-fire-extinguished-at-aramco-facility-in-jizan"
+        "https://gbcode.rthk.hk/TuniS/news.rthk.hk/rthk/en/component/k2/1865649-20260810.htm?spTabChangeable=0"
       ]
     },
     {
       "date": "2026-08-10",
-      "headline": "WEDNESDAY IS THE WEEK: US July CPI and Tencent Q2 results land on the same day",
-      "summary": "US July CPI is released Wednesday 12 August at 08:30 ET, and Tencent reports interim results the same day with an interim dividend on the agenda. September Fed hike odds sit at roughly 40-44% after Friday's payrolls contraction.",
+      "headline": "Korea's index stabilised (+0.65%) but the memory complex did not — SK Hynix -0.14%, Samsung -0.43%; Nikkei +2.08%",
+      "summary": "FINAL CLOSES (Asia, Monday 10 Aug). Nikkei 225 closed 66,970.22, up 1,363.51 points or +2.08%, led by AI and chip-linked names after Wall Street's Friday rally and the weak US payrolls print. KOSPI closed 6,299.66, up 40.89 points or +0.65% — verified against Friday's confirmed 6,258.77 close (40.89/6,258.77 = 0.653%), which matches the published figure exactly. So the KOSPI index stabilised after last week's crash. But the memory names did not: SK Hynix closed 1,420,000 won, DOWN 0.14%, and Samsung Electronics closed 230,000 won, DOWN 0.43%. Both were negative on an up day — the index bounce came from elsewhere in the market. Per separate reporting (Aju Press, Seoul Economic Daily), SK Hynix had fallen 4.88% on Friday on reports Nvidia may use less HBM than originally planned in Rubin Ultra, its next-generation AI chip, a concern to which SK Hynix has more exposure than Samsung; the KOSPI fell 4.58% Thursday and a further 0.60% Friday. That thesis was not refuted Monday; the stock simply stopped falling. SoftBank Group closed 5,484 yen (-1.22%), Kioxia 48,010 yen (+0.59%).",
+      "category": "Asia",
+      "impact": "mixed",
+      "tickers": [
+        "SMH",
+        "0981.HK"
+      ],
+      "actionable": "The index stabilised but the memory complex did not — SK Hynix and Samsung both closed NEGATIVE on an up day. The AI/memory unwind has not finished, which is the read-across risk for SMIC.",
+      "sources": [
+        "https://www.tradingkey.com/analysis/stocks/more/262091622-japan-south-korea-stocks-kospi-nikkei-softbank-sk-hynix-samsung-kioxia-tradingkey"
+      ]
+    },
+    {
+      "date": "2026-08-10",
+      "headline": "CPI setup for Wednesday: Cleveland Fed nowcast points to a soft +0.09% headline but a stickier +0.21% core",
+      "summary": "July CPI lands Wednesday 12 August. The Cleveland Fed nowcast, as of 6 August, looks for headline CPI +0.09% month-on-month and 3.42% year-on-year, with core CPI +0.21% month-on-month and 2.52% year-on-year. The same nowcast already carries an August headline estimate of +0.38% m/m — a sharp acceleration — which is where the current oil move would start showing up. PPI follows later in the week. IMPORTANT CAVEAT ON A FIGURE YOU MAY SEE ELSEWHERE: the article carrying this nowcast was published 10 August but quotes CME FedWatch September odds of 'nearly 55% hike / 45% hold' explicitly as of 6 August — that is a PRE-payrolls number and is stale by four days. The live figure is ~46% hike / ~54% hold. Do not let the 55% into the dashboard.",
       "category": "Fed/Macro",
       "impact": "mixed",
       "tickers": [
         "SLV",
         "GDX",
+        "TLT",
         "0700.HK"
       ],
-      "actionable": "Two of your largest exposures resolve on one day — the levered silver leg via CPI, and your single biggest HK holding via Tencent. With SGX shut today, you have Tuesday alone to position the Singapore sleeve beforehand.",
+      "actionable": "Wednesday remains the week: CPI and Tencent results the same day. A soft headline with a sticky core is the awkward outcome — it would not clearly resolve the September hike either way, leaving both your metals and your REITs in limbo.",
       "sources": [
-        "https://www.usinflationcalculator.com/inflation/consumer-price-index-release-schedule/"
+        "https://finance.yahoo.com/economy/policy/articles/federal-just-released-august-inflation-232824554.html"
       ]
     },
     {
-      "date": "2026-08-09",
-      "headline": "Metals barely reacted: gold futures literally unchanged, silver +0.70%",
-      "summary": "Gold Dec-26 futures are pinned to their prior settle of 4,399.70 — successive Sunday-evening ticks printed 4,401.51 and 4,399.30, i.e. unchanged. Silver Sep-26 is 63.943, +0.70%, with previous close confirmed at 63.499. Note the contract-vs-spot distinction: Dec gold near 4,400 is not comparable to Friday's spot close of 4,343.43, which carries no forward premium.",
-      "category": "Precious Metals",
+      "date": "2026-08-10",
+      "headline": "Hormuz still shut: Araghchi demands blockade lifted plus compensation; Iran-Oman close but not done",
+      "summary": "The Monday developments that explain the oil bid. Per TradingEconomics' Brent commentary, Iranian FM Abbas Araghchi said Tehran is NOT currently holding direct talks with the US and reiterated that reopening Hormuz would require Washington to lift its blockade of Iranian shipping and provide compensation for damages; the same page carries President Trump saying Washington was now 'low-keying it' [tradingeconomics.com/commodity/brent-crude-oil]. Al Jazeera frames the same conditions as Washington easing sanctions and providing war reparations, and notes Iran has repeatedly insisted on the right to control shipping in the strait, which cuts against freedom-of-navigation norms. Al Jazeera reports Iran and Oman were 'close to an agreement' on Hormuz, but the waterway will not reopen until those conditions are met — framework close, reopening not. The UAE on Saturday condemned what it said was an Iranian missile attack on a vessel owned by the Abu Dhabi National Oil Company. Hard number on the disruption: only 8 to 15 vessels crossed the strait between 4 and 6 August, against roughly 130 transits before the conflict began in late February. The International Maritime Organization counts at least 64 violent incidents and 17 deaths involving commercial vessels since the war began, most blamed on Iran. Al Jazeera's own price stamp is October Brent at $84.11 at 07:30 GMT, up 0.7% — an early reading, superseded by the $86.53 level later in the session.",
+      "category": "Geopolitics",
       "impact": "mixed",
       "tickers": [
-        "GC=F",
-        "SI=F",
-        "SLV",
-        "GDX"
+        "CL=F",
+        "BZ=F",
+        "XLE"
       ],
-      "actionable": "After a 20%+ week in GDX, the weekend escalation produced no follow-through and no give-back. On 1.6x leverage a +0.70% silver move is ~+1.1% on the position — immaterial. The complex is waiting for CPI, which is the real driver here, not Hormuz.",
+      "actionable": "Araghchi is demanding the blockade lifted plus compensation; the Iran-Oman lane deal is close but not done and does not itself reopen the strait. This is why the premium is sticking rather than fading.",
       "sources": [
-        "https://www.investing.com/commodities/real-time-futures"
+        "https://www.aljazeera.com/economy/2026/8/10/oil-prices-climb-as-iranian-demands-cloud-outlook-for-strait-of-hormuz"
       ]
     },
     {
-      "date": "2026-08-09",
-      "headline": "US equity futures essentially flat — no weekend risk-off despite the tanker strike",
-      "summary": "S&P 500 Sep-26 futures 7,772.25 (-0.10%), Nasdaq 100 Sep-26 29,872.00 (+0.12%, fading to flat), Dow Sep-26 54,044.00 (-0.20%), all measured against Friday FUTURES settles, not cash closes. Two comparison traps flagged: the S&P cash record was 7,757.64, about 22 points below the futures settle, so 7,772 is not a new high; and the Nasdaq 100 future (29,872) is a different index from the Nasdaq Composite (26,690.62) and must not be compared to it.",
+      "date": "2026-08-10",
+      "headline": "MP Materials +7.2% intraday on no fresh headline; GDX/SILJ Monday levels unverified — anchor to Friday's real closes",
+      "summary": "MP Materials traded up 7.2% intraday Monday 10 August (INTRADAY — the US session has not closed; source published ~11:02 ET). Per the source, no single new headline drove it; the move is attributed to continued reaction to the 6 August Q2 print plus the magnet ramp, Texas expansion and defence demand theme. Q2 figures (separately sourced, not in the cited article): revenue $108.49M, a 9.35% beat of the Zacks consensus; NdPr production +41% YoY to 840 metric tons and NdPr sales volume +127% YoY to 1,006 metric tons — sales more than doubled, production did not. Consolidated revenue plus PPA income was $126.1M, more than double a year earlier.\n\nOn Energy Fuels (UUUU), the confirmed items are from 5-6 August, not Monday: Q2-2026 results released 5 August with revenue of $25.11M against a $30.2M Zacks consensus, a 16.9% miss, and a net loss of $33.4M ($0.13/sh) driven largely by ASM/VAC transaction costs; Roth/MKM then upgraded UUUU to Buy from Neutral on valuation with an unchanged $16 target. No verified Monday move for UUUU.\n\nMINERS — MONDAY IS UNKNOWN, NOT FLAT. I could not obtain a trustworthy live Monday quote for GDX or SILJ, so nothing Monday-dated is reported for either. The Friday 7 August closes, verified against exchange history, are GDX $89.89 (+7.11% on the day, prior close $83.92) and GDXJ $117.62 (+7.51%), capping the miners' best week in over a year at roughly +21% and +23% respectively over five sessions. Note that widely circulated figures of GDX $89.73 and GDXJ $116.78 are pre-close intraday prints from a wire story filed before the bell — do not use them as closes. Separately, if the dashboard is carrying GDX near $83.68, that is a correct but stale 5 August close, not a corrupt quote; it simply needs refreshing to Friday's $89.89. With silver spot +2.47% and gold firmer Monday, the miners are very likely up again, but that must be confirmed from a live feed before it enters the P&L.",
+      "category": "Rare Earths",
+      "impact": "bullish",
+      "tickers": [
+        "MP",
+        "REMX",
+        "UUUU"
+      ],
+      "actionable": "A 7.2% intraday move on no fresh headline, consistent with the broad precious/strategic-metals bid. GDX and SILJ Monday levels are anchored to verified sources rather than this print.",
+      "sources": [
+        "https://www.quiverquant.com/news/Why+MP+Materials+(MP)+Stock+Is+Up+Today"
+      ]
+    },
+    {
+      "date": "2026-08-10",
+      "headline": "INTRADAY (not a close): S&P clings to flat at 7,760, Dow and Nasdaq slightly red — US session still open",
+      "summary": "These are INTRADAY levels from a session in progress (US cash opened 09:30 ET Monday, roughly three hours before this brief); they are NOT closes and will move. Reading as of 11:15 ET: S&P 500 7,760.49, +2.85 (+0.04%); Dow Jones Industrial Average 53,951.31, -85.62 (-0.16%); Nasdaq Composite 26,645.33, -45.28 (-0.17%); Russell 2000 3,021.13, -13.36 (-0.44%); VIX 15.11, +0.21 (+1.41%). Every one of those reference prices reconciles exactly to Friday's record closes (7,757.64, 54,036.93, 26,690.62), so the percent changes are verified. Yahoo characterises the tape as 'muted', with the Dow and S&P 'wavering near the flat line' and investors in wait-and-see mode into Wednesday's CPI. Context, confirmed from separate sources rather than this live blog: Friday's 7,757.64 was a record close capping the best week since April (S&P +3.6%, Nasdaq +5.2%, Dow ~+3%), and Monday's session shows a sharp sector rotation — energy up nearly 3% while REITs (-1.5%) and utilities (-0.9%) lag.",
       "category": "US Equities",
       "impact": "mixed",
       "tickers": [
         "SPY",
         "QQQ"
       ],
-      "actionable": "The market is treating Hormuz as contained — consistent with the muted crude response. Wednesday's CPI, not the Gulf, is the week's risk event.",
+      "actionable": "Explicitly labelled intraday — the US session is still open as this publishes. A top-up run at 05:22 SGT will replace these with actual closes before the 08:15 email.",
       "sources": [
-        "https://www.investing.com/indices/indices-futures"
-      ]
-    },
-    {
-      "date": "2026-08-09",
-      "headline": "China July inflation undershoots: CPI +0.5% y/y, PPI +3.5% y/y — energy doing the deflating",
-      "summary": "China's July CPI rose 0.5% year-on-year and PPI 3.5%, both below expectations, released Sunday 9 August by the National Bureau of Statistics. Energy is the main deflating component.",
-      "category": "China/HK Tech",
-      "impact": "mixed",
-      "tickers": [
-        "FXI",
-        "0700.HK",
-        "1810.HK"
-      ],
-      "actionable": "A soft print lands straight into this morning's HK open. Weak inflation keeps the policy-easing case alive for China, which supports your HK tech sleeve — but it also says domestic demand is not yet firing.",
-      "sources": [
-        "http://en.people.cn/n3/2026/0809/c90000-20486836.html"
+        "https://finance.yahoo.com/markets/live/stock-market-today-monday-august-10-dow-sp-500-nasdaq-104358890.html"
       ]
     },
     {
       "date": "2026-08-10",
-      "headline": "SGX confirmed fully closed today for National Day — the Singapore sleeve does not mark until Tuesday",
-      "summary": "Singapore Exchange is fully closed Monday 10 August for the National Day holiday (observed). Your Singapore banks, REITs and developers do not trade or mark today.",
-      "category": "SGX/Singapore",
+      "headline": "DATA INTEGRITY: two bad prints rejected — a Brent quote off a stale reference, and a Hang Seng level 73 points wrong",
+      "summary": "A Fortune Brent print of $87.55 was rejected because its reference price was a prior morning's level rather than Friday's settle. Separately, TradingEconomics was publishing the Hang Seng level as 26,010 while carrying the correct +269.46 change — a ~73-point error; the verified close is 25,937.49, which reconciles exactly to Friday's 25,668.03. Vendor intraday snapshots for Tencent (+0.7%) and Xiaomi (+0.4%) were also discarded in favour of settled closes.",
+      "category": "Fed/Macro",
       "impact": "mixed",
       "tickers": [
-        "D05.SI",
-        "O39.SI",
-        "C09.SI",
-        "K71U.SI"
+        "BZ=F",
+        "^HSI"
       ],
-      "actionable": "One session — Tuesday — to act on the record DBS and OCBC results or reposition ahead of Wednesday's CPI.",
+      "actionable": "Third consecutive day a bad vendor figure was caught before publication. The rule introduced yesterday — only trust a percent-change when its implied previous close reconciles to the known settle — is now doing real work.",
       "sources": [
-        "https://market-holiday.com/markets/sgx/holidays/2026"
-      ]
-    },
-    {
-      "date": "2026-08-09",
-      "headline": "Bitcoin quiet at $64,873, -0.12% in a tight overnight range",
-      "summary": "Bitcoin traded a narrow overnight range at roughly $64,873, down 0.12%, with no weekend catalyst.",
-      "category": "Crypto",
-      "impact": "mixed",
-      "tickers": [
-        "BTC-USD"
-      ],
-      "actionable": "Second weekend running that crypto has failed to join a metals rally — the debasement trade is not moving as one.",
-      "sources": [
-        "https://www.investing.com/crypto/bitcoin"
-      ]
-    },
-    {
-      "date": "2026-08-07",
-      "headline": "Saudi Arabia, Turkey and Pakistan sign the Mecca Joint Deterrence Agreement",
-      "summary": "Signed Friday 7 August, a NATO-style mutual-defence arrangement between Saudi Arabia, Turkey and Pakistan — landing days before the Sunday Houthi strike on Aramco's Jazan refinery.",
-      "category": "Geopolitics",
-      "impact": "mixed",
-      "tickers": [
-        "XLE",
-        "CL=F"
-      ],
-      "actionable": "Structural, not tradeable today, but it raises the ceiling on regional escalation risk that sits behind your energy and metals exposure.",
-      "sources": [
-        "https://www.aljazeera.com/news/2026/8/7/turkiye-saudi-arabi-pakistan-sign-joint-defence-agreement-whats-in-it"
-      ]
-    },
-    {
-      "date": "2026-08-10",
-      "headline": "GAP DECLARED: no live Hang Seng futures level could be confirmed this run",
-      "summary": "No Hang Seng futures quote could be verified on a loaded page before the 09:30 SGT cash open, so no HK pre-open level is published. China July credit and money-supply data are also not yet out — the PBoC release window is 10-15 August.",
-      "category": "China/HK Tech",
-      "impact": "mixed",
-      "tickers": [
-        "0700.HK",
-        "1810.HK",
-        "0981.HK"
-      ],
-      "actionable": "Stated as a gap rather than filled with an inferred number. Tencent, Xiaomi and SMIC open at 09:30 SGT into the soft China CPI print.",
-      "sources": [
-        "https://www.investing.com/indices/hong-kong-40-futures"
+        "https://fortune.com/article/price-of-oil-08-10-2026/"
       ]
     }
   ]
