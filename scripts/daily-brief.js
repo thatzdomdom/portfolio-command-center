@@ -151,18 +151,71 @@ const htmlSection = (h, items) => `
     ${htmlList(items)}
   </div>`;
 
-const fullHtml = `<div style="background-color:${C.card};color:${C.body};font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.5;padding:24px;max-width:660px;border-radius:10px">
-  <div style="color:${C.ink};font-size:20px;font-weight:800;letter-spacing:-.01em">📊 Portfolio Morning Brief</div>
-  <div style="color:${C.muted};font-size:13px;padding:4px 0 0 0">${esc(today)} · data refreshed ${esc(stamp)}</div>
-  <div style="margin:20px 0 0 0;background-color:#fffbeb;border-left:3px solid ${C.accent};padding:14px 16px;border-radius:6px">
-    <div style="color:${C.accent};font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:0 0 8px 0">TLDR</div>
-    ${htmlList(tldr)}
-  </div>
-  ${sections.map(([h, items]) => htmlSection(h, items)).join('')}
-  <div style="margin:26px 0 0 0;padding:14px 0 0 0;border-top:1px solid ${C.rule}">
-    <a href="${DASH}" style="color:${C.accent};font-weight:700;text-decoration:none;font-size:15px">Open the live dashboard →</a>
-    <div style="color:${C.muted};font-size:12px;padding:8px 0 0 0">Prices, probabilities and risk recompute in-browser on every open.</div>
-    <div style="color:${C.muted};font-size:12px;padding:10px 0 0 0">Decision-support only — not financial advice. Nothing is ever traded automatically.</div>
+
+// ── HTML BRIEF: colour and icons, but NO CARD ─────────────────────────────
+// Hard lesson from 29 Jul: it was never HTML that made the brief look
+// forwarded — it was the CARD. A white background with padding, rounded
+// corners and a max-width, sitting inside the <blockquote type="cite"> that
+// Mail forces onto every scripted message, reads as an embedded/quoted block.
+// So this version flows like an ordinary email: no container background, no
+// border-radius, no max-width box.
+// It also deliberately does NOT set a colour on body text — that inherits the
+// client's default, so it stays readable in BOTH light and dark mode. Only
+// headings, icons and impact tags are coloured, using mid-tones that work on
+// either background.
+const AC = { accent:'#b45309', blue:'#1d4ed8', green:'#15803d', red:'#b91c1c', grey:'#6b7280' };
+const impactChip = t => {
+  const u = String(t).toUpperCase();
+  const c = /BULLISH/.test(u) ? AC.green : /BEARISH/.test(u) ? AC.red : AC.accent;
+  const ico = /BULLISH/.test(u) ? '▲' : /BEARISH/.test(u) ? '▼' : '◆';
+  return `<span style="color:${c};font-weight:700;white-space:nowrap">${ico} ${esc(u)}</span>`;
+};
+const SECTION_ICON = h => {
+  if (/TLDR/i.test(h)) return '📌';
+  if (/INSIDER/i.test(h)) return '🔔';
+  if (/NEWS/i.test(h)) return '📰';
+  if (/REGIME/i.test(h)) return '🌏';
+  if (/SIGNAL|TRADE/i.test(h)) return '⚡';
+  if (/WATCH/i.test(h)) return '👀';
+  if (/INTEGRITY/i.test(h)) return '✅';
+  if (/UPDATED/i.test(h)) return '🔄';
+  return '▪️';
+};
+// one bullet -> coloured marker + optional impact chip + indented follow-up
+function htmlBullet2(x) {
+  const raw = String(x), parts = raw.split('\n');
+  let head = parts[0];
+  const rest = parts.slice(1).map(l => l.replace(/^\s*→\s*/, '')).filter(Boolean);
+  const tag = head.match(/^\[([A-Z]+)\]\s*/);
+  let chip = '';
+  if (tag) { chip = impactChip(tag[1]) + ' '; head = head.slice(tag[0].length); }
+  // bold a leading ALL-CAPS lead-in like "OUR CALL, GRADED —"
+  head = esc(head).replace(/^([A-Z][A-Z0-9 ,'\/&\.\-]{4,60}?)(\s*[—:-])/,
+    `<b style="color:${AC.blue}">$1</b>$2`);
+  const follow = rest.map(l => `<div style="color:${AC.grey};margin:3px 0 0 0">↳ ${esc(l)}</div>`).join('');
+  return `<tr>
+    <td style="vertical-align:top;padding:0 8px 9px 0;color:${AC.accent};font-weight:700">•</td>
+    <td style="padding:0 0 9px 0;font-size:15px;line-height:1.55">${chip}${head}${follow}</td>
+  </tr>`;
+}
+const htmlList2 = a => `<table cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse">${a.map(htmlBullet2).join('')}</table>`;
+const htmlSection2 = (h, items) => `
+  <div style="margin:22px 0 0 0">
+    <div style="color:${AC.accent};font-size:13px;font-weight:800;letter-spacing:.04em;padding:0 0 6px 0;border-bottom:2px solid ${AC.accent}33;margin:0 0 10px 0">${SECTION_ICON(h)} ${esc(h)}</div>
+    ${htmlList2(items)}
+  </div>`;
+
+const fullHtml = `<div style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.55">
+  <div style="font-size:20px;font-weight:800;letter-spacing:-.01em">📊 Portfolio Morning Brief</div>
+  <div style="color:${AC.grey};font-size:13px;padding:3px 0 2px 0">${esc(today)} &nbsp;·&nbsp; data refreshed ${esc(stamp)}</div>
+  <div style="border-bottom:2px solid ${AC.accent};width:64px;margin:6px 0 4px 0"></div>
+  ${isStale ? `<div style="margin:14px 0;color:${AC.red};font-weight:700">⚠️ STALE — this is not today's research. ${esc(briefDay || 'an earlier run')} data; the dashboard's live prices and risk still recompute.</div>` : ''}
+  ${htmlSection2('TLDR', tldr)}
+  ${sections.map(([h, items]) => htmlSection2(h, items)).join('')}
+  <div style="margin:26px 0 0 0;padding:12px 0 0 0;border-top:1px solid ${AC.grey}44">
+    <a href="${DASH}" style="color:${AC.blue};font-weight:700;text-decoration:none">📈 Open the live dashboard →</a>
+    <div style="color:${AC.grey};font-size:12px;padding:7px 0 0 0">Prices, probabilities and risk recompute in-browser on every open.</div>
+    <div style="color:${AC.grey};font-size:12px;padding:8px 0 0 0">Decision-support only — not financial advice. Nothing is ever traded automatically.</div>
   </div>
 </div>`;
 
@@ -243,7 +296,7 @@ if (env.EMAIL_TO && !smtpDone) {
   delay 2
   with timeout of 150 seconds
     tell application "Mail"
-      set msg to make new outgoing message with properties {subject:item 1 of argv, content:item 2 of argv, visible:false}
+      set msg to make new outgoing message with properties {subject:item 1 of argv, html content:item 2 of argv, visible:false}
       -- Strip the account signature. Mail was attaching image004.png (a
       -- Microsoft Office-generated signature graphic) to every brief, which
       -- added a corporate-forward look on top of the quote wrapper.
@@ -263,7 +316,7 @@ end run`;
   // quote block made it read as an embedded/forwarded message, and from 30 Jul
   // Mail also started attaching a multipart/related PNG. The card only belongs
   // on the SMTP path, where there is no wrapper at all.
-  const args = ['-', SUBJ, fullText, env.EMAIL_TO];
+  const args = ['-', SUBJ, fullHtml, env.EMAIL_TO];
   if (env.EMAIL_FROM) args.push(env.EMAIL_FROM);
   // Up to 3 attempts with widening gaps — a launchd 08:15 run may catch Mail
   // mid-launch, mid-account-connect, or mid-network-flap.
