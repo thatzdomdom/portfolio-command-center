@@ -1,42 +1,52 @@
 {
-  "updated": "2026-08-11",
-  "asOf": "2026-08-11",
+  "updated": "2026-08-12",
+  "asOf": "2026-08-12",
   "note": "CIO research-panel macro regime + per-instrument probabilistic priors, produced by a multi-agent research workflow with adversarial verification and cited sources. The live in-browser quant engine (GBM drift-diffusion on 2y daily history) blends with these forward-looking priors to produce the displayed P(up) and EV. Refreshed by the scheduled intel agent.",
   "macro": {
-    "regime": "Oil breakout drives the hike case back",
-    "riskOnProb": 0.48,
-    "regimeScore": 0.48,
-    "narrative": "Re-anchored Tue 11 Aug 05:25 SGT — Monday is now COMPLETE, US closes included. The question we flagged is answered: Brent did NOT round-trip — it held Friday's $83.55 settle and SETTLED at $87.85, +5.15% — it did not fade into the close, it broke well clear, with WTI settling $82.30 (+5.27%). Investing.com attributes the surge to the collapse of US-Iran Hormuz talks after Tehran escalated its reopening conditions. The Gulf premium is sticking, not fading, because Hormuz remains shut and Araghchi is demanding the blockade lifted plus compensation. One honest nuance: deferred barrels led the rally and the curve FLATTENED (Nov/Dec/Jan all +3.8% vs Oct +3.5%), so this is a repricing of the whole strip rather than acute prompt scarcity. The consequence matters more than the cause: the 10Y closed at 4.713% (+6.2bp) and the 30Y at 5.254%, its highest since 2007 as oil revives the inflation impulse that Friday's payrolls contraction had dismantled, so the September hike case is being rebuilt three sessions after it was torn down. Silver closed $65.714 (+3.42%) and gold $4,391.34 (+1.10%) — but note the engine has changed from dovish-Fed to inflation-hedge, and the gold miners still lagged: GDX closed +0.67% against gold +1.10%, recovering from its intraday red but trailing the metal by ~43bp on a day it should have out-levered it. Asia closed up but rotated violently: Hang Seng +1.05% on consumer/property/gold rather than tech, mainland China sold AI hard (CSI AI -3%) and bought precious-metals miners, Korea's index stabilised while SK Hynix and Samsung both closed negative. Wednesday is unchanged as the pivot: US CPI and Tencent results on the same day. US equities finished fractionally red — the S&P closed 7,753.11, just 4.53 points shy of Friday's record, so the record streak stopped one day short. OVERNIGHT (to 07:40 SGT Tue): no reversal — Brent $87.72 (-0.15% off the settle), WTI $82.07 (-0.28%), gold $4,397.28 (+0.14%), silver $65.74 (+0.04%); everything simply held Monday's gains. The one new development is Iranian parliamentary committees advancing a bill to impose transit charges and restrictions in the strait, which institutionalises the hard line without being law yet.",
+    "regime": "Metals rejected at the highs; everything defers to tonight's CPI",
+    "riskOnProb": 0.46,
+    "regimeScore": 0.46,
+    "narrative": "Re-anchored Wed 12 Aug 07:50 SGT — Tuesday 11 Aug is COMPLETE. The day's real information is not in the levels, it is in the SHAPE: gold spiked to a two-month high of $4,432.74 in Asian hours and closed DOWN at ~$4,368 (-0.5%); silver touched a seven-week high near $66 and closed ~$64.71 (-1.5%). A failed breakout on a day when oil settled UP 1.4% and the long end sits at 2007 highs is a different signal from a quiet drift lower — the backdrop was supportive and the metals could not use it. Oil itself did the opposite of fading: Brent settled $88.91 and WTI $83.20, a fifth straight gain to one-week highs, on doubt that a US-Iran deal will quickly restore flows (Hormuz transits six vessels Monday vs a ~11 ten-day average and 125-140 pre-war; strait net exports 3.0m bpd in the week to 7 Aug from 4.4m). A correction to our own record: Monday's published $87.85/$82.30 were spot/CFD quotes — the true settles were $87.72/$82.13. The Fed path hardened at the margin: Hammack, a 2026 voter who already dissented for a hike in July, argued that MULTIPLE increases will likely be needed and that 3.50-3.75% is not meaningfully restrictive, with September now priced roughly 50/50 hike-versus-hold against 67% hike odds a week ago — there is no cut anywhere in that distribution. Against that, NFIB pricing intentions fell hard (net raising prices -7pts, net planning increases -4pts, inflation-as-top-problem -7pts and the first decline this year) and a $58bn 3-year auction cleared at a HIGHER yield with BETTER cover, which is the most plausible reason the long end held rather than extended. Asia split cleanly rather than moving as a bloc: Greater China tech was the weak spot (Hang Seng -1.10%, HS Tech -1.9%, Shanghai -0.82%, with Xiaomi -3.5% and Tencent -2.2% into today's results), while Korea rose 0.73% and Singapore — reopening after National Day into a 5.254% 30Y — RALLIED 0.98% on an MTI upgrade of 2026 GDP to 4.5-5.5%, led by the banks. Japan was closed for Mountain Day, so there is no Tuesday Nikkei figure and any that appears is Monday's re-dated. US equities fell a second session but narrowly (S&P -0.32%, Nasdaq -0.60%) with small caps green. Risk-on trimmed 0.48 to 0.46: the hike case firmed and the metals bid failed its own test, partially offset by a strong auction and a genuine Singapore growth upgrade. Two events land tonight in the same window — US July CPI at 20:30 SGT and Tencent's interim results after the HK close — and neither is in this file.",
     "drivers": [
       {
-        "factor": "Gulf premium sticking, not fading",
-        "read": "Brent SETTLED $87.85, +5.15%, well clear of Friday's $83.55 and near the day's high — no fade. WTI settled $82.30 (+5.27%). Driver: the collapse of US-Iran Hormuz talks after Tehran escalated its reopening conditions.",
+        "factor": "Metals made highs and could not hold them",
+        "read": "Gold spiked to $4,432.74, its highest since 5 June, and closed ~$4,368 (-0.5%); silver hit a seven-week high near $66 and closed ~$64.71 (-1.5%). Both reconcile exactly to Monday's published closes. A rejection on a day with oil +1.4% and the 30Y at 2007 highs says the inflation-hedge bid is not being refreshed at these levels.",
         "impact": "cautionary"
       },
       {
-        "factor": "Curve flattened — strip repricing, not prompt scarcity",
-        "read": "Deferred contracts led (Nov +3.82%, Dec +3.88%, Jan-27 +3.83% vs Oct +3.53%); Oct-Nov narrowed 1.90 to 1.69. Backwardated but flatter, which weakens a pure prompt supply-risk reading.",
-        "impact": "mixed"
-      },
-      {
-        "factor": "10Y at a one-month high of 4.70%",
-        "read": "10Y closed 4.713% (+6.2bp) and the 30Y 5.254%, its highest since 2007. A 5% crude day is rebuilding the September hike case that the payrolls contraction dismantled on Friday — directly adverse for the S-REITs and developers, which reopen on SGX today.",
+        "factor": "Oil extended rather than faded — fifth straight gain",
+        "read": "Brent settled $88.91 (+1.4%), WTI $83.20 (+1.3%), one-week highs, on doubt a US-Iran deal restores flows quickly. Hormuz transits six vessels vs an ~11 ten-day average; strait net exports 3.0m bpd from 4.4m. Correction: Monday's true settles were $87.72/$82.13, not the $87.85/$82.30 we published.",
         "impact": "cautionary"
       },
       {
-        "factor": "Silver at a seven-week high on a CHANGED engine",
-        "read": "~$65.1 spot (+2.5%), up ~17% from late July. But it is now rallying on the inflation impulse rather than the dovish Fed — and that same impulse could revive the hike that would hurt it.",
+        "factor": "September is hike-or-hold, with no cut in the distribution",
+        "read": "Hammack — a 2026 voter who dissented for a hike in July — says multiple increases will likely be needed and that 3.50-3.75% is not meaningfully restrictive. CME pricing is roughly 50/50 for September against 67% hike odds a week earlier.",
+        "impact": "cautionary"
+      },
+      {
+        "factor": "But the actual price-setting data is disinflating",
+        "read": "NFIB July: net 31% raised selling prices (-7pts), net 28% plan increases (-4pts), only 14% cite inflation as their top problem (-7pts, the first decline this year). Optimism rose to 99.8 on hiring, which cuts the other way against Friday's -23,000 payrolls.",
+        "impact": "supportive"
+      },
+      {
+        "factor": "Supply absorbed well at the front, but the 10Y prices AFTER CPI",
+        "read": "$58bn 3-year cleared 4.291% with 2.71 cover vs a 2.64 ten-auction average — a higher yield AND better cover than July's 4.179%/2.60. $42bn of 10-years today at 13:00 ET, $25bn of 30-years Thursday. A hot CPI forces dealers to underwrite supply into a selloff.",
         "impact": "mixed"
       },
       {
-        "factor": "Gold miners not confirming",
-        "read": "GDX closed +0.67% against spot gold +1.10% — it recovered from an intraday loss but still trailed the metal by ~43bp on a strong day. Miners are participating at less than 1:1 beta, the opposite of the leverage they exist to provide.",
+        "factor": "Singapore did NOT mark down into the 30Y — but your REIT names didn't mark at all",
+        "read": "STI +0.98% to 5,754.17 on the reopen (vs Friday; three-day change) with MTI upgrading 2026 GDP to 4.5-5.5% and OCBC at a record. Yet Mapletree Log/Ind/MPACT and Keppel REIT each printed EXACTLY 0.00% while CICT +2.03%, FCT +0.90% and Keppel DC +0.45% moved — name-specific, not a sector rates story. Single-source; verify against broker marks.",
         "impact": "mixed"
       },
       {
-        "factor": "Asia bought defensives and metals, sold AI",
-        "read": "Hang Seng +1.05% led by consumer/property/precious metals with chips negative; mainland CSI AI Index -3% on RMB2.5trn turnover; SK Hynix and Samsung closed negative on an up KOSPI day.",
-        "impact": "mixed"
+        "factor": "Asia split — Greater China tech was the only real weakness",
+        "read": "Hang Seng -1.10%, HS Tech -1.9%, Shanghai -0.82%, Xiaomi -3.5%, Tencent -2.2%, SMIC -1.36%; but KOSPI +0.73% and the STI +0.98%. Japan closed for Mountain Day — no Tuesday Nikkei exists.",
+        "impact": "cautionary"
+      },
+      {
+        "factor": "Miners stopped underperforming the metal",
+        "read": "GDX -0.41% against spot gold roughly -0.55%: not confirmation, since both fell, but the two-session relative-strength deterioration halted. A gold rally on tonight's CPI is the clean test of whether the lag meant anything.",
+        "impact": "supportive"
       }
     ],
     "byAssetClass": [
@@ -77,14 +87,20 @@
       }
     ],
     "sources": [
-      "https://www.thestreet.com/stock-market-today/stock-market-today-aug-3-2026-dow-futures-climb-as-oil-slides-on-renewed-iran-talks",
-      "https://finance.yahoo.com/markets/live/stock-market-today-monday-august-3-dow-sp-500-nasdaq-big-tech-oil-092516872.html",
-      "https://www.washingtonpost.com/world/2026/08/03/mideast-iran-us-israel-palestinians-gaza/30f29ee0-8f21-11f1-9fdc-0a725c989a7b_story.html",
-      "https://www.advisorperspectives.com/dshort/updates/2026/07/30/core-pce-inflation-at-3-3-in-june-edging-down-from-may",
-      "https://finance.yahoo.com/personal-finance/investing/article/silver-prices-today-monday-august-3-2026-silver-prices-open-higher-thanks-to-paused-airstrikes-123103873.html",
-      "https://www.ig.com/en/news-and-trade-ideas/weekly-market-navigator-3-aug-2026-260803"
+      "https://finance.yahoo.com/markets/live/stock-market-today-tuesday-august-11-dow-sp-500-nasdaq-102827503.html",
+      "https://www.investing.com/news/commodities-news/oil-steadies-near-oneweek-highs-as-usiran-peace-deal-hopes-dim-4850678",
+      "https://tradingeconomics.com/commodity/gold",
+      "https://tradingeconomics.com/commodity/silver",
+      "https://www.foxbusiness.com/economy/feds-hammack-says-multiple-rate-hikes-may-needed-tame-inflation",
+      "https://www.rttnews.com/3679034/three-year-note-auction-attracts-above-average-demand.aspx",
+      "https://www.mti.gov.sg/newsroom/mti-upgrades-2026-gdp-growth-forecast-to--4-5-to-5-5-per-cent-/",
+      "https://sginvestors.io/market/ftse-st-indices-straits-times-index-constituents",
+      "https://www.investing.com/indices/hang-sen-40-historical-data",
+      "https://www.calendarlabs.com/jpx-market-holidays-2026/",
+      "https://www.gulf-times.com/article/730873/qatar/oman-iran-talks-on-hormuz-are-in-advanced-stage-qatar-says",
+      "https://www.bls.gov/schedule/news_release/cpi.htm"
     ],
-    "asOf": "2026-08-11"
+    "asOf": "2026-08-12"
   },
   "calls": [
     {
