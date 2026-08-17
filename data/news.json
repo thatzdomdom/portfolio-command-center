@@ -1,7 +1,28 @@
 {
   "updated": "2026-08-17",
-  "note": "Mon 17 Aug 13:00 SGT — CATCH-UP EDITION covering THREE missed sessions (Wed 12, Thu 13, Fri 14 Aug). The dashboard's last brief was 12 August: the headless research job has aborted on an expired login every morning since 5 August, and this run was additionally handed a wrong date (it believed the day was Thursday 13 Aug) which its own verification agents caught and refuted using the machine clock, three vendor date stamps and an exact reference-close chain. Every figure here was reconciled forward from the verified Tue 11 Aug closes through Wed, Thu and Fri, with the chain closing to the cent at each step. TWO CORRECTIONS TO OUR OWN PUBLISHED NARRATIVE: (1) the 30Y has NOT broken out — the 2026 peak is 5.27% set 31 July and Friday closed 5.25%; (2) the flat S-REIT prints were SGX tick size, not a stale feed. DECLARED GAPS (16 of 42 verification agents were cut off by a session limit mid-run, so their items were NOT published rather than published unverified): no verified Thu/Fri closes for GOLD spot, GDX or the miner complex, for BRENT/WTI settles, for MP MATERIALS, for XIAOMI (either day), or for BITCOIN's weekend level; no verified Berkshire/other 13F detail beyond Paulson; no verified week-ahead calendar. Also blocked: bls.gov (403) so core PPI rests on secondary sources; CNBC/TheStreet/stockanalysis/marketscreener (403); FRED has no 14 Aug yield row yet so Friday's yields rest on the Treasury par curve alone; Singapore July NODX was due 08:30 SGT today and is not in here.",
+  "note": "Mon 17 Aug 13:00 SGT — CATCH-UP EDITION covering THREE missed sessions (Wed 12, Thu 13, Fri 14 Aug). The dashboard's last brief was 12 August: the headless research job has aborted on an expired login every morning since 5 August, and this run was additionally handed a wrong date (it believed the day was Thursday 13 Aug) which its own verification agents caught and refuted using the machine clock, three vendor date stamps and an exact reference-close chain. Every figure here was reconciled forward from the verified Tue 11 Aug closes through Wed, Thu and Fri, with the chain closing to the cent at each step. TWO CORRECTIONS TO OUR OWN PUBLISHED NARRATIVE: (1) the 30Y has NOT broken out — the 2026 peak is 5.27% set 31 July and Friday closed 5.25%; (2) the flat S-REIT prints were SGX tick size, not a stale feed. GAPS NOW LARGELY CLOSED. 16 of 42 verification agents were cut off by a session limit mid-run, leaving no verified Thu/Fri prices for gold, silver, GDX, the miners, Brent/WTI, Xiaomi, MP Materials or Bitcoin. Those gaps have since been filled DETERMINISTICALLY by a new price spine (scripts/price-spine.js) that fetches OHLC in code rather than having agents read quote pages — validated on 24 of 24 closes independently verified this week from unrelated sources, and it exactly reproduced three of the cut-off agents' own figures (MP +5.53%, Pan American -9.70%, WTI $81.25/$82.40). REMAINING GAPS, genuinely open: no Berkshire or other 13F detail beyond Paulson; no verified week-ahead calendar or Jackson Hole dates; bls.gov 403 so core PPI rests on secondary sources; Singapore July NODX was due 08:30 SGT today and is not in here.",
   "items": [
+    {
+      "date": "2026-08-14",
+      "headline": "GAP NOW CLOSED — Thursday was a MINER BREAKDOWN that no agent captured: GDX -2.96%, Newmont -3.10%, Pan American -9.70%, on a day gold fell only 1.03%",
+      "summary": "These figures come from the new deterministic price spine (scripts/price-spine.js), not from an agent reading a news page — Yahoo's chart endpoint, validated on 24 of 24 closes that were independently verified this week from unrelated sources. THURSDAY 13 AUG: GDX 88.27 (-2.96%), SILJ 29.44 (-2.39%), Newmont 114.19 (-3.10%), Barrick 43.81 (-1.95%), Pan American 47.30 (-9.70%). Against that, gold front-month fell just 1.03% to 4,363.60 and silver front-month 1.04% to 64.873. So THE MINERS UNDERPERFORMED THE METAL BY ROUGHLY 2-3x IN A SINGLE SESSION. FRIDAY 14 AUG partially retraced: GDX 89.97 (+1.93%), SILJ 29.86 (+1.43%), Newmont 117.76 (+3.13%), Barrick 44.00 (+0.43%), Pan American 47.42 (+0.25%) while gold rose 0.39% to 4,380.40. INDEPENDENT CORROBORATION: the -9.70% Pan American figure exactly reproduces a claim made by one of the verification agents that was cut off mid-run, and WTI's $81.25/$82.40 settles likewise — two separate pipelines agreeing to the cent. CONTEXT that makes Thursday worse: it was the week's RISK-ON day, with the S&P closing at a record on soft PPI. The miners broke down anyway. ── THE FUNDAMENTALS SAY THE OPPOSITE, which is the tension worth holding. Barricks own release (10 Aug): gold cost of sales $1,993/oz vs $1,654 (+20.5%) and AISC $1,866 vs $1,684 (+10.8%) — but realised gold $4,417/oz vs $3,295 (+34.1%) outran both, so AISC margin per ounce went $1,611 -> $2,551, i.e. +58.3%. Costs rose and unit margin EXPANDED. Pan American reiterated full-year cost guidance, grew net earnings 61% to $305m, generated $344m of attributable FCF (+47%) and returned a record $300m — its miss was tax ($179m charge) and gold volumes, not economics.",
+      "category": "Precious Metals",
+      "impact": "bearish",
+      "tickers": [
+        "GDX",
+        "SILJ",
+        "NEM",
+        "GOLD",
+        "PAAS",
+        "SLVP"
+      ],
+      "actionable": "This materially changes the miner read and cuts against the 'margins are expanding' conclusion drawn from Barrick's and Pan American's own filings. Pan American -9.70% is the market's verdict on its Q2 tax charge and gold-volume miss, delivered the day after the release, and it swamped the reiterated cost guidance. More importantly the whole complex fell 2-3x the metal's decline on a record-high day for the S&P — that is the miner sleeve failing its own leverage test in the direction that hurts. Friday's bounce recovered roughly two-thirds of GDX's drop but Pan American recovered almost none of its. Hold both facts at once: the filings show unit margins expanding while the tape marked the whole complex down 2-3x the metal. When fundamentals and price disagree this sharply in one session, the tape is usually telling you about positioning and fund flows, not about mine economics.",
+      "sources": [
+        "https://query1.finance.yahoo.com/v8/finance/chart/GDX?range=1mo&interval=1d",
+        "https://s202.q4cdn.com/876548212/files/doc_news/Pan-American-Silver-Reports-Second-Quarter-2026-Financial-Results-2026.pdf",
+        "https://www.barrick.com/English/news/news-details/2026/q2-2026-results/default.aspx"
+      ]
+    },
     {
       "date": "2026-08-14",
       "headline": "SILVER, the book's largest risk: three sessions of failed breakouts. It never printed a 67 handle, made two successively lower highs after Wednesday's peak, and closed Friday $64.68 — up just 1.74% on the week",
@@ -43,8 +64,8 @@
     },
     {
       "date": "2026-08-14",
-      "headline": "Friday's double miss on the US consumer: retail sales -0.6% against +0.1% expected, the worst since May 2025, and UMich sentiment collapsed to 51.0 from 55.2",
-      "summary": "Both landed Friday 14 Aug — retail sales 08:30 ET, UMich 10:00 ET. RETAIL SALES (Census advance report): July retail and food services $763.6bn, -0.6% m/m against consensus +0.1%, the sharpest monthly decline since May 2025; +5.0% y/y. Ex-autos -0.3% (cons. +0.2%); ex-autos-and-gas -0.2% (cons. +0.3%). THE CONTROL GROUP — which strips autos, gasoline, building materials and food services and feeds the PCE line of GDP — fell 0.4% against consensus +0.3%, after a revised +0.4% in June. So this was NOT a volatile-category artifact. Drivers: motor vehicles -1.8%, nonstore/online -2.2% (Prime Day fell in June this year), gasoline stations -0.9%. UMICH preliminary August: headline 51.0 against consensus 54.5 (one source prints 55.0) and a July final of 55.2. THE CROSS-CURRENT FOR METALS: year-ahead inflation expectations ROSE to 4.3% even as sentiment fell. FRIDAY CLOSES, chain-reconciled to the verified Wednesday baseline with zero residual: S&P 500 7,785.76 (-13.23, -0.17%); Dow 53,732.41 (-107.58, -0.20%); Nasdaq Composite 26,729.16 (-73.86, -0.28%); Russell 2000 3,068.42 (+15.57, +0.51%) at a fresh record on its fourth straight up day. VIX made its lowest CLOSE of 2026 at 14.25 (lowest of the year, not an all-time low).",
+      "headline": "The US week in two halves: a RECORD S&P close Thursday on soft PPI, then Friday's double miss — retail sales -0.6% and sentiment down to 51.0",
+      "summary": "AP syndicated recap, page stamp Thu 13 Aug 4:21pm ET, ~20 minutes after the cash close. CLOSES: S&P 500 7,798.99 (+50.49); Dow 53,839.99 (+69.72); Nasdaq Composite 26,803.03 (+214.54); Russell 2000 3,052.85 (+7.36). VERIFICATION, pinned from BOTH sides: 7,798.99 - 50.49 = 7,748.50, matching the verified Wednesday S&P close TO THE CENT; and Friday's separate recap gives 7,785.76 - 13.23 = 7,798.99, EXACT. Dow, Nasdaq and Russell all reconcile the same way in both directions. THE DATA: July PPI for final demand UNCHANGED (0.0%) m/m against +0.2% consensus; +4.7% y/y against 4.9% expected. Composition: final demand GOODS -0.7%, services +0.2%, construction +2.2%, with the goods decline driven by energy -3.1% and foods -0.9% — which substantiates rather than assumes the softer-oil read. ONE HOT LINE: core PPI +4.2% y/y actually beat the 4.1% consensus, and because bls.gov returned 403 the core figures rest on secondary sources. Jobless claims 209,000, up 9,000, against 202,000 expected. Semiconductors led (Sandisk +15%, Micron strong). ── THEN FRIDAY REVERSED THE MOOD. Both landed Friday 14 Aug — retail sales 08:30 ET, UMich 10:00 ET. RETAIL SALES (Census advance report): July retail and food services $763.6bn, -0.6% m/m against consensus +0.1%, the sharpest monthly decline since May 2025; +5.0% y/y. Ex-autos -0.3% (cons. +0.2%); ex-autos-and-gas -0.2% (cons. +0.3%). THE CONTROL GROUP — which strips autos, gasoline, building materials and food services and feeds the PCE line of GDP — fell 0.4% against consensus +0.3%, after a revised +0.4% in June. So this was NOT a volatile-category artifact. Drivers: motor vehicles -1.8%, nonstore/online -2.2% (Prime Day fell in June this year), gasoline stations -0.9%. UMICH preliminary August: headline 51.0 against consensus 54.5 (one source prints 55.0) and a July final of 55.2. THE CROSS-CURRENT FOR METALS: year-ahead inflation expectations ROSE to 4.3% even as sentiment fell. FRIDAY CLOSES, chain-reconciled to the verified Wednesday baseline with zero residual: S&P 500 7,785.76 (-13.23, -0.17%); Dow 53,732.41 (-107.58, -0.20%); Nasdaq Composite 26,729.16 (-73.86, -0.28%); Russell 2000 3,068.42 (+15.57, +0.51%) at a fresh record on its fourth straight up day. VIX made its lowest CLOSE of 2026 at 14.25 (lowest of the year, not an all-time low).",
       "category": "Fed/Macro",
       "impact": "bearish",
       "tickers": [
@@ -53,28 +74,15 @@
         "^VIX",
         "D05.SI",
         "O39.SI",
-        "XLE"
-      ],
-      "actionable": "The week's clearest negative surprise, and it argues against reading Thursday's soft PPI as a clean soft landing. A negative control group — the GDP-relevant cut — alongside sentiment at 51.0 is a growth signal to weigh against the cyclical side of the book: the Singapore banks, the developers and the oil sleeve. Do not frame Friday as risk-off, though: breadth was positive, the Russell closed at a record and the VIX made its lowest close of the year. The consumer weakened; the market did not panic.",
-      "sources": [
-        "http://www.sca.isr.umich.edu/",
-        "https://www.barchart.com/story/news/3858944/how-major-us-stock-indexes-fared-friday-8-14-2026"
-      ]
-    },
-    {
-      "date": "2026-08-13",
-      "headline": "Thursday was the week's risk-on day: S&P closed at a RECORD 7,798.99 (+0.65%) on a soft PPI — flat m/m against +0.2% expected",
-      "summary": "AP syndicated recap, page stamp Thu 13 Aug 4:21pm ET, ~20 minutes after the cash close. CLOSES: S&P 500 7,798.99 (+50.49); Dow 53,839.99 (+69.72); Nasdaq Composite 26,803.03 (+214.54); Russell 2000 3,052.85 (+7.36). VERIFICATION, pinned from BOTH sides: 7,798.99 - 50.49 = 7,748.50, matching the verified Wednesday S&P close TO THE CENT; and Friday's separate recap gives 7,785.76 - 13.23 = 7,798.99, EXACT. Dow, Nasdaq and Russell all reconcile the same way in both directions. THE DATA: July PPI for final demand UNCHANGED (0.0%) m/m against +0.2% consensus; +4.7% y/y against 4.9% expected. Composition: final demand GOODS -0.7%, services +0.2%, construction +2.2%, with the goods decline driven by energy -3.1% and foods -0.9% — which substantiates rather than assumes the softer-oil read. ONE HOT LINE: core PPI +4.2% y/y actually beat the 4.1% consensus, and because bls.gov returned 403 the core figures rest on secondary sources. Jobless claims 209,000, up 9,000, against 202,000 expected. Semiconductors led (Sandisk +15%, Micron strong).",
-      "category": "Fed/Macro",
-      "impact": "bullish",
-      "tickers": [
-        "^GSPC",
+        "XLE",
         "^IXIC",
         "SLV",
         "GDX"
       ],
-      "actionable": "Two consecutive benign inflation prints plus a soft-side claims number are what pushed September hike odds lower and drove the record close — the disinflation leg supporting both the equity book and the rate-sensitive precious-metals complex. Use 7,798.99 as Thursday's mark, not the unconfirmed 7,800 intraday print. But note what it did NOT do: silver made a lower high on this session and the long end gave the whole rally back on Friday.",
+      "actionable": "Two consecutive benign inflation prints plus a soft-side claims number are what pushed September hike odds lower and drove the record close — the disinflation leg supporting both the equity book and the rate-sensitive precious-metals complex. Use 7,798.99 as Thursday's mark, not the unconfirmed 7,800 intraday print. But note what it did NOT do: silver made a lower high on this session and the long end gave the whole rally back on Friday. The week's clearest negative surprise, and it argues against reading Thursday's soft PPI as a clean soft landing. A negative control group — the GDP-relevant cut — alongside sentiment at 51.0 is a growth signal to weigh against the cyclical side of the book: the Singapore banks, the developers and the oil sleeve. Do not frame Friday as risk-off, though: breadth was positive, the Russell closed at a record and the VIX made its lowest close of the year. The consumer weakened; the market did not panic.",
       "sources": [
+        "http://www.sca.isr.umich.edu/",
+        "https://www.barchart.com/story/news/3858944/how-major-us-stock-indexes-fared-friday-8-14-2026",
         "https://sg.finance.yahoo.com/news/major-us-stock-indexes-fared-202137379.html",
         "https://www.ftportfolios.com/Commentary/EconomicResearch/2026/8/13/the-producer-price-index-ppi-was-unchanged-in-july"
       ]
@@ -92,6 +100,20 @@
       "sources": [
         "https://www.prnewswire.com/apac/news-releases/tencent-announces-2026-second-quarter-results-302849608.html",
         "https://www.hstong.com/news/detail/26081316130483765"
+      ]
+    },
+    {
+      "date": "2026-08-14",
+      "headline": "GAP NOW CLOSED — Xiaomi fell FOUR consecutive sessions into tomorrow's results: HK$26.66 → 25.62, roughly -HK$27,700 on your 26,662 units",
+      "summary": "No agent could verify a Xiaomi close for either Thursday or Friday this run; the price spine resolves it. CLOSES: Tue 11 Aug 26.66 (-3.48%), Wed 12 Aug 26.36 (-1.13%), Thu 13 Aug 25.88 (-1.82%), Fri 14 Aug 25.62 (-1.00%). Four consecutive declines, cumulative -3.90% from Tuesday's close and -6.5% from Monday's 27.62. The Wednesday -1.13% closely tracks the '-1.3%' that The Standard's close report gave verbally, so the spine and the press report corroborate each other. Friday's session traded 25.44-26.12 and closed near the low. POSITION IMPACT on 26,662 units: the HK$1.04 fall from Tuesday's close is about HK$27,700 of mark-to-market. CRITICAL TIMING: Xiaomi reports H1 results TOMORROW, Tuesday 18 Aug, and the board also considers a first interim dividend.",
+      "category": "China/HK Tech",
+      "impact": "bearish",
+      "tickers": [
+        "1810.HK"
+      ],
+      "actionable": "Xiaomi goes into tomorrow's print having fallen four sessions in a row and closing Friday near its session low — the market is de-risking ahead of the number, the same pattern Tencent showed before its own results, and Tencent then fell 4.46% on the day. Sell-side previews circulating point to a materially lower adjusted profit year-on-year, but no primary-source consensus was verifiable this run, so treat any specific consensus figure you see as unconfirmed. This is the book's live event risk for tomorrow.",
+      "sources": [
+        "https://query1.finance.yahoo.com/v8/finance/chart/GDX?range=1mo&interval=1d"
       ]
     },
     {
@@ -146,37 +168,42 @@
     },
     {
       "date": "2026-08-14",
-      "headline": "SINGAPORE — read the bank prices carefully today: DBS's Friday -1.07% was the S$0.81 dividend almost to the cent (the stock was FLAT), and OCBC goes ex 47 cents THIS MORNING",
-      "summary": "STI: Thu 13 Aug 5,720.05 (-0.01%); Fri 14 Aug 5,743.59 (+23.54, +0.41%). The Wednesday row of 5,720.75 / -0.58% matches the verified baseline to the decimal, validating the table as a genuine cash-index series. Two-session net +22.84 points, +0.40%. No 15/16/17 Aug row exists anywhere — SGX was shut, so no weekend tick is in play. DBS, read off the historical table: Wed 75.70, Thu 76.35 (+0.86%), Fri 75.53 (-1.07%). The chain reconciles in both directions. THE EX-DIVIDEND: ex-date 14 Aug, S$0.81 (66c quarterly plus a 15c special), paid 25 Aug. That is 1.06% of the Thursday close against an observed -1.07% — so the underlying stock was FLAT on Friday, not down. OCBC: Wed 31.19, Thu 31.50 (+0.99%, closing at the day's high), Fri 31.79 (+0.92%) — up 1.92% over the two sessions, with Friday's 31.86 high being the stated 52-week high, so it closed just under a fresh one-year peak. OCBC's ex-date is TODAY, Monday 17 Aug, 47 cents, paid 28 Aug — roughly 1.48% mechanical.",
+      "headline": "SINGAPORE: read the bank prices carefully today (DBS's drop was the dividend, OCBC goes ex this morning) — and UOL's -8.75% is the one real loss",
+      "summary": "STI: Thu 13 Aug 5,720.05 (-0.01%); Fri 14 Aug 5,743.59 (+23.54, +0.41%). The Wednesday row of 5,720.75 / -0.58% matches the verified baseline to the decimal, validating the table as a genuine cash-index series. Two-session net +22.84 points, +0.40%. No 15/16/17 Aug row exists anywhere — SGX was shut, so no weekend tick is in play. DBS, read off the historical table: Wed 75.70, Thu 76.35 (+0.86%), Fri 75.53 (-1.07%). The chain reconciles in both directions. THE EX-DIVIDEND: ex-date 14 Aug, S$0.81 (66c quarterly plus a 15c special), paid 25 Aug. That is 1.06% of the Thursday close against an observed -1.07% — so the underlying stock was FLAT on Friday, not down. OCBC: Wed 31.19, Thu 31.50 (+0.99%, closing at the day's high), Fri 31.79 (+0.92%) — up 1.92% over the two sessions, with Friday's 31.86 high being the stated 52-week high, so it closed just under a fresh one-year peak. OCBC's ex-date is TODAY, Monday 17 Aug, 47 cents, paid 28 Aug — roughly 1.48% mechanical. ── THE REST OF THE SLEEVE SPLIT VIOLENTLY ON RESULTS. All figures are official session closes read off historical tables; the latest row on every table is Friday 14 Aug. UOL: Wed 10.17 (+2.42%); THU 9.55 (-6.10%, open 10.18, high 10.20, low 9.44, vol 5.43M); FRI 9.28 (-2.83%, high 9.60, low 9.11). Arithmetic: Thu -0.62 on 10.17 = -6.096%; Fri -0.27 on 9.55 = -2.827%; two-day 9.28/10.17-1 = -8.751%. Two independent post-close quote feeds confirm both session dates. CRITICALLY: there is no dividend, ex-date or corporate action to excuse this — the results wire declares no dividend, and Thursday OPENED one cent ABOVE the prior close before collapsing intraday. The trigger is a 7% revenue decline masked by fair-value gains. CITY DEVELOPMENTS rose 4.33% Thursday on tripled profit plus a strategic review. SINGTEL: Wed 4.290, Thu 4.250 (-0.93%), Fri 4.450 (+4.71%). Its 1QFY2027 update was released PRE-OPEN Thursday; the market sold the -71.6% headline down to 4.190 intraday, then reversed once the underlying +21% / S$831m — an 11.4% consensus beat — was digested. Publish +4.71% to S$4.450, the close, NOT the +3.5% intraday figure still in the wire copy.",
       "category": "SGX/Singapore",
       "impact": "mixed",
       "tickers": [
         "D05.SI",
         "O39.SI",
-        "^STI"
-      ],
-      "actionable": "Across DBS (ex Friday) and OCBC (ex today) your two bank lines show a combined ~2.5% of purely mechanical decline in consecutive sessions. Use S$31.32 as OCBC's ex-adjusted reference, not the S$31.79 close. If the P&L feed marks DBS to 75.53 without accruing the S$0.81 receivable, the book understates DBS by ~1.06% until 25 August. The inverse error is the dangerous one: if a genuine bank selloff coincides with today's ex-date, do not write it off as 'just the dividend'.",
-      "sources": [
-        "https://www.investing.com/equities/dbs-group-holdings-historical-data",
-        "https://www.investing.com/equities/oversea-chinese-banking-corp.-historical-data",
-        "https://www.investing.com/indices/singapore-straits-time-historical-data"
-      ]
-    },
-    {
-      "date": "2026-08-14",
-      "headline": "The Singapore sleeve split violently on results: UOL -8.75% over two sessions with NO dividend to excuse it, while Singtel reversed to +4.71% and City Developments rose on tripled profit",
-      "summary": "All figures are official session closes read off historical tables; the latest row on every table is Friday 14 Aug. UOL: Wed 10.17 (+2.42%); THU 9.55 (-6.10%, open 10.18, high 10.20, low 9.44, vol 5.43M); FRI 9.28 (-2.83%, high 9.60, low 9.11). Arithmetic: Thu -0.62 on 10.17 = -6.096%; Fri -0.27 on 9.55 = -2.827%; two-day 9.28/10.17-1 = -8.751%. Two independent post-close quote feeds confirm both session dates. CRITICALLY: there is no dividend, ex-date or corporate action to excuse this — the results wire declares no dividend, and Thursday OPENED one cent ABOVE the prior close before collapsing intraday. The trigger is a 7% revenue decline masked by fair-value gains. CITY DEVELOPMENTS rose 4.33% Thursday on tripled profit plus a strategic review. SINGTEL: Wed 4.290, Thu 4.250 (-0.93%), Fri 4.450 (+4.71%). Its 1QFY2027 update was released PRE-OPEN Thursday; the market sold the -71.6% headline down to 4.190 intraday, then reversed once the underlying +21% / S$831m — an 11.4% consensus beat — was digested. Publish +4.71% to S$4.450, the close, NOT the +3.5% intraday figure still in the wire copy.",
-      "category": "SGX/Singapore",
-      "impact": "mixed",
-      "tickers": [
+        "^STI",
         "U14.SI",
         "C09.SI",
         "Z74.SI"
       ],
-      "actionable": "UOL is the genuine damage in the Singapore book — -8.75% across two sessions with nothing mechanical to explain it, on a 7% revenue decline masked by fair-value gains. Mark it as a real loss, unlike the two bank moves. Singtel is the mirror image: a headline-driven overreaction that fully reversed within a session, which is worth remembering the next time a -71.6% figure appears in a results headline.",
+      "actionable": "Across DBS (ex Friday) and OCBC (ex today) your two bank lines show a combined ~2.5% of purely mechanical decline in consecutive sessions. Use S$31.32 as OCBC's ex-adjusted reference, not the S$31.79 close. If the P&L feed marks DBS to 75.53 without accruing the S$0.81 receivable, the book understates DBS by ~1.06% until 25 August. The inverse error is the dangerous one: if a genuine bank selloff coincides with today's ex-date, do not write it off as 'just the dividend'. UOL is the genuine damage in the Singapore book — -8.75% across two sessions with nothing mechanical to explain it, on a 7% revenue decline masked by fair-value gains. Mark it as a real loss, unlike the two bank moves. Singtel is the mirror image: a headline-driven overreaction that fully reversed within a session, which is worth remembering the next time a -71.6% figure appears in a results headline.",
       "sources": [
+        "https://www.investing.com/equities/dbs-group-holdings-historical-data",
+        "https://www.investing.com/equities/oversea-chinese-banking-corp.-historical-data",
+        "https://www.investing.com/indices/singapore-straits-time-historical-data",
         "https://www.investing.com/equities/united-overseas-land-historical-data",
         "https://www.investing.com/equities/singapore-telecommunications-historical-data"
+      ]
+    },
+    {
+      "date": "2026-08-14",
+      "headline": "GAP NOW CLOSED — oil sold off hard Thursday then recovered: Brent $87.07 (-2.15%) then $88.52 (+1.67%); WTI $81.25 then $82.40",
+      "summary": "Front-month settles from the price spine, which reproduces the Tuesday and Wednesday marks ($88.91 and $88.98 Brent; $83.20 and $83.27 WTI) that were separately verified from exchange historical tables — so the series is anchored at both ends. BRENT: Wed 88.98 (+0.08%), Thu 87.07 (-2.15%, range 85.87-89.02), Fri 88.52 (+1.67%, range 86.44-88.79). WTI: Wed 83.27, Thu 81.25 (-2.43%, range 80.09-83.30), Fri 82.40 (+1.42%). INDEPENDENT CORROBORATION: the $81.25 and $82.40 WTI settles exactly reproduce a claim from a verification agent that was cut off mid-run — two pipelines, same numbers. Net across the week Brent gave back 0.44% from Wednesday's level having traded an $85.87-90.07 range, so the Hormuz premium is intact but no longer expanding.",
+      "category": "Energy",
+      "impact": "mixed",
+      "tickers": [
+        "BZ=F",
+        "CL=F",
+        "USO",
+        "XLE"
+      ],
+      "actionable": "The oil sleeve had a genuine two-day round trip that was invisible in the last edition. Thursday's -2.15% coincided with the soft PPI print, whose goods component was driven by energy -3.1% — so the disinflation that supported equities came partly at the expense of your energy exposure. Friday recovered most of it. Brent holding $88 after a 17.4mb inventory build and a mid-week 2% drawdown says the geopolitical bid is doing the work, consistent with the earlier read.",
+      "sources": [
+        "https://query1.finance.yahoo.com/v8/finance/chart/GDX?range=1mo&interval=1d"
       ]
     },
     {
@@ -236,25 +263,6 @@
         "https://www.kitco.com/news/article/2026-08-12/gold-prices-test-two-month-highs-cpi-trims-yields-fed-hike-odds-kitco-pm",
         "https://www.fxstreet.com/news/wti-holds-firm-as-strait-of-hormuz-concerns-outweigh-sharp-us-inventory-build-202608121719",
         "https://www.eia.gov/petroleum/supply/weekly/pdf/highlights.pdf"
-      ]
-    },
-    {
-      "date": "2026-08-12",
-      "headline": "MINER MARGINS EXPANDED, they did not compress: Barrick's costs rose 20% but its realised gold price rose 34%, lifting unit margin 58%",
-      "summary": "Verified on Barrick's own investor-relations release dated 10 August and cross-checked against a second rendering — figures identical. THE COST MISS IS CONFIRMED TO THE DOLLAR: gold cost of sales $1,993/oz against $1,654/oz in Q2 2025 (+20.5%); gold AISC $1,866/oz against $1,684/oz (+10.8%). BUT THE MARGIN WENT THE OTHER WAY: realised gold $4,417/oz against $3,295/oz, +34.1%, outrunning the cost rise. AISC margin per ounce: $4,417 - $1,866 = $2,551 this quarter against $3,295 - $1,684 = $1,611 a year ago, i.e. +58.3%. The Nevada IPO remains on track for year-end, with Newmont paying $1.95bn. PAN AMERICAN reported after Wednesday's close (5:17 p.m. ET, verified against the company's own PDF): revenue $1,124m missed a ~$1.16bn consensus and adjusted EPS $0.73 missed $0.84 on a $179m tax expense; silver production 6.47m oz at the high end, gold 165.9k oz below range. BUT full-year cost guidance was REITERATED, net earnings were $305m against $190m a year ago (+61%), attributable free cash flow $344m (+47%), and a record $300m was returned to shareholders.",
-      "category": "Precious Metals",
-      "impact": "bullish",
-      "tickers": [
-        "GOLD",
-        "NEM",
-        "PAAS",
-        "GDX",
-        "SILJ"
-      ],
-      "actionable": "Read these the right way round: the read-across to your miner sleeve is margin EXPANSION, not compression, and expect the same shape from Newmont. Pan American's miss is a tax and volume story sitting on top of a 61% earnings increase with reiterated cost guidance — not evidence that miner economics are deteriorating. CAVEAT: no verified Thursday or Friday closes for GDX or any individual miner this run, so this is a fundamentals read without a current price mark.",
-      "sources": [
-        "https://www.barrick.com/English/news/news-details/2026/q2-2026-results/default.aspx",
-        "https://s202.q4cdn.com/876548212/files/doc_news/Pan-American-Silver-Reports-Second-Quarter-2026-Financial-Results-2026.pdf"
       ]
     }
   ]

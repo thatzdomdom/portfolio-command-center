@@ -53,17 +53,26 @@ else {
   // 09:00 SGT on a Monday, the newest close that CAN exist is Friday's — 3 calendar days old —
   // so a flat ">2 days" test fails every Monday and after every holiday. The bug was mine, and
   // silently padding news.json to satisfy it would have been the wrong fix.)
-  const nowSGT = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Singapore' }));
-  const dow = nowSGT.getDay();                      // 0 Sun … 6 Sat
-  const preAsiaClose = nowSGT.getHours() < 18;      // SGX closes 17:00, HKEX 16:00 SGT
-  // How many calendar days back the newest possible completed session sits.
-  let allowance = 2;
-  if (dow === 1) allowance = preAsiaClose ? 3 : 2;  // Mon before the close → Friday is newest
-  else if (dow === 0) allowance = 3;                // Sunday → Friday
-  else if (dow === 6) allowance = 2;                // Saturday → Friday
+  // Derive the allowance from the SPINE's own most recent completed session rather than guessing
+  // from the day of week. The first version hard-coded "Monday → 3 days", which is wrong the
+  // moment a holiday lands (SGX shut for National Day on 10 Aug, JPX for Mountain Day on the
+  // 11th) and wrong again after midnight SGT, when Asia has closed but the US has not. The spine
+  // already knows exactly which sessions completed, so ask it instead of re-deriving a calendar.
+  let allowance = 2, basis = 'default';
+  try {
+    const spine = JSON.parse(fs.readFileSync(path.join(D, '.prices.json'), 'utf8'));
+    // Exclude PARTIAL bars AND crypto entirely. Crypto never closes, so it always has the newest
+    // bar — first it was Bitcoin's live same-day level, then its Sunday bar — and neither says
+    // anything about whether an equity session has closed that the news sweep ought to cover.
+    const lastBar = Object.values(spine.instruments || {})
+      .filter(i => i.exchange !== 'CRYPTO')
+      .flatMap(i => (i.bars || []).filter(b => !b.partial).map(b => b.d))
+      .sort().pop();
+    if (lastBar) { allowance = Math.max(0, daysAgo(lastBar)); basis = `latest completed session ${lastBar}`; }
+  } catch (_) { /* no spine — fall back to the conservative default */ }
   if (freshest == null) fail('news.json', 'no validly dated items at all');
-  else if (freshest > allowance) fail('news.json', `newest item is ${freshest} days old (allowance ${allowance} for a ${['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][dow]}) — the daily sweep did not find anything current`);
-  else ok(`news: ${items.length} items, newest ${freshest === 0 ? 'today' : freshest + 'd old'}${freshest > 2 ? ' (Friday close — latest session that exists)' : ''}`);
+  else if (freshest > allowance) fail('news.json', `newest item is ${freshest} days old but a session has closed since (${basis}) — the sweep is behind`);
+  else ok(`news: ${items.length} items, newest ${freshest === 0 ? 'today' : freshest + 'd old'} (${basis})`);
   if (stale) warn('news.json', `${stale} item(s) older than 14 days still published`);
   if (noSrc) fail('news.json', `${noSrc} item(s) cite no source at all`);
   if (bareSrc) warn('news.json', `${bareSrc} item(s) cite only homepage-level URLs (no specific article)`);
@@ -191,6 +200,87 @@ else {
       String(brief.regime.label).trim() && String(model.macro.regime).trim() &&
       brief.regime.label !== model.macro.regime) {
     warn('brief.json', `regime label "${brief.regime.label}" differs from model.json's "${model.macro.regime}"`);
+  }
+}
+
+// ── PRICE RECONCILIATION GATE (added 17 Aug 2026) ──────────────────────────
+// This replaces work that used to be done by one verification AGENT PER ITEM — roughly thirty
+// agents on a busy day, each re-opening quote pages to check arithmetic, which is most of why a
+// single daily run cost ~2.4M tokens. Arithmetic is not a research task. Every price an agent
+// asserts is now checked in code against data/.prices.json (the deterministic spine), for free.
+//
+// The point is not only cost. An agent that "verifies" a number by reading another vendor page
+// inherits that vendor's errors — which is exactly how a spot/CFD quote got published as a Brent
+// exchange settle, and how OCBC carried two different Tuesday closes for days. Code comparing
+// against one anchored series cannot make that mistake.
+//
+// Only claims that FAIL here need a human-or-agent look, so the expensive path is reserved for
+// genuine disagreements instead of being paid on every item.
+{
+  const PF = path.join(D, '.prices.json');
+  if (!fs.existsSync(PF)) {
+    warn('prices', 'data/.prices.json missing — run `node scripts/price-spine.js` before validating');
+  } else {
+    const spine = JSON.parse(fs.readFileSync(PF, 'utf8'));
+    const ageMin = Math.floor((Date.now() - Date.parse(spine.generated)) / 60000);
+    if (ageMin > 24 * 60) warn('prices', `spine is ${Math.floor(ageMin / 60)}h old — re-run price-spine.js`);
+
+    // Build "TICKER @ price" candidates out of the published prose. Deliberately conservative:
+    // it only fires on a $/HK$/S$-prefixed number sitting near a ticker we actually track, so a
+    // percentage or a share count is never mistaken for a price.
+    const CUR = '(?:US\\$|HK\\$|S\\$|\\$)';
+    const bySym = spine.instruments || {};
+    const alias = { 'Tencent': '0700.HK', 'Xiaomi': '1810.HK', 'SMIC': '0981.HK', 'DBS': 'D05.SI',
+      'OCBC': 'O39.SI', 'Singtel': 'Z74.SI', 'UOL': 'U14.SI', 'Keppel REIT': 'K71U.SI',
+      'Newmont': 'NEM', 'Barrick': 'GOLD', 'Pan American': 'PAAS', 'MP Materials': 'MP',
+      'Brent': 'BZ=F', 'WTI': 'CL=F', 'GDX': 'GDX', 'SILJ': 'SILJ', 'Bitcoin': 'BTC-USD' };
+
+    let checked = 0, matched = 0; const mismatches = [];
+    const scan = (text, where) => {
+      if (!text) return;
+      for (const [name, sym] of Object.entries(alias)) {
+        const inst = bySym[sym]; if (!inst) continue;
+        const re = new RegExp(name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '[^.!?]{0,80}?' + CUR + '\\s?([\\d,]+\\.?\\d*)', 'gi');
+        let m;
+        while ((m = re.exec(text)) !== null) {
+          const claimed = parseFloat(m[1].replace(/,/g, ''));
+          if (!isFinite(claimed) || claimed <= 0) continue;
+          // Reject figures that are not share prices at all. The first version of this gate
+          // flagged Barrick's "$1,993/oz" cost of sales and Pan American's "$305m" of net
+          // earnings as bad prices, because both sit within 80 characters of the company name.
+          // Two filters, in order of reliability:
+          //   (a) an explicit unit right after the number (/oz, m, bn, per ounce…);
+          //   (b) magnitude — a real price claim lives near the instrument's actual trading band.
+          //       Anything outside 0.3x-3x of the recent range is a revenue, a cost, a market cap
+          //       or a target, not a quote, so it is silently skipped rather than reported.
+          const tail = text.slice(m.index + m[0].length, m.index + m[0].length + 12);
+          if (/^\s*(?:\/|per\b|m\b|mn\b|bn\b|k\b|million|billion|trillion|%)/i.test(tail)) continue;
+          const lows = inst.bars.map(b => b.l), highs = inst.bars.map(b => b.h);
+          const lo = Math.min(...lows) * 0.3, hi = Math.max(...highs) * 3;
+          if (claimed < lo || claimed > hi) continue;
+          // A claim counts as reconciled if it matches ANY completed close in the window —
+          // items legitimately quote several sessions, and highs/lows are quoted too.
+          const hit = inst.bars.some(b =>
+            Math.abs(b.c - claimed) <= Math.max(0.011, b.c * 0.0025) ||
+            Math.abs(b.h - claimed) <= Math.max(0.011, b.h * 0.0025) ||
+            Math.abs(b.l - claimed) <= Math.max(0.011, b.l * 0.0025));
+          checked++;
+          if (hit) matched++;
+          else mismatches.push({ where, sym, claimed, near: inst.bars.slice(-4).map(b => b.c) });
+        }
+      }
+    };
+    (news.items || []).forEach((n, i) => { scan(n.summary, `news[${i}]`); scan(n.actionable, `news[${i}]`); });
+    if (brief) { (brief.tldr || []).forEach((t, i) => scan(t, `brief.tldr[${i}]`)); (brief.signals || []).forEach((t, i) => scan(t, `brief.signals[${i}]`)); }
+    if (model && model.macro) scan(model.macro.narrative, 'model.macro.narrative');
+
+    if (!checked) ok('prices: spine loaded; no ticker-anchored price claims to reconcile');
+    else if (!mismatches.length) ok(`prices: ${matched}/${checked} asserted prices reconcile against the spine`);
+    else {
+      mismatches.slice(0, 6).forEach(x =>
+        fail('prices', `${x.where} asserts ${x.sym} at ${x.claimed}, which matches no traded close/high/low (recent closes: ${x.near.join(', ')})`));
+      if (mismatches.length > 6) fail('prices', `…and ${mismatches.length - 6} more unreconciled price claim(s)`);
+    }
   }
 }
 
