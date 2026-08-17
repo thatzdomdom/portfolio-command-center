@@ -26,7 +26,18 @@ if [ "$AUTH" != "ok" ] && [ -z "$CLAUDE_CODE_OAUTH_TOKEN" ]; then
   exit 78
 fi
 
-/opt/homebrew/bin/claude -p "Execute the instructions in /Users/dominiczhao/.claude/scheduled-tasks/portfolio-intel-refresh/SKILL.md exactly and completely. Work efficiently — hard time budget 45 minutes; if a source stalls twice, skip it and continue; partial-but-published beats complete-but-late." \
+# ── DETERMINISTIC DATA LAYERS — run BEFORE any agent work ─────────────────
+# Added 18 Aug 2026 after a daily run cost ~2.4M tokens, most of it spent on
+# verification agents re-opening quote pages to check arithmetic. Prices and
+# release schedules are structured data; fetching them in code is faster, free,
+# and more accurate than having a language model read them off a web page.
+# The agent is handed these files as established fact and must not re-research
+# them. Both are non-fatal: if a feed is down the run continues and says so.
+/opt/homebrew/bin/node scripts/price-spine.js || echo "$(date '+%F %T') price spine FAILED — agents will lack a price anchor this run"
+/opt/homebrew/bin/node scripts/calendar-spine.js || echo "$(date '+%F %T') calendar spine unavailable/stale — see data/.calendar.json"
+
+/opt/homebrew/bin/claude -p "Execute the instructions in /Users/dominiczhao/.claude/scheduled-tasks/portfolio-intel-refresh/SKILL.md exactly and completely.
+Two files have ALREADY been fetched for you and are authoritative — treat them as established fact and do NOT spend agents re-researching their contents: data/.prices.json (dated OHLC for every instrument on the book) and data/.calendar.json (the release schedule with consensus and previous). Work efficiently — hard time budget 45 minutes; if a source stalls twice, skip it and continue; partial-but-published beats complete-but-late." \
   --permission-mode bypassPermissions \
   --add-dir /Users/dominiczhao/portfolio-dashboard \
   --add-dir /Users/dominiczhao/.claude \
