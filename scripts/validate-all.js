@@ -48,9 +48,22 @@ else {
     if (!s.length) noSrc++; else if (s.every(isBareDomain)) bareSrc++;
   });
   const freshest = items.map(n => daysAgo(n.date)).filter(x => x != null && x >= 0).sort((a, b) => a - b)[0];
+  // Age the news against the latest COMPLETED trading session, not against the calendar.
+  // (Added 2026-08-17: this rule fired on a correct Monday-morning catch-up. Written before
+  // 09:00 SGT on a Monday, the newest close that CAN exist is Friday's — 3 calendar days old —
+  // so a flat ">2 days" test fails every Monday and after every holiday. The bug was mine, and
+  // silently padding news.json to satisfy it would have been the wrong fix.)
+  const nowSGT = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Singapore' }));
+  const dow = nowSGT.getDay();                      // 0 Sun … 6 Sat
+  const preAsiaClose = nowSGT.getHours() < 18;      // SGX closes 17:00, HKEX 16:00 SGT
+  // How many calendar days back the newest possible completed session sits.
+  let allowance = 2;
+  if (dow === 1) allowance = preAsiaClose ? 3 : 2;  // Mon before the close → Friday is newest
+  else if (dow === 0) allowance = 3;                // Sunday → Friday
+  else if (dow === 6) allowance = 2;                // Saturday → Friday
   if (freshest == null) fail('news.json', 'no validly dated items at all');
-  else if (freshest > 2) fail('news.json', `newest item is ${freshest} days old — the daily sweep did not find anything current`);
-  else ok(`news: ${items.length} items, newest ${freshest === 0 ? 'today' : freshest + 'd old'}`);
+  else if (freshest > allowance) fail('news.json', `newest item is ${freshest} days old (allowance ${allowance} for a ${['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][dow]}) — the daily sweep did not find anything current`);
+  else ok(`news: ${items.length} items, newest ${freshest === 0 ? 'today' : freshest + 'd old'}${freshest > 2 ? ' (Friday close — latest session that exists)' : ''}`);
   if (stale) warn('news.json', `${stale} item(s) older than 14 days still published`);
   if (noSrc) fail('news.json', `${noSrc} item(s) cite no source at all`);
   if (bareSrc) warn('news.json', `${bareSrc} item(s) cite only homepage-level URLs (no specific article)`);
