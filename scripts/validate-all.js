@@ -147,17 +147,42 @@ if (!inv) warn('investors.json', 'missing');
 else {
   const a = daysAgo(inv.updated);
   if (a == null) warn('investors.json', 'no updated stamp');
-  else if (a > 3) fail('investors.json', `stamped ${a} days ago — it is meant to be re-verified every run`);
+  // Only a WARNING now, never a failure. (Changed 18 Aug 2026.) Failing on stamp age created a
+  // perverse incentive: the cheapest way to pass was to bump `updated` without re-pulling any
+  // filing, which is exactly what happened — the file carried a fresh 17 Aug stamp over Q1 data
+  // from May. Staleness that matters is measured against the FILING CALENDAR below, not against
+  // when a job last ran.
+  else if (a > 3) warn('investors.json', `stamped ${a} days ago — re-verify (note: bumping this stamp is NOT a fix; the quarter check below is what matters)`);
   else ok(`investors: re-verified ${a === 0 ? 'today' : a + 'd ago'}`);
-  // a 13F quarter cannot be presented as current before its filing deadline
+
+  // 13F QUARTER CHECK — BOTH DIRECTIONS.
+  // The original only asked "is this quarter presented as current before its deadline?" It never
+  // asked the question that actually caught us out: "has a NEWER quarter already passed its
+  // deadline and become public while we are still showing the old one?" On 18 Aug 2026 it happily
+  // printed "2026 Q1 is past its 13F deadline — legitimately current" while Q2 had been public
+  // since Friday the 14th and Berkshire's Alphabet position had more than doubled inside it.
+  const qEndOf = (q, y) => new Date(Date.UTC(y, q * 3, 0));           // last day of the quarter
+  const dueOf  = (q, y) => new Date(qEndOf(q, y).getTime() + 45 * 864e5);
   const cur = inv.convictionPlays && inv.convictionPlays.current;
   if (cur) {
-    const m = /Q([1-4])\s*(\d{4})/.exec(cur);
-    if (m) {
-      const qEnd = new Date(Date.UTC(+m[2], +m[1] * 3, 0));
-      const due = new Date(qEnd.getTime() + 45 * 864e5);
-      if (Date.parse(today) < due.getTime()) fail('investors.json', `presents ${cur} as current, but those 13Fs are not due until ${due.toISOString().slice(0, 10)}`);
-      else ok(`investors: ${cur} is past its 13F deadline — legitimately current`);
+    const m = /Q([1-4])\s*(\d{4})/.exec(cur) || /(\d{4})\s*Q([1-4])/.exec(cur);
+    const qn = m ? (m[1].length === 4 ? +m[2] : +m[1]) : null;
+    const yr = m ? (m[1].length === 4 ? +m[1] : +m[2]) : null;
+    if (qn && yr) {
+      const due = dueOf(qn, yr);
+      if (Date.parse(today) < due.getTime()) {
+        fail('investors.json', `presents ${cur} as current, but those 13Fs are not due until ${due.toISOString().slice(0, 10)}`);
+      } else {
+        // Walk forward: is there a LATER quarter whose deadline has also passed?
+        let nq = qn, ny = yr, newest = null;
+        for (let i = 0; i < 8; i++) {
+          nq++; if (nq > 4) { nq = 1; ny++; }
+          if (Date.parse(today) >= dueOf(nq, ny).getTime()) newest = `${ny} Q${nq}`; else break;
+        }
+        if (newest) {
+          fail('investors.json', `shows ${cur} but ${newest} 13Fs are ALREADY PUBLIC (deadline passed) — the tables are a full quarter behind`);
+        } else ok(`investors: ${cur} is the newest quarter whose 13F deadline has passed`);
+      }
     }
   }
 }

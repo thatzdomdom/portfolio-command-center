@@ -1296,7 +1296,7 @@ function showTab(id,b){document.querySelectorAll('.panel').forEach(p=>p.classLis
 // because the fix simply was not running). data/version.json is fetched with a
 // cache-buster on every load; if the server is ahead of this file, reload once
 // against the new build. sessionStorage guards against a reload loop.
-const BUILD=59;
+const BUILD=60;
 async function checkBuild(){
   try{
     const r=await fetch('data/version.json?cb='+Date.now(),{cache:'no-store'});
@@ -1417,7 +1417,8 @@ function renderInvestorsHub(){
   const siN=(si.roster&&si.roster.length)||si.count||0;
   const nProf=Object.keys(investorsData.profiles||{}).length;
   box.innerHTML=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div class="sh" style="margin:0">🐋 Super Investors</div><button class="btn" style="padding:2px 9px;font-size:14px" onclick="openCurated()" title="About">ⓘ</button>${siN?`<span class="small" style="color:var(--muted)">${siN} tracked</span>`:''}</div>
-  ${stamp(investorsData&&investorsData.updated,{label:'13F holdings & sector data',note:'refreshed daily · filings quarterly/lagged'})}
+  ${stamp(investorsData&&investorsData.updated,{label:'13F holdings & sector data',note:((investorsData&&investorsData.convictionPlays&&investorsData.convictionPlays.current)||'quarter unknown')+' filings · '+q13fNote(investorsData&&investorsData.convictionPlays&&investorsData.convictionPlays.current)})}
+  ${(investorsData&&investorsData.note)?`<div class="small" style="margin:8px 0 0;padding:9px 11px;border-left:3px solid var(--warn,#d19a2f);background:rgba(209,154,47,.07);border-radius:0 6px 6px 0;color:var(--muted);line-height:1.45">${esc(investorsData.note)}</div>`:''}
   <input class="search-input" id="inv-search" placeholder="Search super investors…" oninput="filterRoster(this.value)" style="margin-bottom:12px;width:100%;margin-top:10px">
   <div class="cp-filters" style="margin-bottom:14px">
     <button class="cpf ${invSub==='activity'?'active':''}" data-s="activity" onclick="setInvSub('activity')">Activity &amp; Sectors</button>
