@@ -1,9 +1,7 @@
 {
  "checkedOn": "2026-08-19",
- "at": "2026-08-18T23:27:31.773Z",
- "problems": [
-  "brief.json: dated 1 day(s) ago — the morning email would send stale content under today's date"
- ],
+ "at": "2026-08-18T23:59:15.897Z",
+ "problems": [],
  "warnings": [
   "flows-investors.json: Japan (JPX / TSE) data is 26 days old — check it is labelled as carried forward",
   "flows-investors.json: Singapore (SGX) data is 26 days old — check it is labelled as carried forward",
@@ -12,14 +10,15 @@
   "prices: skipped reconciliation for low-trust series (BZ=F) — the spine flags these as rolled/thin; quote the ETF proxy instead"
  ],
  "passed": [
-  "news: 14 items, newest 1d old (latest completed session 2026-08-18)",
+  "news: 12 items, newest today (latest completed session 2026-08-18)",
   "model: 49 calls, all probabilities in range",
-  "model: macro re-stamped 1d ago",
+  "model: macro re-stamped today",
   "market: F&G 46, stamps current",
-  "track: 36 snapshots, history intact",
+  "track: 37 snapshots, history intact",
   "investors: re-verified 1d ago",
   "investors: 2026 Q2 is the newest quarter whose 13F deadline has passed",
   "flows: 6 markets, sources present, proxies labelled",
-  "prices: 1/1 asserted prices reconcile against the spine"
+  "brief: written today",
+  "prices: spine loaded; no ticker-anchored price claims to reconcile"
  ]
 }
