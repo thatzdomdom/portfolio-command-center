@@ -260,11 +260,16 @@ else {
       'Newmont': 'NEM', 'Barrick': 'GOLD', 'Pan American': 'PAAS', 'MP Materials': 'MP',
       'Brent': 'BZ=F', 'WTI': 'CL=F', 'GDX': 'GDX', 'SILJ': 'SILJ', 'Bitcoin': 'BTC-USD' };
 
-    let checked = 0, matched = 0; const mismatches = [];
+    let checked = 0, matched = 0; const mismatches = []; const lowTrustSkipped = new Set();
     const scan = (text, where) => {
       if (!text) return;
       for (const [name, sym] of Object.entries(alias)) {
         const inst = bySym[sym]; if (!inst) continue;
+        // Never "confirm" a price against a series the spine itself distrusts. On 19 Aug the
+        // futures feed was found to roll contracts and carry volumes forward, which had already
+        // put a wrong gold close into a published brief. Reconciling against it would have
+        // rubber-stamped the error. Skip and surface it instead of passing silently.
+        if (inst.trust === 'low') { lowTrustSkipped.add(sym); continue; }
         const re = new RegExp(name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '[^.!?]{0,80}?' + CUR + '\\s?([\\d,]+\\.?\\d*)', 'gi');
         let m;
         while ((m = re.exec(text)) !== null) {
@@ -299,6 +304,9 @@ else {
     if (brief) { (brief.tldr || []).forEach((t, i) => scan(t, `brief.tldr[${i}]`)); (brief.signals || []).forEach((t, i) => scan(t, `brief.signals[${i}]`)); }
     if (model && model.macro) scan(model.macro.narrative, 'model.macro.narrative');
 
+    if (lowTrustSkipped.size) {
+      warn('prices', `skipped reconciliation for low-trust series (${[...lowTrustSkipped].join(', ')}) — the spine flags these as rolled/thin; quote the ETF proxy instead`);
+    }
     if (!checked) ok('prices: spine loaded; no ticker-anchored price claims to reconcile');
     else if (!mismatches.length) ok(`prices: ${matched}/${checked} asserted prices reconcile against the spine`);
     else {

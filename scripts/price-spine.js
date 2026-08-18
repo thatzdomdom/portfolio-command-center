@@ -42,6 +42,16 @@ const EXCH = {
   CRYPTO: { tz: 'UTC', close: null },               // never closes; today's bar is a LEVEL
 };
 
+// FUTURES ARE NOT TRUSTWORTHY ON THIS FEED — established empirically on 19 Aug 2026.
+// Gold front-month returned daily volumes of 673-3,609 (real COMEX gold trades six figures);
+// Brent and WTI returned IDENTICAL volumes on two different sessions, a carry-forward artifact;
+// and a contract roll silently rewrote Monday's gold close from 4,479.50 to 4,417.80 after it had
+// already been published as a breakout. ETFs cannot roll and trade millions of shares a day, so
+// every metals/energy PERCENTAGE the brief quotes should come from the proxy, not the future.
+// Futures are retained for level context only, and flagged `trust:'low'` when volume is implausible.
+const PROXY = { 'GC=F': 'GLD', 'SI=F': 'SLV', 'BZ=F': 'USO', 'CL=F': 'USO' };
+const MIN_PLAUSIBLE_VOL = { 'GC=F': 50000, 'SI=F': 20000, 'BZ=F': 50000, 'CL=F': 100000 };
+
 // The book, plus the benchmarks the brief actually quotes.
 const UNIVERSE = [
   // US indices
@@ -140,8 +150,63 @@ async function main() {
     } catch (e) { out.errors[sym] = e.message; }
     await new Promise(r => setTimeout(r, 90));   // be polite; this is an unauthenticated endpoint
   }
-  const p = path.join(__dirname, '..', 'data', '.prices.json');
-  fs.writeFileSync(p, JSON.stringify(out, null, 2) + '\n');
+  // NOTE: the file is written ONCE, at the end. An earlier version wrote it here as well, which
+  // silently defeated the revision detector below — by the time it read the "previous" run it was
+  // reading the file this line had just overwritten, so every diff compared today with itself and
+  // reported zero revisions forever. The detector was added to catch a wrong published gold price
+  // and, on its first run, could not have caught it.
+  // Tag every futures instrument with a trust level and point at its roll-immune proxy, so a
+  // consumer cannot accidentally quote a thin future as if it were the market.
+  for (const [sym, inst] of Object.entries(out.instruments)) {
+    if (inst.exchange !== 'FUT') continue;
+    const floor = MIN_PLAUSIBLE_VOL[sym] || 10000;
+    const recent = inst.bars.slice(-5).map(b => b.v || 0);
+    const median = recent.slice().sort((a, b) => a - b)[Math.floor(recent.length / 2)] || 0;
+    inst.proxy = PROXY[sym] || null;
+    inst.trust = median >= floor ? 'ok' : 'low';
+    if (inst.trust === 'low') {
+      inst.trustNote = `median recent volume ${median} is below the ${floor} plausibility floor for this contract — ` +
+        `the series is probably a rolled or back-month contract. Quote ${inst.proxy || 'an ETF proxy'} for percentage moves instead.`;
+    }
+  }
+
+  // ── REVISION DETECTOR + THIN-BAR GATE (added 19 Aug 2026) ────────────────────────────────
+  // On 18 Aug this spine reported Monday's front-month gold close as 4,479.50 (high 4,486.50,
+  // volume 4,739) and the brief published "gold broke out to a new high and held it". Re-read the
+  // next morning, the SAME Monday bar was 4,417.80 (high 4,428.50, volume 673). The contract had
+  // rolled: the "front-month" symbol pointed at a different contract, and the old bar was left
+  // illiquid. The clean control — GLD, which cannot roll — rose 1.00% on Monday, agreeing with
+  // the revised 0.85% and refuting the 2.26% that was published. A wrong call reached the owner.
+  //
+  // Two defences, because either alone would have missed it:
+  //   (a) THIN-BAR GATE — futures bars with implausibly low or zero volume are not real session
+  //       prints. Silver bars carried volume 0 on two consecutive days and were still published.
+  //   (b) REVISION DETECTOR — diff every historical bar against the previous run and shout when
+  //       one changes. Prices for a CLOSED session must never move; if one does, the series has
+  //       been re-based and anything already published off it is suspect.
+  const PRIOR = (() => { try { return JSON.parse(fs.readFileSync(path.join(__dirname,'..','data','.prices.json'),'utf8')); } catch (_) { return null; } })();
+  out.revisions = []; out.thinBars = [];
+  for (const [sym, inst] of Object.entries(out.instruments)) {
+    // (a) thin bars — only meaningful where a volume field is genuinely populated
+    if (inst.exchange === 'FUT') {
+      for (const b of inst.bars) {
+        if (b.v === 0 || b.v == null) out.thinBars.push({ sym, d: b.d, v: b.v, why: 'zero/absent volume — not a real session print' });
+        else if (b.v < 100) out.thinBars.push({ sym, d: b.d, v: b.v, why: 'implausibly thin for a front-month future — likely a rolled or back-month contract' });
+      }
+    }
+    // (b) revisions against the prior run
+    const prev = PRIOR && PRIOR.instruments && PRIOR.instruments[sym];
+    if (!prev) continue;
+    const pmap = {}; (prev.bars || []).forEach(b => pmap[b.d] = b);
+    for (const b of inst.bars) {
+      const o = pmap[b.d];
+      if (!o || o.partial || b.partial) continue;
+      const moved = Math.abs(o.c - b.c) > Math.max(0.005, Math.abs(o.c) * 0.0005);
+      if (moved) out.revisions.push({ sym, d: b.d, was: o.c, now: b.c,
+        pctMoved: +(((b.c / o.c) - 1) * 100).toFixed(3), volWas: o.v, volNow: b.v });
+    }
+  }
+
   // Per-exchange latest COMPLETED bar. Surfaces source lag explicitly instead of letting it look
   // like a market holiday. Measured 18 Aug 00:40 SGT: Yahoo had no Monday 17 Aug daily bar for ANY
   // Asian instrument — not withheld as incomplete, simply absent ~8h after the Hong Kong close.
@@ -159,6 +224,22 @@ async function main() {
   console.log(`price spine: ${n} instruments, ${e} error(s), ${d} incomplete bar(s) dropped → data/.prices.json`);
   console.log('  latest completed bar by exchange: ' +
     Object.entries(out.latestByExchange).map(([k, v]) => `${k} ${v}`).join(' · '));
+  if (out.revisions.length) {
+    console.log(`  !! ${out.revisions.length} REVISED historical bar(s) — a closed session changed price:`);
+    out.revisions.slice(0, 12).forEach(r =>
+      console.log(`     ${r.sym} ${r.d}: ${r.was} -> ${r.now} (${r.pctMoved > 0 ? '+' : ''}${r.pctMoved}%), volume ${r.volWas} -> ${r.volNow}`));
+    console.log('     Anything already PUBLISHED off the old values must be re-checked.');
+  }
+  const lowTrust = Object.entries(out.instruments).filter(([, i]) => i.trust === 'low');
+  if (lowTrust.length) {
+    console.log('  !! LOW-TRUST futures series (quote the ETF proxy instead): ' +
+      lowTrust.map(([k, i]) => `${k} -> ${i.proxy}`).join(' · '));
+  }
+  if (out.thinBars.length) {
+    const byS = {}; out.thinBars.forEach(t => (byS[t.sym] = byS[t.sym] || []).push(t.d));
+    console.log('  ~~ thin/zero-volume futures bars (do NOT publish as session prints): ' +
+      Object.entries(byS).map(([k, v]) => `${k} [${v.join(', ')}]`).join(' · '));
+  }
   if (e) Object.entries(out.errors).forEach(([k, v]) => console.log(`  ! ${k}: ${v}`));
   if (d) Object.entries(out.dropped).forEach(([k, v]) => v.forEach(x => console.log(`  ~ ${k} ${x.d} dropped (${x.why})`)));
 }
