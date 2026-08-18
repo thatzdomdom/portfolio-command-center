@@ -1,32 +1,79 @@
 {
-  "updated": "2026-08-17",
-  "note": "Mon 17 Aug 13:00 SGT — CATCH-UP EDITION covering THREE missed sessions (Wed 12, Thu 13, Fri 14 Aug). The dashboard's last brief was 12 August: the headless research job has aborted on an expired login every morning since 5 August, and this run was additionally handed a wrong date (it believed the day was Thursday 13 Aug) which its own verification agents caught and refuted using the machine clock, three vendor date stamps and an exact reference-close chain. Every figure here was reconciled forward from the verified Tue 11 Aug closes through Wed, Thu and Fri, with the chain closing to the cent at each step. TWO CORRECTIONS TO OUR OWN PUBLISHED NARRATIVE: (1) the 30Y has NOT broken out — the 2026 peak is 5.27% set 31 July and Friday closed 5.25%; (2) the flat S-REIT prints were SGX tick size, not a stale feed. GAPS NOW LARGELY CLOSED. 16 of 42 verification agents were cut off by a session limit mid-run, leaving no verified Thu/Fri prices for gold, silver, GDX, the miners, Brent/WTI, Xiaomi, MP Materials or Bitcoin. Those gaps have since been filled DETERMINISTICALLY by a new price spine (scripts/price-spine.js) that fetches OHLC in code rather than having agents read quote pages — validated on 24 of 24 closes independently verified this week from unrelated sources, and it exactly reproduced three of the cut-off agents' own figures (MP +5.53%, Pan American -9.70%, WTI $81.25/$82.40). REMAINING GAPS, genuinely open: no Berkshire or other 13F detail beyond Paulson; no verified week-ahead calendar or Jackson Hole dates; bls.gov 403 so core PPI rests on secondary sources; Singapore July NODX was due 08:30 SGT today and is not in here.",
+  "updated": "2026-08-18",
+  "note": "Tue 18 Aug 08:45 SGT. Covers MONDAY 17 AUGUST, complete in both Asia and the US. METHOD CHANGE IN EFFECT: all prices and the release calendar were fetched deterministically in code (scripts/price-spine.js, scripts/calendar-spine.js) BEFORE any agent ran, and agents were forbidden from re-researching them — so this edition used 6 agents instead of the 42 that Sunday's catch-up required. Agents did only the 'why': drivers, actual released data values, filings and official statements. Verification corrected rather than merely dropped: a Hormuz vessel-transit collapse story was DELETED as contradicted by independent maritime tracking; two Trump quotes were re-timestamped to the morning; a claim that the Michigan survey blamed the Iran war was deleted as absent from the release; specific 10Y/30Y decimals and a set of Newmont Q2 figures were stripped as unopenable. DECLARED GAPS: no verified Monday closing decimals for the 10Y/30Y (source 403); no Bitcoin daily bar yet; no primary Newmont Q2 figures; whether Chair Warsh speaks at Jackson Hole is unknown, not merely unfound. Xiaomi's results land tonight, after this was written.",
   "items": [
     {
-      "date": "2026-08-14",
-      "headline": "GAP NOW CLOSED — Thursday was a MINER BREAKDOWN that no agent captured: GDX -2.96%, Newmont -3.10%, Pan American -9.70%, on a day gold fell only 1.03%",
-      "summary": "These figures come from the new deterministic price spine (scripts/price-spine.js), not from an agent reading a news page — Yahoo's chart endpoint, validated on 24 of 24 closes that were independently verified this week from unrelated sources. THURSDAY 13 AUG: GDX 88.27 (-2.96%), SILJ 29.44 (-2.39%), Newmont 114.19 (-3.10%), Barrick 43.81 (-1.95%), Pan American 47.30 (-9.70%). Against that, gold front-month fell just 1.03% to 4,363.60 and silver front-month 1.04% to 64.873. So THE MINERS UNDERPERFORMED THE METAL BY ROUGHLY 2-3x IN A SINGLE SESSION. FRIDAY 14 AUG partially retraced: GDX 89.97 (+1.93%), SILJ 29.86 (+1.43%), Newmont 117.76 (+3.13%), Barrick 44.00 (+0.43%), Pan American 47.42 (+0.25%) while gold rose 0.39% to 4,380.40. INDEPENDENT CORROBORATION: the -9.70% Pan American figure exactly reproduces a claim made by one of the verification agents that was cut off mid-run, and WTI's $81.25/$82.40 settles likewise — two separate pipelines agreeing to the cent. CONTEXT that makes Thursday worse: it was the week's RISK-ON day, with the S&P closing at a record on soft PPI. The miners broke down anyway. ── THE FUNDAMENTALS SAY THE OPPOSITE, which is the tension worth holding. Barricks own release (10 Aug): gold cost of sales $1,993/oz vs $1,654 (+20.5%) and AISC $1,866 vs $1,684 (+10.8%) — but realised gold $4,417/oz vs $3,295 (+34.1%) outran both, so AISC margin per ounce went $1,611 -> $2,551, i.e. +58.3%. Costs rose and unit margin EXPANDED. Pan American reiterated full-year cost guidance, grew net earnings 61% to $305m, generated $344m of attributable FCF (+47%) and returned a record $300m — its miss was tax ($179m charge) and gold volumes, not economics.",
-      "category": "Precious Metals",
-      "impact": "bearish",
+      "date": "2026-08-18",
+      "headline": "XIAOMI REPORTS TONIGHT — results have NOT landed. Filing after the HK close, investor call 19:30 Beijing",
+      "summary": "Clock verified against the machine: as of 08:30 SGT Tuesday 18 August, Xiaomi's H1/Q2 results are NOT out. Treat any figure circulating now as an estimate, not an actual. PRIMARY SOURCE, quoted verbatim from the HKEX board-meeting filing dated 17 July 2026: a Board meeting 'will be held on August 18, 2026 (Tuesday)' for 'considering and approving the unaudited consolidated interim results of the Company and its subsidiaries for the six months ended June 30, 2026, and considering the payment of an interim dividend, if any.' Signed Lei Jun, Chairman. TIMING CORRECTED: the 19:30 Beijing slot is the investor conference call; the results filing itself lands after the HK close. PRICE CONTEXT from the deterministic feed: Xiaomi fell four consecutive sessions into the print (26.66 → 26.36 → 25.88 → 25.62) before recovering 1.01% Monday to HK$25.88.",
+      "category": "China/HK Tech",
+      "impact": "mixed",
       "tickers": [
-        "GDX",
-        "SILJ",
-        "NEM",
-        "GOLD",
-        "PAAS",
-        "SLVP"
+        "1810.HK"
       ],
-      "actionable": "This materially changes the miner read and cuts against the 'margins are expanding' conclusion drawn from Barrick's and Pan American's own filings. Pan American -9.70% is the market's verdict on its Q2 tax charge and gold-volume miss, delivered the day after the release, and it swamped the reiterated cost guidance. More importantly the whole complex fell 2-3x the metal's decline on a record-high day for the S&P — that is the miner sleeve failing its own leverage test in the direction that hurts. Friday's bounce recovered roughly two-thirds of GDX's drop but Pan American recovered almost none of its. Hold both facts at once: the filings show unit margins expanding while the tape marked the whole complex down 2-3x the metal. When fundamentals and price disagree this sharply in one session, the tape is usually telling you about positioning and fund flows, not about mine economics.",
+      "actionable": "Your 26,662 shares report tonight AFTER the close, so today's HK session trades blind and the gap risk is Wednesday's open. Three things to read first when it lands: whether an interim dividend is actually declared — the filing says only 'if any', and a dividend alongside a sharp profit decline would be a genuine surprise; the EV segment's margin trajectory; and whether the smartphone share story survives. Tencent's precedent is the caution: it de-risked into its print, then fell 4.46% on the day.",
       "sources": [
-        "https://query1.finance.yahoo.com/v8/finance/chart/GDX?range=1mo&interval=1d",
-        "https://s202.q4cdn.com/876548212/files/doc_news/Pan-American-Silver-Reports-Second-Quarter-2026-Financial-Results-2026.pdf",
-        "https://www.barrick.com/English/news/news-details/2026/q2-2026-results/default.aspx"
+        "https://www.hkexnews.hk/listedco/listconews/sehk/2026/0717/2026071700987.pdf"
       ]
     },
     {
-      "date": "2026-08-14",
-      "headline": "SILVER, the book's largest risk: three sessions of failed breakouts. It never printed a 67 handle, made two successively lower highs after Wednesday's peak, and closed Friday $64.68 — up just 1.74% on the week",
-      "summary": "Spot silver has no official settlement, so these are read daily-table closes, corrected against two feeds. INVESTING.COM XAG/USD daily table: Fri 7 Aug 63.5766 (high 65.1620); Wed 12 Aug 65.3250 (HIGH 66.8170); Thu 13 Aug 64.4800 (high 66.3124, -1.29%); Fri 14 Aug 64.6819 (high 65.7150, +0.31%). COMEX Sep-26 futures for cross-check: Wed 65.700 (high 66.980), Thu 64.993, Fri 65.108. BASELINE RECONCILIATION: Wednesday's 65.3250 matches the independently verified Wednesday baseline to the cent and matches a third source's 13 Aug report ($64.48, 'down $0.84', implying a 65.32 prior) — Wednesday is anchored on three feeds. THE STRUCTURE IS THE STORY. The intraday highs run 66.8170 (Wed) → 66.3124 (Thu) → 65.7150 (Fri): two successively lower highs. Silver never traded with a 67 handle in spot at any point. And the Wednesday high was made BEFORE the 08:30 ET CPI release, not on it. WEEKLY MOVE, corrected: 64.6819 vs the prior Friday's 63.5766 = +1.74%, not the +2.4% derived elsewhere.",
+      "date": "2026-08-17",
+      "headline": "GOLD BROKE OUT AND HELD IT — new high 4,486.50, closed 4,479.50 (+2.26%). After three failed attempts, this one stuck",
+      "summary": "From the deterministic price feed: gold front-month closed 4,479.50, up 2.26%, with a session high of 4,486.50. THE PATTERN BREAK IS THE POINT. The three preceding attempts all faded — 12 Aug made 4,434.00 and closed 4,408.90; 13 Aug made 4,445.00 and closed 4,363.60, giving the whole move back; 14 Aug made 4,397.10. Monday cleared the prior 4,445 peak and closed within $7 of its high. THE DRIVER IS MONETARY, NOT REAL-YIELD: September hike odds fell to roughly one-in-three from nearly 50%, and the dollar index slipped below 100 toward two-month lows. Confirmed drivers on a dated page: fading hike expectations, dimmed prospects for a US-Iran agreement, Trump's refusal to extend the interim deal, and continued central-bank purchases, particularly from China. CORRECTION APPLIED IN VERIFICATION: a claim that the University of Michigan release 'explicitly attributed' its drop to the Iran war lifting fuel and food prices was DELETED — the release says no such thing; its only Iran reference is that Republican sentiment sits 19% below pre-conflict readings.",
+      "category": "Precious Metals",
+      "impact": "bullish",
+      "tickers": [
+        "GLD",
+        "GC=F",
+        "GDX",
+        "SLV"
+      ],
+      "actionable": "The thing to notice is that gold made this high while the long end sat at multi-year highs — normally hostile. That says the bid is debasement and haven demand rather than falling real rates, which is a more durable engine but also a more fragile one: it unwinds fast if US-Iran talks resume. This is the first genuinely constructive session for the metals complex in a week.",
+      "sources": [
+        "https://tradingeconomics.com/commodity/gold",
+        "https://query1.finance.yahoo.com/v8/finance/chart/GC%3DF?range=1mo&interval=1d"
+      ]
+    },
+    {
+      "date": "2026-08-17",
+      "headline": "OIL'S $91 BREAKOUT IS A REAL CATALYST: the US-Iran MOU formally expired Monday, Trump declined to extend, and Tehran went 'fully offensive' on Hormuz",
+      "summary": "Brent settled 91.11 (+2.93%) with a 91.43 high — a clean break above the prior range top of 90.07. WTI 84.95 (+3.09%). THE CATALYST, verified at primary sources: an IntelBrief dated 17 Aug states that 'the defunct June U.S.-Iran Memorandum of Understanding (MOU) formally expires on Monday.' Trump's refusal to extend is independently corroborated on a second dated page. A Reuters report dated 17 Aug, sourced to a senior Iranian official speaking Monday, carries the shift: Iranian entities 'must be prepared to escalate tensions in the Strait of Hormuz and wider region,' with a 'timely and precise' military attack to break the naval blockade if talks collapse, and 'within the short period of a few weeks set by Iran, all the agreement's provisions must be implemented by the U.S.' TWO THINGS DELETED IN VERIFICATION, both of which would have overstated the case: the vessel-transit collapse story (five vessels Saturday, none Sunday) came only from a page returning HTTP 403 and is CONTRADICTED by independent maritime tracking showing 12 transits in the 24 hours of 16 Aug; and Trump's most inflammatory quote is timestamped 07:44 ET, a morning remark, not an afternoon escalation.",
+      "category": "Geopolitics",
+      "impact": "bullish",
+      "tickers": [
+        "BZ=F",
+        "CL=F",
+        "USO",
+        "XLE"
+      ],
+      "actionable": "The oil sleeve is now long a live escalation rather than a stalemate, with a dated several-week Iranian ultimatum as the clock. But size to the diplomatic track, NOT to a supply outage: the physical-disruption story failed verification and independent tracking contradicts it. The second-order effect matters more for the rest of the book — this same oil move is the named driver behind the long end and the September hike tail, which is the direct threat to the levered silver.",
+      "sources": [
+        "https://thesoufancenter.org/intelbrief-2026-august-17/",
+        "https://www.insurancejournal.com/news/international/2026/08/17/881884.htm"
+      ]
+    },
+    {
+      "date": "2026-08-17",
+      "headline": "THE OTHER SIDE OF IT: the 10Y rose past 4.7% and the 30Y sits above 5.2%, its highest since 2007 — the long end still will not rally",
+      "summary": "Commentary dated 17 Aug: 'The yield on the 10-year US Treasury note rose past 4.7% on Monday, not far from the 19-month high of 4.75% tested last week as lingering concerns of inflation and increasing credit supply extended the aversion to bonds in the long end of the curve.' FALSE PRECISION STRIPPED IN VERIFICATION: specific closes of 10Y 4.724% and 30Y 5.311%, and the 'highest since June 2007 / 19-year high' framing, rested solely on a page returning HTTP 403 and are NOT published. What is verified is the direction and the rough level. Named drivers include record AI-related bond issuance adding supply, alongside the inflation impulse from oil. CONTEXT from our own verified series: this follows a week in which an in-line CPI and a soft PPI produced ZERO net duration relief, with the 10Y round-tripping to exactly 4.68%.",
+      "category": "Fed/Macro",
+      "impact": "bearish",
+      "tickers": [
+        "^TNX",
+        "^TYX",
+        "K71U.SI",
+        "M44U.SI",
+        "N2IU.SI"
+      ],
+      "actionable": "This is the single most important line for the book's largest risk. A 1.6x margin-levered silver position is short duration and short real rates by construction, and a 30Y at post-2007 highs with a live one-in-three September hike tail is precisely the adverse scenario — driven by the very oil move that is helping the energy sleeve. The two positions are now hedging each other by accident rather than design. It also keeps structural pressure on Keppel REIT and the Mapletrees.",
+      "sources": [
+        "https://tradingeconomics.com/united-states/government-bond-yield"
+      ]
+    },
+    {
+      "date": "2026-08-17",
+      "headline": "Silver posted its best close of the run (66.065, +1.66%) but STILL a lower high — and there is no silver-specific driver behind it",
+      "summary": "From the deterministic feed: silver front-month closed 66.065, its best close of the sequence, but its 66.145 session high remains BELOW the 66.650 high of 12 August. So the fade pattern broke while the ceiling did not. THE NEGATIVE FINDING IS THE VALUE HERE, and it was confirmed rather than merely unrefuted: the only dated commentary attributes the move ENTIRELY to macro — tame inflation, weak consumer sentiment, soft retail sales, reduced Fed hike expectations, plus Middle East risk. It contains NO silver-specific catalyst: no squeeze, no inventory event, no industrial-demand news. The gold/silver ratio widened to 67.8, meaning silver UNDERPERFORMED gold on a strong day for both.",
       "category": "Precious Metals",
       "impact": "mixed",
       "tickers": [
@@ -35,124 +82,35 @@
         "SILJ",
         "SLVP"
       ],
-      "actionable": "At 1.6x the week was +2.78% on the levered position — positive, but by less than a glance at the closes suggests, and the internal structure deteriorated across all three sessions. The pattern now has three instances: silver rallies into a catalyst, makes its high at or before the release, and bleeds afterwards. Metal that cannot hold gains on friendly news (in-line CPI Wednesday, soft PPI Thursday) is the signal, not the plus sign on the week. Watch whether it can clear 66.82 — until then each rally is a lower high.",
+      "actionable": "Do not attribute Monday to a physical squeeze — there is no dated evidence for one, and the widening ratio argues against it. Silver is trading as a high-beta gold proxy and sits in a genuine crosscurrent: the debasement bid helps it, while the same weak-consumer data driving that bid also softens industrial demand. At 1.6x, Monday was worth about +2.66% on the position. The level that still matters is 66.65; until it clears, this remains a lower high.",
       "sources": [
-        "https://www.investing.com/currencies/xag-usd-historical-data",
-        "https://goldtrack.io/blog/2026-08-12/precious-metals-daily-2026-08-12"
+        "https://tradingeconomics.com/commodity/silver",
+        "https://query1.finance.yahoo.com/v8/finance/chart/GC%3DF?range=1mo&interval=1d"
       ]
     },
     {
-      "date": "2026-08-14",
-      "headline": "The week delivered NO net duration relief: the 10Y round-tripped to exactly 4.68% and the 30Y closed 5.25% — and a correction, the 30Y has NOT broken out, the 2026 peak is 5.27% set 31 July",
-      "summary": "VERIFIED AGAINST TWO OFFICIAL SOURCES: the US Treasury daily par yield curve CSV, cross-checked against the Federal Reserve H.15 release dated 14 Aug. CLOSES (Treasury par curve, ~3:30pm ET bid-side): Wed 12 Aug 2Y 4.20 / 10Y 4.68 / 30Y 5.24. Thu 13 Aug 2Y 4.15 / 10Y 4.63 / 30Y 5.21. Fri 14 Aug 2Y 4.17 / 10Y 4.68 / 30Y 5.25. H.15 independently reproduces 12 and 13 Aug exactly; it carries no 14 Aug row (it publishes a day in arrears), so Friday rests on the Treasury curve alone. ARITHMETIC: Thursday rallied 10Y -5bp / 30Y -3bp on soft PPI, then Friday gave it all back, 10Y +5bp / 30Y +4bp. Net across both sessions the 10Y round-tripped to its Wednesday level. THE CORRECTION TO OUR OWN NARRATIVE: we have been describing the 30Y as breaking out to post-2007 highs. It has not. The 2026 maximum is 5.27%, set 31 JULY — a unique print. Friday's 5.25% is 2bp below it and merely matches the 10 Aug local high. Over 22 Jul-14 Aug the 30Y ranged 5.09-5.27, an 18bp band. THE TWO AUCTIONS: Wednesday's $42bn 10-year stopped at 4.683%, the highest clear since Aug 2007, with a 2.53 cover and dealers left only 8.6%. Thursday's $25bn 30-year (verified field-by-field from the TreasuryDirect PDF, CUSIP 912810UW6) stopped at 5.216%, the highest 30Y clear since 2001, with a 0.4bp tail, 2.39 cover and indirects at 66.85%, in line with their ~67% average. September is priced roughly 69% hold.",
-      "category": "Fed/Macro",
-      "impact": "bearish",
+      "date": "2026-08-17",
+      "headline": "The miners re-coupled to the metal — which retrospectively marks Thursday's breakdown as positioning, not a fundamental break",
+      "summary": "From the deterministic feed: GDX +2.13%, Newmont +2.18%, Barrick +3.16%, Pan American +1.46%, SILJ +0.13%, against gold +2.26%. Straightforward beta. The notable thing is the ABSENCE of a repeat of Thursday 13 August, when the complex fell 2-3x the metal (GDX -2.96%, Newmont -3.10%, Pan American -9.70%) on a day gold fell only 1.03% and the S&P closed at a record. No company or sector announcement dated Monday explains the move. FIGURES GUTTED IN VERIFICATION — worth stating because it is most of what made the original item feel informative: a set of Newmont Q2 numbers ($4,414/oz realised, $1,621 AISC, $2.2bn FCF) is NOT published here because the company results URL returned HTTP 404 and no primary source could be opened. The Nevada Gold Mines transaction is real but dated 10 August, NOT Monday: Barrick transfers Fourmile into the joint venture, Newmont transfers Mike and Fiberline and pays Barrick $1.95bn.",
+      "category": "Precious Metals",
+      "impact": "mixed",
       "tickers": [
-        "^TNX",
-        "^TYX",
-        "K71U.SI",
-        "M44U.SI",
-        "N2IU.SI",
-        "GLD"
+        "GDX",
+        "NEM",
+        "GOLD",
+        "PAAS",
+        "SILJ"
       ],
-      "actionable": "Two things to hold at once. The good news is that 'the 30Y is accelerating to post-2007 highs' was wrong — it peaked on 31 July and has chopped sideways since, which is a materially less hostile backdrop for the S-REITs and developers than we have been describing. The bad news is that a week containing an in-line CPI, a soft PPI and two orderly auctions produced ZERO net duration relief. Both auctions cleared at multi-decade high yields with demand present, so this is a term-premium problem, not a buyers' strike. Do not publish or act on a 5.27% vendor print as a new high.",
+      "actionable": "Treat Monday as evidence that the 13 August dislocation was positioning rather than a fundamental break — the complex re-coupled on the first strong gold day. That read is safe precisely because it rests on price behaviour rather than on earnings figures, which is fortunate given how few of those survived checking. Do not size on the unverified Newmont numbers.",
       "sources": [
-        "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2026/all?type=daily_treasury_yield_curve&field_tdr_date_value=2026&page&_format=csv",
-        "https://www.federalreserve.gov/releases/h15/",
-        "https://www.treasurydirect.gov/instit/annceresult/press/preanre/2026/R_20260813_3.pdf"
+        "https://query1.finance.yahoo.com/v8/finance/chart/GC%3DF?range=1mo&interval=1d",
+        "https://www.bnnbloomberg.ca/business/company-news/2026/08/10/barrick-newmont-nevada-gold-mines/"
       ]
     },
     {
-      "date": "2026-08-14",
-      "headline": "The US week in two halves: a RECORD S&P close Thursday on soft PPI, then Friday's double miss — retail sales -0.6% and sentiment down to 51.0",
-      "summary": "AP syndicated recap, page stamp Thu 13 Aug 4:21pm ET, ~20 minutes after the cash close. CLOSES: S&P 500 7,798.99 (+50.49); Dow 53,839.99 (+69.72); Nasdaq Composite 26,803.03 (+214.54); Russell 2000 3,052.85 (+7.36). VERIFICATION, pinned from BOTH sides: 7,798.99 - 50.49 = 7,748.50, matching the verified Wednesday S&P close TO THE CENT; and Friday's separate recap gives 7,785.76 - 13.23 = 7,798.99, EXACT. Dow, Nasdaq and Russell all reconcile the same way in both directions. THE DATA: July PPI for final demand UNCHANGED (0.0%) m/m against +0.2% consensus; +4.7% y/y against 4.9% expected. Composition: final demand GOODS -0.7%, services +0.2%, construction +2.2%, with the goods decline driven by energy -3.1% and foods -0.9% — which substantiates rather than assumes the softer-oil read. ONE HOT LINE: core PPI +4.2% y/y actually beat the 4.1% consensus, and because bls.gov returned 403 the core figures rest on secondary sources. Jobless claims 209,000, up 9,000, against 202,000 expected. Semiconductors led (Sandisk +15%, Micron strong). ── THEN FRIDAY REVERSED THE MOOD. Both landed Friday 14 Aug — retail sales 08:30 ET, UMich 10:00 ET. RETAIL SALES (Census advance report): July retail and food services $763.6bn, -0.6% m/m against consensus +0.1%, the sharpest monthly decline since May 2025; +5.0% y/y. Ex-autos -0.3% (cons. +0.2%); ex-autos-and-gas -0.2% (cons. +0.3%). THE CONTROL GROUP — which strips autos, gasoline, building materials and food services and feeds the PCE line of GDP — fell 0.4% against consensus +0.3%, after a revised +0.4% in June. So this was NOT a volatile-category artifact. Drivers: motor vehicles -1.8%, nonstore/online -2.2% (Prime Day fell in June this year), gasoline stations -0.9%. UMICH preliminary August: headline 51.0 against consensus 54.5 (one source prints 55.0) and a July final of 55.2. THE CROSS-CURRENT FOR METALS: year-ahead inflation expectations ROSE to 4.3% even as sentiment fell. FRIDAY CLOSES, chain-reconciled to the verified Wednesday baseline with zero residual: S&P 500 7,785.76 (-13.23, -0.17%); Dow 53,732.41 (-107.58, -0.20%); Nasdaq Composite 26,729.16 (-73.86, -0.28%); Russell 2000 3,068.42 (+15.57, +0.51%) at a fresh record on its fourth straight up day. VIX made its lowest CLOSE of 2026 at 14.25 (lowest of the year, not an all-time low).",
-      "category": "Fed/Macro",
-      "impact": "bearish",
-      "tickers": [
-        "^GSPC",
-        "^RUT",
-        "^VIX",
-        "D05.SI",
-        "O39.SI",
-        "XLE",
-        "^IXIC",
-        "SLV",
-        "GDX"
-      ],
-      "actionable": "Two consecutive benign inflation prints plus a soft-side claims number are what pushed September hike odds lower and drove the record close — the disinflation leg supporting both the equity book and the rate-sensitive precious-metals complex. Use 7,798.99 as Thursday's mark, not the unconfirmed 7,800 intraday print. But note what it did NOT do: silver made a lower high on this session and the long end gave the whole rally back on Friday. The week's clearest negative surprise, and it argues against reading Thursday's soft PPI as a clean soft landing. A negative control group — the GDP-relevant cut — alongside sentiment at 51.0 is a growth signal to weigh against the cyclical side of the book: the Singapore banks, the developers and the oil sleeve. Do not frame Friday as risk-off, though: breadth was positive, the Russell closed at a record and the VIX made its lowest close of the year. The consumer weakened; the market did not panic.",
-      "sources": [
-        "http://www.sca.isr.umich.edu/",
-        "https://www.barchart.com/story/news/3858944/how-major-us-stock-indexes-fared-friday-8-14-2026",
-        "https://sg.finance.yahoo.com/news/major-us-stock-indexes-fared-202137379.html",
-        "https://www.ftportfolios.com/Commentary/EconomicResearch/2026/8/13/the-producer-price-index-ppi-was-unchanged-in-july"
-      ]
-    },
-    {
-      "date": "2026-08-14",
-      "headline": "TENCENT: Q2 revenue beat but IFRS profit was flat and free cash flow went negative for the first time since 2005 — the stock fell 4.46% Thursday to HK$441.00, then steadied at HK$440.00",
-      "summary": "THE RESULTS, verified against Tencent's own PR Newswire release stamped 12 Aug 18:29 CST — 2.5 hours AFTER the Wednesday HK close, so the reaction is Thursday's. Revenue RMB204,785m, +11% y/y (beat); gross profit RMB118.4bn +13% (margin 58% vs 57%); operating profit RMB67.3bn IFRS +12%; profit attributable to equity holders RMB56,022m IFRS, +0.7% — flat, and roughly 9% below consensus; non-IFRS RMB68.4bn +9%, which is ON consensus (RMB68.2bn expected). SEGMENTS: domestic games RMB47.3bn +17%; international games RMB18.6bn -0.8% reported (+4% constant currency); marketing services RMB43.6bn +22%; FinTech & Business Services RMB60.3bn +9%. Arithmetic checks: 47.3+18.6+32.5 = 98.4, exactly the stated VAS line. THE AI DRAG, QUANTIFIED BY THE COMPANY ITSELF: operating profit EXCLUDING New AI Products was RMB86.1bn, +19%. Capex rose 176% y/y to RMB52.8bn and free cash flow turned NEGATIVE for the first time since 2005. THE PRICE CHAIN, verified and corrected (the Thursday close is HK$441.00, not the HK$441.40 circulating): Wed 461.60 (-1.95%) → Thu 441.00 (-20.60, -4.46%) → Fri 440.00 (-1.00, -0.23%). Arithmetic: 441.00/461.60-1 = -4.463%; 440.00/441.00-1 = -0.227%. Both print exactly as reported. Cumulative Wed-to-Fri: -4.68%. Primary source is a Hong Kong close report published 16:17 HKT, 17 minutes after the close.",
-      "category": "China/HK Tech",
-      "impact": "bearish",
-      "tickers": [
-        "0700.HK"
-      ],
-      "actionable": "Mark Tencent at HK$440.00. Read the result the right way round before acting: demand is genuinely fine — revenue beat, marketing services +22%, domestic games +17% — and the adjusted profit line analysts actually model came in on consensus. What changed is the cash profile. Capex +176% and negative free cash flow for the first time in twenty-one years means Tencent is now spending through a capex cycle rather than harvesting one. That is a re-rating question, not a demand question, and the market took 4.7% off over two sessions to price it.",
-      "sources": [
-        "https://www.prnewswire.com/apac/news-releases/tencent-announces-2026-second-quarter-results-302849608.html",
-        "https://www.hstong.com/news/detail/26081316130483765"
-      ]
-    },
-    {
-      "date": "2026-08-14",
-      "headline": "GAP NOW CLOSED — Xiaomi fell FOUR consecutive sessions into tomorrow's results: HK$26.66 → 25.62, roughly -HK$27,700 on your 26,662 units",
-      "summary": "No agent could verify a Xiaomi close for either Thursday or Friday this run; the price spine resolves it. CLOSES: Tue 11 Aug 26.66 (-3.48%), Wed 12 Aug 26.36 (-1.13%), Thu 13 Aug 25.88 (-1.82%), Fri 14 Aug 25.62 (-1.00%). Four consecutive declines, cumulative -3.90% from Tuesday's close and -6.5% from Monday's 27.62. The Wednesday -1.13% closely tracks the '-1.3%' that The Standard's close report gave verbally, so the spine and the press report corroborate each other. Friday's session traded 25.44-26.12 and closed near the low. POSITION IMPACT on 26,662 units: the HK$1.04 fall from Tuesday's close is about HK$27,700 of mark-to-market. CRITICAL TIMING: Xiaomi reports H1 results TOMORROW, Tuesday 18 Aug, and the board also considers a first interim dividend.",
-      "category": "China/HK Tech",
-      "impact": "bearish",
-      "tickers": [
-        "1810.HK"
-      ],
-      "actionable": "Xiaomi goes into tomorrow's print having fallen four sessions in a row and closing Friday near its session low — the market is de-risking ahead of the number, the same pattern Tencent showed before its own results, and Tencent then fell 4.46% on the day. Sell-side previews circulating point to a materially lower adjusted profit year-on-year, but no primary-source consensus was verifiable this run, so treat any specific consensus figure you see as unconfirmed. This is the book's live event risk for tomorrow.",
-      "sources": [
-        "https://query1.finance.yahoo.com/v8/finance/chart/GDX?range=1mo&interval=1d"
-      ]
-    },
-    {
-      "date": "2026-08-14",
-      "headline": "SMIC is the book's standout: Q2 profit +261.7% y/y, and the stock rose 4.81% to HK$70.80 on Friday AGAINST a -1.77% Hang Seng Tech tape",
-      "summary": "TIMING: SMIC disclosed Q2 AFTER the Thursday 13 Aug HK close, so the reaction is FRIDAY. THE NUMBERS: revenue $3.01bn, +36.1% y/y; profit attributable to shareholders $479.2m, +261.7% y/y; gross margin 25.3% against 20.4% a year earlier; wafer shipments +20.1% y/y; utilisation 93.7% against 92.5%. Q3 guidance: revenue +2% to +4% q/q, gross margin 26-28%. THE BEAT IS AGAINST THE COMPANY'S OWN GUIDANCE: prior guidance was +14-16% q/q revenue and 20-22% GM, against actual +20% q/q and 25.3%. PRICE, verified three ways: HK$70.80, +3.25, +4.81% (Trading Economics, stamped 'this Friday August 14th'); The Standard's close-of-session report stamped 14-08-2026 16:35 HKT says SMIC 'up 4.8 percent'; a third close flash gives +4.81%. Arithmetic: 70.80 - 3.25 = HK$67.55 implied Thursday close. CAVEAT: that HK$67.55 Thursday close is DERIVED from a quote page's previous-close field, not read from a close report.",
-      "category": "China/HK Tech",
-      "impact": "bullish",
-      "tickers": [
-        "0981.HK"
-      ],
-      "actionable": "SMIC carries HK$70.80 into Monday and is the best-performing name in the book this week. It rose 4.8% on a session when Hang Seng Tech fell 1.77% and peer Hua Hong fell 11.55% DESPITE its own beat — so this is company-specific execution, not a sector bid, and the divergence is the point. Q3 gross margin guided higher again to 26-28% after a quarter that beat the company's own 20-22% guide. This is the one HK position where the news flow is unambiguously working.",
-      "sources": [
-        "https://www.thestandard.com.hk/finance/article/339965/Hong-Kong-stocks-fall-at-close-SMIC-up-5pc",
-        "https://www.investing.com/equities/semiconductor-manufacturing"
-      ]
-    },
-    {
-      "date": "2026-08-14",
-      "headline": "Hang Seng fell a fourth straight session to 25,116.85 (-1.10%), its lowest since 24 July — while mainland A-shares decoupled and closed higher",
-      "summary": "BOTH SESSIONS CONFIRMED from six independently opened pages. THU 13 AUG (Xinhua, stamped 16:29:30): HSI 25,396.51 (-0.17%), Hang Seng TECH 4,792.39 (+0.33%), HSCEI 8,426.49 (-0.23%); corroborated by RTHK stamped 17:07 HKT. FRI 14 AUG (The Standard, stamped 14-08-2026 16:35 HKT, i.e. 35 minutes after the close — a true close, not a morning wrap): HSI fell 279 points, or 1.1%, to 25,116; HS TECH -1.77% to 4,707; full-day turnover HK$254.1bn. Corroborated by a second source dated 14 August: 'fourth consecutive session of losses and hitting its lowest level since July 24'. CHAIN CHECK: anchored to the verified Wednesday baseline of 25,440.17, so this is not Wednesday's data re-served. THE MAINLAND DECOUPLED. Fri 14 Aug: Shanghai Composite 3,927.18 (+0.01%), Shenzhen Component 14,354.31 (+0.45%), ChiNext 3,626.30 (+1.12%), STAR 2,020.45 (+0.79%) — the growth board rose 1.12% on the same session Hong Kong fell 1.10%. Thursday the mainland was weaker (Shanghai 3,926.96, -0.5%) with PRECIOUS-METALS SHARES suffering notable losses. DO NOT publish the syndicated '3,908' Shanghai figure — it is not a close.",
-      "category": "China/HK Tech",
-      "impact": "bearish",
-      "tickers": [
-        "^HSI",
-        "0700.HK",
-        "1810.HK",
-        "0981.HK"
-      ],
-      "actionable": "Hong Kong enters Monday on a four-session losing streak at a three-week low, and the mainland/HK decoupling says Friday's weakness was a Hong Kong-specific de-rating rather than a China growth scare. Your sleeve did not move as one: Tencent and Xiaomi were marked down while SMIC rose 4.8%. Note the A-share detail that matters for the miners — precious-metals shares were notable losers onshore on Thursday.",
-      "sources": [
-        "https://www.thestandard.com.hk/finance/article/339965/Hong-Kong-stocks-fall-at-close-SMIC-up-5pc",
-        "https://www.bastillepost.com/global/article/6081498-chinese-shares-close-higher-friday-22"
-      ]
-    },
-    {
-      "date": "2026-08-14",
-      "headline": "UNPRICED, AND IT MEETS THIS MORNING'S OPEN: China's July new yuan loans posted a RECORD 340bn contraction against +45bn expected — released after Friday's HK close",
-      "summary": "Released Friday 14 Aug (page stamped 05:32 ET); all figures read verbatim. New yuan loans CONTRACTED 340bn yuan ($50.43bn) in July — the second contraction of 2026 after April, and the largest monthly contraction ON RECORD — against a Reuters poll of +45bn and June's +1.61trn. ARITHMETIC: the miss against consensus is 385bn yuan; the month-on-month swing is -1.95trn. Household loans including mortgages -460.3bn after +264.6bn in June; corporate loans -130bn after +1.5trn. NOTE the components sum to -590.3bn, roughly 250bn MORE negative than the -340bn headline; the gap is bill financing and non-bank lending, so the figures are consistent rather than contradictory. M2 +7.7% y/y against 7.9% consensus, down from 8.0%. Outstanding TSF +7.4% y/y, unchanged. The PBOC said it would maintain an 'appropriately loose' stance and 'roll out practical, effective measures as needed', without detail. SEPARATELY: July activity data did NOT print Thursday or Friday — the NBS calendar confirms it is due TODAY, Monday 17 Aug, 10:00 Beijing.",
+      "date": "2026-08-17",
+      "headline": "CHINA MISSED ON ALL FOUR headline measures — and Hong Kong rallied 1.34% anyway, with the data landing an hour before the close",
+      "summary": "Released Monday 15:00 Beijing, an hour before the HK close. ACTUALS vs consensus, all four worse: industrial production 4.5% y/y (cons. 5.0%, June 5.3%); retail sales 0.6% y/y (cons. 1.5%, June 1.0%); fixed-asset investment -6.7% ytd y/y (cons. -6.2%, steepening from -5.7%, the lowest since April 2020); surveyed urban unemployment 5.2% (cons. 5.1%, June 5.0%). Confirmed on the NBS release index, on an ING economist note and on a Reuters wire, all stamped 2026-08-17. CONSENSUS CAVEAT: the consensus set is source-dependent — ING and Reuters use 5.0/1.5/-6.2, which is what is reported here; another outlet used slightly different figures. THIS IS THE SECOND CONSECUTIVE MISS: Friday's July net new yuan loans CONTRACTED CNY 340bn, the largest monthly contraction on record, against expectations of a CNY 45bn increase, with outstanding loan growth at a record-low 5.1% y/y.",
       "category": "China/HK Tech",
       "impact": "bearish",
       "tickers": [
@@ -161,108 +119,122 @@
         "1810.HK",
         "^HSI"
       ],
-      "actionable": "This is the live catalyst for your HK sleeve this morning. A record loan contraction plus an M2 miss is the strongest China easing signal in months, and because it landed after Friday's close it is UNPRICED — it meets Monday's open together with the July activity dump due 10:00 Beijing. Two-sided: it is bad growth news but raises the odds of stimulus, and Hong Kong is already at a three-week low after four down sessions.",
+      "actionable": "The striking thing is what the market did with it: Hong Kong closed UP 1.34% on a day every major China macro print missed, with the data in hand an hour before the close. Semiconductors set the tape, not macro. That tells you the HK bid is currently an AI-hardware story running independently of the domestic economy — which is good for your SMIC and Xiaomi exposure and bad as a reason to own China breadth. Two consecutive misses also raise the odds of stimulus; the 1-year and 5-year Loan Prime Rates are set Thursday.",
       "sources": [
-        "https://www.investing.com/news/economy-news/china-july-bank-loans-contract-for-second-time-in-2026-on-weak-demand-4860112"
+        "https://www.stats.gov.cn/english/"
       ]
     },
     {
-      "date": "2026-08-14",
-      "headline": "SINGAPORE: read the bank prices carefully today (DBS's drop was the dividend, OCBC goes ex this morning) — and UOL's -8.75% is the one real loss",
-      "summary": "STI: Thu 13 Aug 5,720.05 (-0.01%); Fri 14 Aug 5,743.59 (+23.54, +0.41%). The Wednesday row of 5,720.75 / -0.58% matches the verified baseline to the decimal, validating the table as a genuine cash-index series. Two-session net +22.84 points, +0.40%. No 15/16/17 Aug row exists anywhere — SGX was shut, so no weekend tick is in play. DBS, read off the historical table: Wed 75.70, Thu 76.35 (+0.86%), Fri 75.53 (-1.07%). The chain reconciles in both directions. THE EX-DIVIDEND: ex-date 14 Aug, S$0.81 (66c quarterly plus a 15c special), paid 25 Aug. That is 1.06% of the Thursday close against an observed -1.07% — so the underlying stock was FLAT on Friday, not down. OCBC: Wed 31.19, Thu 31.50 (+0.99%, closing at the day's high), Fri 31.79 (+0.92%) — up 1.92% over the two sessions, with Friday's 31.86 high being the stated 52-week high, so it closed just under a fresh one-year peak. OCBC's ex-date is TODAY, Monday 17 Aug, 47 cents, paid 28 Aug — roughly 1.48% mechanical. ── THE REST OF THE SLEEVE SPLIT VIOLENTLY ON RESULTS. All figures are official session closes read off historical tables; the latest row on every table is Friday 14 Aug. UOL: Wed 10.17 (+2.42%); THU 9.55 (-6.10%, open 10.18, high 10.20, low 9.44, vol 5.43M); FRI 9.28 (-2.83%, high 9.60, low 9.11). Arithmetic: Thu -0.62 on 10.17 = -6.096%; Fri -0.27 on 9.55 = -2.827%; two-day 9.28/10.17-1 = -8.751%. Two independent post-close quote feeds confirm both session dates. CRITICALLY: there is no dividend, ex-date or corporate action to excuse this — the results wire declares no dividend, and Thursday OPENED one cent ABOVE the prior close before collapsing intraday. The trigger is a 7% revenue decline masked by fair-value gains. CITY DEVELOPMENTS rose 4.33% Thursday on tripled profit plus a strategic review. SINGTEL: Wed 4.290, Thu 4.250 (-0.93%), Fri 4.450 (+4.71%). Its 1QFY2027 update was released PRE-OPEN Thursday; the market sold the -71.6% headline down to 4.190 intraday, then reversed once the underlying +21% / S$831m — an 11.4% consensus beat — was digested. Publish +4.71% to S$4.450, the close, NOT the +3.5% intraday figure still in the wire copy.",
+      "date": "2026-08-17",
+      "headline": "Hang Seng 25,453.23 (+1.34%) snapped a four-session losing streak; STI 5,768.46 (+0.43%) closed exactly on its high after opening down 0.86%",
+      "summary": "VERIFIED ON THREE INDEPENDENT PAGES EACH — these are the two index levels our price feed could not supply, though it had every constituent. Hang Seng 25,453.23, +336.38 points, +1.34%, snapping a four-session losing streak; Hang Seng Tech +1.58% (+74.41) to 4,782.03; turnover HK$210.77bn. STI 5,768.46, +0.43%, having opened 0.86% lower and closed exactly on its session high. DATA-QUALITY FLAG, confirmed and narrowed: one outlet printed '24,453' alongside '+336 points' and '+1.34%' — arithmetically impossible, since 25,453.23 - 336.38 = 25,116.85, which is exactly Friday's verified close, and 336.38/25,116.85 = 1.34%. The dropped digit is real and 25,453.23 is correct.",
+      "category": "China/HK Tech",
+      "impact": "bullish",
+      "tickers": [
+        "^HSI",
+        "^STI"
+      ],
+      "actionable": "Both indices reversed intraday weakness to close strong, and the STI closing precisely on its high after a down open is the kind of tape that usually reflects real buying rather than short-covering. Hong Kong entering Tuesday off a four-session low with a 1.34% reversal is a better setup for Xiaomi's print tonight than the tape looked on Friday.",
+      "sources": [
+        "https://www.bastillepost.com/global/article/6087283",
+        "https://tradingeconomics.com/hong-kong/stock-market"
+      ]
+    },
+    {
+      "date": "2026-08-17",
+      "headline": "SMIC +6.14% to HK$75.15 is a PRICE-HIKE story, not a beat story — and Monday was only the SECOND post-results session",
+      "summary": "OFF-BY-ONE CORRECTED: Q2 results were announced 13 August after the HK close, making Friday 14 August the FIRST post-results session and Monday the SECOND — not the third, as originally filed. Five-day gain roughly 13.6%. Q2 ACTUALS confirmed: revenue US$3.006bn (+20.0% q/q, +36.1% y/y); gross profit US$760.6m against US$503.6m in Q1 (+51.0%); gross margin 25.3% against 20.1% (+5.2pp); capacity utilisation 93.7% against 93.1%. GUIDANCE BEAT CONFIRMED: SMIC had guided in May to 14-16% sequential revenue growth and a 20-22% gross margin, and delivered +20.0% and 25.3% — clear of both. Q3 guidance takes gross margin up another 1-3pp on wafers already contracted at higher prices.",
+      "category": "China/HK Tech",
+      "impact": "bullish",
+      "tickers": [
+        "0981.HK"
+      ],
+      "actionable": "The re-rating runs on pricing power and utilisation near 94%, with Q3 margin guided higher on wafers ALREADY contracted at new prices — that is a forward margin lever, not a one-off beat, which is why the move is extending rather than fading. The corrected session count matters for how much is already in the price: Monday was the second reaction session, so this is early rather than late. SMIC remains the one HK holding where the news flow is unambiguously working.",
+      "sources": [
+        "https://www.investing.com/equities/semiconductor-manufacturing"
+      ]
+    },
+    {
+      "date": "2026-08-17",
+      "headline": "Singapore NODX +24.2% y/y on a 112% electronics surge — the AI trade is now visibly in the trade data",
+      "summary": "Enterprise Singapore released July external trade Monday 17 August. Non-oil domestic exports rose 24.2% y/y, accelerating from an upwardly revised 20.8% in June and a fourth consecutive month above 20%. THE COMPOSITION IS EXTRAORDINARY: electronic NODX +112% y/y (after +105.1% in June, so still accelerating), while non-electronic NODX FELL 2.3%, led lower by pharmaceuticals off a high base, then petrochemicals and food preparations. Within electronics the AI fingerprint is explicit: disk media +339.1% (+S$1.6bn) and integrated circuits +84.5% (+S$1.4bn). Non-oil re-exports +51.3%, with electronics re-exports +75.2%. Year-to-date NODX through July +19.4%. Verified on two independently opened pages, both stamped 2026-08-17.",
       "category": "SGX/Singapore",
-      "impact": "mixed",
+      "impact": "bullish",
       "tickers": [
         "D05.SI",
         "O39.SI",
-        "^STI",
-        "U14.SI",
-        "C09.SI",
-        "Z74.SI"
+        "^STI"
       ],
-      "actionable": "Across DBS (ex Friday) and OCBC (ex today) your two bank lines show a combined ~2.5% of purely mechanical decline in consecutive sessions. Use S$31.32 as OCBC's ex-adjusted reference, not the S$31.79 close. If the P&L feed marks DBS to 75.53 without accruing the S$0.81 receivable, the book understates DBS by ~1.06% until 25 August. The inverse error is the dangerous one: if a genuine bank selloff coincides with today's ex-date, do not write it off as 'just the dividend'. UOL is the genuine damage in the Singapore book — -8.75% across two sessions with nothing mechanical to explain it, on a 7% revenue decline masked by fair-value gains. Mark it as a real loss, unlike the two bank moves. Singtel is the mirror image: a headline-driven overreaction that fully reversed within a session, which is worth remembering the next time a -71.6% figure appears in a results headline.",
+      "actionable": "Same underlying driver as SMIC: AI hardware demand. Note the K-shape printed in two economies on the same day — Singapore's export engine and China's high-tech output are booming while their domestic and traditional sectors contract. Supportive for the SGX bank sleeve, which is levered to trade finance and regional growth; DBS rose 1.79% Monday. It does nothing for the REIT sleeve, which remains a duration story.",
       "sources": [
-        "https://www.investing.com/equities/dbs-group-holdings-historical-data",
-        "https://www.investing.com/equities/oversea-chinese-banking-corp.-historical-data",
-        "https://www.investing.com/indices/singapore-straits-time-historical-data",
-        "https://www.investing.com/equities/united-overseas-land-historical-data",
-        "https://www.investing.com/equities/singapore-telecommunications-historical-data"
+        "https://www.enterprisesg.gov.sg/resources/media-centre/media-releases/2026/august/mr03926_singapore-external-trade-statistics-july-2026",
+        "https://www.asiaone.com/business/singapore-nodx-july-2026"
       ]
     },
     {
-      "date": "2026-08-14",
-      "headline": "GAP NOW CLOSED — oil sold off hard Thursday then recovered: Brent $87.07 (-2.15%) then $88.52 (+1.67%); WTI $81.25 then $82.40",
-      "summary": "Front-month settles from the price spine, which reproduces the Tuesday and Wednesday marks ($88.91 and $88.98 Brent; $83.20 and $83.27 WTI) that were separately verified from exchange historical tables — so the series is anchored at both ends. BRENT: Wed 88.98 (+0.08%), Thu 87.07 (-2.15%, range 85.87-89.02), Fri 88.52 (+1.67%, range 86.44-88.79). WTI: Wed 83.27, Thu 81.25 (-2.43%, range 80.09-83.30), Fri 82.40 (+1.42%). INDEPENDENT CORROBORATION: the $81.25 and $82.40 WTI settles exactly reproduce a claim from a verification agent that was cut off mid-run — two pipelines, same numbers. Net across the week Brent gave back 0.44% from Wednesday's level having traded an $85.87-90.07 range, so the Hormuz premium is intact but no longer expanding.",
-      "category": "Energy",
-      "impact": "mixed",
-      "tickers": [
-        "BZ=F",
-        "CL=F",
-        "USO",
-        "XLE"
-      ],
-      "actionable": "The oil sleeve had a genuine two-day round trip that was invisible in the last edition. Thursday's -2.15% coincided with the soft PPI print, whose goods component was driven by energy -3.1% — so the disinflation that supported equities came partly at the expense of your energy exposure. Friday recovered most of it. Brent holding $88 after a 17.4mb inventory build and a mid-week 2% drawdown says the geopolitical bid is doing the work, consistent with the earlier read.",
-      "sources": [
-        "https://query1.finance.yahoo.com/v8/finance/chart/GDX?range=1mo&interval=1d"
-      ]
-    },
-    {
-      "date": "2026-08-14",
-      "headline": "RESOLVED: the flat S-REIT prints were SGX tick size, not a stale feed — the four names quote on a 0.5-1.0 cent grid, so 0.00% is the expected print",
-      "summary": "All four opened individually; every row read, each table terminating at Fri 14 Aug with no weekend tick. KEPPEL REIT (K71U): Tue 0.890 (0.00%, 22.35M) · Wed 0.885 (-0.56%) · Thu 0.885 (0.00%, high 0.890, low 0.875, 11.59M) · Fri 0.885 (0.00%, high 0.885, low 0.875, 13.25M). MAPLETREE LOGISTICS (M44U): Tue 1.200 · Wed 1.190 (-0.83%) · Thu 1.180 (-0.84%) · Fri 1.170 (-0.85%) — the only one of the four that moved every session. MAPLETREE INDUSTRIAL (ME8U): Tue 1.920 · Wed 1.910 (-0.52%) · Thu 1.910 (0.00%, high 1.930, low 1.900, 8.22M) · Fri 1.910 (0.00%). MAPLETREE PAN ASIA COMMERCIAL (N2IU): Tue 1.280 · Wed 1.280 (0.00%) · Thu 1.270 (-0.78%) · Fri 1.280 (+0.79%). THE EXPLANATION: at these price levels one minimum tick is 0.565% for Keppel REIT, 0.847% for MLT, 0.524% for MIT and 0.787% for MPACT. A stock that does not move a full tick MUST print 0.00%. The heavy volumes (22.35M, 17.15M, 16.36M) and genuine intraday high/low spreads confirm a live feed.",
-      "category": "SGX/Singapore",
-      "impact": "mixed",
-      "tickers": [
-        "K71U.SI",
-        "M44U.SI",
-        "ME8U.SI",
-        "N2IU.SI"
-      ],
-      "actionable": "Retire the stale-feed alert permanently — this was a misreading of tick size, not a data fault, and no vendor swap is needed. The useful inversion: because one tick is 0.5-0.85% on these names, any sub-0.5% non-zero change reported on them IS a genuine data error and should be treated as suspect. Mapletree Logistics is the one actually grinding lower — down every session from 1.200 to 1.170, -2.5% across the week.",
-      "sources": [
-        "https://www.investing.com/equities/keppel-reit-si-historical-data",
-        "https://www.investing.com/equities/mapletree-logistics-trust-historical-data",
-        "https://www.investing.com/equities/mapletree-industrial-trust-historical-data",
-        "https://www.investing.com/equities/mapletree-commercial-trust-historical-data"
-      ]
-    },
-    {
-      "date": "2026-08-12",
-      "headline": "July CPI landed exactly on consensus — 3.4% headline / 2.5% core — and September hike odds fell about 10 points to ~38%",
-      "summary": "Read directly off the BLS release, USDL-26-1378, embargo stamp 'until 8:30 a.m. (ET) Wednesday, August 12, 2026'. THE PRINT: headline CPI-U +0.1% m/m SA (after -0.4% in June), +3.4% y/y NSA (after +3.5%); core +0.2% m/m (after 0.0%), +2.5% y/y (after +2.6%). Both y/y prints matched consensus exactly. Shelter contributed roughly two-thirds of the entire monthly gain. PRECISION NOTE: the BLS release carries no consensus figures, so 'in line' is verified only for the two y/y numbers. MARKET RESPONSE: CME FedWatch at 11:32 a.m. ET showed ~62% for a HOLD at 3.50-3.75% in September against ~38% for a hike, versus ~52/48 the prior day. TIMING CORRECTION: hike odds FELL through the morning and did not recover — a 42.1% reading circulating from 08:52 a.m. ET is an early-morning figure, not a closing one. Every FedWatch number here is INTRADAY. FRAMING THE BOOK MUST NOT GET BACKWARDS: this FOMC is debating a HIKE, not a cut. There is no cut in the September distribution.",
+      "date": "2026-08-17",
+      "headline": "CORRECTION to our own Fed framing: the September debate is HOLD vs HIKE — three officials already voted for a hike in July, and hike odds sit at 35.3%",
+      "summary": "Verified against the Fed's own 29 July 2026 release: the FOMC held at 3-1/2 to 3-3/4 percent, and 'Voting against the monetary policy action were Beth M. Hammack, Neel Kashkari, and Lorie K. Logan, who preferred to raise the target range for the federal funds rate by 1/4 percentage point at this meeting' — THREE dissents, all for a HIKE. The statement's inflation language, verbatim: inflation 'remains elevated relative to the Committee's 2 percent goal, in part reflecting supply shocks that have driven price increases in certain sectors, including energy.' WHY THIS MATTERS FOR THE DASHBOARD: our '~69% hold' phrasing reads naturally as hold-versus-CUT. It is not. There is no cut in the distribution. Hike odds stood at 35.3% after Monday's close, down from nearly 50%.",
       "category": "Fed/Macro",
-      "impact": "bullish",
+      "impact": "mixed",
       "tickers": [
         "SLV",
         "GDX",
-        "^TNX",
-        "K71U.SI"
+        "^TNX"
       ],
-      "actionable": "A hike deferred is direct financing-cost relief on the 1.6x margin-levered silver leg and removes the tail that mattered most to it. Same direction for the miners and for the Mapletree/Keppel complex, where SGD rates track USD. By Friday, September was priced roughly 69% hold — the dovish shift held all week even as the long end refused to rally.",
+      "actionable": "Reframe how you read the Fed tile: the tail risk to price is a HIKE, not a delayed cut, and that is asymmetric across this book. A hike scare lifts the long end and the dollar — the classic headwind for 1.6x levered silver and the whole miner complex. The genuinely interesting fact is that gold made a new high anyway, against rising long yields, which is what makes the debasement reading more credible than a rate-cut reading.",
       "sources": [
-        "https://www.bls.gov/news.release/archives/cpi_08122026.htm",
-        "https://www.fool.com/investing/2026/08/12/july-inflation-data-came-in-as-expected-lowering-the-odds-of-a-fed-hike-in-september-yet-again/"
+        "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260729a.htm"
       ]
     },
     {
-      "date": "2026-08-12",
-      "headline": "Gold closed Wednesday at $4,406 (+0.87%), its best close in two months — and oil settled DEAD FLAT despite the largest EIA crude build since January 2023",
-      "summary": "GOLD, verified across three independently opened pages: spot $4,406.20, +0.90% (Kitco PM report, 'late-afternoon U.S. trading Wednesday'), with a second wrap giving identical figures. ANCHOR ARITHMETIC — the strongest reconciliation of the batch: Kitco's intraday pair $4,435.58 at +1.54% implies a Tuesday close of $4,368.31 against our reference $4,368.04-4,368.29, a TWO-CENT match. Computed off $4,368.29: close +$37.91 = +0.868%; session high $4,438.30 = +1.603%. Gold retained 54% of its peak gain and gave back $32.10 from the high — and its Wednesday high topped Tuesday's by only ~$3, inside the disagreement between two feeds on the same datum. OIL: Brent front-month settled Wed $88.98 (+0.08%) and WTI $83.27 (+0.08%) — both +7 cents. The 11 Aug rows read $88.91 and $83.20, matching our Tuesday reference settles to the cent, and the 10 Aug Brent row reads $87.72, exactly the corrected Monday settle established after our $87.85 spot/CFD error. Three consecutive reference marks reproduced. THE EIA NUMBER, verified by downloading the Weekly Petroleum Status Report PDF: commercial crude ex-SPR rose 17.4mb to 424.4mb for the week ending 7 Aug, against a consensus DRAW of 1.4mb — an ~18.8mb miss and the largest build since January 2023. Yet crude is still ~2% BELOW the five-year average, and imports jumped 1.14 mbpd week-on-week, which alone accounts for roughly 8mb of the build.",
-      "category": "Precious Metals",
+      "date": "2026-08-17",
+      "headline": "Empire State hit a four-year high of 20.6 — but the internals are stagflationary, and they corroborate the long-end move",
+      "summary": "Verified line by line against the New York Fed's own August report, downloaded directly after WebFetch returned 403. The file carries an internal generation stamp of 13AUG2026 with public release Monday 17 August 08:30 ET, so the strong reading is genuinely new. Headline general business conditions rose five points to 20.6 from 15.6, 'its highest reading in more than four years'; 97 respondents; responses collected 3-10 August. THE INTERNALS CUT AGAINST THE HEADLINE. Demand SOFTENED: new orders fell to 17.3 from 22.2; shipments fell hard to 11.7 from 24.4. The headline strength came from CONSTRAINT, not demand — unfilled orders jumped to 15.5 and delivery times stretched, while prices paid accelerated and prices received FELL.",
+      "category": "Fed/Macro",
       "impact": "mixed",
       "tickers": [
         "GLD",
-        "GC=F",
-        "BZ=F",
-        "CL=F",
-        "USO",
+        "SLV",
+        "^TNX",
         "XLE"
       ],
-      "actionable": "On oil, the headline number is worse than the tape and the tape is right: a 17.4mb build producing a +7-cent settle says the market wrote it off as a trade-flow artifact of the Hormuz disruption rather than genuine oversupply. Do not read it as bearish for the USO/XLE leg. NOTE THE GAP: no verified Thursday or Friday settles for Brent or WTI, and no verified Thu/Fri gold close — those verification agents were cut off mid-run.",
+      "actionable": "This is the cleanest fundamental support for the precious-metals leg in Monday's data: input costs accelerating, supply availability deteriorating and delivery times stretching — all consistent with the Hormuz energy shock feeding through — while firms cannot pass it on. That is a stagflationary print, and it corroborates both the gold breakout and the refusal of the long end to rally. Margin compression at the firm level is the part that eventually reaches equities.",
       "sources": [
-        "https://www.kitco.com/news/article/2026-08-12/gold-prices-test-two-month-highs-cpi-trims-yields-fed-hike-odds-kitco-pm",
-        "https://www.fxstreet.com/news/wti-holds-firm-as-strait-of-hormuz-concerns-outweigh-sharp-us-inventory-build-202608121719",
-        "https://www.eia.gov/petroleum/supply/weekly/pdf/highlights.pdf"
+        "https://www.newyorkfed.org/survey/empire/empiresurvey_overview"
+      ]
+    },
+    {
+      "date": "2026-08-17",
+      "headline": "OCBC's headline -0.76% is a FALSE ALARM: it went ex-dividend 47 cents Monday, so it actually rose 0.73%",
+      "summary": "Computed in code against the deterministic price feed, which is why it was caught rather than missed. OCBC closed Monday at S$31.55 against Friday's S$31.79 — a headline -0.76%. But its 47-cent interim dividend went ex on Monday 17 August (pay 28 August), so the correct reference is the ex-adjusted 31.32, against which the close represents a genuine RISE of 0.73%. The same trap ran the other way on Friday for DBS: its -1.07% was the S$0.81 ex-dividend (66c quarterly plus a 15c special) almost exactly, meaning the underlying stock was flat rather than down. DBS then rose 1.79% Monday to S$76.88.",
+      "category": "SGX/Singapore",
+      "impact": "bullish",
+      "tickers": [
+        "O39.SI",
+        "D05.SI"
+      ],
+      "actionable": "If your P&L feed marks OCBC to 31.55 without accruing the 47-cent receivable, the book understates it by about 1.5% until 28 August — and shows a loss on a day the bank gained. Across the two names roughly 2.5% of purely mechanical decline has now passed through in consecutive sessions. The dangerous inverse still applies: if a genuine bank selloff arrives, do not write it off as 'just the dividend'.",
+      "sources": [
+        "https://query1.finance.yahoo.com/v8/finance/chart/GC%3DF?range=1mo&interval=1d",
+        "https://www.dividendmax.com/singapore/singapore-exchange/unknown/oversea-chinese-banking-corporation-limited/dividends"
+      ]
+    },
+    {
+      "date": "2026-08-18",
+      "headline": "SETTLED after three attempts: Jackson Hole is 27-29 August. And a date correction — FOMC minutes are THURSDAY 20 Aug 02:00 SGT",
+      "summary": "The Kansas City Fed FAQ returned HTTP 403 to automated fetching, so it was opened in a real browser and read directly. Verbatim: 'The 2026 Jackson Hole Economic Policy Symposium will take place Aug. 27-29. The topic is Financial Innovation: Implications for Payments and Policy.' Dates and theme CONFIRMED; 27-29 August falls Thursday-Saturday, consistent with the traditional format. WARSH: confirmed as Chairman from the Board's own members page. But the KC Fed names NO speakers and posts no 2026 agenda, so whether Warsh speaks is genuinely unknown rather than merely unfound — do not assume the traditional Chair address. DATE CORRECTION: FOMC minutes are Thursday 20 August 02:00 SGT (Wednesday 19 August 14:00 ET). Anyone reading a 'Wednesday' SGT day label would arrive a full day late.",
+      "category": "Fed/Macro",
+      "impact": "mixed",
+      "tickers": [
+        "SLV",
+        "GDX",
+        "^TNX"
+      ],
+      "actionable": "Fix the calendar entry to Thu 20 Aug 02:00 SGT. On content, the minutes cover the 29 July meeting at which three officials dissented FOR a hike, so the market wants to know how close the majority came to joining them and whether September was described as live. The staleness caveat is real: those minutes predate the soft CPI, the soft PPI, the retail-sales miss and the MOU expiry, so they may read hawkish relative to where pricing now sits.",
+      "sources": [
+        "https://www.kansascityfed.org/research/jackson-hole-economic-symposium/jackson-hole-faqs/",
+        "https://www.federalreserve.gov/aboutthefed/bios/board/default.htm"
       ]
     }
   ]
