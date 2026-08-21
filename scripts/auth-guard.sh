@@ -12,12 +12,14 @@ cd /Users/dominiczhao/portfolio-dashboard || exit 1
 STATE="$HOME/.claude/portfolio-auth.state"
 NTFY=$(grep '^NTFY_TOPIC=' "$HOME/.claude/portfolio-brief.env" 2>/dev/null | cut -d= -f2)
 
-REASON=$(./scripts/auth-check.sh); OK=$?
+# --live: the nightly check is the one that must catch a token that is present
+# but no longer accepted. One tiny API call per day.
+REASON=$(./scripts/auth-check.sh --live); OK=$?
 echo "=== $(date '+%F %T') auth-guard: $REASON ==="
 
 if [ "$OK" != "0" ]; then
   echo "broken" > "$STATE"
-  MSG="Tomorrow's 07:02 research WILL FAIL — the Claude CLI has no credential. Fix on the Mac in one step: run  claude setup-token  then paste the token into ~/.claude/claude-token.env"
+  MSG="Tomorrow's 07:02 research WILL FAIL — $REASON. Fix on the Mac in one step: run  claude setup-token  then paste the token into ~/.claude/claude-token.env"
   [ -n "$NTFY" ] && curl -s -o /dev/null -H "Title: Portfolio: FIX TONIGHT — research credential dead" \
     -H "Priority: urgent" -H "Tags: rotating_light" -d "$MSG" "https://ntfy.sh/${NTFY}"
   # A banner on the Mac he is actually sitting at. ntfy pushes have been

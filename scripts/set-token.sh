@@ -32,16 +32,30 @@ esac
 
 # Keep the explanatory header, replace only the assignment. Written 600.
 umask 077
+BACKUP="$(mktemp)"
+[ -f "$ENVF" ] && cp "$ENVF" "$BACKUP"
 TMP="$(mktemp)"
 if [ -f "$ENVF" ]; then grep -v '^CLAUDE_CODE_OAUTH_TOKEN=' "$ENVF" > "$TMP"; fi
 printf 'CLAUDE_CODE_OAUTH_TOKEN=%s\n' "$TOKEN" >> "$TMP"
 mv "$TMP" "$ENVF"; chmod 600 "$ENVF"
 echo "✓ Written to $ENVF (${#TOKEN} chars)"
 
-# Prove it, rather than trusting it.
-REASON=$(./scripts/auth-check.sh); OK=$?
+# Prove the API ACCEPTS it, not just that it is non-empty. On 21 Aug 2026 an
+# auto-captured token was silently truncated to 79 chars by terminal line-wrap;
+# the presence check said ok and the research died on a 401 minutes later.
+echo "  verifying against the API…"
+REASON=$(./scripts/auth-check.sh --live); OK=$?
 echo "  auth-check: $REASON"
-[ "$OK" != "0" ] && { echo "✗ Still not usable — token rejected. Rerun claude setup-token." >&2; exit 1; }
+if [ "$OK" != "0" ]; then
+  # Roll back — a rejected token left on disk would read as "configured" to the
+  # cheap hourly check and rebuild exactly the false-green we just removed.
+  if [ -s "$BACKUP" ]; then cp "$BACKUP" "$ENVF"; else rm -f "$ENVF"; fi
+  rm -f "$BACKUP"
+  echo "✗ Token REJECTED by the API — nothing installed, previous state restored." >&2
+  echo "  Most likely it was cut short on paste. Rerun: claude setup-token" >&2
+  exit 1
+fi
+rm -f "$BACKUP"
 echo "ok" > "$HOME/.claude/portfolio-auth.state"
 
 TODAY=$(TZ=Asia/Singapore date +%F)
