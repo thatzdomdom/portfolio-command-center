@@ -96,14 +96,53 @@ const stamp = (brief && brief.date) || (model && model.updated) || 'unknown';
 const todaySGT = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Singapore' });
 const briefDay = brief && brief.date ? String(brief.date).slice(0, 10) : null;
 const isStale = briefDay !== todaySGT;
+// HOW LONG has this been going on? A one-off miss and a fortnight-long outage
+// are completely different events and must not read the same. From 8-21 Aug
+// 2026 the research aborted on a dead credential fourteen mornings running,
+// and every one of those emails still looked like a normal brief carrying one
+// small red line — so it never felt urgent enough to act on, and the fix sat
+// undone for two weeks. Staleness now escalates and leads with the remedy.
+const staleDays = isStale && briefDay
+  ? Math.max(1, Math.round((Date.parse(todaySGT) - Date.parse(briefDay)) / 86400000))
+  : 0;
+// Name the actual cause rather than "did not complete". The research log is the
+// only thing that knows, and a command you can paste beats a symptom you can't.
+let staleCause = 'the 07:02 research run did not complete', staleFix = '', staleStreak = 0;
+try {
+  const tail = fs.readFileSync(path.join(process.env.HOME, 'Library/Logs/portfolio-research.log'), 'utf8').slice(-30000);
+  if (/ABORT \u2014 not authenticated/.test(tail)) {
+    // brief.json can be 2 days old while the automation has been dead for 14 —
+    // Dom hand-refreshes some mornings, which masked the real outage. Report the
+    // run streak, not just the file date, or the severity reads far too low.
+    const aborts = [...tail.matchAll(/^(\d{4}-\d{2}-\d{2}) .*ABORT \u2014 not authenticated/gm)].map(m => m[1]);
+    const runs = [...tail.matchAll(/^=== (\d{4}-\d{2}-\d{2}) .*research start/gm)].map(m => m[1]);
+    let streak = 0;
+    for (let k = runs.length - 1; k >= 0 && aborts.includes(runs[k]); k--) streak++;
+    staleStreak = streak;
+    staleCause = streak > 1
+      ? `the Claude CLI has no credential \u2014 the 07:02 research has failed ${streak} mornings running, since ${aborts[aborts.length - streak]}`
+      : 'the Claude CLI has no credential, so no research ran at all';
+    staleFix = 'claude setup-token   \u2192   paste the token into ~/.claude/claude-token.env';
+  }
+} catch (e) {}
+// The brief file can look 2 days old while the automation has been dead for 14.
+// Escalate on the worse of the two so the severity is never understated.
+const outageDays = Math.max(staleDays, staleStreak);
 const staleBanner = isStale
-  ? `⚠️  STALE — THIS IS NOT TODAY'S RESEARCH\n`
-    + `The ${new Date().toLocaleDateString('en-SG', { day: 'numeric', month: 'short' })} research run did not complete, so everything below is from ${briefDay || 'an earlier run'}.\n`
-    + `Prices, probabilities and risk on the dashboard still recompute live; only this written analysis is stale.\n`
-    + `${'─'.repeat(60)}\n\n`
+  ? `${'\u2588'.repeat(56)}\n`
+    + `\u{1F534}  NO RESEARCH TODAY \u2014 DAY ${outageDays} OF THIS OUTAGE\n\n`
+    + `Cause: ${staleCause}.\n`
+    + (staleFix ? `Fix on the Mac, about 30 seconds:\n    ${staleFix}\n` : '')
+    + `\nEverything below is ${briefDay || 'an earlier run'} analysis under a ${today} heading.\n`
+    + `Do not trade on it. Prices, probabilities and risk on the dashboard still\n`
+    + `recompute live.\n${'\u2588'.repeat(56)}\n\n`
   : '';
-const bullets = a => a.map(x => `• ${x}`).join('\n');
-const SUBJ = `📊 Portfolio Morning Brief — ${today}${isStale ? ' ⚠️ STALE (research did not run)' : ''}`;
+const bullets = a => a.map(x => `\u2022 ${x}`).join('\n');
+// The subject line is the only part he sees on a locked phone. When there is no
+// research, it must not say "Morning Brief".
+const SUBJ = isStale
+  ? `\u{1F534} NO RESEARCH \u2014 day ${outageDays} \u2014 brief is ${briefDay || 'old'} data, not ${today}`
+  : `\u{1F4CA} Portfolio Morning Brief \u2014 ${today}`;
 const fullText = [
   staleBanner + `PORTFOLIO MORNING BRIEF — ${today}`,
   `Data refreshed: ${stamp}`,
@@ -206,10 +245,16 @@ const htmlSection2 = (h, items) => `
   </div>`;
 
 const fullHtml = `<div style="font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.55">
-  <div style="font-size:20px;font-weight:800;letter-spacing:-.01em">📊 Portfolio Morning Brief</div>
+  <div style="font-size:20px;font-weight:800;letter-spacing:-.01em;color:${isStale ? AC.red : '#111827'}">${isStale ? '\u{1F534} Portfolio Brief \u2014 NO RESEARCH TODAY' : '\u{1F4CA} Portfolio Morning Brief'}</div>
   <div style="color:${AC.grey};font-size:13px;padding:3px 0 2px 0">${esc(today)} &nbsp;·&nbsp; data refreshed ${esc(stamp)}</div>
   <div style="border-bottom:2px solid ${AC.accent};width:64px;margin:6px 0 4px 0"></div>
-  ${isStale ? `<div style="margin:14px 0;color:${AC.red};font-weight:700">⚠️ STALE — this is not today's research. ${esc(briefDay || 'an earlier run')} data; the dashboard's live prices and risk still recompute.</div>` : ''}
+  ${isStale ? `<div style="background-color:#fef2f2;border:2px solid ${AC.red};border-radius:8px;padding:15px 17px;margin:14px 0 4px 0">
+    <div style="color:${AC.red};font-weight:800;font-size:17px;line-height:1.35;margin:0 0 7px 0">\u{1F534} NO RESEARCH TODAY \u2014 day ${outageDays} of this outage</div>
+    <div style="color:#111827;font-size:14px;line-height:1.5;margin:0 0 9px 0">Cause: ${esc(staleCause)}.</div>
+    ${staleFix ? `<div style="color:#111827;font-size:14px;line-height:1.5;margin:0 0 5px 0">Fix on the Mac, about 30 seconds:</div>
+    <div style="background-color:#111827;color:#f9fafb;font-family:ui-monospace,Menlo,Monaco,monospace;font-size:13px;line-height:1.5;padding:10px 12px;border-radius:5px;margin:0 0 9px 0">${esc(staleFix)}</div>` : ''}
+    <div style="color:#7f1d1d;font-size:13px;line-height:1.5;margin:0">Everything below is <b style="color:#7f1d1d">${esc(briefDay || 'an earlier run')}</b> analysis shown under a ${esc(today)} heading \u2014 <b style="color:#7f1d1d">do not trade on it</b>. The dashboard's prices, probabilities and risk still recompute live.</div>
+  </div>` : ''}
   ${htmlSection2('TLDR', tldr)}
   ${sections.map(([h, items]) => htmlSection2(h, items)).join('')}
   <div style="margin:26px 0 0 0;padding:12px 0 0 0;border-top:1px solid ${AC.grey}44">

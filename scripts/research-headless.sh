@@ -16,15 +16,24 @@ cd /Users/dominiczhao/portfolio-dashboard || exit 1
 export CLAUDE_CODE_OAUTH_TOKEN
 
 # Fail LOUDLY and early rather than burning the run and shipping stale data.
-AUTH=$(/opt/homebrew/bin/claude auth status 2>/dev/null | /opt/homebrew/bin/node -e 'let s="";process.stdin.on("data",c=>s+=c).on("end",()=>{try{console.log(JSON.parse(s).loggedIn?"ok":"no")}catch(e){console.log("no")}})')
-if [ "$AUTH" != "ok" ] && [ -z "$CLAUDE_CODE_OAUTH_TOKEN" ]; then
+# One hardened check, shared with auth-guard.sh and research-retry.sh. The old
+# inline test used [ -z "$CLAUDE_CODE_OAUTH_TOKEN" ], which treats a token of
+# pure whitespace as present; auth-check.sh strips before testing.
+AUTH_REASON=$(./scripts/auth-check.sh)
+if [ $? != 0 ]; then
   echo "$(date '+%F %T') ABORT — not authenticated and no long-lived token set."
+  echo "$(date '+%F %T') detail: $AUTH_REASON"
+  echo "broken" > "$HOME/.claude/portfolio-auth.state"
   NT=$(grep '^NTFY_TOPIC=' "$HOME/.claude/portfolio-brief.env" 2>/dev/null | cut -d= -f2)
   [ -n "$NT" ] && curl -s -o /dev/null -H "Title: Portfolio: research BLOCKED — logged out" -H "Priority: urgent" -H "Tags: warning" \
-    -d "The Claude CLI is logged out, so no research ran and the morning brief will be stale. Fix on the Mac: claude setup-token, then paste the token into ~/.claude/claude-token.env" "https://ntfy.sh/${NT}"
+    -d "$AUTH_REASON. No research ran, so the 08:15 email will go out as a NO-RESEARCH alarm. Fix on the Mac: claude setup-token, then paste the token into ~/.claude/claude-token.env" "https://ntfy.sh/${NT}"
+  # Retries every hour until 20:10 will pick this up the moment the token lands,
+  # so a fix at any point in the day still produces today's research.
   echo "=== $(date '+%F %T') research end (exit 78 — auth) ==="
   exit 78
 fi
+echo "$(date '+%F %T') auth: $AUTH_REASON"
+echo "ok" > "$HOME/.claude/portfolio-auth.state"
 
 # ── DETERMINISTIC DATA LAYERS — run BEFORE any agent work ─────────────────
 # Added 18 Aug 2026 after a daily run cost ~2.4M tokens, most of it spent on
