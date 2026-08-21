@@ -1,27 +1,21 @@
 {
  "checkedOn": "2026-08-21",
- "at": "2026-08-21T01:15:39.305Z",
- "problems": [
-  "news.json: newest item is 2 days old but a session has closed since (latest completed session 2026-08-20) — the sweep is behind",
-  "brief.json: dated 2 day(s) ago — the morning email would send stale content under today's date"
- ],
+ "at": "2026-08-21T02:30:06.568Z",
+ "problems": [],
  "warnings": [
-  "flows-investors.json: Japan (JPX / TSE) data is 28 days old — check it is labelled as carried forward",
-  "flows-investors.json: Hong Kong (HKEX) data is 22 days old — check it is labelled as carried forward",
-  "flows-investors.json: China (A-shares) data is 22 days old — check it is labelled as carried forward",
   "flows-investors.json: Singapore (SGX) data is 28 days old — check it is labelled as carried forward",
-  "flows-investors.json: United States data is 30 days old — check it is labelled as carried forward",
-  "flows-investors.json: file stamp is 17 days old",
   "prices: skipped reconciliation for low-trust series (BZ=F, CL=F) — the spine flags these as rolled/thin; quote the ETF proxy instead"
  ],
  "passed": [
+  "news: 12 items, newest today (latest completed session 2026-08-20)",
   "model: 49 calls, all probabilities in range",
-  "model: macro re-stamped 2d ago",
-  "market: F&G 46, stamps current",
-  "track: 37 snapshots, history intact",
-  "investors: re-verified 3d ago",
+  "model: macro re-stamped today",
+  "market: F&G 56, stamps current",
+  "track: 38 snapshots, history intact",
+  "investors: re-verified today",
   "investors: 2026 Q2 is the newest quarter whose 13F deadline has passed",
   "flows: 6 markets, sources present, proxies labelled",
-  "prices: spine loaded; no ticker-anchored price claims to reconcile"
+  "brief: written today",
+  "prices: 1/1 asserted prices reconcile against the spine"
  ]
 }
