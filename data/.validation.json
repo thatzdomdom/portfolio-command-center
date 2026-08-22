@@ -1,23 +1,21 @@
 {
  "checkedOn": "2026-08-22",
- "at": "2026-08-21T23:14:08.687Z",
- "problems": [
-  "brief.json: dated 1 day(s) ago — the morning email would send stale content under today's date",
-  "prices: news[5] asserts BTC-USD at 74859, which matches no traded close/high/low (recent closes: 64680.7109375, 69266.1875, 73032.7578125, 78425.6484375)"
- ],
+ "at": "2026-08-22T00:24:28.931Z",
+ "problems": [],
  "warnings": [
   "flows-investors.json: Singapore (SGX) data is 29 days old — check it is labelled as carried forward",
-  "brief.json: regime label \"Risk-off tilt with hard-asset rotation\" differs from model.json's \"Tentative risk rebound, hard-asset rotation intact\"",
   "prices: skipped reconciliation for low-trust series (BZ=F, CL=F) — the spine flags these as rolled/thin; quote the ETF proxy instead"
  ],
  "passed": [
-  "news: 12 items, newest 1d old (latest completed session 2026-08-21)",
+  "news: 13 items, newest 1d old (latest completed session 2026-08-21)",
   "model: 49 calls, all probabilities in range",
   "model: macro re-stamped today",
-  "market: F&G 56, stamps current",
-  "track: 38 snapshots, history intact",
-  "investors: re-verified 1d ago",
+  "market: F&G 50, stamps current",
+  "track: 39 snapshots, history intact",
+  "investors: re-verified today",
   "investors: 2026 Q2 is the newest quarter whose 13F deadline has passed",
-  "flows: 6 markets, sources present, proxies labelled"
+  "flows: 6 markets, sources present, proxies labelled",
+  "brief: written today",
+  "prices: 2/2 asserted prices reconcile against the spine"
  ]
 }
