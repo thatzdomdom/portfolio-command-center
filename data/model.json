@@ -1,90 +1,80 @@
 {
-  "updated": "2026-08-21",
-  "asOf": "2026-08-21",
+  "updated": "2026-08-22",
+  "asOf": "2026-08-22",
   "note": "CIO research-panel macro regime + per-instrument probabilistic priors, produced by a multi-agent research workflow with adversarial verification and cited sources. The live in-browser quant engine (GBM drift-diffusion on 2y daily history) blends with these forward-looking priors to produce the displayed P(up) and EV. Refreshed by the scheduled intel agent.",
   "macro": {
-    "regime": "Risk-off tilt with hard-asset rotation",
-    "riskOnProb": 0.38,
-    "regimeScore": 0.38,
-    "asOf": "2026-08-21",
-    "narrative": "Re-anchored Fri 21 Aug 10:10 SGT on complete Wed 19 AND Thu 20 Aug sessions (a two-session catch-up from the prior Tue-18-Aug anchor). Wednesday's dominant catalyst was the US Treasury's surprise announcement to double its long-bond buyback operation size (to >=$4bn/operation for 10-30y, effective 9 Sep-4 Nov) after the 30-year yield hit its highest level since 2007 (~5.33%). This pulled the 10y down 6bp to 4.647% and the 30y down 9bp to 5.196%, sent the dollar to an 11-week low, and ignited a REAL real-yield-driven rally in gold (GLD +3.84%) and silver (SLV +4.47%) that flowed through with operating leverage into miners (GDX +9.42%, SILJ +9.55%, Barrick +8.82%) — unlike the Monday-17-Aug futures-roll false breakout corrected two runs ago. That relief came too late to stop a continuing Asia chip-sector rout that began Tue 18 Aug (Nvidia lost as much as ~$600bn intraday on AI 'circular financing' fears): Nikkei -3.16% and KOSPI -5.80% Wednesday as Samsung and SK Hynix were hammered. July FOMC minutes (released Wed) showed an unusually visible 3-of-12 dissent favoring a hike — hawkish, but markets largely looked through it given the buyback-driven yield relief. Thursday reversed the cross-currents again: blockbuster US data (jobless claims 206K vs 210K forecast; Philly Fed manufacturing 47.4 vs 24.1 forecast, a huge beat) trimmed near-term Fed-cut odds, and St. Louis Fed's Musalem said he 'won't prejudge' September while flagging inflation still running 2.5-3% against the 2% target — a hawkish cocktail that, layered on lingering AI-valuation anxiety, drove a genuine equity selloff (S&P -0.87% to 7,641.16, Nasdaq -1.00%, Dow -1.32%, Russell -1.34%, VIX +7.52% to 16.01) while gold/silver kept grinding higher (GLD +0.34%, SLV +2.75%) on the still-easier real-yield/dollar backdrop, even as miners' momentum decelerated (GDX +2.59%, SILJ +0.67%) as equity-market risk-off capped their equity beta. Asia bifurcated sharply Thursday: KOSPI +5.89% (Samsung's >KRW100tn shareholder-return plan and SK Hynix's ~KRW40tn buyback/cancellation, plus the buyback-driven yield relief) nearly fully reversed Wednesday's crash, Nikkei +1.36% partially recovered on chip dip-buying, and Hang Seng's more modest +0.80% reflected calmer, idiosyncratic HK flows (Tencent/Xiaomi up, SMIC down). Separately, Brent/WTI continued grinding higher (+2.29%/+1.05% Thu) on the unresolved Strait of Hormuz crisis (ADNOC tankers attacked Thu evening; Trump announced sweeping new Iran sanctions Tue) — a structural driver largely independent of the gold/equity story. Bitcoin surged on the same debasement narrative plus a record ~$2.7-3bn short-liquidation cascade, reaching a ~$74,859 Friday-morning level (a continuous-trading LEVEL, not a session close). Risk-on cut from 0.45 to 0.38: a genuine US equity selloff with a real VIX spike, hawkish Fed cross-currents (a rare 3-way FOMC dissent plus a hawkish regional president), and unresolved AI-valuation anxiety are risk-negative, only partially offset by the Treasury-buyback yield relief and idiosyncratic (not broad-based) Asia strength.",
+    "regime": "Tentative risk rebound, hard-asset rotation intact",
+    "riskOnProb": 0.41,
+    "regimeScore": 0.41,
+    "asOf": "2026-08-22",
+    "narrative": "Friday 21 Aug delivered a broad-based equity rebound (S&P +0.43% to 7,674.37, Dow +0.98%, Russell +0.85%) and a cooling VIX (-5.5% to 15.13), as Treasury Secretary Bessent's confirmation that the doubled long-bond buyback could exceed the $4bn/operation floor extended the real-yield relief trade that began Wednesday. Gold and silver notched a third straight day of gains (GLD +1.95%, SLV +1.72%, gold futures +3.22% to $4,661.60) on continued dollar weakness (DXY near an 11-week low) and building hedge demand ahead of the 27-29 Aug Jackson Hole Symposium, where new Fed Chair Warsh delivers his untested first keynote (28 Aug; a BofA survey shows 69% expect a neutral tone, leaving room for a hawkish surprise). Rare-earth names staged a sharp, policy-driven reversal of Thursday's AI-fear-driven selloff — MP +9.10%, UUUU +8.92% — on G7 leaders' agreement to cut rare-earth reliance on non-bloc (China) suppliers, a Pentagon-backed $500M Phoenix Tailings loan, and the DoE's selection of seven critical-mineral processing/battery projects, making Materials the S&P's strongest sector (+2.09%). Xiaomi's outsized +4.54% move (Thu HK close, index data still lagging) reflects continued digestion of its 18 Aug Q2 results (EV deliveries +28.2% YoY, SkyNomad SUV pre-orders >100k) rather than fresh news. Trump's Friday 7pm ET remarks were confirmed to be a South Carolina Senate campaign rally (endorsing Darline Graham ahead of the 25 Aug runoff), not a market-moving policy event, while the Strait of Hormuz remains effectively closed to commercial shipping with continued Iranian tanker seizures — a structural oil-risk premium that held Brent/WTI roughly flat Friday after the week's sharp climb.",
     "drivers": [
       {
-        "factor": "Treasury debt-buyback expansion",
-        "read": "Doubled max operation size to >=$4bn for long-end sectors (effective 9 Sep); 10Y -6bp/30Y -9bp Wed, DXY to an 11-week low (~99). The master catalyst behind the gold/silver breakout, the KOSPI rebound, and the Bitcoin surge.",
+        "factor": "Broad equity rebound + VIX cooling",
+        "read": "S&P +0.43% to 7,674.37 (Dow +0.98%, Russell +0.85%), VIX -5.5% to 15.13 from Thursday's 16.01 spike, as Bessent confirmed the Treasury buyback could exceed the $4bn/operation floor.",
         "impact": "supportive"
       },
       {
-        "factor": "AI/chip valuation unwind",
-        "read": "Nvidia lost up to ~$600bn intraday on 'circular financing' fears; spilled into Asia chips Wed (Nikkei -3.16%, KOSPI -5.80%) and weighed on US tech Thu (VIX 16.01, +7.52%). WSJ flagged ~$3tn of off-balance-sheet AI infrastructure commitments across nine major tech names.",
-        "impact": "cautionary"
+        "factor": "Gold/silver third straight day of gains",
+        "read": "GLD +1.95%, SLV +1.72%, gold futures +3.22% to $4,661.60 on continued dollar weakness (DXY near an 11-week low) and building Jackson Hole hedge demand.",
+        "impact": "supportive"
       },
       {
-        "factor": "Blockbuster US data cools near-term cut odds",
-        "read": "Jobless claims 206K vs 210K forecast; Philly Fed manufacturing 47.4 vs 24.1 forecast — a large beat. Good for the economy, but reduces near-term Fed-cut hopes.",
+        "factor": "Rare-earth policy reversal (G7/Pentagon/DoE)",
+        "read": "MP +9.10%, UUUU +8.92% reversed Thursday's AI-fear selloff on G7's agreement to cut non-bloc rare-earth reliance, a Pentagon-backed $500M Phoenix Tailings loan, and DoE's 7-project critical-minerals selection — Materials was the S&P's strongest sector (+2.09%).",
+        "impact": "supportive"
+      },
+      {
+        "factor": "Jackson Hole Symposium approaching (27-29 Aug)",
+        "read": "New Fed Chair Warsh delivers his first keynote 28 Aug into a 16 Sep FOMC with odds ~65.5% for a 25bp cut (down from 71% a day earlier) and 34.5% for 50bp — a BofA survey shows 69% expect a neutral tone, but Warsh's early tenure has deliberately pulled back forward guidance, leaving genuine two-sided surprise risk.",
         "impact": "mixed"
       },
       {
-        "factor": "Hawkish Fed cross-currents",
-        "read": "July FOMC minutes: 3-of-12 dissented favoring a hike. Musalem (Thu) called policy accommodative, cited inflation at 2.5-3% vs the 2% target, and said he 'won't prejudge' the September decision.",
+        "factor": "Strait of Hormuz still effectively closed",
+        "read": "Crisis tracking shows the strait remains closed to commercial shipping as of 21 Aug; Iranian forces reportedly seized/boarded a tanker near Qeshm Island this week. Brent/WTI paused (+0.10%/-1.35% Fri) after the week's sharp climb — a structural premium, not a resolving one.",
         "impact": "cautionary"
       },
       {
-        "factor": "Structural silver/gold deficit",
-        "read": "6th consecutive annual silver shortfall (~46.3moz, Silver Institute/Metals Focus); both the US and China have classified silver as a critical/strategic material — a supportive backdrop independent of this week's cyclical catalysts.",
-        "impact": "supportive"
-      },
-      {
-        "factor": "Korea mega-buyback bonanza drove the KOSPI round trip",
-        "read": "Samsung's >KRW100tn shareholder-return plan and SK Hynix's ~KRW40tn buyback/cancellation reversed nearly all of Wednesday's -5.80% crash on Thursday (+5.89%) — an idiosyncratic, company-specific catalyst, not a broad EM-Asia risk-on shift. Korea flows data (foreigners/institutions bought Thu, retail bought Wed's dip and sold Thu's rebound) confirms this was a clean two-sided reversal.",
-        "impact": "mixed"
-      },
-      {
-        "factor": "Strait of Hormuz crisis unresolved",
-        "read": "ADNOC tankers attacked transiting Hormuz Thu evening (one crew death); Trump announced sweeping new Iran sanctions ('Operation Economic Fury') Tue. Roughly a fifth of global oil supply has been disrupted since the Feb 2026 US-Israel-Iran war.",
-        "impact": "supportive"
-      },
-      {
-        "factor": "Global fund flows rotated hard into cash and gold",
-        "read": "Week to 19 Aug: money-market/cash funds drew the largest inflow ($25.4bn), bonds $23.8bn, gold $6.3bn (biggest since Jan 2026, per BofA's Hartnett 'long gold, short USD'). Equities still drew a net $16.1bn but decelerating — a genuine de-risking alongside the metals bid.",
+        "factor": "Trump's Friday remarks were a non-event for markets",
+        "read": "Confirmed to be a South Carolina Senate campaign rally (Myrtle Beach, endorsing Darline Graham ahead of the 25 Aug runoff), not an economic or geopolitical policy speech — no market-moving content despite the calendar flagging it as a medium-impact USD event.",
         "impact": "mixed"
       }
     ],
     "byAssetClass": [
       {
         "assetClass": "Equity",
-        "stance": "Neutral",
-        "pUp12m": 0.62,
-        "tilt": 0,
-        "note": "Cut from modest OW: AI-valuation unwind and hawkish Fed cross-currents (3-way dissent, Musalem) offset resilient labor/manufacturing data and buyback-driven yield relief. Breadth deterioration this week (50-DMA breadth -9.67% in a day vs 200-DMA -2.5%) reads as narrow, semi-led weakness rather than broad capitulation."
+        "stance": "modest OW",
+        "pUp12m": 0.64,
+        "tilt": 0.012,
+        "note": "Raised from Neutral: Friday's broad rebound (S&P +0.43%, VIX -5.5%) plus Bessent's buyback follow-through partially offset the mid-week AI-valuation scare, but it's a single session — Jackson Hole (27-29 Aug) and Warsh's untested debut keynote (28 Aug) are the next real test."
       },
       {
         "assetClass": "Commodities",
         "stance": "OW",
-        "pUp12m": 0.7,
+        "pUp12m": 0.71,
         "tilt": 0.02,
-        "note": "Raised from modest OW: structural silver deficit, gold real-yield tailwind, and Hormuz oil risk premium all pointing the same direction, confirmed by a REAL (not futures-roll-artifact) breakout in GLD/SLV/GDX/SILJ this week plus a $6.3bn weekly gold-fund inflow, the biggest since Jan 2026."
+        "note": "Held OW: gold/silver's third straight day of gains (GLD +1.95%, SLV +1.72%) plus a concrete rare-earth policy reversal (G7/Pentagon/DoE) confirm the hard-asset rotation remains intact and now has policy tailwinds beyond just the metals trade."
       },
       {
         "assetClass": "Crypto",
-        "stance": "Neutral",
-        "pUp12m": 0.58,
-        "tilt": 0,
-        "note": "Raised from modest UW: Bitcoin rode the same debasement/buyback narrative as gold to a ~$74,859 level (+8% from Thursday), amplified by a record ~$2.7-3bn short-liquidation cascade — still high-vol and correlated to the metals trade rather than a genuine diversifier."
+        "stance": "modest OW",
+        "pUp12m": 0.6,
+        "tilt": 0.012,
+        "note": "Raised from Neutral: Bitcoin continued climbing to a ~$78,426 level (+7.4% vs Thursday) on the same debasement narrative as gold/silver, though still high-vol and correlated to the metals trade rather than an independent diversifier."
       },
       {
         "assetClass": "Bonds",
         "stance": "Neutral",
         "pUp12m": 0.5,
         "tilt": 0,
-        "note": "Held Neutral: the Treasury buyback technically supports the long end (30Y eased 9bp Wed), but fiscal/inflation concerns (30Y still near 5.2%, highest since 2007) and Thursday's hawkish data/Fed-speak cap a durable rally."
+        "note": "Held Neutral: buyback-driven long-end support persists, but the 30Y remains near a multi-decade high (~5.2%) and Jackson Hole (Warsh's untested debut) is a two-sided event risk for the curve next week."
       },
       {
-        "assetClass": "USD/Cash",
+        "assetClass": "USD-Cash",
         "stance": "modest UW",
         "pUp12m": 0.4,
         "tilt": -0.012,
-        "note": "Cut to modest UW from modest OW: DXY fell to an 11-week low on buyback-driven real-yield compression; hawkish Fed speak provides only partial offsetting support. Cash still earns positive carry (~3.5-3.75%) as dry powder into Jackson Hole (27-29 Aug, Warsh's first keynote 28 Aug)."
+        "note": "Held modest UW: DXY eased again Friday (near an 11-week low) as the buyback/debasement trade persists; cash still earns positive carry (~3.5-3.75%) as dry powder into Jackson Hole (27-29 Aug)."
       }
     ],
     "sources": [
@@ -97,7 +87,18 @@
       "https://kfgo.com/2026/08/20/feds-musalem-says-wont-prejudge-rate-call-view-for-september-fomc-cnbc/",
       "https://www.regardsofwallstreet.com/news/jackson-hole-2026-dates-schedule-warsh-first-speech",
       "https://en.wikipedia.org/wiki/2026_Strait_of_Hormuz_crisis",
-      "https://discoveryalert.com.au/silver-squeeze-physical-shortage-supply-deficits-2026/"
+      "https://discoveryalert.com.au/silver-squeeze-physical-shortage-supply-deficits-2026/",
+      "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-aug-21-2026",
+      "https://sg.finance.yahoo.com/news/stock-market-today-aug-21-131738699.html",
+      "https://www.cnbc.com/amp/2026/08/21/gold-on-track-for-third-weekly-gain-on-softer-dollar-lower-us-yields.html",
+      "https://247wallst.com/investing/2026/08/21/usa-rare-earth-rises-8-critical-metals-jumps-10-mp-materials-climbs-5-as-the-resource-sector-catches-a-bid/",
+      "https://www.benzinga.com/trading-ideas/movers/26/08/61363383/why-is-mp-materials-stock-surging-friday",
+      "https://finance.yahoo.com/markets/stocks/articles/mp-materials-mp-stock-rising-182958234.html",
+      "https://www.investing.com/news/company-news/xiaomi-q2-2026-slides-ev-growth-and-ai-gains-offset-smartphone-pressure-93CH-4865316",
+      "https://en.wikipedia.org/wiki/2026_Strait_of_Hormuz_crisis",
+      "https://www.wmbfnews.com/2026/08/21/live-blog-trump-visits-rally-myrtle-beach-convention-center/",
+      "https://www.regardsofwallstreet.com/news/jackson-hole-2026-dates-schedule-warsh-first-speech",
+      "https://kalkine.com/news/premium/jackson-hole-2026-can-warshs-debut-signal-where-rates-go-next"
     ]
   },
   "calls": [
@@ -231,19 +232,19 @@
       "ticker": "XLE",
       "name": "Energy Select Sector SPDR Fund",
       "assetClass": "US sector ETF (Energy)",
-      "pUp1m": 0.56,
-      "pUp3m": 0.6,
-      "pUp12m": 0.66,
-      "ev1m": 0.007,
-      "ev3m": 0.025,
-      "ev12m": 0.08,
+      "pUp1m": 0.55,
+      "pUp3m": 0.59,
+      "pUp12m": 0.65,
+      "ev1m": 0.005,
+      "ev3m": 0.022,
+      "ev12m": 0.075,
       "drivers": [
-        "ADNOC tankers attacked in the Strait of Hormuz Thu evening; Trump's new Iran sanctions ('Operation Economic Fury') announced Tue",
-        "Brent +2.29%/WTI +1.05% Thu, continuing to grind higher on the unresolved crisis",
-        "IEA warnings on shrinking global stockpiles supportive for the sleeve",
-        "Roughly a fifth of global oil supply disrupted since the Feb 2026 US-Israel-Iran war"
+        "Roughly flat Fri (XLE -0.17%, Brent +0.10%, WTI -1.35%) — a pause, not a reversal, after the week's Hormuz-driven grind higher",
+        "Strait of Hormuz remains effectively closed to commercial shipping as of 21 Aug per crisis tracking; Iranian forces reportedly seized a tanker near Qeshm Island this week",
+        "Trump's new Iran sanctions ('Operation Economic Fury', announced Tue) still in force",
+        "Roughly a fifth of global oil supply disrupted since the Feb 2026 US-Israel-Iran war — structural premium intact despite Friday's pullback"
       ],
-      "confidence": 0.55
+      "confidence": 0.54
     },
     {
       "ticker": "XLV",
@@ -339,37 +340,37 @@
       "ticker": "GLD",
       "name": "SPDR Gold Shares",
       "assetClass": "Precious metals ETF (gold)",
-      "pUp1m": 0.62,
-      "pUp3m": 0.65,
-      "pUp12m": 0.72,
-      "ev1m": 0.015,
-      "ev3m": 0.04,
-      "ev12m": 0.12,
+      "pUp1m": 0.64,
+      "pUp3m": 0.67,
+      "pUp12m": 0.73,
+      "ev1m": 0.018,
+      "ev3m": 0.045,
+      "ev12m": 0.125,
       "drivers": [
-        "Treasury buyback (doubled long-end operations) drove a REAL breakout: +3.84% Wed, +0.34% Thu",
-        "11-week DXY low and real-yield compression the direct tailwind",
-        "$6.3bn weekly gold-fund inflow (wk to 19 Aug), biggest since Jan 2026, per BofA's Hartnett 'long gold, short USD'",
-        "Confirmed genuine (not a futures-roll artifact like the corrected 17 Aug false breakout) — GDX/SILJ leverage confirms"
+        "Third straight session of gains: GLD +1.95% Fri (GC=F +3.22% to $4,661.60) on continued Treasury-buyback real-yield tailwind and DXY near an 11-week low",
+        "Bessent confirmed the buyback could exceed the $4bn/operation floor, reinforcing the debasement trade",
+        "Jackson Hole (27-29 Aug) hedge demand building into Warsh's untested first keynote (28 Aug) — BofA survey shows 69% expect a neutral tone, leaving room for a hawkish surprise",
+        "Structural deficit and the $6.3bn weekly gold-fund inflow (biggest since Jan 2026) remain intact"
       ],
-      "confidence": 0.65
+      "confidence": 0.66
     },
     {
       "ticker": "SLV",
       "name": "iShares Silver Trust",
       "assetClass": "Precious metals ETF (silver)",
-      "pUp1m": 0.63,
-      "pUp3m": 0.66,
-      "pUp12m": 0.73,
-      "ev1m": 0.02,
-      "ev3m": 0.05,
-      "ev12m": 0.14,
+      "pUp1m": 0.64,
+      "pUp3m": 0.67,
+      "pUp12m": 0.74,
+      "ev1m": 0.022,
+      "ev3m": 0.052,
+      "ev12m": 0.145,
       "drivers": [
-        "+4.47% Wed, +2.75% Thu on the Treasury-buyback real-yield tailwind",
-        "6th consecutive annual structural silver deficit (~46.3moz, Silver Institute/Metals Focus)",
-        "US and China have both classified silver as a critical/strategic material",
-        "GDX/SILJ miners (+9.4%/+9.6% Wed) confirm the breakout with operating leverage"
+        "Third straight day: SLV +1.72% Fri (SI=F +1.45% to $69.01), extending the week's real-yield-driven breakout",
+        "GDX +2.98%/SILJ +0.95% Fri — miner leverage decelerating slightly vs the metal, worth watching for momentum exhaustion",
+        "Same buyback/dollar tailwind as gold, plus intact structural deficit (6th consecutive annual shortfall, ~46.3moz)",
+        "Jackson Hole event risk (Warsh's 28 Aug keynote) is a two-sided catalyst — hedge-demand tailwind but also surprise risk"
       ],
-      "confidence": 0.6
+      "confidence": 0.61
     },
     {
       "ticker": "DBC",
@@ -393,19 +394,19 @@
       "ticker": "USO",
       "name": "United States Oil Fund LP",
       "assetClass": "Crude oil futures ETF",
-      "pUp1m": 0.57,
-      "pUp3m": 0.58,
-      "pUp12m": 0.62,
-      "ev1m": 0.008,
-      "ev3m": 0.02,
-      "ev12m": 0.06,
+      "pUp1m": 0.56,
+      "pUp3m": 0.57,
+      "pUp12m": 0.61,
+      "ev1m": 0.005,
+      "ev3m": 0.018,
+      "ev12m": 0.055,
       "drivers": [
-        "Strait of Hormuz crisis unresolved; ADNOC tankers attacked Thu evening",
-        "Brent +2.29%/WTI +1.05% Thu continuing to grind higher",
-        "Trump's new Iran sanctions ('Operation Economic Fury') announced Tue",
-        "Global demand risk (soft China data) caps further upside"
+        "Roughly flat Fri (+0.07%) as WTI pulled back -1.35% even as Brent held +0.10% — a pause after the week's Hormuz-driven rally",
+        "Strait of Hormuz remains effectively closed to commercial shipping; Iranian forces reportedly seized/boarded a tanker near Qeshm Island this week, continuing the escalation pattern",
+        "Global demand risk (soft China data) still caps further upside",
+        "Trump's new Iran sanctions remain a structural, not yet de-escalating, factor"
       ],
-      "confidence": 0.5
+      "confidence": 0.49
     },
     {
       "ticker": "URA",
@@ -501,35 +502,35 @@
       "ticker": "MP",
       "name": "MP Materials Corp",
       "assetClass": "US rare earth miner/magnet producer (equity)",
-      "pUp1m": 0.52,
-      "pUp3m": 0.58,
-      "pUp12m": 0.68,
-      "ev1m": 0.005,
-      "ev3m": 0.03,
-      "ev12m": 0.15,
+      "pUp1m": 0.58,
+      "pUp3m": 0.63,
+      "pUp12m": 0.72,
+      "ev1m": 0.02,
+      "ev3m": 0.045,
+      "ev12m": 0.17,
       "drivers": [
-        "-2.89% Thu tied to broad 'rare earth stocks dropped as AI fears grew' sector rotation, not company news",
-        "Bridgewater opened a fresh Q2-2026 $19.8M add per its 13F, filed 14 Aug 2026 (SEC EDGAR)",
-        "Q2 fundamentals were a beat: revenue +13%, NdPr sales +277% YoY",
-        "GM magnet shipments start Q4 2026 — a concrete near-term catalyst"
+        "+9.10% Fri to $60.05 — sharp reversal of Thursday's AI-fear-driven selloff on concrete policy catalysts, not just macro rotation",
+        "G7 leaders agreed to cut rare-earth reliance on non-bloc (China) suppliers; Pentagon backed a $500M Phoenix Tailings loan",
+        "DoE selected seven critical-mineral processing/battery projects; Materials was the S&P's strongest sector Friday (+2.09%)",
+        "Q2 beat (revenue +89% YoY to $108.5M vs $96.9M consensus) and GM magnet shipments starting Q4 2026 remain intact tailwinds"
       ],
-      "confidence": 0.45
+      "confidence": 0.52
     },
     {
       "ticker": "LYC.AX",
       "name": "Lynas Rare Earths Ltd",
       "assetClass": "Australian rare earth producer (equity)",
       "pUp1m": 0.51,
-      "pUp3m": 0.54,
-      "pUp12m": 0.62,
+      "pUp3m": 0.55,
+      "pUp12m": 0.63,
       "ev1m": 0.002,
-      "ev3m": 0.012,
-      "ev12m": 0.09,
+      "ev3m": 0.013,
+      "ev12m": 0.095,
       "drivers": [
-        "-0.37% Thu, a mild move relative to MP/UUUU's sharper drops",
+        "Flat Friday (-0.06% to A$16.21) — did not participate in MP/UUUU's ~9% reversal, underscoring that the G7/Pentagon/DoE catalyst was US-specific",
         "Ex-China alternative-supply theme intact and structurally supportive",
         "China's Oct-2025 export controls remain suspended through 10 Nov 2026, a near-term relief valve",
-        "No fresh company-specific news this run"
+        "No fresh Lynas-specific news this run; relative underperformance vs MP/UUUU this week is a data point, not a red flag"
       ],
       "confidence": 0.3
     },
@@ -537,19 +538,19 @@
       "ticker": "UUUU",
       "name": "Energy Fuels Inc",
       "assetClass": "US uranium/rare earth producer (equity)",
-      "pUp1m": 0.48,
-      "pUp3m": 0.53,
-      "pUp12m": 0.62,
-      "ev1m": -0.005,
-      "ev3m": 0.01,
-      "ev12m": 0.1,
+      "pUp1m": 0.53,
+      "pUp3m": 0.58,
+      "pUp12m": 0.66,
+      "ev1m": 0.01,
+      "ev3m": 0.03,
+      "ev12m": 0.13,
       "drivers": [
-        "-6.40% Thu — high-beta small cap swept up in the same AI-fear-driven sector rotation as MP",
-        "Bridgewater opened a fresh new Q2-2026 $2.3M stake per its 13F, filed 14 Aug 2026 (SEC EDGAR)",
-        "Layers onto already-disclosed CEO/director open-market buying ($12.70-13.08, 7-8 Jul)",
-        "Rare alignment of insider AND macro-whale conviction on the same name"
+        "+8.92% Fri to $15.14 — reversed Thursday's -6.40% AI-fear-driven drop on the same G7/Pentagon/DoE rare-earth policy catalysts lifting MP",
+        "High-beta small cap swept up in a sector-wide 'resource complex catches a bid' move (REMX/USA Rare Earth also sharply higher)",
+        "Bridgewater's fresh Q2-2026 stake and insider buying (CEO/directors, Jul) still stand as idiosyncratic support",
+        "A one-session policy-driven reversal — durability depends on G7/Pentagon follow-through, not yet a structural re-rate"
       ],
-      "confidence": 0.35
+      "confidence": 0.42
     },
     {
       "ticker": "USAR",
@@ -627,37 +628,37 @@
       "ticker": "SPY",
       "name": "S&P 500 SPDR ETF",
       "assetClass": "Equity / Regions",
-      "pUp1m": 0.52,
-      "pUp3m": 0.58,
+      "pUp1m": 0.54,
+      "pUp3m": 0.59,
       "pUp12m": 0.68,
-      "ev1m": 0.003,
-      "ev3m": 0.018,
+      "ev1m": 0.005,
+      "ev3m": 0.02,
       "ev12m": 0.08,
       "drivers": [
-        "AI-valuation unwind risk vs buyback-driven yield relief and record Philly Fed/claims beats Thu",
-        "S&P -0.87% Thu on VIX +7.52% spike, but breadth (70% >200-DMA) shows narrow semi-led weakness, not broad capitulation",
-        "Treasury buyback (9 Sep start) supportive for the long end and risk assets generally",
-        "Hawkish Fed cross-currents (3-way FOMC dissent, Musalem) cap near-term upside"
+        "+0.43% Fri to 7,674.37, a broad rebound (Dow +0.98%, Russell +0.85%) after Thursday's -0.87% selloff; VIX -5.5% to 15.13",
+        "Treasury Secretary Bessent confirmed the buyback could exceed the $4bn/operation floor, reinforcing the real-yield relief trade",
+        "A one-session bounce, not a resolved AI-valuation concern — Jackson Hole (27-29 Aug) and Warsh's 28 Aug debut keynote are the next event risk",
+        "Sept FOMC odds ~65.5% for a 25bp cut (down from 71% a day earlier), 34.5% odds of 50bp — still meaningfully dovish-priced"
       ],
-      "confidence": 0.55
+      "confidence": 0.56
     },
     {
       "ticker": "QQQ",
       "name": "Invesco Nasdaq-100 ETF",
       "assetClass": "Equity / Regions",
-      "pUp1m": 0.48,
-      "pUp3m": 0.55,
-      "pUp12m": 0.66,
-      "ev1m": 0,
-      "ev3m": 0.015,
+      "pUp1m": 0.5,
+      "pUp3m": 0.56,
+      "pUp12m": 0.67,
+      "ev1m": 0.002,
+      "ev3m": 0.018,
       "ev12m": 0.09,
       "drivers": [
-        "Nvidia lost as much as ~$600bn intraday on AI 'circular financing' fears mid-week",
-        "WSJ flagged ~$3tn of off-balance-sheet AI infrastructure commitments across nine major tech names",
-        "Secular AI demand fundamentals intact even as valuation scrutiny intensifies",
-        "Nasdaq -1.00% Thu, the epicenter of the risk-off move"
+        "+0.43% Fri to 26,180.46, rebounding with the broader market after mid-week's AI-valuation-driven selloff",
+        "VIX cooled -5.5% to 15.13 from Thursday's 16.01 spike — vol relief supportive near-term",
+        "AI 'circular financing'/valuation scrutiny (WSJ's ~$3tn off-balance-sheet commitments estimate) not resolved, just paused for a session",
+        "Secular AI demand fundamentals intact; watch for follow-through into next week ahead of Jackson Hole"
       ],
-      "confidence": 0.5
+      "confidence": 0.51
     },
     {
       "ticker": "IWM",
@@ -789,19 +790,19 @@
       "ticker": "BTC-USD",
       "name": "Bitcoin",
       "assetClass": "Crypto",
-      "pUp1m": 0.58,
-      "pUp3m": 0.6,
-      "pUp12m": 0.68,
-      "ev1m": 0.03,
-      "ev3m": 0.06,
-      "ev12m": 0.2,
+      "pUp1m": 0.6,
+      "pUp3m": 0.62,
+      "pUp12m": 0.69,
+      "ev1m": 0.035,
+      "ev3m": 0.065,
+      "ev12m": 0.21,
       "drivers": [
-        "~$74,859 Friday-morning level (+8.07% from Thu), a continuous-trading LEVEL not a session close",
-        "Treasury-buyback debasement narrative plus a record ~$2.7-3bn short-liquidation cascade drove the surge",
-        "Trump crypto-reserve talk and CLARITY Act push (vote expected 15 Sep) supportive",
-        "Correlated to the gold/silver debasement trade this week rather than acting as a diversifier"
+        "~$78,426 level as of Sat pre-Asia-open (+7.4% vs Thursday's close), continuing to climb overnight past Friday's already-strong ~$74,859 level",
+        "Riding the same Treasury-buyback debasement narrative as gold/silver, plus continued short-covering after the record ~$2.7-3bn liquidation cascade",
+        "Correlated to the metals debasement trade rather than acting as an independent diversifier this week",
+        "Trump's Friday 21 Aug 7pm ET remarks were a South Carolina Senate campaign rally (Darline Graham runoff, 25 Aug) — confirmed non-market-moving, no crypto-policy content"
       ],
-      "confidence": 0.45
+      "confidence": 0.46
     },
     {
       "ticker": "ETH-USD",
@@ -984,5 +985,5 @@
       "confidence": 0.56
     }
   ],
-  "callsNote": "Per-instrument forward-looking priors re-verified Fri 21 Aug 10:10 SGT against the complete Wed 19 + Thu 20 Aug sessions (a two-session catch-up). This run: 30 of 49 tickers were independently re-grounded in current news/price action (the US/global equity factor and sector ETFs, precious metals, energy, the rare-earth basket, and BTC-USD) — the macro block above covers all of them narratively. The remaining tickers (VGK, INDA, FXI, EEM, EWJ and most of the bond/rates and altcoin sleeve) were NOT independently re-verified this cycle and are carried forward from the prior run rather than re-derived with fabricated precision; their probabilities should be read as stale-but-not-wrong rather than fresh. The live in-browser quant engine blends all 49 with 2y daily technicals to produce the displayed P(up)/EV."
+  "callsNote": "Per-instrument forward-looking priors re-verified Sat 22 Aug (pre-Asia-open SGT) against the complete Fri 21 Aug US session (S&P/Nasdaq/Dow/Russell/VIX/gold/silver/oil/BTC) plus Thursday-close-lagged HK/SG prints (Tencent/Xiaomi/SMIC/DBS/OCBC, which report one day behind). This run: 11 tickers were independently re-grounded in current news/price action — GLD, SLV, MP, UUUU, LYC.AX, SPY, QQQ, XLE, USO, and BTC-USD (the tickers most affected by Friday's session: the equity rebound, gold/silver's third straight day of gains, the G7/Pentagon/DoE-driven rare-earth reversal, and Bitcoin's continued climb). GDX/SILJ have no standalone ticker entries in this universe; their read is captured via the GLD/SLV driver notes. All other tickers (the momentum/quality/value factor ETFs, sector ETFs besides XLE, DBC/URA/COPX/DBA, the remaining rare-earth extras, regional/EM equity ETFs, ETH-USD/SOL-USD, and the full bond/rates sleeve) were NOT independently re-verified this cycle and are carried forward from the prior (Fri 21 Aug 10:10 SGT) run rather than re-derived with fabricated precision; their probabilities should be read as stale-but-not-wrong rather than fresh. The live in-browser quant engine blends all 49 with 2y daily technicals to produce the displayed P(up)/EV."
 }
