@@ -1,52 +1,52 @@
 {
-  "updated": "2026-08-23",
-  "asOf": "2026-08-23",
+  "updated": "2026-08-24T07:35:00+08:00",
+  "asOf": "2026-08-24",
   "note": "CIO research-panel macro regime + per-instrument probabilistic priors, produced by a multi-agent research workflow with adversarial verification and cited sources. The live in-browser quant engine (GBM drift-diffusion on 2y daily history) blends with these forward-looking priors to produce the displayed P(up) and EV. Refreshed by the scheduled intel agent.",
   "macro": {
-    "regime": "Tentative risk rebound, hard-asset rotation intact",
-    "riskOnProb": 0.41,
-    "regimeScore": 0.41,
-    "asOf": "2026-08-23",
-    "narrative": "Sunday 23 Aug, markets closed for the weekend — levels below are as of Friday 21 Aug's US close: S&P +0.43% to 7,674.37 (Dow +0.98%, Russell +0.85%), VIX -5.5% to 15.13, extending a one-session rebound after the mid-week AI-valuation scare, while gold/silver/BTC continued the same fiscal-debasement rally (GLD +1.95%, SLV +1.72%, BTC closed the week +22% at ~$76,944) even as DXY fell despite the FOMC's 19 Aug minutes revealing a genuinely hawkish bloc — three regional presidents (Logan, Hammack, Kashkari) pushed for a 25bp hike in July with no discussion of cuts — which markets chose to read as removing a stale hawkish premium rather than fresh hawkish news (16 Sep FOMC still prices ~65% odds of a 25bp cut vs ~35% for 50bp). The next binary catalyst is the 27-29 Aug Jackson Hole Symposium, where new Chair Warsh delivers his first keynote (Fri 28 Aug, 10am ET, theme 'Financial Innovation: Implications for Payments and Policy'); he has signaled a 'big picture' framing and said he is 'not constrained by market prices' — central-banker code that leaves real two-sided surprise risk despite a BofA survey pricing a neutral tone. Underneath the bounce, two areas of genuine fragility persist: high-yield credit spreads (~271-281bp OAS) sit in the richest decile of their history against a ~450bp long-run median, priced for perfection into a heavy September issuance calendar, while hyperscalers (Amazon/Alphabet/Microsoft) are now guided to spend ~102% of cloud revenue on AI capex in 2026, feeding a growing 'capex-fatigue'/ROI-scrutiny narrative that is the structural driver behind the mid-week Nvidia-led selloff Friday's bounce only partially reversed. The Strait of Hormuz crisis remains unresolved and arguably worse — two ADNOC tankers were struck by (per the UAE) Iranian drones on 13 Aug, commercial traffic stays far below prewar levels despite a US-protected corridor, and Qatar-mediated talks are stalled — a structural oil-risk premium that held Brent/WTI roughly flat Friday (XLE -0.17%).",
+    "regime": "Tentative risk rebound, elevated event risk into a stacked catalyst week",
+    "riskOnProb": 0.39,
+    "regimeScore": 0.39,
+    "asOf": "2026-08-24",
+    "narrative": "Levels below are as of Friday 21 Aug's US close (S&P 7,674.37 +0.43%, VIX 15.13 -5.5%) -- the whole weekend passed with zero new equity/bond sessions and Asia has not opened yet this Monday. What changed is positioning ahead of three stacked binary catalysts this week rather than any confirmed new print: Treasury's Iran-sanctions rollout (2pm ET Monday, publicly scheduled since Fri 21 Aug -- Bessent's 'toughest sanctions in history' and China-Gulf-energy framing trace to a Thu 20 Aug CNBC interview, not a Sunday one; his genuinely Sunday-dated contribution was an FT op-ed calling it an 'economic D-Day'), Nvidia's FQ2 earnings (Wed 26 Aug after close, the cleanest single read on AI-capex durability), and new Fed Chair Warsh's first Jackson Hole keynote (Fri 28 Aug, which he has previewed as 'structural, not near-term guidance'). Oil already re-rated on the sanctions anticipation (Brent/WTI +5-6% on the week) before giving back part of that move at Sunday's Globex reopen; crypto similarly gave back roughly a third of Friday's surge over the weekend (BTC ~$76,000 Sunday vs $78,335 Friday close) on thin weekend liquidity -- levels, not closes. Net: trim risk-on conviction modestly ahead of resolution rather than extending into the rebound.",
     "drivers": [
       {
-        "factor": "FOMC minutes reveal a hawkish bloc, but markets read it as an air-pocket, not new hawkishness",
-        "read": "The 19 Aug minutes (July 28-29 meeting) showed three regional presidents (Logan, Hammack, Kashkari) pushed for a 25bp hike with no discussion of cuts — a genuinely hawkish document — yet DXY still fell as markets treated it as removing a stale hawkish premium; the 16 Sep FOMC still prices ~65% odds of a 25bp cut vs ~35% for 50bp (no material odds of a hold or hike).",
+        "factor": "Iran sanctions rollout (Mon 24 Aug, 2pm ET) now explicitly threatens China as a secondary target",
+        "read": "Treasury Secretary Bessent's Sunday 23 Aug FT op-ed ('economic D-Day,' 'the single greatest financial offensive ever marshalled against an adversary') is genuinely new; the harder line quoted elsewhere this week -- 'toughest sanctions in history' and naming China as the buyer of ~90% of Iran's oil while declining to rule out direct targeting -- traces to Thursday 20 Aug's CNBC interview, not Sunday. Iran's security chief Rezaei threatened to halt Hormuz flow if Gulf states join the sanctions, and Iran's parliament advanced a Hormuz transit-fee law over the weekend -- genuine counter-escalation.",
+        "impact": "cautionary"
+      },
+      {
+        "factor": "Jackson Hole (27-29 Aug) is the next binary catalyst -- Warsh's untested debut keynote",
+        "read": "New Fed Chair Warsh delivers his first Jackson Hole keynote Fri 28 Aug, 10am ET ('Financial Innovation: Implications for Payments and Policy'); he has told reporters the remarks will focus on 'long-term structural questions, not near-term guidance' -- tempering, not eliminating, hawkish-surprise risk versus a BofA survey pricing a neutral-tone consensus.",
         "impact": "mixed"
       },
       {
-        "factor": "Jackson Hole (27-29 Aug) is the next binary catalyst — Warsh's untested debut keynote",
-        "read": "New Fed Chair Warsh delivers his first Jackson Hole keynote Fri 28 Aug, 10am ET ('Financial Innovation: Implications for Payments and Policy'); he has signaled a 'big picture' framing and said he is 'not constrained by market prices' — language that leaves real hawkish-surprise risk despite a BofA survey pricing a neutral-tone consensus.",
+        "factor": "Nvidia FQ2 earnings (Wed 26 Aug after close) is now the week's second binary catalyst",
+        "read": "The cleanest single read on whether the AI-capex-fatigue narrative behind the mid-week (19-20 Aug) selloff is real. Nvidia is separately providing up to $105B of financing for an OpenAI Ohio data center -- a sign hyperscaler capex intensity is still accelerating, a mild counterweight to the fatigue narrative heading into the print.",
         "impact": "mixed"
       },
       {
         "factor": "Credit spreads priced for perfection into a heavy September issuance calendar",
-        "read": "HY OAS ~271-281bp sits in the richest decile of its history (vs a ~450bp long-run median) and IG ~81bp/BBB ~100bp are similarly tight; the compression reflects a genuinely benign backdrop (Fed easing, 2s10s +35bp, MOVE ~74.7, contained defaults) but leaves little cushion if energy (~10% of the HY index) reverses or September's heavy supply calendar tests demand.",
+        "read": "HY OAS ~271-281bp sits in the richest decile of its history (vs a ~450bp long-run median); unchanged over the weekend, still little cushion if energy (~10% of the HY index) reverses or September's heavy supply calendar tests demand.",
         "impact": "cautionary"
       },
       {
         "factor": "AI-capex 'fatigue' narrative building beneath Friday's tech rebound",
-        "read": "Amazon/Alphabet/Microsoft are now guided to spend ~102% of cloud revenue on AI capex in 2026 (UBS projects hyperscaler capex rising from ~$0.5tn in 2025 to ~$1.0tn in 2026 and ~$1.6tn by 2028), and hedge funds are increasingly separating 'durable winners' from overextended names — the structural backdrop behind the mid-week Nvidia-led selloff that Friday's bounce only partially reversed.",
+        "read": "Amazon/Alphabet/Microsoft are now guided to spend ~102% of cloud revenue on AI capex in 2026 (UBS: hyperscaler capex ~$1.0tn 2026 rising to ~$1.6tn by 2028); Nvidia's Wednesday print is the near-term test of whether this de-rates the group further or the WSJ-driven scare (~$3tn off-balance-sheet AI commitments) proves to have been overdone.",
         "impact": "cautionary"
       },
       {
-        "factor": "Strait of Hormuz crisis deteriorating, not resolving",
-        "read": "Two ADNOC tankers were struck by (per the UAE) Iranian drones on 13 Aug; commercial traffic remains far below prewar levels despite a US-protected corridor, and Qatar-mediated talks toward a short-term arrangement remain stalled — a structural oil-risk premium persists even as Friday's tape was roughly flat (XLE -0.17%, Brent +0.10%, WTI -1.35%).",
-        "impact": "cautionary"
-      },
-      {
-        "factor": "Debasement trade (gold/silver/BTC) extends into the weekend, reinforced by rare-earth policy",
-        "read": "GLD +1.95%/SLV +1.72% marked a third straight gain Friday and BTC closed the week +22% at ~$76,944 (still below the Jan-2026 high of $94,820 and the Oct-2025 ATH of $126,198) on the same DXY-weakness/fiscal-debasement narrative, reinforced by a concrete rare-earth policy tailwind (G7/Pentagon/DoE) that drove MP +9.1%/UUUU +8.9%.",
+        "factor": "Debasement trade (gold/silver, BTC) extends into the weekend but crypto gave back part of Friday's surge",
+        "read": "GLD +1.95%/SLV +1.72% marked a third straight Friday gain; BTC pulled back to ~$76,000 Sunday from Friday's $78,335 close (weekend liquidity, not a reversal) after its best week since 2024. The G7/Pentagon/DOE rare-earth policy tailwind (MP +9.1%/UUUU +8.9% Fri) is unchanged and now sits adjacent to Monday's China-adjacent Iran-sanctions headlines.",
         "impact": "supportive"
       }
     ],
     "byAssetClass": [
       {
         "assetClass": "Equity",
-        "stance": "modest OW",
-        "pUp12m": 0.64,
-        "tilt": 0.012,
-        "note": "Held modest OW: Friday's broad rebound (S&P +0.43%, VIX -5.5%) is real but a single session against two live overhangs — Jackson Hole's hawkish-surprise risk (Warsh: 'not constrained by market prices') and the building AI-capex-fatigue narrative (hyperscalers at ~102% of cloud revenue) that triggered the mid-week selloff in the first place."
+        "stance": "Neutral",
+        "pUp12m": 0.6,
+        "tilt": 0,
+        "note": "Cut from modest OW to Neutral: Friday's rebound (S&P +0.43%, VIX -5.5%) is real but three binary catalysts land this week (Iran sanctions Mon, Nvidia earnings Wed, Warsh's Jackson Hole debut Fri) -- better to let them resolve than lean further into the bounce."
       },
       {
         "assetClass": "Commodities",
@@ -60,7 +60,7 @@
         "stance": "modest OW",
         "pUp12m": 0.61,
         "tilt": 0.012,
-        "note": "Held modest OW: BTC closed the week +22% to ~$76,944 on the same debasement narrative as gold/silver, though it remains a high-vol, metals-correlated trade rather than an independent diversifier, and is still well below both the Jan-2026 high ($94,820) and the Oct-2025 ATH ($126,198)."
+        "note": "Held modest OW: BTC continues grinding higher on Treasury-buyback-driven liquidity optimism, but gave back roughly a third of Friday's surge over the weekend (~$76,000 Sunday vs $78,335 Friday close) on thin weekend liquidity -- a level, not a close, and not treated as a reversal."
       },
       {
         "assetClass": "Bonds",
@@ -71,10 +71,10 @@
       },
       {
         "assetClass": "USD/Cash",
-        "stance": "modest UW",
-        "pUp12m": 0.4,
-        "tilt": -0.012,
-        "note": "Held modest UW: DXY fell even on a hawkish FOMC-minutes print, underscoring the debasement trade's durability; cash still earns ~3.5-3.75% carry as dry powder into Jackson Hole (27-29 Aug)."
+        "stance": "Neutral",
+        "pUp12m": 0.47,
+        "tilt": 0,
+        "note": "Moved from modest UW to Neutral: explicit secondary-sanctions rhetoric targeting Iran's trading partners (implicitly China) ahead of Monday's 2pm ET announcement is a classic dollar-defensive setup; holding some cash optionality into three stacked binary catalysts this week (Iran Mon, Nvidia Wed, Jackson Hole Fri) is reasonable even as cash still earns ~3.5-3.75% carry."
       }
     ],
     "sources": [
@@ -102,7 +102,13 @@
       "https://www.aljazeera.com/news/2026/6/22/china-adds-10-us-firms-including-rare-earth-miner-to-export-control-list",
       "https://source.benchmarkminerals.com/article/china-targets-us-rare-earth-and-defence-linked-entities-with-dual-use-export-ban",
       "https://247wallst.com/investing/2026/08/21/usa-rare-earth-rises-8-critical-metals-jumps-10-mp-materials-climbs-5-as-the-resource-sector-catches-a-bid/",
-      "https://www.benzinga.com/trading-ideas/movers/26/08/61363383/why-is-mp-materials-stock-surging-friday"
+      "https://www.benzinga.com/trading-ideas/movers/26/08/61363383/why-is-mp-materials-stock-surging-friday",
+      "https://www.cnbc.com/2026/08/20/cnbc-exclusive-transcript-us-treasury-secretary-scott-bessent-speaks-with-cnbcs-sara-eisen-on-squawk-on-the-street-today.html",
+      "https://www.cnbc.com/2026/08/23/treasury-secretary-bessent-iran-sanctions-press-conference.html",
+      "https://www.al-monitor.com/originals/2026/08/us-will-impose-toughest-sanctions-history-iran-bessent-says",
+      "https://www.fxleaders.com/news/2026/08/23/crude-oil-prices-open-lower-ahead-of-us-pce-and-warsh-as-80-and-75-supports-come-into-focus/",
+      "https://www.aljazeera.com/news/liveblog/2026/8/23/iran-war-live-tehran-warns-neighbours-against-joining-us-economic-war",
+      "https://247wallst.com/investing/2026/08/21/nvidia-stock-has-one-week-to-prove-the-ai-spending-boom-is-still-alive/"
     ]
   },
   "calls": [
@@ -192,7 +198,8 @@
         "Nvidia -$600bn intraday on circular-financing fears; epicenter of the Thu selloff",
         "WSJ's ~$3tn off-balance-sheet AI-commitments story keeps valuation scrutiny elevated",
         "Hyperscalers (AMZN/GOOGL/MSFT) now guided to spend ~102% of cloud revenue on AI capex in 2026 — a fresh 'capex-fatigue'/ROI-scrutiny data point (UBS: hyperscaler capex ~$1.0tn 2026 rising to ~$1.6tn 2028) reinforcing the mid-week selloff's underlying thesis",
-        "Buyback-driven yield relief a partial offset for high-duration tech valuations"
+        "Buyback-driven yield relief a partial offset for high-duration tech valuations",
+        "Nvidia reports FQ2 earnings Wed 26 Aug after close -- the week's cleanest single read on AI-capex durability; Nvidia is separately financing up to $105B of an OpenAI Ohio data center, a mild counterweight to the capex-fatigue narrative"
       ],
       "confidence": 0.5
     },
@@ -210,7 +217,8 @@
         "Epicenter of the selloff/rebound whipsaw — PHLX semis' steepest 3-day decline since March",
         "Korea's Samsung/SK Hynix buyback announcements (KOSPI +5.89% Thu) show a real capital-return offset to the valuation scare",
         "Nvidia -$600bn intraday mid-week; AMD -4%+; hyperscaler 'capex fatigue' narrative (AMZN/GOOGL/MSFT at ~102% of cloud revenue reinvested) is the structural bear case weighing on the group into Jackson Hole",
-        "High-beta to both the AI-capex-credibility scare and any dovish Fed repricing"
+        "High-beta to both the AI-capex-credibility scare and any dovish Fed repricing",
+        "Nvidia FQ2 earnings (Wed 26 Aug after close) is now a live, dated catalyst for the whole group, not just NVDA -- elevated event-risk window into Jackson Hole the same week"
       ],
       "confidence": 0.5
     },
@@ -380,37 +388,39 @@
       "ticker": "DBC",
       "name": "Invesco DB Commodity Index Tracking Fund",
       "assetClass": "Broad commodity futures ETF",
-      "pUp1m": 0.56,
+      "pUp1m": 0.58,
       "pUp3m": 0.58,
       "pUp12m": 0.64,
-      "ev1m": 0.006,
+      "ev1m": 0.009,
       "ev3m": 0.018,
       "ev12m": 0.07,
       "drivers": [
         "Oil geopolitical premium (Hormuz) plus the metals rally both supportive",
         "Soft China demand a partial offset to the broad commodity complex",
         "Benefits from the same USD-weakness tailwind as gold/silver",
-        "No broad-commodity-specific news beyond the energy and metals drivers already covered"
+        "No broad-commodity-specific news beyond the energy and metals drivers already covered",
+        "Oil already re-rated ~6% on the week on Iran-sanctions anticipation before giving back part of that move at Sunday's Globex reopen -- Monday's 2pm ET announcement is a live two-sided catalyst"
       ],
-      "confidence": 0.4
+      "confidence": 0.42
     },
     {
       "ticker": "USO",
       "name": "United States Oil Fund LP",
       "assetClass": "Crude oil futures ETF",
-      "pUp1m": 0.56,
+      "pUp1m": 0.58,
       "pUp3m": 0.57,
       "pUp12m": 0.61,
-      "ev1m": 0.005,
+      "ev1m": 0.008,
       "ev3m": 0.018,
       "ev12m": 0.055,
       "drivers": [
         "Roughly flat Fri (+0.07%) as WTI pulled back -1.35% even as Brent held +0.10% — a pause after the week's Hormuz-driven rally",
         "Two ADNOC tankers struck by (per the UAE) Iranian drones on 13 Aug; commercial traffic remains far below prewar levels despite a US-protected corridor, continuing the escalation pattern",
         "Global demand risk (soft China data — July FAI/industrial production/retail sales all weak) still caps further upside",
-        "Trump's new Iran sanctions remain a structural, not yet de-escalating, factor"
+        "Trump's new Iran sanctions remain a structural, not yet de-escalating, factor",
+        "Oil pulled back at Sunday's Globex reopen (profit-taking ahead of PCE/Warsh) after Friday's rally; Iran's security chief Rezaei threatened to halt Hormuz flow if Gulf states join Monday's sanctions and parliament advanced a transit-fee law -- both raise, not lower, the probability of a disorderly Monday reaction"
       ],
-      "confidence": 0.49
+      "confidence": 0.51
     },
     {
       "ticker": "URA",
@@ -776,17 +786,18 @@
       "ticker": "FXI",
       "name": "iShares China Large-Cap ETF",
       "assetClass": "Equity / Regions",
-      "pUp1m": 0.48,
+      "pUp1m": 0.46,
       "pUp3m": 0.52,
       "pUp12m": 0.52,
-      "ev1m": -0.006,
+      "ev1m": -0.008,
       "ev3m": 0.008,
       "ev12m": 0.03,
       "drivers": [
         "Hang Seng logged its best week since Sep-2025 (+3.7%) on a 'moderately loose' Politburo pledge and record southbound YTD inflows, but China GDP at a 3.5-yr low (~4.3%) and a sub-50 PMI keep easing incremental — a hope-driven bid",
         "China Q2 GDP still missed at +4.3% (weakest in 3+ years, below the 4.5% consensus), with property investment -18% and fixed-asset investment -5.7% partly offset by exports surging +27% — the growth backdrop caps how far the stimulus signal can carry",
         "Firm tape into late July: the Hang Seng rose +0.41% for a 4th straight session (HS Tech +0.61%) with Tencent/Alibaba/Xiaomi anchoring the index even as SMIC/semis gave back gains on the US chip rout; China drew a record 3rd-largest +$21.3bn weekly equity inflow (BofA), a real flow bid",
-        "Geopolitical tail: US tariffs, tech restrictions and the rare-earth export-control détente (controls suspended to 10 Nov) frame the binary risk; the Iran oil shock is a further headwind for the oil-importing economy — the follow-through detail on the Politburo signal is the swing"
+        "Geopolitical tail: US tariffs, tech restrictions and the rare-earth export-control détente (controls suspended to 10 Nov) frame the binary risk; the Iran oil shock is a further headwind for the oil-importing economy — the follow-through detail on the Politburo signal is the swing",
+        "Bessent's Thu 20 Aug CNBC interview (not Sunday as one wire conflated) explicitly named China as Iran's dominant oil buyer (~50% of its Gulf energy) while declining to rule out direct secondary sanctions -- new China-trade-friction event risk into Monday's 2pm ET announcement and ahead of Xi's expected September DC visit, layered on the existing G7 rare-earth friction"
       ],
       "confidence": 0.55
     },

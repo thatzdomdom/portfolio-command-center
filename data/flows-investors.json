@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-23",
+  "updated": "2026-08-24",
   "retrievedOn": "2026-08-23",
-  "note": "Re-verified Sun 23 Aug 2026, ~07:02 SGT (weekend run, before Monday's Asia open). No exchange published a new investor-type split since Saturday's edition — Japan/Korea/HK/China/Singapore are all between prints (Japan's next weekly release is ~27 Aug; Korea has no new session since Fri 21 Aug close; HK Southbound discloses on a T+2 lag so 20 Aug remains the newest confirmed print; China's daily margin balance did advance one session, to 20 Aug, on a broader combined financing+securities-lending basis — flagged as a different basis than the SSE/SZSE financing-only split tracked below, not spliced together). Singapore (the owner's largest exposure) was re-attempted this run (sgx.com, SGinvestors.io, i3investor) and again returned no fresher weekly institutional/retail split than the week of 20-24 Jul — now ~30 days stale, the single biggest gap in this file; a widely-circulating 'S$506m institutional outflow' figure was checked and confirmed to be a stale 2024 snippet, not current, and is deliberately NOT used. US proxy set unchanged (ICI's next release, week to 19 Aug, is not due until ~26 Aug).",
+  "note": "Re-verified Sun 23 Aug 2026, ~07:02 SGT (weekend run, before Monday's Asia open). No exchange published a new investor-type split since Saturday's edition — Japan/Korea/HK/China/Singapore are all between prints (Japan's next weekly release is ~27 Aug; Korea has no new session since Fri 21 Aug close; HK Southbound discloses on a T+2 lag so 20 Aug remains the newest confirmed print; China's daily margin balance did advance one session, to 20 Aug, on a broader combined financing+securities-lending basis — flagged as a different basis than the SSE/SZSE financing-only split tracked below, not spliced together). Singapore (the owner's largest exposure) was re-attempted this run (sgx.com, SGinvestors.io, i3investor) and again returned no fresher weekly institutional/retail split than the week of 20-24 Jul — now ~30 days stale, the single biggest gap in this file; a widely-circulating 'S$506m institutional outflow' figure was checked and confirmed to be a stale 2024 snippet, not current, and is deliberately NOT used. US proxy set unchanged (ICI's next release, week to 19 Aug, is not due until ~26 Aug). Re-verified Mon 24 Aug 2026 07:50 SGT pre-Asia-open run: Japan/Korea not re-checked (already current through their respective latest cadences); Hong Kong Southbound and Singapore SGX weekly remain stale despite active re-attempts (see each market's dataGaps); China A-share margin-balance proxy re-confirmed consistent with the already-recorded ¥3.01trn 23-Jun-2026 peak (a '~2trn' figure circulating in some secondary sources this run traces to a stale, mis-dated 2025 data point and was not applied here); United States ICI mutual-fund breakdown corrected below with a fresher, internally-consistent direct fetch.",
   "markets": [
     {
       "market": "Japan (JPX / TSE)",
@@ -359,7 +359,7 @@
           "unit": "HKD",
           "period": "20 Aug session",
           "isProxy": false,
-          "note": "No fresher (21 Aug) print found this run despite a real attempt — remains the latest confirmed session. Stock-level detail refined this run: contrarian buying in Alibaba (+HK$2.21bn) and Kuaishou (+HK$1.14bn) and GenScript Biotech (+HK$205mn) even as the aggregate was a net outflow; Tencent -HK$408mn, SMIC -HK$350mn net sold the same session — via third-party aggregation (futunn/hstong), HKEX's own Historical-Daily page failed to load again this run."
+          "note": "No fresher (21 Aug) print found again this run (2nd consecutive miss) despite trying HKEX's Historical-Daily Stock Connect page (JS-rendered, no data), the MacroMicro southbound mirror (HTTP 403) and Chinese-language search for 南向资金 8月21日 -- 20 Aug remains the latest confirmed session."
         },
         {
           "investorType": "Southbound — 15 Aug session (context)",
@@ -382,7 +382,7 @@
         "HKEX publishes NO retail-vs-institutional split — its Cash Market Transaction Survey was discontinued (latest edition 2020)",
         "Northbound real-time and daily flows were withdrawn in 2024; only quarterly shareholding remains",
         "Southbound captures mainland money only — it says nothing about international institutional flows into HK",
-        "HKEX's own Historical-Daily Stock Connect page failed to load (JS-rendered, no data in fetched HTML) again this run — the 20 Aug and 15 Aug figures above remain THIRD-PARTY-SOURCED (futunn/hstong), not primary HKEX; 18-19 Aug daily figures were not found and are skipped rather than guessed. Re-checked this run: several Stock Connect aggregators (10jqka, eastmoney) note their disclosed daily figures run on a T+2 lag, which is a plausible structural reason a 21 Aug print was not yet findable as of this 23 Aug weekend run — worth re-checking after Monday 24 Aug rather than assuming it will appear over the weekend."
+        "HKEX's own Historical-Daily Stock Connect page failed to load (JS-rendered, no data in fetched HTML) again this run — the 20 Aug and 15 Aug figures above remain THIRD-PARTY-SOURCED (futunn/hstong), not primary HKEX; 18-19 Aug daily figures were not found and are skipped rather than guessed. Re-checked this run: several Stock Connect aggregators (10jqka, eastmoney) note their disclosed daily figures run on a T+2 lag, which is a plausible structural reason a 21 Aug print was not yet findable as of this 23 Aug weekend run — worth re-checking after Monday 24 Aug rather than assuming it will appear over the weekend. Re-checked again 24 Aug: still no 21 Aug print found via HKEX direct, MacroMicro mirror (403), or targeted CN-language search -- consistent with the T+2-lag hypothesis noted last run."
       ],
       "series": {
         "unit": "HK$ bn",
@@ -504,7 +504,8 @@
         "Real-time and DAILY northbound foreign flows were withdrawn in two stages (13 May 2024 intraday; 19 Aug 2024 daily) — only a post-close same-day aggregate (total turnover, trade count, top-10 active) is published now; only quarterly shareholding gives a foreign-positioning read. Do NOT call current northbound data \"daily\".",
         "No official retail-vs-institutional split exists for A-shares",
         "Margin balance is a leverage proxy, not a flow measurement",
-        "New-account-opening figure's exact reference period is imprecisely dated in the source found — treat the -7% m/m as approximate."
+        "New-account-opening figure's exact reference period is imprecisely dated in the source found — treat the -7% m/m as approximate.",
+        "Re-checked 24 Aug: the already-recorded ¥3.01trn (25 Jun 2026) margin-balance peak was independently re-confirmed (combined SH+SZ+BJ crossed ¥3trn for the first time on 23 Jun 2026, ~10.25% of same-day A-share turnover). A '~2trn' or '2.155trn, 10-year-high' figure circulating in some secondary sources this run traces to a stale, mis-dated 2025 data point conflated with 2026 -- not applied to this file."
       ],
       "series": {
         "unit": "CNY trn",
@@ -646,7 +647,7 @@
         }
       ],
       "trend": "Institutions have been net sellers in two of the last three weeks (−S$318.2m, then −S$54.3m) while retail bought both weeks (+S$516.8m, +S$71.1m).",
-      "interpretation": "DISTRIBUTION as of the last confirmed week (24 Jul) — institutions selling into retail buying, with the STI at record levels. STALENESS FLAG (4 runs in a row now): no fresher weekly SGX institutional-vs-retail split could be retrieved again this run despite re-attempting sgx.com, SGinvestors.io and i3investor/itiger/moomoo; this reading is now ~30 days old and should not be assumed to still hold given the Aug 19-21 global volatility, the weekend's Iran-sanctions escalation, and the Fri 21 Aug OCBC Research note flagging S-REITs as sharply lagging the bank-led STI YTD (see news.json). A recurring '~S$506m net institutional outflow driven by Financials/Industrials' snippet was re-checked this run and traced to a stale 2024 report being resurfaced by search aggregators, not a current-week figure — confirmed NOT usable and deliberately excluded again. Qualitative context found instead (YTD-through-17-Jul, NOT a fresh weekly figure): institutional buying concentrated in OCBC/UOB/SIA/Wilmar/SATS (all already-strong YTD performers); retail flow skewed toward DBS and weaker names (Singtel, CapitaLand Ascendas REIT, Genting Singapore, Sembcorp) — OCBC is the one name both cohorts were net buying. For the owner's REIT sleeve (Mapletree, Keppel REIT), CapitaLand Ascendas REIT's negative YTD retail flow is a caution sign if the pattern holds, though it is not SGX-confirmed for the REIT names specifically.",
+      "interpretation": "DISTRIBUTION as of the last confirmed week (24 Jul) — institutions selling into retail buying, with the STI at record levels. STALENESS FLAG (5 runs in a row now): no fresher weekly SGX institutional-vs-retail split could be retrieved again this run despite re-attempting sgx.com, SGinvestors.io and i3investor/itiger/moomoo; this reading is now ~30 days old and should not be assumed to still hold given the Aug 19-21 global volatility, the weekend's Iran-sanctions escalation, and the Fri 21 Aug OCBC Research note flagging S-REITs as sharply lagging the bank-led STI YTD (see news.json). A recurring '~S$506m net institutional outflow driven by Financials/Industrials' snippet was re-checked this run and traced to a stale 2024 report being resurfaced by search aggregators, not a current-week figure — confirmed NOT usable and deliberately excluded again. Qualitative context found instead (YTD-through-17-Jul, NOT a fresh weekly figure): institutional buying concentrated in OCBC/UOB/SIA/Wilmar/SATS (all already-strong YTD performers); retail flow skewed toward DBS and weaker names (Singtel, CapitaLand Ascendas REIT, Genting Singapore, Sembcorp) — OCBC is the one name both cohorts were net buying. For the owner's REIT sleeve (Mapletree, Keppel REIT), CapitaLand Ascendas REIT's negative YTD retail flow is a caution sign if the pattern holds, though it is not SGX-confirmed for the REIT names specifically.",
       "sources": [
         "https://klse.i3investor.com/web/blog/detail/SGXResearch/2026-07-20-story-h502278712-STI_Hits_Record_as_Focus_Shifts_to_Earnings",
         "https://www.moomoo.com/community/feed/institutions-buy-sia-and-wilmar-retail-crowds-into-dbs-singapore-116973559611398"
@@ -655,7 +656,7 @@
         "SGX does NOT split institutional into foreign vs domestic — the single \"institutional\" line mixes both",
         "sgx.com itself renders as a JavaScript shell and returns HTTP 200 for non-existent paths, so figures here are cited to a full-text republication that could actually be read",
         "Weekly cadence: no intra-week read",
-        "STALE (4 runs in a row): no fresher weekly SGD net-flow total than the week of 20-24 Jul 2026 could be retrieved as of this 23 Aug run despite re-attempting sgx.com, SGinvestors.io, i3investor, itiger and moomoo — this is the single biggest gap in this file given SGX is the owner's largest exposure. The figures above are CARRIED FORWARD, not restamped as current. SGX's next weekly release would ordinarily land Mon/Tue for the week of 17-21 Aug; worth a targeted re-check early in the week of 24-28 Aug rather than repeating the same weekend search pattern."
+        "STALE (5 runs in a row): no fresher weekly SGD net-flow total than the week of 20-24 Jul 2026 could be retrieved again this run (24 Aug) despite re-attempting sgx.com and sginvestors.io (both JS-rendered, no data served) -- this is the single biggest gap in this file given SGX is the owner's largest exposure. The figures above are CARRIED FORWARD, not restamped as current. A recurring '~S$506m net institutional outflow' snippet was checked again this run and re-confirmed as a stale, likely mis-dated resurfaced figure -- excluded again."
       ],
       "series": {
         "unit": "S$ m",
@@ -730,7 +731,7 @@
       "market": "United States",
       "available": false,
       "cadence": "No official investor-type split exists. Proxies: ICI weekly (released Wed), CFTC weekly (Fri, as-of Tuesday)",
-      "latestPeriod": "ICI week ending 12 Aug 2026 (fresher scope: total long-term fund + ETF flows, not the prior mutual-fund-only series) · re-checked 22 Aug, still the latest ICI release (week ending 19 Aug will not post until ~26 Aug) · Vanda/JPM commentary dated within days of 21 Aug",
+      "latestPeriod": "ICI week ending 12 Aug 2026 -- re-confirmed via direct fetch of ici.org/research/stats/flows this run (24 Aug); week ending 19 Aug not yet posted (expected ~26 Aug). Mutual-fund breakdown below corrected to an internally-consistent direct-fetch figure (equity + hybrid + bond = total, verified to the cent) superseding the prior run's approximate split.",
       "asOf": "2026-08-12",
       "flows": [
         {
@@ -743,22 +744,31 @@
           "note": "Official ICI aggregate, INCLUDES ETFs this time (a broader/fresher scope than the mutual-fund-only series tracked below) — mutual funds -$16.82bn, ETF net issuance +$34.21bn."
         },
         {
-          "investorType": "Equity funds (ICI, mutual+ETF)",
+          "investorType": "Equity mutual funds (ICI, ex-ETF)",
           "direction": "outflow",
-          "amount": "-$4.41bn (domestic -$8.10bn, world +$3.69bn)",
+          "amount": "-$20.89bn (domestic -$17.18bn, world -$3.71bn)",
           "unit": "USD",
           "period": "week ending 12 Aug",
           "isProxy": true,
-          "note": "Domestic equity outflow partly offset by world/international equity inflow."
+          "note": "Corrected this run via a direct ici.org fetch (superseding the prior approximate split) -- internally consistent: equity -$20.89bn + hybrid -$1.09bn + bond +$5.16bn = -$16.82bn total long-term mutual fund flow, matching the total line above to the cent."
         },
         {
-          "investorType": "Taxable bond + municipal bond funds (ICI)",
-          "direction": "inflow",
-          "amount": "+$17.63bn taxable, +$2.02bn municipal",
+          "investorType": "Hybrid mutual funds (ICI, ex-ETF)",
+          "direction": "outflow",
+          "amount": "-$1.09bn",
           "unit": "USD",
           "period": "week ending 12 Aug",
           "isProxy": true,
-          "note": ""
+          "note": "Added this run for completeness -- part of the internally-consistent equity+hybrid+bond=total reconciliation."
+        },
+        {
+          "investorType": "Taxable + municipal bond mutual funds (ICI, ex-ETF)",
+          "direction": "inflow",
+          "amount": "+$3.62bn taxable, +$1.54bn municipal (+$5.16bn combined)",
+          "unit": "USD",
+          "period": "week ending 12 Aug",
+          "isProxy": true,
+          "note": "Corrected this run via direct fetch (superseded the prior approximate +$17.63bn/+$2.02bn split, which did not reconcile with the total line)."
         },
         {
           "investorType": "Retail net ETF purchases (Vanda)",
@@ -767,7 +777,7 @@
           "unit": "USD",
           "period": "as of ~21 Aug",
           "isProxy": true,
-          "note": "PROXY. Vanda: retail buying has fallen to its weakest pace since the COVID era despite markets near highs — one of the largest pullbacks since early Q2 2023; mutual funds/systematic strategies stepping in to fill the gap."
+          "note": "PROXY. Vanda: retail turnover remains near record highs (99.7th percentile) but net buying has weakened to its weakest pace since the COVID era -- re-confirmed this run, unchanged from last week's read."
         },
         {
           "investorType": "Prime-brokerage / leveraged-ETF deleveraging (JPMorgan)",
