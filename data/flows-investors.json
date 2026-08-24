@@ -1,65 +1,66 @@
 {
-  "updated": "2026-08-24",
-  "retrievedOn": "2026-08-23",
-  "note": "Re-verified Sun 23 Aug 2026, ~07:02 SGT (weekend run, before Monday's Asia open). No exchange published a new investor-type split since Saturday's edition — Japan/Korea/HK/China/Singapore are all between prints (Japan's next weekly release is ~27 Aug; Korea has no new session since Fri 21 Aug close; HK Southbound discloses on a T+2 lag so 20 Aug remains the newest confirmed print; China's daily margin balance did advance one session, to 20 Aug, on a broader combined financing+securities-lending basis — flagged as a different basis than the SSE/SZSE financing-only split tracked below, not spliced together). Singapore (the owner's largest exposure) was re-attempted this run (sgx.com, SGinvestors.io, i3investor) and again returned no fresher weekly institutional/retail split than the week of 20-24 Jul — now ~30 days stale, the single biggest gap in this file; a widely-circulating 'S$506m institutional outflow' figure was checked and confirmed to be a stale 2024 snippet, not current, and is deliberately NOT used. US proxy set unchanged (ICI's next release, week to 19 Aug, is not due until ~26 Aug). Re-verified Mon 24 Aug 2026 07:50 SGT pre-Asia-open run: Japan/Korea not re-checked (already current through their respective latest cadences); Hong Kong Southbound and Singapore SGX weekly remain stale despite active re-attempts (see each market's dataGaps); China A-share margin-balance proxy re-confirmed consistent with the already-recorded ¥3.01trn 23-Jun-2026 peak (a '~2trn' figure circulating in some secondary sources this run traces to a stale, mis-dated 2025 data point and was not applied here); United States ICI mutual-fund breakdown corrected below with a fresher, internally-consistent direct fetch.",
+  "updated": "2026-08-25",
+  "retrievedOn": "2026-08-25",
+  "note": "Re-verified Tue 25 Aug 2026, ~07:25 SGT pre-Asia-open run. Korea and Hong Kong both got genuinely fresh prints this run (Korea's Monday 24 Aug session, Hong Kong's 21+24 Aug southbound). Japan's weekly print is unchanged (week of 10-14 Aug remains latest; the 17-21 Aug week is not due until ~27 Aug per JPX's 4-business-day lag). Singapore (the owner's largest exposure) was re-attempted and again returned no fresher weekly institutional/retail split than the week of 20-24 Jul -- now ~32 days stale, the single biggest gap in this file. China's margin-balance proxy: search this run returned internally inconsistent totals for the prospective 21 Aug print across sources (likely combined-vs-financing-only conflation) -- the already-verified 19-20 Aug figure (\u00a52,632.847bn combined, -\u00a51.248bn d/d) is kept as latest rather than publishing an unreconciled number. United States: ICI's own page re-confirmed via direct fetch still shows week ending 12 Aug as latest (week-to-19-Aug not yet posted, expected ~26 Aug).",
   "markets": [
     {
       "market": "Japan (JPX / TSE)",
       "available": true,
-      "cadence": "Weekly — published ~15:30 JST on the 4th business day after the survey week",
-      "latestPeriod": "Week of 10-14 Aug 2026 (\"August Week 2\") — foreigners, individuals, trust banks, business corporations all confirmed",
+      "cadence": "Weekly \u2014 published ~15:30 JST on the 4th business day after the survey week",
+      "latestPeriod": "Week of 10-14 Aug 2026 (\"August Week 2\") \u2014 foreigners, individuals, trust banks, business corporations all confirmed",
       "asOf": "2026-08-14",
       "publishedOn": "2026-08-19",
       "flows": [
         {
-          "investorType": "Foreigners (海外投資家) — foreign institutional",
+          "investorType": "Foreigners (\u6d77\u5916\u6295\u8cc7\u5bb6) \u2014 foreign institutional",
           "direction": "inflow",
-          "amount": "+¥213.4bn cash (+¥688.6bn cash+futures combined)",
+          "amount": "+\u00a5213.4bn cash (+\u00a5688.6bn cash+futures combined)",
           "unit": "JPY",
           "period": "10-14 Aug",
           "isProxy": false,
-          "note": "4th consecutive week of net futures buying — a reversal from the 3-7 Aug net sell."
+          "note": "4th consecutive week of net futures buying \u2014 a reversal from the 3-7 Aug net sell."
         },
         {
-          "investorType": "Individuals (個人) — retail",
+          "investorType": "Individuals (\u500b\u4eba) \u2014 retail",
           "direction": "outflow",
-          "amount": "-¥655.7bn (cash -¥612.2bn, margin -¥43.5bn)",
+          "amount": "-\u00a5655.7bn (cash -\u00a5612.2bn, margin -\u00a543.5bn)",
           "unit": "JPY",
           "period": "10-14 Aug",
           "isProxy": false,
-          "note": "4th consecutive week of net selling — the largest since the 2nd week of April."
+          "note": "4th consecutive week of net selling \u2014 the largest since the 2nd week of April."
         },
         {
-          "investorType": "Trust banks (信託銀行)",
+          "investorType": "Trust banks (\u4fe1\u8a17\u9280\u884c)",
           "direction": "outflow",
-          "amount": "-¥82.3bn",
+          "amount": "-\u00a582.3bn",
           "unit": "JPY",
           "period": "10-14 Aug",
           "isProxy": false,
           "note": ""
         },
         {
-          "investorType": "Business corporations (事業法人, mainly buybacks)",
+          "investorType": "Business corporations (\u4e8b\u696d\u6cd5\u4eba, mainly buybacks)",
           "direction": "inflow",
-          "amount": "+¥257.8bn",
+          "amount": "+\u00a5257.8bn",
           "unit": "JPY",
           "period": "10-14 Aug",
           "isProxy": false,
           "note": "7th consecutive week of net buying, consistent with an active buyback cycle."
         }
       ],
-      "trend": "Foreign investors reversed back to net buying in the week of 10-14 Aug (+¥213.4bn cash, 4th straight week of futures buying) while retail extended a 4th consecutive week of net selling (-¥655.7bn, the largest since early April) — foreigners and retail moving in opposite directions again after briefly aligning 3-7 Aug.",
-      "interpretation": "A partial re-accumulation read: foreign money returned to net buying as global risk sentiment stabilized post-Treasury-buyback, while Japanese retail kept de-risking for a 4th straight week — a classic 'foreign institutions buy the dip retail is selling' pattern, consistent with the broader gold/silver debasement-hedge and cash-into-safety themes showing up elsewhere in the book this run. Business-corporation buybacks remain a steady structural bid (7 straight weeks).",
+      "trend": "Foreign investors reversed back to net buying in the week of 10-14 Aug (+\u00a5213.4bn cash, 4th straight week of futures buying) while retail extended a 4th consecutive week of net selling (-\u00a5655.7bn, the largest since early April) \u2014 foreigners and retail moving in opposite directions again after briefly aligning 3-7 Aug.",
+      "interpretation": "A partial re-accumulation read: foreign money returned to net buying as global risk sentiment stabilized post-Treasury-buyback, while Japanese retail kept de-risking for a 4th straight week \u2014 a classic 'foreign institutions buy the dip retail is selling' pattern, consistent with the broader gold/silver debasement-hedge and cash-into-safety themes showing up elsewhere in the book this run. Business-corporation buybacks remain a steady structural bid (7 straight weeks).",
       "sources": [
         "https://finance.yahoo.co.jp/news/detail/fb41e6e129b67cf23ab07f7f961d09d833712d59",
         "https://www.jpx.co.jp/markets/statistics-equities/investor-type/index.html"
       ],
       "dataGaps": [
-        "Trust banks is a CUSTODIAN category — it aggregates pension and other beneficial owners, so it is not a pure \"domestic institution\" read",
+        "Trust banks is a CUSTODIAN category \u2014 it aggregates pension and other beneficial owners, so it is not a pure \"domestic institution\" read",
         "No foreign/domestic split within investment trusts; investment-trust line not retrievable this run",
         "Weekly only: no intra-week refresh",
         "JPX's own site returned HTTP 403 on direct fetch this run again; the 10-14 Aug figures were confirmed via secondary Japanese financial press (Kabutan/Yahoo Japan Finance) citing the official release",
-        "The week of 17-21 Aug will not publish until ~27 Aug per JPX's own 4-business-day lag — nothing newer is expected before then."
+        "The week of 17-21 Aug will not publish until ~27 Aug per JPX's own 4-business-day lag \u2014 nothing newer is expected before then.",
+        "Re-checked 25 Aug: the week of 17-21 Aug is still not published (JPX's 4-business-day lag puts it at ~27 Aug) -- 10-14 Aug remains latest confirmed."
       ],
       "series": {
         "unit": "JPY bn",
@@ -147,114 +148,104 @@
           }
         ],
         "source": "https://www.traders.co.jp/margin_derivatives/investor_trends",
-        "note": "TSE cash equities only (現物), Tokyo+Nagoya, 51-broker basis. 10 weekly prints, every value cross-checked against Nikkei/Kabutan/Yahoo Japan Finance. NOTE: the 21-24 Jul week is only 4 sessions — Marine Day — so its magnitudes are not like-for-like. 3-7 Aug point: trust-bank/investment-trust values left null (not retrievable that run). 10-14 Aug point: foreigners/individuals/trust-banks confirmed via secondary press; investment-trust value left null (not retrievable this run, not guessed).",
+        "note": "TSE cash equities only (\u73fe\u7269), Tokyo+Nagoya, 51-broker basis. 10 weekly prints, every value cross-checked against Nikkei/Kabutan/Yahoo Japan Finance. NOTE: the 21-24 Jul week is only 4 sessions \u2014 Marine Day \u2014 so its magnitudes are not like-for-like. 3-7 Aug point: trust-bank/investment-trust values left null (not retrievable that run). 10-14 Aug point: foreigners/individuals/trust-banks confirmed via secondary press; investment-trust value left null (not retrievable this run, not guessed).",
         "confidence": "verified-secondary"
       }
     },
     {
       "market": "South Korea (KRX / KOSPI)",
       "available": true,
-      "cadence": "Daily — full investor-type split published after the close",
-      "latestPeriod": "Wed 19 Aug - Fri 21 Aug 2026 (all three days, post-close)",
-      "asOf": "2026-08-21",
+      "cadence": "Daily \u2014 full investor-type split published after the close",
+      "latestPeriod": "Mon 24 Aug 2026 session (KOSPI -3.12% to 6,696.96)",
+      "asOf": "2026-08-24",
       "flows": [
         {
-          "investorType": "Institutions (기관) — Fri 21 Aug (KOSPI +0.88% to 6,912.95)",
+          "investorType": "Foreigners (\uc678\uad6d\uc778) \u2014 Mon 24 Aug (KOSPI -3.12% to 6,696.96)",
+          "direction": "outflow",
+          "amount": "-W3.7trn to -W3.9trn (Korean-press sources disagree on the exact figure; direction and rough magnitude agree)",
+          "unit": "KRW",
+          "period": "24 Aug session",
+          "isProxy": false,
+          "note": "Heavy foreign selling into a chip-led selloff (Samsung Electronics -4% to -8.7%, SK Hynix also down) that tracked the same pre-Nvidia-earnings AI-capex jitters hitting US semis Monday."
+        },
+        {
+          "investorType": "Domestic institutions (\uae30\uad00) \u2014 Mon 24 Aug",
+          "direction": "outflow",
+          "amount": "-W1.3trn to -W1.7trn (source discrepancy, see above)",
+          "unit": "KRW",
+          "period": "24 Aug session",
+          "isProxy": false,
+          "note": "Institutions were the second-largest net seller alongside foreigners."
+        },
+        {
+          "investorType": "Retail / individuals (\uac1c\uc778) \u2014 Mon 24 Aug",
           "direction": "inflow",
-          "amount": "+₩248.4bn",
+          "amount": "+W3.3trn to +W3.8trn",
+          "unit": "KRW",
+          "period": "24 Aug session",
+          "isProxy": false,
+          "note": "Retail absorbed almost all of the foreign+institutional selling -- a 'buy the dip' pattern echoing the prior week's round trip."
+        },
+        {
+          "investorType": "KOSDAQ \u2014 Foreigners",
+          "direction": "inflow",
+          "amount": "+W241.7bn",
+          "unit": "KRW",
+          "period": "24 Aug session",
+          "isProxy": false,
+          "note": "KOSDAQ itself closed +1.42% at 813.33 on secondary-battery strength, diverging from KOSPI's selloff."
+        },
+        {
+          "investorType": "KOSDAQ \u2014 Individuals",
+          "direction": "outflow",
+          "amount": "-W260.4bn",
+          "unit": "KRW",
+          "period": "24 Aug session",
+          "isProxy": false,
+          "note": ""
+        },
+        {
+          "investorType": "Institutions (\uae30\uad00) \u2014 Fri 21 Aug (KOSPI +0.88% to 6,912.95)",
+          "direction": "inflow",
+          "amount": "+\u20a9248.4bn",
           "unit": "KRW",
           "period": "21 Aug session",
           "isProxy": false,
           "note": "A third straight day of positioning shifts following the KOSPI round trip; the index closed the week modestly higher."
         },
         {
-          "investorType": "Foreigners (외국인) — Fri 21 Aug",
+          "investorType": "Foreigners (\uc678\uad6d\uc778) \u2014 Fri 21 Aug",
           "direction": "outflow",
-          "amount": "-₩171.1bn",
+          "amount": "-\u20a9171.1bn",
           "unit": "KRW",
           "period": "21 Aug session",
           "isProxy": false,
-          "note": "Headline foreign flow was a small net sell, but foreign money bought >₩430bn of Samsung Electronics specifically — a stock-level divergence from the aggregate figure."
+          "note": "Headline foreign flow was a small net sell, but foreign money bought >\u20a9430bn of Samsung Electronics specifically \u2014 a stock-level divergence from the aggregate figure."
         },
         {
-          "investorType": "Retail / individuals (개인) — Fri 21 Aug",
+          "investorType": "Retail / individuals (\uac1c\uc778) \u2014 Fri 21 Aug",
           "direction": "outflow",
-          "amount": "-₩1,165.5bn",
+          "amount": "-\u20a91,165.5bn",
           "unit": "KRW",
           "period": "21 Aug session",
           "isProxy": false,
           "note": "Retail was the largest net seller for a second straight session, continuing to take profits into the rebound."
-        },
-        {
-          "investorType": "Foreigners (외국인) — Wed 19 Aug (KOSPI -5.80%)",
-          "direction": "outflow",
-          "amount": "-₩1.32trn (~$949.3mn)",
-          "unit": "KRW",
-          "period": "19 Aug session",
-          "isProxy": false,
-          "note": "Foreign selling into the AI/chip-valuation-shock crash."
-        },
-        {
-          "investorType": "Domestic institutions (기관) — Wed 19 Aug",
-          "direction": "outflow",
-          "amount": "-₩3.49trn (~$2.5bn)",
-          "unit": "KRW",
-          "period": "19 Aug session",
-          "isProxy": false,
-          "note": "The largest single seller of the crash session."
-        },
-        {
-          "investorType": "Retail / individuals (개인) — Wed 19 Aug",
-          "direction": "inflow",
-          "amount": "+₩4.64trn (~$3.3bn)",
-          "unit": "KRW",
-          "period": "19 Aug session",
-          "isProxy": false,
-          "note": "Retail bought the dip aggressively while foreign+institutional sold."
-        },
-        {
-          "investorType": "Foreigners (외국인) — Thu 20 Aug (KOSPI +5.89%)",
-          "direction": "inflow",
-          "amount": "+₩1.71trn",
-          "unit": "KRW",
-          "period": "20 Aug session",
-          "isProxy": false,
-          "note": "Foreign money reversed hard into the Samsung/SK Hynix buyback-driven rebound."
-        },
-        {
-          "investorType": "Domestic institutions (기관) — Thu 20 Aug",
-          "direction": "inflow",
-          "amount": "+₩487.37bn",
-          "unit": "KRW",
-          "period": "20 Aug session",
-          "isProxy": false,
-          "note": ""
-        },
-        {
-          "investorType": "Retail / individuals (개인) — Thu 20 Aug",
-          "direction": "outflow",
-          "amount": "-₩2.28trn",
-          "unit": "KRW",
-          "period": "20 Aug session",
-          "isProxy": false,
-          "note": "Retail took profits/rotated out into the rebound — the mirror image of Wednesday."
         }
       ],
-      "trend": "The two-day round trip (retail bought Wednesday's crash, foreign+institutional bought Thursday's rebound) was followed by a calmer Friday: institutions were modest net buyers (+₩248.4bn), retail was the largest seller for a second straight day (-₩1,165.5bn, profit-taking into strength), and foreigners were a small net seller in aggregate (-₩171.1bn) despite buying over ₩430bn of Samsung Electronics specifically.",
-      "interpretation": "Classic 'smart money re-enters, retail chases then fades' pattern around a company-specific catalyst (the Samsung >₩100trn and SK Hynix ~₩40trn capital-return announcements), now extending into a third day of retail profit-taking while foreign money stays selectively constructive on Samsung specifically. For the book, this mainly signals a fast-moving, headline-driven risk-appetite snapback in Asia tech that likely also supported HK tech (Tencent/Xiaomi) sentiment — not a structural read on Korea itself, which the owner does not hold directly.",
+      "trend": "Monday 24 Aug brought a sharp chip-led KOSPI selloff (-3.12%) with foreigners and institutions net selling W5-5.5trn combined, almost entirely absorbed by retail buying (+W3.3-3.8trn) -- the same 'retail buys, smart money sells the dip' pattern seen the prior week, now on a larger scale.",
+      "interpretation": "The Monday selloff tracks the same pre-Nvidia-earnings AI-capex-fatigue jitters hitting US chip names (Micron/AMD/TSM/Nvidia all down Monday), transmitted directly into Samsung/SK Hynix. Retail's aggressive dip-buying for a third consecutive volatile session suggests domestic risk appetite in Korea remains resilient even as foreign money continues to rotate defensively -- a read-through worth watching for HK tech (Tencent/SMIC), which saw a similar Monday pullback.",
       "sources": [
+        "https://www.businesskorea.co.kr/news/articleView.html?idxno=275391",
+        "https://www.betanews.net/article/view/beta202608240083",
         "https://www.asiae.co.kr/en/article/2026081915454701870",
-        "https://en.sedaily.com/news/2026/08/19/foreigners-institutions-dump-34-billion-samsung-falls-7",
-        "https://www.asiae.co.kr/en/article/2026082015554856874",
-        "https://www.businesskorea.co.kr/news/articleView.html?idxno=275087",
-        "https://www.hankyung.com/article/2026082150696",
-        "https://www.businesskorea.co.kr/news/articleView.html?idxno=275291"
+        "https://en.sedaily.com/news/2026/08/19/foreigners-institutions-dump-34-billion-samsung-falls-7"
       ],
       "dataGaps": [
-        "KRX \"foreigners\" mixes foreign institutions and foreign retail — it is not a pure institutional read",
+        "KRX \"foreigners\" mixes foreign institutions and foreign retail \u2014 it is not a pure institutional read",
         "No domestic foreign/institutional sub-split",
         "Single-day figures are volatile; the monthly aggregate is the usable signal",
-        "KRX \"foreigners\" mixes foreign institutions and foreign retail — it is not a pure institutional read."
+        "KRX \"foreigners\" mixes foreign institutions and foreign retail \u2014 it is not a pure institutional read.",
+        "Two Korean-press sources (businesskorea.co.kr vs betanews.net) disagree on the exact 24 Aug won amounts (likely preliminary-vs-final or classification differences) -- direction and rough magnitude agree, treated as directionally reliable rather than to-the-won precise."
       ],
       "series": {
         "unit": "KRW bn",
@@ -273,11 +264,12 @@
           "2026-07-31",
           "2026-08-19",
           "2026-08-20",
-          "2026-08-21"
+          "2026-08-21",
+          "2026-08-24"
         ],
         "lines": [
           {
-            "investorType": "Foreigners (외국인)",
+            "investorType": "Foreigners (\uc678\uad6d\uc778)",
             "isProxy": false,
             "values": [
               -1725.9,
@@ -294,11 +286,12 @@
               7182,
               -1320,
               1710,
-              -171.1
+              -171.1,
+              -3800
             ]
           },
           {
-            "investorType": "Institutions (기관)",
+            "investorType": "Institutions (\uae30\uad00)",
             "isProxy": false,
             "values": [
               -2208.3,
@@ -315,11 +308,12 @@
               1178.3,
               -3490,
               487.37,
-              248.4
+              248.4,
+              -1500
             ]
           },
           {
-            "investorType": "Individuals / retail (개인)",
+            "investorType": "Individuals / retail (\uac1c\uc778)",
             "isProxy": false,
             "values": [
               3892.5,
@@ -336,7 +330,8 @@
               -8254.3,
               4640,
               -2280,
-              -1165.5
+              -1165.5,
+              3500
             ]
           }
         ],
@@ -347,42 +342,52 @@
     },
     {
       "market": "Hong Kong (HKEX)",
-      "available": false,
+      "available": true,
       "cadence": "Southbound Stock Connect: daily, published after the HK close (T+0)",
-      "latestPeriod": "20 Aug 2026",
-      "asOf": "2026-08-20",
+      "latestPeriod": "24 Aug 2026",
+      "asOf": "2026-08-24",
       "flows": [
         {
-          "investorType": "Southbound — mainland money into HK stocks",
+          "investorType": "Southbound \u2014 mainland money into HK stocks",
+          "direction": "inflow",
+          "amount": "+HK$11.57bn (SH-Connect +HK$8.89bn, SZ-Connect +HK$2.67bn)",
+          "unit": "HKD",
+          "period": "24 Aug session",
+          "isProxy": false,
+          "note": "Bought Alibaba (+HK$2.18bn) and Tencent (+HK$1.54bn), sold SMIC (-HK$1.90bn) -- a stock-specific divergence within the owner's HK tech names even as the aggregate flow turned positive."
+        },
+        {
+          "investorType": "Southbound \u2014 prior session (context)",
+          "direction": "outflow",
+          "amount": "-HK$7.63bn (SH-Connect -HK$5.13bn, SZ-Connect -HK$2.50bn)",
+          "unit": "HKD",
+          "period": "21 Aug session",
+          "isProxy": false,
+          "note": "Friday's outflow, reversed by Monday's inflow above -- illustrates continued day-to-day choppiness in Southbound around the owner's HK tech names."
+        },
+        {
+          "investorType": "Southbound \u2014 mainland money into HK stocks",
           "direction": "outflow",
           "amount": "-HK$10.41bn (SH-Connect -HK$5.11bn, SZ-Connect -HK$5.30bn)",
           "unit": "HKD",
           "period": "20 Aug session",
           "isProxy": false,
-          "note": "No fresher (21 Aug) print found again this run (2nd consecutive miss) despite trying HKEX's Historical-Daily Stock Connect page (JS-rendered, no data), the MacroMicro southbound mirror (HTTP 403) and Chinese-language search for 南向资金 8月21日 -- 20 Aug remains the latest confirmed session."
-        },
-        {
-          "investorType": "Southbound — 15 Aug session (context)",
-          "direction": "inflow",
-          "amount": "+HK$35.876bn",
-          "unit": "HKD",
-          "period": "15 Aug session",
-          "isProxy": false,
-          "note": "A single-day record inflow (SH-connect +HK$19.712bn, SZ-connect +HK$16.165bn) earlier in the same fortnight — the swing from record inflow (15th) to a sizeable outflow (20th) illustrates how choppy Southbound has been around the owner's HK tech names this run."
+          "note": "No fresher (21 Aug) print found again this run (2nd consecutive miss) despite trying HKEX's Historical-Daily Stock Connect page (JS-rendered, no data), the MacroMicro southbound mirror (HTTP 403) and Chinese-language search for \u5357\u5411\u8d44\u91d1 8\u670821\u65e5 -- 20 Aug remains the latest confirmed session."
         }
       ],
-      "trend": "Volatile day-to-day: a single-day record HK$35.9bn inflow on 15 Aug was followed by a HK$10.4bn outflow on 20 Aug — mainland investors are trading Southbound tactically around the same tech names the owner holds, with no clean multi-day directional trend.",
-      "interpretation": "No official retail/institutional split exists for HK; Southbound Connect net is the mainland-conviction proxy. The picture on the owner's specific names (Tencent, SMIC) is mixed and choppy day-to-day this run — record inflows mid-month, an outflow on the day of Thursday's US-led equity selloff. Separately, EPFR/ISI commentary (undated, 2026) notes foreign long-only funds remain 'significantly underweight' China with early signs of a return to benchmark weight — a structurally bullish, multi-quarter story distinct from this choppy daily southbound read; do not conflate the two.",
+      "trend": "Southbound flipped from a HK$7.63bn net outflow Friday to a HK$11.57bn net inflow Monday -- continued day-to-day volatility, but Monday's buying was concentrated in Alibaba and Tencent specifically even as SMIC was sold, a more selective mainland stance than the prior 15-20 Aug swings from record inflow to outflow.",
+      "interpretation": "Mainland conviction on Tencent stayed intact through Monday's broader North Asia chip-led selloff (Tencent itself fell 3.72% Monday even as Southbound bought it net) -- reads as dip-buying rather than capitulation. SMIC's net sell alongside the broader inflow is the one cautionary stock-specific signal in the owner's HK tech book this run.",
       "sources": [
-        "https://finance.biggo.com/news/843e4b3a-e7d5-458c-bbfe-ff0683293412",
-        "https://www.hstong.com/news/detail/26081718100061070",
-        "https://isimarkets.com/publications/chinas-outperformance-is-finding-buyers/"
+        "https://www.cls.cn/detail/2462565",
+        "https://www.sina.cn/news/detail/5334518934275430.html",
+        "https://finance.biggo.com/news/843e4b3a-e7d5-458c-bbfe-ff0683293412"
       ],
       "dataGaps": [
-        "HKEX publishes NO retail-vs-institutional split — its Cash Market Transaction Survey was discontinued (latest edition 2020)",
+        "HKEX publishes NO retail-vs-institutional split \u2014 its Cash Market Transaction Survey was discontinued (latest edition 2020)",
         "Northbound real-time and daily flows were withdrawn in 2024; only quarterly shareholding remains",
-        "Southbound captures mainland money only — it says nothing about international institutional flows into HK",
-        "HKEX's own Historical-Daily Stock Connect page failed to load (JS-rendered, no data in fetched HTML) again this run — the 20 Aug and 15 Aug figures above remain THIRD-PARTY-SOURCED (futunn/hstong), not primary HKEX; 18-19 Aug daily figures were not found and are skipped rather than guessed. Re-checked this run: several Stock Connect aggregators (10jqka, eastmoney) note their disclosed daily figures run on a T+2 lag, which is a plausible structural reason a 21 Aug print was not yet findable as of this 23 Aug weekend run — worth re-checking after Monday 24 Aug rather than assuming it will appear over the weekend. Re-checked again 24 Aug: still no 21 Aug print found via HKEX direct, MacroMicro mirror (403), or targeted CN-language search -- consistent with the T+2-lag hypothesis noted last run."
+        "Southbound captures mainland money only \u2014 it says nothing about international institutional flows into HK",
+        "HKEX's own Historical-Daily Stock Connect page failed to load (JS-rendered, no data in fetched HTML) again this run \u2014 the 20 Aug and 15 Aug figures above remain THIRD-PARTY-SOURCED (futunn/hstong), not primary HKEX; 18-19 Aug daily figures were not found and are skipped rather than guessed. Re-checked this run: several Stock Connect aggregators (10jqka, eastmoney) note their disclosed daily figures run on a T+2 lag, which is a plausible structural reason a 21 Aug print was not yet findable as of this 23 Aug weekend run \u2014 worth re-checking after Monday 24 Aug rather than assuming it will appear over the weekend. Re-checked again 24 Aug: still no 21 Aug print found via HKEX direct, MacroMicro mirror (403), or targeted CN-language search -- consistent with the T+2-lag hypothesis noted last run.",
+        "Re-checked 25 Aug: 21 Aug and 24 Aug prints both obtained via Chinese-language financial press (sina.cn, cls.cn) after HKEX's own Historical-Daily Stock Connect page again failed to load (JS-rendered) -- third-party-sourced, not primary HKEX."
       ],
       "series": {
         "unit": "HK$ bn",
@@ -409,7 +414,9 @@
           "2026-08-14",
           "2026-08-15",
           "2026-08-17",
-          "2026-08-20"
+          "2026-08-20",
+          "2026-08-21",
+          "2026-08-24"
         ],
         "lines": [
           {
@@ -438,12 +445,14 @@
               0,
               35.876,
               3.077,
-              -10.41
+              -10.41,
+              -7.63,
+              11.57
             ]
           }
         ],
         "source": "https://www.hkex.com.hk/eng/csm/DailyStat/data_tab_daily_20260730e.js",
-        "note": "Southbound Stock Connect daily net, recomputed from HKEX primary files and confirmed to the cent. 14/15/17/20 Aug points are third-party-sourced (futunn/hstong) after HKEX's own page failed to load this run.",
+        "note": "Southbound Stock Connect daily net, recomputed from HKEX primary files and confirmed to the cent. 14/15/17/20 Aug points are third-party-sourced (futunn/hstong) after HKEX's own page failed to load this run. 21/24 Aug points are third-party-sourced (sina.cn/cls.cn) after HKEX's own page failed to load again this run.",
         "confidence": "verified-secondary (14-20 Aug points only; earlier points remain verified-primary)"
       }
     },
@@ -451,35 +460,35 @@
       "market": "China (A-shares)",
       "available": false,
       "cadence": "Margin balance: daily. Northbound: quarterly shareholding only since the 2024 disclosure change",
-      "latestPeriod": "20 Aug 2026 (combined 两融 balance, broader basis); 19 Aug 2026 (SSE/SZSE financing-only split)",
+      "latestPeriod": "20 Aug 2026 (combined \u4e24\u878d balance, broader basis); 19 Aug 2026 (SSE/SZSE financing-only split)",
       "asOf": "2026-08-20",
       "flows": [
         {
-          "investorType": "Margin financing balance (融资余额) — retail leverage",
+          "investorType": "Margin financing balance (\u878d\u8d44\u4f59\u989d) \u2014 retail leverage",
           "direction": "outflow",
-          "amount": "¥1,353.656bn (SSE) + ¥1,279.191bn (SZSE) = ¥2,632.847bn combined",
+          "amount": "\u00a51,353.656bn (SSE) + \u00a51,279.191bn (SZSE) = \u00a52,632.847bn combined",
           "unit": "CNY",
           "period": "19 Aug",
           "isProxy": true,
-          "note": "PROXY. SSE -¥13.611bn d/d, SZSE -¥16.058bn d/d, combined -¥29.669bn d/d — a modest deleveraging, giving back part of the early-August rebuild."
+          "note": "PROXY. SSE -\u00a513.611bn d/d, SZSE -\u00a516.058bn d/d, combined -\u00a529.669bn d/d \u2014 a modest deleveraging, giving back part of the early-August rebuild."
         },
         {
-          "investorType": "Combined margin trading balance (两融余额, financing + securities-lending) — broader retail-leverage proxy",
+          "investorType": "Combined margin trading balance (\u4e24\u878d\u4f59\u989d, financing + securities-lending) \u2014 broader retail-leverage proxy",
           "direction": "outflow",
-          "amount": "¥2,666.36bn, -¥1.248bn d/d (2.68% of A-share free-float market cap; margin turnover ¥190.06bn, -9.07% of total A-share turnover)",
+          "amount": "\u00a52,666.36bn, -\u00a51.248bn d/d (2.68% of A-share free-float market cap; margin turnover \u00a5190.06bn, -9.07% of total A-share turnover)",
           "unit": "CNY",
           "period": "20 Aug",
           "isProxy": true,
-          "note": "PROXY, BROADER BASIS than the financing-only (融资余额) SSE/SZSE split above — includes securities-lending balance, so not directly additive to the 19 Aug figure. Confirms the 'pause, not reversal' read: a small day/day dip after the mid-Aug rebuild, consistent with a market still digesting the Aug 19-20 volatility rather than resuming the June-to-August deleveraging trend."
+          "note": "PROXY, BROADER BASIS than the financing-only (\u878d\u8d44\u4f59\u989d) SSE/SZSE split above \u2014 includes securities-lending balance, so not directly additive to the 19 Aug figure. Confirms the 'pause, not reversal' read: a small day/day dip after the mid-Aug rebuild, consistent with a market still digesting the Aug 19-20 volatility rather than resuming the June-to-August deleveraging trend."
         },
         {
-          "investorType": "Margin balance — weekly",
+          "investorType": "Margin balance \u2014 weekly",
           "direction": "inflow",
-          "amount": "¥2,647.541bn (financing ¥2,622.544bn +¥33.427bn w/w; securities-lending ¥24.997bn +¥2.788bn w/w)",
+          "amount": "\u00a52,647.541bn (financing \u00a52,622.544bn +\u00a533.427bn w/w; securities-lending \u00a524.997bn +\u00a52.788bn w/w)",
           "unit": "CNY",
           "period": "week to 7 Aug",
           "isProxy": true,
-          "note": "PROXY. Balance had earlier peaked at ¥3.01trn (25 Jun) then fallen ~14% amid the AI/tech selloff to a ~¥2.59trn trough — this is a partial rebuild off that low, not a new high."
+          "note": "PROXY. Balance had earlier peaked at \u00a53.01trn (25 Jun) then fallen ~14% amid the AI/tech selloff to a ~\u00a52.59trn trough \u2014 this is a partial rebuild off that low, not a new high."
         },
         {
           "investorType": "New A-share account openings",
@@ -491,7 +500,7 @@
           "note": "PROXY for retail entry appetite; fell during the Aug tech selloff, consistent with the margin-balance pattern."
         }
       ],
-      "trend": "Margin balance (leveraged retail conviction) troughed mid-August after a sharp ~14% deleveraging from the June record high, rebuilt gradually through early-to-mid August, then gave back a modest ¥29.7bn on 19 Aug followed by a further small ¥1.2bn dip (broader combined basis) on 20 Aug — a pause rather than a reversal, but new account openings had already fallen during the same selloff, a genuinely mixed retail-appetite picture heading into the weekend's Iran-sanctions and Monday-open headline risk.",
+      "trend": "Margin balance (leveraged retail conviction) troughed mid-August after a sharp ~14% deleveraging from the June record high, rebuilt gradually through early-to-mid August, then gave back a modest \u00a529.7bn on 19 Aug followed by a further small \u00a51.2bn dip (broader combined basis) on 20 Aug \u2014 a pause rather than a reversal, but new account openings had already fallen during the same selloff, a genuinely mixed retail-appetite picture heading into the weekend's Iran-sanctions and Monday-open headline risk.",
       "interpretation": "Risk-neutral-to-cautiously-improving at the retail-leverage level. China remains the least observable market in this panel: since Beijing withdrew real-time/daily northbound disclosure (stage 1: 13 May 2024 intraday; stage 2: 19 Aug 2024 daily), only post-close aggregate turnover is published and margin balance is the best available proxy. For rare-earths/China-linked exposure, the rebuild off the trough suggests retail risk appetite is recovering but hasn't reclaimed the June highs.",
       "sources": [
         "https://www.stock.stockstar.com/IG2026081000002507.shtml",
@@ -501,11 +510,12 @@
         "https://m.21jingji.com/article/20260821/herald/9fe38edb40e7717f1d41af62c52bd90e.html"
       ],
       "dataGaps": [
-        "Real-time and DAILY northbound foreign flows were withdrawn in two stages (13 May 2024 intraday; 19 Aug 2024 daily) — only a post-close same-day aggregate (total turnover, trade count, top-10 active) is published now; only quarterly shareholding gives a foreign-positioning read. Do NOT call current northbound data \"daily\".",
+        "Real-time and DAILY northbound foreign flows were withdrawn in two stages (13 May 2024 intraday; 19 Aug 2024 daily) \u2014 only a post-close same-day aggregate (total turnover, trade count, top-10 active) is published now; only quarterly shareholding gives a foreign-positioning read. Do NOT call current northbound data \"daily\".",
         "No official retail-vs-institutional split exists for A-shares",
         "Margin balance is a leverage proxy, not a flow measurement",
-        "New-account-opening figure's exact reference period is imprecisely dated in the source found — treat the -7% m/m as approximate.",
-        "Re-checked 24 Aug: the already-recorded ¥3.01trn (25 Jun 2026) margin-balance peak was independently re-confirmed (combined SH+SZ+BJ crossed ¥3trn for the first time on 23 Jun 2026, ~10.25% of same-day A-share turnover). A '~2trn' or '2.155trn, 10-year-high' figure circulating in some secondary sources this run traces to a stale, mis-dated 2025 data point conflated with 2026 -- not applied to this file."
+        "New-account-opening figure's exact reference period is imprecisely dated in the source found \u2014 treat the -7% m/m as approximate.",
+        "Re-checked 24 Aug: the already-recorded \u00a53.01trn (25 Jun 2026) margin-balance peak was independently re-confirmed (combined SH+SZ+BJ crossed \u00a53trn for the first time on 23 Jun 2026, ~10.25% of same-day A-share turnover). A '~2trn' or '2.155trn, 10-year-high' figure circulating in some secondary sources this run traces to a stale, mis-dated 2025 data point conflated with 2026 -- not applied to this file.",
+        "Re-checked 25 Aug: a prospective 21 Aug print was searched but returned internally inconsistent totals across sources (likely combined-vs-financing-only basis conflation, similar to a prior run's confusion) -- NOT applied; 19-20 Aug remains the latest reconciled figure."
       ],
       "series": {
         "unit": "CNY trn",
@@ -537,7 +547,7 @@
         ],
         "lines": [
           {
-            "investorType": "Retail leverage proxy — margin financing balance outstanding (融资余额, RZYE)",
+            "investorType": "Retail leverage proxy \u2014 margin financing balance outstanding (\u878d\u8d44\u4f59\u989d, RZYE)",
             "isProxy": true,
             "values": [
               2.9807,
@@ -567,7 +577,7 @@
             ]
           },
           {
-            "investorType": "Retail leverage proxy — daily net margin buying (融资净买入额, RZJME)",
+            "investorType": "Retail leverage proxy \u2014 daily net margin buying (\u878d\u8d44\u51c0\u4e70\u5165\u989d, RZJME)",
             "isProxy": true,
             "values": [
               -0.019734,
@@ -598,23 +608,23 @@
           }
         ],
         "source": "https://datacenter-web.eastmoney.com/api/data/v1/get?sortColumns=dim_date&sortTypes=-1&pageSize=25&pageNumber=1&reportName=RPTA_RZRQ_LSHJ&columns=ALL&source=WEB&client=WEB",
-        "note": "Margin financing balance and daily net — a RETAIL LEVERAGE proxy, not a foreign-flow measure. Northbound foreign flows have not been published since 2024. 7/11/13/19 Aug points added for the margin-financing-balance line only (line 1); daily net-buying figures (line 2) were not retrievable for these dates and are left null rather than guessed.",
+        "note": "Margin financing balance and daily net \u2014 a RETAIL LEVERAGE proxy, not a foreign-flow measure. Northbound foreign flows have not been published since 2024. 7/11/13/19 Aug points added for the margin-financing-balance line only (line 1); daily net-buying figures (line 2) were not retrievable for these dates and are left null rather than guessed.",
         "confidence": "verified-secondary"
       }
     },
     {
       "market": "Singapore (SGX)",
       "available": true,
-      "cadence": "Weekly — SGX Fund Flow tracker, Mon–Fri weeks",
-      "latestPeriod": "Week 30: 20–24 Jul 2026",
+      "cadence": "Weekly \u2014 SGX Fund Flow tracker, Mon\u2013Fri weeks",
+      "latestPeriod": "Week 30: 20\u201324 Jul 2026",
       "asOf": "2026-07-24",
       "flows": [
         {
           "investorType": "Institutional (SGX does not split foreign vs domestic)",
           "direction": "outflow",
-          "amount": "−S$54.3m",
+          "amount": "\u2212S$54.3m",
           "unit": "SGD",
-          "period": "20–24 Jul",
+          "period": "20\u201324 Jul",
           "isProxy": false,
           "note": "Second net-selling week in three."
         },
@@ -623,40 +633,40 @@
           "direction": "inflow",
           "amount": "+S$71.1m",
           "unit": "SGD",
-          "period": "20–24 Jul",
+          "period": "20\u201324 Jul",
           "isProxy": false,
           "note": "Retail absorbing institutional supply."
         },
         {
           "investorType": "Market makers / active traders (MMATs)",
           "direction": "outflow",
-          "amount": "−S$16.7m",
+          "amount": "\u2212S$16.7m",
           "unit": "SGD",
-          "period": "20–24 Jul",
+          "period": "20\u201324 Jul",
           "isProxy": true,
           "note": "PROXY: the residual category as printed by the source."
         },
         {
-          "investorType": "Institutional — prior week",
+          "investorType": "Institutional \u2014 prior week",
           "direction": "outflow",
-          "amount": "−S$318.2m",
+          "amount": "\u2212S$318.2m",
           "unit": "SGD",
-          "period": "13–17 Jul",
+          "period": "13\u201317 Jul",
           "isProxy": false,
           "note": "Retail bought +S$516.8m the same week."
         }
       ],
-      "trend": "Institutions have been net sellers in two of the last three weeks (−S$318.2m, then −S$54.3m) while retail bought both weeks (+S$516.8m, +S$71.1m).",
-      "interpretation": "DISTRIBUTION as of the last confirmed week (24 Jul) — institutions selling into retail buying, with the STI at record levels. STALENESS FLAG (5 runs in a row now): no fresher weekly SGX institutional-vs-retail split could be retrieved again this run despite re-attempting sgx.com, SGinvestors.io and i3investor/itiger/moomoo; this reading is now ~30 days old and should not be assumed to still hold given the Aug 19-21 global volatility, the weekend's Iran-sanctions escalation, and the Fri 21 Aug OCBC Research note flagging S-REITs as sharply lagging the bank-led STI YTD (see news.json). A recurring '~S$506m net institutional outflow driven by Financials/Industrials' snippet was re-checked this run and traced to a stale 2024 report being resurfaced by search aggregators, not a current-week figure — confirmed NOT usable and deliberately excluded again. Qualitative context found instead (YTD-through-17-Jul, NOT a fresh weekly figure): institutional buying concentrated in OCBC/UOB/SIA/Wilmar/SATS (all already-strong YTD performers); retail flow skewed toward DBS and weaker names (Singtel, CapitaLand Ascendas REIT, Genting Singapore, Sembcorp) — OCBC is the one name both cohorts were net buying. For the owner's REIT sleeve (Mapletree, Keppel REIT), CapitaLand Ascendas REIT's negative YTD retail flow is a caution sign if the pattern holds, though it is not SGX-confirmed for the REIT names specifically.",
+      "trend": "Institutions have been net sellers in two of the last three weeks (\u2212S$318.2m, then \u2212S$54.3m) while retail bought both weeks (+S$516.8m, +S$71.1m).",
+      "interpretation": "DISTRIBUTION as of the last confirmed week (24 Jul) \u2014 institutions selling into retail buying, with the STI at record levels. STALENESS FLAG (5 runs in a row now): no fresher weekly SGX institutional-vs-retail split could be retrieved again this run despite re-attempting sgx.com, SGinvestors.io and i3investor/itiger/moomoo; this reading is now ~30 days old and should not be assumed to still hold given the Aug 19-21 global volatility, the weekend's Iran-sanctions escalation, and the Fri 21 Aug OCBC Research note flagging S-REITs as sharply lagging the bank-led STI YTD (see news.json). A recurring '~S$506m net institutional outflow driven by Financials/Industrials' snippet was re-checked this run and traced to a stale 2024 report being resurfaced by search aggregators, not a current-week figure \u2014 confirmed NOT usable and deliberately excluded again. Qualitative context found instead (YTD-through-17-Jul, NOT a fresh weekly figure): institutional buying concentrated in OCBC/UOB/SIA/Wilmar/SATS (all already-strong YTD performers); retail flow skewed toward DBS and weaker names (Singtel, CapitaLand Ascendas REIT, Genting Singapore, Sembcorp) \u2014 OCBC is the one name both cohorts were net buying. For the owner's REIT sleeve (Mapletree, Keppel REIT), CapitaLand Ascendas REIT's negative YTD retail flow is a caution sign if the pattern holds, though it is not SGX-confirmed for the REIT names specifically.",
       "sources": [
         "https://klse.i3investor.com/web/blog/detail/SGXResearch/2026-07-20-story-h502278712-STI_Hits_Record_as_Focus_Shifts_to_Earnings",
         "https://www.moomoo.com/community/feed/institutions-buy-sia-and-wilmar-retail-crowds-into-dbs-singapore-116973559611398"
       ],
       "dataGaps": [
-        "SGX does NOT split institutional into foreign vs domestic — the single \"institutional\" line mixes both",
+        "SGX does NOT split institutional into foreign vs domestic \u2014 the single \"institutional\" line mixes both",
         "sgx.com itself renders as a JavaScript shell and returns HTTP 200 for non-existent paths, so figures here are cited to a full-text republication that could actually be read",
         "Weekly cadence: no intra-week read",
-        "STALE (5 runs in a row): no fresher weekly SGD net-flow total than the week of 20-24 Jul 2026 could be retrieved again this run (24 Aug) despite re-attempting sgx.com and sginvestors.io (both JS-rendered, no data served) -- this is the single biggest gap in this file given SGX is the owner's largest exposure. The figures above are CARRIED FORWARD, not restamped as current. A recurring '~S$506m net institutional outflow' snippet was checked again this run and re-confirmed as a stale, likely mis-dated resurfaced figure -- excluded again."
+        "STALE (6 runs in a row): no fresher weekly SGD net-flow total than the week of 20-24 Jul 2026 could be retrieved again this run (25 Aug) despite re-attempting sgx.com and sginvestors.io (both JS-rendered, no data served) -- this is the single biggest gap in this file given SGX is the owner's largest exposure. The figures above are CARRIED FORWARD, not restamped as current. A recurring '~S$506m net institutional outflow' snippet was checked again this run and re-confirmed as a stale, likely mis-dated resurfaced figure -- excluded again."
       ],
       "series": {
         "unit": "S$ m",
@@ -741,7 +751,7 @@
           "unit": "USD",
           "period": "week ending 12 Aug",
           "isProxy": true,
-          "note": "Official ICI aggregate, INCLUDES ETFs this time (a broader/fresher scope than the mutual-fund-only series tracked below) — mutual funds -$16.82bn, ETF net issuance +$34.21bn."
+          "note": "Official ICI aggregate, INCLUDES ETFs this time (a broader/fresher scope than the mutual-fund-only series tracked below) \u2014 mutual funds -$16.82bn, ETF net issuance +$34.21bn."
         },
         {
           "investorType": "Equity mutual funds (ICI, ex-ETF)",
@@ -786,21 +796,22 @@
           "unit": "qualitative",
           "period": "since Jun 2026, still active ~Aug 2026",
           "isProxy": true,
-          "note": "PROXY, undated exact publication. Deleveraging that began in June has not concluded — leveraged equity ETFs, options positioning and margin accounts still have room to unwind, weighing on tech/semis."
+          "note": "PROXY, undated exact publication. Deleveraging that began in June has not concluded \u2014 leveraged equity ETFs, options positioning and margin accounts still have room to unwind, weighing on tech/semis."
         }
       ],
-      "trend": "Retail buying power is fading sharply (Vanda) even as broader fund-flow data (ICI, now including ETFs) stays modestly positive, and institutional-side leverage (JPM prime brokerage) is still unwinding — a 'retail exhausted, institutions still de-risking' combination.",
-      "interpretation": "For the owner's large cash pile, this combination (retail fatigue + ongoing institutional deleveraging, especially in tech/semis) supports staying defensive/patient; it also contextualizes the Aug 19-20 US-semiconductor-led rout. NOTE: this run's ICI figure uses a BROADER scope (total long-term funds + ETFs) than the prior mutual-fund-only series charted below — the two are not directly comparable point-to-point, flagged rather than spliced together.",
+      "trend": "Retail buying power is fading sharply (Vanda) even as broader fund-flow data (ICI, now including ETFs) stays modestly positive, and institutional-side leverage (JPM prime brokerage) is still unwinding \u2014 a 'retail exhausted, institutions still de-risking' combination.",
+      "interpretation": "For the owner's large cash pile, this combination (retail fatigue + ongoing institutional deleveraging, especially in tech/semis) supports staying defensive/patient; it also contextualizes the Aug 19-20 US-semiconductor-led rout. NOTE: this run's ICI figure uses a BROADER scope (total long-term funds + ETFs) than the prior mutual-fund-only series charted below \u2014 the two are not directly comparable point-to-point, flagged rather than spliced together.",
       "sources": [
         "https://www.ici.org/research/stats/combined_flows",
         "https://seekingalpha.com/news/4612658",
         "https://news.futunn.com/en/post/76205612"
       ],
       "dataGaps": [
-        "The US publishes NO investor-type flow breakdown — everything here is a proxy",
-        "This run's ICI figure (total long-term funds + ETFs, week to 12 Aug) uses a DIFFERENT, broader scope than the mutual-fund-only ICI series charted below (week to 22 Jul) — intentionally not appended to that series to avoid a discontinuity read as a trend break",
+        "The US publishes NO investor-type flow breakdown \u2014 everything here is a proxy",
+        "This run's ICI figure (total long-term funds + ETFs, week to 12 Aug) uses a DIFFERENT, broader scope than the mutual-fund-only ICI series charted below (week to 22 Jul) \u2014 intentionally not appended to that series to avoid a discontinuity read as a trend break",
         "Vanda and JPMorgan commentary are aggregator-sourced and not pinned to an exact publication date",
-        "CFTC weekly futures-positioning data (previously tracked) was not re-verified this run"
+        "CFTC weekly futures-positioning data (previously tracked) was not re-verified this run",
+        "Re-checked 25 Aug via direct ici.org fetch: week ending 12 Aug remains the latest ICI release; week-to-19-Aug not yet posted (expected ~26 Aug)."
       ],
       "series": {
         "unit": "US$ mn",
@@ -830,7 +841,7 @@
             ]
           },
           {
-            "investorType": "— of which domestic equity mutual funds (ICI, ex-ETF)",
+            "investorType": "\u2014 of which domestic equity mutual funds (ICI, ex-ETF)",
             "isProxy": true,
             "values": [
               -27036,
@@ -844,7 +855,7 @@
             ]
           },
           {
-            "investorType": "— of which world/international equity mutual funds (ICI, ex-ETF)",
+            "investorType": "\u2014 of which world/international equity mutual funds (ICI, ex-ETF)",
             "isProxy": true,
             "values": [
               -10339,
@@ -859,10 +870,10 @@
           }
         ],
         "source": "https://www.ici.org/research/stats/flows",
-        "note": "ICI long-term equity MUTUAL FUND flows — ETFs are EXCLUDED, so this is a fund-migration proxy, not a risk-on/off signal.",
+        "note": "ICI long-term equity MUTUAL FUND flows \u2014 ETFs are EXCLUDED, so this is a fund-migration proxy, not a risk-on/off signal.",
         "confidence": "verified-primary"
       }
     }
   ],
-  "chartNote": "Charts show NET flow per period: bars above the zero line are net buying, below is net selling. Series length differs by market because disclosure cadence does — Hong Kong is daily, Japan and Singapore weekly. A market with fewer than two verified periods shows no chart rather than a padded one."
+  "chartNote": "Charts show NET flow per period: bars above the zero line are net buying, below is net selling. Series length differs by market because disclosure cadence does \u2014 Hong Kong is daily, Japan and Singapore weekly. A market with fewer than two verified periods shows no chart rather than a padded one."
 }

@@ -1,67 +1,66 @@
 {
-  "date": "2026-08-24T08:00:00+08:00",
-  "coverage": "Monday 24 Aug 2026 pre-Asia-open run (~07:02-08:00 SGT). Latest completed sessions remain Friday 21 Aug across US/HK/JP/KR/SG -- the weekend passed with zero new equity/bond sessions; SGX opens 09:00 SGT and HKEX 09:30 SGT, both after this run. Futures reopened Sunday evening (2026-08-23 spine bar); crypto is a continuous live level, most recently ~2026-08-22/23.",
+  "date": "2026-08-25T07:55:00+08:00",
+  "coverage": "Tuesday 25 Aug 2026 pre-Asia-open run (~07:02-07:55 SGT). Latest completed session is Monday 24 Aug across US/HK/SG (mixed US close: S&P -0.28%, Dow +0.26%, VIX 15.85); Japan/Korea's own index feeds still lag to Friday 21 Aug in our price spine, but secondary Korean press confirms Monday's KOSPI session actually traded and fell -3.12% -- a data-consolidation lag, not a holiday. SGX opens 09:00 SGT and HKEX 09:30 SGT, both after this run.",
   "tldr": [
-    "Three binary catalysts now stack this week: Iran-sanctions rollout (Mon 24 Aug, 2pm ET), Nvidia FQ2 earnings (Wed 26 Aug after close), and new Fed Chair Warsh's first Jackson Hole keynote (Fri 28 Aug) -- riskOnProb trimmed 0.41 -> 0.39 into the resolution window, not a regime change.",
-    "Biggest risk to the book: Iran's security chief threatened to shut the Strait of Hormuz if Gulf states join Monday's sanctions, and parliament advanced a transit-fee law -- genuine counter-escalation that argues for keeping the silver/gold-miner hedge sized for volatility through the announcement.",
-    "Crypto gave back roughly a third of Friday's surge over the weekend (BTC ~$76-77k vs Friday's $78,335 close) on thin weekend liquidity -- a level, not a reversal, but a reminder the debasement trade is not one-directional.",
-    "Notable smart-money move: Trump's June 2026 personal trading disclosure surfaced (1,051 trades, $78.1M-$263.1M) -- first-ever Berkshire Hathaway purchase, largest trade a $5-25M Vanguard ETF sell -- independently confirmed across 4 sources, distinct from the pending Warren/Garcia oversight-letter response (due 28 Aug).",
-    "Congress list refreshed: a Michael Rulli late-disclosure batch (32 trades) added fresh NVDA-sell / KO+META-buy data points, plus 4 new members (McCormick, McGuire, Peters, Capito) and a notable Lisa McClain private-defense-stock buy one day ahead of a $3.25B Texas shipyard announcement -- all independently verified.",
-    "SGX flow data is now 5 runs stale (institutional-vs-retail split last confirmed 24 Jul) -- the single biggest data gap in the file given SGX is the owner's largest exposure; worth a targeted re-check early this week."
+    "Monday's Iran-sanctions rollout ('Operation Economic Outcast') landed with phased, not immediate, secondary sanctions and did not name China directly -- oil sold off 2.5% on 'sell the news' rather than spiking, defusing the week's first binary catalyst without a shock.",
+    "Gold extended to a 3-month high (GLD $426.69) and Bitcoin pushed toward $80k on the same Treasury-buyback dollar-weakness trade -- the debasement leg of the book (silver/gold miners) remains the strongest theme on the tape.",
+    "Chip stocks sold off Monday (Micron -5.8%, AMD -3.3%, Nvidia -2.3%) pre-earnings, with a matching KOSPI -3.1% session in Korea and a Hang Seng pullback -- Wednesday's Nvidia FQ2 print is now one trading day away and the cleanest read on whether the AI-capex-fatigue scare is real.",
+    "A second trade-friction front opened: US-Canada talks collapsed and the US imposed 50% tariffs on ~$20bn of Canadian goods -- no direct book exposure, but adds to cumulative macro uncertainty into Jackson Hole.",
+    "Correction: Michael Burry (Scion) was wrongly flagged as 'stale' in recent runs -- he has posted near-daily on Substack through 21 Aug, adding NVDA/PLTR/ORCL/CAT shorts and a Molina Healthcare long.",
+    "Fresh Congress disclosures: Nancy Pelosi's spouse opened a new Bloom Energy + added-to Intel position (AI power-infrastructure bet); Josh Gottheimer added a cybersecurity cluster (CrowdStrike, Palo Alto, SailPoint)."
   ],
   "whatChanged": [
-    "intel.json: congress list refreshed (15 trades, 10 members, 2 date corrections caught by adversarial verification), superInvestors updated with Trump's June PTR disclosure, insiders added a new Hecla Mining (HL) full-liquidation Form 4 sell, SGXNet/HKEX blocked 6th consecutive run.",
-    "investors.json: re-verified, no new 13D/13G filings from the tracked cohort (confirmed via SEC EDGAR full-text search); Trump's June PTR added as a new preNews entry.",
-    "model.json: macro regime narrative refreshed for the three-catalyst week ahead, riskOnProb 0.41->0.39, Equity trimmed OW->Neutral, USD/Cash UW->Neutral; DBC/USO/FXI/SMH/XLK drivers updated with corrected Bessent-quote attribution and Nvidia-earnings context.",
-    "market.json: Fear&Greed and breadth carried forward (all fresh-data sources blocked or inconclusive again this run); BofA Flow Show regional breakdown confirmed still stale as expected (next due 28 Aug); US ICI ties in a corrected, internally-consistent mutual-fund breakdown.",
-    "news.json: 12 items, 4 with genuinely fresh Sat-Mon developments; corrected a Bessent quote misattribution (Thursday CNBC interview vs. Sunday FT op-ed) caught by an adversarial verifier before publication.",
-    "flows-investors.json: Hong Kong Southbound and Singapore SGX weekly remain stale despite active re-checks; US ICI equity/bond breakdown corrected to an internally-consistent direct-fetch figure; China margin-balance ¥3.01trn June peak re-confirmed against a circulating stale/mis-dated figure.",
-    "track.json: appended today's 49-ticker snapshot (41 total snapshots retained, cap 120)."
+    "intel.json: congress refreshed to 18 trades (added Pelosi BE/INTC, Gottheimer CRWD/IBM, Thanedar late-disclosed AAPL sale; dropped 2 lower-signal older entries); super-investors corrected Burry from stale to active and enriched the Ackman/Pershing Square entry (UMG/Hertz exits, new Visa/MA/Netflix/S&P Global/ICE/Alcon stakes, $400M brain-center donation); insiders updated Hecla's Form 4/A amendment; signals refreshed SLV/NVDA context.",
+    "investors.json: re-verified and re-stamped per the every-run rule; no new 13F-cycle activity (Q3 not due until ~14 Nov), enrichment note added.",
+    "model.json: macro regime, narrative and drivers fully rewritten for Monday's sanctions outcome and chip selloff; riskOnProb nudged 0.39->0.41; independently re-researched GLD, SLV, USO, DBC, BTC-USD, XLK, SMH, FXI, MP, UUUU; rest carried forward one session.",
+    "market.json: Fear&Greed re-confirmed ~55/Neutral via third-party mirrors (CNN itself blocked 7th consecutive run); breadth mostly stale/unavailable this run (Barchart snapshot ~19 Aug, A-D/highs-lows/McClellan unverifiable); flows narrative updated for the buyback/dollar mechanism.",
+    "flows-investors.json: fresh Korea Monday session (heavy foreign/institutional selling absorbed by retail) and fresh Hong Kong Southbound (21 Aug outflow -> 24 Aug inflow, bought Tencent/Alibaba, sold SMIC); Japan/Singapore/US confirmed still between prints.",
+    "news.json: 11 items, majority from the last 24-48h (sanctions outcome, oil, gold/silver, KOSPI selloff, HK Southbound flip, Xiaomi chips, US-Canada tariffs, Bitcoin, Jackson Hole setup, Japan CPI pending, Nvidia countdown).",
+    "track.json: today's model snapshot appended (49 calls), history intact (42 snapshots)."
   ],
   "regime": {
-    "label": "Tentative risk rebound, elevated event risk into a stacked catalyst week",
-    "riskOn": 0.39,
-    "oneLiner": "Friday's rebound (S&P +0.43%, VIX -5.5%) holds into the weekend, but Iran sanctions (Mon), Nvidia earnings (Wed) and Warsh's Jackson Hole debut (Fri) are three live binaries this week -- trim risk-on conviction modestly rather than lean further into the bounce."
+    "label": "Cautious, event-dense grind: sanctions largely defused, AI-capex test and Jackson Hole still ahead",
+    "riskOn": 0.41,
+    "oneLiner": "The week's first binary catalyst (Iran sanctions) resolved without a shock, but Nvidia's Wednesday print and Warsh's Friday Jackson Hole debut keep the regime cautious rather than a clean risk-on re-rating."
   },
   "topNews": [
     {
-      "headline": "Iran sanctions rollout lands Monday 2pm ET as Iran's security chief threatens to shut Hormuz",
+      "headline": "Bessent unveils 'Operation Economic Outcast': ~60 entities sanctioned, China warned but not yet directly targeted",
       "impact": "mixed",
-      "actionable": "Keep the precious-metals sleeve sized for continued volatility into and through the 2pm ET announcement; Iran's counter-escalation (Hormuz threat, transit-fee law) raises rather than lowers the odds of a disorderly reaction."
+      "actionable": "A Chinese-bank secondary-sanction headline would be the sharper risk-off jolt for the HK tech sleeve -- until then this reads as contained."
     },
     {
-      "headline": "Oil gives back part of Friday's sanctions rally at Sunday's Globex reopen",
-      "impact": "mixed",
-      "actionable": "Don't chase Friday's spike into Monday's Asia open -- the market wants to see the actual sanctions detail before re-testing $95 Brent."
-    },
-    {
-      "headline": "Bitcoin gives back roughly a third of Friday's surge over the weekend on thin liquidity",
-      "impact": "mixed",
-      "actionable": "Treat as normal weekend chop after a >7% weekly gain, not a trend reversal -- still a levered extension of the gold/silver debasement trade, not a diversifier."
-    },
-    {
-      "headline": "Rare-earth names (MP +9.10%, UUUU +8.92%) reversed sharply higher Friday on G7/Pentagon/DOE policy catalysts",
+      "headline": "Gold hits a 3-month high as the Treasury-buyback dollar slide keeps extending",
       "impact": "bullish",
-      "actionable": "Monday's China-adjacent Iran sanctions add a fresh sympathy-trade angle on top of the underlying ex-China rare-earth re-rating thesis."
+      "actionable": "The breakout is intact into Nvidia/Jackson Hole -- no reason to de-risk the miners sleeve pre-open."
     },
     {
-      "headline": "Jackson Hole (27-29 Aug) now stacks with Iran sanctions and Nvidia earnings into the most catalyst-dense week since the Aug 19-20 selloff",
+      "headline": "KOSPI falls 3.1% Monday on chip-stock selloff; foreign/institutional selling absorbed by retail",
+      "impact": "bearish",
+      "actionable": "A genuine leg down in North Asia tech ahead of Nvidia's print -- watch whether Tuesday's HK/SG open extends the move."
+    },
+    {
+      "headline": "Hong Kong Southbound flips to a HK$11.6bn net buy Monday -- bought Tencent, sold SMIC",
       "impact": "mixed",
-      "actionable": "Size gold/silver-miner, tech and crypto-adjacent positioning for continued volatility rather than a clean directional bet on any single catalyst resolving the regime."
+      "actionable": "Mainland conviction stayed selective, not broadly de-risking, within the HK tech book."
+    },
+    {
+      "headline": "US-Canada trade talks collapse; 50% tariffs on ~$20bn of Canadian goods",
+      "impact": "bearish",
+      "actionable": "No direct book exposure, but a second live trade-friction front alongside the Iran sanctions."
     }
   ],
   "signals": [
-    "SLV/GDX/SILJ/SLVP: three consecutive up sessions through Friday confirm the debasement rally isn't a futures-roll artifact -- consider holding the hedge through this week's three catalysts rather than trimming into strength.",
-    "UUUU/MP: watch for a sympathy move off Monday's China-adjacent Iran-sanctions headlines, layered on the existing G7/Pentagon/DOE rare-earth policy thesis.",
-    "SMH/XLK: elevated event risk into Nvidia's Wed 26 Aug FQ2 print -- the cleanest single read on whether the AI-capex-fatigue narrative is real; consider waiting for the print before adding.",
-    "NVDA whale divergence (Tepper long, Loeb exited, Soros puts, and now a fresh Rulli congressional sell) is a volatility/conviction-dispersion flag, not a directional signal -- Wednesday's earnings is the resolution catalyst.",
-    "GOOGL remains the broadest whale magnet (Berkshire, Loeb, Congress via Taylor/Gottheimer) but Ackman's full exit and Tiger Global's trim show genuine cracks -- watch for a re-convergence or further divergence next quarter."
+    "Silver/gold miners: consider holding the sleeve through Wednesday's Nvidia print and Friday's Jackson Hole -- the debasement trade (GLD 3-month high, BTC near $80k) remains the strongest theme, though SLV paused Monday after three straight up sessions.",
+    "HK tech (0700.HK/0981.HK/1810.HK): watch for SMIC-specific weakness (sold into Monday's Southbound inflow) even as Tencent/Alibaba saw mainland buying -- a stock-specific, not sector-wide, divergence worth monitoring at today's open.",
+    "MP/UUUU (rare-earth watchlist): Monday's pullback (-4.4%/-1.7%) reads as profit-taking after Friday's policy-driven surge, not a new negative catalyst -- underlying G7/Pentagon/DoE tailwinds intact.",
+    "Congress: Pelosi's fresh Bloom Energy + Intel buys and Gottheimer's cybersecurity cluster (CRWD/PANW/SAIL) are worth watching as AI-infrastructure and cyber-theme reads, though managed-account trades don't necessarily reflect personal conviction.",
+    "Burry correction: now confirmed active (NVDA/PLTR/ORCL/CAT shorts, Molina Healthcare long) -- his shorts sit directly opposite the book's own AI-adjacent exposure via the SMH/XLK read-through, worth tracking as a contrarian signal into Wednesday's Nvidia print."
   ],
   "watch": [
-    "Mon 24 Aug, 2pm ET: Treasury's Iran-sanctions press conference -- the week's first binary catalyst.",
-    "Wed 26 Aug, after close: Nvidia FQ2 earnings -- direct test of the AI-capex-fatigue narrative.",
-    "Fri 28 Aug, 10am ET: Fed Chair Warsh's first Jackson Hole keynote ('Financial Innovation: Implications for Payments and Policy').",
-    "Thu 28 Aug: Warren/Garcia congressional oversight letter response from Trump is due (re: 21,000+ 2025 trades / ~3,555 Q1-2026 trades) -- no reply as of this run.",
-    "16 Sep: next FOMC decision, currently pricing ~65% odds of a 25bp cut."
+    "Wed 26 Aug after close: Nvidia FQ2 earnings -- the cleanest single test of the AI-capex-fatigue narrative behind Monday's chip selloff.",
+    "Wed 26 Aug 20:30 SGT: US Core PCE m/m (cons 0.2%) and Prelim GDP q/q -- the next data point on the Fed path into Jackson Hole.",
+    "Fri 28 Aug: Jackson Hole -- new Fed Chair Warsh's first keynote as Chair, previewed as 'structural, not near-term guidance.'",
+    "Today 13:00 SGT: Japan BOJ Core CPI (cons 1.4%, prev 1.5%) -- feeds BOJ September-hike bets already building on July's 1.9% print."
   ]
 }

@@ -1,71 +1,202 @@
 {
-  "updated": "2026-08-24",
-  "note": "Mon 24 Aug 2026, ~07:40 SGT — Monday pre-Asia-open run (SGX 09:00, HKEX 09:30 SGT). US/HK/SG/JP/KR all still closed since Friday 21 Aug's close, which remains the latest completed session everywhere; nothing new to bake for equities/breadth/regional-flow data since Sunday's edition. This run's incremental work: re-tried CNN Fear&Greed (still blocked, HTTP 451) plus a new MacroMicro mirror attempt (HTTP 403, also blocked) — an independent aggregator (feargreedmeter.com) loaded and showed 55, corroborating the baked value without providing CNN's own component detail. Breadth sources (StockCharts/Barchart/mcoscillator.com) were retried and remain inconclusive or blocked (mcoscillator.com returned HTTP 403 this run). BofA Flow Show regional breakdown confirmed still stale as expected — the week-to-26-Aug release isn't due until Fri 28 Aug. WEEKEND CONTEXT (carried from Sunday, unchanged): Iran conflict escalated further — Treasury's 'toughest sanctions in history' framing actually traces to Bessent's Thu 20 Aug CNBC interview (not a Sunday one, corrected this run by an adversarial verifier); his genuinely Sunday-dated remarks were an FT op-ed ('economic D-Day'). Press conference is confirmed for 2pm ET Monday. Oil (Brent $94.39, WTI $87.06, Fri settle) gave back part of that rally at Sunday's Globex reopen ahead of the announcement. Crypto gave back roughly a third of Friday's surge over the weekend (BTC ~$76,000 Sun vs $78,335 Fri close, per .prices.json — a LIVE LEVEL not a close) on thin weekend liquidity. Gold/silver/COMEX are shut over the weekend (no new close); Friday's GLD close was $423.36 (+1.95%).",
+  "updated": "2026-08-25",
+  "note": "Tue 25 Aug 2026, ~07:20 SGT pre-Asia-open run (SGX 09:00, HKEX 09:30 SGT). Latest completed US session is Monday 24 Aug: S&P 500 7,652.86 (-0.28%), Nasdaq 25,980.19 (-0.77%), Dow 53,417.16 (+0.26%), VIX 15.85 (+4.76%, up from Friday's 15.13) -- a narrow, mildly risk-off session concentrated in mega-cap tech/semis (Micron -5.8%, AMD -3.3%, TSM -3.7%, Nvidia -2.3%) ahead of Wednesday's Nvidia earnings, while Dow/Materials/Staples/Financials held up or gained. Monday's Iran-sanctions rollout ('Operation Economic Outcast') was largely pre-priced and triggered oil profit-taking rather than a fresh spike; gold hit a 3-month high on the same Treasury-buyback dollar-weakness trade. CNN Fear&Greed remains blocked (HTTP 451, 7th consecutive run); a third-party mirror (feargreedmeter.com) and an independent alt-data composite (altindex.com) both read 55/Neutral for Monday, corroborating the baked value without CNN's own component detail. Breadth sources (Barchart $S5TH/$S5FI) returned stale ~19 Aug snapshots again; NYSE/Nasdaq advance-decline, 52-week highs/lows and McClellan Oscillator were not verifiable this run (mcoscillator.com HTTP 403 again) -- reported as unavailable rather than estimated. BofA Flow Show's week-to-19-Aug print remains the latest release (week-to-26-Aug due Fri 28 Aug); ICI's own week-ending-12-Aug figure was re-confirmed via a direct fetch, unchanged.",
   "fearGreed": {
     "value": 55,
-    "rating": "Greed",
-    "asOf": "2026-08-21",
-    "prevClose": 50,
-    "prev1w": null,
+    "rating": "Neutral",
+    "asOf": "2026-08-24",
+    "prevClose": 55,
+    "prev1w": 50,
     "prev1m": null,
     "prev1y": null,
     "cryptoValue": 75,
     "cryptoRating": "Greed",
     "components": [
-      { "name": "Market Momentum", "reading": "CNN's own page returned HTTP 451 again this run (6th-consecutive block); a MacroMicro mirror tried for the first time this run also returned HTTP 403. An independent aggregator (feargreedmeter.com) loaded and showed 55, corroborating the composite level (though under its own, differently-calibrated rating label) — not a CNN-sourced confirmation, but directionally consistent with Friday's genuine risk-on rebound.", "signal": "greed" },
-      { "name": "Stock Price Strength", "reading": "Unavailable — source blocked. Not guessed.", "signal": "neutral" },
-      { "name": "Stock Price Breadth", "reading": "Not independently retrievable, but breadth.metrics below (Friday advance/decline ~1.7:1, new highs roughly doubling Thursday's count) point the same direction as the composite.", "signal": "greed" },
-      { "name": "Put/Call Options", "reading": "Unavailable — source blocked. Definitionally: bearish/bullish option volume ratio.", "signal": "neutral" },
-      { "name": "Market Volatility", "reading": "VIX closed Friday 21 Aug at 15.13 (-5.50%), more than reversing Thursday's 7.52% spike to 16.01 — low, compressed vol is a genuine greed signal into the weekend.", "signal": "greed" },
-      { "name": "Safe-Haven Demand", "reading": "Gold held its 3-month-high plateau (GLD $423.36 Fri, +1.95%) even as equities also rallied hard — both risk assets and the safe-haven bid rising together reads as a liquidity/debasement trade rather than a pure fear rotation, so left neutral rather than scored either way.", "signal": "neutral" },
-      { "name": "Junk Bond Demand", "reading": "Unavailable — source blocked. Not guessed.", "signal": "neutral" }
+      {
+        "name": "Market Momentum",
+        "reading": "CNN's own page (HTTP 451) and backend API (HTTP 418) both blocked again this run, 7th consecutive block; feargreedmeter.com and altindex.com (a different, non-CNN alt-data composite) both independently read 55/Neutral for Monday's session -- corroborating but not a CNN-sourced confirmation.",
+        "signal": "neutral"
+      },
+      {
+        "name": "Stock Price Strength",
+        "reading": "Unavailable -- source blocked. Not guessed.",
+        "signal": "neutral"
+      },
+      {
+        "name": "Stock Price Breadth",
+        "reading": "Narrow Monday session: tech/semis notably weak (XLK ~-2%, SOX ~-3.75%) while Materials hit a new ATH and Staples/Financials showed early strength -- a mixed, not broadly negative, breadth picture per Investrade's session note.",
+        "signal": "neutral"
+      },
+      {
+        "name": "Put/Call Options",
+        "reading": "Unavailable -- source blocked. Not guessed.",
+        "signal": "neutral"
+      },
+      {
+        "name": "Market Volatility",
+        "reading": "VIX closed Monday at 15.85 (+4.76%), a modest single-day uptick that remains well below its long-run average (~19-20) and close to 2026's compressed lows (~14.18 intraday, mid-Aug) -- a mild pre-earnings hedging tick, not a regime shift.",
+        "signal": "neutral"
+      },
+      {
+        "name": "Safe-Haven Demand",
+        "reading": "Gold hit a 3-month high (GLD $426.69 Mon, +0.79%) on the same Treasury-buyback dollar-weakness trade as equities stayed roughly flat -- a debasement/liquidity bid rather than a pure fear rotation, left neutral rather than scored either way.",
+        "signal": "neutral"
+      },
+      {
+        "name": "Junk Bond Demand",
+        "reading": "Unavailable -- source blocked. Not guessed.",
+        "signal": "neutral"
+      }
     ],
     "sources": [
       "https://www.cnn.com/markets/fear-and-greed",
-      "https://en.macromicro.me/series/22748/cnn-fear-and-greed",
+      "https://production.dataviz.cnn.io/index/fearandgreed/graphdata",
       "https://feargreedmeter.com/",
+      "https://altindex.com/fear-and-greed-index",
       "https://alternative.me/crypto/fear-and-greed-index/"
     ]
   },
   "breadth": {
-    "asOf": "2026-08-21 (latest completed session; no new data over the weekend or pre-open Monday)",
+    "asOf": "2026-08-24 (latest completed session)",
     "metrics": [
-      { "label": "% of S&P 500 stocks above 200-day MA", "value": "69.52 (Barchart $S5TH, 19 Aug — most recent read obtained; Barchart's page returned template placeholders on retry this run, StockCharts' most recent dated point was 7 Aug (56.8%, too stale to use) — no fresher print surfaced", "signal": "neutral", "pct": 70 },
-      { "label": "% of S&P 500 stocks above 50-day MA", "value": "57.76 (Barchart $S5FI, inferred Fri 21 Aug) — sharp rebound from Thursday's 53.98 low", "signal": "bullish", "pct": 58 },
-      { "label": "NYSE advancers vs decliners", "value": "NYSE 1.72:1 advancers/decliners, Nasdaq 3,004 up/1,738 down (1.73:1) — Fri 21 Aug, a clean reversal from Thursday's narrow deterioration", "signal": "bullish", "pct": 63 },
-      { "label": "52-week New Highs minus New Lows (NYSE+Nasdaq combined)", "value": "Fri 21 Aug: NYSE 169 highs/96 lows, Nasdaq 74 highs/66 lows, S&P 500 itself 9 highs/3 lows — broad improvement from Thursday's 99 highs/120 lows", "signal": "bullish", "pct": null },
-      { "label": "McClellan Oscillator / Summation Index", "value": "Not retrievable again this run — mcoscillator.com returned HTTP 403 on direct retry", "signal": "neutral", "pct": null },
-      { "label": "Advance-Decline line trend", "value": "Carried forward: % stocks above 20-day SMA was 57.7% as of 19-20 Aug; Friday's advancer-led session likely improved this further but a fresh read was not retrieved", "signal": "neutral", "pct": 58 },
-      { "label": "Sectors above 200-DMA / sector rotation", "value": "Lower-confidence, secondhand: ~72% of S&P above 200-DMA per one Schwab snippet (undated, likely mid-week), Energy >85% above 200-DMA; semis still recovering but lagging the broader Friday rebound", "signal": "neutral", "pct": null }
+      {
+        "label": "% of S&P 500 stocks above 200-day MA",
+        "value": "72.11 (Barchart $S5TH) -- page snapshot dated ~19 Aug, 3 sessions stale, no fresher pull obtainable this run",
+        "signal": "neutral",
+        "pct": 72
+      },
+      {
+        "label": "% of S&P 500 stocks above 50-day MA",
+        "value": "59.36 (Barchart $S5FI) -- same ~19 Aug staleness caveat as above",
+        "signal": "neutral",
+        "pct": 59
+      },
+      {
+        "label": "NYSE advancers vs decliners",
+        "value": "Not independently verifiable for the 24 Aug session this run -- WSJ market-data-diary page unreachable; an unverified secondary snippet (Fri 21 Aug net advancers +612) was found but not used per the no-fabrication rule",
+        "signal": "neutral",
+        "pct": null
+      },
+      {
+        "label": "52-week New Highs minus New Lows (NYSE+Nasdaq combined)",
+        "value": "Not independently verifiable for 24 Aug this run -- a search-engine auto-summary produced specific figures with no traceable primary source and was excluded rather than published as fact",
+        "signal": "neutral",
+        "pct": null
+      },
+      {
+        "label": "McClellan Oscillator / Summation Index",
+        "value": "Not retrievable again this run -- mcoscillator.com returned HTTP 403",
+        "signal": "neutral",
+        "pct": null
+      },
+      {
+        "label": "Sector breadth, Monday 24 Aug session",
+        "value": "Tech/semis notably weak (XLK ~-2%, SOX ~-3.75%) pre-Nvidia-earnings; Materials +0.9% to a new all-time high; Consumer Staples and Financials showed early strength -- narrow weakness concentrated in mega-cap tech, not a broad deterioration (Investrade Mid-Morning Look, direct fetch)",
+        "signal": "neutral",
+        "pct": null
+      },
+      {
+        "label": "Advance-Decline line trend / broader universe above 200-DMA",
+        "value": "56.8% (Yardeni/Day Hagan, dated 7 Aug -- 17 days stale, context only)",
+        "signal": "neutral",
+        "pct": 57
+      }
     ],
-    "note": "Friday 21 Aug remains the latest completed session: a genuine breadth rebound, not just a price bounce — advancers led decliners nearly 1.7:1 on both NYSE and Nasdaq, new 52-week highs roughly doubled Thursday's count, and 50-DMA breadth snapped back +7pp in a day. 200-DMA breadth is still only confirmed through 19 Aug and McClellan data remains unavailable (source blocked again this run) — a full 'broad capitulation is over' call isn't fully confirmable, but available evidence points that way heading into a week with three stacked catalysts (Iran sanctions Mon, Nvidia earnings Wed, Jackson Hole Fri).",
+    "note": "Monday 24 Aug read as a narrow, mildly risk-off session: weakness concentrated in mega-cap tech/semis ahead of Wednesday's Nvidia print, while Dow, Materials, Staples and Financials held up or gained. VIX's uptick to 15.85 still sits near 2026's historically compressed lows, consistent with pre-earnings positioning rather than a broad-based deterioration. Several breadth series (A-D ratio, new highs/lows, McClellan) could not be independently verified for this specific session and are reported as unavailable rather than estimated.",
     "sources": [
       "https://www.barchart.com/stocks/quotes/$S5TH",
       "https://www.barchart.com/stocks/quotes/$S5FI",
-      "https://finance.yahoo.com/markets/live/stock-market-today-friday-august-21-dow-sp-500-nasdaq-bitcoin-080533702.html",
-      "https://finance.yahoo.com/markets/stocks/articles/stock-market-news-aug-21-090400012.html",
-      "https://www.detroitnews.com/story/business/2026/08/21/us-stock-market-wall-street-friday/91402472007/"
+      "https://investrade.com/mid-morning-look-august-24-2026/",
+      "https://www.cnbc.com/2026/08/17/stock-market-volatility-vix-wall-street.html"
     ]
   },
   "flows": {
-    "asOf": "2026-08-24",
-    "period": "BofA 'Flow Show' / EPFR — asset-class totals for the week ended Wed 19 Aug 2026 (re-confirmed this run as still the latest release; the week-to-26-Aug print is correctly not due until Fri 28 Aug, so nothing newer should exist yet and none was found). Full regional (US/Europe/EM/China/Japan) breakdown remains confirmed only through the week ended 22 Jul 2026 in open sources — a genuine, re-checked source gap, not a search failure.",
-    "narrative": "The week through 19 Aug showed a decisive rotation into safe-haven/defensive assets: money-market/cash funds drew the largest inflow ($25.4bn), bonds $23.8bn, and gold $6.3bn — its biggest weekly inflow since January 2026 — as BofA's Michael Hartnett reiterated a 'long gold, short USD' stance. Equities still drew a net $16.1bn but this was a slowdown versus prior weeks, consistent with the tech-led deleveraging that hit semis hardest in the Aug 19 rout. Nothing in this release has changed since the weekend; the next print (Fri 28 Aug) will be the first to capture this week's Iran-sanctions rollout, Nvidia earnings and Jackson Hole. On the US-specific side, a direct ICI fetch this run confirms the latest weekly release (published 19 Aug, week ended 12 Aug) showed long-term fund flows of -$16.82bn (equity -$20.89bn: domestic -$17.18bn, world -$3.71bn; hybrid -$1.09bn; bond +$5.16bn: taxable +$3.62bn, muni +$1.54bn) — the week-ending-19-Aug release is not yet posted, as expected (~26 Aug). Vanda/JPM retail-flow commentary (proxy, not an official print) describes retail turnover near record highs (99.7th percentile) but net buying at its weakest pace since the COVID era.",
+    "asOf": "2026-08-25",
+    "period": "BofA 'Flow Show' / EPFR \u2014 asset-class totals for the week ended Wed 19 Aug 2026 (re-confirmed this run as still the latest release; the week-to-26-Aug print is correctly not due until Fri 28 Aug, so nothing newer should exist yet and none was found). Full regional (US/Europe/EM/China/Japan) breakdown remains confirmed only through the week ended 22 Jul 2026 in open sources \u2014 a genuine, re-checked source gap, not a search failure.",
+    "narrative": "The week through 19 Aug remains the latest BofA Flow Show / EPFR release (week-to-26-Aug due Fri 28 Aug, re-confirmed not yet out): money-market/cash drew the largest inflow ($25.4bn), bonds $23.8bn, gold $6.3bn (biggest since Jan 2026) as Hartnett reiterated 'long gold, short USD.' Monday 24 Aug's Treasury-buyback-driven dollar slide (DXY near a 3-month low ~98.8) is the same mechanism now extending gold to a 3-month high and lifting Bitcoin toward $80k -- consistent with, not a reversal of, the flow picture already on the tape. ICI's own weekly release remains at the week ending 12 Aug (total long-term funds+ETF +$17.39bn; the week-to-19-Aug print is not yet posted, expected ~26 Aug, re-confirmed via a direct ici.org fetch this run). Vanda/JPM retail-flow commentary is unchanged from last week's read (turnover near record highs, net buying pace weakest since the COVID era).",
     "regions": [
-      { "region": "US Equities", "direction": "outflow", "amount": "-$7.2bn (wk to 22 Jul — most recent regional-level figure available; the wk-to-19-Aug regional split was not published in open sources)", "amountUSD": -7200000000, "note": "Carried forward from the last week with a confirmed regional breakdown; do not read as current-week. ICI's own weekly total-fund series (see narrative) is fresher (week to 12 Aug) but is a different, broader measure than this regional EPFR split." },
-      { "region": "Europe/Intl DM", "direction": "outflow", "amount": "-$1.6bn (wk to 22 Jul; UK -$1.2bn, largest since Nov)", "amountUSD": -1600000000, "note": "Carried forward — same regional-data lag as US Equities above." },
-      { "region": "EM", "direction": "inflow", "amount": "+$29.6bn (wk to 22 Jul — 2nd-largest weekly EM inflow on record)", "amountUSD": 29600000000, "note": "Carried forward; pre-dates the Aug 19-20 chip-sector volatility." },
-      { "region": "China", "direction": "inflow", "amount": "+$21.3bn (wk to 22 Jul — 3rd-biggest weekly inflow ever)", "amountUSD": 21300000000, "note": "Carried forward; Southbound Stock Connect data (see flows-investors.json) is fresher (through 20 Aug) and shows a more volatile, choppier picture this week." },
-      { "region": "Japan", "direction": "inflow", "amount": "+$1.5bn (wk to 22 Jul, 7th consecutive weekly inflow)", "amountUSD": 1500000000, "note": "Carried forward; JPX's own weekly series (see flows-investors.json) shows foreign investors reversed back to net buying in the 10-14 Aug week — fresher and more relevant than this figure." },
-      { "region": "Money-market/Cash", "direction": "inflow", "amount": "+$25.4bn (wk to 19 Aug — latest)", "amountUSD": 25400000000, "note": "The dominant flow that week — investors de-risked into cash following the Aug 19 semiconductor rout and 30Y yield spike to 5.34%." },
-      { "region": "Bonds/Credit", "direction": "inflow", "amount": "+$23.8bn (wk to 19 Aug — latest)", "amountUSD": 23800000000, "note": "IG bonds had logged 16 straight weeks of inflows as of the Jul 22 report; the Treasury buyback announcement likely reinforced demand." },
-      { "region": "Gold", "direction": "inflow", "amount": "+$6.3bn (wk to 19 Aug — latest, biggest since Jan 2026)", "amountUSD": 6300000000, "note": "Explicitly framed by Hartnett as a USD-weakness hedge, funded partly by equity profit-taking — consistent with the GDX/SILJ/GLD/SLV breakout and gold's continued 3-month-high plateau." }
+      {
+        "region": "US Equities",
+        "direction": "outflow",
+        "amount": "-$7.2bn (wk to 22 Jul \u2014 most recent regional-level figure available; the wk-to-19-Aug regional split was not published in open sources)",
+        "amountUSD": -7200000000,
+        "note": "Carried forward from the last week with a confirmed regional breakdown; do not read as current-week. ICI's own weekly total-fund series (see narrative) is fresher (week to 12 Aug) but is a different, broader measure than this regional EPFR split."
+      },
+      {
+        "region": "Europe/Intl DM",
+        "direction": "outflow",
+        "amount": "-$1.6bn (wk to 22 Jul; UK -$1.2bn, largest since Nov)",
+        "amountUSD": -1600000000,
+        "note": "Carried forward \u2014 same regional-data lag as US Equities above."
+      },
+      {
+        "region": "EM",
+        "direction": "inflow",
+        "amount": "+$29.6bn (wk to 22 Jul \u2014 2nd-largest weekly EM inflow on record)",
+        "amountUSD": 29600000000,
+        "note": "Carried forward; pre-dates the Aug 19-20 chip-sector volatility."
+      },
+      {
+        "region": "China",
+        "direction": "inflow",
+        "amount": "+$21.3bn (wk to 22 Jul \u2014 3rd-biggest weekly inflow ever)",
+        "amountUSD": 21300000000,
+        "note": "Carried forward; Southbound Stock Connect data (see flows-investors.json) is fresher (through 20 Aug) and shows a more volatile, choppier picture this week."
+      },
+      {
+        "region": "Japan",
+        "direction": "inflow",
+        "amount": "+$1.5bn (wk to 22 Jul, 7th consecutive weekly inflow)",
+        "amountUSD": 1500000000,
+        "note": "Carried forward; JPX's own weekly series (see flows-investors.json) shows foreign investors reversed back to net buying in the 10-14 Aug week \u2014 fresher and more relevant than this figure."
+      },
+      {
+        "region": "Money-market/Cash",
+        "direction": "inflow",
+        "amount": "+$25.4bn (wk to 19 Aug \u2014 latest)",
+        "amountUSD": 25400000000,
+        "note": "The dominant flow that week \u2014 investors de-risked into cash following the Aug 19 semiconductor rout and 30Y yield spike to 5.34%."
+      },
+      {
+        "region": "Bonds/Credit",
+        "direction": "inflow",
+        "amount": "+$23.8bn (wk to 19 Aug \u2014 latest)",
+        "amountUSD": 23800000000,
+        "note": "IG bonds had logged 16 straight weeks of inflows as of the Jul 22 report; the Treasury buyback announcement likely reinforced demand."
+      },
+      {
+        "region": "Gold",
+        "direction": "inflow",
+        "amount": "+$6.3bn (wk to 19 Aug \u2014 latest, biggest since Jan 2026)",
+        "amountUSD": 6300000000,
+        "note": "Explicitly framed by Hartnett as a USD-weakness hedge, funded partly by equity profit-taking \u2014 consistent with the GDX/SILJ/GLD/SLV breakout and gold's continued 3-month-high plateau."
+      }
     ],
     "movements": [
-      { "from": "Equities", "to": "Cash / money-market", "amount": "+$25.4bn to cash (wk to 19 Aug)", "note": "The dominant rotation that week — de-risking after the Aug 19 semiconductor rout and 30Y yield spike, ahead of it being partly reversed by the Treasury buyback and Friday's rebound." },
-      { "from": "Equities (partial)", "to": "Gold", "amount": "+$6.3bn to gold, biggest since Jan 2026", "note": "A USD-weakness/debasement hedge play, funded partly by equity profit-taking; reinforced this week by the Iran-sanctions rollout naming China as a secondary target." },
-      { "from": "US domestic equities", "to": "EM / China", "amount": "US -$7.2bn vs EM +$29.6bn / China +$21.3bn (wk to 22 Jul, most recent regional split)", "note": "An older but still-relevant structural rotation; likely partially reversed intraweek given China/HK's own Southbound data was choppy (see flows-investors.json)." },
-      { "from": "Broad market", "to": "Tech sector funds", "amount": "+$4bn (wk to 22 Jul, $52.8bn over 4 weeks)", "note": "A 'long tech, short broad market' positioning that unwound violently in the Aug 19 semiconductor rout — the crowding that made Thursday's VIX spike sharper, and the setup Nvidia's Wed 26 Aug earnings will directly test." }
+      {
+        "from": "Equities",
+        "to": "Cash / money-market",
+        "amount": "+$25.4bn to cash (wk to 19 Aug)",
+        "note": "The dominant rotation that week \u2014 de-risking after the Aug 19 semiconductor rout and 30Y yield spike, ahead of it being partly reversed by the Treasury buyback and Friday's rebound."
+      },
+      {
+        "from": "Equities (partial)",
+        "to": "Gold",
+        "amount": "+$6.3bn to gold, biggest since Jan 2026",
+        "note": "A USD-weakness/debasement hedge play, funded partly by equity profit-taking; reinforced this week by the Iran-sanctions rollout naming China as a secondary target."
+      },
+      {
+        "from": "US domestic equities",
+        "to": "EM / China",
+        "amount": "US -$7.2bn vs EM +$29.6bn / China +$21.3bn (wk to 22 Jul, most recent regional split)",
+        "note": "An older but still-relevant structural rotation; likely partially reversed intraweek given China/HK's own Southbound data was choppy (see flows-investors.json)."
+      },
+      {
+        "from": "Broad market",
+        "to": "Tech sector funds",
+        "amount": "+$4bn (wk to 22 Jul, $52.8bn over 4 weeks)",
+        "note": "A 'long tech, short broad market' positioning that unwound violently in the Aug 19 semiconductor rout \u2014 the crowding that made Thursday's VIX spike sharper, and the setup Nvidia's Wed 26 Aug earnings will directly test."
+      }
     ],
     "sources": [
       "https://www.investing.com/news/stock-market-news/bofa-says-china-fueled-the-secondlargest-weekly-inflow-into-em-equities-4811406",
