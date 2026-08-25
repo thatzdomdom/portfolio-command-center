@@ -1,21 +1,21 @@
 {
-  "updated": "2026-08-25",
-  "note": "Tue 25 Aug 2026, ~07:20 SGT pre-Asia-open run (SGX 09:00, HKEX 09:30 SGT). Latest completed US session is Monday 24 Aug: S&P 500 7,652.86 (-0.28%), Nasdaq 25,980.19 (-0.77%), Dow 53,417.16 (+0.26%), VIX 15.85 (+4.76%, up from Friday's 15.13) -- a narrow, mildly risk-off session concentrated in mega-cap tech/semis (Micron -5.8%, AMD -3.3%, TSM -3.7%, Nvidia -2.3%) ahead of Wednesday's Nvidia earnings, while Dow/Materials/Staples/Financials held up or gained. Monday's Iran-sanctions rollout ('Operation Economic Outcast') was largely pre-priced and triggered oil profit-taking rather than a fresh spike; gold hit a 3-month high on the same Treasury-buyback dollar-weakness trade. CNN Fear&Greed remains blocked (HTTP 451, 7th consecutive run); a third-party mirror (feargreedmeter.com) and an independent alt-data composite (altindex.com) both read 55/Neutral for Monday, corroborating the baked value without CNN's own component detail. Breadth sources (Barchart $S5TH/$S5FI) returned stale ~19 Aug snapshots again; NYSE/Nasdaq advance-decline, 52-week highs/lows and McClellan Oscillator were not verifiable this run (mcoscillator.com HTTP 403 again) -- reported as unavailable rather than estimated. BofA Flow Show's week-to-19-Aug print remains the latest release (week-to-26-Aug due Fri 28 Aug); ICI's own week-ending-12-Aug figure was re-confirmed via a direct fetch, unchanged.",
+  "updated": "2026-08-26",
+  "note": "Wed 26 Aug 2026, ~07:30 SGT pre-Asia-open run. Latest completed US session is Tuesday 25 Aug: S&P 500 7,677.28 (+0.32%), Nasdaq 26,151.30 (+0.66%), Dow 53,577.40 (+0.30%), Russell 2000 3,010.02 (+0.50%), VIX 15.45 (-2.52%, down from Monday's 15.85) -- a rebound session led by AI-infrastructure/chip names recovering from Monday's rout (ahead of Nvidia's Wednesday earnings) and softer Treasury yields, though breadth was reported as narrow intraday (only ~180 of 500 S&P names advancing shortly after 11am ET even as the index traded higher) -- consistent with a still-selective, not broad-based, rally. CNN Fear&Greed's own site/API remain blocked (HTTP 418 this run, 8th consecutive block); a third-party mirror (feargreedmeter.com) read 59/Greed for Tuesday, up from 55/Neutral Monday -- used as the fallback baked value with the same corroboration caveat as prior runs (mirror-sourced, not CNN's own component detail). Crypto Fear&Greed (alternative.me) reads 74/Greed. Breadth sources (Barchart $S5TH/$S5FI) again returned stale snapshots with no fresher pull obtainable this run; NYSE/Nasdaq advance-decline and 52-week highs/lows for the specific 25 Aug close, and the McClellan Oscillator, were not independently verifiable this run -- reported as unavailable rather than estimated. BofA Flow Show's week-to-19-Aug print remains the latest release (week-to-26-Aug due Fri 28 Aug, correctly not yet out); ICI's week-ending-12-Aug figure remains latest, with the week-to-19-Aug release expected today (~26 Aug) but not yet posted as of this run.",
   "fearGreed": {
-    "value": 55,
-    "rating": "Neutral",
-    "asOf": "2026-08-24",
+    "value": 59,
+    "rating": "Greed",
+    "asOf": "2026-08-25",
     "prevClose": 55,
-    "prev1w": 50,
-    "prev1m": null,
+    "prev1w": 55,
+    "prev1m": 41,
     "prev1y": null,
-    "cryptoValue": 75,
+    "cryptoValue": 74,
     "cryptoRating": "Greed",
     "components": [
       {
         "name": "Market Momentum",
-        "reading": "CNN's own page (HTTP 451) and backend API (HTTP 418) both blocked again this run, 7th consecutive block; feargreedmeter.com and altindex.com (a different, non-CNN alt-data composite) both independently read 55/Neutral for Monday's session -- corroborating but not a CNN-sourced confirmation.",
-        "signal": "neutral"
+        "reading": "CNN's own page and backend API both blocked again this run (HTTP 418, 8th consecutive block); feargreedmeter.com independently read 59/Greed for Tuesday, up from 55/Neutral Monday -- corroborating but not a CNN-sourced confirmation. S&P 500 closed +0.32% at 7,677.28, edging back toward its all-time high.",
+        "signal": "greed"
       },
       {
         "name": "Stock Price Strength",
@@ -24,7 +24,7 @@
       },
       {
         "name": "Stock Price Breadth",
-        "reading": "Narrow Monday session: tech/semis notably weak (XLK ~-2%, SOX ~-3.75%) while Materials hit a new ATH and Staples/Financials showed early strength -- a mixed, not broadly negative, breadth picture per Investrade's session note.",
+        "reading": "Narrow rally: only ~180 of 500 S&P names were advancing shortly after 11am ET even as the index traded higher, per a same-day market recap -- gains concentrated in AI-infrastructure/chip names rebounding from Monday's rout ahead of Nvidia's Wednesday print, not a broad-based advance.",
         "signal": "neutral"
       },
       {
@@ -34,12 +34,12 @@
       },
       {
         "name": "Market Volatility",
-        "reading": "VIX closed Monday at 15.85 (+4.76%), a modest single-day uptick that remains well below its long-run average (~19-20) and close to 2026's compressed lows (~14.18 intraday, mid-Aug) -- a mild pre-earnings hedging tick, not a regime shift.",
-        "signal": "neutral"
+        "reading": "VIX closed Tuesday at 15.45 (-2.52%), down from Monday's 15.85 and back near 2026's compressed lows -- consistent with a greed-leaning volatility read as pre-earnings hedging unwound.",
+        "signal": "greed"
       },
       {
         "name": "Safe-Haven Demand",
-        "reading": "Gold hit a 3-month high (GLD $426.69 Mon, +0.79%) on the same Treasury-buyback dollar-weakness trade as equities stayed roughly flat -- a debasement/liquidity bid rather than a pure fear rotation, left neutral rather than scored either way.",
+        "reading": "Treasury yields softened Tuesday alongside the equity rebound -- a classic risk-on pairing (equities up, yields down) rather than a flight to safety; left neutral rather than scored either way absent a direct gold/bond-spread read this run.",
         "signal": "neutral"
       },
       {
@@ -52,68 +52,73 @@
       "https://www.cnn.com/markets/fear-and-greed",
       "https://production.dataviz.cnn.io/index/fearandgreed/graphdata",
       "https://feargreedmeter.com/",
-      "https://altindex.com/fear-and-greed-index",
       "https://alternative.me/crypto/fear-and-greed-index/"
     ]
   },
   "breadth": {
-    "asOf": "2026-08-24 (latest completed session)",
+    "asOf": "2026-08-25 (latest completed session)",
     "metrics": [
       {
         "label": "% of S&P 500 stocks above 200-day MA",
-        "value": "72.11 (Barchart $S5TH) -- page snapshot dated ~19 Aug, 3 sessions stale, no fresher pull obtainable this run",
+        "value": "72.11 (Barchart $S5TH) -- carried forward, page snapshot still dated ~19 Aug, no fresher pull obtainable this run",
         "signal": "neutral",
         "pct": 72
       },
       {
         "label": "% of S&P 500 stocks above 50-day MA",
-        "value": "59.36 (Barchart $S5FI) -- same ~19 Aug staleness caveat as above",
+        "value": "59.36 (Barchart $S5FI) -- same staleness caveat as above",
         "signal": "neutral",
         "pct": 59
       },
       {
         "label": "NYSE advancers vs decliners",
-        "value": "Not independently verifiable for the 24 Aug session this run -- WSJ market-data-diary page unreachable; an unverified secondary snippet (Fri 21 Aug net advancers +612) was found but not used per the no-fabrication rule",
+        "value": "Not independently verifiable to the close for the 25 Aug session this run; the best available same-day read is intraday-qualitative (see note below)",
         "signal": "neutral",
         "pct": null
       },
       {
+        "label": "S&P 500 advancers, intraday (~11am ET)",
+        "value": "Only ~180 of 500 S&P constituents were advancing shortly after 11am ET even as the index traded higher into the close -- a narrow-breadth rally read (same-day market recap, not a closing tally)",
+        "signal": "neutral",
+        "pct": 36
+      },
+      {
         "label": "52-week New Highs minus New Lows (NYSE+Nasdaq combined)",
-        "value": "Not independently verifiable for 24 Aug this run -- a search-engine auto-summary produced specific figures with no traceable primary source and was excluded rather than published as fact",
+        "value": "Not independently verifiable for 25 Aug this run",
         "signal": "neutral",
         "pct": null
       },
       {
         "label": "McClellan Oscillator / Summation Index",
-        "value": "Not retrievable again this run -- mcoscillator.com returned HTTP 403",
+        "value": "Not retrievable again this run",
         "signal": "neutral",
         "pct": null
       },
       {
-        "label": "Sector breadth, Monday 24 Aug session",
-        "value": "Tech/semis notably weak (XLK ~-2%, SOX ~-3.75%) pre-Nvidia-earnings; Materials +0.9% to a new all-time high; Consumer Staples and Financials showed early strength -- narrow weakness concentrated in mega-cap tech, not a broad deterioration (Investrade Mid-Morning Look, direct fetch)",
+        "label": "Sector breadth, Tuesday 25 Aug session",
+        "value": "AI-infrastructure/chip names rebounded from Monday's rout ahead of Nvidia's Wednesday earnings print; Treasury yields softened alongside the advance -- gains read as selective/tech-led rather than broad-based, consistent with the narrow ~180-advancer intraday read above",
         "signal": "neutral",
         "pct": null
       },
       {
         "label": "Advance-Decline line trend / broader universe above 200-DMA",
-        "value": "56.8% (Yardeni/Day Hagan, dated 7 Aug -- 17 days stale, context only)",
+        "value": "56.8% (Yardeni/Day Hagan, dated 7 Aug -- now ~18 days stale, context only)",
         "signal": "neutral",
         "pct": 57
       }
     ],
-    "note": "Monday 24 Aug read as a narrow, mildly risk-off session: weakness concentrated in mega-cap tech/semis ahead of Wednesday's Nvidia print, while Dow, Materials, Staples and Financials held up or gained. VIX's uptick to 15.85 still sits near 2026's historically compressed lows, consistent with pre-earnings positioning rather than a broad-based deterioration. Several breadth series (A-D ratio, new highs/lows, McClellan) could not be independently verified for this specific session and are reported as unavailable rather than estimated.",
+    "note": "Tuesday 25 Aug read as a selective, tech-led rebound: AI-infrastructure/chip names recovered from Monday's rout and yields softened, but only ~180 of 500 S&P names were advancing intraday even as the index gained -- a narrow, not broad-based, rally ahead of Nvidia's Wednesday earnings. Several breadth series (closing A-D ratio, new highs/lows, McClellan, fresh %-above-MA) could not be independently verified for this specific session and are reported as unavailable/carried-forward rather than estimated.",
     "sources": [
       "https://www.barchart.com/stocks/quotes/$S5TH",
       "https://www.barchart.com/stocks/quotes/$S5FI",
-      "https://investrade.com/mid-morning-look-august-24-2026/",
-      "https://www.cnbc.com/2026/08/17/stock-market-volatility-vix-wall-street.html"
+      "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-aug-25-2026",
+      "https://easternherald.com/2026/08/25/sp-500-today-august-25-2026/"
     ]
   },
   "flows": {
-    "asOf": "2026-08-25",
+    "asOf": "2026-08-26",
     "period": "BofA 'Flow Show' / EPFR \u2014 asset-class totals for the week ended Wed 19 Aug 2026 (re-confirmed this run as still the latest release; the week-to-26-Aug print is correctly not due until Fri 28 Aug, so nothing newer should exist yet and none was found). Full regional (US/Europe/EM/China/Japan) breakdown remains confirmed only through the week ended 22 Jul 2026 in open sources \u2014 a genuine, re-checked source gap, not a search failure.",
-    "narrative": "The week through 19 Aug remains the latest BofA Flow Show / EPFR release (week-to-26-Aug due Fri 28 Aug, re-confirmed not yet out): money-market/cash drew the largest inflow ($25.4bn), bonds $23.8bn, gold $6.3bn (biggest since Jan 2026) as Hartnett reiterated 'long gold, short USD.' Monday 24 Aug's Treasury-buyback-driven dollar slide (DXY near a 3-month low ~98.8) is the same mechanism now extending gold to a 3-month high and lifting Bitcoin toward $80k -- consistent with, not a reversal of, the flow picture already on the tape. ICI's own weekly release remains at the week ending 12 Aug (total long-term funds+ETF +$17.39bn; the week-to-19-Aug print is not yet posted, expected ~26 Aug, re-confirmed via a direct ici.org fetch this run). Vanda/JPM retail-flow commentary is unchanged from last week's read (turnover near record highs, net buying pace weakest since the COVID era).",
+    "narrative": "The week through 19 Aug remains the latest BofA Flow Show / EPFR release (week-to-26-Aug due Fri 28 Aug, re-confirmed not yet out): money-market/cash drew the largest inflow ($25.4bn), bonds $23.8bn, gold $6.3bn (biggest since Jan 2026) as Hartnett reiterated 'long gold, short USD.' Tuesday 25 Aug's rebound in AI-infrastructure/chip names and softer Treasury yields extend the same risk-taking backdrop rather than reversing the flow picture already on the tape. ICI's own weekly release remains at the week ending 12 Aug (total long-term funds+ETF +$17.39bn); the week-to-19-Aug print was expected ~26 Aug but had not posted as of this run. Vanda/JPM retail-flow commentary is unchanged from last week's read (turnover near record highs, net buying pace weakest since the COVID era).",
     "regions": [
       {
         "region": "US Equities",
