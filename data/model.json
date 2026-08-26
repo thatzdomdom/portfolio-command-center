@@ -1,116 +1,99 @@
 {
-  "updated": "2026-08-26T07:15:00+08:00",
-  "asOf": "2026-08-26",
+  "updated": "2026-08-27T07:55:00+08:00",
+  "asOf": "2026-08-27",
   "note": "CIO research-panel macro regime + per-instrument probabilistic priors, produced by a multi-agent research workflow with adversarial verification and cited sources. The live in-browser quant engine (GBM drift-diffusion on 2y daily history) blends with these forward-looking priors to produce the displayed P(up) and EV. Refreshed by the scheduled intel agent.",
   "macro": {
-    "regime": "Cautious, event-dense grind: Hormuz de-escalates, Nvidia/PCE and Jackson Hole all still ahead",
-    "riskOnProb": 0.45,
-    "regimeScore": 0.45,
-    "asOf": "2026-08-26",
-    "narrative": "Tuesday 25 Aug's complete US close: S&P 500 +0.32% to 7,677.28, Nasdaq +0.66%, Dow +0.30%, Russell 2000 +0.50%, VIX -2.52% to 15.45 -- a broad, low-vol rally heading into a stacked Wednesday catalyst pile (Nvidia FQ2 after the close, then Core PCE/GDP data). Oil cracked hard (USO -4.58% to $126.15, XLE -1.66% to $62.06) as Iran and Oman floated a proposal for a temporary Hormuz shipping channel, unwinding weeks of built-up geopolitical risk premium even as Beijing publicly criticized the new US sanctions round without being named directly itself. Gold and silver held their debasement-trade grind (GLD +0.32% to $428.07, SLV +0.19% to $62.32) on the same Treasury-buyback dollar-softness mechanism, while Bitcoin pushed above $80,000 for the first time in roughly three months. The day's one hard data print, CB Consumer Confidence, missed meaningfully (89.4 vs 90.3 consensus, down from 90.8, the softest since January) -- a cautionary read on the US consumer heading into today's Core PCE/GDP prints and Friday's Warsh Jackson Hole debut. Net: risk appetite firmed on the Hormuz de-escalation and a cooling VIX, but three consecutive binary catalysts (Nvidia tonight, PCE/GDP later today, Jackson Hole Friday) keep this a cautious, event-dense grind rather than a conviction re-risking.",
+    "regime": "Cautiously risk-on but fragile: NVDA beat-and-raise offsets a hot-but-in-line PCE, with Warsh's Jackson Hole debut the last binary catalyst before September FOMC",
+    "riskOnProb": 0.57,
+    "regimeScore": 0.55,
+    "asOf": "2026-08-27",
+    "narrative": "Wednesday 26 Aug's complete US close: S&P 500 +0.3% to ~7,676-7,677, Nasdaq +0.7-0.8% to ~26,130-26,151, VIX -1.55% to 15.21 -- calm into a stacked data day. Core PCE m/m printed in line at 0.2% (y/y 3.3%, still well above target -- 'elevated but stable,' not accelerating); Prelim GDP q/q held at 1.5%, confirming the deceleration from Q1's 2.1% without a recession signal. After the close, Nvidia crushed FQ2: revenue $96.2B (+106% y/y), EPS $2.22, FQ3 guidance $108B vs $104.2B consensus, shares +14.5% after-hours, AWS separately announcing a 2-million-GPU order on Nvidia's new Vera CPU -- futures firmed into Thursday's Asia open on the print. Gold/silver ETFs and miners pulled back (GLD -1.58%, SLV -1.17%, GDX -2.94%) even as futures held firm (GC=F +0.50%, SI=F +0.14%), a timing/ETF-vs-future divergence coinciding with the hot-but-in-line inflation print tempering near-term cut hopes; silver still capped its best month in years (~+17-18% in August). Oil extended its slide (Brent -2.24%, WTI -0.59%) on continuing Iran-Oman Strait-of-Hormuz de-escalation talks. The dominant near-term catalyst is now Fed Chair Kevin Warsh's first Jackson Hole keynote as Chair, Friday 28 Aug -- he has explicitly declined forward guidance and left a 2026 hike on the table since the July FOMC hold at 3.50-3.75%, even as September hike odds have eased to ~30% on a weak July jobs report. Net: a genuinely constructive tape (AI capex intact, inflation not re-accelerating, calm VIX, tight-but-not-complacent credit spreads) capped by real uncertainty over a hawkish-surprise Fed chair's Friday speech and a historic long-bond selloff (30Y >5.3%, TLT at a 22-year low) reflecting fiscal/duration stress independent of the Fed.",
     "drivers": [
       {
-        "factor": "Iran-Oman float a temporary Hormuz shipping-channel proposal -- oil craters on the de-escalation",
-        "read": "Regional officials confirmed Tuesday that Iran and Oman outlined a plan to jointly establish a temporary shipping channel through the Strait after weeks of fraught talks, materially reducing the geopolitical supply-shock premium that had been built into crude. USO fell 4.58% to $126.15 and XLE fell 1.66% to $62.06 on the news -- a sharper 'sell the de-escalation' move than Monday's 2.5% sanctions-related pullback.",
+        "factor": "Nvidia FQ2 beat-and-raise -- the AI capex cycle's cleanest live confirmation this quarter",
+        "read": "Revenue $96.2B (+106% y/y) beat, data-center sales $89B beat, FQ3 guide $108B topped the $104.2B consensus, shares +14.5% after-hours; AWS's 2-million-GPU order on Nvidia's new Vera CPU reinforces continued hyperscaler capex commitment.",
         "impact": "supportive"
       },
       {
-        "factor": "China criticizes the new Iran-sanctions round without being named directly -- a live but so-far-contained friction point",
-        "read": "Beijing said Tuesday the US sanctions threat 'will only further intensify tensions,' a day after Bessent vowed an 'economic D-Day' for buyers of Iranian oil under the phased 'Operation Economic Outcast' framework. China itself has still not been directly designated, keeping this a rhetorical rather than an escalatory risk for now.",
-        "impact": "cautionary"
-      },
-      {
-        "factor": "CB Consumer Confidence missed sharply -- 89.4 vs 90.3 consensus, prior revised down to 90.8, softest since January",
-        "read": "A meaningful downside miss on the week's one hard US data print, landing hours before today's Core PCE (cons 0.2% m/m, prev 0.1%) and Prelim GDP (cons 1.5% q/q, prev 1.5%) releases at 20:30 SGT -- a cautionary read on the consumer heading into the inflation/growth data that will shape Jackson Hole positioning.",
-        "impact": "cautionary"
-      },
-      {
-        "factor": "Nvidia FQ2 earnings land after tonight's close -- the single cleanest live test of AI-capex durability",
-        "read": "Street consensus is ~$93-95bn revenue and ~$0.65-0.68 EPS (+67-75% y/y), with analyst price targets clustered $275-325. This is now hours away rather than a day away, and sits back-to-back with the PCE/GDP prints -- the highest-density catalyst stretch of the week for the tech/AI complex.",
+        "factor": "Core PCE in line but sticky at 3.3% y/y; GDP holds at 1.5%, confirming a growth deceleration from Q1's 2.1%",
+        "read": "Inflation is not re-accelerating but remains well above the 2% target -- not the disinflationary print that would clear the way for a confident September cut, and a decelerating-but-not-recessionary growth backdrop leaves the Fed's reaction function genuinely two-sided.",
         "impact": "mixed"
       },
       {
-        "factor": "Jackson Hole (27-29 Aug) still ahead: Warsh's first keynote as Fed Chair (Fri 28 Aug, 10am ET, theme 'Financial Innovation'), plus Fed speak and the Prelim Benchmark Payrolls Revision (prev -911K) landing Fri 28 Aug 22:00 SGT",
-        "read": "Sept-cut odds have swung materially since the July jobs miss (various trackers show anywhere from ~60% hold to ~65% cut priced, underscoring genuine two-sided uncertainty rather than a settled consensus); Warsh's debut is the week's dominant rates catalyst and remains genuinely two-sided into a still price-sensitive tape.",
+        "factor": "Fed Chair Kevin Warsh's first Jackson Hole keynote as Chair, Friday 28 Aug -- the single largest near-term binary catalyst",
+        "read": "Warsh (confirmed Chair since 22 May 2026, succeeding Powell) held rates at 3.50-3.75% at the July FOMC and has explicitly declined forward guidance, leaving a 2026 hike on the table even as Sept hike odds have eased to ~30% (from a weak July jobs report). A hawkish tone here would hit both equities and the long end; a dovish/QT-only framing would be a relief rally -- markets have not yet fully re-priced his actual reaction function.",
         "impact": "mixed"
       },
       {
-        "factor": "Rare-earth/critical-minerals theme continues to run hot, distinct from the broader macro tape",
-        "read": "MP Materials +4.79% to $60.17 and Energy Fuels (UUUU) +7.33% to $15.97 on 08-25, extending the G7/Pentagon/DoE-driven domestic-supply-chain re-rating that has run largely independent of the day's equity-index and rates moves.",
+        "factor": "30-year Treasury at a 22-year low (yield >5.33%, highest since 2007) -- a fiscal/duration story, not a credit story",
+        "read": "The long end is under genuine selling pressure from fiscal supply concerns and hike optionality, even as credit spreads stay historically tight (HY OAS ~275-281bp, richest decile) -- a real divergence between duration risk and default-risk pricing worth tracking independent of the Fed decision itself.",
+        "impact": "cautionary"
+      },
+      {
+        "factor": "Iran-Oman float a temporary Hormuz shipping-channel proposal -- oil continues to de-escalate",
+        "read": "Continuing talks toward a phased framework (inbound via Iranian waters, outbound via Iranian+Omani waters) pushed Brent -2.24% and WTI -0.59% on 26 Aug, unwinding geopolitical supply-shock premium built up since Iran's war began in February 2026.",
         "impact": "supportive"
+      },
+      {
+        "factor": "China's rare-earth export-control escalation continues on a fixed timeline -- second wave (5 heavy rare earths) now set for 10 Nov 2026",
+        "read": "Structurally supportive for the ex-China rare-earth basket (MP, Lynas) given DoD/Western-government price-floor backing (Lynas's $96M DoD deal, $110/kg NdPr floor), cautionary for broader industrials/defense supply chains reliant on Chinese refining.",
+        "impact": "mixed"
       }
     ],
     "byAssetClass": [
       {
         "assetClass": "Equity",
-        "stance": "Neutral",
-        "pUp12m": 0.61,
-        "tilt": 0,
-        "note": "Held Neutral: Tuesday's broad rally (S&P/Nasdaq/Dow/Russell all up, VIX -2.52% to 15.45) argues for a marginal upgrade, but Nvidia earnings (tonight), Core PCE/GDP (later today) and Jackson Hole (Friday) are three consecutive binary events -- staying Neutral rather than re-risking into all three."
+        "stance": "modest OW",
+        "pUp12m": 0.63,
+        "tilt": 0.012,
+        "note": "Upgraded from Neutral: Nvidia's beat-and-raise confirms the AI-capex cycle is intact and credit spreads remain contained, but a hawkish-surprise Fed chair three weeks from his Jackson Hole debut and a decelerating GDP print (1.5% vs 2.1% in Q1) cap full conviction."
       },
       {
         "assetClass": "Commodities",
         "stance": "modest OW",
-        "pUp12m": 0.67,
+        "pUp12m": 0.64,
         "tilt": 0.012,
-        "note": "Downgraded from OW to modest OW: the complex is now genuinely bifurcated -- gold/silver extend their debasement-trade grind (GLD +0.32%, SLV +0.19%) while oil cracked 4.58% on Hormuz de-escalation, unwinding the geopolitical premium that had been propping up the broader commodity index. The metals leg remains the stronger half."
+        "note": "Held modest OW, bifurcated: gold/silver structurally supported by record central-bank buying and safe-haven/Fed-uncertainty demand (silver +17-18% in August despite Wednesday's pullback) even as oil continues to soften on Hormuz de-escalation and an OPEC+-driven 2026/27 supply-glut narrative."
       },
       {
         "assetClass": "Crypto",
         "stance": "modest OW",
-        "pUp12m": 0.63,
+        "pUp12m": 0.60,
         "tilt": 0.012,
-        "note": "Held modest OW: Bitcoin broke above $80,000 for the first time in roughly three months on continued institutional/liquidity optimism tied to the Treasury-buyback dollar-softness trade -- momentum intact, though Jackson Hole is a two-sided catalyst for the same real-yield mechanism."
+        "note": "Held modest OW: Bitcoin's push above $80k this week is tied partly to a Treasury long-bond buyback surprise and $3B+ of August ETF inflows -- a genuine but policy-flow-dependent tailwind rather than a purely organic one; high dispersion within the asset class (Solana ETF inflows broadening institutional demand)."
       },
       {
         "assetClass": "Bonds",
-        "stance": "Neutral",
-        "pUp12m": 0.51,
-        "tilt": 0,
-        "note": "Held Neutral: 10y yield eased to 4.66%, but historically tight credit spreads (HY OAS ~273-275bp, richest decile) leave the credit sleeve (HYG/LQD) more exposed than the rate sleeve if today's PCE/GDP or Friday's Jackson Hole surprise hawkish."
+        "stance": "modest UW",
+        "pUp12m": 0.46,
+        "tilt": -0.012,
+        "note": "Downgraded to modest UW on duration: the 30-year at a 22-year price low and >5.33% yield reflects genuine fiscal-supply and hike-optionality risk under Warsh, independent of credit conditions -- short-duration/credit (HYG, tight but not complacent spreads) is more defensible than long duration (TLT) here."
       },
       {
         "assetClass": "USD/Cash",
-        "stance": "Neutral",
-        "pUp12m": 0.47,
-        "tilt": 0,
-        "note": "Held Neutral: DXY remains soft near the high-98/99 handle on the Treasury-buyback mechanism with no clean directional trigger yet -- cash optionality into the Nvidia/PCE/Jackson Hole stretch remains reasonable even as no single acute dollar-defensive trigger is currently live."
+        "stance": "modest OW",
+        "pUp12m": 0.54,
+        "tilt": 0.012,
+        "note": "Upgraded to modest OW: elevated real yields and hike optionality under a hawkish-surprise Fed chair support the dollar near-term and cash earns an attractive ~3.5-3.75% risk-free rate through the Jackson Hole/September FOMC catalyst window, even as consensus still calls for USD weakness into mid-2026."
       }
     ],
     "sources": [
-      "https://www.investing.com/news/economic-indicators/consumer-confidence-dips-as-economic-uncertainty-persists-93CH-4875575",
-      "https://investinglive.com/news/us-conference-board-august-consumer-confidence-89-4-vs-90-2-expected/",
-      "https://finance.yahoo.com/economy/articles/u-consumer-confidence-hits-seven-170933631.html",
-      "https://www.briskmarkets.com/blog/us-cb-consumer-confidence-falls-to-89-4-as-us-outlook-weakens/",
-      "https://www.cnn.com/2026/08/25/world/live-news/iran-war-trump-sanctions",
-      "https://www.cnbc.com/2026/08/24/us-iran-war-trump-hormuz-bessent-economic-sanctions-.html",
-      "https://www.cnn.com/2026/08/23/world/live-news/iran-war-trump",
-      "https://en.wikipedia.org/wiki/2026_Strait_of_Hormuz_crisis",
-      "https://www.bloomberg.com/news/articles/2026-08-25/boj-s-price-gauge-stays-above-target-amid-rate-hike-speculation",
-      "https://www.cnbc.com/2026/08/21/japan-inflation-iran-war-energy.html",
-      "https://intellectia.ai/blog/nvidia-q2-fy27-earnings-preview-august-2026",
-      "https://intellectia.ai/blog/nvidia-earnings-august-26-2026-preview",
-      "https://www.tradingview.com/news/newsbtc:ce37983d6094b:0-bitcoin-traders-watch-jackson-hole-as-kevin-warsh-prepares-first-fed-keynote/",
-      "https://www.xtb.com/en/education/jackson-hole-2026-warsh-fed-speech",
-      "https://www.mnimarkets.com/articles/chair-warsh-to-give-jackson-hole-keynote-speech-aug-28-at-10am-et-1787258124058",
-      "https://www.regardsofwallstreet.com/news/jackson-hole-2026-dates-schedule-warsh-first-speech",
-      "https://kalkine.com/news/premium/jackson-hole-2026-can-warshs-debut-signal-where-rates-go-next",
-      "https://finance.biggo.com/news/4bdca185-b608-4b0f-a895-e3f2ef41d945",
-      "https://www.techtimes.com/articles/325518/20260825/warsh-keynote-jackson-hole-ai-capex-breaking-his-rate-hold-case.htm",
-      "https://www.cnbc.com/select/the-price-of-gold-today-august-25-2026/",
-      "https://finance.yahoo.com/personal-finance/investing/article/gold-prices-today-tuesday-august-25-2026-gold-hits-3-month-high-this-morning-120736963.html",
-      "https://fortune.com/article/current-price-of-gold-08-25-2026/",
-      "https://finance.yahoo.com/personal-finance/investing/article/bitcoin-and-ethereum-prices-today-tuesday-august-25-2026-highest-opening-for-bitcoin-in-over-three-months-123338376.html",
-      "https://www.fool.com/coverage/stock-market-today/2026/08/25/crypto-market-today-aug-25-bitcoins-rebound-above-usd80-000-has-it-finally-bottomed/",
-      "https://www.bloomberg.com/news/articles/2026-08-25/bitcoin-reaches-three-month-high-of-80-000-as-momentum-returns",
-      "https://tradingeconomics.com/united-states/bofa-merrill-lynch-us-high-yield-option-adjusted-spread-fed-data.html",
-      "https://convextrade.com/metrics/bamlh0a0hym2",
-      "https://tradingeconomics.com/united-states/government-bond-yield",
-      "https://finance.yahoo.com/markets/stocks/articles/mp-materials-mp-stock-rising-182958234.html",
-      "https://stockstotrade.com/news/mp-materials-corp-mp-news-2026_08_21/",
-      "https://ts2.tech/en/mp-materials-jumps-9-as-pentagon-price-support-anchors-rare-earth-earnings/",
+      "https://www.cnbc.com/2026/08/26/feds-preferred-inflation-gauge-shows-core-prices-rose-3point3percent-annually-in-july.html",
+      "https://www.bea.gov/news/2026/gdp-second-estimate-and-corporate-profits-2nd-quarter-2026",
+      "https://www.bloomberg.com/news/articles/2026-08-26/nasdaq-futures-rise-on-bullish-nvidia-sales-growth-markets-wrap",
+      "https://www.cnbc.com/2026/08/26/nvidia-nvda-earnings-report-q2-2027-live-updates.html",
+      "https://www.federalreserve.gov/newsevents/pressreleases/other20260522a.htm",
+      "https://www.cnbc.com/2026/05/13/kevin-warsh-wins-senate-confirmation-as-the-next-federal-reserve-chair.html",
+      "https://www.pbs.org/newshour/economy/watch-live-new-fed-chair-kevin-warsh-holds-first-news-conference-after-interest-rate-decision",
       "https://www.cnbc.com/2026/08/07/odds-the-fed-hikes-in-september-tumble-following-big-july-jobs-miss.html",
-      "https://www.washingtonpost.com/business/2026/08/25/wall-street-stocks-dow-nasdaq/6dcac1e0-a0c3-11f1-8606-1d40ad00172e_story.html"
+      "https://www.xtb.com/en/education/jackson-hole-2026-warsh-fed-speech",
+      "https://www.forbes.com/sites/brandonkochkodin/2026/08/18/why-the-safest-bonds-are-performing-dismally-compared-to-junk-debt/",
+      "https://convextrade.com/metrics/bamlh0a0hym2",
+      "https://www.themoscowtimes.com/2026/08/20/tear-down-the-wall-of-silence-around-negotiations-to-end-russia-ukraine-war-a93533",
+      "https://www.aei.org/commentary/china-taiwan-update-august-25-2026/",
+      "https://www.spglobal.com/market-intelligence/en/news-insights/articles/2026/6/china-tightens-rare-earth-export-curbs-on-10-us-companies-103014947",
+      "https://www.aljazeera.com/news/2026/8/26/iran-oman-agree-on-temporary-hormuz-route-what-we-know",
+      "https://www.mining.com/barrick-newmont-settle-dispute-with-1-95b-deal/"
     ]
   },
   "calls": [
@@ -359,10 +342,10 @@
       "ev3m": 0.042,
       "ev12m": 0.12,
       "drivers": [
-        "GLD +0.32% Tuesday to $428.07, a smaller gain than recent sessions but still extending the multi-week debasement-trade grind on the Treasury-buyback dollar-softness mechanism",
-        "Move continued even as oil sold off 4.58% on Hormuz de-escalation -- confirms gold's bid is driven by the dollar/liquidity mechanism, not a pure geopolitical-fear trade",
-        "Jackson Hole (27-29 Aug) hedge demand building into Warsh's untested first keynote (Fri 28 Aug) -- a genuinely two-sided catalyst for real yields",
-        "Today's Core PCE/GDP prints (20:30 SGT) are the next near-term swing factor for the real-yield/dollar backdrop gold trades against"
+        "GLD pulled back -1.58% Wednesday to $421.32 even as GC=F futures held firm (+0.50%) -- an ETF/futures timing divergence coinciding with the in-line-but-hot Core PCE (0.2% m/m, 3.3% y/y) that tempered near-term rate-cut hopes",
+        "Barrick/Newmont settled their Nevada Gold Mines dispute for $1.95B (26 Aug), clearing the way for Barrick's planned North America gold-business IPO -- a fundamental miner-sector positive distinct from the metals price",
+        "Jackson Hole (Fri 28 Aug) hedge demand building into Warsh's untested first keynote as Fed Chair -- a genuinely two-sided catalyst for real yields",
+        "Multi-week debasement-trade thesis (Treasury buyback, central-bank buying) intact; Wednesday's pullback reads as digestion, not a reversal"
       ],
       "confidence": 0.64
     },
@@ -377,10 +360,10 @@
       "ev3m": 0.048,
       "ev12m": 0.14,
       "drivers": [
-        "SLV +0.19% Tuesday to $62.32, a modest gain that continues the same buyback/dollar tailwind as gold, though at a slower pace than gold's recent run",
+        "SLV pulled back -1.17% Wednesday to $61.59 alongside gold's ETF-vs-futures divergence (SI=F held +0.14%), coinciding with the hot-but-in-line Core PCE print",
+        "Still capped its best month in years (~+17-18% in August) even after Wednesday's pullback -- the pullback reads as digestion of a sharp run, not a reversal",
         "Same structural deficit (6th consecutive annual shortfall) intact as the underlying multi-month thesis",
-        "Jackson Hole event risk (Warsh's 28 Aug keynote) and today's PCE/GDP data are two-sided catalysts for the real-yield mechanism silver trades against",
-        "Higher beta than gold to the same dollar-softness trade -- both upside and downside amplified"
+        "Jackson Hole event risk (Warsh's 28 Aug keynote as new Fed Chair) is the next two-sided catalyst for the real-yield mechanism silver trades against; higher beta than gold in both directions"
       ],
       "confidence": 0.58
     },
@@ -413,10 +396,10 @@
       "ev3m": -0.01,
       "ev12m": 0.02,
       "drivers": [
-        "Sold off sharply Tuesday (-4.58% to $126.15) as Iran and Oman outlined a proposal for a temporary Hormuz shipping channel, unwinding weeks of built-up geopolitical risk premium in a single session",
-        "China criticized the new sanctions round without being directly named, keeping some tail risk alive but not enough to offset Tuesday's de-escalation move",
-        "'Operation Economic Outcast' sanctions remain phased/country-by-country rather than an immediate blanket measure, structurally capping near-term supply-shock urgency",
-        "The scale of Tuesday's reversal (largest single-day move referenced this cycle) materially lowers confidence in the standing supply-disruption thesis -- treated as a genuine trend change, not just noise, pending confirmation"
+        "Extended the slide Wednesday (Brent -2.24%, WTI -0.59%) as Iran and Oman continued talks toward a phased temporary Hormuz shipping-channel framework, a second straight session of de-escalation-driven softness",
+        "Crude inventories printed a near-zero +0.095M build (vs +1.6M forecast, well below the prior +4.4M) -- a bullish demand signal that oil fell through anyway on the geopolitical de-escalation",
+        "OPEC+ supply-glut positioning (JPMorgan sees Brent averaging $86 in Q3 sliding toward $78 by year-end) remains the dominant medium-term overhang independent of the Hormuz story",
+        "The multi-session reversal materially lowers confidence in the standing supply-disruption thesis -- treated as a genuine trend change, not just noise"
       ],
       "confidence": 0.42
     },
@@ -647,28 +630,28 @@
       "ev3m": 0.021,
       "ev12m": 0.082,
       "drivers": [
-        "+0.32% Tuesday to 7,677.28, a broad rally (Nasdaq +0.66%, Dow +0.30%, Russell +0.50%) with VIX cooling 2.52% to 15.45",
-        "CB Consumer Confidence missed sharply (89.4 vs 90.3, softest since January) -- a cautionary consumer-demand signal ahead of today's Core PCE/GDP data",
-        "Nvidia FQ2 earnings land after tonight's close, followed almost immediately by Core PCE/GDP at 20:30 SGT -- the highest catalyst density of the week",
-        "Jackson Hole (27-29 Aug) and Warsh's 28 Aug debut keynote remain the week's third major event risk"
+        "S&P closed Wednesday +0.3% around 7,675-7,677 with VIX cooling further to 15.21 (-1.55%), calm heading into a stacked catalyst day",
+        "Core PCE printed in line (0.2% m/m, 3.3% y/y) and GDP held at 1.5% -- neither derails nor confirms a September cut, keeping the Fed path genuinely two-sided",
+        "Nvidia's after-the-close beat-and-raise (revenue $96.2B, FQ3 guide $108B, shares +14.5% AH) is lifting futures into Thursday's Asia open",
+        "Warsh's Friday 28 Aug Jackson Hole keynote as new Fed Chair remains the week's last major binary event risk"
       ],
-      "confidence": 0.52
+      "confidence": 0.54
     },
     {
       "ticker": "QQQ",
       "name": "Invesco Nasdaq-100 ETF",
       "assetClass": "Equity / Regions",
-      "pUp1m": 0.51,
-      "pUp3m": 0.57,
-      "pUp12m": 0.68,
-      "ev1m": 0.002,
-      "ev3m": 0.018,
-      "ev12m": 0.095,
+      "pUp1m": 0.55,
+      "pUp3m": 0.6,
+      "pUp12m": 0.69,
+      "ev1m": 0.01,
+      "ev3m": 0.026,
+      "ev12m": 0.098,
       "drivers": [
-        "+0.66% Tuesday, the strongest of the major US indices, with VIX cooling to 15.45",
-        "Nvidia FQ2 earnings after tonight's close is the single dominant catalyst for the index -- Street consensus ~$93-95bn revenue, targets $275-325",
-        "AI 'circular financing'/valuation scrutiny (WSJ's ~$3tn off-balance-sheet commitments estimate) not resolved, just paused ahead of the print; hyperscaler capex near ~102% of cloud revenue keeps the bar high",
-        "Secular AI demand fundamentals intact; confidence held moderate given tonight's binary event risk"
+        "Nvidia FQ2 beat-and-raise (revenue $96.2B +106% y/y, FQ3 guide $108B vs $104.2B consensus, shares +14.5% after-hours) -- the cleanest live confirmation yet of AI-capex durability",
+        "AWS announced a 2-million-GPU order using Nvidia's new Vera CPU alongside the print, reinforcing continued hyperscaler commitment",
+        "AI 'circular financing'/valuation scrutiny (large off-balance-sheet capex commitments) not resolved, just addressed by a strong print; hyperscaler capex intensity keeps the bar high next quarter",
+        "Warsh's Friday Jackson Hole keynote is the next event risk that could reprice the real-yield backdrop tech multiples trade against"
       ],
       "confidence": 0.48
     },
@@ -856,17 +839,17 @@
       "ticker": "TLT",
       "name": "iShares 20+ Year Treasury Bond ETF",
       "assetClass": "Bonds / Rates / Credit",
-      "pUp1m": 0.53,
-      "pUp3m": 0.52,
-      "pUp12m": 0.5,
-      "ev1m": 0.006,
-      "ev3m": 0.004,
-      "ev12m": 0,
+      "pUp1m": 0.47,
+      "pUp3m": 0.46,
+      "pUp12m": 0.46,
+      "ev1m": -0.006,
+      "ev3m": -0.008,
+      "ev12m": -0.01,
       "drivers": [
-        "10y yield eased to 4.66% Tuesday, a modest tailwind for duration",
-        "Fiscal/inflation concerns still cap a durable rally -- the long end remains near multi-year highs",
-        "Today's Core PCE (cons 0.2% m/m) and GDP (cons 1.5% q/q) prints are the next direct catalyst for the long end, followed by Jackson Hole",
-        "Fed rate-path uncertainty remains genuinely two-sided into Warsh's first keynote -- real risk both ways for duration"
+        "30-year Treasury at a 22-year price low (yield >5.33%, highest since 2007) -- a fiscal-supply/duration story, not a credit-cycle one; TLT down ~6% YTD",
+        "Fed Chair Warsh has explicitly declined forward guidance and left a 2026 hike on the table since the July FOMC hold -- his Friday Jackson Hole keynote is the next direct catalyst for the long end",
+        "Core PCE printed hot-but-in-line (3.3% y/y) and GDP held at 1.5% -- neither clears the way for a confident rate-cut-driven duration rally",
+        "Credit spreads remain historically tight even as duration sells off -- a genuine divergence worth watching independent of the Fed decision"
       ],
       "confidence": 0.45
     },

@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-26",
-  "retrievedOn": "2026-08-26",
-  "note": "Re-verified Wed 26 Aug 2026, ~07:35 SGT pre-Asia-open run. Korea got a genuinely fresh print this run (full Tuesday 25 Aug close, KOSPI+KOSDAQ). Hong Kong's Southbound could NOT be refreshed past 24 Aug this run -- a search for the 25 Aug print returned two internally inconsistent AI-summarized figures (one ~HK$6.6bn net sell, a second citing the same SH/SZ split scaled 10x to ~HK$66bn) with no traceable primary article; neither was applied, per the no-fabrication rule, so 24 Aug remains latest. Japan's weekly print is unchanged (week of 10-14 Aug remains latest; the 17-21 Aug week is not due until ~27 Aug per JPX's 4-business-day lag, re-confirmed still not posted). Singapore (the owner's largest exposure) was re-attempted and again returned no fresher weekly institutional/retail split than the week of 20-24 Jul -- now ~33 days stale, the single biggest gap in this file. China's margin-balance proxy: a '\u00a52.155trn combined balance, 10-year high, 22 Aug' figure was found recirculating this run but is very likely the same stale/mis-dated 2025 data point already identified and excluded in a prior run (see dataGaps) -- NOT applied; the already-verified 19-20 Aug figure (\u00a52,632.847bn combined, -\u00a51.248bn d/d) is kept as latest. United States: ICI's own page still shows week ending 12 Aug as latest; the week-to-19-Aug release was expected ~26 Aug (today) but had not posted as of this run.",
+  "updated": "2026-08-27",
+  "retrievedOn": "2026-08-27",
+  "note": "Re-verified Thu 27 Aug 2026, ~08:10 SGT pre-Asia-open run. Singapore's freshness streak was broken this run (8 consecutive stale runs) -- the week of 17-21 Aug SGX institutional/retail split was retrieved via sginvestors.io, cutting the gap from ~33 days to ~6 days; the 4 weeks between 25 Jul and 16 Aug remain unconfirmed. Japan's weekly print is unchanged (week of 10-14 Aug remains latest confirmed; the 17-21 Aug week was expected ~27 Aug per JPX's 4-business-day lag -- i.e. today -- but was not yet retrievable this run). Korea: this run's fresh search returned figures for 24-26 Aug that were internally inconsistent with, and did not clearly improve on, the already-confirmed 24-25 Aug sessions already in this file -- not applied, per the no-fabrication rule; 25 Aug remains latest confirmed. Hong Kong Southbound and China's margin-balance proxy were re-checked but no cleaner, more-recent primary figure than what's already on file was found -- carried forward unchanged. United States: ICI's week ending 19 Aug was confirmed this run via Lipper syndication (see market.json flows) but the investor-type-specific US data (Vanda/JPM proxies) did not materially change from the prior read -- carried forward with re-verified context.",
   "markets": [
     {
       "market": "Japan (JPX / TSE)",
@@ -622,58 +622,47 @@
       "market": "Singapore (SGX)",
       "available": true,
       "cadence": "Weekly \u2014 SGX Fund Flow tracker, Mon\u2013Fri weeks",
-      "latestPeriod": "Week 30: 20\u201324 Jul 2026",
-      "asOf": "2026-07-24",
+      "latestPeriod": "Week of 17\u201321 Aug 2026",
+      "asOf": "2026-08-21",
       "flows": [
         {
           "investorType": "Institutional (SGX does not split foreign vs domestic)",
+          "direction": "outflow",
+          "amount": "\u2212S$159.8m",
+          "unit": "SGD",
+          "period": "17\u201321 Aug",
+          "isProxy": false,
+          "note": "UPDATED this run (freshness streak broken after 8 stale runs): top institutional net buys were DBS (+S$70.9m), Sembcorp Industries (+S$63.4m) and Yangzijiang Shipbuilding (+S$43.2m) -- even the net-selling week saw selective institutional accumulation in the owner's DBS and YZJ holdings."
+        },
+        {
+          "investorType": "Retail",
+          "direction": "inflow",
+          "amount": "+S$323.1m",
+          "unit": "SGD",
+          "period": "17\u201321 Aug",
+          "isProxy": false,
+          "note": "Retail absorbed the institutional supply, a larger net-buy than the prior confirmed week (24 Jul, +S$71.1m)."
+        },
+        {
+          "investorType": "Institutional \u2014 prior confirmed week",
           "direction": "outflow",
           "amount": "\u2212S$54.3m",
           "unit": "SGD",
           "period": "20\u201324 Jul",
           "isProxy": false,
-          "note": "Second net-selling week in three."
-        },
-        {
-          "investorType": "Retail",
-          "direction": "inflow",
-          "amount": "+S$71.1m",
-          "unit": "SGD",
-          "period": "20\u201324 Jul",
-          "isProxy": false,
-          "note": "Retail absorbing institutional supply."
-        },
-        {
-          "investorType": "Market makers / active traders (MMATs)",
-          "direction": "outflow",
-          "amount": "\u2212S$16.7m",
-          "unit": "SGD",
-          "period": "20\u201324 Jul",
-          "isProxy": true,
-          "note": "PROXY: the residual category as printed by the source."
-        },
-        {
-          "investorType": "Institutional \u2014 prior week",
-          "direction": "outflow",
-          "amount": "\u2212S$318.2m",
-          "unit": "SGD",
-          "period": "13\u201317 Jul",
-          "isProxy": false,
-          "note": "Retail bought +S$516.8m the same week."
+          "note": "Carried context from the last run; the 4-week gap between 24 Jul and 17-21 Aug could not be filled -- intervening weeks are unconfirmed."
         }
       ],
-      "trend": "Institutions have been net sellers in two of the last three weeks (\u2212S$318.2m, then \u2212S$54.3m) while retail bought both weeks (+S$516.8m, +S$71.1m).",
-      "interpretation": "DISTRIBUTION as of the last confirmed week (24 Jul) \u2014 institutions selling into retail buying, with the STI at record levels. STALENESS FLAG (7 runs in a row now): no fresher weekly SGX institutional-vs-retail split could be retrieved again this run despite re-attempting sgx.com, SGinvestors.io and i3investor/itiger/moomoo; this reading is now ~33 days old and should not be assumed to still hold given the Aug 19-25 global volatility (chip-led selloffs in both US and Korea), the Iran-sanctions escalation, and the Fri 21 Aug OCBC Research note flagging S-REITs as sharply lagging the bank-led STI YTD (see news.json). A recurring '~S$506m net institutional outflow driven by Financials/Industrials' snippet was re-checked this run and traced to a stale 2024 report being resurfaced by search aggregators, not a current-week figure \u2014 confirmed NOT usable and deliberately excluded again. Qualitative context found instead (YTD-through-17-Jul, NOT a fresh weekly figure): institutional buying concentrated in OCBC/UOB/SIA/Wilmar/SATS (all already-strong YTD performers); retail flow skewed toward DBS and weaker names (Singtel, CapitaLand Ascendas REIT, Genting Singapore, Sembcorp) \u2014 OCBC is the one name both cohorts were net buying. For the owner's REIT sleeve (Mapletree, Keppel REIT), CapitaLand Ascendas REIT's negative YTD retail flow is a caution sign if the pattern holds, though it is not SGX-confirmed for the REIT names specifically.",
+      "trend": "Institutions were net sellers again in the week of 17-21 Aug (\u2212S$159.8m) with retail absorbing the supply (+S$323.1m) -- the same distribution pattern seen in the last confirmed week (24 Jul), though DBS and Yangzijiang Shipbuilding (both owner holdings) were among the institutional net buys even within an overall selling week.",
+      "interpretation": "DISTRIBUTION persists as of 21 Aug \u2014 institutions net selling into retail buying, but with selective institutional accumulation in DBS and YZJ specifically, both owner holdings. The 4-week data gap (25 Jul-16 Aug) means the Aug 19-25 chip-led global volatility and Iran-sanctions escalation are not directly reflected in this print -- treat the 17-21 Aug read as a snapshot either side of that volatility, not a clean read through it.",
       "sources": [
-        "https://klse.i3investor.com/web/blog/detail/SGXResearch/2026-07-20-story-h502278712-STI_Hits_Record_as_Focus_Shifts_to_Earnings",
-        "https://www.moomoo.com/community/feed/institutions-buy-sia-and-wilmar-retail-crowds-into-dbs-singapore-116973559611398"
+        "https://sginvestors.io/market/sgx-fund-flow-summary"
       ],
       "dataGaps": [
         "SGX does NOT split institutional into foreign vs domestic \u2014 the single \"institutional\" line mixes both",
         "sgx.com itself renders as a JavaScript shell and returns HTTP 200 for non-existent paths, so figures here are cited to a full-text republication that could actually be read",
         "Weekly cadence: no intra-week read",
-        "STALE (7 runs in a row): no fresher weekly SGD net-flow total than the week of 20-24 Jul 2026 could be retrieved again this run (25 Aug) despite re-attempting sgx.com and sginvestors.io (both JS-rendered, no data served) -- this is the single biggest gap in this file given SGX is the owner's largest exposure. The figures above are CARRIED FORWARD, not restamped as current. A recurring '~S$506m net institutional outflow' snippet was checked again this run and re-confirmed as a stale, likely mis-dated resurfaced figure -- excluded again.",
-        "STALE (8 runs in a row): re-attempted again 26 Aug (sgx.com, sginvestors.io both still JS-rendered with no data served); no fresher weekly split found. Week of 20-24 Jul remains latest, now ~33 days stale."
+        "Freshness streak broken this run (27 Aug) after 8 consecutive stale runs -- week of 17-21 Aug retrieved via sginvestors.io. The 4 weeks between 25 Jul and 16 Aug remain unconfirmed/ungapped -- the MMAT (market maker/active trader) residual line was not retrievable for this new week and is omitted rather than carried forward as stale."
       ],
       "series": {
         "unit": "S$ m",
