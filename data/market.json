@@ -1,31 +1,31 @@
 {
-  "updated": "2026-08-27",
-  "note": "Thu 27 Aug 2026, ~08:00 SGT pre-Asia-open run. Latest completed US session is Wednesday 26 Aug: S&P 500 ~7,676 (-0.02% per price spine; some outlets show +0.3% to 7,677.24, a minor cross-source discrepancy flagged rather than resolved), Nasdaq 26,130.20 (-0.08% per spine), VIX 15.21 (-1.55%), a calm session ahead of Nvidia's after-close beat-and-raise and the day's Core PCE/GDP prints. CNN Fear&Greed's own site remained blocked (HTTP 451 on cnn.com and edition.cnn.com, and a third mirror aistockselection.com returned 403) -- could not retrieve the live 7-component breakdown or clean historical comparison table this run; a finhacker.cz mirror read 55/Greed for 26 Aug, unchanged from the prior close. Crypto Fear&Greed (alternative.me) fell to 65/Greed from 74 the prior day (46 a week ago), reflecting high crypto volatility. Breadth: NYSE advancers led decliners ~1.71:1 on 26 Aug and 52-week new highs (190) outpaced new lows (79) net +111 (both search-aggregated, moderate confidence, not directly pulled from Barchart); %-above-200DMA/50DMA and the McClellan Oscillator/Summation Index could not be pinned to the current date after two search attempts each -- reported as unavailable rather than estimated or carried forward as stale. Flows: replaced the carried-forward BofA/22-Jul regional breakdown with Reuters/LSEG Lipper's actual week-ended-19-Aug regional data (a genuine freshness improvement -- real current-week regional detail rather than a 5-week-old carry-forward), plus fresher gold-ETF and money-market figures.",
+  "updated": "2026-08-28",
+  "note": "Fri 28 Aug 2026, ~07:00 SGT pre-Asia-open run. Latest completed US session is Thursday 27 Aug: S&P 500 +0.72% to 7,730.99, Nasdaq +1.57%, VIX fell to 14.51 on Nvidia's after-close beat-and-raise and calming inflation nerves. CNN Fear&Greed's own site remained blocked (HTTP 451 on cnn.com; a Benzinga mirror also 403'd) -- could not retrieve the live 7-component breakdown this run; a finhacker.cz mirror read 58/Greed for 27 Aug (up from ~55 on 26 Aug), consistent with the VIX drop and rally. Crypto Fear&Greed (alternative.me) rose to 71/Greed from 65 the prior day (62 a week ago, 29 a month ago). Breadth was notably narrow on 27 Aug despite the index gain: intraday/EOD scraper data showed NYSE decliners (~1,212) outpacing advancers (~972), and Investrade's mid-session note flagged 10 of 11 S&P sectors lower with only Technology (+2.3%, Nvidia-driven) positive -- a thin, mega-cap-tech-led rally rather than a broad one (moderate confidence, search-aggregated, not a direct Barchart/WSJ pull). %-above-200DMA/50DMA and the McClellan Oscillator/Summation Index again could not be pinned to the current date after repeated attempts -- reported as unavailable rather than estimated or carried forward as stale. Flows: added BofA/EPFR Flow Show reporting (via Bloomberg, published 21 Aug) for the week ended ~20 Aug -- global equity funds +$40.1bn (largest in three weeks) and bonds +$21.4bn, alongside Hartnett's Bull & Bear Indicator at 9.3 ('excessively bullish') -- as a fresher cross-check alongside the previously-captured Reuters/LSEG Lipper week-to-19-Aug regional breakdown (kept as secondary detail since the two providers' methodologies differ and are not directly reconcilable); week-to-26-Aug data not yet published by either provider.",
   "fearGreed": {
-    "value": 55,
+    "value": 58,
     "rating": "Greed",
-    "asOf": "2026-08-26",
+    "asOf": "2026-08-27",
     "prevClose": 55,
     "prev1w": null,
     "prev1m": null,
     "prev1y": null,
-    "cryptoValue": 65,
+    "cryptoValue": 71,
     "cryptoRating": "Greed",
     "components": [
       {
         "name": "Market Momentum",
-        "reading": "CNN's own page blocked again this run (HTTP 451 on cnn.com and edition.cnn.com; a third mirror also 403'd). finhacker.cz independently read 55/Greed for 26 Aug, unchanged day-over-day. S&P 500 closed effectively flat (-0.02% to +0.3% depending on source) at ~7,676-7,677.",
+        "reading": "CNN's own page blocked again this run (HTTP 451 on cnn.com; a Benzinga mirror also 403'd). finhacker.cz independently read 58/Greed for 27 Aug, up from ~55 the prior day. S&P 500 closed +0.72% to 7,730.99 and Nasdaq +1.57% on Nvidia's beat-and-raise.",
         "signal": "greed"
       },
       {
         "name": "Stock Price Strength",
-        "reading": "Unavailable -- CNN's component page blocked (451) on two separate fetch attempts this run. Not guessed.",
+        "reading": "Unavailable -- CNN's component page blocked (451) again this run. Not guessed.",
         "signal": "neutral"
       },
       {
         "name": "Stock Price Breadth",
-        "reading": "NYSE advancers led decliners ~1.71:1 on 26 Aug per a search-aggregated market recap (moderate confidence, not directly pulled from a primary source) -- a constructive but not extreme breadth read.",
-        "signal": "greed"
+        "reading": "Mixed/narrow on 27 Aug: NYSE decliners outpaced advancers (~1,212 vs ~972, search-aggregated, moderate confidence) and 10 of 11 S&P sectors fell even as the index rose, per Investrade's mid-session note -- a thin, mega-cap-tech-led advance rather than a broad one.",
+        "signal": "neutral"
       },
       {
         "name": "Put/Call Options",
@@ -34,12 +34,12 @@
       },
       {
         "name": "Market Volatility",
-        "reading": "VIX closed Wednesday at 15.21 (-1.55%), calm and near 2026's compressed lows heading into Nvidia's earnings and the PCE/GDP prints -- consistent with a greed-leaning volatility read.",
+        "reading": "VIX fell to 14.51 on 27 Aug, near 2026's compressed lows -- consistent with a greed-leaning volatility read.",
         "signal": "greed"
       },
       {
         "name": "Safe-Haven Demand",
-        "reading": "Gold/silver ETFs pulled back Wednesday (GLD -1.58%, SLV -1.17%) even as futures held firm -- a mixed signal, left neutral rather than scored either way absent a direct CNN-sourced spread read this run.",
+        "reading": "Gold continued attracting fresh money (ETF inflows near a 10-month high, gold approaching $4,700/oz) even as equities rallied -- a mixed signal, left neutral absent a direct CNN-sourced stock-vs-Treasury spread read this run.",
         "signal": "neutral"
       },
       {
@@ -55,11 +55,11 @@
     ]
   },
   "breadth": {
-    "asOf": "2026-08-26 (latest completed session)",
+    "asOf": "2026-08-27 (latest completed session)",
     "metrics": [
       {
         "label": "% of S&P 500 stocks above 200-day MA",
-        "value": "mid-to-high 50s% (approximate synthesis of Aug point-in-time readings: 56.8% as of 7 Aug, 56.26% as of 4 Jun; no clean figure pinned to 26 Aug specifically found this run)",
+        "value": "mid-to-high 50s% (approximate synthesis of Aug point-in-time readings: 56.8% as of 7 Aug, 56.26% as of 4 Jun; no clean figure pinned to 27 Aug specifically found this run -- carried as an approximation, not fresh)",
         "signal": "neutral",
         "pct": 57
       },
@@ -71,46 +71,46 @@
       },
       {
         "label": "NYSE advancers vs decliners",
-        "value": "Advancers led decliners ~1.71:1 on 26 Aug (search-aggregated market recap, moderate confidence, not a direct Barchart/WSJ pull)",
-        "signal": "bullish",
-        "pct": 63
+        "value": "Decliners led advancers ~1,212 vs ~972 (roughly 1.25:1) on 27 Aug despite the index closing up -- search-aggregated live-scraper snippet, moderate confidence, not a direct Barchart/WSJ pull; a reversal from 26 Aug's advancer-led 1.71:1",
+        "signal": "bearish",
+        "pct": 44
       },
       {
         "label": "52-week New Highs minus New Lows (NYSE)",
-        "value": "190 new highs vs 79 new lows, net +111, on 26 Aug (search-aggregated, moderate confidence)",
-        "signal": "bullish",
+        "value": "Not found specifically for 27 Aug this run; most recent confirmed reading is 26 Aug (190 new highs vs 79 new lows, net +111) -- not carried forward as current",
+        "signal": "neutral",
         "pct": null
       },
       {
         "label": "McClellan Oscillator / Summation Index",
-        "value": "Not retrievable this run after two direct attempts (stockcharts.com/mcoscillator.com pages identified but not pulled with live data)",
+        "value": "Not retrievable this run after repeated attempts (stockcharts.com $NYMO page identified but live value not pulled)",
         "signal": "neutral",
         "pct": null
       },
       {
         "label": "Advance-decline line trend",
-        "value": "Qualitatively bullish -- NYSE A-D line has been trending with price through mid-August per stockcharts.com commentary, though the most specific corroborating figures found are dated (context only, not a live 26 Aug read)",
-        "signal": "bullish",
+        "value": "Qualitatively bullish on a multi-week view per stockcharts.com commentary, but the 27 Aug daily print itself was breadth-negative (see advancers/decliners row) -- a narrowing within an still-uptrending line, not a live A-D line value",
+        "signal": "neutral",
         "pct": null
       },
       {
         "label": "Sectors above 200-DMA (count of 11 GICS sectors)",
-        "value": "Not found this run",
-        "signal": "neutral",
-        "pct": null
+        "value": "Precise 200-DMA sector count not found, but same-session color: 10 of 11 S&P sectors closed lower on 27 Aug with only Technology (+2.3%, Nvidia-driven) positive, per Investrade's mid-session note -- a narrow, single-sector-led session",
+        "signal": "bearish",
+        "pct": 9
       }
     ],
-    "note": "Wednesday 26 Aug read as constructive/healthy: advancers meaningfully outpacing decliners and more new highs than new lows, consistent with the calm VIX (15.21) backdrop -- but the two most rigorous quantitative confirmations (McClellan Oscillator/Summation Index and precise current %-above-200DMA/50DMA) could not be pinned to the exact date this run and are reported as gaps rather than filled with stale numbers.",
+    "note": "Thursday 27 Aug was a headline-up, breadth-down session: S&P +0.72% to 7,730.99 and Nasdaq +1.57% on Nvidia's beat-and-raise, but NYSE decliners outpaced advancers and 10 of 11 S&P sectors fell -- a narrow, mega-cap-tech-led rally rather than a broad-based one. The two most rigorous quantitative confirmations (McClellan Oscillator/Summation Index and precise current %-above-200DMA/50DMA) remain unavailable this run and are reported as gaps rather than filled with stale numbers.",
     "sources": [
-      "https://alternative.me/crypto/fear-and-greed-index/",
       "https://www.stockcharts.com/",
-      "https://www.barchart.com/"
+      "https://www.barchart.com/",
+      "https://investrade.com/mid-morning-look-august-27-2026/"
     ]
   },
   "flows": {
-    "asOf": "2026-08-27",
-    "period": "Reuters/LSEG Lipper -- week ended Wed 19 Aug 2026 (the freshest regional breakdown found this run; week-to-26-Aug not yet published). Replaces the prior run's carried-forward 22-Jul regional split with actual current-week data.",
-    "narrative": "Lipper's week-to-19-Aug data shows broad-based inflows: global equity funds +$22.01bn (US +$11.72bn, Europe +$4.70bn, Asia +$2.96bn, EM +$1.57bn -- EM's 6th consecutive week of inflows), bond funds +$15.42bn (20th straight weekly inflow), money-market funds +$3.71bn (a three-week-low pace even as absolute money-market assets remain near record highs, $7.93tn per ICI), and gold funds +$2.04bn (6th straight week) alongside physical gold ETFs +$6.4bn/+46.7 tonnes the week ended ~21 Aug -- strongest gold-ETF inflow in 10 months. BofA's own Flow Show full asset-class breakdown for the current week could not be pinned down this run (only stale April/late-July prints found) -- Lipper is used as the primary source instead. Notable: BofA's Fund Manager Survey (7-13 Aug poll) showed allocators' cash allocation at 3.5% of AUM, the 6th-lowest ever, even as absolute cash balances sit at records -- a genuine 'low relative cash, high absolute cash' divergence.",
+    "asOf": "2026-08-28",
+    "period": "Primary: Reuters/LSEG Lipper -- week ended Wed 19 Aug 2026. Cross-check: BofA/EPFR Flow Show (Michael Hartnett), week ended ~Thu 20 Aug 2026, via Bloomberg reporting published 21 Aug. Week-to-26-Aug not yet published by either provider as of this run.",
+    "narrative": "Lipper's week-to-19-Aug data shows broad-based inflows: global equity funds +$22.01bn (US +$11.72bn, Europe +$4.70bn, Asia +$2.96bn, EM +$1.57bn -- EM's 6th consecutive week of inflows), bond funds +$15.42bn (20th straight weekly inflow), money-market funds +$3.71bn (a three-week-low pace even as absolute money-market assets remain near record highs, $7.93tn per ICI), and gold funds +$2.04bn (6th straight week) alongside physical gold ETFs +$6.4bn/+46.7 tonnes the week ended ~21 Aug -- strongest gold-ETF inflow in 10 months. A fresher cross-check via BofA/EPFR's Flow Show (week ended ~20 Aug, reported by Bloomberg 21 Aug) shows the same broad-based pattern at larger EPFR-scope magnitudes: global equity funds +$40.1bn (largest in three weeks) and bonds +$21.4bn, with Hartnett's Bull & Bear Indicator at 9.3 ('excessively bullish') and continued 'Anything But Dollar' gold-over-USD positioning -- the two providers aren't directly reconcilable (different universe/methodology) but agree directionally. Notable: BofA's Fund Manager Survey (7-13 Aug poll) showed allocators' cash allocation at 3.5% of AUM, the 6th-lowest ever, even as absolute cash balances sit at records -- a genuine 'low relative cash, high absolute cash' divergence.",
     "regions": [
       {
         "region": "US Equities",
@@ -199,7 +199,8 @@
       "https://www.reuters.com/markets/",
       "https://www.ici.org/research/stats/flows",
       "https://alternative.me/",
-      "https://www.etfexpress.com/"
+      "https://www.etfexpress.com/",
+      "https://www.bloomberg.com/news/articles/2026-08-21/bofa-s-hartnett-sees-pressure-on-risk-assets-if-bond-plan-fails"
     ]
   }
 }

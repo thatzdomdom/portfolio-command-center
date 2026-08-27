@@ -1,66 +1,66 @@
 {
-  "date": "2026-08-27T08:20:00+08:00",
-  "coverage": "Thursday 27 Aug 2026 pre-Asia-open run (~07:02-08:20 SGT). Latest completed session is Wednesday 26 Aug for the US (S&P ~7,676, Nasdaq 26,130, VIX 15.21, -1.55%); HK/SG/JP/KR's own daily bars had not yet consolidated past Tuesday 25 Aug at spine-fetch time (Asian bars lag). Nvidia's FQ2 print landed after Wednesday's US close, the dominant overnight story. SGX opens 09:00 SGT and HKEX 09:30 SGT, both after this run.",
+  "date": "2026-08-28T07:45:00+08:00",
+  "coverage": "Friday 28 Aug 2026 pre-Asia-open run (~07:02-07:45 SGT). Latest completed session is Thursday 27 Aug for the US (S&P 7,730.99 +0.72%, Nasdaq 26,541 +1.57%, VIX 14.51 -4.6%) and Thursday 27 Aug for HK/SG; JP/KR's own daily bars had only consolidated through Wednesday 26 Aug at spine-fetch time (Asian bars lag). This run sits directly ahead of Fed Chair Kevin Warsh's debut Jackson Hole keynote tonight (22:00 SGT) and the Jackson Hole Symposium's formal start tomorrow. SGX opens 09:00 SGT and HKEX 09:30 SGT, both after this run.",
   "tldr": [
-    "Nvidia crushed FQ2 (revenue $96.2B +106% y/y, FQ3 guide $108B vs $104.2B consensus, shares +14.5% after-hours) -- the cleanest confirmation yet the AI-capex cycle is intact, resolving last quarter's three-way whale split (Tepper/Loeb/Soros) in the bulls' favor.",
-    "Core PCE held in-line but sticky at 3.3% y/y and GDP confirmed at 1.5% -- neither derails nor confirms a September Fed cut; Fed Chair Kevin Warsh's first Jackson Hole keynote (Friday 28 Aug) is now the dominant near-term catalyst after he explicitly left a 2026 hike on the table.",
-    "Gold/silver ETFs and miners pulled back Wednesday (GLD -1.58%, SLV -1.17%, GDX -2.94%) even as futures held firm (GC=F +0.50%, SI=F +0.14%) -- an ETF/futures timing divergence coinciding with the hot-but-in-line PCE print; silver still capped its best month in years (~+17-18% in August).",
-    "Trump renewed the push to fire Fed Governor Lisa Cook (response deadline was today) and the 30-year Treasury sits at a 22-year price low (yield >5.33%) -- both a structural tailwind for holding the gold/silver hedge independent of today's data.",
-    "Iran and Oman continued talks toward a temporary Hormuz shipping corridor, pushing oil to a third straight down session (WTI -0.59%, Brent -2.24%) -- easing one input into the inflation narrative that's been supporting the metals trade.",
-    "Berkshire, Ackman, Druckenmiller and Tepper all made large, partially offsetting Q2-2026 13F moves (Berkshire's $21.1B GOOGL add; Ackman's new Visa/Mastercard/S&P Global stakes; Druckenmiller's 10x AMZN build funded by a full chip exit; Tepper's 12-name narrowing) -- no new activist filings surfaced this week."
+    "Thursday's full US close ratified Wednesday's Nvidia beat-and-raise -- S&P +0.72%, Nasdaq +1.57%, VIX down to 14.51 -- but breadth was narrow (NYSE decliners > advancers, 10 of 11 S&P sectors down): a mega-cap-tech-led rally, not a broad one.",
+    "Fed Chair Kevin Warsh's first Jackson Hole keynote tonight (22:00 SGT) is the single largest binary catalyst before September FOMC -- markets are split between a hold and a residual ~30% hike probability with essentially zero 2026 cuts priced.",
+    "A Strait of Hormuz tanker strike (Iran says the Oman deal is 'not finalized') reverses Wednesday's de-escalation narrative -- a reason not to fade the gold/silver safe-haven hedge on de-escalation headlines alone.",
+    "Real ETF moves diverged sharply from thin futures headlines Thursday: SLV +1.92% and GLD +0.30% were the true prints, while GC=F (+1.37%) and SI=F (+3.23%) are low-trust, thin-volume series this run and overstate the actual move.",
+    "The 30-year Treasury sits at post-2007-high yields (5.19-5.31%) even after Bessent's buyback intervention -- a structural, Fed-independent tailwind for the gold/silver debasement thesis.",
+    "No new 13D/13G filings moved the tracked super-investor cohort this week; Michael Burry (deregistered 13F filer, Substack-only) escalated AI-bubble shorts in Nebius/Oracle/Micron plus SOXX 2027 puts -- background color, not a structured disclosure."
   ],
   "whatChanged": [
-    "intel.json: congress trimmed to 17 trades across 9 members (dropped 2 older items to stay current); superInvestors expanded from 11 to 14 (added Appaloosa's 12 exits, Bridgewater's energy rotation, Druckenmiller's AMZN/chip-exit swap); insiders refreshed Xiaomi with fresh HKEX filings (BlackRock 5-filing cluster + Lei Jun/Lin Bin founder buys, both 11-21 Aug) replacing a stale 15 Jul entry, and added SMIC's National IC Fund stake; NVDA and SLV signals updated to reflect the actual earnings outcome and Wednesday's price action.",
-    "investors.json: re-verified and re-stamped per the every-run rule; notableTrades grew from 17 to 20 (added Druckenmiller/AMZN, Tepper/MSFT-exit, Bridgewater/PG&E); no new 13D/13G this week; flagged Trump net-worth figures as unreconciled ($6.5B-$7.3B across sources) rather than picking one.",
-    "model.json: macro regime re-verified with Wednesday's actual PCE/GDP prints and Nvidia's after-close beat -- riskOnProb lifted 0.45->0.57; Equity upgraded Neutral->modest OW, Bonds downgraded Neutral->modest UW on 30Y duration stress, USD/Cash upgraded to modest OW; GLD/SLV/USO/SPY/QQQ/TLT driver text and estimates refreshed with today's confirmed data; all 40 core tickers + 9-name rare-earth basket present (49 total).",
-    "market.json: Fear&Greed reset to 55/Greed (CNN's own site still 451-blocked; crypto F&G fell to 65 from 74 on volatility); breadth improved with fresher advancer/decliner and new-highs-minus-lows reads (both bullish-leaning) though McClellan/sector-count remain unavailable; flows section rebuilt on Reuters/LSEG Lipper's actual week-to-19-Aug regional data, replacing a 5-week-stale carried-forward split.",
-    "flows-investors.json: Singapore's 8-run staleness streak broken -- week of 17-21 Aug SGX institutional/retail split retrieved (institutions -S$159.8m, retail +S$323.1m, with DBS/YZJ among institutional net buys); Japan/Korea/Hong Kong/China/US carried forward, no cleaner fresher figure found for any of them this run.",
-    "news.json: fully refreshed to 14 items, 6 dated in the last 24-48h (PCE/GDP, NVDA earnings, Fed Governor Cook deadline, Iran-Oman Hormuz talks, gold/silver pullback, Barrick-Newmont settlement); SGX/Singapore was the thinnest category, paired a 24 Aug REIT/bank item with 7-11 Aug earnings context to stay decision-relevant.",
-    "track.json: today's model snapshot appended (49 calls), history intact (44 snapshots, cap 120)."
+    "intel.json: congress rebuilt to 15 trades across 9 members with real dates/sources; superInvestors set to 10 entries (one per required name) from Q2-2026 13Fs; insiders trimmed hard to 6 items that survived freshness + price-discipline checks (13 of 14 SGX names and all 4 US ETF tickers yielded nothing verifiable this run -- logged as an 11th consecutive SGXNet-source block in dataQuality); signals refreshed to 6 tickers (GOOGL, AMZN, MU, CRWD, 1810.HK, CBRS).",
+    "investors.json: re-verified and re-stamped per the every-run rule; convictionPlays/notableTrades/sectorConcentration unchanged (Q2 2026 remains the current filed quarter, Q3 not due until ~14 Nov 2026); folded in Burry's escalated August shorts (background color, not a 13F event), Berkshire's cash pile falling to $365.5B from a record $397.4B, and a new CNN detail on Trump's June Exxon Mobil sell-then-repurchase PTR.",
+    "model.json: macro regime upgraded from 'cautiously risk-on but fragile' to 'risk-on confirmed post-Nvidia' -- riskOnProb 0.57->0.60 -- on Thursday's full US-close confirmation of the Nvidia beat, the jobless-claims beat (203K vs 208K), and confirmed Q2 GDP at 1.5%; equity/tech/semis calls (XLK, SMH, QQQ, SPY) bumped up on the confirmed rally; gold call trimmed slightly since GLD's real ETF move was far more muted than the low-trust GC=F futures headline, while silver's stronger real move (SLV +1.92%) lifted its call; all 40 core tickers plus the 9-name rare-earth basket present (49 total).",
+    "market.json: Fear&Greed reset to 58/Greed (CNN's own site still HTTP-451-blocked, so component detail stays mostly unavailable rather than guessed); crypto F&G jumped to 71/Greed from 65; breadth flagged as a 'headline-up, breadth-down' session (NYSE decliners ~1,212 vs advancers ~972, only Technology positive among 11 sectors); flows cross-checked Lipper's week-to-19-Aug data against a fresher BofA/EPFR Flow Show pull (week ended ~20 Aug) showing global equities +$40.1bn and a 9.3 'excessively bullish' Bull & Bear Indicator.",
+    "flows-investors.json: 4 of 6 markets refreshed -- Japan's week-of-17-21-Aug data finally published (foreigners flipped to -¥414.1bn net selling, individuals to +¥688.8bn net buying); Korea advanced to 26 Aug; Hong Kong Southbound advanced through 27 Aug, resolving a large swing (-HK$66.05bn on the 25th to +HK$31.8bn on the 27th); US ICI data confirmed for week ending 19 Aug. Singapore and Vanda/JPM US proxy commentary carried forward -- no fresher usable figure found this run.",
+    "news.json: fully refreshed to 13 items, 9 dated 27-28 Aug (jobless claims, the Hormuz tanker strike, gold/silver/oil price action, 30-year yields, crypto holding gains); SGX/Singapore remained the thinnest category -- the freshest available item is the 26 Aug DBS/OCBC/UOB dividend-and-NPL divergence story.",
+    "track.json: today's model snapshot appended (49 calls), history intact (45 snapshots, cap 120)."
   ],
   "regime": {
-    "label": "Cautiously risk-on but fragile: NVDA beat-and-raise offsets a hot-but-in-line PCE, with Warsh's Jackson Hole debut the last binary catalyst before September FOMC",
-    "riskOn": 0.57,
-    "oneLiner": "A genuinely constructive tape (AI capex intact, inflation not re-accelerating, calm VIX, tight credit spreads) is capped by real uncertainty over Fed Chair Warsh's hawkish-leaning Friday speech and a historic long-bond selloff reflecting fiscal stress independent of the Fed."
+    "label": "Risk-on confirmed post-Nvidia, but Warsh's untested Jackson Hole debut tonight is the last coin flip before September",
+    "riskOn": 0.6,
+    "oneLiner": "Thursday's clean, VIX-collapsing confirmation of the Nvidia rally and a resilient labor/growth backdrop argue for risk-on, but a narrow, mega-cap-led advance and an unresolved Hormuz/Fed-speech binary mean the tape is constructive rather than settled."
   },
   "topNews": [
     {
-      "headline": "Nvidia crushes Q2 -- revenue $96.2B, guides to $108B, stock +14.5% after-hours",
-      "impact": "bullish",
-      "actionable": "A blowout NVDA print typically lifts HK tech/semis (SMIC, Tencent's AI-capex narrative) at Thursday's open -- worth watching 0981.HK and 0700.HK for a sympathy gap-up."
-    },
-    {
-      "headline": "Core PCE holds at 3.3% y/y, GDP confirmed at 1.5% -- markets tilt toward 'higher for longer,' not imminent cuts",
+      "headline": "Fed Chair Kevin Warsh delivers debut Jackson Hole keynote today -- markets brace for signal on rate path and Fed independence",
       "impact": "mixed",
-      "actionable": "Sticky inflation plus fading cut odds argues against adding cash-pile duration bets and reinforces the case for holding the silver/miners hedge rather than trimming into strength."
+      "actionable": "The single highest-volatility catalyst of the week for the levered silver/gold book -- avoid adding new leverage into the print and be ready for a sharp two-way move in metals and crypto once Warsh speaks."
     },
     {
-      "headline": "Trump renews bid to fire Fed Governor Lisa Cook; response deadline was today",
-      "impact": "bearish",
-      "actionable": "An escalating Fed-independence fight is a structural tailwind for the gold/silver thesis (debasement/credibility hedge) even if it doesn't move September rate odds directly."
-    },
-    {
-      "headline": "Silver notches its best month in years, up ~18% in August, holding near $68-69 despite Wednesday's pullback",
+      "headline": "Strait of Hormuz tanker struck, Iran says Oman deal 'not finalized' -- reverses Wednesday's de-escalation narrative",
       "impact": "bullish",
-      "actionable": "The 18% August rally directly validates the levered silver position -- momentum and gold/silver ratio compression argue for holding rather than taking profit here."
+      "actionable": "Wednesday's Iran-Oman de-escalation thesis looks premature -- a reason not to fade the gold/silver safe-haven hedge on de-escalation headlines alone."
     },
     {
-      "headline": "Iran and Oman float temporary Strait of Hormuz shipping corridor; oil falls below $81/bbl for a third straight session",
+      "headline": "Jobless claims fall to 203K, below 208K forecast -- layoffs remain low heading into Jackson Hole",
       "impact": "mixed",
-      "actionable": "Early-stage de-escalation reduces the geopolitical risk premium in oil and slightly dampens gold's 'crisis hedge' bid, though inflation/Fed drivers still dominate the metals thesis."
+      "actionable": "A resilient labor market reduces the odds of an urgent Fed pivot and raises the bar for Warsh to sound dovish today -- a modest headwind for near-term gold/silver momentum absent a dovish surprise."
+    },
+    {
+      "headline": "Silver climbs back to ~$69.34, +1.82%, recovering from Wednesday's dip ahead of Jackson Hole",
+      "impact": "bullish",
+      "actionable": "The bounce toward $69-70 confirms the levered silver position's uptrend remains intact heading into today's Jackson Hole catalyst -- supportive of holding through the event rather than de-risking pre-emptively."
+    },
+    {
+      "headline": "30-year Treasury yield sits near 5.19-5.31%, highest since 2007, as Bessent's bond-buyback relief fades",
+      "impact": "mixed",
+      "actionable": "A long bond market pushing to post-2007 highs despite Treasury intervention signals eroding fiscal/inflation confidence -- a structural tailwind for the gold/silver debasement thesis independent of near-term Fed moves."
     }
   ],
   "signals": [
-    "Equity stance upgraded from Neutral to modest OW in model.json this run (pUp12m ~0.63) on Nvidia's confirmed beat-and-raise -- the AI-capex cycle's cleanest live test this quarter came back decisively bullish.",
-    "Bonds downgraded to modest UW (TLT pUp12m 0.46, ev12m -1.0%) -- the 30-year at a 22-year price low reflects genuine fiscal-supply/duration stress distinct from credit conditions, which remain historically tight.",
-    "Watch Fed Chair Warsh's Friday 28 Aug Jackson Hole keynote closely: he has explicitly declined forward guidance and left a 2026 hike on the table since the July FOMC hold -- the single largest binary catalyst before the September decision, for both equities and the long end.",
-    "GLD/SLV both pulled back Wednesday on the hot-but-in-line PCE even as futures held firm -- consider this digestion within an intact uptrend (silver's best month in years) rather than a reversal signal, pending Friday's Jackson Hole tone.",
-    "MP Materials and Lynas remain a live watch item: China's second-wave rare-earth export controls (5 heavy elements) are now fixed for 10 Nov 2026, a scheduled catalyst window for the ex-China basket (MP/LYC.AX/UUUU) distinct from Lynas's operational earnings miss this week."
+    "Silver (SLV) is the model's strongest conviction call this run: pUp3m 0.68, ev3m +5.2%, confidence 0.60 -- consider watching for continuation if Warsh's tone tonight is not hawkish.",
+    "Gold (GLD) close behind at pUp3m 0.64, ev3m +3.6%, confidence 0.58 -- the real ETF move (+0.30% Thu) is far more muted than the thin GC=F futures headline (+1.37%), so treat the futures print with caution.",
+    "Equity/tech calls firmed on the confirmed Nvidia follow-through: SPY pUp3m 0.62, XLK and SMH both pUp3m 0.61 -- consider watching for whether Friday's narrow, mega-cap-led breadth broadens or stays concentrated.",
+    "Conviction plays unchanged this run (Q2 2026 still current): watch MP and GDX among 'Added' positions and BABA/HL/MU among 'Reduced' as the quarter's clearest smart-money reads.",
+    "Rare-earth basket mixed: Lynas (+2.89% Thu) outperformed while MP (-0.47%) and UUUU (flat) cooled -- worth watching as a relative-value pair into the 10 Nov 2026 China export-control catalyst window."
   ],
   "watch": [
-    "Fed Chair Kevin Warsh's first Jackson Hole keynote as Chair, Friday 28 Aug 10am ET (22:00 SGT) -- the week's dominant rates catalyst, genuinely two-sided on September FOMC odds.",
-    "US Unemployment Claims, Thu 27 Aug 20:30 SGT (cons 208K, prev 206K) -- the other half of the labor-market read alongside Friday's Benchmark Payrolls Revision.",
-    "Prelim Benchmark Payrolls Revision, Fri 28 Aug 22:00 SGT (prev -911K) -- a large negative revision would reinforce the growth-deceleration read from this week's GDP print.",
-    "Xi-Trump summit expected late September 2026, with a 7.5% China 'overcapacity' tariff reportedly being calibrated to preserve the existing trade truce -- watch for confirmation, relevant to the HK tech sleeve."
+    "Fed Chair Kevin Warsh's first Jackson Hole keynote as Chair, today 28 Aug 22:00 SGT -- the week's dominant rates catalyst, genuinely two-sided on September FOMC odds.",
+    "Jackson Hole Symposium formally opens tomorrow, 29 Aug 00:15 SGT -- expect continued Fed commentary and market repositioning through the weekend.",
+    "Prelim Benchmark Payrolls Revision, today 28 Aug 22:00 SGT (prev -911K) -- a large negative revision would reinforce the growth-deceleration read from this week's GDP print.",
+    "Tokyo Core CPI y/y, today 28 Aug 07:30 SGT (cons 1.8%, prev 1.9%) -- North Asia risk-tone read-across relevant to the HK sleeve at Friday's open."
   ]
 }
