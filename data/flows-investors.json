@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-29",
-  "retrievedOn": "2026-08-29",
-  "note": "Sat 29 Aug 2026 weekend run. Korea: two NEW confirmed daily sessions added (27 Aug: institutions +W152.7bn, foreign +W45.3bn both modest buyers; 28 Aug: KOSPI closed 6,788.88 -1.79% -- individuals +W424.5bn buyers, foreign -W1,758.6bn and institutions -W284.4bn both sellers, alongside semiconductor tariff concerns hitting Samsung Electronics -2.82% and SK Hynix -3.87%). Japan: kept the existing JPX-sourced -Y414.1bn (17-21 Aug) foreign-selling figure as primary since it reconciles to the primary JPX release; a secondary source this run separately cited a -Y764.1bn foreign outflow for a week ending 21 Aug which does not match the already-reconciled figure -- flagged as an unresolved discrepancy in Japan's dataGaps rather than silently overwritten. Hong Kong: no new daily session beyond 27 Aug found this weekend run (HK/SG were open Fri 28 Aug but Stock Connect data sources had not published by this run's fetch time) -- carried forward, general trend color (Southbound decelerating from H1-2026's >HK$100bn/month pace) added to interpretation. China: no new margin-balance day found (next session would be Fri 28 Aug, not yet published); a secondary claim of a 'record RMB2.28tn margin balance, Aug 2026' was found but its source headline directly contradicted its own body figures -- NOT applied, flagged in dataGaps. Singapore: still unreachable, now a 9th consecutive stale run for the current week; carried forward unchanged. United States: ICI's week-ending-26-Aug release is not yet published (Wednesday cadence) -- carried forward unchanged, nothing new to check this run.",
+  "updated": "2026-08-30",
+  "retrievedOn": "2026-08-30",
+  "note": "Sun 30 Aug 2026 weekend run, 2nd consecutive weekend day. China: ONE new confirmed margin-balance day added -- 27 Aug financing balance ¥2,636.409bn (+¥11.355bn d/d), via a direct raw fetch of the Eastmoney datacenter API, reversing the prior multi-day grind-lower (¥2,629.1bn -> ¥2,625.1bn, 24-26 Aug). 28 Aug not yet published by this API as of fetch time. Hong Kong: Friday 28 Aug Southbound could NOT be reliably confirmed this run despite multiple attempts (Eastmoney's flow API returned quota-balance data, not daily net-buy/sell; HKEX's own Historical Daily page is a JS-rendered SPA with no recoverable data; repeated searches for stockstar.com/sina.cn coverage of 28 Aug returned mutually contradictory synthesized figures with no verifiable citable article) -- Thursday 27 Aug (+HK$31.8bn) remains the latest confirmed session, carried forward rather than guessed. Singapore: sginvestors.io now returns a CAPTCHA/human-verification wall (a harder block than the prior 'not found' state) and sgx.com direct returned HTTP 403 -- genuinely unable to confirm whether the week of 24-28 Aug has published; now a 10th consecutive run without a fresher SGX print. Japan: unchanged, week of 24-28 Aug not expected until ~3-4 Sep per JPX's lag -- not re-checked this run per the prior week's confirmed timeline. United States: ICI's flows and combined_flows pages were directly re-fetched and confirm the week-ending-26-Aug release has not yet posted (Wednesday cadence, ~2 Sep expected) -- carried forward unchanged.",
   "markets": [
     {
       "market": "Japan (JPX / TSE)",
@@ -441,7 +441,8 @@
         "HKEX's own Historical-Daily Stock Connect page failed to load (JS-rendered, no data in fetched HTML) again this run — all of 24-27 Aug remain THIRD-PARTY-SOURCED (stockstar/sina/cls), not primary HKEX",
         "26 Aug figure (+HK$20bn) has no SH/SZ split and is sourced from a single brief alert, lower confidence than the other three sessions this run",
         "Re-checked 28 Aug: the prior run's flagged internally-inconsistent 25 Aug figures (a ~HK$6.6bn vs ~HK$66bn scaling discrepancy) were resolved this run -- stockstar.com's -HK$66.05bn (SH -44.82bn + SZ -21.24bn = -66.06bn, reconciles to a rounding cent) is now applied as the confirmed 25 Aug figure.",
-        "Re-checked 29 Aug (weekend run): no new Southbound session found beyond 27 Aug -- HK was open Fri 28 Aug but this run's sources had not published that day's Stock Connect figures by fetch time. General trend context found this run: Southbound inflows are continuing into late August but decelerating sharply from H1-2026's repeated >HK$100bn/month pace, with stock selection turning more selective/concentrated rather than broad-based."
+        "Re-checked 29 Aug (weekend run): no new Southbound session found beyond 27 Aug -- HK was open Fri 28 Aug but this run's sources had not published that day's Stock Connect figures by fetch time. General trend context found this run: Southbound inflows are continuing into late August but decelerating sharply from H1-2026's repeated >HK$100bn/month pace, with stock selection turning more selective/concentrated rather than broad-based.",
+        "Re-checked 30 Aug: still could not confirm 28 Aug's Southbound figure -- Eastmoney's flow API returned static quota-balance data (not a daily net-buy/sell series, wrong dataset for this purpose), HKEX's own Historical-Daily page remains a JS-rendered SPA with no recoverable data via direct fetch, and repeated searches for stockstar.com/sina.cn coverage of the 28 Aug session returned mutually contradictory synthesized figures with no single verifiable, citable article -- treated the same way this file already treats unreliable AI-search summaries: NOT applied. 27 Aug (+HK$31.8bn) remains the latest confirmed session. A manual browser check of HKEX's Historical Daily Stock Connect page is recommended for a future run."
       ],
       "series": {
         "unit": "HK$ bn",
@@ -520,17 +521,26 @@
       "market": "China (A-shares)",
       "available": false,
       "cadence": "Margin balance: daily. Northbound: quarterly shareholding only since the 2024 disclosure change",
-      "latestPeriod": "26 Aug 2026 (combined 两融 balance and financing-only balance, via direct Eastmoney datacenter API fetch)",
-      "asOf": "2026-08-26",
+      "latestPeriod": "27 Aug 2026 (financing balance, via direct Eastmoney datacenter API fetch)",
+      "asOf": "2026-08-27",
       "flows": [
         {
           "investorType": "Margin financing balance (融资余额, RZYE) — retail leverage",
+          "direction": "inflow",
+          "amount": "¥2,636.409bn (+¥11.355bn d/d)",
+          "unit": "CNY",
+          "period": "27 Aug",
+          "isProxy": true,
+          "note": "PROXY. NEW this run: a genuine reversal from the prior multi-day grind-lower -- ¥2,629.075bn (24 Aug) -> ¥2,628.377bn (25 Aug) -> ¥2,625.054bn (26 Aug) -> ¥2,636.409bn (27 Aug, +¥11.355bn, the largest single-day gain since the mid-August rebuild). Sourced via a direct raw fetch of the Eastmoney datacenter API (RPTA_RZRQ_LSHJ). 28 Aug not yet published by this API as of this run's fetch time."
+        },
+        {
+          "investorType": "Margin financing balance (融资余额, RZYE) — retail leverage, prior session (context)",
           "direction": "outflow",
           "amount": "¥2,625.054bn (-¥3.323bn d/d)",
           "unit": "CNY",
           "period": "26 Aug",
           "isProxy": true,
-          "note": "PROXY. Continued a gradual decline: ¥2,629.075bn (24 Aug) -> ¥2,628.377bn (25 Aug) -> ¥2,625.054bn (26 Aug). Sourced via a direct raw fetch of the same Eastmoney datacenter API (RPTA_RZRQ_LSHJ) already cited in this file's series, bypassing an AI-search-summarized figure (¥2,207.6bn) that would have implied an implausible ~¥450bn one-week drop and was NOT applied."
+          "note": "PROXY, carried as context. Continued a gradual decline: ¥2,629.075bn (24 Aug) -> ¥2,628.377bn (25 Aug) -> ¥2,625.054bn (26 Aug)."
         },
         {
           "investorType": "Combined margin trading balance (两融余额, financing + securities-lending, RZRQYE) — broader retail-leverage proxy",
@@ -560,8 +570,8 @@
           "note": "PROXY for retail entry appetite; fell during the Aug tech selloff, consistent with the margin-balance pattern."
         }
       ],
-      "trend": "Margin balance (leveraged retail conviction) troughed mid-August after a sharp ~14% deleveraging from the June record high, rebuilt gradually through early-to-mid August, then has been grinding gradually lower again through 24-26 Aug (financing balance ¥2,629.1bn -> ¥2,628.4bn -> ¥2,625.1bn; combined balance ¥2,656.5bn -> ¥2,656.0bn -> ¥2,653.2bn) — a slow, steady fade rather than a sharp reversal, with new account openings having already fallen during the same selloff, a genuinely mixed retail-appetite picture.",
-      "interpretation": "Risk-neutral-to-mildly-cautious at the retail-leverage level. China remains the least observable market in this panel: since Beijing withdrew real-time/daily northbound disclosure (stage 1: 13 May 2024 intraday; stage 2: 19 Aug 2024 daily), only post-close aggregate turnover is published and margin balance is the best available proxy. For rare-earths/China-linked exposure, the slow multi-day fade suggests retail risk appetite is cooling gently rather than reversing sharply -- worth watching alongside the same week's chip-led selloff visible in Korea and Hong Kong.",
+      "trend": "Margin balance (leveraged retail conviction) troughed mid-August after a sharp ~14% deleveraging from the June record high, rebuilt gradually through early-to-mid August, ground gradually lower through 24-26 Aug (financing balance ¥2,629.1bn -> ¥2,628.4bn -> ¥2,625.1bn), then reversed sharply on 27 Aug (+¥11.355bn to ¥2,636.4bn) -- the largest single-day gain since the mid-August rebuild, a genuine break from the multi-day fade rather than noise, though one day is not yet a confirmed trend change.",
+      "interpretation": "Risk-neutral, tilting mildly toward re-engagement at the retail-leverage level as of 27 Aug. China remains the least observable market in this panel: since Beijing withdrew real-time/daily northbound disclosure (stage 1: 13 May 2024 intraday; stage 2: 19 Aug 2024 daily), only post-close aggregate turnover is published and margin balance is the best available proxy. The 27 Aug uptick predates Friday 28 Aug's US-driven Warsh/gold-silver shock (A-shares had already closed), so it reflects domestic conviction rather than a reaction to it -- worth watching whether Monday's session extends the re-engagement or the shock knocks it back down.",
       "sources": [
         "https://datacenter-web.eastmoney.com/api/data/v1/get?sortColumns=dim_date&sortTypes=-1&pageSize=8&pageNumber=1&reportName=RPTA_RZRQ_LSHJ&columns=ALL&source=WEB&client=WEB",
         "https://www.stock.stockstar.com/IG2026081000002507.shtml",
@@ -578,7 +588,8 @@
         "Re-checked 25 Aug: a prospective 21 Aug print was searched but returned internally inconsistent totals across sources (likely combined-vs-financing-only basis conflation, similar to a prior run's confusion) -- NOT applied; 19-20 Aug remains the latest reconciled figure.",
         "Re-checked 26 Aug: a '¥2.155trn combined balance, 10-year high, 22 Aug' figure was found recirculating this run. This closely matches a figure already identified in a prior run as a stale, mis-dated 2025 data point conflated with 2026 -- NOT applied; 19-20 Aug remains the latest reconciled figure, carried forward unchanged.",
         "Re-checked 28 Aug: another AI-search-summarized figure claiming a ¥2,207.611bn combined balance as of 26 Aug (financing ¥2,192.16bn + securities-lending ¥15.452bn) was found and would have implied an implausible ~¥450bn one-week drop from the 20 Aug level -- NOT applied. Instead went directly to the raw Eastmoney datacenter API (same one already cited in this file's series) and pulled the RZYE/RZRQYE/RZJME fields directly, which reconcile smoothly with the existing trend (¥2,629-2,625bn financing-only across 24-26 Aug) -- bypassing search-engine summaries for this metric is recommended going forward given this repeated stale/conflated-data risk.",
-        "Re-checked 29 Aug: no new margin-balance session found beyond 26 Aug (next session, Fri 28 Aug, not yet published by the API at fetch time). A secondary claim of 'new A-share account openings +165% YoY in August 2026' and a 'record RMB2.28tn margin balance' was found this run, but the source's own headline (\"drop in new accounts\") contradicted its body figures -- NOT applied pending reconciliation; the existing Eastmoney-sourced series (~¥2.625trn as of 26 Aug) is kept as primary."
+        "Re-checked 29 Aug: no new margin-balance session found beyond 26 Aug (next session, Fri 28 Aug, not yet published by the API at fetch time). A secondary claim of 'new A-share account openings +165% YoY in August 2026' and a 'record RMB2.28tn margin balance' was found this run, but the source's own headline (\"drop in new accounts\") contradicted its body figures -- NOT applied pending reconciliation; the existing Eastmoney-sourced series (~¥2.625trn as of 26 Aug) is kept as primary.",
+        "Re-checked 30 Aug: a direct raw fetch of the same Eastmoney API surfaced a genuine new row for 27 Aug (RZYE ¥2,636.409bn, +¥11.355bn d/d) -- applied to the series below. 28 Aug still not published by this API as of this run's fetch time (Friday sessions sometimes lag into the following Monday for this data source)."
       ],
       "series": {
         "unit": "CNY trn",
@@ -610,7 +621,8 @@
           "2026-08-21",
           "2026-08-24",
           "2026-08-25",
-          "2026-08-26"
+          "2026-08-26",
+          "2026-08-27"
         ],
         "lines": [
           {
@@ -644,7 +656,8 @@
               2.633315,
               2.629075,
               2.628377,
-              2.625054
+              2.625054,
+              2.636409
             ]
           },
           {
@@ -678,12 +691,13 @@
               -0.006207,
               -0.00424,
               -0.000698,
-              -0.003323
+              -0.003323,
+              0.011355
             ]
           }
         ],
         "source": "https://datacenter-web.eastmoney.com/api/data/v1/get?sortColumns=dim_date&sortTypes=-1&pageSize=25&pageNumber=1&reportName=RPTA_RZRQ_LSHJ&columns=ALL&source=WEB&client=WEB",
-        "note": "Margin financing balance and daily net — a RETAIL LEVERAGE proxy, not a foreign-flow measure. Northbound foreign flows have not been published since 2024. 7/11/13/19 Aug points added for the margin-financing-balance line only (line 1); daily net-buying figures (line 2) were not retrievable for these dates and are left null rather than guessed. 21/24/25/26 Aug points added for BOTH lines via a direct raw fetch of the same Eastmoney API (RZYE and RZJME fields), confirmed to the yuan.",
+        "note": "Margin financing balance and daily net — a RETAIL LEVERAGE proxy, not a foreign-flow measure. Northbound foreign flows have not been published since 2024. 7/11/13/19 Aug points added for the margin-financing-balance line only (line 1); daily net-buying figures (line 2) were not retrievable for these dates and are left null rather than guessed. 21/24/25/26/27 Aug points added for BOTH lines via a direct raw fetch of the same Eastmoney API (RZYE and RZJME fields), confirmed to the yuan. 27 Aug shows the first meaningful up-day (+¥11.355bn) after several days of gradual decline.",
         "confidence": "verified-secondary"
       }
     },
@@ -733,7 +747,8 @@
         "Weekly cadence: no intra-week read",
         "Freshness streak broken 27 Aug after 8 consecutive stale runs -- week of 17-21 Aug retrieved via sginvestors.io. The 4 weeks between 25 Jul and 16 Aug remain unconfirmed/ungapped -- the MMAT (market maker/active trader) residual line was not retrievable for that week and is omitted rather than carried forward as stale.",
         "Re-checked 28 Aug: two search attempts (for the still-in-progress 24-28 Aug week, and for the unconfirmed 25 Jul-16 Aug gap weeks) returned no usable sginvestors.io or SGX republication -- 17-21 Aug remains the latest confirmed week, carried forward unchanged this run. The 24-28 Aug week will not be publishable until after Friday's close in any case.",
-        "Re-checked 29 Aug: a further search attempt for the week of 24-28 Aug returned nothing usable -- now a 9th consecutive run without a fresher print. 17-21 Aug remains the latest confirmed week, carried forward unchanged."
+        "Re-checked 29 Aug: a further search attempt for the week of 24-28 Aug returned nothing usable -- now a 9th consecutive run without a fresher print. 17-21 Aug remains the latest confirmed week, carried forward unchanged.",
+        "Re-checked 30 Aug: sginvestors.io now returns a CAPTCHA/human-verification wall on direct fetch (a harder block than the prior 'nothing usable' state) and sgx.com direct returned HTTP 403 -- genuinely unable to confirm whether the week of 24-28 Aug has published yet, not confirmed as either published or unpublished. Now a 10th consecutive run without a fresher print; 17-21 Aug remains the latest confirmed week. A manual browser check is recommended for a future run."
       ],
       "series": {
         "unit": "S$ m",
@@ -881,7 +896,8 @@
         "CFTC weekly futures-positioning data (previously tracked) was not re-verified this run",
         "Taxable-vs-municipal bond fund split for the week ending 19 Aug was not separately retrieved this run (only the combined +$6.89bn bond-fund total)",
         "Re-checked 28 Aug via direct ici.org and combined_flows fetches: week ending 19 Aug is now the latest ICI release, replacing the week-ending-12-Aug figure carried in the prior three runs.",
-        "Re-checked 29 Aug: ICI's week-ending-26-Aug release was not yet published (Wednesday cadence, next release expected ~2 Sep) -- week ending 19 Aug remains the latest confirmed figure, carried forward unchanged this run."
+        "Re-checked 29 Aug: ICI's week-ending-26-Aug release was not yet published (Wednesday cadence, next release expected ~2 Sep) -- week ending 19 Aug remains the latest confirmed figure, carried forward unchanged this run.",
+        "Re-checked 30 Aug via direct fetches of ici.org/research/stats/flows and combined_flows: still no week-ending-26-Aug release -- confirmed as still on the expected ~2 Sep Wednesday cadence, nothing new to add."
       ],
       "series": {
         "unit": "US$ mn",

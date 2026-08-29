@@ -1,6 +1,6 @@
 {
-  "updated": "2026-08-29",
-  "note": "Sat 29 Aug 2026, ~07:40 SGT weekend run. Latest completed US session is Friday 28 Aug close, dominated by Fed Chair Warsh's hawkish Jackson Hole debut (gold/silver/miners/crypto rout; S&P/Nasdaq/VIX barely moved). CNN's own Fear&Greed page returned HTTP 451 again this run; figures below are triangulated across independent mirrors/trackers with some disagreement between them, flagged as approximate. McClellan Oscillator/Summation Index and %-above-50DMA remain unpinned to a current date after repeated attempts -- reported as gaps rather than guessed.",
+  "updated": "2026-08-30",
+  "note": "Sun 30 Aug 2026, ~07:45 SGT weekend run (2nd consecutive weekend day). Latest completed US session remains Friday 28 Aug close (unchanged from Saturday), dominated by Fed Chair Warsh's hawkish Jackson Hole debut. CNN's own Fear&Greed page still returns HTTP 451 (and its Wayback Machine mirror is also blocked at the fetch-tool level) -- the headline 55/Neutral figure is carried forward from Saturday's triangulation. This run found two genuine, dated improvements to prior gaps: a fresher %S&P-above-200-DMA (68.78% as of 28 Aug, via investing.com's S5TH series, materially down from 72.11% on 24 Aug and superseding the stale 7-Aug/56.8% figure) and a dated McClellan Oscillator reading (-99.23 as of 28 Aug, via thetrading.tools, since mcoscillator.com/stockcharts.com direct remain blocked). Crypto Fear&Greed (alternative.me, a live API) softened from 73/Greed (28 Aug) to 68/Greed (29 Aug), still Greed but decelerating. Summation Index and %-above-50DMA remain unavailable after repeated attempts -- reported as gaps rather than guessed.",
   "fearGreed": {
     "value": 55,
     "rating": "Neutral",
@@ -9,17 +9,17 @@
     "prev1w": 55,
     "prev1m": 38,
     "prev1y": null,
-    "cryptoValue": 73,
+    "cryptoValue": 68,
     "cryptoRating": "Greed",
     "components": [
       {
         "name": "Market Momentum",
-        "reading": "CNN's own page blocked again (HTTP 451). feargreedmeter.com read 54 (Neutral) as of this run, down from 58 the prior day -- S&P 500 closed -0.25% to 7,711.76 and Nasdaq -0.52% Friday on Warsh's hawkish surprise, a mild pullback rather than a momentum breakdown.",
+        "reading": "CNN's own page still blocked (HTTP 451) this run, and its Wayback Machine mirror is blocked at the fetch-tool level too. A non-CNN third-party replica (thetrading.tools, using CNN's published methodology) read 59 as of 28 Aug -- directionally consistent with the ~55/Neutral headline carried from Saturday's triangulation, flagged explicitly as not CNN's own data.",
         "signal": "neutral"
       },
       {
         "name": "Stock Price Strength",
-        "reading": "Unavailable -- CNN's component page blocked (451) again this run. Not guessed.",
+        "reading": "CNN's own component page still blocked (451). A directly relevant proxy improved this run: % of S&P 500 stocks above their 200-day MA is now confirmed at 68.78% as of 28 Aug (investing.com S5TH series), down from 72.11% on 24 Aug -- a real, dated figure that supersedes the previously stale 7-Aug/56.8% number, though it is breadth, not CNN's own strength component.",
         "signal": "neutral"
       },
       {
@@ -50,8 +50,8 @@
     ],
     "sources": [
       "https://www.cnn.com/markets/fear-and-greed",
-      "https://feargreedmeter.com/",
-      "https://alternative.me/crypto/fear-and-greed-index/"
+      "https://www.thetrading.tools/fear-greed-index",
+      "https://api.alternative.me/fng/?limit=3"
     ]
   },
   "breadth": {
@@ -59,9 +59,9 @@
     "metrics": [
       {
         "label": "% of S&P 500 stocks above 200-day MA",
-        "value": "56.8% as of 7 Aug 2026 (MacroMicro/Yardeni-sourced) -- no confirmed late-August figure found this run; carried as an approximation, not fresh",
+        "value": "68.78% as of 28 Aug 2026 (investing.com S5TH series), down from 70.37% (26 Aug) and 72.11% (24 Aug) -- a genuine fresh figure this run, replacing the stale 7-Aug/56.8% number",
         "signal": "neutral",
-        "pct": 57
+        "pct": 69
       },
       {
         "label": "% of S&P 500 stocks above 50-day MA",
@@ -83,8 +83,8 @@
       },
       {
         "label": "McClellan Oscillator / Summation Index",
-        "value": "Not retrievable this run after repeated attempts (mcoscillator.com/stockcharts.com general pages only, no dated live value); one related headline described the oscillator as 'quietest in years' recently, directionally suggesting low-conviction breadth momentum but not a specific figure",
-        "signal": "neutral",
+        "value": "Oscillator now confirmed at -99.23 as of 28 Aug close (thetrading.tools, dated), down 48.2 points from the prior session -- a genuinely bearish/deteriorating short-term breadth-momentum reading despite the S&P's flat close. mcoscillator.com/stockcharts.com direct remain blocked (403); Summation Index still unavailable ('not built yet' per the same source).",
+        "signal": "bearish",
         "pct": null
       },
       {
@@ -100,16 +100,16 @@
         "pct": null
       }
     ],
-    "note": "Friday 28 Aug was a genuinely split session: the S&P/Nasdaq/VIX barely moved and NYSE breadth was close to balanced with a net-positive new-highs/lows count, while gold/silver/miners/crypto suffered a sharp, isolated rout on Warsh's hawkish Jackson Hole debut -- broad-market internals show no confirmation of a wider risk-off shift. McClellan Oscillator/Summation Index and %-above-50DMA remain unavailable this run and are reported as gaps rather than filled with stale numbers.",
+    "note": "Friday 28 Aug was a genuinely split session: the S&P/Nasdaq/VIX barely moved and NYSE breadth was close to balanced with a net-positive new-highs/lows count, while gold/silver/miners/crypto suffered a sharp, isolated rout on Warsh's hawkish Jackson Hole debut. This run's fresher data adds a mild bearish undertone beneath that headline calm: %S&P-above-200DMA has been declining all week (72.11%->68.78%, 24-28 Aug) and the McClellan Oscillator reads -99.23 (28 Aug), a real deterioration in short-term breadth momentum even though the index-level close was flat. %-above-50DMA and the Summation Index remain unavailable and are reported as gaps rather than filled with stale numbers.",
     "sources": [
       "https://finance.yahoo.com/markets/stocks/articles/stock-market-news-aug-28-133400922.html",
-      "https://www.macromicro.me/series/22718/sp-500-200ma-breadth",
-      "https://www.stockcharts.com/"
+      "https://www.investing.com/indices/sp-500-stocks-above-200-day-average-historical-data",
+      "https://www.thetrading.tools/mcclellan-oscillator"
     ]
   },
   "flows": {
-    "asOf": "2026-08-29",
-    "period": "Primary: LSEG Lipper -- week ended Wed 26 Aug 2026. Cross-check: BofA/EPFR Flow Show (Michael Hartnett), mid-August 2026 reporting.",
+    "asOf": "2026-08-30",
+    "period": "Primary: LSEG Lipper -- week ended Wed 26 Aug 2026 (unchanged, next release due ~2 Sep). Cross-check: BofA/EPFR Flow Show (Michael Hartnett), mid-August 2026 reporting. Re-verified 30 Aug: US ICI's week-ending-26-Aug release was directly re-checked and has not yet posted (Wednesday cadence) -- no new weekly flow data to add this run.",
     "narrative": "Lipper's week-to-26-Aug data shows the first crack in an otherwise resilient inflow picture: global equity funds posted a -$5.87bn outflow, snapping 13 consecutive weeks of inflows, with US equity funds specifically seeing -$22.33bn in net sales. Gold/precious-metals funds bucked the trend hard, drawing +$4.21bn -- a 6-month high -- while global bond funds added a slower +$10.25bn (a 4-week-low pace) and short-term bond funds saw a 7-week-high +$6.29bn, consistent with investors both taking profits in equities and rotating toward safety/gold and shorter duration ahead of Friday's Warsh shock. The prior week (to 19 Aug) had still shown broad-based inflows (equities at a 3-week high, gold +$2.04bn, a 6th straight week). BofA's Flow Show cross-check shows the same defensive tilt at larger EPFR-scope magnitudes: gold funds +$6.3bn in its featured week (biggest since Jan 2026), tech funds' first outflow in 6 weeks (-$700mn) even after annualizing a record $217bn for the year, and the Bull & Bear Indicator climbing to 9.7 (from 9.4) -- the highest since 2021 and squarely in contrarian 'sell' territory. Japan drew a 9th straight week of fund inflows (+$2.6bn) even as JPX's own data (see flows-investors.json) shows foreign investors net-SELLING Japanese cash equities -- a genuine flow-vs-fund-positioning divergence tied to the JGB yield surge.",
     "regions": [
       {
