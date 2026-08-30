@@ -1,20 +1,24 @@
 {
- "checkedOn": "2026-08-30",
- "at": "2026-08-29T23:22:17.407Z",
- "problems": [],
+ "checkedOn": "2026-08-31",
+ "at": "2026-08-30T23:20:58.909Z",
+ "problems": [
+  "prices: news[5] asserts D05.SI at 63, which matches no traded close/high/low (recent closes: 76.4000015258789, 76.23999786376953, 75.6500015258789, 76.1500015258789)",
+  "prices: news[5] asserts O39.SI at 20.5, which matches no traded close/high/low (recent closes: 31.489999771118164, 31.440000534057617, 30.899999618530273, 31.06999969482422)",
+  "prices: news[6] asserts Z74.SI at 5.46, which matches no traded close/high/low (recent closes: 4.489999771118164, 4.510000228881836, 4.510000228881836, 4.519999980926514)",
+  "prices: brief.tldr[3] asserts D05.SI at 63, which matches no traded close/high/low (recent closes: 76.4000015258789, 76.23999786376953, 75.6500015258789, 76.1500015258789)"
+ ],
  "warnings": [
   "prices: skipped reconciliation for low-trust series (BZ=F) — the spine flags these as rolled/thin; quote the ETF proxy instead"
  ],
  "passed": [
-  "news: 14 items, newest 1d old (latest completed session 2026-08-28)",
+  "news: 11 items, newest 1d old (latest completed session 2026-08-30)",
   "model: 49 calls, all probabilities in range",
   "model: macro re-stamped today",
   "market: F&G 55, stamps current",
-  "track: 47 snapshots, history intact",
+  "track: 48 snapshots, history intact",
   "investors: re-verified today",
   "investors: 2026 Q2 is the newest quarter whose 13F deadline has passed",
   "flows: 6 markets, sources present, proxies labelled",
-  "brief: written today",
-  "prices: spine loaded; no ticker-anchored price claims to reconcile"
+  "brief: written today"
  ]
 }
