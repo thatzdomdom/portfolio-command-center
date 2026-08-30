@@ -1,46 +1,66 @@
 {
-  "date": "2026-08-30T08:00:00+08:00",
-  "coverage": "Sunday 30 Aug 2026 weekend run (~07:02-08:00 SGT), the second consecutive weekend day. All tracked markets (US, HK, SG, JP, KR) remain closed; the latest completed session is still Friday 28 Aug for the US/HK/SG (unchanged from Saturday's run) and Thursday 27 Aug for JP/KR. A data-quality note: this morning's fresh price-spine fetch did not return a Friday 28 Aug daily bar for pure US-exchange instruments (indices, gold/silver ETFs, miners, USO/XLE) -- only futures and HK/SG-listed individual stocks got Friday bars -- so no new US-instrument price deltas are asserted this run; Friday's figures (already multi-source verified via Fed-speech transcripts, BLS.gov and financial press) are carried forward from Saturday's run. Genuinely new since Saturday: the September Fed-hike debate hardened into a real coin-flip (Goldman/SocGen hawkish vs Brookings economists/Krugman skeptical), Hormuz risk escalated (Treasury sanctioned a UAE bank; Iran's IRGC publicly claimed strait control), crypto Fear&Greed softened further (73->68) without a confirmed new price low, a fresh China A-shares margin-balance uptick (+¥11.4bn on 27 Aug, reversing a multi-day fade), and two genuinely new congressional filings (neither portfolio-relevant). Market-sentiment data quality improved: a fresh %S&P-above-200DMA (68.78%, down from 72.1% a week earlier) and a dated McClellan Oscillator (-99.23) replaced two previously stale/unavailable breadth gaps.",
+  "date": "2026-08-31T07:55:00+08:00",
+  "coverage": "Monday 31 Aug 2026 pre-market run (~07:02-07:55 SGT), the first weekday run after the weekend. US/HK/SG cash markets remain closed since Friday 28 Aug's close and have not yet reopened (HKEX/SGX open ~09:00-09:30 SGT later this morning; US opens 21:30 SGT tonight). The price feed's own bars confirm the same known artifact seen over the weekend: pure US-exchange instruments (indices, gold/silver ETFs, miners, USO/XLE) still show no Friday 28 Aug bar, while futures (silver/gold/WTI/Brent) and crypto rolled forward to a genuine Sunday 30 Aug reopen bar, and HK/SG-listed single stocks reached Friday 28 Aug. The dominant genuinely-new development since Sunday's run is a real military escalation: CENTCOM (on record) struck Iranian rocket launchers near Larak Island in the Strait of Hormuz on Sunday, the first US action against Iran in over a month, corroborated by CNN/CNBC/Al Jazeera; oil futures extended gains into Monday's Asia session as a result. A separate single-sourced claim that Iran retaliated against US forces in Jordan the same day could NOT be corroborated (no CENTCOM/Pentagon/wire-service confirmation) and is explicitly labeled unconfirmed everywhere it's mentioned. Congress: one new filer added (Rep. Jared Moskowitz, immaterial AMAT/STE/GWW managed-account trades). No new insider filings, no new 13F/13D/13G whale activity. A claimed Hong Kong Southbound 'record outflow' figure was checked, found to be a misdated 2025 article, and was NOT published -- flagged in flows-investors.json instead.",
   "tldr": [
-    "Friday's hawkish Warsh-driven rout in gold/silver/miners/crypto remains the dominant recent event -- unchanged from Saturday since markets are still closed, but the September-hike call hardened into a genuine coin-flip over the weekend rather than settling hawkish (Goldman/SocGen vs Brookings/Krugman split).",
-    "Hormuz risk escalated, not faded: Treasury sanctioned a UAE bank (Banque Misr) over Iran-evasion processing and Iran's IRGC publicly claimed 'decisive control' of the strait -- UKMTO still rates the threat SEVERE ahead of Sunday evening's oil-futures reopen.",
-    "Crypto Fear&Greed eased from 73 to 68 (still Greed) with no independently confirmed new weekend low beyond Friday's ~$77.7K BTC print -- consolidation, not a fresh breakdown.",
-    "Breadth quietly deteriorated beneath Friday's calm headline close: %S&P-above-200DMA fell to 68.78% (from 72.1% a week earlier) and the McClellan Oscillator reads -99.23 -- a real, if modest, short-term momentum warning.",
-    "China A-shares margin balance reversed higher (+¥11.4bn, 27 Aug) after several days of grinding lower -- a small but genuine domestic re-engagement signal, though it predates Friday's US-driven shock.",
-    "No new super-investor moves or portfolio-relevant congressional/insider filings surfaced over the weekend -- two new congressional filings found (McCormick, Coons) are unrelated to any held names."
+    "Confirmed escalation, not just rhetoric: CENTCOM struck Iranian rocket launchers near the Strait of Hormuz on Sunday -- the first US military action on Iran in a month -- pushing oil futures ~2% higher into Monday's Asia open; a separate claim of Iranian retaliation against US forces in Jordan is unconfirmed and should not be treated as fact.",
+    "The September Fed-hike debate remains a genuine coin-flip (CME ~56%, Kalshi ~47/54) rather than settling either way -- Goldman/SocGen hawkish vs Brookings economists/Krugman skeptical -- the dominant risk for the levered silver/miners sleeve into the 16 Sep FOMC.",
+    "Silver miners' August rally (Hecla +47%, First Majestic +42%, Pan American +22% MTD) still outpaces the metal itself even after Friday's Warsh-driven rout -- the Silver Institute projects a sixth straight annual supply deficit, widening to 46.3M oz. Treat Friday as noise within an intact bullish month.",
+    "JPMorgan cut DBS's target to S$63 (from S$70) and downgraded OCBC to underweight on asset-quality/geopolitical-risk concerns -- a direct negative read on two core SGX holdings worth weighing against the sector's still-strong 1H26 income prints.",
+    "No new smart-money moves: super-investor, 13F, congress (beyond one immaterial filer) and SGX/HKEX insider checks all came back empty this run -- Friday's GOOGL/Berkshire story remains the dominant recent whale theme, unchanged.",
+    "Breadth is broadly participative but losing short-term momentum: 9 of 11 sector ETFs sit above their 200-DMA and %S&P>50-DMA is 52.88%, yet %S&P>200-DMA has declined all week (72.1%->68.8%) and the McClellan Oscillator reads -99.23 (bearish)."
   ],
   "whatChanged": [
-    "Intel: added 2 newly-disclosed congressional filings (Sen. McCormick structured notes/muni bond, Sen. Coons W.L. Gore sale), neither portfolio-relevant; congress/insiders/super-investors otherwise re-verified with no new findings, dataQuality note updated.",
-    "Investors: re-verified per the every-run rule, stamp bumped; no new 13F/13D/13G cycle activity found (Q3-2026 13Fs re-confirmed due 16 Nov 2026).",
-    "Model: macro narrative and 2 drivers updated with the weekend's hardened rate-hike debate and Hormuz escalation; BTC-USD and USO call drivers refreshed; all 40 required tickers and 49 total calls carried forward, asOf re-stamped.",
-    "Market: fixed two real data gaps -- %S&P-above-200DMA (68.78%, fresher than the prior stale 7-Aug figure) and McClellan Oscillator (-99.23, previously unavailable); crypto Fear&Greed updated to 68; CNN's own page remains blocked.",
-    "News: 14 items, 3 genuinely dated Sat 29 Aug (Hormuz escalation, hike-debate hardening, crypto weekend read) -- freshness rule satisfied despite the quiet weekend news cycle.",
-    "Flows-investors: China A-shares margin balance extended one fresh confirmed day (27 Aug, +¥11.4bn); Hong Kong Southbound and Singapore SGX Friday data could not be verified this run despite multiple attempts -- both carried forward honestly with the failed methods logged.",
-    "Track: today's snapshot appended (47 total), history intact per the fingerprint check."
+    "Intel: added 1 new congressional filer (Rep. Jared Moskowitz -- immaterial AMAT/STE/GWW managed-account trades, filed 27-28 Aug); no new insider filings found across US/HK/SG despite active checks; dataQuality note updated.",
+    "Investors: re-verified per the every-run rule, stamp bumped; no new 13F/13D/13G activity or roster additions found since Sunday.",
+    "Model: macro narrative and Commodities/Equity driver notes updated with the confirmed Hormuz strike; USO/XLE/DBC call drivers refreshed; regime label and riskOnProb (0.57) held unchanged pending cash-market reopen; all 40 required tickers plus 9 rare-earth calls (49 total) carried forward.",
+    "Market: crypto Fear&Greed ticked 68->69; two long-standing breadth gaps filled with genuine 28 Aug data (%S&P>50-DMA 52.88%, sectors>200-DMA 9/11); equity Fear&Greed (55/Neutral) and region-level Lipper flows carried forward unchanged (no newer release).",
+    "News: 11 items, 7 dated 27-30 Aug -- lead item is the confirmed Hormuz strike, explicitly caveating the unconfirmed Jordan-retaliation claim.",
+    "Flows-investors: Hong Kong Southbound stays at 27 Aug (+HK$31.8bn) -- a claimed 28 Aug 'record outflow' was checked, traced to a misdated 2025 article, and correctly NOT published. Korea, Japan, China, Singapore, US all re-verified with no new data (weekly/lag cadences haven't rolled).",
+    "Track: today's snapshot appended (48 total), history intact."
   ],
   "regime": {
     "label": "Hawkish Warsh debut jolts gold/silver/crypto; broad equities and credit shrug it off -- a rates-driven correction, not a risk-off event",
     "riskOn": 0.57,
-    "oneLiner": "Unchanged from Friday's shock, but the weekend's hardened, still-unsettled September-hike debate keeps the read genuinely two-sided rather than a settled hawkish pivot."
+    "oneLiner": "Unchanged from Sunday: a confirmed Hormuz strike adds a genuine oil-supply catalyst on top of the hawkish-Fed metals unwind, but cash markets haven't reopened to confirm how equities react to either."
   },
   "topNews": [
-    { "headline": "Hormuz risk escalates over the weekend: Treasury sanctions UAE bank, Iran's IRGC claims 'decisive control' of the strait", "impact": "mixed", "actionable": "No direct energy exposure in the book, but the escalating geopolitical risk premium is a reminder the debasement/inflation angle behind the silver-gold trade hasn't disappeared." },
-    { "headline": "September Fed-hike debate hardens into a genuine coin-flip as sell-side reaction to Warsh diverges", "impact": "mixed", "actionable": "Keeps the levered silver/miners sleeve and duration positions two-sided rather than settled into a clear hawkish trend heading into September." },
-    { "headline": "Gold/silver/miners suffer sharpest one-day rout in months as Fed Chair Warsh turns hawkish at Jackson Hole debut", "impact": "bearish", "actionable": "Treat as a rates-driven unwind of an extremely crowded rally rather than a fundamental break, but expect elevated volatility around the September FOMC before adding fresh leverage." },
-    { "headline": "Bitcoin holds near $77-78K into the weekend; Fear&Greed softens from 73 to 68 without a confirmed new leg down", "impact": "bearish", "actionable": "Confirms crypto is trading as a rate-sensitive risk asset this cycle; weekend consolidation rather than a fresh breakdown -- re-check live levels before Monday's Asia open." },
-    { "headline": "Rare earths sell off alongside metals -- MP -4.9%, UUUU -6.8% per the tape, though causation and magnitude are contested", "impact": "mixed", "actionable": "The structural China-export-curb and DoD-backing thesis is unaffected either way -- verify live prices before acting on the watchlist." }
+    {
+      "headline": "CENTCOM strikes Iranian rocket launchers near Larak Island in the Strait of Hormuz; Iran vows retaliation",
+      "impact": "bearish",
+      "actionable": "Expect a haven bid in gold/silver and elevated miners-sleeve volatility into Monday's Asia open; treat the separate Jordan-retaliation claim as unverified, not a basis for action."
+    },
+    {
+      "headline": "Oil jumps over 2% at the week's open on the Larak Island strike -- Brent back above $90, WTI near $85.41",
+      "impact": "mixed",
+      "actionable": "Reinforces the inflation/rate-hike narrative that hit precious metals Friday -- a genuine two-way pull on the miners sleeve."
+    },
+    {
+      "headline": "September Fed hike odds harden into a genuine coin-flip on CME and Kalshi",
+      "impact": "bearish",
+      "actionable": "Size any silver/miner leverage additions with the binary 16 Sep FOMC risk explicitly in mind."
+    },
+    {
+      "headline": "JPMorgan downgrades OCBC to underweight, cuts DBS price target to S$63 from S$70",
+      "impact": "bearish",
+      "actionable": "A direct negative read on two core SGX holdings -- weigh against the banks' still-strong 1H26 income data before adding exposure."
+    },
+    {
+      "headline": "Silver miners' August rally still outpaces the metal itself despite Friday's rout",
+      "impact": "bullish",
+      "actionable": "The structural deficit thesis behind the levered silver/miners sleeve is intact -- treat Friday as noise within a still-bullish month."
+    }
   ],
   "signals": [
-    "No model calls meet the high-confidence pUp3m>=0.6/<=0.4 threshold this run (highest are SPY at 0.59 p3m/0.55 confidence and SHY at 0.60 confidence) -- itself a genuine read: conviction is low and two-sided given the unsettled September-hike debate, not a data gap.",
-    "GLD/SLV both sit near coin-flip pUp3m (0.50/0.48) with moderate confidence (0.50/0.52) -- consider watching for confirmation either way rather than treating Friday's rout as a clean directional signal.",
-    "XLK/SMH (semis/tech) both read pUp3m ~0.58 with 0.50 confidence -- AI-capex fundamentals remain unchallenged by Friday's Fed-driven metals/crypto shock, worth watching as a relative-strength pair against the debasement trade.",
-    "Rare-earth basket (MP, UUUU, REMX) stays moderate-confidence and mixed after Friday's pullback -- the NdPr price near-doubling y/y and China's fixed Nov-2026 export-control timeline remain the structural bull case independent of the day's tape.",
-    "China A-shares margin balance's 27 Aug uptick (+CNY11.4bn) is a small but genuine domestic-conviction signal worth watching into Monday, ahead of the delayed reaction to Friday's US-driven shock."
+    "Consider watching the energy sleeve (USO/XLE/DBC): the confirmed Hormuz strike is a fresh, genuine supply-risk catalyst layered on Sunday's already-positive futures reopen.",
+    "Consider treating GOOGL as the broadest whale-consensus name this cycle (Berkshire, Soros, Druckenmiller/Duquesne, Tiger Global all convergent) -- unchanged and still the strongest cross-investor signal on file.",
+    "Consider caution on DBS/OCBC near-term: JPMorgan's fresh downgrade/target cut is a genuine, dated negative catalyst against a core SGX holding.",
+    "Watch the silver/miners sleeve for a binary swing around the 16 Sep FOMC -- the hike-vs-hold debate is a genuine coin-flip, not a settled call in either direction.",
+    "Crypto: BTC consolidating near $77-78k with Fear&Greed back up to 69 (Greed) -- ETH ETF inflows now outpacing BTC's for the first time this year, worth watching as a rotation signal rather than a broad risk-off read."
   ],
   "watch": [
-    "Monday 31 Aug: Asia markets reopen first -- watch whether HK/China absorb Friday's US shock with a catch-down or shrug it off as equities did Friday.",
-    "China August manufacturing PMI (NBS/RatingDog): typically released end-of-month/early September, not yet out as of this run.",
-    "September FOMC meeting: the hawkish-vs-skeptical sell-side split (Goldman/SocGen vs Brookings/Krugman) makes this a genuine coin-flip rather than a settled call.",
+    "Monday 31 Aug: HK/SG cash markets open first (09:00/09:30 SGT) -- watch whether they absorb the Hormuz strike + Friday's Warsh shock with a catch-down or shrug it off, and whether Southbound flows reaccelerate.",
+    "Tue 1 Sep, 22:00 SGT: ISM Manufacturing PMI (consensus 55.2, prev 55.6) and JOLTS (consensus 7.33M, prev 7.36M) -- first hard data points into the September FOMC debate.",
+    "Fri 4 Sep, 20:30 SGT: Non-Farm Payrolls (consensus 58K, prev -23K) and Unemployment Rate (consensus 4.1%) -- the single biggest scheduled catalyst before the 16 Sep FOMC.",
     "Q3-2026 13F filing deadline: Monday 16 Nov 2026 (45 days after quarter-end, rolled forward from the Saturday 14 Nov deadline)."
   ]
 }

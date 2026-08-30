@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-30T07:25:00+08:00",
+  "updated": "2026-08-31T07:35:00+08:00",
   "signals": [
     {
       "ticker": "GOOGL",
@@ -70,6 +70,45 @@
     }
   ],
   "congress": [
+    {
+      "ticker": "AMAT",
+      "representative": "Jared Moskowitz",
+      "date": "2026-07-13",
+      "type": "Buy",
+      "amount": "$1,001-$15,000",
+      "rationale": "Part of a same-batch three-stock filing (AMAT buy, STE and GWW sells) through a Morgan Stanley Active Assets managed account, filed 27-28 Aug 2026 (aggregators disagree on the exact day).",
+      "deepDive": "No stated rationale in either source; coverage explicitly notes the trades do not necessarily reflect Moskowitz's own views on the companies -- a managed-account disclosure, not an active stock pick.",
+      "sources": [
+        "https://www.investing.com/news/company-news/jared-moskowitz-buys-applied-materials-stock-and-sells-steris-and-ww-grainger-shares-93CH-4881907",
+        "https://www.quiverquant.com/news/Congress+Trade:+Representative+Jared+Moskowitz+Just+Disclosed+New+Stock+Trades"
+      ]
+    },
+    {
+      "ticker": "STE",
+      "representative": "Jared Moskowitz",
+      "date": "2026-07-13",
+      "type": "Sell",
+      "amount": "$1,001-$15,000",
+      "rationale": "Same batch filing as the AMAT buy and GWW sell above, via a Morgan Stanley Active Assets managed account.",
+      "deepDive": "No stated rationale identified; managed-account disclosure.",
+      "sources": [
+        "https://www.investing.com/news/company-news/jared-moskowitz-buys-applied-materials-stock-and-sells-steris-and-ww-grainger-shares-93CH-4881907",
+        "https://www.quiverquant.com/news/Congress+Trade:+Representative+Jared+Moskowitz+Just+Disclosed+New+Stock+Trades"
+      ]
+    },
+    {
+      "ticker": "GWW",
+      "representative": "Jared Moskowitz",
+      "date": "2026-07-13",
+      "type": "Sell",
+      "amount": "$1,001-$15,000",
+      "rationale": "Same batch filing as the AMAT buy and STE sell above, via a Morgan Stanley Active Assets managed account.",
+      "deepDive": "No stated rationale identified; managed-account disclosure.",
+      "sources": [
+        "https://www.investing.com/news/company-news/jared-moskowitz-buys-applied-materials-stock-and-sells-steris-and-ww-grainger-shares-93CH-4881907",
+        "https://www.quiverquant.com/news/Congress+Trade:+Representative+Jared+Moskowitz+Just+Disclosed+New+Stock+Trades"
+      ]
+    },
     {
       "ticker": "WLGORE",
       "representative": "Christopher A. Coons",
@@ -625,8 +664,8 @@
       }
     ],
     "flaggedCitations": 0,
-    "checkedOn": "2026-08-30",
-    "runNote": "Sunday 30 Aug 2026 weekend run, ~07:25 SGT -- second consecutive weekend day, US/HK/SG markets still closed since Friday 28 Aug's close (unchanged latest session; JP/KR still lag at Thu 27 Aug per the price spine). Congress: 2 genuinely new filings found and added -- Sen. David McCormick's Goldman Sachs structured-note purchases and a municipal bond buy (filed 27 Aug), Sen. Christopher Coons's sale of private W.L. Gore & Associates stock (filed 28 Aug); neither is portfolio-relevant (no GDX/SILJ/SLVP/PAAS/AG/HL/NEM/VNM/MP/LYC.AX/UUUU/Tencent/Xiaomi/SMIC exposure), so not forced into a narrative. The prior 15-trade batch is retained unchanged below. Super-investors: no genuinely new weekend (29-30 Aug) developments found after directly checking Michael Burry's Substack, Druckenmiller/Ackman/Soros public commentary, Berkshire/Buffett news and general 13D/13G search -- one AI-search false positive (a 2009 Institutional Investor article on Appaloosa misdated as 2026) was caught and discarded rather than published. Buffett turned 96 on Sun 30 Aug; noted here as atmospheric context only, not a portfolio signal. Insiders: re-checked all HKEX (Tencent/SMIC/Xiaomi via aastocks.com) and SGXNet names -- nothing filed since the 25 Aug BlackRock/Xiaomi tranche already on file; SGXNet returned nothing verifiable for the 14th consecutive run. PRICE-SPINE DATA GAP flagged this run: the fresh price-spine fetch (07:02 SGT) did not return a Friday 28 Aug daily bar for any pure US-exchange instrument (indices, gold/silver ETFs, miners, USO/XLE) -- only futures and HK/SG-listed individual stocks got Friday bars in today's fetch. This does not affect intel.json directly (no new US-instrument prices were asserted here), but is flagged for cross-reference with model.json/market.json.",
+    "checkedOn": "2026-08-31",
+    "runNote": "Monday 31 Aug 2026 pre-market run (~07:15 SGT). Congress: 1 genuinely new filer added -- Rep. Jared Moskowitz (FL-23), a 13 Jul 2026 batch trade (AMAT buy, STE/GWW sells) via a Morgan Stanley managed account, filed 27-28 Aug 2026 per two independent secondary sources (investing.com, quiverquant.com); primary House Clerk PDF could not be reached (site blocked) so the exact filing day (27 vs 28 Aug) is unresolved but the trade itself is confirmed via two independent aggregators. capitoltrades.com, efdsearch.senate.gov and disclosures-clerk.house.gov all 403'd/blocked this run. Insiders: nothing new -- re-checked aastocks.com Disclosure-of-Interests for Tencent/SMIC/Xiaomi (existing entries remain the latest) and SGXNet for all held SG names (14th consecutive dry run); SEC EDGAR was blocked (403) for GDX/SILJ/SLVP/VNM Form 4 checks, so that specific coverage is incomplete this run rather than confirmed-empty. Super-investors: re-verified separately (see investors.json note) -- no new 13D/13G or whale moves since Sunday. Signals: re-verified, no material change to the 6 existing consensus tickers this run. Separately, macro research for model.json confirmed a genuine new escalation -- US strikes on Iranian assets near the Strait of Hormuz, Sun 30 Aug, oil up ~2% at Monday's Asia open -- flagged here for cross-reference though it does not directly affect any congress/insider/13F item in this file.",
     "lastRun": {
       "date": "2026-08-29",
       "note": "aastocks.com's HKEX Disclosure-of-Interests tables remain the one channel that works reliably for HK-listed names when SGXNet/sginvestors.io/MarketScreener all 403 -- but its 'average price' field is prone to misreads (event codes, unrelated totals mistaken for per-share prices); always re-fetch raw rows to confirm before publishing any HKEX price."
