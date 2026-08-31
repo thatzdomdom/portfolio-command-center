@@ -1,98 +1,97 @@
 {
-  "updated": "2026-08-31T07:45:00+08:00",
-  "asOf": "2026-08-31",
-  "note": "CIO research-panel macro regime + per-instrument probabilistic priors, produced by a multi-agent research workflow with adversarial verification and cited sources. The live in-browser quant engine (GBM drift-diffusion on 2y daily history) blends with these forward-looking priors to produce the displayed P(up) and EV. Refreshed by the scheduled intel agent. DATA-VINTAGE NOTE (30 Aug): this is a Sunday weekend run -- markets remain closed since Friday 28 Aug's close, the same reference session as Saturday's run, so most technicals/prices below are unchanged. Also: today's fresh price-spine fetch did not return a Friday 28 Aug daily bar for pure US-exchange instruments (indices, gold/silver ETFs, miners, USO/XLE) -- only futures and HK/SG-listed stocks got Friday bars -- so no new US-instrument price deltas are asserted this run; Friday's figures (multi-source verified via Fed-speech transcripts, BLS.gov, Kitco/Benzinga/mining.com) are carried forward from Saturday's run rather than re-derived.",
+  "updated": "2026-09-01T07:45:00+08:00",
+  "asOf": "2026-09-01",
+  "note": "CIO research-panel macro regime + per-instrument probabilistic priors, produced by a multi-agent research workflow with adversarial verification and cited sources. The live in-browser quant engine (GBM drift-diffusion on 2y daily history) blends with these forward-looking priors to produce the displayed P(up) and EV. Refreshed by the scheduled intel agent. TUESDAY UPDATE (1 Sep, re-researched ~07:45 SGT): US cash markets reopened Monday 31 Aug after the long weekend and closed with S&P 500 at 7,686.14, Nasdaq 26,370.89, Dow 53,185.90, Russell 2000 2,956.45 and VIX 14.92 -- but our own price-spine fetch again did not return a Friday 28 Aug daily bar for pure US-exchange instruments (indices, gold/silver ETFs, miners, USO/XLE), so every one of those Monday % changes is a COMPOUNDED TWO-SESSION move (Fri 28 + Mon 31), not a single day's move -- treat the printed pct fields as directionally right but not a clean one-day read. CME futures (GC=F, SI=F, BZ=F, CL=F) and BTC-USD do have the Friday bar and show the true day-by-day shape (gold -2.85% Fri / +0.39% Mon; silver -3.5% Fri / +0.30% Mon; WTI +3.39% cumulative to 86.23; Brent -0.88% cumulative to 88.52, though Brent traded as high as $91.52 intraday Monday per newswire reports). The dominant new development this run: Iran's IRGC confirmed retaliatory missile/drone strikes on the US-hosting King Hussein and Al-Azraq air bases in Jordan (and a UAE target) late Monday, in response to Sunday's CENTCOM strike on Larak Island -- Jordan's military intercepted 8 missiles and a US official said there was no significant impact, while Iran's IRGC claims 'heavy damage' (an unverified claim from an interested party). This is now corroborated by multiple independent outlets (Al Jazeera, The Hill, Reuters-sourced wires, Armed Forces Press, Washington Times) and supersedes the prior run's single-sourced/unconfirmed framing -- treated here as a confirmed but so-far-contained escalation in a US-Iran conflict now in its sixth month. Separately, CME FedWatch September-hike odds drifted further hawkish to 66% (from ~57-58% Friday) on hot PCE readings (3.7% y/y, 4.1% 6m annualized). Today is the first live catalyst day of NFP week (ISM Manufacturing PMI/Prices, JOLTS, FOMC's Barr speaking).",
   "macro": {
-    "regime": "Hawkish Warsh debut jolts gold/silver/crypto; broad equities and credit shrug it off -- a rates-driven correction, not a risk-off event",
-    "riskOnProb": 0.57,
-    "regimeScore": 0.53,
-    "asOf": "2026-08-31",
-    "narrative": "Fed Chair Kevin Warsh's debut Jackson Hole keynote Friday (\"In Our Time\") delivered the hawkish surprise markets had been bracing for: he said inflation is \"still too high\" and the Fed has \"more work to do,\" explicitly declined to offer forward guidance, and floated cutting FOMC meetings from 8 to 6 a year -- pushing September hike odds from ~36% to ~57-58% (CME-tracked) and lifting the 2-year Treasury yield 11.8bp to 4.348% and the dollar (DXY +0.5%). The reaction was sharply asymmetric: gold fell 3.24% (GLD to $408.89) and silver 4.38% (SLV to $60.02), with miners amplifying the move (AG/HL/PAAS -3.7% to -4.9%) after a parabolic ~40% month-to-date GDX run into the event -- while the S&P 500 (-0.25% to 7,711.76), Nasdaq (-0.52%) and VIX (-0.55% to 14.43) barely reacted -- a rates/dollar-driven unwind concentrated in the 'debasement trade,' not a broad risk-off event. Rare earths (MP -4.91%, UUUU -6.80%) and crypto (BTC -3.18% to $77,703) also sold off hard Friday. WEEKEND UPDATE (re-researched 30 Aug): the September-hike debate hardened into a genuine two-sided fight rather than settling -- Goldman's Hatzius framed Warsh as focused on delivering 2% PCE inflation, SocGen's Groen now pencils in three hikes (Sept/Dec/Mar-2027, with the last flagged at-risk), while four former Fed economists writing for Brookings argued a September hike remains unlikely (sub-50%) and Paul Krugman dismissed the speech as conventional with little genuinely new; CME-tracked odds are best read as a real coin-flip into the meeting, not a settled hawkish pivot. Separately, US Treasury escalated its Iran sanctions campaign over the weekend (targeting a UAE bank, Banque Misr, over alleged sanctions-evasion processing) and Iran's IRGC publicly asserted 'decisive control' of the Strait of Hormuz, calling US reopening claims false -- UKMTO still rates threat SEVERE with Gulf shipping traffic reduced; the Iran-Oman temporary corridor deal remains unimplemented. Crypto continued soft into the weekend (Fear&Greed 73->68 by Sat, still Greed but decelerating) without a clearly confirmed new leg down beyond Friday's level -- treat as consolidating near $77-78k rather than extending the rout. Early sell-side commentary calling this a sharp correction within an intact precious-metals bull trend (not a regime change) is now two sessions old but still only moderate-confidence given the hardened rate-path disagreement. MONDAY UPDATE (re-researched 31 Aug, ~07:15 SGT): the Hormuz situation moved from rhetoric to confirmed action -- CENTCOM (on record via spokesman Capt. Tim Hawkins) struck two Iranian rocket launchers on Larak Island on Sunday 30 Aug after IRGC forces were observed prepping rockets and sea mines for the strait, the first US strike on Iran in over a month; this is independently corroborated by CNN, CNBC, Al Jazeera and others, and Iran's IRGC publicly vowed retaliation. A separate single-sourced report (Fox News, one unnamed US official, not corroborated by CENTCOM/Pentagon/Reuters/AP as of this run) claims Iran already retaliated against US forces in Jordan -- treated here as reported-but-unconfirmed, not fact. Oil extended its Sunday-evening futures-reopen gains into Monday's Asia session (Brent briefly above $90, WTI near $85.4, per Bloomberg/Investing.com), a genuine incremental catalyst on top of the already-priced Sunday reopen (WTI +1.77%, Brent +0.55% per our own feed). No new Fed speak, China rare-earth action, or credit-market data point found since Sunday. Cash equities (US/HK/SG) remain closed pre-open at run time, so there is no confirmed broad-equity reaction yet -- historically this conflict's prior strikes have been absorbed by equities while moving oil, and futures were only modestly softer.",
+    "regime": "Confirmed Iran-Jordan missile exchange escalates the Hormuz conflict but is contained; Fed hike odds climb to 66% into NFP week -- oil breaks higher, gold/silver stabilize fragilely, equities/credit still largely unbothered",
+    "riskOnProb": 0.55,
+    "regimeScore": 0.51,
+    "asOf": "2026-09-01",
+    "narrative": "Iran's IRGC confirmed a retaliatory missile-and-drone strike ('Punishment of the Aggressor') on the US-hosting King Hussein and Al-Azraq air bases in Jordan late Monday, plus a UAE target, in response to Sunday's CENTCOM strike on Larak Island -- Jordan's military intercepted 8 missiles and a US official reported no significant impact, while Iran's IRGC separately claims 'heavy damage,' an unverified claim from an interested party; this is now corroborated by multiple independent outlets and marks the latest round of a US-Iran conflict running roughly six months, with prior flare-ups in late June and July that each proved containable for broad risk assets even as oil moved sharply. Oil is the clearest market reaction: Brent traded as high as $91.52 intraday Monday before settling near $88.52 and WTI near $86.23 on our own futures spine, a genuine supply-risk repricing given low US SPR levels and diminished Hormuz tanker traffic. Equities and credit, by contrast, continue to largely shrug off the geopolitical shock -- Monday's US cash reopen (S&P 500 7,686.14, Nasdaq 26,370.89, VIX 14.92) reflects a compounded two-session move including Friday's Warsh-driven selloff, not a fresh Iran-specific leg down. The Fed side of the story kept hardening in parallel: CME FedWatch September-hike odds rose further to 66% (from ~57-58% Friday) as traders cite PCE inflation running 3.7% y/y and 4.1% on a 6-month annualized basis, both well above target, extending Warsh's hawkish Jackson Hole framing rather than fading it. Gold and silver futures stabilized but only fragilely -- GC=F and SI=F each bounced modestly Monday (+0.39%/+0.30%) after Friday's rout, still down a cumulative -3.36%/-4.21% over the two sessions, with the hawkish Fed repricing remaining the dominant near-term headwind against the structural debasement-trade case. Crypto is in a similar fragile-stabilization mode: BTC recovered to ~$78,477 Monday (+1.04%) after dipping to ~$77,667 Sunday, but crypto Fear & Greed has now fallen three straight sessions (73 Fri -> 68 Sat -> 62 Mon), still 'Greed' but losing momentum. All of this sets up a genuinely consequential NFP week: today brings ISM Manufacturing PMI/Prices, JOLTS and a Barr speech, Wednesday brings ADP plus RBNZ and BOC decisions, Thursday ISM Services and jobless claims, and Friday the marquee print -- nonfarm payrolls (consensus 55K, a large rebound expected off July's -23K miss) alongside average hourly earnings and the unemployment rate -- the single biggest scheduled swing factor for whether the Fed's hawkish repricing (now at 66% for September) holds or reverses.",
     "drivers": [
       {
-        "factor": "Warsh's hawkish Jackson Hole debut -- \"we have work to do\" on inflation, explicit rejection of forward guidance",
-        "read": "September hike odds jumped from ~36% to ~57-58% (CME-tracked), the 2-year Treasury yield rose 11.8bp to 4.348%, and the dollar index (DXY) gained 0.5% within the session. Over the weekend the debate hardened rather than settled: Goldman (Hatzius) and SocGen (three-hike call) lean hawkish while four former Fed economists (Brookings) and Krugman argue a September hike is still sub-50% likely -- best read as a genuine coin-flip into the meeting, not a settled pivot.",
+        "factor": "Confirmed Iran retaliation on US bases in Jordan (plus a UAE target), late Monday 31 Aug",
+        "read": "IRGC's 'Punishment of the Aggressor' missile-and-drone strike hit King Hussein and Al-Azraq air bases; Jordan's military intercepted 8 missiles and a US official said there was no significant impact, while Iran's IRGC claims 'heavy damage' -- an unverified claim from an interested party. Multiple independent outlets (Al Jazeera, The Hill, Armed Forces Press, Washington Times) now corroborate this, superseding the prior run's single-sourced/unconfirmed framing. This is the latest round in a conflict now roughly six months old; prior late-June/July rounds moved oil sharply but proved containable for broad equities.",
         "impact": "cautionary"
       },
       {
-        "factor": "Precious metals/miners rout -- a violent, rates-driven unwind of an extremely crowded rally",
-        "read": "GLD -3.24% to $408.89, SLV -4.38% to $60.02, silver miners AG/HL/PAAS -3.7% to -4.9%, after GDX ran +~40% month-to-date into the event -- reads as a stretched-positioning unwind rather than a fundamental break; gold funds still drew +$4.21bn the week ended 26 Aug, a 6-month high.",
+        "factor": "Oil breaks higher on the confirmed strike-and-counterstrike cycle",
+        "read": "Brent traded as high as $91.52 intraday Monday before settling near $88.52 (BZ=F, 2-day cumulative -0.88% per our spine, which lags the intraday newswire peak); WTI (CL=F) closed $86.23 (2-day cumulative +3.39%) -- a genuine, still-live supply-risk repricing given low US SPR levels and diminished Hormuz tanker traffic, with the risk skewed toward further upside if the Iran-Jordan exchange continues.",
         "impact": "mixed"
       },
       {
-        "factor": "Equities and credit shrugged the shock off entirely",
-        "read": "S&P 500 -0.25% to 7,711.76, Nasdaq -0.52% to 26,402, VIX -0.55% to 14.43 (still near multi-week lows), and credit spreads remain near historic tights -- confirms this was a metals/duration-specific shock, not a broad risk-off event.",
-        "impact": "supportive"
-      },
-      {
-        "factor": "BLS preliminary benchmark payrolls revision miss (-79K vs a Bloomberg consensus for +183K)",
-        "read": "A genuine miss versus expectations in the hawkish direction, though a far smaller downward revision than the prior year's -911K -- added to Friday's hawkish tone without being the primary driver.",
-        "impact": "mixed"
-      },
-      {
-        "factor": "Crypto and rare-earth weakness as high-beta extensions of the same shock",
-        "read": "BTC -3.18% to $77,703 with ~$481M in liquidations (~$360M+ from wrongfooted longs); MP -4.91%, UUUU -6.80% per the spine -- though the rare-earth causation is only moderately confirmed and may partly reflect AI-capex/semiconductor spillover rather than a pure real-yield story.",
+        "factor": "Fed hike odds climb further into the FOMC -- CME FedWatch now shows 66% probability of a September hike (from ~57-58% Friday)",
+        "read": "Warsh's hawkish Jackson Hole framing continues to gain traction as traders cite PCE inflation running 3.7% y/y and 4.1% on a 6-month annualized basis, both well above target; the 2yr yield's Friday move (+11.8bp) has room to extend if incoming data (today's ISM/JOLTS, Friday's NFP) confirms the hawkish read into the 16 Sep FOMC.",
         "impact": "cautionary"
       },
       {
-        "factor": "Structural fiscal/geopolitical overhang persists beneath the daily noise",
-        "read": "The 30-year Treasury remains near a multi-year (post-2007) yield high on fiscal-supply concerns independent of the Fed. Hormuz escalated over the weekend rather than de-escalating: Treasury targeted a UAE bank (Banque Misr) in a fresh Iran-sanctions push, and Iran's IRGC publicly claimed 'decisive control' of the strait, calling US reopening claims false -- UKMTO still rates the threat SEVERE with the Iran-Oman temporary corridor deal unimplemented. China's rare-earth export-control escalation continues on its fixed 10 Nov 2026 timeline. Reminders the debasement/geopolitical thesis isn't invalidated by one hawkish session.",
+        "factor": "Gold/silver stabilize but remain fragile",
+        "read": "GC=F and SI=F futures bounced modestly Monday (+0.39%/+0.30% per our own spine) after Friday's rout, but remain down a cumulative -3.36%/-4.21% over the two sessions (cash/spot reports ranged $4,459-$4,496 gold, $66.4-$67.2 silver) -- not a clean reversal, and the hawkish Fed repricing (now 66% September-hike odds) remains the dominant near-term headwind against the structural debasement-trade case, even as the Iran escalation is a wildcard tailwind for safe-haven demand if it worsens.",
         "impact": "mixed"
+      },
+      {
+        "factor": "Live NFP week: today's ISM Manufacturing PMI/Prices and JOLTS, then ADP/RBNZ/BOC Wednesday, ISM Services/claims Thursday, and Friday's payrolls (cons 55K vs -23K prior, a large rebound expected) with unemployment holding at 4.1%",
+        "read": "This is the single largest scheduled swing factor of the week for the Fed path and cuts both ways -- a strong beat cements the hawkish case (and the ~66% September hike odds), while a miss echoing July's -23K print would reopen the door to a September pause.",
+        "impact": "mixed"
+      },
+      {
+        "factor": "Crypto stabilizing, sentiment decelerating",
+        "read": "BTC recovered to ~$78,477 Monday (+1.04% per spine) after Sunday's dip to ~$77,667, but crypto Fear & Greed has now fallen three straight sessions (73 Fri -> 68 Sat -> 62 Mon), still 'Greed' but losing momentum -- a fragile, not-yet-confirmed floor heading into the Fed- and NFP-heavy week ahead.",
+        "impact": "cautionary"
       }
     ],
     "byAssetClass": [
       {
         "assetClass": "Equity",
         "stance": "Neutral",
-        "pUp12m": 0.62,
+        "pUp12m": 0.61,
         "tilt": 0,
-        "note": "Downgraded from modest OW: equities/VIX barely reacted to Friday's genuinely hawkish Warsh surprise and credit stays tight, but ~58% September hike odds (from ~36%) cap near-term multiple expansion into the FOMC. MONDAY UPDATE: US/HK/SG cash markets remain closed pre-open; Sunday-evening US equity futures only edged lower on the confirmed Hormuz strike news (per Bloomberg), consistent with this conflict's prior pattern of equities absorbing Iran-related shocks while oil moves -- no change to stance pending the actual reopen."
+        "note": "Held Neutral: Monday's US cash reopen (S&P 7,686.14, VIX 14.92) reflects a compounded two-session move, not a fresh Iran-specific leg down -- equities continue to largely absorb the geopolitical shock as they have in prior rounds of this conflict, but 66% September hike odds (up from ~58%) cap near-term multiple expansion into a live NFP week."
       },
       {
         "assetClass": "Commodities",
         "stance": "Neutral",
-        "pUp12m": 0.56,
+        "pUp12m": 0.57,
         "tilt": 0,
-        "note": "Downgraded from modest OW: gold/silver/miners suffered a sharp rates-driven unwind Friday after an extremely stretched rally (GDX +40% MTD), while energy (XLE +0.63%, USO flat) was untouched -- a genuinely split complex, not a clean breakout or breakdown. MONDAY UPDATE: a confirmed US strike near the Strait of Hormuz (30 Aug) adds a genuine fresh oil-supply-risk catalyst on top of Friday's rates-driven gold/silver unwind -- Brent/WTI extended gains ~2% into Monday's Asia open. Complex remains genuinely split: energy now has an independent bullish catalyst while gold/silver still digest the hawkish Fed repricing; stance held at Neutral pending confirmation once cash markets reopen."
+        "note": "Held Neutral: the complex remains genuinely split -- energy has a confirmed, live supply-risk catalyst (Brent intraday high $91.52, WTI $86.23 close) from the Iran-Jordan exchange, while gold/silver only fragilely stabilized (+0.39%/+0.30% Monday futures bounce) against a still-hardening hawkish Fed repricing (66% September-hike odds)."
       },
       {
         "assetClass": "Crypto",
-        "stance": "UW",
-        "pUp12m": 0.48,
-        "tilt": -0.02,
-        "note": "Downgraded from modest OW: BTC fell 3.18% with ~$481M in liquidations as the hawkish surprise hit the highest-beta leg of the debasement trade -- fragile into the September FOMC even with crypto Fear&Greed still reading 73/Greed."
+        "stance": "modest UW",
+        "pUp12m": 0.49,
+        "tilt": -0.012,
+        "note": "Upgraded from UW: BTC recovered to ~$78,477 Monday (+1.04%) after Sunday's dip, a genuine stabilization versus Friday's rout, though crypto Fear & Greed has decelerated for three straight sessions (73->68->62) -- still fragile into the Fed- and NFP-heavy week, so held short of Neutral."
       },
       {
         "assetClass": "Bonds",
         "stance": "modest UW",
-        "pUp12m": 0.46,
+        "pUp12m": 0.44,
         "tilt": -0.012,
-        "note": "Held modest UW: the 2-year yield jumped 11.8bp on the repriced hike odds and the 30-year remains near a post-2007 high on fiscal-supply concerns -- short/intermediate duration bears the most direct brunt of Warsh's hawkish tone."
+        "note": "Held modest UW, marked slightly more cautious: September hike odds rose further to 66% (from ~58% Friday) on hot PCE prints (3.7% y/y, 4.1% 6m annualized), extending the headwind for duration into a week with several more inflation/labor data points before the FOMC."
       },
       {
         "assetClass": "USD/Cash",
         "stance": "OW",
-        "pUp12m": 0.6,
+        "pUp12m": 0.62,
         "tilt": 0.02,
-        "note": "Upgraded from modest OW: the direct beneficiary of Friday's hawkish surprise -- DXY +0.5%, hike odds near 58% into September, and an attractive risk-free cash rate through the FOMC window."
+        "note": "Held OW, marked slightly more favorable: the direct beneficiary of the further-hardened hawkish repricing -- September hike odds now 66% (from ~58%), with an attractive risk-free cash rate through a week stacked with Fed-relevant data culminating in Friday's NFP."
       }
     ],
     "sources": [
+      "https://www.forbes.com/sites/digital-assets/2026/08/31/cme-fedwatch-provides-a-66-chance-fed-will-hike-rates-in-september/",
+      "https://www.aljazeera.com/news/2026/8/30/us-strikes-irans-lark-island-in-first-attack-in-weeks",
+      "https://thehill.com/policy/international/6060457-iran-retaliation-jordan-uae-us-strikes-resume/",
+      "https://armedforces.press/middle-east/2026/08/31/centcom-larak-iran-retaliation-jordan-uae-2026/",
+      "https://www.washingtontimes.com/news/2026/aug/31/iran-launches-retaliatory-strikes-jordan-uae-us-attacks-strait-hormuz/",
+      "https://www.ynetnews.com/article/b1xpfbf00gl",
+      "https://www.investing.com/news/economy-news/oil-jumps-fed-hawkish-jobs-data--whats-moving-markets-4882256",
+      "https://finance.yahoo.com/personal-finance/investing/article/gold-prices-today-monday-august-31-2026-gold-sinks-following-us-strikes-on-iran-123744944.html",
+      "https://finance.yahoo.com/personal-finance/investing/article/silver-prices-today-monday-august-31-2026-silver-opens-lower-as-rate-hike-expectations-rise-125201881.html",
       "https://www.pbs.org/newshour/economy/watch-live-fed-chair-warsh-speaks-at-jackson-hole-economic-policy-symposium",
       "https://www.forbes.com/sites/tylerroush/2026/08/28/fed-chair-kevin-warsh-says-inflation-still-too-high-in-first-jackson-hole-speech/",
-      "http://www.kitco.com/news/article/2026-08-28/gold-silver-sink-warsh-revives-september-fed-hike-trade-kitco-pm-report",
-      "https://www.benzinga.com/markets/commodities/26/08/61498664/warsh-jackson-hole-mining-stocks-gold-silver-selloff",
       "https://www.bls.gov/web/empsit/cesprelbmk.htm",
-      "https://finance.yahoo.com/economy/articles/bls-revises-u-job-growth-172153070.html",
-      "https://smallcapsdaily.com/bitcoin-price-slides-below-78000-as-warshs-hawkish-fed-message-shakes-crypto-markets/",
-      "https://www.canadianminingreport.com/blog/major-gold-and-silver-mining-experts-react-to-today-s-crash-hawkish-fed-fears-dominate-but-fundamentals-remain-strong",
       "https://www.mining.com/gold-price-drops-as-warsh-warns-fed-still-has-work-to-do-on-inflation/",
-      "https://www.bullionvault.com/gold-news/gold-price-warsh-jackson-pce-inflation-082820261",
-      "https://www.jpmorgan.com/insights/global-research/outlook/mid-year-outlook",
-      "https://www.cnn.com/2026/08/30/politics/us-iran-strikes-larak-island",
-      "https://www.cnbc.com/2026/08/30/us-iran-strikes-strait-hormuz.html",
-      "https://www.aljazeera.com/news/2026/8/30/us-strikes-irans-lark-island-in-first-attack-in-weeks",
-      "https://www.investing.com/news/commodities-news/oil-jumps-more-than-2-after-us-attack-on-irans-larak-island-4882075"
+      "https://www.cnbc.com/2026/08/30/us-iran-strikes-strait-hormuz.html"
     ]
   },
   "calls": [
@@ -100,35 +99,35 @@
       "ticker": "MTUM",
       "name": "iShares MSCI USA Momentum Factor ETF",
       "assetClass": "US equity factor ETF",
-      "pUp1m": 0.48,
-      "pUp3m": 0.54,
-      "pUp12m": 0.63,
-      "ev1m": -0.002,
-      "ev3m": 0.01,
-      "ev12m": 0.07,
+      "pUp1m": 0.47,
+      "pUp3m": 0.53,
+      "pUp12m": 0.62,
+      "ev1m": -0.003,
+      "ev3m": 0.009,
+      "ev12m": 0.068,
       "drivers": [
-        "Nasdaq closed Friday -0.52% to 26,402 and VIX stayed near 14.4 -- a mild pullback in the AI/chip-heavy momentum names, far short of the gold/silver/crypto rout the same session",
-        "September hike odds jumping to ~57-58% (from ~36%) after Warsh's hawkish Jackson Hole debut is a genuine headwind for the crowded momentum trade if it persists",
-        "Momentum remains concentrated in AI-hardware names that already cleared their highest-stakes earnings catalyst of the quarter",
-        "No momentum-factor-specific news this run beyond the broader Friday macro shock"
+        "Nasdaq closed Monday at 26,370.89, a mild two-session pullback -- momentum names largely absorbed the Fed and Iran news rather than leading a selloff.",
+        "CME FedWatch September-hike odds rose further to 66% (from ~57-58% Friday) on hot PCE prints (3.7% y/y, 4.1% 6m annualized), a genuine headwind for the crowded momentum trade if it persists into the FOMC.",
+        "Momentum remains concentrated in AI-hardware names that already cleared their highest-stakes earnings catalyst of the quarter.",
+        "Iran's IRGC confirmed retaliatory missile/drone strikes on the King Hussein and Al-Azraq air bases in Jordan late Monday (plus a UAE target); Jordan intercepted 8 missiles, a US official reports no significant impact -- contained so far, but the latest round of a ~6-month conflict -- limited direct read-through for the momentum factor specifically."
       ],
-      "confidence": 0.38
+      "confidence": 0.37
     },
     {
       "ticker": "QUAL",
       "name": "iShares MSCI USA Quality Factor ETF",
       "assetClass": "US equity factor ETF",
-      "pUp1m": 0.52,
-      "pUp3m": 0.58,
-      "pUp12m": 0.66,
-      "ev1m": 0.003,
-      "ev3m": 0.017,
-      "ev12m": 0.08,
+      "pUp1m": 0.51,
+      "pUp3m": 0.57,
+      "pUp12m": 0.65,
+      "ev1m": 0.002,
+      "ev3m": 0.016,
+      "ev12m": 0.078,
       "drivers": [
-        "Quality's lower-beta, high-margin tilt held up better than momentum through Friday's hawkish-Fed shock (S&P -0.25%, Nasdaq -0.52%)",
-        "Higher hike odds (~58% for September) is a modest headwind for equity multiples broadly, but quality's balance-sheet strength is typically the most defensible cohort into a hawkish repricing",
-        "Resilient labor backdrop intact despite the BLS benchmark payrolls revision miss (-79K vs +183K expected)",
-        "No quality-factor-specific news this run"
+        "Quality's lower-beta, high-margin tilt continues to hold up better than momentum through both the Fed repricing and the Iran-Jordan escalation.",
+        "CME FedWatch September-hike odds rose further to 66% (from ~57-58% Friday) on hot PCE prints (3.7% y/y, 4.1% 6m annualized) is a modest headwind for equity multiples broadly, but quality's balance-sheet strength is typically the most defensible cohort into a hawkish repricing.",
+        "Resilient labor backdrop intact heading into this week's ISM/JOLTS/NFP data run.",
+        "No quality-factor-specific news this run."
       ],
       "confidence": 0.36
     },
@@ -143,12 +142,12 @@
       "ev3m": 0.011,
       "ev12m": 0.055,
       "drivers": [
-        "VIX stayed near 14.4 Friday despite Warsh's hawkish surprise -- no volatility spike to reward min-vol's defensive tilt yet",
-        "Structurally benefits from any follow-through volatility if September hike odds (~58%) keep rising into the FOMC",
-        "Resilient labor data (despite the benchmark revision miss) and contained credit spreads reduce recession-tail risk that would otherwise favor min-vol more strongly",
-        "No min-vol-specific news this run"
+        "VIX ticked up modestly to 14.92 Monday (+2.83%) but remains near multi-week lows -- limited volatility-market reward for min-vol's defensive tilt yet.",
+        "Structurally benefits from any follow-through volatility if the Iran-Jordan exchange escalates further, or if September hike odds (66%) keep climbing into the FOMC.",
+        "Resilient labor data and contained credit spreads reduce recession-tail risk that would otherwise favor min-vol more strongly.",
+        "No min-vol-specific news this run."
       ],
-      "confidence": 0.36
+      "confidence": 0.37
     },
     {
       "ticker": "VLUE",
@@ -157,32 +156,32 @@
       "pUp1m": 0.5,
       "pUp3m": 0.54,
       "pUp12m": 0.63,
-      "ev1m": 0,
-      "ev3m": 0.009,
-      "ev12m": 0.06,
+      "ev1m": 0.001,
+      "ev3m": 0.01,
+      "ev12m": 0.062,
       "drivers": [
-        "Energy sleeve was a rare Friday outperformer (XLE +0.63%) even as oil (USO) was roughly flat -- a genuine value-vs-broader-market divergence",
-        "Financials sleeve stands to benefit from higher-for-longer rate expectations (hike odds ~58% for September) via net interest margins",
-        "Broad equity tape barely moved (S&P -0.25%), tempering any pure rotation thesis",
-        "No value-factor-specific news this run"
+        "Energy sleeve is the clearest near-term beneficiary given oil's Iran-driven spike (Brent intraday high $91.52, WTI $86.23 close) -- a genuine value-vs-broader-market tailwind.",
+        "Financials sleeve stands to benefit from higher-for-longer rate expectations (September hike odds now 66%) via net interest margins.",
+        "Broad equity tape only moved modestly (S&P 7,686.14 Monday), tempering any pure rotation thesis.",
+        "No value-factor-specific news this run."
       ],
-      "confidence": 0.35
+      "confidence": 0.36
     },
     {
       "ticker": "XLK",
       "name": "Technology Select Sector SPDR Fund",
       "assetClass": "US sector ETF (Technology)",
-      "pUp1m": 0.52,
-      "pUp3m": 0.58,
+      "pUp1m": 0.51,
+      "pUp3m": 0.57,
       "pUp12m": 0.68,
-      "ev1m": 0.005,
-      "ev3m": 0.02,
-      "ev12m": 0.095,
+      "ev1m": 0.004,
+      "ev3m": 0.019,
+      "ev12m": 0.093,
       "drivers": [
-        "Nasdaq -0.52% to 26,402 Friday -- tech held up far better than gold/silver/crypto through Warsh's hawkish debut, consistent with equities broadly shrugging off the Fed shock",
-        "Higher hike odds (~58% for September, from ~36%) is the main channel that could compress high-duration tech multiples if the repricing persists into the FOMC",
-        "AI-capex/hyperscaler fundamentals (Nvidia beat-and-raise, AWS's 2M-GPU order) remain intact and were not challenged by Friday's news",
-        "VIX near 14.4 shows no volatility-market confirmation of a tech-specific de-rating"
+        "Nasdaq closed Monday at 26,370.89 -- tech held up through both the Fed repricing and the Iran-Jordan escalation, consistent with equities broadly shrugging off the geopolitical shock.",
+        "CME FedWatch September-hike odds rose further to 66% (from ~57-58% Friday) on hot PCE prints (3.7% y/y, 4.1% 6m annualized) -- the main channel that could compress high-duration tech multiples if the repricing persists into the FOMC.",
+        "AI-capex/hyperscaler fundamentals (Nvidia beat-and-raise, AWS's 2M-GPU order) remain intact and were not challenged by this weekend's news.",
+        "VIX near 14.92 shows no volatility-market confirmation of a tech-specific de-rating."
       ],
       "confidence": 0.5
     },
@@ -190,17 +189,17 @@
       "ticker": "SMH",
       "name": "VanEck Semiconductor ETF",
       "assetClass": "US industry ETF (Semiconductors)",
-      "pUp1m": 0.53,
-      "pUp3m": 0.58,
+      "pUp1m": 0.52,
+      "pUp3m": 0.57,
       "pUp12m": 0.69,
-      "ev1m": 0.007,
-      "ev3m": 0.022,
-      "ev12m": 0.1,
+      "ev1m": 0.006,
+      "ev3m": 0.021,
+      "ev12m": 0.098,
       "drivers": [
-        "Direct epicenter of the validated NVDA beat remains intact; Friday's Nasdaq -0.52% close was a mild pullback, not a reversal of the AI-capex thesis",
-        "Rare-earth complex (MP -4.91%, UUUU -6.80% per the spine) sold off harder than semis -- a reminder the two sectors, while correlated, aren't the same trade",
-        "AWS's 2-million-GPU order remains a fresh, concrete hyperscaler-demand data point",
-        "Higher hike odds (~58%) are the swing factor to watch into the September FOMC for high-beta semis via the real-yield channel"
+        "Direct epicenter of the validated NVDA beat remains intact; Monday's move was a mild two-session pullback, not a reversal of the AI-capex thesis.",
+        "Rare-earth complex (MP, UUUU) sold off harder than semis over the two-session window -- a reminder the two sectors, while correlated, aren't the same trade.",
+        "AWS's 2-million-GPU order remains a fresh, concrete hyperscaler-demand data point.",
+        "CME FedWatch September-hike odds rose further to 66% (from ~57-58% Friday) on hot PCE prints (3.7% y/y, 4.1% 6m annualized) -- the swing factor to watch into the September FOMC for high-beta semis via the real-yield channel."
       ],
       "confidence": 0.5
     },
@@ -208,53 +207,53 @@
       "ticker": "XLF",
       "name": "Financial Select Sector SPDR Fund",
       "assetClass": "US sector ETF (Financials)",
-      "pUp1m": 0.56,
-      "pUp3m": 0.59,
+      "pUp1m": 0.57,
+      "pUp3m": 0.6,
       "pUp12m": 0.68,
-      "ev1m": 0.008,
-      "ev3m": 0.019,
-      "ev12m": 0.08,
+      "ev1m": 0.009,
+      "ev3m": 0.02,
+      "ev12m": 0.082,
       "drivers": [
-        "Higher-for-longer rate expectations (September hike odds to ~58%, 2yr yield +11.8bp Friday) are a genuine near-term tailwind for bank net interest margins",
-        "Credit spreads remain historically tight, supporting financials' credit-quality backdrop",
-        "Singapore banks (DBS/OCBC record 1H26 profits, UOB selling its asset-management arm to Allianz GI for S$555M) show the same rate-tailwind read-through internationally",
-        "Broad risk-on tape for equities/credit (VIX barely moved) supports trading-sensitive financials even as gold/silver/crypto sold off"
+        "CME FedWatch September-hike odds rose further to 66% (from ~57-58% Friday) on hot PCE prints (3.7% y/y, 4.1% 6m annualized) -- an even larger near-term tailwind for bank net interest margins than last run's ~58% read.",
+        "Credit spreads remain historically tight, supporting financials' credit-quality backdrop.",
+        "Singapore banks (DBS/OCBC record 1H26 profits, UOB selling its asset-management arm to Allianz GI for S$555M) show the same rate-tailwind read-through internationally.",
+        "Iran's IRGC confirmed retaliatory missile/drone strikes on the King Hussein and Al-Azraq air bases in Jordan late Monday (plus a UAE target); Jordan intercepted 8 missiles, a US official reports no significant impact -- contained so far, but the latest round of a ~6-month conflict -- limited direct read-through for financials specifically; broad credit conditions remain benign."
       ],
-      "confidence": 0.48
+      "confidence": 0.49
     },
     {
       "ticker": "XLE",
       "name": "Energy Select Sector SPDR Fund",
       "assetClass": "US sector ETF (Energy)",
-      "pUp1m": 0.48,
-      "pUp3m": 0.5,
-      "pUp12m": 0.58,
-      "ev1m": 0.002,
-      "ev3m": 0.005,
-      "ev12m": 0.03,
+      "pUp1m": 0.53,
+      "pUp3m": 0.54,
+      "pUp12m": 0.6,
+      "ev1m": 0.009,
+      "ev3m": 0.014,
+      "ev12m": 0.045,
       "drivers": [
-        "XLE rose 0.63% to $62.68 Friday, one of the few risk assets that traded UP through the hawkish Warsh shock that hammered gold/silver/miners/crypto -- a genuine divergence worth noting",
-        "Oil (USO -0.24%, CL=F -0.11%) was little changed, so the equity-specific strength likely reflects rotation away from the day's worst-hit debasement-trade names rather than a commodity-price story",
-        "Middle East (Hormuz) diplomacy remains unresolved alongside renewed Russia-Ukraine refinery-strike risk -- a two-sided geopolitical setup",
-        "NEW (31 Aug): confirmed US strike on Iranian assets near the Strait of Hormuz (30 Aug, CENTCOM on record) extended the Sunday futures-reopen gain into Monday's Asia session (Brent briefly >$90, WTI ~$85.4) -- a genuine fresh supply-risk catalyst, not yet confirmed by cash-market reopen."
+        "Confirmed Iran-Jordan missile exchange (late Mon 31 Aug) extended the Sunday Larak-strike oil rally further -- Brent traded as high as $91.52 intraday, WTI (CL=F) closed $86.23 (2-day cumulative +3.39%) -- a genuine, still-live supply-risk catalyst for energy equities.",
+        "USO closed Monday at $133.70 (2-day cumulative +2.84%), confirming the move is showing up at the ETF level, not just futures.",
+        "This conflict's prior rounds (late June/July) each drove multi-day oil/energy-equity strength before partially fading -- treat the current move as live but with two-sided fade risk if the exchange doesn't escalate further.",
+        "Low US Strategic Petroleum Reserve levels and diminished Hormuz tanker traffic mean the market has less spare capacity to absorb a genuine supply disruption than in prior cycles."
       ],
-      "confidence": 0.4
+      "confidence": 0.47
     },
     {
       "ticker": "XLV",
       "name": "Health Care Select Sector SPDR Fund",
       "assetClass": "US sector ETF (Health Care)",
-      "pUp1m": 0.53,
-      "pUp3m": 0.57,
+      "pUp1m": 0.52,
+      "pUp3m": 0.56,
       "pUp12m": 0.65,
-      "ev1m": 0.003,
-      "ev3m": 0.015,
-      "ev12m": 0.07,
+      "ev1m": 0.002,
+      "ev3m": 0.014,
+      "ev12m": 0.068,
       "drivers": [
-        "Defensive, lower-beta sector was largely unaffected by Friday's hawkish-Fed-driven metals/crypto rout",
-        "No healthcare-specific news this run",
-        "Resilient labor/consumer backdrop, despite the BLS benchmark revision miss, is a mild indirect positive for healthcare demand and payer mix",
-        "Rate-sensitive; higher hike odds (~58%) are a modest headwind, though smaller than for higher-duration sectors"
+        "Defensive, lower-beta sector remains largely unaffected by both the Fed repricing and the Iran-Jordan escalation.",
+        "No healthcare-specific news this run.",
+        "Resilient labor/consumer backdrop heading into this week's data run is a mild indirect positive for healthcare demand and payer mix.",
+        "CME FedWatch September-hike odds rose further to 66% (from ~57-58% Friday) on hot PCE prints (3.7% y/y, 4.1% 6m annualized) is a modest headwind, though smaller than for higher-duration sectors."
       ],
       "confidence": 0.32
     },
@@ -262,17 +261,17 @@
       "ticker": "XLI",
       "name": "Industrial Select Sector SPDR Fund",
       "assetClass": "US sector ETF (Industrials)",
-      "pUp1m": 0.53,
-      "pUp3m": 0.56,
+      "pUp1m": 0.52,
+      "pUp3m": 0.55,
       "pUp12m": 0.65,
-      "ev1m": 0.003,
-      "ev3m": 0.014,
-      "ev12m": 0.07,
+      "ev1m": 0.002,
+      "ev3m": 0.013,
+      "ev12m": 0.068,
       "drivers": [
-        "Broad equity tape barely moved Friday (S&P -0.25%) even as gold/silver/crypto sold off sharply -- industrials read this as a metals/rates-specific shock, not a demand signal",
-        "Resilient labor data (despite the benchmark payrolls revision miss) supports the industrial-demand backdrop",
-        "Lower direct oil-price sensitivity than energy; largely insulated from the day's precious-metals/crypto story",
-        "No industrial-specific negative catalysts found this run"
+        "Broad equity tape only moved modestly Monday even as gold/silver/Iran headlines dominated -- industrials read this as a metals/rates/geopolitical-specific set of shocks, not a demand signal.",
+        "Resilient labor data supports the industrial-demand backdrop heading into this week's ISM Manufacturing print (cons 55.2, prev 55.6).",
+        "Higher oil prices from the Iran-Jordan escalation are a modest input-cost headwind for transport-heavy industrials.",
+        "No industrial-specific negative catalysts found this run."
       ],
       "confidence": 0.38
     },
@@ -280,17 +279,17 @@
       "ticker": "XLU",
       "name": "Utilities Select Sector SPDR Fund",
       "assetClass": "US sector ETF (Utilities)",
-      "pUp1m": 0.53,
-      "pUp3m": 0.56,
+      "pUp1m": 0.52,
+      "pUp3m": 0.55,
       "pUp12m": 0.61,
-      "ev1m": 0.002,
-      "ev3m": 0.01,
-      "ev12m": 0.055,
+      "ev1m": 0.001,
+      "ev3m": 0.009,
+      "ev12m": 0.053,
       "drivers": [
-        "AI-datacenter power-demand theme remains a structural tailwind independent of Friday's Fed-driven metals/crypto shock",
-        "VIX near 14.4 reduces the near-term defensive-rotation case for utilities",
-        "Rate-sensitive; higher hike odds (~58% for September) are a modest headwind for the sector's bond-proxy characteristics",
-        "No utility-specific news this run"
+        "AI-datacenter power-demand theme remains a structural tailwind independent of this week's Fed/Iran headlines.",
+        "VIX near 14.92 reduces the near-term defensive-rotation case for utilities.",
+        "CME FedWatch September-hike odds rose further to 66% (from ~57-58% Friday) on hot PCE prints (3.7% y/y, 4.1% 6m annualized) is a modest headwind for the sector's bond-proxy characteristics.",
+        "No utility-specific news this run."
       ],
       "confidence": 0.33
     },
@@ -298,17 +297,17 @@
       "ticker": "XLP",
       "name": "Consumer Staples Select Sector SPDR Fund",
       "assetClass": "US sector ETF (Consumer Staples)",
-      "pUp1m": 0.52,
-      "pUp3m": 0.55,
+      "pUp1m": 0.51,
+      "pUp3m": 0.54,
       "pUp12m": 0.58,
-      "ev1m": 0.002,
-      "ev3m": 0.008,
-      "ev12m": 0.045,
+      "ev1m": 0.001,
+      "ev3m": 0.007,
+      "ev12m": 0.043,
       "drivers": [
-        "Resilient labor backdrop supports consumer spending capacity broadly, though the BLS benchmark payrolls revision miss (-79K vs +183K expected) is a mild crosscurrent",
-        "No staples-specific news this run",
-        "Lower beta to Friday's Fed-driven precious-metals/crypto rout than growth or rate-sensitive sectors",
-        "Defensive positioning has limited near-term appeal with VIX still compressed near 14.4"
+        "Resilient labor backdrop supports consumer spending capacity broadly heading into this week's NFP print.",
+        "No staples-specific news this run.",
+        "Lower beta to this week's dominant Fed-repricing/Iran-Jordan narrative than growth or rate-sensitive sectors.",
+        "Defensive positioning has limited near-term appeal with VIX still compressed near 14.92."
       ],
       "confidence": 0.3
     },
@@ -316,17 +315,17 @@
       "ticker": "XLY",
       "name": "Consumer Discretionary Select Sector SPDR Fund",
       "assetClass": "US sector ETF (Consumer Discretionary)",
-      "pUp1m": 0.48,
-      "pUp3m": 0.52,
-      "pUp12m": 0.62,
-      "ev1m": -0.002,
-      "ev3m": 0.009,
-      "ev12m": 0.065,
+      "pUp1m": 0.47,
+      "pUp3m": 0.51,
+      "pUp12m": 0.61,
+      "ev1m": -0.003,
+      "ev3m": 0.008,
+      "ev12m": 0.062,
       "drivers": [
-        "BLS's benchmark payrolls revision miss (-79K vs a Bloomberg consensus for +183K) is a genuine, if modest, negative read for consumer spending capacity",
-        "USO was roughly flat Friday (-0.24%), a neutral read for gasoline/travel-cost-sensitive discretionary names",
-        "Broad equity tape barely moved (S&P -0.25%), limiting the read-through from Friday's metals/crypto-specific shock",
-        "Higher hike odds (~58% for September) is a genuine headwind for the rate-sensitive parts of the sector"
+        "Higher gasoline/travel costs from the Iran-driven oil spike (Brent intraday $91.52) are a genuine, if modest, headwind for discretionary spending.",
+        "BLS's benchmark payrolls revision miss (-79K vs a Bloomberg consensus for +183K) remains a crosscurrent for consumer spending capacity ahead of Friday's NFP.",
+        "Broad equity tape only moved modestly Monday, limiting the read-through from the week's Fed/Iran-specific shocks.",
+        "CME FedWatch September-hike odds rose further to 66% (from ~57-58% Friday) on hot PCE prints (3.7% y/y, 4.1% 6m annualized) is a genuine headwind for the rate-sensitive parts of the sector."
       ],
       "confidence": 0.36
     },
@@ -334,73 +333,73 @@
       "ticker": "GLD",
       "name": "SPDR Gold Shares",
       "assetClass": "Precious metals ETF (gold)",
-      "pUp1m": 0.42,
-      "pUp3m": 0.5,
+      "pUp1m": 0.43,
+      "pUp3m": 0.51,
       "pUp12m": 0.62,
-      "ev1m": -0.02,
-      "ev3m": 0.01,
+      "ev1m": -0.017,
+      "ev3m": 0.011,
       "ev12m": 0.09,
       "drivers": [
-        "GLD fell 3.24% to $408.89 Friday (spot broke below its ~$4,526 200-day MA) after Warsh's hawkish Jackson Hole debut repriced September hike odds from ~36% to ~57-58% and lifted the 2-year yield 11.8bp",
-        "The move looks like a rates/dollar-driven unwind rather than a fundamental break -- gold funds still drew +$4.21bn the week ended 26 Aug (a 6-month high), even as broad global equity funds saw their first outflow in 13 weeks the same week",
-        "Structural debasement-trade thesis (central bank buying, fiscal/duration stress, 30y yield near a post-2007 high) remains intact; early sell-side commentary reads this as a sharp correction within an ongoing bull trend, though that view is only one session old",
-        "Near-term path now hinges on whether Monday's Asia session extends or fades the Friday move, and on confirmation of the actual September FOMC decision"
+        "GC=F futures bounced +0.39% Monday after Friday's -2.85% rout, closing $4,495.60 -- a fragile stabilization, not a clean reversal; cash/spot reports ranged $4,459-$4,496 across sources.",
+        "CME FedWatch September-hike odds rose further to 66% (from ~57-58% Friday) on hot PCE prints (3.7% y/y, 4.1% 6m annualized) remains the dominant near-term headwind against gold, extending Warsh's hawkish framing.",
+        "The confirmed Iran-Jordan missile exchange is a genuine wildcard tailwind for safe-haven demand if the conflict escalates further this week; gold funds still drew +$4.21bn the week ended 26 Aug (a 6-month high), suggesting the structural bid hasn't broken.",
+        "Structural debasement-trade thesis (central bank buying, fiscal/duration stress, 30y yield near a post-2007 high) remains intact even after the Fed-driven pullback."
       ],
-      "confidence": 0.5
+      "confidence": 0.49
     },
     {
       "ticker": "SLV",
       "name": "iShares Silver Trust",
       "assetClass": "Precious metals ETF (silver)",
-      "pUp1m": 0.4,
-      "pUp3m": 0.48,
+      "pUp1m": 0.41,
+      "pUp3m": 0.49,
       "pUp12m": 0.65,
-      "ev1m": -0.025,
-      "ev3m": 0.005,
+      "ev1m": -0.021,
+      "ev3m": 0.007,
       "ev12m": 0.12,
       "drivers": [
-        "SLV fell 4.38% to $60.02 Friday, underperforming gold on higher beta -- spot silver fell as much as $2/oz to ~$66.21 after failing a fresh 10-week-high breakout, triggered by Warsh's hawkish inflation language and the resulting hike-odds repricing",
-        "Silver miners (AG, HL, PAAS -3.6% to -4.9% intraday) amplified the move after a parabolic run -- GDX was +~40% month-to-date into the event, an extremely crowded setup ripe for a rates-driven unwind",
-        "Structural 6th-consecutive-annual supply deficit thesis (Silver Institute) remains the intact medium-term case, and fresh Q2-2026 institutional buying (e.g. Millennium Management +200% PAAS stake) predates this shock",
-        "Higher-beta than gold in both directions -- expect the sharpest near-term swings of the debasement-trade basket around the September FOMC"
+        "SI=F futures bounced +0.30% Monday after Friday's -3.51% rout, closing $67.20 -- SLV itself closed $60.13 (2-day cumulative -4.21%), still underperforming gold on higher beta.",
+        "Silver miners amplified the prior rout after a parabolic run into the Warsh speech -- a rates-driven unwind of an extremely crowded setup that has only partially stabilized.",
+        "Structural 6th-consecutive-annual supply deficit thesis (Silver Institute) remains the intact medium-term case, and fresh Q2-2026 institutional buying (e.g. Millennium Management +200% PAAS stake) predates this shock.",
+        "Higher-beta than gold in both directions -- expect the sharpest near-term swings of the debasement-trade basket around the September FOMC and any further Iran-Jordan escalation."
       ],
-      "confidence": 0.52
+      "confidence": 0.51
     },
     {
       "ticker": "DBC",
       "name": "Invesco DB Commodity Index Tracking Fund",
       "assetClass": "Broad commodity futures ETF",
-      "pUp1m": 0.47,
-      "pUp3m": 0.49,
-      "pUp12m": 0.56,
-      "ev1m": -0.006,
-      "ev3m": 0,
-      "ev12m": 0.04,
+      "pUp1m": 0.48,
+      "pUp3m": 0.5,
+      "pUp12m": 0.57,
+      "ev1m": -0.003,
+      "ev3m": 0.003,
+      "ev12m": 0.043,
       "drivers": [
-        "Sharply mixed complex Friday: precious metals fell hard (GLD -3.24%, SLV -4.38%) on the hawkish Fed shock while energy held up (USO -0.24%, XLE +0.63%)",
-        "Blended broad-commodity return remains highly sensitive to which sub-sleeve (metals vs energy) dominates on any given session",
-        "Dollar strength (DXY +0.5% Friday) is a fresh headwind for the complex broadly, a reversal from the prior run's USD-weakness tailwind framing",
-        "NEW (31 Aug): confirmed US strike on Iranian assets near the Strait of Hormuz (30 Aug, CENTCOM on record) extended the Sunday futures-reopen gain into Monday's Asia session (Brent briefly >$90, WTI ~$85.4) -- a genuine fresh supply-risk catalyst, not yet confirmed by cash-market reopen."
+        "Sharply mixed complex remains: energy has a confirmed, live Iran-driven supply catalyst (Brent intraday high $91.52) while precious metals only fragilely stabilized (GC=F/SI=F +0.39%/+0.30% Monday after Friday's rout).",
+        "Blended broad-commodity return remains highly sensitive to which sub-sleeve (energy vs metals) dominates on any given session.",
+        "CME FedWatch September-hike odds rose further to 66% (from ~57-58% Friday) on hot PCE prints (3.7% y/y, 4.1% 6m annualized) is a fresh headwind for the complex broadly via dollar strength.",
+        "The confirmed Iran-Jordan missile exchange keeps the energy sleeve's near-term path skewed toward further upside if the exchange continues."
       ],
-      "confidence": 0.36
+      "confidence": 0.38
     },
     {
       "ticker": "USO",
       "name": "United States Oil Fund LP",
       "assetClass": "Crude oil futures ETF",
-      "pUp1m": 0.46,
-      "pUp3m": 0.48,
-      "pUp12m": 0.54,
-      "ev1m": -0.004,
-      "ev3m": -0.001,
-      "ev12m": 0.02,
+      "pUp1m": 0.53,
+      "pUp3m": 0.52,
+      "pUp12m": 0.55,
+      "ev1m": 0.011,
+      "ev3m": 0.005,
+      "ev12m": 0.025,
       "drivers": [
-        "USO essentially flat Friday (-0.24% to $129.70) while XLE (energy equities) actually rose 0.63% to $62.68 -- oil was one of the few complexes NOT swept up in the hawkish-Fed unwind",
-        "WTI (CL=F, an 'ok'-trust series this run) closed -0.11% to $83.44, confirming the ETF-level stability",
-        "Hormuz risk escalated over the weekend rather than fading: Treasury sanctioned a UAE bank over Iran-evasion processing, and Iran's IRGC publicly claimed 'decisive control' of the strait (UKMTO still SEVERE, corridor deal unimplemented) -- a genuine upside risk premium heading into Sunday evening's Globex reopen",
-        "NEW (31 Aug): confirmed US strike on Iranian assets near the Strait of Hormuz (30 Aug, CENTCOM on record) extended the Sunday futures-reopen gain into Monday's Asia session (Brent briefly >$90, WTI ~$85.4) -- a genuine fresh supply-risk catalyst, not yet confirmed by cash-market reopen."
+        "USO closed Monday at $133.70 (2-day cumulative +2.84%); WTI (CL=F) closed $86.23 (2-day cumulative +3.39%) -- oil is now the clearest market reaction to the confirmed Iran-Jordan exchange.",
+        "Brent traded as high as $91.52 intraday Monday before settling near $88.52 (BZ=F, 2-day cumulative -0.88% per our spine, which lags the newswire intraday peak) -- a genuine, still-live supply-risk repricing.",
+        "Low US Strategic Petroleum Reserve levels and diminished Hormuz tanker traffic mean less spare capacity to absorb a genuine disruption than in earlier 2026 rounds of this conflict.",
+        "This conflict's prior rounds (late June/July) each drove multi-day oil strength before partially fading -- treat the current move as live but with two-sided fade risk if the exchange doesn't escalate further."
       ],
-      "confidence": 0.44
+      "confidence": 0.48
     },
     {
       "ticker": "URA",
@@ -413,10 +412,10 @@
       "ev3m": 0.013,
       "ev12m": 0.075,
       "drivers": [
-        "AI-datacenter power-demand theme remains a structural tailwind independent of Friday's Fed-driven metals/crypto shock",
-        "No uranium-specific news this run",
-        "Broad equity tape barely moved Friday, limiting spillover from the day's precious-metals rout",
-        "Held near prior-run levels given no fresh grounding this cycle"
+        "AI-datacenter power-demand theme remains a structural tailwind independent of this week's Fed/Iran headlines.",
+        "No uranium-specific news this run.",
+        "Broad equity tape only moved modestly Monday, limiting spillover from the week's dominant precious-metals/geopolitical narrative.",
+        "Held near prior-run levels given no fresh grounding this cycle."
       ],
       "confidence": 0.24
     },
@@ -431,10 +430,10 @@
       "ev3m": 0.013,
       "ev12m": 0.075,
       "drivers": [
-        "No copper-specific news this run",
-        "Industrial-metals exposure is more insulated from Friday's precious-metals-specific rout than gold/silver miners",
-        "AI-datacenter/electrification demand remains a structural tailwind",
-        "Held near prior-run levels given no fresh grounding this cycle"
+        "No copper-specific news this run.",
+        "Industrial-metals exposure is more insulated from the precious-metals-specific rout and from the Iran-Jordan escalation than gold/silver miners.",
+        "AI-datacenter/electrification demand remains a structural tailwind.",
+        "Held near prior-run levels given no fresh grounding this cycle."
       ],
       "confidence": 0.24
     },
@@ -449,10 +448,10 @@
       "ev3m": 0.004,
       "ev12m": 0.028,
       "drivers": [
-        "No agricultural-commodity-specific news this run",
-        "Near-coin-flip default given the lack of fresh grounding",
-        "Lower beta to Friday's dominant Warsh/gold-silver/crypto narrative",
-        "Held at prior-run levels given no fresh grounding this cycle"
+        "No agricultural-commodity-specific news this run.",
+        "Near-coin-flip default given the lack of fresh grounding.",
+        "Lower beta to this week's dominant Fed-repricing/Iran-Jordan narrative.",
+        "Held at prior-run levels given no fresh grounding this cycle."
       ],
       "confidence": 0.24
     },
@@ -460,17 +459,17 @@
       "ticker": "REMX",
       "name": "VanEck Rare Earth and Strategic Metals ETF",
       "assetClass": "Rare earth/strategic metals equities ETF",
-      "pUp1m": 0.45,
+      "pUp1m": 0.44,
       "pUp3m": 0.52,
       "pUp12m": 0.62,
-      "ev1m": -0.01,
-      "ev3m": 0.012,
-      "ev12m": 0.09,
+      "ev1m": -0.012,
+      "ev3m": 0.011,
+      "ev12m": 0.088,
       "drivers": [
-        "Basket-wide pullback likely Friday given MP -4.91%/UUUU -6.80% per the spine, even as Lynas (ASX, closed earlier) fell only 0.85% -- a mix of the hawkish-Fed real-yield shock and possible AI-capex/semiconductor spillover",
-        "China's fixed second-wave export-control timeline (10 Nov 2026) remains the structurally supportive theme",
-        "NdPr reference price nearly doubling y/y (per Lynas's FY26 disclosure) is a genuine bullish fundamental signal for the whole basket independent of Friday's tape",
-        "Not independently re-researched beyond basket-component price action this run"
+        "Basket-wide pullback continues into Monday given MP -7.25%/UUUU -6.29% (2-day cumulative per the spine, which lacks a Friday US bar) -- a mix of the hawkish-Fed real-yield shock and possible AI-capex/semiconductor spillover.",
+        "China's rare-earth export-control regime remains in active-enforcement mode: MOFCOM Announcement No. 26 formalizes a public reporting mechanism for violations, and extraterritorial-provision enforcement has been pushed to Nov 2026 -- a structurally supportive but slow-moving theme.",
+        "NdPr reference-price strength (up sharply y/y per multiple 2026 trade reports) remains a genuine bullish fundamental signal for the whole basket independent of this week's tape.",
+        "Not independently re-researched beyond basket-component price action and the general China-policy news flow this run."
       ],
       "confidence": 0.3
     },
@@ -478,17 +477,17 @@
       "ticker": "REXC",
       "name": "Sprott Rare Earths Ex-China ETF",
       "assetClass": "Ex-China rare earth equities ETF",
-      "pUp1m": 0.44,
+      "pUp1m": 0.43,
       "pUp3m": 0.5,
       "pUp12m": 0.58,
-      "ev1m": -0.01,
-      "ev3m": 0.008,
-      "ev12m": 0.075,
+      "ev1m": -0.012,
+      "ev3m": 0.007,
+      "ev12m": 0.073,
       "drivers": [
-        "Same basket-wide pullback dynamic as REMX/MP/UUUU Friday",
-        "China's export-control timeline and NdPr price strength remain the structural bull case",
-        "Not independently re-researched this run beyond component price action",
-        "Near-coin-flip-plus given the lack of fresh company-level grounding"
+        "Same basket-wide pullback dynamic as REMX/MP/UUUU into Monday's close.",
+        "China's export-control enforcement posture and NdPr price strength remain the structural bull case.",
+        "Not independently re-researched this run beyond component price action.",
+        "Near-coin-flip-plus given the lack of fresh company-level grounding."
       ],
       "confidence": 0.24
     },
@@ -496,17 +495,17 @@
       "ticker": "MP",
       "name": "MP Materials Corp",
       "assetClass": "US rare earth miner/magnet producer (equity)",
-      "pUp1m": 0.42,
-      "pUp3m": 0.52,
-      "pUp12m": 0.66,
-      "ev1m": -0.02,
-      "ev3m": 0.015,
-      "ev12m": 0.13,
+      "pUp1m": 0.41,
+      "pUp3m": 0.51,
+      "pUp12m": 0.65,
+      "ev1m": -0.023,
+      "ev3m": 0.013,
+      "ev12m": 0.125,
       "drivers": [
-        "MP fell 4.91% to $56.13 Friday per the code-verified price spine, likely a mix of the same hawkish-Fed real-yield pressure hitting gold/silver plus AI-capex/semiconductor-sector spillover -- rare-earth causation for the day is only moderately confirmed and one secondary source found UUUU roughly flat the same day, a genuine unresolved discrepancy",
-        "413 institutional investors added MP in Q2-2026 13Fs (365 trimmed), including a new BNY Mellon stake (~$65M) and CalSTRS +5,523% (~$507M) -- broad, fresh institutional accumulation predates Friday's pullback",
-        "China's fixed-timeline export-control escalation (second wave, 10 Nov 2026) and the Pentagon/DoD-backed mine-to-magnet buildout remain the intact structural thesis",
-        "Elevated volatility given dual exposure to both the rates-sensitive miner complex and the AI-capex narrative -- treat Friday's drop as noisy rather than a clean signal either way"
+        "MP closed Monday at $54.75, a 2-day cumulative -7.25% per the spine (which lacks a Friday US bar) -- a mix of the hawkish-Fed real-yield pressure hitting gold/silver plus AI-capex/semiconductor-sector spillover; rare-earth-specific causation is only moderately confirmed.",
+        "413 institutional investors added MP in Q2-2026 13Fs (365 trimmed), including a new BNY Mellon stake (~$65M) and CalSTRS +5,523% (~$507M) -- broad, fresh institutional accumulation predates this pullback.",
+        "China's active-enforcement rare-earth export-control regime (MOFCOM Announcement No. 26, extraterritorial provisions pushed to Nov 2026) and the Pentagon/DoD-backed mine-to-magnet buildout remain the intact structural thesis.",
+        "Elevated volatility given dual exposure to both the rates-sensitive miner complex and the AI-capex narrative -- treat the two-session drop as noisy rather than a clean signal either way."
       ],
       "confidence": 0.4
     },
@@ -521,10 +520,10 @@
       "ev3m": 0.02,
       "ev12m": 0.09,
       "drivers": [
-        "Fell a modest 0.85% to A$16.26 Friday -- smaller decline than the US-listed rare-earth/miner complex since the ASX session closed before Warsh's remarks landed",
-        "FY26 results (reported 26 Aug): record revenue +76% to A$977.9M and net profit A$222.4M (vs A$8M prior year) on record REO/NdPr production, but missed the A$242.5M consensus on rising ramp-up costs at new Australian facilities",
-        "Reference NdPr price nearly doubled y/y (US$55.00 to US$100.80/kg per the Chinese benchmark) -- a structurally bullish read-through for the whole ex-China rare-earth basket despite Lynas's own cost overruns",
-        "China's Oct-2025 export controls remain suspended through 10 Nov 2026, a near-term relief valve; ex-China alternative-supply theme intact"
+        "ASX-listed, closed before Friday's Warsh remarks and largely outside the US Monday-close window -- likely more insulated than the US-listed rare-earth names from this week's compounded two-session US moves.",
+        "FY26 results (reported 26 Aug): record revenue +76% to A$977.9M and net profit A$222.4M (vs A$8M prior year) on record REO/NdPr production, but missed the A$242.5M consensus on rising ramp-up costs at new Australian facilities.",
+        "Reference NdPr price strength (roughly doubled y/y per the Chinese benchmark cited in Lynas's FY26 disclosure) is a structurally bullish read-through for the whole ex-China rare-earth basket despite Lynas's own cost overruns.",
+        "China's Oct-2025 export controls remain suspended through 10 Nov 2026, a near-term relief valve; ex-China alternative-supply theme intact."
       ],
       "confidence": 0.4
     },
@@ -532,17 +531,17 @@
       "ticker": "UUUU",
       "name": "Energy Fuels Inc",
       "assetClass": "US uranium/rare earth producer (equity)",
-      "pUp1m": 0.42,
-      "pUp3m": 0.52,
+      "pUp1m": 0.41,
+      "pUp3m": 0.51,
       "pUp12m": 0.62,
-      "ev1m": -0.03,
-      "ev3m": 0.01,
-      "ev12m": 0.11,
+      "ev1m": -0.032,
+      "ev3m": 0.008,
+      "ev12m": 0.108,
       "drivers": [
-        "Fell 6.80% to $14.67 Friday per the code-verified price spine, though one secondary source found the stock roughly flat that day -- a genuine, unresolved data discrepancy; the spine (checked against traded closes) was treated as authoritative per this run's price-discipline rules but the gap is flagged rather than papered over",
-        "Alps Advisors lifted its stake 29.0% (~$59.4M) and Mirae Asset Global ETFs grew its position 10.8% (~$46.9M) in recent filings -- fresh institutional accumulation predates this pullback",
-        "On track for first US commercial-scale dysprosium/terbium (heavy rare earth) output at White Mesa Mill in Q4-2026 -- a concrete, near-term company-specific catalyst distinct from the day's macro noise",
-        "Same G7/Pentagon/DoE policy tailwinds and China-export-curb overhang as MP; high volatility given small-cap size and dual uranium/rare-earth exposure"
+        "UUUU closed Monday at $14.75, a 2-day cumulative -6.29% per the spine (which lacks a Friday US bar) -- directionally consistent with the broader rare-earth/precious-metals real-yield unwind.",
+        "Alps Advisors lifted its stake 29.0% (~$59.4M) and Mirae Asset Global ETFs grew its position 10.8% (~$46.9M) in recent filings -- fresh institutional accumulation predates this pullback.",
+        "On track for first US commercial-scale dysprosium/terbium (heavy rare earth) output at White Mesa Mill in Q4-2026 -- a concrete, near-term company-specific catalyst distinct from the week's macro noise.",
+        "Same G7/Pentagon/DoE policy tailwinds and China-export-curb overhang as MP; high volatility given small-cap size and dual uranium/rare-earth exposure."
       ],
       "confidence": 0.32
     },
@@ -553,14 +552,14 @@
       "pUp1m": 0.44,
       "pUp3m": 0.5,
       "pUp12m": 0.55,
-      "ev1m": -0.015,
+      "ev1m": -0.014,
       "ev3m": 0.005,
       "ev12m": 0.04,
       "drivers": [
-        "Not independently re-priced this run (outside the price spine); directionally marked down alongside the rare-earth complex given Friday's hawkish-Fed-driven real-yield pressure on capital-intensive, pre-commercial miners",
-        "Directly blacklisted by China (22 Jun) on Chinese-origin dual-use exports -- a concrete operational risk to the Stillwater, OK magnet line's equipment/feedstock procurement",
-        "Round Top heavy-REE deposit and domestic magnet ambitions position it for potential DoD support, similar to MP/UUUU",
-        "Pre-commercial execution risk at a rich valuation keeps the near-term call close to a coin flip; confidence stays low"
+        "Not independently re-priced this run (outside the price spine); directionally marked alongside the rare-earth complex given the ongoing hawkish-Fed-driven real-yield pressure on capital-intensive, pre-commercial miners.",
+        "Directly blacklisted by China (22 Jun) on Chinese-origin dual-use exports -- a concrete operational risk to the Stillwater, OK magnet line's equipment/feedstock procurement.",
+        "Round Top heavy-REE deposit and domestic magnet ambitions position it for potential DoD support, similar to MP/UUUU.",
+        "Pre-commercial execution risk at a rich valuation keeps the near-term call close to a coin flip; confidence stays low."
       ],
       "confidence": 0.26
     },
@@ -571,16 +570,16 @@
       "pUp1m": 0.53,
       "pUp3m": 0.56,
       "pUp12m": 0.59,
-      "ev1m": 0.016,
-      "ev3m": 0.036,
-      "ev12m": 0.11,
+      "ev1m": 0.015,
+      "ev3m": 0.035,
+      "ev12m": 0.108,
       "drivers": [
-        "Not directly re-researched this run; last confirmed near 52-week highs with a Q1 EPS beat (79% above consensus)",
-        "Same rare-earth-complex pullback risk as MP/UUUU Friday, though Neo's diversified China-Estonia-Thailand footprint gives it a partial hedge across both blocs' export regimes",
-        "Narva, Estonia sintered-magnet plant remains Europe's first-mover in ex-China magnet production, selling into EU auto/defense",
-        "Held near prior-run levels given no fresh company-specific grounding this cycle"
+        "Not directly re-researched this run; last confirmed near 52-week highs with a Q1 EPS beat (79% above consensus).",
+        "Same rare-earth-complex pullback risk as MP/UUUU, though Neo's diversified China-Estonia-Thailand footprint gives it a partial hedge across both blocs' export regimes.",
+        "Narva, Estonia sintered-magnet plant remains Europe's first-mover in ex-China magnet production, selling into EU auto/defense.",
+        "Held near prior-run levels given no fresh company-specific grounding this cycle."
       ],
-      "confidence": 0.36
+      "confidence": 0.35
     },
     {
       "ticker": "ILU.AX",
@@ -589,14 +588,14 @@
       "pUp1m": 0.51,
       "pUp3m": 0.53,
       "pUp12m": 0.57,
-      "ev1m": 0.008,
-      "ev3m": 0.026,
-      "ev12m": 0.095,
+      "ev1m": 0.007,
+      "ev3m": 0.025,
+      "ev12m": 0.093,
       "drivers": [
-        "Not directly re-researched this run; last confirmed with an A$1.65B non-recourse Australian government loan funding the Eneabba refinery through planned mid-2027 commissioning",
-        "First binding REE offtake signed with a global automaker validates ex-China oxide demand at contracted prices",
-        "Core zircon/titanium dioxide business remains cyclically soft on weak China property demand",
-        "ASX-listed, closed before Friday's Warsh shock landed -- likely more insulated than the US-listed rare-earth names this specific session"
+        "Not directly re-researched this run; last confirmed with an A$1.65B non-recourse Australian government loan funding the Eneabba refinery through planned mid-2027 commissioning.",
+        "First binding REE offtake signed with a global automaker validates ex-China oxide demand at contracted prices.",
+        "Core zircon/titanium dioxide business remains cyclically soft on weak China property demand.",
+        "ASX-listed, closed outside the US Monday window -- likely more insulated than the US-listed rare-earth names from this week's compounded two-session US moves."
       ],
       "confidence": 0.32
     },
@@ -611,46 +610,46 @@
       "ev3m": 0.008,
       "ev12m": 0.075,
       "drivers": [
-        "Not directly re-researched this run; China's export-control regime toward rare earths continues on its fixed timeline (second wave, 10 Nov 2026) without a fresh escalation confirmed this cycle",
-        "Hang Seng fell 1.1% Friday ahead of the Fed signal -- a mild broad-market headwind for HK-listed names generally",
-        "World-scale NdFeB magnet maker supplying EV, wind and robotics majors remains caught between Beijing's export-licensing constraints and strong domestic demand",
-        "The China-incumbent counter-bet to the ex-China basket; held near prior-run levels given no fresh company-specific news"
+        "Not directly re-researched this run; China's export-control regime continues in active-enforcement mode (MOFCOM Announcement No. 26 formalizes violation reporting; extraterritorial provisions pushed to Nov 2026) without a fresh dramatic escalation confirmed this cycle.",
+        "Hang Seng softened into Monday's close on broad Fed-driven caution -- a mild headwind for HK-listed names generally.",
+        "World-scale NdFeB magnet maker supplying EV, wind and robotics majors remains caught between Beijing's export-licensing constraints and strong domestic demand.",
+        "The China-incumbent counter-bet to the ex-China basket; held near prior-run levels given no fresh company-specific news."
       ],
-      "confidence": 0.28
+      "confidence": 0.29
     },
     {
       "ticker": "SPY",
       "name": "S&P 500 SPDR ETF",
       "assetClass": "Equity / Regions",
-      "pUp1m": 0.54,
+      "pUp1m": 0.53,
       "pUp3m": 0.59,
       "pUp12m": 0.67,
-      "ev1m": 0.004,
-      "ev3m": 0.018,
+      "ev1m": 0.003,
+      "ev3m": 0.017,
       "ev12m": 0.08,
       "drivers": [
-        "S&P 500 closed Friday -0.25% to 7,711.76 and VIX barely moved (-0.55% to 14.43) despite Warsh's genuinely hawkish Jackson Hole debut -- equities read this as a rates/metals-specific shock, not a broad risk-off signal",
-        "September hike odds jumped to ~57-58% (from ~36%) and the 2yr yield rose 11.8bp -- a real tightening-path repricing that caps near-term multiple expansion even without a selloff",
-        "BLS's benchmark payrolls revision (-79K vs a Bloomberg consensus for +183K) was a genuine miss, adding some crosscurrent to the resilient-labor narrative",
-        "Credit spreads remain historically tight, a supportive but complacency-prone backdrop into the September FOMC"
+        "S&P 500 closed Monday at 7,686.14 and VIX at 14.92 -- a compounded two-session (Fri+Mon) move since our spine is missing Friday's US cash bar, not a clean single-day read; equities continue to largely absorb the Iran-Jordan escalation as in prior rounds of this conflict",
+        "Iran's IRGC confirmed retaliatory missile/drone strikes on the King Hussein and Al-Azraq air bases in Jordan late Monday (plus a UAE target); Jordan intercepted 8 missiles, a US official reports no significant impact -- contained so far, but the latest round of a ~6-month conflict -- historically this conflict's strikes have been absorbed by equities while moving oil, and Monday's reopen is consistent with that pattern.",
+        "CME FedWatch September-hike odds rose further to 66% (from ~57-58% Friday) on hot PCE prints (3.7% y/y, 4.1% 6m annualized), a real tightening-path repricing that caps near-term multiple expansion into a live NFP week.",
+        "Live NFP week ahead (ISM Mfg/JOLTS today, ADP/RBNZ/BOC Wed, ISM Services/claims Thu, payrolls Fri cons 55K vs -23K prior) is the dominant near-term catalyst; credit spreads remain historically tight."
       ],
-      "confidence": 0.55
+      "confidence": 0.54
     },
     {
       "ticker": "QQQ",
       "name": "Invesco Nasdaq-100 ETF",
       "assetClass": "Equity / Regions",
-      "pUp1m": 0.55,
+      "pUp1m": 0.54,
       "pUp3m": 0.6,
       "pUp12m": 0.69,
-      "ev1m": 0.008,
-      "ev3m": 0.024,
+      "ev1m": 0.007,
+      "ev3m": 0.023,
       "ev12m": 0.095,
       "drivers": [
-        "Nasdaq closed Friday -0.52% to 26,402 -- a mild pullback but nowhere near the scale of the gold/silver/crypto rout the same session, confirming this was a metals/duration-specific shock",
-        "VIX stayed near 14.4, still historically compressed -- no volatility-market confirmation of a broader tech/AI de-rating",
-        "Higher hike odds (~58% for September) is a genuine headwind for high-duration tech multiples if it persists, the main channel to watch into the FOMC",
-        "AI-capex/hyperscaler fundamentals (Nvidia's beat-and-raise, AWS's 2M-GPU order) remain intact and were not the story Friday"
+        "Nasdaq closed Monday at 26,370.89 -- a compounded two-session move (our spine lacks Friday's US bar); AI-capex/hyperscaler fundamentals were not challenged by either the Fed or Iran news.",
+        "Iran's IRGC confirmed retaliatory missile/drone strikes on the King Hussein and Al-Azraq air bases in Jordan late Monday (plus a UAE target); Jordan intercepted 8 missiles, a US official reports no significant impact -- contained so far, but the latest round of a ~6-month conflict",
+        "CME FedWatch September-hike odds rose further to 66% (from ~57-58% Friday) on hot PCE prints (3.7% y/y, 4.1% 6m annualized) -- the main channel to watch for high-duration tech multiples into the FOMC.",
+        "VIX at 14.92, still historically compressed, shows no volatility-market confirmation of a tech-specific de-rating despite the weekend's geopolitical escalation."
       ],
       "confidence": 0.5
     },
@@ -658,197 +657,197 @@
       "ticker": "IWM",
       "name": "iShares Russell 2000 ETF",
       "assetClass": "Equity / Regions",
-      "pUp1m": 0.46,
-      "pUp3m": 0.53,
-      "pUp12m": 0.62,
-      "ev1m": -0.004,
-      "ev3m": 0.008,
-      "ev12m": 0.06,
+      "pUp1m": 0.45,
+      "pUp3m": 0.52,
+      "pUp12m": 0.61,
+      "ev1m": -0.005,
+      "ev3m": 0.007,
+      "ev12m": 0.058,
       "drivers": [
-        "Russell 2000 underperformed Friday, -1.39% to 2,972 -- small caps showed more sensitivity to the hawkish rate repricing than large caps, consistent with their higher rate-sensitivity",
-        "September hike odds near 58% (from ~36%) is a genuine headwind for domestically-levered, more rate-sensitive small caps versus the prior cut-hope backdrop",
-        "BLS's benchmark payrolls revision miss (-79K vs +183K expected) is a mixed read for domestically-focused small caps specifically",
-        "Higher beta to the Fed path than large caps; the clearest equity-market confirmation Friday's shock was real, even if muted relative to gold/silver/crypto"
+        "Russell 2000 closed Monday at 2,956.45, underperforming large caps over the two-session window -- small caps remain the most rate-sensitive equity cohort as hike odds keep climbing.",
+        "CME FedWatch September-hike odds rose further to 66% (from ~57-58% Friday) on hot PCE prints (3.7% y/y, 4.1% 6m annualized), a genuine headwind for domestically-levered, rate-sensitive small caps.",
+        "Iran's IRGC confirmed retaliatory missile/drone strikes on the King Hussein and Al-Azraq air bases in Jordan late Monday (plus a UAE target); Jordan intercepted 8 missiles, a US official reports no significant impact -- contained so far, but the latest round of a ~6-month conflict -- lower direct read-through for small caps than for energy/duration-sensitive names.",
+        "VIX ticked up to 14.92 (+2.83% Monday) but remains low in absolute terms; no confirmed broad risk-off yet."
       ],
-      "confidence": 0.44
+      "confidence": 0.43
     },
     {
       "ticker": "EFA",
       "name": "iShares MSCI EAFE ETF",
       "assetClass": "Equity / Regions",
-      "pUp1m": 0.53,
+      "pUp1m": 0.52,
       "pUp3m": 0.56,
       "pUp12m": 0.57,
-      "ev1m": 0.006,
-      "ev3m": 0.019,
+      "ev1m": 0.005,
+      "ev3m": 0.018,
       "ev12m": 0.07,
       "drivers": [
-        "International developed-market ETFs continue outperforming US peers YTD on a persistent dollar-softness translation tailwind, though Friday's DXY +0.5% move (on the hawkish Warsh repricing) is a fresh headwind worth watching",
-        "Europe and Japan valuations remain materially cheaper than the US; the CAPE gap continues to favor mean-reversion into non-US developed markets",
-        "USO was roughly flat Friday, a neutral read for energy-importing Europe/Japan versus the prior run's cost-headwind framing",
-        "Not independently re-researched beyond the macro/dollar read-through this run"
+        "International developed-market ETFs continue outperforming US peers YTD on cheaper valuations and a dollar-softness translation tailwind, though a further-hawkish Fed (66% Sept-hike odds) is a fresh headwind worth watching.",
+        "Europe and Japan valuations remain materially cheaper than the US; the CAPE gap continues to favor mean-reversion into non-US developed markets.",
+        "Iran's IRGC confirmed retaliatory missile/drone strikes on the King Hussein and Al-Azraq air bases in Jordan late Monday (plus a UAE target); Jordan intercepted 8 missiles, a US official reports no significant impact -- contained so far, but the latest round of a ~6-month conflict -- limited direct read-through for developed-market equities historically.",
+        "Not independently re-researched beyond the macro/dollar read-through this run."
       ],
-      "confidence": 0.52
+      "confidence": 0.5
     },
     {
       "ticker": "EEM",
       "name": "iShares MSCI Emerging Markets ETF",
       "assetClass": "Equity / Regions",
-      "pUp1m": 0.5,
-      "pUp3m": 0.53,
-      "pUp12m": 0.57,
-      "ev1m": -0.002,
-      "ev3m": 0.013,
-      "ev12m": 0.06,
+      "pUp1m": 0.49,
+      "pUp3m": 0.52,
+      "pUp12m": 0.56,
+      "ev1m": -0.004,
+      "ev3m": 0.011,
+      "ev12m": 0.057,
       "drivers": [
-        "Dollar strength (DXY +0.5% Friday) is a genuine near-term headwind for EM broadly, reversing the prior run's dollar-softness tailwind framing",
-        "Resilient US labor backdrop (despite the benchmark revision miss) supports the global growth backdrop EM equities need",
-        "EM dispersion remains wide: China growth/property overhang, India valuation stretch, Taiwan/Korea's direct AI-cycle read-through",
-        "Not independently re-researched beyond the macro/dollar read-through this run"
+        "CME FedWatch September-hike odds rose further to 66% (from ~57-58% Friday) on hot PCE prints (3.7% y/y, 4.1% 6m annualized), a genuine near-term headwind for EM broadly via the dollar channel.",
+        "Oil's Iran-driven rise (Brent intraday high $91.52) is a mixed signal for EM: a headwind for oil importers (India, most of EM Asia), a tailwind for oil exporters.",
+        "EM dispersion remains wide: China growth/property overhang, India valuation stretch, Taiwan/Korea's direct AI-cycle read-through.",
+        "Not independently re-researched beyond the macro/dollar/oil read-through this run."
       ],
-      "confidence": 0.48
+      "confidence": 0.46
     },
     {
       "ticker": "VGK",
       "name": "Vanguard FTSE Europe ETF",
       "assetClass": "Equity / Regions",
-      "pUp1m": 0.53,
-      "pUp3m": 0.56,
-      "pUp12m": 0.59,
-      "ev1m": 0.006,
-      "ev3m": 0.02,
-      "ev12m": 0.075,
+      "pUp1m": 0.52,
+      "pUp3m": 0.55,
+      "pUp12m": 0.58,
+      "ev1m": 0.004,
+      "ev3m": 0.018,
+      "ev12m": 0.072,
       "drivers": [
-        "Germany's EUR 127bn infrastructure/defense fiscal impulse remains the largest European fiscal stimulus in a generation; industrials and financials are primary beneficiaries",
-        "Dollar strength Friday (DXY +0.5%) is a fresh incremental headwind for USD-denominated European equity returns, a reversal from the prior dollar-softness framing",
-        "European valuations remain historically cheap versus the US; strong 2026 flows continue to support the mean-reversion thesis over a 12m horizon",
-        "Not independently re-researched beyond the macro/dollar read-through this run"
+        "Germany's EUR 127bn infrastructure/defense fiscal impulse remains the largest European fiscal stimulus in a generation; industrials and financials are primary beneficiaries.",
+        "CME FedWatch September-hike odds rose further to 66% (from ~57-58% Friday) on hot PCE prints (3.7% y/y, 4.1% 6m annualized) -- a fresh incremental headwind for USD-denominated European equity returns via a stronger dollar.",
+        "Europe is a large net energy importer; the Iran-driven oil spike (Brent intraday $91.52) is a genuine near-term cost headwind worth monitoring.",
+        "European valuations remain historically cheap versus the US; strong 2026 flows continue to support the mean-reversion thesis over a 12m horizon."
       ],
-      "confidence": 0.54
+      "confidence": 0.52
     },
     {
       "ticker": "EWJ",
       "name": "iShares MSCI Japan ETF",
       "assetClass": "Equity / Regions",
-      "pUp1m": 0.5,
-      "pUp3m": 0.53,
-      "pUp12m": 0.58,
-      "ev1m": 0.003,
-      "ev3m": 0.018,
-      "ev12m": 0.072,
+      "pUp1m": 0.49,
+      "pUp3m": 0.52,
+      "pUp12m": 0.57,
+      "ev1m": -0.001,
+      "ev3m": 0.015,
+      "ev12m": 0.068,
       "drivers": [
-        "Japanese foreign-investor equity flows turned sharply negative (-¥764.1bn wk ended 21 Aug, the largest weekly outflow since June) alongside a 3-decade-high 10Y JGB yield -- a rates-driven equity outflow rather than a risk-off signal",
-        "BoJ's core CPI gauge has held above the 2% target, reinforcing September BoJ rate-hike expectations, supportive for bank net interest margins within EWJ",
-        "Yen dynamics remain a genuine two-sided setup for USD-denominated returns given the diverging Fed (hawkish Friday) and BoJ paths",
-        "Multi-year structural re-rating from corporate governance reforms and shareholder-return improvements continues"
+        "Japanese foreign-investor equity flows turned sharply negative (-JPY764.1bn wk ended 21 Aug) alongside a 3-decade-high 10Y JGB yield -- a rates-driven equity outflow rather than a risk-off signal.",
+        "BoJ's core CPI gauge has held above the 2% target, reinforcing September BoJ rate-hike expectations, supportive for bank net interest margins within EWJ.",
+        "Japan is a large net energy importer; the Iran-driven oil spike is a fresh cost headwind, though yen dynamics (diverging Fed/BoJ paths) remain genuinely two-sided for USD returns.",
+        "Multi-year structural re-rating from corporate governance reforms and shareholder-return improvements continues."
       ],
-      "confidence": 0.48
+      "confidence": 0.47
     },
     {
       "ticker": "INDA",
       "name": "iShares MSCI India ETF",
       "assetClass": "Equity / Regions",
-      "pUp1m": 0.48,
-      "pUp3m": 0.51,
-      "pUp12m": 0.57,
-      "ev1m": -0.001,
-      "ev3m": 0.012,
-      "ev12m": 0.075,
+      "pUp1m": 0.46,
+      "pUp3m": 0.5,
+      "pUp12m": 0.56,
+      "ev1m": -0.005,
+      "ev3m": 0.009,
+      "ev12m": 0.068,
       "drivers": [
-        "Dollar strength Friday (DXY +0.5%) is a modest incremental headwind for India as a large net oil importer, though USO itself was roughly flat",
-        "India's GDP growth forecast remains among the fastest of major economies; earnings expected to re-accelerate in 2026",
-        "US-India trade deal continues to reduce tariff uncertainty; RBI's easing stance and consumption-tax relief remain positive near-term catalysts",
-        "Not independently re-researched this run beyond the macro/dollar read-through"
+        "India is a large net oil importer -- the confirmed Iran-Jordan escalation and Brent's intraday spike to $91.52 is a genuine, direct cost/import-bill headwind this run.",
+        "CME FedWatch September-hike odds rose further to 66% (from ~57-58% Friday) on hot PCE prints (3.7% y/y, 4.1% 6m annualized), a modest incremental headwind via dollar strength.",
+        "India's GDP growth forecast remains among the fastest of major economies; earnings expected to re-accelerate in 2026.",
+        "US-India trade deal continues to reduce tariff uncertainty; RBI's easing stance and consumption-tax relief remain positive near-term offsets."
       ],
-      "confidence": 0.48
+      "confidence": 0.46
     },
     {
       "ticker": "FXI",
       "name": "iShares China Large-Cap ETF",
       "assetClass": "Equity / Regions",
-      "pUp1m": 0.45,
-      "pUp3m": 0.5,
-      "pUp12m": 0.51,
-      "ev1m": -0.008,
-      "ev3m": 0.006,
-      "ev12m": 0.028,
+      "pUp1m": 0.44,
+      "pUp3m": 0.49,
+      "pUp12m": 0.5,
+      "ev1m": -0.01,
+      "ev3m": 0.004,
+      "ev12m": 0.024,
       "drivers": [
-        "Hang Seng fell 1.1% Friday (closing before Warsh spoke) on caution ahead of the Fed signal, plus AI-linked-name weakness; further hawkish-repricing catch-down is a genuine Monday-open risk",
-        "China's Q2 GDP growth remains at a multi-year low (~4.3%) with weak property investment, a structural cap on any stimulus-driven rally",
-        "China's rare-earth export-control escalation continues on a fixed timeline (second wave, 10 Nov 2026) -- a live overhang on the broader relationship",
-        "Southbound Stock Connect inflows continuing but decelerating from H1-2026's pace, per this run's flow research -- a mild loss of mainland conviction momentum"
+        "Hang Seng fell into Monday's close on broad Fed-driven caution; further catch-down risk from the confirmed Iran-Jordan escalation is a live Tuesday-open risk.",
+        "China's Q2 GDP growth remains at a multi-year low (~4.3%) with weak property investment, a structural cap on any stimulus-driven rally.",
+        "China's rare-earth export-control regime continues its active-enforcement posture (MOFCOM Announcement No. 26 formalizes violation reporting; extraterritorial enforcement pushed to Nov 2026) -- a live overhang on the broader relationship.",
+        "China is a large net oil importer; the Iran-driven oil spike is an incremental cost headwind on top of the Fed-driven dollar strength."
       ],
-      "confidence": 0.46
+      "confidence": 0.45
     },
     {
       "ticker": "BTC-USD",
       "name": "Bitcoin",
       "assetClass": "Crypto",
-      "pUp1m": 0.45,
-      "pUp3m": 0.5,
+      "pUp1m": 0.47,
+      "pUp3m": 0.51,
       "pUp12m": 0.62,
-      "ev1m": -0.025,
-      "ev3m": 0.005,
+      "ev1m": -0.015,
+      "ev3m": 0.008,
       "ev12m": 0.15,
       "drivers": [
-        "Fell 3.18% to $77,703 Friday per the price spine, with ~$481M in liquidations as Warsh's hawkish tone repriced the rate path",
-        "Crypto-adjacent equities (Strategy, Coinbase, Galaxy Digital, Circle) fell 5-8% the same session -- confirms BTC is trading as a rate-sensitive risk asset this cycle, not a pure hedge",
-        "Weekend price action shows continued consolidation rather than a confirmed new leg down -- crypto Fear & Greed (alternative.me) softened from 73/Greed (Fri) to 68/Greed (Sat), still Greed but decelerating; no independently verified fresh weekend low beyond Friday's ~$77.7k print was found this run",
-        "Same debasement-trade unwind hitting gold/silver/miners; the hardened, still-unsettled September hike debate (Goldman/SocGen hawkish vs Brookings/Krugman skeptical) keeps BTC's near-term path genuinely two-sided into the FOMC"
+        "Recovered to $78,477 Monday (+1.04% per spine) after Sunday's dip to $77,667 -- a genuine stabilization versus Friday's -3.18% Warsh-driven rout.",
+        "Crypto Fear & Greed has now fallen three straight sessions (73 Fri -> 68 Sat -> 62 Mon per alternative.me trackers) -- still 'Greed' but losing momentum, a fragile not-yet-confirmed floor.",
+        "Same debasement-trade unwind hitting gold/silver/miners continues to weigh on BTC via the real-yield channel; September hike odds now 66% (from ~58% Friday) keeps that pressure live into the FOMC.",
+        "The confirmed Iran-Jordan escalation has so far had limited visible spillover to crypto beyond the broader risk-asset tone; BTC's near-term path remains genuinely two-sided into a heavy data week."
       ],
-      "confidence": 0.42
+      "confidence": 0.44
     },
     {
       "ticker": "ETH-USD",
       "name": "Ethereum",
       "assetClass": "Crypto",
-      "pUp1m": 0.42,
-      "pUp3m": 0.46,
+      "pUp1m": 0.43,
+      "pUp3m": 0.47,
       "pUp12m": 0.5,
-      "ev1m": -0.03,
-      "ev3m": -0.015,
-      "ev12m": 0,
+      "ev1m": -0.028,
+      "ev3m": -0.012,
+      "ev12m": 0.005,
       "drivers": [
-        "Traded alongside BTC's Friday selloff on the same hawkish-Fed/rate-repricing shock; no ETH-specific price data in the spine this run, directionally marked down with the broader crypto complex",
-        "Glamsterdam upgrade delay to Q3 2026 still removes the near-term protocol catalyst",
-        "Staking-ETF structural tailwind (income conversion, ~30% float staked) remains a 6-12m rather than 1-3m positive",
-        "Higher-beta-to-macro read than BTC typically, given thinner liquidity; confidence held low"
+        "Traded alongside BTC's stabilization into Monday, though no ETH-specific price data in the spine this run -- directionally marked with the broader crypto complex's fragile recovery.",
+        "Glamsterdam upgrade delay to Q3 2026 still removes the near-term protocol catalyst.",
+        "Staking-ETF structural tailwind (income conversion, ~30% float staked) remains a 6-12m rather than 1-3m positive.",
+        "Higher-beta-to-macro read than BTC typically, given thinner liquidity; confidence held low."
       ],
-      "confidence": 0.38
+      "confidence": 0.37
     },
     {
       "ticker": "SOL-USD",
       "name": "Solana",
       "assetClass": "Crypto",
-      "pUp1m": 0.4,
-      "pUp3m": 0.44,
+      "pUp1m": 0.41,
+      "pUp3m": 0.45,
       "pUp12m": 0.52,
-      "ev1m": -0.04,
-      "ev3m": -0.02,
-      "ev12m": 0.04,
+      "ev1m": -0.038,
+      "ev3m": -0.018,
+      "ev12m": 0.042,
       "drivers": [
-        "Highest-beta major crypto asset; likely the hardest-hit of the majors in Friday's hawkish-Fed-driven risk-off given its leverage to liquidity conditions -- no SOL-specific price data in the spine this run",
-        "Alpenglow upgrade (~150ms finality) targeting Q3 2026 mainnet remains an asymmetric 3-12m catalyst if risk appetite recovers",
-        "Network fundamentals (record daily transactions, deep DeFi TVL) remain the strongest among L1 peers",
-        "Confidence held low given full leverage to the post-Jackson-Hole liquidity/rate-path outcome"
+        "Highest-beta major crypto asset; likely tracked BTC's Sunday-to-Monday stabilization with amplified swings -- no SOL-specific price data in the spine this run.",
+        "Alpenglow upgrade (~150ms finality) targeting Q3 2026 mainnet remains an asymmetric 3-12m catalyst if risk appetite recovers.",
+        "Network fundamentals (record daily transactions, deep DeFi TVL) remain the strongest among L1 peers.",
+        "Confidence held low given full leverage to the Fed- and Iran-driven liquidity/rate-path outcome this week."
       ],
-      "confidence": 0.34
+      "confidence": 0.33
     },
     {
       "ticker": "TLT",
       "name": "iShares 20+ Year Treasury Bond ETF",
       "assetClass": "Bonds / Rates / Credit",
-      "pUp1m": 0.38,
-      "pUp3m": 0.4,
-      "pUp12m": 0.42,
-      "ev1m": -0.015,
-      "ev3m": -0.018,
-      "ev12m": -0.025,
+      "pUp1m": 0.37,
+      "pUp3m": 0.39,
+      "pUp12m": 0.41,
+      "ev1m": -0.017,
+      "ev3m": -0.02,
+      "ev12m": -0.028,
       "drivers": [
-        "2-year Treasury yield jumped 11.8bp to 4.348% Friday on Warsh's hawkish repricing -- the long end is not directly quoted in the spine this run, but the same hike-odds repricing (~36% to ~58% for September) is a headwind for duration broadly",
-        "30-year yield remains near a 22-year/post-2007 high (~5.19-5.33%) even before Friday's speech -- a fiscal-supply/duration story a hawkish Fed surprise does not help",
-        "Warsh's proposal to cut FOMC meetings from 8 to 6/year and reject 'forward guidance' adds genuine policy-path uncertainty for the long end specifically",
-        "Credit spreads remain historically tight, a mild offsetting signal that this is a rates repricing rather than a broader risk event"
+        "CME FedWatch September-hike odds rose further to 66% (from ~57-58% Friday) on hot PCE prints (3.7% y/y, 4.1% 6m annualized) -- the long end faces a bigger headwind than last run's ~58% read, though the long end is not directly quoted in the spine this run.",
+        "30-year yield remains near a 22-year/post-2007 high (~5.19-5.33%) even before this week's data -- a fiscal-supply/duration story a hawkish Fed surprise does not help.",
+        "Warsh's proposal to cut FOMC meetings from 8 to 6/year and reject 'forward guidance' adds genuine policy-path uncertainty for the long end specifically.",
+        "Credit spreads remain historically tight, a mild offsetting signal that this remains a rates repricing rather than a broader risk event."
       ],
       "confidence": 0.42
     },
@@ -856,17 +855,17 @@
       "ticker": "IEF",
       "name": "iShares 7-10 Year Treasury Bond ETF",
       "assetClass": "Bonds / Rates / Credit",
-      "pUp1m": 0.44,
-      "pUp3m": 0.46,
-      "pUp12m": 0.5,
-      "ev1m": -0.008,
-      "ev3m": -0.006,
-      "ev12m": 0.01,
+      "pUp1m": 0.43,
+      "pUp3m": 0.45,
+      "pUp12m": 0.49,
+      "ev1m": -0.009,
+      "ev3m": -0.007,
+      "ev12m": 0.008,
       "drivers": [
-        "2yr yield +11.8bp to 4.348% Friday is the most direct read-through for the belly of the curve; IEF itself not separately quoted this run",
-        "September hike odds jumping to ~57-58% (from ~36%) directly repriced the intermediate curve lower",
-        "SEC yield carry continues to offset some price downside over a 3-12m horizon",
-        "Warsh's rejection of explicit forward guidance keeps the intermediate curve genuinely two-sided into the September FOMC"
+        "CME FedWatch September-hike odds rose further to 66% (from ~57-58% Friday) on hot PCE prints (3.7% y/y, 4.1% 6m annualized) directly repriced the intermediate curve lower again; IEF itself not separately quoted this run.",
+        "This week's data run (ISM/JOLTS today, ADP Wed, ISM Services/claims Thu, NFP Fri) is the key swing factor for whether the 66% hike odds hold or fade.",
+        "SEC yield carry continues to offset some price downside over a 3-12m horizon.",
+        "Warsh's rejection of explicit forward guidance keeps the intermediate curve genuinely two-sided into the September FOMC."
       ],
       "confidence": 0.46
     },
@@ -881,10 +880,10 @@
       "ev3m": 0.006,
       "ev12m": 0.03,
       "drivers": [
-        "Very low duration (~1.8y) means Friday's 11.8bp 2yr-yield jump has minimal price impact; carry continues to dominate total return",
-        "September hike odds near 58% would, if realized, modestly lift front-end yields further -- a mild tailwind for reinvested carry, mild headwind for price",
-        "High-Sharpe, low-conviction directional bet given minimal duration risk either way",
-        "Probability distribution remains tight around par"
+        "Very low duration (~1.8y) means even this week's further hike-odds move (to 66%) has minimal price impact; carry continues to dominate total return.",
+        "September hike odds at 66% would, if realized, modestly lift front-end yields further -- a mild tailwind for reinvested carry, mild headwind for price.",
+        "High-Sharpe, low-conviction directional bet given minimal duration risk either way.",
+        "Probability distribution remains tight around par."
       ],
       "confidence": 0.6
     },
@@ -892,17 +891,17 @@
       "ticker": "TIP",
       "name": "iShares TIPS Bond ETF",
       "assetClass": "Bonds / Rates / Credit",
-      "pUp1m": 0.45,
-      "pUp3m": 0.48,
-      "pUp12m": 0.54,
-      "ev1m": -0.01,
-      "ev3m": 0.005,
-      "ev12m": 0.045,
+      "pUp1m": 0.44,
+      "pUp3m": 0.47,
+      "pUp12m": 0.53,
+      "ev1m": -0.012,
+      "ev3m": 0.003,
+      "ev12m": 0.042,
       "drivers": [
-        "Real yields moved higher alongside nominal yields Friday (2yr +11.8bp) on the hawkish repricing -- a genuine headwind for TIPS price even though breakevens may hold given Warsh's explicit 'more work to do' inflation language",
-        "BLS's benchmark payrolls revision (-79K vs a Bloomberg consensus for +183K) is a genuine labor-market miss that complicates the inflation/growth mix TIPS trade on",
-        "Duration risk (~6-7y) remains a headwind if real yields grind higher into the September FOMC",
-        "Warsh's inflation-focused rhetoric keeps breakeven inflation expectations somewhat supported even as real yields rise"
+        "Real yields likely moved higher again alongside nominal yields on the further-hawkish repricing (66% hike odds) -- a genuine headwind for TIPS price even though breakevens may hold given persistent above-target PCE (3.7% y/y, 4.1% 6m annualized).",
+        "The Iran-Jordan oil spike (Brent intraday $91.52) is a fresh, genuine upside risk to near-term realized inflation, supportive for breakevens specifically even as real yields rise.",
+        "Duration risk (~6-7y) remains a headwind if real yields grind higher into the September FOMC.",
+        "This week's ISM Prices sub-index (cons 70.5) and NFP wage data (average hourly earnings cons 0.3%) are the next direct inflation-expectations catalysts."
       ],
       "confidence": 0.44
     },
@@ -910,17 +909,17 @@
       "ticker": "LQD",
       "name": "iShares iBoxx $ Investment Grade Corporate Bond ETF",
       "assetClass": "Bonds / Rates / Credit",
-      "pUp1m": 0.42,
-      "pUp3m": 0.45,
+      "pUp1m": 0.41,
+      "pUp3m": 0.44,
       "pUp12m": 0.5,
-      "ev1m": -0.008,
-      "ev3m": -0.003,
-      "ev12m": 0.035,
+      "ev1m": -0.01,
+      "ev3m": -0.004,
+      "ev12m": 0.033,
       "drivers": [
-        "IG spreads remain in the richest historical decile -- little room to compress further, and Friday's rate-path repricing is a duration headwind (~8-9y) more than a credit-quality one",
-        "Credit fundamentals remain benign; no stress signal in the spread move itself, this is a rates story",
-        "September hike odds near 58% raises the near-term cost-of-carry math for issuers, a modest incremental negative",
-        "All-in SEC yield remains the most compelling argument for holding LQD even if spreads drift modestly wider"
+        "IG spreads remain in the richest historical decile -- little room to compress further, and this week's rate-path repricing (66% hike odds) is a duration headwind (~8-9y) more than a credit-quality one.",
+        "Credit fundamentals remain benign; no stress signal in the spread move itself, this remains a rates story.",
+        "September hike odds at 66% raises the near-term cost-of-carry math for issuers, a modest incremental negative.",
+        "All-in SEC yield remains the most compelling argument for holding LQD even if spreads drift modestly wider."
       ],
       "confidence": 0.46
     },
@@ -928,35 +927,35 @@
       "ticker": "HYG",
       "name": "iShares iBoxx $ High Yield Corporate Bond ETF",
       "assetClass": "Bonds / Rates / Credit",
-      "pUp1m": 0.4,
-      "pUp3m": 0.43,
+      "pUp1m": 0.39,
+      "pUp3m": 0.42,
       "pUp12m": 0.5,
-      "ev1m": -0.009,
-      "ev3m": -0.002,
-      "ev12m": 0.018,
+      "ev1m": -0.011,
+      "ev3m": -0.003,
+      "ev12m": 0.016,
       "drivers": [
-        "HY OAS remains near its richest historical decile -- a genuinely benign credit backdrop, but Friday's hawkish repricing (hike odds to ~58%) leaves little spread cushion for a shock",
-        "No credit-specific stress signal in the day's move; this reads as a rates/duration story rather than a default-risk one",
-        "Meaningful carry continues to provide yield, but a spread-widening event would consume several months of that carry",
-        "Energy remains ~10% of the HY index; USO was little changed Friday (-0.24%), a modest offsetting stability point"
+        "HY OAS remains near its richest historical decile -- a genuinely benign credit backdrop, but this week's hawkish repricing (hike odds to 66%) leaves little spread cushion for a shock.",
+        "No credit-specific stress signal from either the Fed repricing or the Iran-Jordan escalation; this reads as a rates/geopolitical-headline story rather than a default-risk one so far.",
+        "Meaningful carry continues to provide yield, but a spread-widening event would consume several months of that carry.",
+        "Energy remains ~10% of the HY index; the Iran-driven oil spike is a modest offsetting stability point for that sleeve specifically."
       ],
-      "confidence": 0.48
+      "confidence": 0.47
     },
     {
       "ticker": "EMB",
       "name": "iShares J.P. Morgan USD Emerging Markets Bond ETF",
       "assetClass": "Bonds / Rates / Credit",
-      "pUp1m": 0.42,
-      "pUp3m": 0.46,
-      "pUp12m": 0.52,
-      "ev1m": -0.006,
-      "ev3m": 0,
-      "ev12m": 0.05,
+      "pUp1m": 0.41,
+      "pUp3m": 0.45,
+      "pUp12m": 0.51,
+      "ev1m": -0.008,
+      "ev3m": -0.002,
+      "ev12m": 0.047,
       "drivers": [
-        "Dollar strength (DXY +0.5% Friday) is a direct headwind for USD-denominated EM sovereign debt servicing costs and local-currency translation",
-        "All-in yield remains attractive versus history, offering reasonable carry pickup despite the day's move",
-        "September hike odds near 58% (from ~36%) is the dominant near-term swing factor for the broader EM-debt complex via the dollar/rate channel",
-        "No EM-sovereign-specific stress signal from Friday's move; broad global growth backdrop (US claims resilient) remains supportive"
+        "CME FedWatch September-hike odds rose further to 66% (from ~57-58% Friday) on hot PCE prints (3.7% y/y, 4.1% 6m annualized) is a direct headwind for USD-denominated EM sovereign debt servicing costs and local-currency translation.",
+        "All-in yield remains attractive versus history, offering reasonable carry pickup despite the day's move.",
+        "The Iran-driven oil spike is a mixed signal for EM sovereigns: a tailwind for oil-exporting issuers, a headwind for importers.",
+        "No EM-sovereign-specific stress signal from this week's news; broad global growth backdrop remains supportive ahead of Friday's NFP."
       ],
       "confidence": 0.44
     },
@@ -964,20 +963,20 @@
       "ticker": "BND",
       "name": "Vanguard Total Bond Market ETF",
       "assetClass": "Bonds / Rates / Credit",
-      "pUp1m": 0.4,
-      "pUp3m": 0.44,
+      "pUp1m": 0.39,
+      "pUp3m": 0.43,
       "pUp12m": 0.5,
-      "ev1m": -0.006,
-      "ev3m": -0.002,
-      "ev12m": 0.035,
+      "ev1m": -0.008,
+      "ev3m": -0.004,
+      "ev12m": 0.033,
       "drivers": [
-        "Broad investment-grade exposure (~70% AAA/AA, ~6y duration) directly exposed to Friday's rate-path repricing (2yr +11.8bp, hike odds to ~58%)",
-        "Blended duration sits in the 'belly' of the risk/reward curve -- less punishing than TLT in a hawkish scenario",
-        "MBS component still benefits from a no-recession base case, though the BLS payrolls benchmark revision miss (-79K vs +183K expected) is a mild crosscurrent",
-        "Warsh's rejection of explicit forward guidance keeps the near-term swing catalyst genuinely two-sided"
+        "Broad investment-grade exposure (~70% AAA/AA, ~6y duration) directly exposed to this week's further rate-path repricing (hike odds to 66%).",
+        "Blended duration sits in the 'belly' of the risk/reward curve -- less punishing than TLT in a hawkish scenario.",
+        "MBS component still benefits from a no-recession base case, though this week's NFP (cons 55K vs -23K prior) is the key data point to watch.",
+        "Warsh's rejection of explicit forward guidance keeps the near-term swing catalyst genuinely two-sided."
       ],
       "confidence": 0.48
     }
   ],
-  "callsNote": "Regime re-verified Mon 31 Aug (SGT, 07:15 pre-market run) -- US/HK/SG cash markets closed since Friday 28 Aug close, not yet reopened (US 21:30 SGT tonight). Our own price-spine fetch again did not return a Friday 28 Aug daily bar for pure US-exchange instruments (indices, gold/silver ETFs, miners, USO/XLE) -- only futures/crypto (dated 30 Aug, Sunday-evening reopen) and HK/SG-listed stocks got Friday bars. Friday cash-close figures (GLD -3.24%, SLV -4.38%, MP -4.91%, UUUU -6.80%, BTC-USD -3.18%, S&P -0.25% to 7,711.76, VIX -0.55% to 14.43) remain carried forward from the multi-source-verified weekend runs, not re-derived. What genuinely changed this run: a confirmed US strike on Iranian rocket launchers near the Strait of Hormuz (Sun 30 Aug, CENTCOM on record) -- the first US military action on Iran in over a month -- pushed oil futures further into Monday's Asia session (Brent briefly >, WTI ~.4); a separate single-sourced claim of Iranian retaliation against US forces in Jordan is UNCONFIRMED (no CENTCOM/Pentagon/wire-service corroboration) and is not treated as fact anywhere in this file. Drivers for USO, XLE, DBC and the macro narrative/Commodities+Equity notes were updated to reflect the Hormuz strike; other calls carry forward unchanged as there is no new cash session to re-price against. Congress (1 new filer, Rep. Moskowitz AMAT/STE/GWW, immaterial to any tracked ticker), insiders and 13F/whale checks this run found nothing that changes the macro calls. The live in-browser quant engine blends all 49 tracked names with 2y daily technicals to produce the displayed P(up)/EV."
+  "callsNote": "Regime re-verified Tue 1 Sep (SGT, ~07:45 pre-market run) against US Monday 31 Aug cash close (S&P 7,686.14, Nasdaq 26,370.89, Dow 53,185.90, Russell 2,956.45, VIX 14.92). Our own price-spine fetch again did not return a Friday 28 Aug daily bar for pure US-exchange instruments (indices, gold/silver ETFs, miners, USO/XLE) -- only futures (GC=F, SI=F, BZ=F, CL=F) and BTC-USD have the true Friday bar, so every Monday US-instrument pct in the spine is a compounded two-session (Fri+Mon) move, not a clean single day; that is called out explicitly wherever it materially affects a call's framing. What genuinely changed this run: Iran's IRGC confirmed retaliatory missile/drone strikes on the King Hussein and Al-Azraq air bases in Jordan (plus a UAE target) late Monday, in response to Sunday's CENTCOM strike on Larak Island -- Jordan intercepted 8 missiles, a US official reports no significant impact, and this is now corroborated across multiple independent outlets, superseding the prior run's single-sourced/unconfirmed framing. Separately, CME FedWatch September-hike odds drifted further hawkish to 66% (from ~57-58% Friday) on hot PCE prints. Drivers for the equity indices, energy complex (XLE/USO/DBC), precious metals (GLD/SLV), crypto and the bond ladder were updated to reflect actual Monday closes, the confirmed Iran-Jordan exchange, and the higher hike odds; sector/regional/factor ETFs and the rare-earth basket received a lighter touch (updated hike-odds/Iran framing, carried-forward company-specific theses) since no ticker-specific fresh news was found for them this run. This is the first live day of NFP week: today brings ISM Manufacturing PMI/Prices, JOLTS and a Barr speech; Wednesday ADP plus RBNZ/BOC decisions; Thursday ISM Services and jobless claims; Friday the marquee nonfarm payrolls print (cons 55K vs -23K prior). The live in-browser quant engine blends all 49 tracked names with 2y daily technicals to produce the displayed P(up)/EV."
 }
