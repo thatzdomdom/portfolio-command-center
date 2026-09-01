@@ -1,120 +1,125 @@
 {
-  "updated": "2026-09-01",
-  "note": "Tue 1 Sep 2026, ~07:15 SGT pre-market run, covering Monday 31 Aug's US close (the first full session after the known Fri-28-Aug missing bar in the price spine, and after the weekend's confirmed US strike on Iranian assets near the Strait of Hormuz). S&P 500 closed 7686.14 (-0.58% vs 27 Aug's 7730.99; no clean single-day comp exists across the 28-31 Aug gap), VIX rose to 14.92 (+2.83% vs 14.51) -- still a modest, not panic-level, print. Genuinely fresh this run: McClellan Oscillator deteriorated further to -152.39 (31 Aug, thetrading.tools) from -99.23 (28 Aug); GICS sectors above 200-DMA slipped to 8 of 11 (31 Aug) from 9 of 11 (28 Aug), with Industrials/Real Estate/Utilities now below; NYSE/Nasdaq breadth was decisively negative on the day (~1.77:1 and ~2.19:1 decliners-to-advancers per a Yahoo Finance market wrap, though that same source also mixed in stale 28-Aug VIX/S&P figures alongside the fresh ones, so treat the exact ratios with some caution). %S&P-above-200DMA and %-above-50DMA could not be refreshed past 28 Aug (68.78% / 52.88%) despite repeated attempts -- carried forward and flagged. CNN's own Fear&Greed page still returns HTTP 451 (retried, still blocked); thetrading.tools' non-CNN replica now reads 46/Neutral (31 Aug), down from ~55-59 late last week -- a plausible but NOT CNN's own figure, flagged as such. Crypto Fear&Greed (alternative.me, live API) pulled back to 62/Greed (from 69 Sun, 68 Sat) -- still Greed but cooling. Flows: no new weekly Lipper release (still week-to-26-Aug, next due ~2 Sep), but a fuller regional breakdown of that same week was found this run (Europe +$7.92bn, EM equity +$709mn/7th straight week, EM bond +$956mn, money-market funds -$19.74bn ending a 4-week inflow streak) -- see flows.narrative. Summation Index remains unavailable after repeated attempts.",
+  "updated": "2026-09-02",
+  "note": "Wed 2 Sep 2026, ~07:11 SGT pre-Asia-open run, covering Tuesday 1 Sep US close -- a genuine, broad-based risk-off session (S&P -0.71% to 7631.47, VIX +9.52% to 16.34) driven by fresh Hormuz Strait tanker attacks (a Saudi and a South Korean vessel struck Monday night) that drew US CENTCOM strikes on IRGC targets Tuesday -- a distinct second escalation beyond Sundays Jordan/UAE strikes -- compounding with Fed Chair Warshs hawkish Jackson Hole stance (Sep hike odds 57-72%, from ~35% pre-Jackson-Hole). fearGreed: CNNs own page remains blocked (HTTP 451/418); non-CNN replicas converge on 41-45/Fear (down from ~46-50 Neutral on 31 Aug), corroborated across three independent trackers. Crypto Fear&Greed (alternative.me, live API) rose to 69/Greed (from 62), decoupled from the equity risk-off. breadth: directly verified via raw-HTML/JSON scraping (after WebFetch/WebSearch summaries produced conflicting, unreliable ratios this run) -- %S&P-above-200DMA fell to 62.62% (from 68.78%), %-above-50DMA to 45.52% (from 52.88%), 52wk new lows (68) overtook new highs (45) for the first time in weeks, NYSE/Nasdaq A/D ratios worsened to 2.32:1/2.76:1, and the McClellan Oscillator fell to -231.30 -- a genuinely broad, not narrow, deterioration. flows: still no newer weekly Lipper release than week-to-26-Aug (next due ~3-4 Sep); this run confirmed no fresher release exists yet and added a technology-sector sub-detail (+$3.2bn the same week, showing the US equity outflow was concentrated in broad/diversified vehicles rather than a clean tech selloff) plus BofA Hartnett rotation-call context (Great Rotation out of US equities, Anything-But-Dollar theme, defensives-rotation call) -- see flows.narrative.",
   "fearGreed": {
-    "value": 46,
-    "rating": "Neutral",
-    "asOf": "2026-08-31",
-    "prevClose": 55,
-    "prev1w": 55,
-    "prev1m": 38,
+    "value": 43,
+    "rating": "Fear",
+    "asOf": "2026-09-01",
+    "prevClose": 46,
+    "prev1w": 57,
+    "prev1m": 61,
     "prev1y": null,
-    "cryptoValue": 62,
+    "cryptoValue": 69,
     "cryptoRating": "Greed",
     "components": [
       {
         "name": "Market Momentum",
-        "reading": "CNN's own page still blocked (HTTP 451) this run. A non-CNN third-party replica (thetrading.tools) now scores this component 53/100 as of 31 Aug (\"SPY +5.7% vs 125-day average\") -- flagged explicitly as not CNN's own data; the site's component set/labels changed from the prior run's read, another reason to treat it as directional only.",
+        "reading": "CNN's own page still returns HTTP 451/418 this run -- unavailable. Non-CNN replica (thetrading.tools) scores this 43/100 as of 1 Sep (\"SPY +4.8% vs 125-day average\") -- flagged as not CNN's own data.",
         "signal": "neutral"
       },
       {
         "name": "Stock Price Strength",
-        "reading": "CNN's own component page still blocked (451). thetrading.tools scores this 8/100 as of 31 Aug (\"net new highs -1.9% of universe\") -- weak. Directly relevant real breadth proxy: % of S&P 500 above 200-day MA remains stuck at 68.78% (28 Aug, investing.com S5TH), down from 72.11% (24 Aug); no fresher print found for 31 Aug despite repeated attempts.",
+        "reading": "CNN's own page unavailable. thetrading.tools scores this 6/100 as of 1 Sep (\"net new highs -2.6% of universe, 55 highs/180 lows\") -- weak, and corroborated by the directly-verified NYSE count of 45 new highs vs 68 new lows (a -23 spread, flipped from +110 on 28 Aug).",
         "signal": "fear"
       },
       {
         "name": "Stock Price Breadth",
-        "reading": "Decisively negative on 31 Aug: NYSE decliners outnumbered advancers ~1.77:1 and Nasdaq ~2.19:1 (Yahoo Finance market wrap) -- a clear deterioration from 28 Aug's roughly-balanced reading (~1.02:1 NYSE). Note: the same source also mixed in stale 28-Aug VIX/S&P figures, so treat the exact ratios with some caution though the negative direction is corroborated by the S&P's -0.58% close and the McClellan Oscillator's further decline.",
+        "reading": "Decisively negative on 1 Sep, confirmed via raw-scraped tables (not LLM summaries, which gave conflicting ratios this run): NYSE decliners led advancers ~2.32:1 (834 up / 1,931 down), Nasdaq ~2.76:1 (1,305 up / 3,600 down) -- a further deterioration from 31 Aug's ~1.77:1/2.19:1.",
         "signal": "fear"
       },
       {
         "name": "Put/Call Options",
-        "reading": "CNN's own series unavailable -- source blocked. thetrading.tools proxy scores this 72/100 as of 31 Aug (\"total put/call 0.84, 5-day avg\") -- a low put/call ratio consistent with complacency, though not CNN's own figure.",
+        "reading": "CNN's own series unavailable. thetrading.tools proxy scores this 81/100 as of 1 Sep (\"total put/call 0.82, 5-day avg\") -- a low put/call ratio, still leaning complacent even as equities sold off.",
         "signal": "greed"
       },
       {
         "name": "Market Volatility",
-        "reading": "VIX rose to 14.92 on 31 Aug (+2.83% vs 27 Aug's 14.51; no clean Fri-28-Aug print exists in the spine) -- a modest uptick, still well within 2026's compressed range, not a panic reading. thetrading.tools scores this component 67/100 (\"VIX -9.5% vs 50-day average\"), i.e. still low relative to its own trend.",
-        "signal": "greed"
-      },
-      {
-        "name": "Safe-Haven Demand",
-        "reading": "thetrading.tools scores this 41/100 as of 31 Aug (\"stocks +0.8pp vs bonds, 20d\") -- roughly neutral. Gold itself has stabilized/edged higher (spot +0.29% on 31 Aug per one market wrap) after the prior week's sharp precious-metals rout, and gold miners (GDX) traded in the $99-100.5 range, up from the worst of the sell-off -- a mixed, not fresh-panic, safe-haven picture.",
+        "reading": "VIX spiked 9.52% to 16.34 on 1 Sep (from 14.92 on 31 Aug) -- still well within 2026's compressed historical range, but a genuine one-day vol shock tied to the Hormuz/Iran escalation and hawkish-Fed repricing. thetrading.tools scores this component 44/100 (\"VIX -0.7% vs its own 50-day avg\"), i.e. roughly neutral on a trend basis despite the day's spike.",
         "signal": "neutral"
       },
       {
+        "name": "Safe-Haven Demand",
+        "reading": "thetrading.tools scores this 32/100 as of 1 Sep (\"stocks -0.1pp vs bonds, 20d\") -- leaning fear. Consistent with the day's flight from both equities and precious metals into cash/short-duration.",
+        "signal": "fear"
+      },
+      {
         "name": "Junk Bond Demand",
-        "reading": "CNN's own series unavailable -- source blocked. thetrading.tools proxy scores this 62/100 as of 31 Aug (\"HYG/LQD +0.29% vs 20-day avg\"), leaning greed. Not independently confirmed via CNN's own series this run.",
+        "reading": "CNN's own series unavailable. thetrading.tools proxy scores this 62/100 as of 1 Sep (\"HYG/LQD +0.29% vs 20-day avg\"), leaning greed -- consistent with HY credit spreads staying resilient (tightened 19bp in August) even as equities/gold sold off.",
         "signal": "greed"
       }
     ],
     "sources": [
       "https://www.cnn.com/markets/fear-and-greed",
-      "https://www.thetrading.tools/fear-greed-index",
-      "https://api.alternative.me/fng/?limit=5",
-      "https://finance.yahoo.com/markets/stocks/articles/stock-market-news-aug-31-082900315.html"
+      "https://thetrading.tools/fear-greed-index",
+      "https://api.alternative.me/fng/?limit=7",
+      "https://www.feargreedmeter.com",
+      "https://www.feargreedtracker.com",
+      "https://finance.yahoo.com/markets/stocks/articles/stock-market-news-sep-1-085900862.html"
     ]
   },
   "breadth": {
-    "asOf": "2026-08-31 (latest completed US session; NYSE advance/decline, McClellan and sector-ETF metrics refreshed to 31 Aug; %-above-200DMA/50DMA and 52wk hi/lo could not be refreshed past 28 Aug)",
+    "asOf": "2026-09-01 (US session close; % above 200/50-DMA, NYSE/Nasdaq A/D, 52wk hi-lo, McClellan, A-D line and sector counts all refreshed to Sep 1 via direct raw-HTML/embedded-JSON scraping after WebFetch/WebSearch summaries gave conflicting, unreliable figures this run)",
     "metrics": [
       {
         "label": "% of S&P 500 stocks above 200-day MA",
-        "value": "Still 68.78% as of 28 Aug 2026 (investing.com S5TH series) -- no fresher 31 Aug print found despite repeated attempts this run; carried forward and flagged as a gap rather than guessed",
-        "signal": "neutral",
-        "pct": 69
+        "value": "62.62% as of Tue 1 Sep 2026 close (Barchart $S5TH, verified via raw embedded JSON) -- down sharply from 68.78% on 28 Aug, a ~6.2-point deterioration",
+        "signal": "bearish",
+        "pct": 62.62
       },
       {
         "label": "% of S&P 500 stocks above 50-day MA",
-        "value": "Still 52.88% as of 28 Aug 2026 (Barchart $S5FI / Investing.com S5FI) -- no fresher 31 Aug print found this run; carried forward",
-        "signal": "neutral",
-        "pct": 52.88
+        "value": "45.52% as of 1 Sep 2026 close (Barchart $S5FI) -- down from 52.88% on 28 Aug, a ~7.4-point deterioration",
+        "signal": "bearish",
+        "pct": 45.52
       },
       {
         "label": "NYSE advancers vs decliners",
-        "value": "Decisively negative on 31 Aug -- decliners outnumbered advancers ~1.77:1 on NYSE and ~2.19:1 on Nasdaq (Yahoo Finance wrap), consistent with the S&P's -0.58% close; a clear deterioration from 28 Aug's near-balanced ~1.02:1. Source also mixed in stale 28-Aug figures alongside these, so treat exact ratios with some caution",
+        "value": "Decliners led ~2.32:1 on NYSE (834 up / 74 flat / 1,931 down) and ~2.76:1 on Nasdaq (1,305 up / 174 flat / 3,600 down) on 1 Sep -- confirmed via raw-scraped market-diary tables, a further deterioration from 31 Aug's ~1.77:1/2.19:1",
         "signal": "bearish",
-        "pct": 36
+        "pct": 30
       },
       {
         "label": "52-week New Highs minus New Lows (NYSE)",
-        "value": "Still 192 new highs vs 82 new lows as of 28 Aug (net +110) -- no fresher 31 Aug count found this run; given the day's negative breadth this figure likely deteriorated, but not re-confirmed so carried forward rather than guessed",
-        "signal": "bullish",
+        "value": "45 new highs vs 68 new lows on 1 Sep (net -23) -- flipped negative from +110 (192 highs/82 lows) on 28 Aug, a sharp reversal confirmed via raw-scraped tables",
+        "signal": "bearish",
         "pct": null
       },
       {
         "label": "McClellan Oscillator / Summation Index",
-        "value": "Oscillator now confirmed at -152.39 as of 31 Aug close (thetrading.tools), down a further 53.2 points from 28 Aug's -99.23 -- a genuinely accelerating deterioration in short-term breadth momentum, now well into bearish territory. mcoscillator.com/stockcharts.com direct remain blocked (403); Summation Index still unavailable ('not built yet' per the same source)",
+        "value": "Raw oscillator -231.30 as of 1 Sep close (thetrading.tools), down a further 78.9 points from 31 Aug's -152.39 -- an accelerating deterioration in short-term breadth momentum. Summation Index remains unavailable ('not built yet' per the same source).",
         "signal": "bearish",
         "pct": null
       },
       {
         "label": "Advance-decline line trend",
-        "value": "No fresh live A-D line value pulled this run, but 31 Aug's decisively negative advancer/decliner count (~1.77:1 NYSE) alongside the sharper McClellan Oscillator decline suggests the A-D line turned down on the day, not merely paused",
+        "value": "Declining on 1 Sep: 1,341 advanced / 3,372 declined / 124 unchanged across 4,837 issues (net advances -2,031); rolling advance share 21-session 47.8%, 63-session 49.3%, 252-session 49.6% -- all below the 50% neutral line, consistent with a negative-breadth regime over the past month",
         "signal": "bearish",
         "pct": null
       },
       {
         "label": "Sectors above 200-DMA (count of 11 GICS sectors)",
-        "value": "8 of 11 GICS sector ETFs above 200-day MA as of 31 Aug 2026 (thetrading.tools Sector Health), down from 9 of 11 on 28 Aug -- Industrials (XLI), Real Estate (XLRE) and Utilities (XLU) now below, all flagged 'Weakening/Weak'",
+        "value": "8 of 11 as of 1 Sep, same count as 31 Aug but composition rotated -- Industrials and Real Estate climbed back above 200-DMA while Consumer Discretionary and Communication Services fell below; Utilities remains below on both days. Separately, only 7 of 11 sectors are above their 50-DMA (down, contracting), giving an overall Sector Health score of 58/100, 'MIXED, narrowing'.",
         "signal": "neutral",
         "pct": 73
       }
     ],
-    "note": "Monday 31 Aug was a genuinely weaker session than Friday's split read: the S&P fell 0.58% to 7686.14, NYSE/Nasdaq breadth turned decisively negative (~1.77:1 / ~2.19:1 decliners), and the McClellan Oscillator extended its decline to -152.39 (from -99.23 on 28 Aug) -- a real, accelerating deterioration in short-term breadth momentum. Sector participation also narrowed slightly (9->8 of 11 GICS sectors above 200-DMA, with Industrials/Real Estate/Utilities now below). Against that, %-above-200DMA, %-above-50DMA and the 52wk hi/lo count could not be refreshed past Friday 28 Aug despite repeated attempts and are carried forward as explicit gaps. Net read: breadth momentum is clearly softening into the new week, though the still-decent (if stale) 200DMA/50DMA participation figures mean this reads as a fresh short-term wobble rather than a confirmed breakdown -- worth re-confirming next run whether the McClellan/sector slippage continues.",
+    "note": "Tuesday 1 Sep was a genuinely sharp, broad-based breadth deterioration, not just an index-level down day: %-above-200DMA and %-above-50DMA both fell 6-7 points, 52-week new lows overtook new highs for the first time in weeks, NYSE/Nasdaq A/D ratios worsened further from an already-negative 31 Aug, and the McClellan Oscillator extended its decline to -231.30. This corroborates the VIX's 9.5% spike and confirms the Sep 1 selloff was a genuine market-wide risk-off event driven by the Hormuz/Iran escalation plus hawkish-Fed repricing, not a narrow mega-cap-driven index move. Worth watching whether Wednesday's ADP/BOC and Friday's NFP arrest or extend this breadth slide.",
     "sources": [
-      "https://finance.yahoo.com/markets/stocks/articles/stock-market-news-aug-31-082900315.html",
-      "https://www.investing.com/indices/sp-500-stocks-above-200-day-average-historical-data",
-      "https://www.thetrading.tools/mcclellan-oscillator",
+      "https://www.barchart.com/stocks/quotes/$S5TH",
       "https://www.barchart.com/stocks/quotes/$S5FI",
-      "https://www.investing.com/indices/s-p-500-stocks-above-50-day-average",
-      "https://www.thetrading.tools/sector-health"
+      "https://www.investcom.com/us/marketnewlownyse.htm",
+      "https://www.investcom.com/us/marketnewhighnyse.htm",
+      "https://www.thetrading.tools/mcclellan-oscillator",
+      "https://www.thetrading.tools/market-breadth",
+      "https://www.thetrading.tools/advance-decline-line",
+      "https://www.thetrading.tools/sector-health",
+      "https://www.thetrading.tools/new-highs-new-lows"
     ]
   },
   "flows": {
-    "asOf": "2026-08-31",
-    "period": "Primary: LSEG Lipper -- week ended Wed 26 Aug 2026 (unchanged, next release due ~2 Sep). Cross-check: BofA/EPFR Flow Show (Michael Hartnett), mid-August 2026 reporting. Re-verified 1 Sep: still no newer weekly release (ICI/Lipper both on their normal Wed cadence, next due ~2 Sep) -- but a fuller regional breakdown of the SAME week-to-26-Aug Lipper report was located this run via a fresh source, filling several gaps flagged in the prior run (see narrative). No new week to report yet.",
-    "narrative": "Lipper's week-to-26-Aug data shows the first crack in an otherwise resilient inflow picture: global equity funds posted a -$5.87bn outflow, snapping 13 consecutive weeks of inflows, with US equity funds specifically seeing -$22.33bn in net sales -- the primary drag. This run located Lipper's fuller regional split for the same week, superseding the smaller/differently-scoped BofA-EPFR 'featured week' figures used previously: Europe equity funds actually drew a solid +$7.92bn inflow (not the +$55mn figure previously cited from a different EPFR cut), Asia equity funds +$4.8bn, EM equity funds +$709mn (a 7th consecutive week of inflows, updating the prior week's +$1.57bn/6th-week figure), and EM bond funds +$956mn -- so the outflow was concentrated specifically in the US, not global. Also newly found: money-market funds saw a -$19.74bn outflow the same week, ending a 4-week inflow streak -- a genuinely fresh data point not previously captured, sitting alongside gold/precious-metals funds' +$4.21bn (6-month high) and short-term bond funds' +$6.29bn (7-week high), consistent with a rotation out of both US equities AND cash into gold/duration ahead of Friday's Warsh shock. Global bond funds added a slower +$10.25bn (a 4-week-low pace). BofA's Flow Show cross-check (older, ~22 Aug featured week) showed the same defensive tilt at larger EPFR-scope magnitudes: gold funds +$6.3bn (biggest since Jan 2026), tech funds' first outflow in 6 weeks (-$700mn), and the Bull & Bear Indicator at 9.7 (highest since 2021, contrarian 'sell' territory) -- not re-verified fresher this run. Separately, BofA/EPFR crypto-fund flows (outside this file's regional scope) swung sharply: +$3.2bn for the week to ~22 Aug (strongest since Oct 2025, ~81% BTC/ETH ETFs) before cooling to +$924.5mn for 24-28 Aug. Japan drew a 9th straight week of fund inflows (+$2.6bn) even as JPX's own data (see flows-investors.json) shows foreign investors net-SELLING Japanese cash equities -- a genuine flow-vs-fund-positioning divergence tied to the JGB yield surge.",
+    "asOf": "2026-09-02",
+    "period": "Primary: LSEG Lipper -- week ended Wed 26 Aug 2026 (unchanged, RE-CONFIRMED 2 Sep -- no newer release exists yet; next release expected ~3-4 Sep 2026 per the normal Wed-to-Wed cadence). Cross-check: BofA/EPFR Flow Show (Michael Hartnett).",
+    "narrative": "Lipper's week-to-26-Aug data shows the first crack in an otherwise resilient inflow picture: global equity funds posted a -$5.87bn outflow, snapping 13 consecutive weeks of inflows, with US equity funds specifically seeing -$22.33bn in net sales -- the primary drag. This run located Lipper's fuller regional split for the same week, superseding the smaller/differently-scoped BofA-EPFR 'featured week' figures used previously: Europe equity funds actually drew a solid +$7.92bn inflow (not the +$55mn figure previously cited from a different EPFR cut), Asia equity funds +$4.8bn, EM equity funds +$709mn (a 7th consecutive week of inflows, updating the prior week's +$1.57bn/6th-week figure), and EM bond funds +$956mn -- so the outflow was concentrated specifically in the US, not global. Also newly found: money-market funds saw a -$19.74bn outflow the same week, ending a 4-week inflow streak -- a genuinely fresh data point not previously captured, sitting alongside gold/precious-metals funds' +$4.21bn (6-month high) and short-term bond funds' +$6.29bn (7-week high), consistent with a rotation out of both US equities AND cash into gold/duration ahead of Friday's Warsh shock. Global bond funds added a slower +$10.25bn (a 4-week-low pace). BofA's Flow Show cross-check (older, ~22 Aug featured week) showed the same defensive tilt at larger EPFR-scope magnitudes: gold funds +$6.3bn (biggest since Jan 2026), tech funds' first outflow in 6 weeks (-$700mn), and the Bull & Bear Indicator at 9.7 (highest since 2021, contrarian 'sell' territory) -- not re-verified fresher this run. Separately, BofA/EPFR crypto-fund flows (outside this file's regional scope) swung sharply: +$3.2bn for the week to ~22 Aug (strongest since Oct 2025, ~81% BTC/ETH ETFs) before cooling to +$924.5mn for 24-28 Aug. Japan drew a 9th straight week of fund inflows (+$2.6bn) even as JPX's own data (see flows-investors.json) shows foreign investors net-SELLING Japanese cash equities -- a genuine flow-vs-fund-positioning divergence tied to the JGB yield surge. RE-CHECKED 2 Sep: no newer weekly release exists yet (confirmed via direct search, next expected ~3-4 Sep) -- but a new technology-sector sub-detail was found for the SAME week-to-26-Aug report: global technology funds specifically still drew +$3.2bn even as broad US equity funds saw -$22.33bn in outflows, suggesting the US outflow was concentrated in broad/diversified vehicles rather than a clean tech-specific selloff. Also newly sourced: BofA strategist Michael Hartnett has been flagging a multi-month Great Rotation theme -- US stocks now capture only $26 of every $100 flowing into global stock funds (down from a $92 peak in 2022, the lowest US share since 2020) -- alongside his Anything-But-Dollar (ABD) framing (rotation into gold/EM/crypto as dollar-debasement hedges) and, as of the Bull & Bear Indicators 9.7 reading, an explicit rotate-into-defensives call. These are multi-week/month thematic reads, not this weeks fresh data, but they contextualize the fund-flow picture already in this file.",
     "regions": [
       {
         "region": "US Equities",
