@@ -1,107 +1,102 @@
 {
-  "updated": "2026-09-03T07:40:00+08:00",
-  "asOf": "2026-09-03",
-  "note": "CIO research-panel macro regime + per-instrument probabilistic priors, produced by a multi-agent research workflow with adversarial verification and cited sources. The live in-browser quant engine (GBM drift-diffusion on 2y daily history) blends with these forward-looking priors to produce the displayed P(up) and EV. Refreshed by the scheduled intel agent. THURSDAY UPDATE (3 Sep, re-researched ~07:40 SGT): Wednesday 2 Sep was a broad risk-ON rebound from Tuesday's Hormuz-driven rout -- S&P 500 +0.46% to 7666.60, Nasdaq +0.45%, Dow +0.56%, Russell 2000 +1.13%, VIX -6.98% to 15.20 -- driven by a soft ADP print (+38K vs ~47K consensus, weakest since January) and NY Fed's Williams pushing back on an 'inevitable' September hike, NOT by any Iran de-escalation. Silver/gold/miners spiked hard on the same dovish repricing (GLD +1.52%, SLV +1.99%, GDX +3.13%, SILJ +5.36%, HL +8.69%, AG +6.75%). The Hormuz/Iran conflict in fact escalated further overnight: the US struck Iranian government tankers directly for the first time under a new 'tanker-for-tanker' policy, and Iran alleges (unverified) a US strike hit a wedding -- crypto (BTC/ETH) sold off specifically on this news even as equities rallied, a genuine cross-asset divergence. Fed voices are now visibly split heading into the Sep 15-16 FOMC: Williams (dovish) vs. Goolsbee/Hammack (hawkish, want more hikes) -- Waller speaks today (20:30 SGT) and Friday's NFP (cons 55K vs -23K prior) is the pivotal print. Wednesday's precise breadth internals (%>200/50-DMA, McClellan, 52wk hi-lo) had not propagated through data providers at run time -- carried forward from Tuesday's verified figures (see market.json) rather than guessed; CNBC confirms 9 of 11 S&P sectors closed higher Wednesday (Materials +1.6% led, Real Estate -0.6% lagged).",
+  "updated": "2026-09-04T07:35:00+08:00",
+  "asOf": "2026-09-04",
+  "note": "CIO research-panel macro regime + per-instrument probabilistic priors, produced by a multi-agent research workflow with adversarial verification and cited sources. The live in-browser quant engine (GBM drift-diffusion on 2y daily history) blends with these forward-looking priors to produce the displayed P(up) and EV. Refreshed by the scheduled intel agent. FRIDAY UPDATE (4 Sep, re-researched ~07:35 SGT): Thursday 3 Sep was a second straight strong US rally -- S&P 500 +1.06% to 7747.71, Nasdaq +1.40% to 26584.06, Dow +1.18%, Russell 2000 +0.51%, VIX -5.79% to 14.32 -- driven specifically by Fed Governor Waller's dovish pre-market remarks (8:30am ET) that he could back a September hold 'so long as upcoming inflation data doesn't produce surprises', which pulled Sep-hike odds from ~63% to ~50% and the 10y yield down a touch to ~4.77%. Gold/silver/miners extended their rally again (GLD +1.85% to $410.22, SLV +2.51% to $60.55, GDX +3.95%, NEM +4.21%) EXCEPT Barrick Gold (GOLD, -5.34% to $41.48) which fell on company-specific news: Bloomberg reported 2 Sep that Barrick is weighing delaying its North America gold-unit IPO from 2026 to 2027 amid a shareholder revolt (VanEck, Mackenzie, Franklin among holders publicly opposing) against Chairman John Thornton's spin-off strategy -- a governance story, not a read-through to the rest of the miners complex. The Hormuz/Iran conflict remains live and escalating in mechanics (US struck two Iranian tankers + ~100 IRGC-linked sites 2 Sep; Iran retaliated with missiles/drones on Gulf bases; Strait transits collapsed to single digits per 24h from ~138/day pre-crisis) even as Trump downplayed follow-through, calling the strikes brief -- silver held above $66/oz (+60.8% y/y) on the residual geopolitical bid. BTC rebounded +4.96% to ~$81,138 on short-covering (~$415M liquidated) and renewed ETF inflows (+$100M net 2 Sep), even as the Sep 15 CLARITY Act cloture-vote passage odds deteriorated further to ~19.5% (from a 58% high, and down from ~30% just a week ago) with 8 Democrats still needed and uncommitted. HK equities lagged the US rally Wednesday (Tencent -1.19%, Xiaomi -2.21%) but partially caught up Thursday (Hang Seng +0.6% to 25,459, Tencent +0.4%) on the same soft-ADP/dovish-Williams read-through. Today (Fri 4 Sep) at 20:30 SGT brings the pivotal US Non-Farm Payrolls print (cons 55K vs -23K prior) -- the last major data point before the Sep 15-16 FOMC -- which has not yet happened as of this run; breadth/credit-spread figures fresher than Tuesday 1 Sep's verified readings (%>200-DMA 62.62%, IG ~78bp, HY ~260bp) could not be independently confirmed this run (search results returned internally inconsistent session closes and a likely-hallucinated sector breakdown that was discarded rather than published) and are carried forward rather than guessed.",
   "macro": {
-    "regime": "Fed voices split -- dovish jobs-data relief collides with an escalating, not cooling, Hormuz war-risk premium",
-    "riskOnProb": 0.52,
-    "regimeScore": 0.48,
-    "asOf": "2026-09-03",
-    "narrative": "Wednesday 2 Sep reversed much of Tuesday's hawkish-Fed/Hormuz-driven rout: the S&P 500 rose 0.46% to 7666.60 (Nasdaq +0.45%, Dow +0.56%, Russell 2000 +1.13%) as VIX fell 6.98% to 15.20, driven by ADP's soft August print (+38K vs ~47K consensus, weakest since January, with manufacturing/professional-services/information all shedding jobs) and NY Fed's Williams publicly pushing back on an 'inevitable' September hike, saying inflation is 'moving slowly down' as tariff effects fade. Gold and silver rallied hard on the same dovish repricing (GLD +1.52%, SLV +1.99%, GDX +3.13%, SILJ +5.36%, HL +8.69%, AG +6.75%), continuing the miners complex's structural bull run (NYSE Arca Gold Miners Index +33% in August, best since 1994). Crucially, this was NOT an Iran de-escalation: the US struck Iranian government tankers directly for the first time under a new 'tanker-for-tanker' deterrence policy, Iran alleges (unverified) a US strike hit a wedding with 50+ claimed casualties, and Jordan/Bahrain intercepted further Iranian missiles/drones -- crypto (BTC to ~$76.6K, ETH to ~$2,374) sold off specifically on this escalation even as equities rallied on the jobs data, a genuine cross-asset divergence worth tracking. Fed officials are now visibly split heading into the Sep 15-16 FOMC: Williams dovish, while Chicago's Goolsbee warned of AI-driven 'overheat' risk and Cleveland's Hammack said more than one further hike is needed against 'broadening inflation' -- Waller speaks today (20:30 SGT) and Friday's NFP (cons 55K vs -23K prior) is the pivotal swing print. RBNZ hiked to 2.75% and BOC held at 2.25% as expected Wednesday, with the BOC statement explicitly flagging Hormuz-driven oil prices as an inflation risk. Separately, the Sep 15 CLARITY Act Senate cloture vote's passage odds have fallen further to under 20% (from a 58% high), landing the same week as the FOMC decision -- a hardening binary catalyst for the crypto sleeve. Wednesday's precise breadth internals had not propagated through data providers at run time (~3h post-close); CNBC confirms 9 of 11 S&P sectors closed higher (Materials +1.6% led, Real Estate -0.6% lagged), consistent with a genuine broad-based rebound.",
+    "regime": "Waller's dovish pivot drives a second straight rally, but a live Hormuz war and Friday's NFP keep the path genuinely two-sided",
+    "riskOnProb": 0.56,
+    "regimeScore": 0.53,
+    "asOf": "2026-09-04",
+    "narrative": "Thursday 3 Sep extended Wednesday's rebound into a second straight strong rally: the S&P 500 rose 1.06% to 7747.71 (Nasdaq +1.40%, Dow +1.18%, Russell 2000 +0.51%), with VIX falling a further 5.79% to 14.32. The specific driver was Fed Governor Christopher Waller's dovish pre-market remarks (8:30am ET) that he could back a September rate hold 'so long as upcoming inflation data doesn't produce surprises' -- pulling implied September-hike odds from roughly 63% to 50% and nudging the 10y yield down to ~4.77%. Rate-sensitive names led (Oracle +5.7%, Palantir +7.7%, financials broadly higher). Gold, silver and miners extended their rally for a second day (GLD +1.85% to $410.22, SLV +2.51% to $60.55, GDX +3.95%, SILJ +2.37%, NEM +4.21%) with silver holding above $66/oz (+60.8% y/y) -- but Barrick Gold (GOLD) fell 5.34% to $41.48 on company-specific news: Bloomberg reported 2 Sep that Barrick is weighing delaying its North America gold-unit IPO from 2026 to 2027 amid a shareholder revolt against Chairman John Thornton's separation strategy, a governance story that does not read through to the rest of the miners complex. The Hormuz/Iran conflict remains live: the US struck two Iranian government tankers plus roughly 100 IRGC-linked air-defense/radar/drone sites on 2 Sep, Iran retaliated with missiles and drones against Gulf bases (mostly intercepted over Jordan/Bahrain), and Strait of Hormuz transits have collapsed to single digits per 24 hours from a pre-crisis pace near 138/day -- even as Trump publicly downplayed further escalation, calling the strikes 'brief.' Oil is on track for its biggest weekly gain since July (WTI near $92, Brent near $95) though the rally has cooled slightly on Trump's de-escalatory framing. Crypto rebounded sharply -- BTC +4.96% to ~$81,138 on a ~$415M short squeeze and renewed spot-ETF inflows (+$100M net 2 Sep) -- even as the Sep 15 CLARITY Act Senate cloture-vote passage odds deteriorated further to roughly 19.5% (down from a 58% high in August and ~30% just a week ago), with 8 Democratic votes still needed and uncommitted, a hardening near-term regulatory tail risk for the crypto sleeve specifically. Asia partially caught up to the US rally: the Hang Seng rose 0.6% to 25,459 Thursday (Tencent +0.4%, reversing about a third of Wednesday's -1.19% lag), while Xiaomi remains under pressure (-2.21% Wed) on investor concern about EV/IoT margin sustainability ahead of its September product blitz (Xiaomi 18 series, SkyNomad EV, YU7 GT). Today (Friday 4 Sep, 20:30 SGT) brings the single most important scheduled print of the week -- US Non-Farm Payrolls (cons 55K vs -23K prior, unemployment cons 4.1%) -- the last major data point before the Sep 15-16 FOMC; a hot print with wages above 0.3% would revive the hike odds Waller just cooled. Breadth and credit-spread figures fresher than Tuesday 1 Sep's verified readings (%S&P>200-DMA 62.62%, IG ~78bp, HY ~260bp) could not be independently confirmed this run -- search results returned mutually contradictory session closes and at least one likely-hallucinated sector-breakdown claim that was discarded rather than published -- so those figures are carried forward rather than guessed.",
     "drivers": [
       {
-        "factor": "Fed voices split heading into the Sep 15-16 FOMC",
-        "read": "NY Fed's Williams pushed back on an 'inevitable' September hike (\"no clear science right now\"), while Chicago's Goolsbee warned of AI-driven 'overheat' risk and Cleveland's Hammack wants more than one further hike against 'broadening inflation.' Waller speaks today (20:30 SGT); Friday's NFP (cons 55K vs -23K prior) is the pivotal swing print.",
+        "factor": "Waller's dovish pivot drove Thursday's rally specifically",
+        "read": "Fed Governor Waller said he could back holding rates steady in September absent an inflation surprise, pulling hike odds from ~63% to ~50% and the 10y yield down to ~4.77% -- the clearest single catalyst behind the S&P's +1.06% session, with rate-sensitive names (Oracle, Palantir, financials) leading.",
+        "impact": "supportive"
+      },
+      {
+        "factor": "Hormuz/Iran conflict remains live and escalating in mechanics, not resolved",
+        "read": "The US struck two Iranian government tankers and ~100 IRGC-linked sites 2 Sep; Iran retaliated with missiles/drones on Gulf bases; Strait transits have collapsed to single digits per 24h from ~138/day pre-crisis. Trump's public 'brief strikes' framing eased immediate fear but did not end the conflict -- a live tail risk into any fresh headline.",
+        "impact": "cautionary"
+      },
+      {
+        "factor": "Barrick's -5.34% drop is company-specific, not a gold-market signal",
+        "read": "Barrick is reportedly weighing a 2026-to-2027 delay of its North America gold-unit IPO amid a shareholder revolt against Chairman Thornton's spin-off strategy -- every other tracked gold/silver miner (GDX +3.95%, NEM +4.21%, SILJ +2.37%) continued rallying the same session, confirming this is idiosyncratic governance risk.",
         "impact": "mixed"
       },
       {
-        "factor": "Soft ADP print drove Wednesday's relief rally, not an Iran de-escalation",
-        "read": "August ADP private payrolls rose just 38K (vs ~47K consensus), the weakest since January, with manufacturing/professional-services/information all shedding jobs. This directly repriced Sep-hike odds lower and drove the S&P/VIX/gold-miners moves -- distinct from and unrelated to the Hormuz conflict's trajectory.",
-        "impact": "supportive"
+        "factor": "Friday's NFP (20:30 SGT) is the pivotal swing print into the Sep 15-16 FOMC",
+        "read": "Consensus 55K vs -23K prior, unemployment 4.1%. A hot print with wages above 0.3% would revive the hike odds Waller just cooled, reversing two days of rally momentum; a soft print would extend it. Genuinely two-sided going in.",
+        "impact": "mixed"
       },
       {
-        "factor": "Hormuz/Iran conflict escalated further, not cooled, despite Wednesday's market calm",
-        "read": "The US struck Iranian government tankers directly for the first time under a new 'tanker-for-tanker' policy; Iran alleges (unverified) a US strike hit a wedding with 50+ claimed casualties; Jordan/Bahrain intercepted further Iranian missiles/drones. Crypto sold off specifically on this news even as equities rallied on the jobs data -- a live tail risk that could reprice risk assets on any fresh headline.",
+        "factor": "CLARITY Act passage odds have deteriorated further, a hardening crypto-specific tail risk",
+        "read": "Senate cloture-vote odds now ~19.5% (from a 58% August high and ~30% a week ago), with 8 Democratic votes still needed and uncommitted ahead of the 15 Sep vote. This sits alongside, not offsetting, BTC's short-covering-driven rebound.",
         "impact": "cautionary"
       },
       {
-        "factor": "Credit spreads remain tight and resilient",
-        "read": "IG ~78bp, HY ~260bp, with HY tightening 19bp in August despite the Mideast escalation and volatile Fed repricing -- a supportive offset to the week's equity/vol/gold swings, with no confirmation yet of recession-tail risk.",
-        "impact": "supportive"
-      },
-      {
-        "factor": "Breadth likely improved sharply Wednesday but not yet independently confirmed",
-        "read": "CNBC confirms 9 of 11 S&P sectors closed higher Wednesday (Materials +1.6% led, Real Estate -0.6% lagged), consistent with a broad rebound from Tuesday's deterioration (%>200DMA 62.62%, 52wk new lows exceeding highs, McClellan -231.30) -- but the precise Wednesday breadth internals had not propagated through data providers at run time.",
-        "impact": "supportive"
-      },
-      {
-        "factor": "Sep 15 CLARITY Act vote and Sep 15-16 FOMC now stack into the same week",
-        "read": "Senate cloture-vote passage odds for the crypto market-structure bill have fallen further to under 20% (from a 58% high), landing the same week as the Fed decision -- a hardening, dated binary catalyst for the crypto sleeve specifically.",
-        "impact": "cautionary"
+        "factor": "Breadth/credit-spread internals fresher than Tue 1 Sep could not be independently confirmed this run",
+        "read": "Search results for Wed 2 Sep/Thu 3 Sep breadth returned mutually contradictory index closes and at least one likely-hallucinated sector-performance claim (discarded rather than published). Tuesday's verified figures (%>200-DMA 62.62%, IG ~78bp, HY ~260bp) are carried forward pending a reliable refresh.",
+        "impact": "mixed"
       }
     ],
     "byAssetClass": [
       {
         "assetClass": "Equity",
-        "stance": "modest OW",
-        "pUp12m": 0.6,
-        "note": "Upgraded from Neutral: Wednesday's broad rebound (9 of 11 S&P sectors higher, VIX -6.98%) on a soft ADP print shows the market reading dovish labor data as more supportive than hawkish-Fed-driven caution, though narrow AI-driven earnings leadership (3 names drive 70% of 2026 EPS growth) and the live, unresolved Hormuz conflict still cap full conviction into the Sep 15-16 FOMC.",
-        "tilt": 0.012
+        "stance": "OW",
+        "pUp12m": 0.62,
+        "note": "Upgraded from modest OW: two straight strong rally days (Wed ADP-driven, Thu Waller-driven) on genuinely dovish Fed signaling, with rate-sensitive leadership (Oracle, Palantir, financials) confirming the move is real, not just short-covering -- though Friday's NFP is a live two-sided catalyst that could reverse the move quickly.",
+        "tilt": 0.02
       },
       {
         "assetClass": "Commodities",
         "stance": "modest OW",
         "pUp12m": 0.58,
-        "note": "Energy's rally paused rather than reversed (USO +0.11% Wed) after a US official said the new direct tanker strikes 'bought at least a month' of reduced shipping-risk, while precious metals rallied hard on the dovish ADP-driven repricing (GLD +1.52%, SLV +1.99%, GDX +3.13%) -- both legs of the commodity complex now constructive, for different reasons.",
+        "note": "Precious metals extended gains for a second day on the dovish Fed pivot and residual Hormuz safe-haven bid (silver >$66, +60.8% y/y); oil is on track for its biggest weekly gain since July though Trump's de-escalatory framing has capped further upside. Barrick's drop is idiosyncratic, not a complex-wide signal.",
         "tilt": 0.012
       },
       {
         "assetClass": "Crypto",
-        "stance": "UW",
-        "pUp12m": 0.46,
-        "note": "Downgraded from modest UW: BTC/ETH sold off specifically on the fresh Sep 2 Iran-tanker-strike news even as equities rallied -- a genuine decoupling showing crypto pricing geopolitical risk independently of Fed-driven relief. The Sep 15 CLARITY Act cloture vote (passage odds now under 20%, down further from 58%) lands the same week as the FOMC decision, a hardening dual-catalyst risk.",
-        "tilt": -0.02
-      },
-      {
-        "assetClass": "Bonds",
         "stance": "modest UW",
-        "pUp12m": 0.46,
-        "note": "Softened from outright UW: Williams' dovish pushback and the soft ADP print ease some of the hawkish-repricing pressure on duration, though yields remain elevated (10y ~4.81% area) and Goolsbee/Hammack's hawkish counter-commentary keeps the Sep 15-16 FOMC outcome genuinely two-sided.",
+        "pUp12m": 0.48,
+        "note": "Softened from UW: BTC's +4.96% short-covering rebound and renewed spot-ETF inflows show real demand returning, but the Sep 15 CLARITY Act cloture vote's passage odds have deteriorated further to ~19.5% (from 58% in August) -- a hardening, dated regulatory tail risk that argues against full conviction into the rebound.",
         "tilt": -0.012
       },
       {
+        "assetClass": "Bonds",
+        "stance": "Neutral",
+        "pUp12m": 0.5,
+        "note": "Upgraded from modest UW: Waller's dovish pivot pulled the 10y yield down to ~4.77% and cut September-hike odds to ~50%, directly easing the hawkish-repricing pressure on duration -- though Friday's NFP is the swing factor that could reverse this within 24 hours.",
+        "tilt": 0
+      },
+      {
         "assetClass": "USD/Cash",
-        "stance": "modest OW",
-        "pUp12m": 0.58,
-        "note": "Softened from outright OW: the soft ADP print and Williams' dovish pushback took some wind out of the hawkish-repricing/dollar-strength trade, though cash remains attractive given the genuinely two-sided Fed path into Friday's NFP and the Sep 15-16 FOMC.",
-        "tilt": 0.012
+        "stance": "Neutral",
+        "pUp12m": 0.5,
+        "note": "Softened further from modest OW: Waller's dovish remarks took more wind out of the hawkish-repricing/dollar-strength trade; cash remains a reasonable parking spot given the genuinely two-sided setup into Friday's NFP and the Sep 15-16 FOMC, but no longer a clear overweight.",
+        "tilt": 0
       }
     ],
     "sources": [
-      "https://www.cnbc.com/2026/09/01/us-strikes-iran-after-new-hormuz-strait-shipping-attacks-centcom.html",
-      "https://www.fool.com/coverage/stock-market-today/2026/09/01/stock-market-today-sept-1-stocks-slide-and-oil-surges-amid-u-s-iran-tension/",
-      "https://finance.yahoo.com/energy/articles/oil-prices-surge-above-94-173653702.html",
-      "https://www.prnewswire.com/news-releases/manufacturing-pmi-at-54-6-august-2026-ism-manufacturing-pmi-report-302865127.html",
-      "https://investinglive.com/news/jolts-job-openings-7-271m-vs-7-300m-estimate/",
-      "https://finance.yahoo.com/economy/policy/article/fed-dot-plot-almost-half-of-fomc-members-project-at-least-one-interest-rate-hike-this-year-183645064.html",
-      "https://www.bls.gov/news.release/cpi.nr0.htm",
-      "https://www.etftrends.com/etf-strategist-content-hub/the-curious-calm-in-credit/",
-      "https://www.investingcube.com/commodities/gold-and-silver-fed-hawkishness-triggers-sharp-pullback/",
-      "https://www.cnbc.com/2026/08/31/china-pmi-august-economy-slowdown.html",
-      "https://www.theblock.co/news/markets/2026-09-01-bitcoin-defies-oil-price-spike-and-rising-fed-hike-bets-after-best-august-since-2017-413218",
-      "https://crypto.news/fed-rate-hike-odds-hit-72-as-barr-warns-on-inflation/",
-      "https://www.kucoin.com/news/flash/u-s-senate-sets-clarity-act-vote-for-september-15-2026",
-      "https://finance.yahoo.com/markets/stocks/articles/mp-materials-mp-faces-fresh-043014418.html",
-      "https://www.barchart.com/stocks/quotes/$S5TH",
-      "https://www.thetrading.tools/mcclellan-oscillator",
-      "https://finance.yahoo.com/markets/stocks/articles/just-3-companies-drive-70-145717948.html",
-      "https://mediacenter.adp.com/2026-09-02-ADP-National-Employment-Report-Private-Sector-Employment-Increased-by-38,000-Jobs-in-August",
-      "https://www.cnbc.com/2026/09/02/new-york-feds-williams-says-yield-surge-due-to-strong-economic-prospects.html",
-      "https://fortune.com/2026/09/02/fed-austan-goolsbee-ai-is-not-far-from-overheating-economy/",
-      "https://investinglive.com/commodities/us-strikes-iranian-tankers-for-first-time-under-new-deterrence-policy/",
-      "https://www.cbsnews.com/live-updates/iran-war-us-strikes-strait-of-hormuz-larak-island/",
+      "https://www.investing.com/news/economy-news/trading-day-waller-cools-fed-hike-hoopla-4888590",
+      "https://finance.yahoo.com/markets/stocks/articles/dow-rises-635-points-fed-170855232.html",
+      "https://en.sedaily.com/international/2026/09/04/feds-waller-backs-rate-hold-cutting-september-hike-odds",
+      "https://eurasiabusinessnews.com/2026/09/03/stock-market-today-stocks-jump-after-fed-official-says-he-could-back-rate-hold-oil-price-at-92/",
+      "https://www.bloomberg.com/news/articles/2026-09-02/barrick-is-said-to-weigh-delaying-north-america-gold-ipo-to-2027",
+      "https://goldsilver.com/industry-news/goldsilver-news/barrick-gold-ipo-delay-shareholder-revolt/",
+      "https://www.axios.com/2026/09/02/iran-tankers-hormuz-attacks-oil",
+      "https://en.wikipedia.org/wiki/2026_Strait_of_Hormuz_campaign",
+      "https://www.unitedagainstnucleariran.com/analysis/iran-shipping-update-september-1-2026",
+      "https://finance.yahoo.com/personal-finance/investing/article/silver-price-today-thursday-september-3-2026-silver-prices-rise-following-short-lived-airstrikes-111653911.html",
+      "https://www.bloomberg.com/news/articles/2026-09-03/latest-oil-market-news-and-analysis-for-sept-4",
+      "https://news.bitcoin.com/market-updates/bitcoin-price-barrels-towards-81k-as-shorts-lose-415m/",
+      "https://news.bitcoin.com/regulation-and-legal/clarity-act-odds-sink-as-senate-delay-threatens-2026-crypto-vote/",
       "https://www.ccn.com/news/crypto/clarity-act-september-15-vote-xrp-10-bitcoin-200k/",
-      "https://www.bankofcanada.ca/2026/09/fad-press-release-2026-09-02/"
+      "https://tradingeconomics.com/hong-kong/stock-market/news/513929",
+      "https://www.ad-hoc-news.de/boerse/news/unternehmensnachrichten/xiaomi-s-september-showcase-arrives-with-a-margin-question-hanging-over/70042858",
+      "https://www.china-briefing.com/news/chinas-rare-earth-export-controls-impacts-on-businesses/",
+      "https://www.morganlewis.com/pubs/2026/07/recent-china-export-control-actions-signal-active-enforcement-for-rare-earths-and-strategic-minerals",
+      "https://www.tradingkey.com/analysis/economic/indicators/262146531-us-august-jobs-report-preview-tradingkey"
     ]
   },
   "calls": [
@@ -217,19 +212,19 @@
       "ticker": "XLF",
       "name": "Financial Select Sector SPDR Fund",
       "assetClass": "US sector equity",
-      "pUp1m": 0.51,
-      "pUp3m": 0.55,
+      "pUp1m": 0.53,
+      "pUp3m": 0.56,
       "pUp12m": 0.61,
-      "ev1m": 0.003,
-      "ev3m": 0.013,
+      "ev1m": 0.006,
+      "ev3m": 0.015,
       "ev12m": 0.065,
       "drivers": [
-        "A 100bp rate increase could add several hundred million dollars to net interest income for large banks -- financials are a direct beneficiary of the hawkish repricing.",
-        "Bank stocks were cited as top winners as the 2026 Fed rate outlook swung hawkish through Q3.",
-        "Trading/wealth-management/investment-banking revenue continues to offset any net-interest-income deceleration risk.",
-        "Elevated valuations and geopolitical tension (Hormuz) remain a volatility risk even within a constructive rate backdrop."
+        "Financials led Thursday's rally alongside rate-sensitive tech, benefiting from Waller's dovish pivot and the resulting yield-curve dynamics even as NII sensitivity to rate cuts is a two-sided consideration.",
+        "Bank stocks remain a direct beneficiary of wherever the Sep 15-16 FOMC lands, given financials' dual sensitivity to both credit growth (favors cuts) and NII (favors holds).",
+        "Trading/wealth-management revenue continues to offset any single-direction rate-path uncertainty.",
+        "Elevated valuations and the live Hormuz tail risk remain a volatility risk even within a constructive near-term setup."
       ],
-      "confidence": 0.4
+      "confidence": 0.42
     },
     {
       "ticker": "XLE",
@@ -343,53 +338,53 @@
       "ticker": "GLD",
       "name": "SPDR Gold Shares",
       "assetClass": "Precious metals",
-      "pUp1m": 0.42,
-      "pUp3m": 0.48,
-      "pUp12m": 0.58,
-      "ev1m": -0.005,
-      "ev3m": 0.008,
-      "ev12m": 0.065,
+      "pUp1m": 0.46,
+      "pUp3m": 0.52,
+      "pUp12m": 0.6,
+      "ev1m": 0.001,
+      "ev3m": 0.012,
+      "ev12m": 0.07,
       "drivers": [
-        "GLD rallied 1.52% Sep 2, reversing about half of Tuesday's hawkish-Fed-driven drop, after a soft ADP print (+38K vs ~47K consensus) and NY Fed's Williams pushing back on an 'inevitable' September hike revived rate-cut-adjacent demand.",
-        "Fed voices are now visibly split (Williams dovish vs. Goolsbee/Hammack hawkish) -- Friday's NFP (cons 55K vs -23K prior) is the swing catalyst into the Sep 15-16 FOMC.",
-        "The live, still-escalating Hormuz/Iran conflict (US struck Iranian tankers directly for the first time Sep 2) keeps a structural safe-haven bid underneath the Fed-driven volatility.",
-        "Structural debasement-trade case (Treasury buyback expansion) remains intact longer-term if the Fed hike doesn't fully materialize."
+        "GLD rallied 1.85% Thu 3 Sep to $410.22, a second straight day of gains on Waller's dovish pivot easing real-rate pressure.",
+        "The live, unresolved Hormuz/Iran conflict (US tanker strikes, Iranian retaliation, collapsed Strait transit volumes) keeps a residual safe-haven bid underneath the Fed-driven rally.",
+        "Barrick's -5.34% drop is confirmed company-specific (IPO-delay/governance story), not a signal for the broader gold complex, which rallied in the same session.",
+        "Friday's NFP is the swing catalyst -- a hot print reviving hike odds would be a headwind after two days of gains."
       ],
-      "confidence": 0.45
+      "confidence": 0.46
     },
     {
       "ticker": "SLV",
       "name": "iShares Silver Trust",
       "assetClass": "Precious metals",
-      "pUp1m": 0.45,
-      "pUp3m": 0.5,
-      "pUp12m": 0.6,
-      "ev1m": 0.0,
-      "ev3m": 0.012,
-      "ev12m": 0.07,
+      "pUp1m": 0.48,
+      "pUp3m": 0.54,
+      "pUp12m": 0.62,
+      "ev1m": 0.003,
+      "ev3m": 0.015,
+      "ev12m": 0.075,
       "drivers": [
-        "SLV rallied 1.99% Sep 2 (more than gold, consistent with its higher beta) as the soft ADP print and dovish Williams commentary reversed part of Tuesday's hawkish-Fed-driven selloff.",
-        "Miners rallied even harder (SILJ +5.36%, SLVP +5.19%, HL +8.69%, AG +6.75%), confirming leveraged high-beta positioning is re-engaging, not just a index-level bounce.",
-        "The gold-miners complex (NYSE Arca Gold Miners Index) posted its best August since 1994 (+33%), a structural tailwind independent of the day-to-day Fed narrative.",
-        "Same two-sided setup into Friday's NFP and the Sep 15-16 FOMC, with the sleeve's realized volatility elevated in both directions."
+        "SLV rallied 2.51% Thu 3 Sep to $60.55, outpacing gold on its higher beta; silver spot held above $66/oz, +60.8% y/y and +14.7% over the trailing month.",
+        "Miners confirmed genuine leveraged positioning re-engaging (GDX +3.95%, SILJ +2.37%, SLVP +3.17%) for a second straight session.",
+        "Residual Hormuz safe-haven bid persists even as Trump downplays further escalation -- silver is pricing both the Fed pivot and the geopolitical premium.",
+        "Same NFP-driven two-sided setup as gold into Friday, with the sleeve's realized volatility elevated in both directions."
       ],
-      "confidence": 0.42
+      "confidence": 0.44
     },
     {
       "ticker": "DBC",
       "name": "Invesco DB Commodity Index Tracking Fund",
       "assetClass": "Broad commodities",
-      "pUp1m": 0.54,
-      "pUp3m": 0.56,
-      "pUp12m": 0.58,
-      "ev1m": 0.01,
-      "ev3m": 0.018,
-      "ev12m": 0.055,
+      "pUp1m": 0.53,
+      "pUp3m": 0.55,
+      "pUp12m": 0.57,
+      "ev1m": 0.008,
+      "ev3m": 0.016,
+      "ev12m": 0.05,
       "drivers": [
-        "Energy is the dominant weight in most broad commodity indices, so the WTI +5.81% spike is a direct net positive for DBC.",
-        "Precious metals selloff (GLD -2.86%, SLV -3.68%) is a partial offset within the broader basket.",
-        "IEA's cut to 2026 global oil supply forecast supports the energy complex staying elevated while the Hormuz conflict continues.",
-        "Broad commodities also benefit modestly from persistent ISM Prices Paid strength (71.1%) signaling ongoing input-cost inflation."
+        "Oil is on track for its biggest weekly gain since July (WTI near $92, Brent near $95) on Hormuz disruption fears, a direct positive for DBC's energy weighting.",
+        "Precious metals' continued rally (GLD +1.85%, SLV +2.51% Thu) adds a second supportive leg within the broader commodity basket.",
+        "Trump's 'brief strikes' framing has cooled the oil rally's momentum slightly without reversing it.",
+        "Diesel prices hit their highest level since 2022, reflecting genuine supply-chain tightness beyond just crude."
       ],
       "confidence": 0.4
     },
@@ -397,19 +392,19 @@
       "ticker": "USO",
       "name": "United States Oil Fund",
       "assetClass": "Energy commodity",
-      "pUp1m": 0.58,
-      "pUp3m": 0.58,
-      "pUp12m": 0.56,
-      "ev1m": 0.018,
-      "ev3m": 0.025,
-      "ev12m": 0.048,
+      "pUp1m": 0.55,
+      "pUp3m": 0.56,
+      "pUp12m": 0.54,
+      "ev1m": 0.012,
+      "ev3m": 0.02,
+      "ev12m": 0.04,
       "drivers": [
-        "USO's rally paused (+0.11% Sep 2) rather than reversed after Tuesday's 5.5%+ spike -- a US official told Axios the new direct strikes on Iranian tankers 'bought at least a month' of reduced shipping-attack risk, tempering further immediate upside.",
-        "The Hormuz conflict escalated further, not cooled: first-ever direct US strikes on Iranian government tankers Sep 2, plus an unverified Iranian claim of a US strike on a wedding -- a live tail risk that could reprice oil sharply on any fresh headline.",
-        "IEA projects a Q3 2026 supply deficit of 1.8mb/d -- a structural tailwind while the conflict persists.",
-        "Prior rounds of this ~6-month conflict have each proved containable and partially reversed once tensions cooled -- meaningful mean-reversion risk longer-term, tempering 12m conviction versus the near-term momentum."
+        "WTI heading for its biggest weekly gain since July (near $92) on Hormuz disruption fears; Strait transits have collapsed to single digits per 24h from ~138/day pre-crisis.",
+        "Trump's public downplaying of further escalation ('brief' strikes) has cooled the rally's momentum -- USO's own daily move has been more muted than the headline crude gain.",
+        "Diesel at its highest level since 2022 confirms genuine physical-market tightness, not just a geopolitical-headline premium.",
+        "Prior rounds of this conflict have each proved partially reversible once tensions cooled -- meaningful mean-reversion risk longer-term tempers the 12m view versus the near-term momentum."
       ],
-      "confidence": 0.42
+      "confidence": 0.4
     },
     {
       "ticker": "URA",
@@ -631,17 +626,17 @@
       "ticker": "SPY",
       "name": "SPDR S&P 500 ETF Trust",
       "assetClass": "US large-cap equity",
-      "pUp1m": 0.46,
-      "pUp3m": 0.55,
-      "pUp12m": 0.6,
-      "ev1m": -0.005,
-      "ev3m": 0.014,
-      "ev12m": 0.075,
+      "pUp1m": 0.5,
+      "pUp3m": 0.58,
+      "pUp12m": 0.63,
+      "ev1m": 0.002,
+      "ev3m": 0.018,
+      "ev12m": 0.08,
       "drivers": [
-        "S&P 500 closed -0.71% Sep 1 (7,631.47) as VIX spiked 9.5% to 16.34, a genuine one-day vol shock, not just drift.",
-        "September hike odds at 57-72% cap near-term multiple expansion into the Sep 16 FOMC.",
-        "Credit spreads (IG 78bp, HY 260bp) show no stress -- supportive of the 12m base case despite near-term caution.",
-        "AI-driven earnings growth (23-24% consensus 2026 EPS) is real but concentrated in 3 hyperscaler names, a breadth risk confirmed by Sep 1's negative advance-decline reading."
+        "S&P 500 closed +1.06% Thu 3 Sep to 7747.71, a second straight rally day driven specifically by Waller's dovish pre-market remarks pulling Sep-hike odds to ~50%.",
+        "Friday's NFP (20:30 SGT, cons 55K vs -23K prior) is the pivotal swing print into the Sep 15-16 FOMC -- a hot print could reverse two days of gains quickly.",
+        "Credit spreads remain tight (IG ~78bp, HY ~260bp per last confirmed reading) -- no stress signal despite the volatile week.",
+        "Concentration risk persists: AI-driven earnings growth remains concentrated in a handful of hyperscaler names."
       ],
       "confidence": 0.5
     },
@@ -649,17 +644,17 @@
       "ticker": "QQQ",
       "name": "Invesco QQQ Trust",
       "assetClass": "US large-cap tech equity",
-      "pUp1m": 0.45,
-      "pUp3m": 0.55,
-      "pUp12m": 0.62,
-      "ev1m": -0.007,
-      "ev3m": 0.016,
-      "ev12m": 0.09,
+      "pUp1m": 0.5,
+      "pUp3m": 0.58,
+      "pUp12m": 0.64,
+      "ev1m": 0.003,
+      "ev3m": 0.02,
+      "ev12m": 0.095,
       "drivers": [
-        "Nasdaq -1.03% Sep 1, the weakest major US index that day -- highest duration/rate sensitivity in the hawkish-Fed repricing.",
-        "Hyperscaler capex tracking to ~$800B in 2026 and ~$1.3T in 2027 is a structural tailwind once the rate path clarifies.",
-        "Only ~17% of S&P stocks have outperformed the index over the past month -- QQQ's concentration cuts both ways.",
-        "Forward P/E for US large-cap has compressed to ~20.2 from ~22 at end-2025, some valuation cushion built in."
+        "Nasdaq +1.40% Thu 3 Sep, the strongest major US index that day, as Oracle (+5.7%) and Palantir (+7.7%) led on Waller's dovish pivot lowering the discount-rate pressure on long-duration tech.",
+        "Hyperscaler capex tracking to ~$800B in 2026 and ~$1.3T in 2027 remains a structural tailwind independent of the week's rate volatility.",
+        "Friday's NFP is a genuine two-sided catalyst for the rate-sensitive tech trade specifically.",
+        "Forward P/E remains compressed versus end-2025 levels, some valuation cushion built in."
       ],
       "confidence": 0.48
     },
@@ -667,19 +662,19 @@
       "ticker": "IWM",
       "name": "iShares Russell 2000 ETF",
       "assetClass": "US small-cap equity",
-      "pUp1m": 0.42,
-      "pUp3m": 0.5,
-      "pUp12m": 0.56,
-      "ev1m": -0.012,
-      "ev3m": 0.006,
-      "ev12m": 0.06,
+      "pUp1m": 0.48,
+      "pUp3m": 0.54,
+      "pUp12m": 0.58,
+      "ev1m": -0.002,
+      "ev3m": 0.012,
+      "ev12m": 0.065,
       "drivers": [
-        "Russell 2000 was the worst major US index Sep 1 (-1.23%), consistent with small caps' higher sensitivity to rate-hike repricing.",
-        "Rising short-end yields (2y ~4.40%) and hike odds of 57-72% directly pressure small-cap financing costs.",
-        "JOLTS softening (7.271M vs 7.3M est, June revised down) signals domestic-demand-sensitive small caps face a cooling backdrop.",
-        "Credit spreads remain tight (HY 260bp), a supportive offset that has kept small-cap credit access open so far."
+        "Russell 2000 +0.51% Thu 3 Sep, a milder gain than large-caps despite small-caps' higher rate sensitivity typically benefiting more from a dovish pivot.",
+        "Waller's dovish remarks and the ~7bp pullback in the 10y yield are a direct tailwind for small-cap financing costs if sustained past Friday's NFP.",
+        "Credit access remains open (HY spreads tight), a supportive backdrop for smaller-cap balance sheets.",
+        "Friday's NFP print carries outsized weight for small-caps' domestic-demand-sensitive earnings outlook."
       ],
-      "confidence": 0.42
+      "confidence": 0.4
     },
     {
       "ticker": "EFA",
@@ -793,17 +788,17 @@
       "ticker": "BTC-USD",
       "name": "Bitcoin",
       "assetClass": "Crypto",
-      "pUp1m": 0.42,
-      "pUp3m": 0.5,
+      "pUp1m": 0.45,
+      "pUp3m": 0.52,
       "pUp12m": 0.6,
-      "ev1m": -0.025,
-      "ev3m": 0.025,
+      "ev1m": -0.01,
+      "ev3m": 0.03,
       "ev12m": 0.2,
       "drivers": [
-        "BTC sold off specifically on the fresh Sep 2 US-Iran tanker-strike news (~$76.6K) even as equities rallied on a soft ADP print -- a genuine cross-asset divergence showing crypto pricing the live Hormuz escalation as risk-off independent of the Fed-driven equity relief.",
-        "CLARITY Act passage odds have deteriorated further, now under 20% (from a 58% high) ahead of the Sep 15 Senate cloture vote -- a hardening binary regulatory-risk catalyst, not just an overhang.",
-        "Split Fed commentary (Williams dovish vs. Goolsbee/Hammack hawkish) keeps the rate-path uncertain into the Sep 15-16 FOMC, which lands the same week as the CLARITY vote -- a genuinely stacked binary-catalyst week.",
-        "Had its best August since 2017 before the current pullback, showing underlying institutional demand remains intact structurally."
+        "BTC rebounded +4.96% to ~$81,138 Thu 3 Sep on a ~$415M short squeeze plus renewed spot-ETF net inflows (+$100M on 2 Sep), a genuine demand signal after Tuesday's Iran-driven selloff.",
+        "The Sep 15 CLARITY Act cloture-vote passage odds have deteriorated further to ~19.5% (from a 58% August high, and down from ~30% just a week ago) with 8 Democratic votes still needed -- a hardening, not fading, regulatory tail risk.",
+        "Waller's dovish pivot and the pullback in the 10y yield are a broad risk-on tailwind that lifted BTC alongside equities and gold Thursday.",
+        "Genuinely stacked binary-catalyst week ahead (Sep 15 CLARITY vote + Sep 15-16 FOMC) keeps near-term volatility elevated in both directions."
       ],
       "confidence": 0.4
     },
@@ -811,91 +806,91 @@
       "ticker": "ETH-USD",
       "name": "Ethereum",
       "assetClass": "Crypto",
-      "pUp1m": 0.41,
-      "pUp3m": 0.49,
+      "pUp1m": 0.44,
+      "pUp3m": 0.51,
       "pUp12m": 0.58,
-      "ev1m": -0.03,
-      "ev3m": 0.025,
-      "ev12m": 0.23,
+      "ev1m": -0.012,
+      "ev3m": 0.028,
+      "ev12m": 0.22,
       "drivers": [
-        "ETH sold off alongside BTC (to ~$2,374) specifically on the Sep 2 Iran-tanker-strike news, decoupled from the same-day equity relief rally.",
-        "August was the first month Ether ETF inflows overtook Bitcoin's ($3.87bn vs ~-$750mn net BTC outflows) -- a genuine rotation signal within crypto that predates and is independent of this week's geopolitical/regulatory risk.",
-        "Institutional ETF inflows extended to a 10-session streak into month-end, a supportive undercurrent despite the near-term pullback.",
-        "Exposed to the same hardening Sep 15 CLARITY Act binary as BTC (odds now under 20%, from a 58% high) landing the same week as the Sep 15-16 FOMC."
+        "ETH rebounded alongside BTC on Thursday's broad risk-on move (Waller-driven equity/gold/crypto rally), reversing part of Tuesday's Iran-driven selloff.",
+        "August's ETH-ETF-inflow-over-BTC rotation signal (from the prior run) remains a supportive structural undercurrent independent of this week's news.",
+        "Exposed to the same hardening Sep 15 CLARITY Act binary as BTC (odds now ~19.5%, down further from 58%) landing the same week as the FOMC.",
+        "No ETH-specific catalyst found fresh this run; view is macro-inferred from the broader crypto correlation to Thursday's rally."
       ],
-      "confidence": 0.37
+      "confidence": 0.36
     },
     {
       "ticker": "SOL-USD",
       "name": "Solana",
       "assetClass": "Crypto",
-      "pUp1m": 0.4,
-      "pUp3m": 0.48,
+      "pUp1m": 0.43,
+      "pUp3m": 0.5,
       "pUp12m": 0.56,
-      "ev1m": -0.035,
-      "ev3m": 0.025,
-      "ev12m": 0.25,
+      "ev1m": -0.015,
+      "ev3m": 0.028,
+      "ev12m": 0.24,
       "drivers": [
-        "Highest-beta major crypto to both the Hormuz-driven risk-off (Sep 2 tanker strikes) and the hardening Sep 15 CLARITY Act binary (odds now under 20%, from a 58% high).",
-        "Dragged down alongside BTC/ETH on the same Sep 2 Iran-strike news, a cross-asset divergence from the day's equity rally.",
-        "Less institutional/ETF support than BTC or ETH, implying larger swings in both directions into the stacked Sep 15/15-16 FOMC-and-CLARITY-vote week.",
+        "SOL rebounded alongside BTC/ETH on Thursday's broad risk-on move, its typically highest-beta profile amplifying both the Tuesday selloff and Thursday's recovery.",
+        "Exposed to the same hardening Sep 15 CLARITY Act binary as the rest of the crypto sleeve (odds now ~19.5%, down further from 58%).",
+        "Less institutional/ETF support than BTC or ETH implies larger swings in both directions into the stacked Sep 15/15-16 FOMC-and-CLARITY-vote week.",
         "No SOL-specific catalyst found fresh this run; view is macro-inferred from the broader crypto correlation."
       ],
-      "confidence": 0.3
+      "confidence": 0.28
     },
     {
       "ticker": "TLT",
       "name": "iShares 20+ Year Treasury Bond ETF",
       "assetClass": "Long-duration Treasury",
-      "pUp1m": 0.38,
-      "pUp3m": 0.42,
-      "pUp12m": 0.48,
-      "ev1m": -0.025,
-      "ev3m": -0.02,
-      "ev12m": -0.01,
+      "pUp1m": 0.44,
+      "pUp3m": 0.47,
+      "pUp12m": 0.5,
+      "ev1m": -0.01,
+      "ev3m": -0.008,
+      "ev12m": 0.005,
       "drivers": [
-        "10y yield near 4.81%, the highest since January 2025, directly pressures long-duration bond prices.",
-        "September hike odds of 57-72% (from ~35% pre-Jackson Hole) represent the sharpest hawkish repricing of 2026 so far.",
-        "Sticky inflation (CPI 3.4% y/y, ISM Prices Paid 71.1%) removes the disinflation narrative that would otherwise support long-duration bonds.",
-        "Softening labor data (JOLTS miss, ISM Manufacturing deceleration) is the key swing factor that could reverse this if Friday's NFP disappoints."
+        "Waller's dovish pivot pulled the 10y yield down to ~4.77% from ~4.81%, a direct near-term tailwind for long-duration Treasury prices after weeks of hawkish-repricing pressure.",
+        "September-hike odds fell from ~63% to ~50% on Waller's remarks -- the sharpest dovish move in weeks, though still a coin-flip outcome.",
+        "Friday's NFP is the key swing factor: a hot print with wages above 0.3% would revive hike odds and reverse this week's yield relief quickly.",
+        "Sticky underlying inflation data (still the dominant multi-week theme) means this is a tactical relief, not a confirmed trend reversal, pending confirmation into the Sep 15-16 FOMC."
       ],
-      "confidence": 0.48
+      "confidence": 0.44
     },
     {
       "ticker": "IEF",
       "name": "iShares 7-10 Year Treasury Bond ETF",
       "assetClass": "Intermediate Treasury",
-      "pUp1m": 0.4,
-      "pUp3m": 0.45,
-      "pUp12m": 0.5,
-      "ev1m": -0.015,
-      "ev3m": -0.008,
-      "ev12m": 0.005,
+      "pUp1m": 0.45,
+      "pUp3m": 0.48,
+      "pUp12m": 0.51,
+      "ev1m": -0.006,
+      "ev3m": -0.002,
+      "ev12m": 0.012,
       "drivers": [
-        "Less duration risk than TLT but still directly exposed to the hawkish repricing pushing yields higher across the curve.",
-        "2y yield at 4.40% and 10y at 4.81% show both the front and back end rising together on hike-odds repricing.",
-        "Same NFP-week swing-factor setup as TLT, just with lower magnitude of price impact.",
-        "Sticky ISM Prices Paid (71.1%) removes the disinflation tailwind intermediate bonds would otherwise enjoy."
+        "Less duration risk than TLT but still benefits from Waller's dovish pivot pulling the 10y yield down to ~4.77%.",
+        "Same NFP-week swing-factor setup as TLT, just with lower magnitude of price impact given shorter duration.",
+        "September-hike odds falling to ~50% from ~63% is a genuine, if tentative, easing of the hawkish-repricing headwind.",
+        "Two-sided into the Sep 15-16 FOMC pending Friday's payrolls confirmation."
       ],
-      "confidence": 0.46
+      "confidence": 0.44
     },
     {
       "ticker": "SHY",
       "name": "iShares 1-3 Year Treasury Bond ETF",
       "assetClass": "Short-duration Treasury",
-      "pUp1m": 0.48,
+      "pUp1m": 0.49,
       "pUp3m": 0.52,
-      "pUp12m": 0.55,
-      "ev1m": -0.001,
-      "ev3m": 0.008,
-      "ev12m": 0.035,
+      "pUp12m": 0.54,
+      "ev1m": 0,
+      "ev3m": 0.007,
+      "ev12m": 0.032,
       "drivers": [
-        "Least duration-sensitive of the Treasury ladder, so least exposed to the price impact of the hawkish repricing.",
-        "Front-end yields (2y ~4.40%) are also rising on hike odds, but the carry/coupon largely offsets the price impact at this maturity.",
-        "Directly benefits from the same 'higher for longer' logic that favors USD/Cash broadly.",
-        "Provides a relatively low-volatility parking spot into the data-heavy NFP week."
+        "Least duration-sensitive of the Treasury ladder, so least exposed to this week's yield swings in either direction.",
+        "Front-end yields easing modestly on Waller's dovish pivot, though carry/coupon dominates the return profile at this maturity regardless.",
+        "A relatively low-volatility parking spot into the NFP-and-FOMC-heavy stretch ahead.",
+        "Directly benefits from cash/short-duration remaining attractive amid the still genuinely two-sided Fed path."
       ],
-      "confidence": 0.5
+      "confidence": 0.48
     },
     {
       "ticker": "TIP",
@@ -988,5 +983,5 @@
       "confidence": 0.44
     }
   ],
-  "callsNote": "Research-only deliverable produced 2026-09-02 (SGT) against the actual Sep 1 US close (S&P 500 7,631.47 -0.71%, Nasdaq 26,099.77 -1.03%, Dow 52,766.88 -0.79%, Russell 2000 2,920.13 -1.23%, VIX 16.34 +9.52%) and the confirmed ISM Manufacturing (54.6, down from 55.6), ISM Prices Paid (71.1, unchanged), and JOLTS (7.271M vs 7.3M est, June revised to 7.182M) prints. The dominant story is two hawkish forces compounding: (1) a live, confirmed US-Iran strike/counter-strike cycle near the Strait of Hormuz driving the oil spike (WTI +5.81%) and VIX spike -- fresh tanker attacks in the Strait Monday night drew US CENTCOM strikes on IRGC targets Tuesday, a distinct second escalation beyond Sunday's Jordan/UAE strikes -- and (2) Fed Chair Warsh's hawkish Jackson Hole stance pushing September rate-hike odds to 57-72% across sources, which is what actually drove the sharp gold/silver selloff (GLD -2.86%, SLV -3.68%) by overwhelming the usual war-driven safe-haven bid via dollar strength and rising real yields. Breadth confirms the risk-off was broad, not narrow: % of S&P 500 above 200-DMA fell to 62.62% (from 68.78%), 52-week new lows (68) overtook new highs (45), and the McClellan Oscillator fell to -231.30. Today (Sep 2) brings ADP and the BOC decision; Friday brings the pivotal NFP print (cons 55K vs -23K prior) that will confirm or reverse this hawkish repricing into the Sep 16 FOMC. A new binary catalyst for the crypto calls: the Senate's CLARITY Act cloture vote is scheduled Sep 15, with Polymarket passage odds falling under 20% from a high of 58%. Tickers/asset classes with genuine fresh news this run (equity indices, energy, precious metals, crypto, Treasuries, financials, semis, uranium/copper, rare earths) received full driver updates; those without dedicated fresh coverage this run (INDA, DBA, XLP, XLV, NEO.TO, ILU.AX, REXC) were kept near pUp 0.5 with explicitly lower confidence rather than fabricated conviction."
+  "callsNote": "Research-only deliverable produced 2026-09-04 (SGT) against the actual Thu 3 Sep US close (S&P 500 7,747.71 +1.06%, Nasdaq 26,584.06 +1.40%, Dow 53,686.11 +1.18%, Russell 2000 2,968.27 +0.51%, VIX 14.32 -5.79%). Thursday's rally was driven specifically by Fed Governor Waller's dovish pre-market remarks (8:30am ET) that he could back a September hold absent an inflation surprise, pulling hike odds from ~63% to ~50% and the 10y yield to ~4.77%. Gold/silver/miners extended their rally for a second day (GLD +1.85%, SLV +2.51%, GDX +3.95%, NEM +4.21%) except Barrick Gold (-5.34%), confirmed as a company-specific IPO-delay/governance story (Bloomberg, 2 Sep) rather than a gold-market signal -- every other tracked miner rallied the same session. The Hormuz/Iran conflict remains live (US struck two Iranian tankers plus ~100 IRGC-linked sites 2 Sep; Iran retaliated with missiles/drones on Gulf bases; Strait transits collapsed to single digits/24h) even as Trump downplayed further escalation. BTC rebounded +4.96% to ~$81,138 on a short squeeze and renewed ETF inflows even as the Sep 15 CLARITY Act cloture-vote odds deteriorated further to ~19.5% (from a 58% high). Friday's NFP (cons 55K vs -23K prior, 20:30 SGT) is the pivotal swing print into the Sep 15-16 FOMC and has not yet happened as of this research. Breadth and credit-spread figures fresher than Tuesday 1 Sep's verified readings could not be independently confirmed this run (search results returned internally inconsistent session closes and at least one likely-hallucinated sector-breakdown claim, both discarded rather than published) and are carried forward. Tickers with genuine fresh news this run (SPY, QQQ, IWM, GLD, SLV, DBC, USO, BTC-USD, ETH-USD, SOL-USD, TLT, IEF, SHY, XLF) received updated drivers; all other calls are carried forward from the 3 Sep run with unchanged priors rather than fabricated updates."
 }
