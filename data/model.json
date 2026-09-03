@@ -1,0 +1,987 @@
+{
+  "updated": "2026-09-04T07:35:00+08:00",
+  "asOf": "2026-09-04",
+  "note": "CIO research-panel macro regime + per-instrument probabilistic priors, produced by a multi-agent research workflow with adversarial verification and cited sources. The live in-browser quant engine (GBM drift-diffusion on 2y daily history) blends with these forward-looking priors to produce the displayed P(up) and EV. Refreshed by the scheduled intel agent. FRIDAY UPDATE (4 Sep, re-researched ~07:35 SGT): Thursday 3 Sep was a second straight strong US rally -- S&P 500 +1.06% to 7747.71, Nasdaq +1.40% to 26584.06, Dow +1.18%, Russell 2000 +0.51%, VIX -5.79% to 14.32 -- driven specifically by Fed Governor Waller's dovish pre-market remarks (8:30am ET) that he could back a September hold 'so long as upcoming inflation data doesn't produce surprises', which pulled Sep-hike odds from ~63% to ~50% and the 10y yield down a touch to ~4.77%. Gold/silver/miners extended their rally again (GLD +1.85% to $410.22, SLV +2.51% to $60.55, GDX +3.95%, NEM +4.21%) EXCEPT Barrick Gold (GOLD, -5.34% to $41.48) which fell on company-specific news: Bloomberg reported 2 Sep that Barrick is weighing delaying its North America gold-unit IPO from 2026 to 2027 amid a shareholder revolt (VanEck, Mackenzie, Franklin among holders publicly opposing) against Chairman John Thornton's spin-off strategy -- a governance story, not a read-through to the rest of the miners complex. The Hormuz/Iran conflict remains live and escalating in mechanics (US struck two Iranian tankers + ~100 IRGC-linked sites 2 Sep; Iran retaliated with missiles/drones on Gulf bases; Strait transits collapsed to single digits per 24h from ~138/day pre-crisis) even as Trump downplayed follow-through, calling the strikes brief -- silver held above $66/oz (+60.8% y/y) on the residual geopolitical bid. BTC rebounded +4.96% to ~$81,138 on short-covering (~$415M liquidated) and renewed ETF inflows (+$100M net 2 Sep), even as the Sep 15 CLARITY Act cloture-vote passage odds deteriorated further to ~19.5% (from a 58% high, and down from ~30% just a week ago) with 8 Democrats still needed and uncommitted. HK equities lagged the US rally Wednesday (Tencent -1.19%, Xiaomi -2.21%) but partially caught up Thursday (Hang Seng +0.6% to 25,459, Tencent +0.4%) on the same soft-ADP/dovish-Williams read-through. Today (Fri 4 Sep) at 20:30 SGT brings the pivotal US Non-Farm Payrolls print (cons 55K vs -23K prior) -- the last major data point before the Sep 15-16 FOMC -- which has not yet happened as of this run; breadth/credit-spread figures fresher than Tuesday 1 Sep's verified readings (%>200-DMA 62.62%, IG ~78bp, HY ~260bp) could not be independently confirmed this run (search results returned internally inconsistent session closes and a likely-hallucinated sector breakdown that was discarded rather than published) and are carried forward rather than guessed.",
+  "macro": {
+    "regime": "Waller's dovish pivot drives a second straight rally, but a live Hormuz war and Friday's NFP keep the path genuinely two-sided",
+    "riskOnProb": 0.56,
+    "regimeScore": 0.53,
+    "asOf": "2026-09-04",
+    "narrative": "Thursday 3 Sep extended Wednesday's rebound into a second straight strong rally: the S&P 500 rose 1.06% to 7747.71 (Nasdaq +1.40%, Dow +1.18%, Russell 2000 +0.51%), with VIX falling a further 5.79% to 14.32. The specific driver was Fed Governor Christopher Waller's dovish pre-market remarks (8:30am ET) that he could back a September rate hold 'so long as upcoming inflation data doesn't produce surprises' -- pulling implied September-hike odds from roughly 63% to 50% and nudging the 10y yield down to ~4.77%. Rate-sensitive names led (Oracle +5.7%, Palantir +7.7%, financials broadly higher). Gold, silver and miners extended their rally for a second day (GLD +1.85% to $410.22, SLV +2.51% to $60.55, GDX +3.95%, SILJ +2.37%, NEM +4.21%) with silver holding above $66/oz (+60.8% y/y) -- but Barrick Gold (GOLD) fell 5.34% to $41.48 on company-specific news: Bloomberg reported 2 Sep that Barrick is weighing delaying its North America gold-unit IPO from 2026 to 2027 amid a shareholder revolt against Chairman John Thornton's separation strategy, a governance story that does not read through to the rest of the miners complex. The Hormuz/Iran conflict remains live: the US struck two Iranian government tankers plus roughly 100 IRGC-linked air-defense/radar/drone sites on 2 Sep, Iran retaliated with missiles and drones against Gulf bases (mostly intercepted over Jordan/Bahrain), and Strait of Hormuz transits have collapsed to single digits per 24 hours from a pre-crisis pace near 138/day -- even as Trump publicly downplayed further escalation, calling the strikes 'brief.' Oil is on track for its biggest weekly gain since July (WTI near $92, Brent near $95) though the rally has cooled slightly on Trump's de-escalatory framing. Crypto rebounded sharply -- BTC +4.96% to ~$81,138 on a ~$415M short squeeze and renewed spot-ETF inflows (+$100M net 2 Sep) -- even as the Sep 15 CLARITY Act Senate cloture-vote passage odds deteriorated further to roughly 19.5% (down from a 58% high in August and ~30% just a week ago), with 8 Democratic votes still needed and uncommitted, a hardening near-term regulatory tail risk for the crypto sleeve specifically. Asia partially caught up to the US rally: the Hang Seng rose 0.6% to 25,459 Thursday (Tencent +0.4%, reversing about a third of Wednesday's -1.19% lag), while Xiaomi remains under pressure (-2.21% Wed) on investor concern about EV/IoT margin sustainability ahead of its September product blitz (Xiaomi 18 series, SkyNomad EV, YU7 GT). Today (Friday 4 Sep, 20:30 SGT) brings the single most important scheduled print of the week -- US Non-Farm Payrolls (cons 55K vs -23K prior, unemployment cons 4.1%) -- the last major data point before the Sep 15-16 FOMC; a hot print with wages above 0.3% would revive the hike odds Waller just cooled. Breadth and credit-spread figures fresher than Tuesday 1 Sep's verified readings (%S&P>200-DMA 62.62%, IG ~78bp, HY ~260bp) could not be independently confirmed this run -- search results returned mutually contradictory session closes and at least one likely-hallucinated sector-breakdown claim that was discarded rather than published -- so those figures are carried forward rather than guessed.",
+    "drivers": [
+      {
+        "factor": "Waller's dovish pivot drove Thursday's rally specifically",
+        "read": "Fed Governor Waller said he could back holding rates steady in September absent an inflation surprise, pulling hike odds from ~63% to ~50% and the 10y yield down to ~4.77% -- the clearest single catalyst behind the S&P's +1.06% session, with rate-sensitive names (Oracle, Palantir, financials) leading.",
+        "impact": "supportive"
+      },
+      {
+        "factor": "Hormuz/Iran conflict remains live and escalating in mechanics, not resolved",
+        "read": "The US struck two Iranian government tankers and ~100 IRGC-linked sites 2 Sep; Iran retaliated with missiles/drones on Gulf bases; Strait transits have collapsed to single digits per 24h from ~138/day pre-crisis. Trump's public 'brief strikes' framing eased immediate fear but did not end the conflict -- a live tail risk into any fresh headline.",
+        "impact": "cautionary"
+      },
+      {
+        "factor": "Barrick's -5.34% drop is company-specific, not a gold-market signal",
+        "read": "Barrick is reportedly weighing a 2026-to-2027 delay of its North America gold-unit IPO amid a shareholder revolt against Chairman Thornton's spin-off strategy -- every other tracked gold/silver miner (GDX +3.95%, NEM +4.21%, SILJ +2.37%) continued rallying the same session, confirming this is idiosyncratic governance risk.",
+        "impact": "mixed"
+      },
+      {
+        "factor": "Friday's NFP (20:30 SGT) is the pivotal swing print into the Sep 15-16 FOMC",
+        "read": "Consensus 55K vs -23K prior, unemployment 4.1%. A hot print with wages above 0.3% would revive the hike odds Waller just cooled, reversing two days of rally momentum; a soft print would extend it. Genuinely two-sided going in.",
+        "impact": "mixed"
+      },
+      {
+        "factor": "CLARITY Act passage odds have deteriorated further, a hardening crypto-specific tail risk",
+        "read": "Senate cloture-vote odds now ~19.5% (from a 58% August high and ~30% a week ago), with 8 Democratic votes still needed and uncommitted ahead of the 15 Sep vote. This sits alongside, not offsetting, BTC's short-covering-driven rebound.",
+        "impact": "cautionary"
+      },
+      {
+        "factor": "Breadth/credit-spread internals fresher than Tue 1 Sep could not be independently confirmed this run",
+        "read": "Search results for Wed 2 Sep/Thu 3 Sep breadth returned mutually contradictory index closes and at least one likely-hallucinated sector-performance claim (discarded rather than published). Tuesday's verified figures (%>200-DMA 62.62%, IG ~78bp, HY ~260bp) are carried forward pending a reliable refresh.",
+        "impact": "mixed"
+      }
+    ],
+    "byAssetClass": [
+      {
+        "assetClass": "Equity",
+        "stance": "OW",
+        "pUp12m": 0.62,
+        "note": "Upgraded from modest OW: two straight strong rally days (Wed ADP-driven, Thu Waller-driven) on genuinely dovish Fed signaling, with rate-sensitive leadership (Oracle, Palantir, financials) confirming the move is real, not just short-covering -- though Friday's NFP is a live two-sided catalyst that could reverse the move quickly.",
+        "tilt": 0.02
+      },
+      {
+        "assetClass": "Commodities",
+        "stance": "modest OW",
+        "pUp12m": 0.58,
+        "note": "Precious metals extended gains for a second day on the dovish Fed pivot and residual Hormuz safe-haven bid (silver >$66, +60.8% y/y); oil is on track for its biggest weekly gain since July though Trump's de-escalatory framing has capped further upside. Barrick's drop is idiosyncratic, not a complex-wide signal.",
+        "tilt": 0.012
+      },
+      {
+        "assetClass": "Crypto",
+        "stance": "modest UW",
+        "pUp12m": 0.48,
+        "note": "Softened from UW: BTC's +4.96% short-covering rebound and renewed spot-ETF inflows show real demand returning, but the Sep 15 CLARITY Act cloture vote's passage odds have deteriorated further to ~19.5% (from 58% in August) -- a hardening, dated regulatory tail risk that argues against full conviction into the rebound.",
+        "tilt": -0.012
+      },
+      {
+        "assetClass": "Bonds",
+        "stance": "Neutral",
+        "pUp12m": 0.5,
+        "note": "Upgraded from modest UW: Waller's dovish pivot pulled the 10y yield down to ~4.77% and cut September-hike odds to ~50%, directly easing the hawkish-repricing pressure on duration -- though Friday's NFP is the swing factor that could reverse this within 24 hours.",
+        "tilt": 0
+      },
+      {
+        "assetClass": "USD/Cash",
+        "stance": "Neutral",
+        "pUp12m": 0.5,
+        "note": "Softened further from modest OW: Waller's dovish remarks took more wind out of the hawkish-repricing/dollar-strength trade; cash remains a reasonable parking spot given the genuinely two-sided setup into Friday's NFP and the Sep 15-16 FOMC, but no longer a clear overweight.",
+        "tilt": 0
+      }
+    ],
+    "sources": [
+      "https://www.investing.com/news/economy-news/trading-day-waller-cools-fed-hike-hoopla-4888590",
+      "https://finance.yahoo.com/markets/stocks/articles/dow-rises-635-points-fed-170855232.html",
+      "https://en.sedaily.com/international/2026/09/04/feds-waller-backs-rate-hold-cutting-september-hike-odds",
+      "https://eurasiabusinessnews.com/2026/09/03/stock-market-today-stocks-jump-after-fed-official-says-he-could-back-rate-hold-oil-price-at-92/",
+      "https://www.bloomberg.com/news/articles/2026-09-02/barrick-is-said-to-weigh-delaying-north-america-gold-ipo-to-2027",
+      "https://goldsilver.com/industry-news/goldsilver-news/barrick-gold-ipo-delay-shareholder-revolt/",
+      "https://www.axios.com/2026/09/02/iran-tankers-hormuz-attacks-oil",
+      "https://en.wikipedia.org/wiki/2026_Strait_of_Hormuz_campaign",
+      "https://www.unitedagainstnucleariran.com/analysis/iran-shipping-update-september-1-2026",
+      "https://finance.yahoo.com/personal-finance/investing/article/silver-price-today-thursday-september-3-2026-silver-prices-rise-following-short-lived-airstrikes-111653911.html",
+      "https://www.bloomberg.com/news/articles/2026-09-03/latest-oil-market-news-and-analysis-for-sept-4",
+      "https://news.bitcoin.com/market-updates/bitcoin-price-barrels-towards-81k-as-shorts-lose-415m/",
+      "https://news.bitcoin.com/regulation-and-legal/clarity-act-odds-sink-as-senate-delay-threatens-2026-crypto-vote/",
+      "https://www.ccn.com/news/crypto/clarity-act-september-15-vote-xrp-10-bitcoin-200k/",
+      "https://tradingeconomics.com/hong-kong/stock-market/news/513929",
+      "https://www.ad-hoc-news.de/boerse/news/unternehmensnachrichten/xiaomi-s-september-showcase-arrives-with-a-margin-question-hanging-over/70042858",
+      "https://www.china-briefing.com/news/chinas-rare-earth-export-controls-impacts-on-businesses/",
+      "https://www.morganlewis.com/pubs/2026/07/recent-china-export-control-actions-signal-active-enforcement-for-rare-earths-and-strategic-minerals",
+      "https://www.tradingkey.com/analysis/economic/indicators/262146531-us-august-jobs-report-preview-tradingkey"
+    ]
+  },
+  "calls": [
+    {
+      "ticker": "MTUM",
+      "name": "iShares MSCI USA Momentum Factor ETF",
+      "assetClass": "US equity factor ETF",
+      "pUp1m": 0.45,
+      "pUp3m": 0.53,
+      "pUp12m": 0.61,
+      "ev1m": -0.005,
+      "ev3m": 0.011,
+      "ev12m": 0.07,
+      "drivers": [
+        "Momentum is concentrated in AI-hardware names already through their highest-stakes earnings catalysts of the quarter.",
+        "Rising hike odds (57-72%) are a genuine headwind for the crowded momentum trade if they persist into the FOMC.",
+        "Nasdaq's -1.03% Sep 1 move shows momentum-heavy names absorbing rather than leading the selloff so far.",
+        "No momentum-factor-specific news found this run."
+      ],
+      "confidence": 0.38
+    },
+    {
+      "ticker": "QUAL",
+      "name": "iShares MSCI USA Quality Factor ETF",
+      "assetClass": "US equity factor ETF",
+      "pUp1m": 0.5,
+      "pUp3m": 0.56,
+      "pUp12m": 0.64,
+      "ev1m": 0.001,
+      "ev3m": 0.016,
+      "ev12m": 0.08,
+      "drivers": [
+        "Quality's lower-beta, high-margin tilt typically holds up best through both a hawkish Fed repricing and geopolitical shocks.",
+        "Balance-sheet strength is the most defensible cohort into a rate-hike-risk regime.",
+        "Resilient credit spreads (IG 78bp) support quality/high-margin balance sheets specifically.",
+        "No quality-factor-specific news found this run."
+      ],
+      "confidence": 0.4
+    },
+    {
+      "ticker": "USMV",
+      "name": "iShares MSCI USA Min Vol Factor ETF",
+      "assetClass": "US equity factor ETF",
+      "pUp1m": 0.52,
+      "pUp3m": 0.55,
+      "pUp12m": 0.6,
+      "ev1m": 0.004,
+      "ev3m": 0.011,
+      "ev12m": 0.055,
+      "drivers": [
+        "VIX spiked 9.5% to 16.34 Sep 1 -- min-vol's defensive tilt should be rewarded if this proves the start of a sustained vol regime.",
+        "Structurally benefits from further Hormuz escalation or continued hawkish Fed repricing.",
+        "Still-resilient credit spreads reduce recession-tail risk that would otherwise favor min-vol even more strongly.",
+        "No min-vol-specific news found this run."
+      ],
+      "confidence": 0.4
+    },
+    {
+      "ticker": "VLUE",
+      "name": "iShares MSCI USA Value Factor ETF",
+      "assetClass": "US equity factor ETF",
+      "pUp1m": 0.51,
+      "pUp3m": 0.55,
+      "pUp12m": 0.6,
+      "ev1m": 0.003,
+      "ev3m": 0.011,
+      "ev12m": 0.058,
+      "drivers": [
+        "Value's energy/financials tilt benefits directly from the WTI +5.81% spike and from higher rates boosting bank NII.",
+        "Rate-hike risk (57-72% odds) is generally more supportive for value's cash-flow-now profile than for long-duration growth.",
+        "XLE's structural tailwind from the live Hormuz conflict flows through to value's energy weighting.",
+        "No value-factor-specific news found this run."
+      ],
+      "confidence": 0.38
+    },
+    {
+      "ticker": "XLK",
+      "name": "Technology Select Sector SPDR Fund",
+      "assetClass": "US sector equity",
+      "pUp1m": 0.45,
+      "pUp3m": 0.55,
+      "pUp12m": 0.63,
+      "ev1m": -0.006,
+      "ev3m": 0.017,
+      "ev12m": 0.095,
+      "drivers": [
+        "Highest duration/rate sensitivity of any sector -- most exposed to the hawkish Fed repricing near-term.",
+        "Hyperscaler capex tracking to ~$800B in 2026 and ~$1.3T in 2027 is a powerful structural offset once rates stabilize.",
+        "Nasdaq -1.03% Sep 1 shows tech absorbing the vol/rate shock without a disorderly break.",
+        "Concentration risk: 3 hyperscalers drive 70% of S&P 2026 EPS growth, much of it AI-infrastructure-linked and thus tech-sector-weighted."
+      ],
+      "confidence": 0.45
+    },
+    {
+      "ticker": "SMH",
+      "name": "VanEck Semiconductor ETF",
+      "assetClass": "US sector equity",
+      "pUp1m": 0.44,
+      "pUp3m": 0.56,
+      "pUp12m": 0.68,
+      "ev1m": -0.008,
+      "ev3m": 0.02,
+      "ev12m": 0.12,
+      "drivers": [
+        "NVIDIA's blowout quarter and Jensen Huang's 'supply-constrained' commentary through FY28 underpin continued AI-chip demand.",
+        "SMH's 10% single-holding cap has diversified returns beyond NVIDIA alone; Broadcom (Sep 2) and Micron (Sep 30) are near-term earnings catalysts.",
+        "High-beta/rate-sensitive profile makes SMH the most exposed sector ETF to the VIX spike and hike-odds repricing near-term.",
+        "Micron trades at a forward P/E of 6 with $100B in contracted minimum revenue -- valuation support within the group despite sector-wide rate sensitivity."
+      ],
+      "confidence": 0.42
+    },
+    {
+      "ticker": "XLF",
+      "name": "Financial Select Sector SPDR Fund",
+      "assetClass": "US sector equity",
+      "pUp1m": 0.53,
+      "pUp3m": 0.56,
+      "pUp12m": 0.61,
+      "ev1m": 0.006,
+      "ev3m": 0.015,
+      "ev12m": 0.065,
+      "drivers": [
+        "Financials led Thursday's rally alongside rate-sensitive tech, benefiting from Waller's dovish pivot and the resulting yield-curve dynamics even as NII sensitivity to rate cuts is a two-sided consideration.",
+        "Bank stocks remain a direct beneficiary of wherever the Sep 15-16 FOMC lands, given financials' dual sensitivity to both credit growth (favors cuts) and NII (favors holds).",
+        "Trading/wealth-management revenue continues to offset any single-direction rate-path uncertainty.",
+        "Elevated valuations and the live Hormuz tail risk remain a volatility risk even within a constructive near-term setup."
+      ],
+      "confidence": 0.42
+    },
+    {
+      "ticker": "XLE",
+      "name": "Energy Select Sector SPDR Fund",
+      "assetClass": "US sector equity",
+      "pUp1m": 0.58,
+      "pUp3m": 0.6,
+      "pUp12m": 0.62,
+      "ev1m": 0.02,
+      "ev3m": 0.035,
+      "ev12m": 0.08,
+      "drivers": [
+        "Direct beneficiary of the confirmed, live Hormuz supply-risk premium -- WTI +5.81% to $90.74, USO +5.46% Sep 1.",
+        "IEA cut its 2026 global supply forecast and projects a Q3 deficit of 1.8mb/d, a genuine structural tailwind while the conflict continues.",
+        "XLE itself only rose 1.27% Sep 1, lagging the crude move -- some room for energy equities to catch up if oil holds these levels.",
+        "Risk cuts both ways: a ceasefire/de-escalation would remove the war-risk premium quickly, as happened in prior rounds of this conflict."
+      ],
+      "confidence": 0.5
+    },
+    {
+      "ticker": "XLV",
+      "name": "Health Care Select Sector SPDR Fund",
+      "assetClass": "US sector equity",
+      "pUp1m": 0.5,
+      "pUp3m": 0.52,
+      "pUp12m": 0.55,
+      "ev1m": 0.001,
+      "ev3m": 0.007,
+      "ev12m": 0.04,
+      "drivers": [
+        "Defensive, low-duration-sensitivity sector should be relatively insulated from the hawkish-Fed/oil-shock cross-currents.",
+        "No healthcare-specific fresh catalyst (drug-pricing policy, M&A, FDA news) found this run.",
+        "Sector has broadly lagged the 2026 AI-driven rally, limiting near-term momentum either way.",
+        "Kept near 0.5 with modest confidence given the lack of a dedicated catalyst this run rather than fabricated conviction."
+      ],
+      "confidence": 0.3
+    },
+    {
+      "ticker": "XLI",
+      "name": "Industrial Select Sector SPDR Fund",
+      "assetClass": "US sector equity",
+      "pUp1m": 0.49,
+      "pUp3m": 0.53,
+      "pUp12m": 0.58,
+      "ev1m": -0.001,
+      "ev3m": 0.009,
+      "ev12m": 0.055,
+      "drivers": [
+        "Higher-for-longer rates (hike odds 57-72%) are a capex-financing headwind for industrials broadly.",
+        "Defense/infrastructure spending and AI-datacenter buildout provide a structural offset within the sector.",
+        "Oil spike raises input/transport costs for industrials generally, a modest margin headwind.",
+        "No industrials-specific fresh catalyst found this run."
+      ],
+      "confidence": 0.32
+    },
+    {
+      "ticker": "XLU",
+      "name": "Utilities Select Sector SPDR Fund",
+      "assetClass": "US sector equity",
+      "pUp1m": 0.47,
+      "pUp3m": 0.5,
+      "pUp12m": 0.54,
+      "ev1m": -0.004,
+      "ev3m": 0.004,
+      "ev12m": 0.04,
+      "drivers": [
+        "Bond-proxy sector directly pressured by rising 10y yields (~4.81%, highest since Jan 2025) from the hawkish Fed repricing.",
+        "AI-datacenter power demand remains a structural multi-year tailwind, partially offsetting the rate-sensitivity headwind.",
+        "Uranium/nuclear demand growth (~8% by 2026 per sector forecasts) supports the nuclear-adjacent utility subset specifically.",
+        "No utilities-specific fresh catalyst found this run."
+      ],
+      "confidence": 0.32
+    },
+    {
+      "ticker": "XLP",
+      "name": "Consumer Staples Select Sector SPDR Fund",
+      "assetClass": "US sector equity",
+      "pUp1m": 0.5,
+      "pUp3m": 0.51,
+      "pUp12m": 0.52,
+      "ev1m": 0.001,
+      "ev3m": 0.003,
+      "ev12m": 0.025,
+      "drivers": [
+        "Defensive sector with low direct sensitivity to the hawkish-Fed/Hormuz-conflict cross-currents.",
+        "Has broadly lagged the AI-driven 2026 rally, limiting momentum in either direction.",
+        "Oil-driven input-cost inflation is a modest margin headwind for staples producers.",
+        "No staples-specific fresh catalyst found this run; kept near 0.5 with low confidence."
+      ],
+      "confidence": 0.28
+    },
+    {
+      "ticker": "XLY",
+      "name": "Consumer Discretionary Select Sector SPDR Fund",
+      "assetClass": "US sector equity",
+      "pUp1m": 0.44,
+      "pUp3m": 0.5,
+      "pUp12m": 0.56,
+      "ev1m": -0.008,
+      "ev3m": 0.003,
+      "ev12m": 0.05,
+      "drivers": [
+        "Rising gasoline/energy costs from the Hormuz-driven oil spike are a direct headwind for discretionary consumer spending.",
+        "JOLTS softening (7.271M vs 7.3M est, June revised down, prof/biz services hiring -188K) signals a cooling labor backdrop that pressures discretionary demand.",
+        "Rate-hike risk (57-72% odds) raises financing costs for big-ticket discretionary purchases (autos, housing-adjacent).",
+        "No discretionary-specific fresh catalyst found this run."
+      ],
+      "confidence": 0.32
+    },
+    {
+      "ticker": "GLD",
+      "name": "SPDR Gold Shares",
+      "assetClass": "Precious metals",
+      "pUp1m": 0.46,
+      "pUp3m": 0.52,
+      "pUp12m": 0.6,
+      "ev1m": 0.001,
+      "ev3m": 0.012,
+      "ev12m": 0.07,
+      "drivers": [
+        "GLD rallied 1.85% Thu 3 Sep to $410.22, a second straight day of gains on Waller's dovish pivot easing real-rate pressure.",
+        "The live, unresolved Hormuz/Iran conflict (US tanker strikes, Iranian retaliation, collapsed Strait transit volumes) keeps a residual safe-haven bid underneath the Fed-driven rally.",
+        "Barrick's -5.34% drop is confirmed company-specific (IPO-delay/governance story), not a signal for the broader gold complex, which rallied in the same session.",
+        "Friday's NFP is the swing catalyst -- a hot print reviving hike odds would be a headwind after two days of gains."
+      ],
+      "confidence": 0.46
+    },
+    {
+      "ticker": "SLV",
+      "name": "iShares Silver Trust",
+      "assetClass": "Precious metals",
+      "pUp1m": 0.48,
+      "pUp3m": 0.54,
+      "pUp12m": 0.62,
+      "ev1m": 0.003,
+      "ev3m": 0.015,
+      "ev12m": 0.075,
+      "drivers": [
+        "SLV rallied 2.51% Thu 3 Sep to $60.55, outpacing gold on its higher beta; silver spot held above $66/oz, +60.8% y/y and +14.7% over the trailing month.",
+        "Miners confirmed genuine leveraged positioning re-engaging (GDX +3.95%, SILJ +2.37%, SLVP +3.17%) for a second straight session.",
+        "Residual Hormuz safe-haven bid persists even as Trump downplays further escalation -- silver is pricing both the Fed pivot and the geopolitical premium.",
+        "Same NFP-driven two-sided setup as gold into Friday, with the sleeve's realized volatility elevated in both directions."
+      ],
+      "confidence": 0.44
+    },
+    {
+      "ticker": "DBC",
+      "name": "Invesco DB Commodity Index Tracking Fund",
+      "assetClass": "Broad commodities",
+      "pUp1m": 0.53,
+      "pUp3m": 0.55,
+      "pUp12m": 0.57,
+      "ev1m": 0.008,
+      "ev3m": 0.016,
+      "ev12m": 0.05,
+      "drivers": [
+        "Oil is on track for its biggest weekly gain since July (WTI near $92, Brent near $95) on Hormuz disruption fears, a direct positive for DBC's energy weighting.",
+        "Precious metals' continued rally (GLD +1.85%, SLV +2.51% Thu) adds a second supportive leg within the broader commodity basket.",
+        "Trump's 'brief strikes' framing has cooled the oil rally's momentum slightly without reversing it.",
+        "Diesel prices hit their highest level since 2022, reflecting genuine supply-chain tightness beyond just crude."
+      ],
+      "confidence": 0.4
+    },
+    {
+      "ticker": "USO",
+      "name": "United States Oil Fund",
+      "assetClass": "Energy commodity",
+      "pUp1m": 0.55,
+      "pUp3m": 0.56,
+      "pUp12m": 0.54,
+      "ev1m": 0.012,
+      "ev3m": 0.02,
+      "ev12m": 0.04,
+      "drivers": [
+        "WTI heading for its biggest weekly gain since July (near $92) on Hormuz disruption fears; Strait transits have collapsed to single digits per 24h from ~138/day pre-crisis.",
+        "Trump's public downplaying of further escalation ('brief' strikes) has cooled the rally's momentum -- USO's own daily move has been more muted than the headline crude gain.",
+        "Diesel at its highest level since 2022 confirms genuine physical-market tightness, not just a geopolitical-headline premium.",
+        "Prior rounds of this conflict have each proved partially reversible once tensions cooled -- meaningful mean-reversion risk longer-term tempers the 12m view versus the near-term momentum."
+      ],
+      "confidence": 0.4
+    },
+    {
+      "ticker": "URA",
+      "name": "Global X Uranium ETF",
+      "assetClass": "Uranium/nuclear commodity",
+      "pUp1m": 0.52,
+      "pUp3m": 0.56,
+      "pUp12m": 0.64,
+      "ev1m": 0.006,
+      "ev3m": 0.02,
+      "ev12m": 0.09,
+      "drivers": [
+        "Structural demand tailwind from AI-datacenter power needs and nuclear reactor restarts/builds across Asia, Europe, and North America.",
+        "Uranium demand is forecast to grow ~8% by 2026 with supply discipline among major producers supporting prices.",
+        "Not directly tied to the Sep 1 Iran/Fed news cycle -- a lower-beta, thesis-driven holding versus the day's macro-driven movers.",
+        "Price targets vary widely across banks ($80-150/lb), reflecting genuine forecast uncertainty around inventory and utility contracting behavior."
+      ],
+      "confidence": 0.38
+    },
+    {
+      "ticker": "COPX",
+      "name": "Global X Copper Miners ETF",
+      "assetClass": "Industrial metals commodity",
+      "pUp1m": 0.49,
+      "pUp3m": 0.53,
+      "pUp12m": 0.6,
+      "ev1m": -0.002,
+      "ev3m": 0.01,
+      "ev12m": 0.07,
+      "drivers": [
+        "Structural demand tailwind from AI/datacenter grid buildout and electrification, with copper forecast toward $9,000-10,000/ton range.",
+        "China's second straight month of PMI contraction (49.8) is a demand-growth headwind for the largest copper consumer globally.",
+        "Higher-for-longer rates (57-72% hike odds) raise financing costs for mining capex specifically.",
+        "Constrained new supply is a supportive structural offset to the near-term China-demand and rate headwinds."
+      ],
+      "confidence": 0.35
+    },
+    {
+      "ticker": "DBA",
+      "name": "Invesco DB Agriculture Fund",
+      "assetClass": "Agriculture commodity",
+      "pUp1m": 0.5,
+      "pUp3m": 0.51,
+      "pUp12m": 0.53,
+      "ev1m": 0,
+      "ev3m": 0.004,
+      "ev12m": 0.025,
+      "drivers": [
+        "No agriculture-specific fresh catalyst (weather, USDA data, trade policy) found this run.",
+        "Oil-price spike raises input costs (fertilizer, transport) for agricultural producers, a modest structural headwind.",
+        "Dollar strength (DXY ~99.5-99.7) is typically a headwind for USD-denominated agricultural commodity prices.",
+        "Kept near 0.5 with low confidence given the lack of dedicated research this run."
+      ],
+      "confidence": 0.25
+    },
+    {
+      "ticker": "REMX",
+      "name": "VanEck Rare Earth/Strategic Metals ETF",
+      "assetClass": "Rare earth basket",
+      "pUp1m": 0.51,
+      "pUp3m": 0.56,
+      "pUp12m": 0.63,
+      "ev1m": 0.005,
+      "ev3m": 0.02,
+      "ev12m": 0.11,
+      "drivers": [
+        "Structural ex-China policy tailwind: G7 agreed to cap Chinese rare-earth imports at 60%, directly benefiting ex-China producers in the basket.",
+        "China blacklisted MP Materials and USA Rare Earth in response, reinforcing that Beijing views the ex-China build-out as a genuine competitive threat worth countering.",
+        "China's Oct-2025 export-curb stand-down holds only until November 2026, after which broader restrictions could snap back -- a binary catalyst that could sharply re-rate the whole basket.",
+        "DoD's $400M equity stake and $110/kg NdPr price floor for MP Materials is a template for further US government backing of the sector."
+      ],
+      "confidence": 0.4
+    },
+    {
+      "ticker": "REXC",
+      "name": "REX Rare Earth & Strategic Materials ETF",
+      "assetClass": "Rare earth basket",
+      "pUp1m": 0.5,
+      "pUp3m": 0.54,
+      "pUp12m": 0.6,
+      "ev1m": 0.003,
+      "ev3m": 0.015,
+      "ev12m": 0.09,
+      "drivers": [
+        "Same ex-China policy thesis as REMX (G7 60% import cap, DoD-style backing) but a smaller/thinner ETF with less liquidity and less dedicated coverage found this run.",
+        "China's blacklisting of MP Materials/USA Rare Earth signals the ex-China build-out remains a live geopolitical flashpoint.",
+        "November 2026 is the key date to watch for whether China's export-curb stand-down holds or restrictions resume.",
+        "Lower confidence than REMX given the sparser fund-specific data available."
+      ],
+      "confidence": 0.25
+    },
+    {
+      "ticker": "MP",
+      "name": "MP Materials Corp",
+      "assetClass": "Rare earth basket",
+      "pUp1m": 0.52,
+      "pUp3m": 0.58,
+      "pUp12m": 0.66,
+      "ev1m": 0.005,
+      "ev3m": 0.025,
+      "ev12m": 0.13,
+      "drivers": [
+        "MP fell 1.84% Sep 1, likely reflecting the broad risk-off/hawkish-Fed cross-current rather than a company-specific negative -- the structural policy thesis is intact.",
+        "DoD is MP's largest shareholder via a $400M equity stake, with a 10-year price floor of $110/kg for NdPr output shielding it from Chinese overproduction.",
+        "China blacklisted MP directly after the G7's 60% import-cap agreement -- a symbolic confirmation of MP's centrality to the ex-China rare-earth strategy.",
+        "Long-term contracts with customers such as Apple provide revenue visibility beyond the DoD relationship."
+      ],
+      "confidence": 0.48
+    },
+    {
+      "ticker": "LYC.AX",
+      "name": "Lynas Rare Earths Ltd",
+      "assetClass": "Rare earth basket",
+      "pUp1m": 0.5,
+      "pUp3m": 0.55,
+      "pUp12m": 0.6,
+      "ev1m": 0.003,
+      "ev3m": 0.018,
+      "ev12m": 0.09,
+      "drivers": [
+        "Lynas fell 2.82% Sep 1, in line with the sector-wide risk-off move rather than a company-specific setback.",
+        "Reported record FY26 net income (A$222.4m, revenue +76% to A$977.9m) on record non-China pricing, though below consensus on rising costs -- confirms the ex-China pricing tailwind is real even as the capex ramp pressures near-term margins.",
+        "As the leading ex-China rare-earth producer outside the US, Lynas is a direct beneficiary of the G7's 60% Chinese-import cap policy.",
+        "China's rare-earth export curbs on MP and other allied firms remain paused through 10 Nov 2026 -- a binary date to watch for the whole ex-China basket."
+      ],
+      "confidence": 0.37
+    },
+    {
+      "ticker": "UUUU",
+      "name": "Energy Fuels Inc",
+      "assetClass": "Rare earth basket",
+      "pUp1m": 0.49,
+      "pUp3m": 0.55,
+      "pUp12m": 0.62,
+      "ev1m": 0,
+      "ev3m": 0.02,
+      "ev12m": 0.11,
+      "drivers": [
+        "Energy Fuels fell 3.59% Sep 1, the largest decline among the tracked rare-earth names, consistent with small-cap high-beta positioning being unwound in the broad risk-off.",
+        "Dual rare-earth/uranium exposure gives it optionality on both the ex-China rare-earth thesis and the structural uranium-demand tailwind.",
+        "Benefits from the same G7 import-cap and DoD-backing policy tailwinds as MP/Lynas, though with a smaller balance sheet and less government backing to date.",
+        "Higher volatility profile than the larger-cap names in the basket given its smaller market size."
+      ],
+      "confidence": 0.32
+    },
+    {
+      "ticker": "USAR",
+      "name": "USA Rare Earth Inc",
+      "assetClass": "Rare earth basket",
+      "pUp1m": 0.49,
+      "pUp3m": 0.54,
+      "pUp12m": 0.6,
+      "ev1m": 0,
+      "ev3m": 0.018,
+      "ev12m": 0.1,
+      "drivers": [
+        "China blacklisted USA Rare Earth alongside MP Materials directly in response to the G7's 60% import-cap agreement -- a symbolic marker of its role in the ex-China build-out.",
+        "Small-cap, high-volatility profile with less established production/revenue than MP or Lynas.",
+        "Benefits from the same structural DoD-backing and G7-policy tailwinds as the rest of the basket.",
+        "Limited dedicated news found this run beyond the blacklisting event; confidence kept low accordingly."
+      ],
+      "confidence": 0.28
+    },
+    {
+      "ticker": "NEO.TO",
+      "name": "Neo Performance Materials Inc",
+      "assetClass": "Rare earth basket",
+      "pUp1m": 0.5,
+      "pUp3m": 0.53,
+      "pUp12m": 0.58,
+      "ev1m": 0.002,
+      "ev3m": 0.014,
+      "ev12m": 0.08,
+      "drivers": [
+        "Canadian rare-earth processor with an ex-China supply-chain positioning consistent with the broader G7 policy tailwind.",
+        "No company-specific fresh news found this run.",
+        "Less US-government-backing visibility (no DoD-style stake disclosed) versus MP Materials specifically.",
+        "Kept near 0.5 with modest confidence given the lack of dedicated research this run."
+      ],
+      "confidence": 0.25
+    },
+    {
+      "ticker": "ILU.AX",
+      "name": "Iluka Resources Ltd",
+      "assetClass": "Rare earth basket",
+      "pUp1m": 0.5,
+      "pUp3m": 0.52,
+      "pUp12m": 0.57,
+      "ev1m": 0.001,
+      "ev3m": 0.011,
+      "ev12m": 0.07,
+      "drivers": [
+        "Building Australia's first fully integrated rare-earth refinery with government backing -- a longer-dated catalyst rather than a near-term one.",
+        "Benefits from the same G7 60% Chinese-import-cap policy tailwind as the rest of the ex-China basket.",
+        "No fresh company-specific news (construction timeline updates, offtake agreements) found this run.",
+        "Longer time-to-production versus MP/Lynas means the 12m thesis is more speculative; confidence kept moderate."
+      ],
+      "confidence": 0.28
+    },
+    {
+      "ticker": "6680.HK",
+      "name": "China Northern Rare Earth (proxy, China incumbent)",
+      "assetClass": "Rare earth basket - China counter-bet",
+      "pUp1m": 0.49,
+      "pUp3m": 0.51,
+      "pUp12m": 0.54,
+      "ev1m": 0,
+      "ev3m": 0.008,
+      "ev12m": 0.045,
+      "drivers": [
+        "China controls ~70% of rare-earth mining and ~90% of processing -- the incumbent-scale advantage this name is a bet on persisting despite G7 pressure.",
+        "China's calibrated, incremental policy response (rather than aggressive counter-escalation) suggests Beijing is managing the trade relationship rather than abandoning rare-earth leverage.",
+        "China blacklisting MP Materials/USA Rare Earth (rather than easing controls) suggests Beijing intends to defend its market position, a modest positive for the incumbent thesis.",
+        "G7's 60% import-cap agreement is a direct structural headwind to Chinese rare-earth export market share if enforced, a risk to this counter-bet."
+      ],
+      "confidence": 0.28
+    },
+    {
+      "ticker": "SPY",
+      "name": "SPDR S&P 500 ETF Trust",
+      "assetClass": "US large-cap equity",
+      "pUp1m": 0.5,
+      "pUp3m": 0.58,
+      "pUp12m": 0.63,
+      "ev1m": 0.002,
+      "ev3m": 0.018,
+      "ev12m": 0.08,
+      "drivers": [
+        "S&P 500 closed +1.06% Thu 3 Sep to 7747.71, a second straight rally day driven specifically by Waller's dovish pre-market remarks pulling Sep-hike odds to ~50%.",
+        "Friday's NFP (20:30 SGT, cons 55K vs -23K prior) is the pivotal swing print into the Sep 15-16 FOMC -- a hot print could reverse two days of gains quickly.",
+        "Credit spreads remain tight (IG ~78bp, HY ~260bp per last confirmed reading) -- no stress signal despite the volatile week.",
+        "Concentration risk persists: AI-driven earnings growth remains concentrated in a handful of hyperscaler names."
+      ],
+      "confidence": 0.5
+    },
+    {
+      "ticker": "QQQ",
+      "name": "Invesco QQQ Trust",
+      "assetClass": "US large-cap tech equity",
+      "pUp1m": 0.5,
+      "pUp3m": 0.58,
+      "pUp12m": 0.64,
+      "ev1m": 0.003,
+      "ev3m": 0.02,
+      "ev12m": 0.095,
+      "drivers": [
+        "Nasdaq +1.40% Thu 3 Sep, the strongest major US index that day, as Oracle (+5.7%) and Palantir (+7.7%) led on Waller's dovish pivot lowering the discount-rate pressure on long-duration tech.",
+        "Hyperscaler capex tracking to ~$800B in 2026 and ~$1.3T in 2027 remains a structural tailwind independent of the week's rate volatility.",
+        "Friday's NFP is a genuine two-sided catalyst for the rate-sensitive tech trade specifically.",
+        "Forward P/E remains compressed versus end-2025 levels, some valuation cushion built in."
+      ],
+      "confidence": 0.48
+    },
+    {
+      "ticker": "IWM",
+      "name": "iShares Russell 2000 ETF",
+      "assetClass": "US small-cap equity",
+      "pUp1m": 0.48,
+      "pUp3m": 0.54,
+      "pUp12m": 0.58,
+      "ev1m": -0.002,
+      "ev3m": 0.012,
+      "ev12m": 0.065,
+      "drivers": [
+        "Russell 2000 +0.51% Thu 3 Sep, a milder gain than large-caps despite small-caps' higher rate sensitivity typically benefiting more from a dovish pivot.",
+        "Waller's dovish remarks and the ~7bp pullback in the 10y yield are a direct tailwind for small-cap financing costs if sustained past Friday's NFP.",
+        "Credit access remains open (HY spreads tight), a supportive backdrop for smaller-cap balance sheets.",
+        "Friday's NFP print carries outsized weight for small-caps' domestic-demand-sensitive earnings outlook."
+      ],
+      "confidence": 0.4
+    },
+    {
+      "ticker": "EFA",
+      "name": "iShares MSCI EAFE ETF",
+      "assetClass": "Developed ex-US equity",
+      "pUp1m": 0.47,
+      "pUp3m": 0.52,
+      "pUp12m": 0.56,
+      "ev1m": -0.004,
+      "ev3m": 0.008,
+      "ev12m": 0.05,
+      "drivers": [
+        "BOJ is being priced for a possible September hike on yen weakness/import inflation, a headwind for Japan-heavy EAFE exposure.",
+        "ECB rate-hike bets are also intensifying, adding to a global hawkish-tightening cross-current.",
+        "Oil spike (WTI +5.81%) is a net importer headwind for Europe/Japan more than for the commodity-exporting US.",
+        "No EAFE-specific fresh catalyst found this run; view is macro-inferred, not name-specific."
+      ],
+      "confidence": 0.35
+    },
+    {
+      "ticker": "EEM",
+      "name": "iShares MSCI Emerging Markets ETF",
+      "assetClass": "Emerging markets equity",
+      "pUp1m": 0.44,
+      "pUp3m": 0.5,
+      "pUp12m": 0.55,
+      "ev1m": -0.008,
+      "ev3m": 0.004,
+      "ev12m": 0.045,
+      "drivers": [
+        "Dollar strength (DXY ~99.5-99.7 post-Jackson Hole) is a direct headwind for EM equity and local-currency returns.",
+        "China's August PMI contracted a second straight month (49.8), though better than the 49.6 forecast -- a mixed China-weighted signal for EEM.",
+        "Higher US rates (hike odds 57-72%) historically tighten EM financial conditions and dollar-funding costs.",
+        "Oil-importing EM economies face a fresh terms-of-trade headwind from the Hormuz-driven spike."
+      ],
+      "confidence": 0.35
+    },
+    {
+      "ticker": "VGK",
+      "name": "Vanguard FTSE Europe ETF",
+      "assetClass": "European equity",
+      "pUp1m": 0.46,
+      "pUp3m": 0.51,
+      "pUp12m": 0.55,
+      "ev1m": -0.005,
+      "ev3m": 0.006,
+      "ev12m": 0.045,
+      "drivers": [
+        "ECB rate-hike bets intensifying alongside the Fed and BOJ -- a global hawkish-tightening cross-current pressuring European equity multiples.",
+        "Europe is a net energy importer; the Hormuz-driven WTI/Brent spike is a direct margin and CPI headwind.",
+        "No fresh Europe-specific earnings catalyst found this run.",
+        "Euro strength (paired with hawkish ECB bets) could offset some of the import-cost pressure for unhedged USD investors."
+      ],
+      "confidence": 0.32
+    },
+    {
+      "ticker": "EWJ",
+      "name": "iShares MSCI Japan ETF",
+      "assetClass": "Japanese equity",
+      "pUp1m": 0.43,
+      "pUp3m": 0.49,
+      "pUp12m": 0.54,
+      "ev1m": -0.009,
+      "ev3m": 0.002,
+      "ev12m": 0.04,
+      "drivers": [
+        "Nikkei fell 0.42% in early September as oil prices climbed on renewed Mideast hostilities; Japan's 10y yield hit a fresh 30-year high.",
+        "BOJ is being priced for a possible September hike on persistent yen weakness/import inflation -- yen strength would pressure exporter earnings.",
+        "Japan is a large net energy importer, a direct headwind from the Hormuz-driven oil spike.",
+        "Nikkei remains near record levels reached earlier in 2026, so some of this is normal profit-taking rather than a trend change."
+      ],
+      "confidence": 0.35
+    },
+    {
+      "ticker": "INDA",
+      "name": "iShares MSCI India ETF",
+      "assetClass": "India equity",
+      "pUp1m": 0.48,
+      "pUp3m": 0.52,
+      "pUp12m": 0.57,
+      "ev1m": -0.003,
+      "ev3m": 0.008,
+      "ev12m": 0.05,
+      "drivers": [
+        "No India-specific fresh catalyst found this run; view is macro-inferred from the broader EM/dollar-strength backdrop.",
+        "India is a large net oil importer, a headwind from the Hormuz-driven WTI spike via CPI and current-account channels.",
+        "Dollar strength (DXY ~99.5-99.7) is a general EM headwind that applies to India as well.",
+        "Kept near 0.5/low-confidence given the lack of dedicated research this run rather than fabricated conviction."
+      ],
+      "confidence": 0.28
+    },
+    {
+      "ticker": "FXI",
+      "name": "iShares China Large-Cap ETF",
+      "assetClass": "China equity",
+      "pUp1m": 0.47,
+      "pUp3m": 0.53,
+      "pUp12m": 0.56,
+      "ev1m": -0.004,
+      "ev3m": 0.009,
+      "ev12m": 0.048,
+      "drivers": [
+        "China's August PMI contracted for a second straight month (49.8) but beat the 49.6 forecast, a modestly less-bad print.",
+        "Beijing is signaling calibrated, incremental easing rather than a broad stimulus package for now.",
+        "The late-Sep/early-Oct Politburo meeting is the next scheduled catalyst -- any shift toward more aggressive easing would be a near-term positive.",
+        "China blacklisted MP Materials/USA Rare Earth after the G7's 60% import cap agreement, a reminder that trade/export-control friction remains a live tail risk for China-exposed equities."
+      ],
+      "confidence": 0.35
+    },
+    {
+      "ticker": "BTC-USD",
+      "name": "Bitcoin",
+      "assetClass": "Crypto",
+      "pUp1m": 0.45,
+      "pUp3m": 0.52,
+      "pUp12m": 0.6,
+      "ev1m": -0.01,
+      "ev3m": 0.03,
+      "ev12m": 0.2,
+      "drivers": [
+        "BTC rebounded +4.96% to ~$81,138 Thu 3 Sep on a ~$415M short squeeze plus renewed spot-ETF net inflows (+$100M on 2 Sep), a genuine demand signal after Tuesday's Iran-driven selloff.",
+        "The Sep 15 CLARITY Act cloture-vote passage odds have deteriorated further to ~19.5% (from a 58% August high, and down from ~30% just a week ago) with 8 Democratic votes still needed -- a hardening, not fading, regulatory tail risk.",
+        "Waller's dovish pivot and the pullback in the 10y yield are a broad risk-on tailwind that lifted BTC alongside equities and gold Thursday.",
+        "Genuinely stacked binary-catalyst week ahead (Sep 15 CLARITY vote + Sep 15-16 FOMC) keeps near-term volatility elevated in both directions."
+      ],
+      "confidence": 0.4
+    },
+    {
+      "ticker": "ETH-USD",
+      "name": "Ethereum",
+      "assetClass": "Crypto",
+      "pUp1m": 0.44,
+      "pUp3m": 0.51,
+      "pUp12m": 0.58,
+      "ev1m": -0.012,
+      "ev3m": 0.028,
+      "ev12m": 0.22,
+      "drivers": [
+        "ETH rebounded alongside BTC on Thursday's broad risk-on move (Waller-driven equity/gold/crypto rally), reversing part of Tuesday's Iran-driven selloff.",
+        "August's ETH-ETF-inflow-over-BTC rotation signal (from the prior run) remains a supportive structural undercurrent independent of this week's news.",
+        "Exposed to the same hardening Sep 15 CLARITY Act binary as BTC (odds now ~19.5%, down further from 58%) landing the same week as the FOMC.",
+        "No ETH-specific catalyst found fresh this run; view is macro-inferred from the broader crypto correlation to Thursday's rally."
+      ],
+      "confidence": 0.36
+    },
+    {
+      "ticker": "SOL-USD",
+      "name": "Solana",
+      "assetClass": "Crypto",
+      "pUp1m": 0.43,
+      "pUp3m": 0.5,
+      "pUp12m": 0.56,
+      "ev1m": -0.015,
+      "ev3m": 0.028,
+      "ev12m": 0.24,
+      "drivers": [
+        "SOL rebounded alongside BTC/ETH on Thursday's broad risk-on move, its typically highest-beta profile amplifying both the Tuesday selloff and Thursday's recovery.",
+        "Exposed to the same hardening Sep 15 CLARITY Act binary as the rest of the crypto sleeve (odds now ~19.5%, down further from 58%).",
+        "Less institutional/ETF support than BTC or ETH implies larger swings in both directions into the stacked Sep 15/15-16 FOMC-and-CLARITY-vote week.",
+        "No SOL-specific catalyst found fresh this run; view is macro-inferred from the broader crypto correlation."
+      ],
+      "confidence": 0.28
+    },
+    {
+      "ticker": "TLT",
+      "name": "iShares 20+ Year Treasury Bond ETF",
+      "assetClass": "Long-duration Treasury",
+      "pUp1m": 0.44,
+      "pUp3m": 0.47,
+      "pUp12m": 0.5,
+      "ev1m": -0.01,
+      "ev3m": -0.008,
+      "ev12m": 0.005,
+      "drivers": [
+        "Waller's dovish pivot pulled the 10y yield down to ~4.77% from ~4.81%, a direct near-term tailwind for long-duration Treasury prices after weeks of hawkish-repricing pressure.",
+        "September-hike odds fell from ~63% to ~50% on Waller's remarks -- the sharpest dovish move in weeks, though still a coin-flip outcome.",
+        "Friday's NFP is the key swing factor: a hot print with wages above 0.3% would revive hike odds and reverse this week's yield relief quickly.",
+        "Sticky underlying inflation data (still the dominant multi-week theme) means this is a tactical relief, not a confirmed trend reversal, pending confirmation into the Sep 15-16 FOMC."
+      ],
+      "confidence": 0.44
+    },
+    {
+      "ticker": "IEF",
+      "name": "iShares 7-10 Year Treasury Bond ETF",
+      "assetClass": "Intermediate Treasury",
+      "pUp1m": 0.45,
+      "pUp3m": 0.48,
+      "pUp12m": 0.51,
+      "ev1m": -0.006,
+      "ev3m": -0.002,
+      "ev12m": 0.012,
+      "drivers": [
+        "Less duration risk than TLT but still benefits from Waller's dovish pivot pulling the 10y yield down to ~4.77%.",
+        "Same NFP-week swing-factor setup as TLT, just with lower magnitude of price impact given shorter duration.",
+        "September-hike odds falling to ~50% from ~63% is a genuine, if tentative, easing of the hawkish-repricing headwind.",
+        "Two-sided into the Sep 15-16 FOMC pending Friday's payrolls confirmation."
+      ],
+      "confidence": 0.44
+    },
+    {
+      "ticker": "SHY",
+      "name": "iShares 1-3 Year Treasury Bond ETF",
+      "assetClass": "Short-duration Treasury",
+      "pUp1m": 0.49,
+      "pUp3m": 0.52,
+      "pUp12m": 0.54,
+      "ev1m": 0,
+      "ev3m": 0.007,
+      "ev12m": 0.032,
+      "drivers": [
+        "Least duration-sensitive of the Treasury ladder, so least exposed to this week's yield swings in either direction.",
+        "Front-end yields easing modestly on Waller's dovish pivot, though carry/coupon dominates the return profile at this maturity regardless.",
+        "A relatively low-volatility parking spot into the NFP-and-FOMC-heavy stretch ahead.",
+        "Directly benefits from cash/short-duration remaining attractive amid the still genuinely two-sided Fed path."
+      ],
+      "confidence": 0.48
+    },
+    {
+      "ticker": "TIP",
+      "name": "iShares TIPS Bond ETF",
+      "assetClass": "Inflation-protected Treasury",
+      "pUp1m": 0.44,
+      "pUp3m": 0.49,
+      "pUp12m": 0.53,
+      "ev1m": -0.01,
+      "ev3m": 0,
+      "ev12m": 0.02,
+      "drivers": [
+        "ISM Prices Paid stuck at 71.1% for a second month (23rd consecutive month of rising input costs) supports inflation breakevens.",
+        "Oil spike (WTI +5.81%) adds a fresh near-term inflation-expectations tailwind that pure nominal bonds don't capture.",
+        "Rising real yields from the hawkish Fed repricing are a price headwind that partially offsets the breakeven support.",
+        "CPI 3.4% y/y (July) with the next print due Sep 11 is the key near-term catalyst for the inflation-protection thesis."
+      ],
+      "confidence": 0.4
+    },
+    {
+      "ticker": "LQD",
+      "name": "iShares iBoxx Investment Grade Corporate Bond ETF",
+      "assetClass": "Investment-grade credit",
+      "pUp1m": 0.42,
+      "pUp3m": 0.46,
+      "pUp12m": 0.51,
+      "ev1m": -0.014,
+      "ev3m": -0.004,
+      "ev12m": 0.015,
+      "drivers": [
+        "IG spreads remain tight at ~78bp and essentially unchanged in August despite AI-funding questions and Mideast tension -- credit-specific risk is low.",
+        "Duration risk from the hawkish rate repricing (10y ~4.81%) is the dominant headwind for LQD price, overwhelming the tight-spread support.",
+        "Strong corporate earnings this quarter have helped keep spreads resilient, a genuine fundamental support.",
+        "Net effect is duration-driven negative near-term with spread stability providing a floor versus a genuine credit-stress scenario."
+      ],
+      "confidence": 0.42
+    },
+    {
+      "ticker": "HYG",
+      "name": "iShares iBoxx High Yield Corporate Bond ETF",
+      "assetClass": "High-yield credit",
+      "pUp1m": 0.49,
+      "pUp3m": 0.53,
+      "pUp12m": 0.57,
+      "ev1m": 0,
+      "ev3m": 0.01,
+      "ev12m": 0.045,
+      "drivers": [
+        "HY spreads tightened 19bp in August, the sector's strongest month of the year despite typically being the second-worst seasonally.",
+        "Shorter effective duration than IG/Treasuries means less price impact from the hawkish rate repricing specifically.",
+        "Energy-sector HY issuers benefit directly from the WTI +5.81% spike given HY's typically higher energy-sector weighting.",
+        "Strong corporate earnings and favorable supply/demand technicals continue to support spread resilience per market commentary."
+      ],
+      "confidence": 0.42
+    },
+    {
+      "ticker": "EMB",
+      "name": "iShares JP Morgan USD Emerging Markets Bond ETF",
+      "assetClass": "EM sovereign debt",
+      "pUp1m": 0.45,
+      "pUp3m": 0.49,
+      "pUp12m": 0.53,
+      "ev1m": -0.006,
+      "ev3m": 0,
+      "ev12m": 0.025,
+      "drivers": [
+        "Dollar strength (DXY ~99.5-99.7 post-Jackson Hole) is a direct headwind for USD-denominated EM debt via issuer funding costs.",
+        "Higher US rates (57-72% hike odds) generally tighten global dollar-funding conditions for EM sovereigns.",
+        "Oil-importing EM sovereigns face an added terms-of-trade headwind from the Hormuz-driven oil spike; oil exporters within the index benefit.",
+        "No EMB-specific fresh catalyst found this run; view is macro-inferred."
+      ],
+      "confidence": 0.32
+    },
+    {
+      "ticker": "BND",
+      "name": "Vanguard Total Bond Market ETF",
+      "assetClass": "US aggregate bond",
+      "pUp1m": 0.42,
+      "pUp3m": 0.46,
+      "pUp12m": 0.51,
+      "ev1m": -0.012,
+      "ev3m": -0.003,
+      "ev12m": 0.015,
+      "drivers": [
+        "Blended Treasury/IG-credit duration exposure means BND inherits the same hawkish-rate-repricing headwind as TLT/IEF/LQD, just diluted.",
+        "10y yield at 4.81% (highest since Jan 2025) is the dominant driver of the near-term price headwind.",
+        "IG credit-spread resilience (78bp, tight and stable) provides a partial offset versus a pure-duration play.",
+        "Softening labor data (JOLTS, ISM Manufacturing) into Friday's NFP is the key swing factor that could reverse the rate-repricing headwind."
+      ],
+      "confidence": 0.44
+    }
+  ],
+  "callsNote": "Research-only deliverable produced 2026-09-04 (SGT) against the actual Thu 3 Sep US close (S&P 500 7,747.71 +1.06%, Nasdaq 26,584.06 +1.40%, Dow 53,686.11 +1.18%, Russell 2000 2,968.27 +0.51%, VIX 14.32 -5.79%). Thursday's rally was driven specifically by Fed Governor Waller's dovish pre-market remarks (8:30am ET) that he could back a September hold absent an inflation surprise, pulling hike odds from ~63% to ~50% and the 10y yield to ~4.77%. Gold/silver/miners extended their rally for a second day (GLD +1.85%, SLV +2.51%, GDX +3.95%, NEM +4.21%) except Barrick Gold (-5.34%), confirmed as a company-specific IPO-delay/governance story (Bloomberg, 2 Sep) rather than a gold-market signal -- every other tracked miner rallied the same session. The Hormuz/Iran conflict remains live (US struck two Iranian tankers plus ~100 IRGC-linked sites 2 Sep; Iran retaliated with missiles/drones on Gulf bases; Strait transits collapsed to single digits/24h) even as Trump downplayed further escalation. BTC rebounded +4.96% to ~$81,138 on a short squeeze and renewed ETF inflows even as the Sep 15 CLARITY Act cloture-vote odds deteriorated further to ~19.5% (from a 58% high). Friday's NFP (cons 55K vs -23K prior, 20:30 SGT) is the pivotal swing print into the Sep 15-16 FOMC and has not yet happened as of this research. Breadth and credit-spread figures fresher than Tuesday 1 Sep's verified readings could not be independently confirmed this run (search results returned internally inconsistent session closes and at least one likely-hallucinated sector-breakdown claim, both discarded rather than published) and are carried forward. Tickers with genuine fresh news this run (SPY, QQQ, IWM, GLD, SLV, DBC, USO, BTC-USD, ETH-USD, SOL-USD, TLT, IEF, SHY, XLF) received updated drivers; all other calls are carried forward from the 3 Sep run with unchanged priors rather than fabricated updates."
+}
