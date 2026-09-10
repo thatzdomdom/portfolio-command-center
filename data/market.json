@@ -1,58 +1,57 @@
 {
-  "updated": "2026-09-10",
-  "note": "CATCH-UP RUN: Thursday 10 Sep 2026, ~18:10-18:55 SGT (an evening run, not the usual pre-Asia slot) after the prior 4 Sep run -- a 6-day/4-session gap. Since 4 Sep: a blowout +162K NFP (vs 55K consensus, released 5 Sep) revived a Sep 15-16 FOMC hike debate as new Fed Chair Kevin Warsh's hawkish tone squares off against Governor Waller's dovish dissent; the S&P 500 fell three of four sessions (-1.44% cumulative) and the 10y yield spiked to 4.857% (highest since Nov 2023) on 9 Sep after the Treasury tripled its long-dated buyback operation. fearGreed: CNN's own live backend feed was fetched directly this run (bypassing the 451-blocked HTML page) -- high-confidence, genuinely live data. breadth: %>200/50-DMA, NYSE advance-decline, 52-week highs/lows and the McClellan Oscillator were all refreshed through Wed 9 Sep's close (the latest completed US session) via secondary aggregators; treat the precise magnitudes as directionally reliable with moderate numeric confidence given some cross-source noise. flows: freshest available is LSEG Lipper/BofA-EPFR data for the week ended 2 Sep 2026, one full week newer than the prior 26-Aug baseline; a week-ended-9-Sep release was not yet published as of this run.",
+  "updated": "2026-09-11",
+  "note": "Normal daily run, Friday 11 Sep 2026 ~07:02-07:45 SGT, one session after the 10 Sep catch-up run. Thursday 10 Sep was a hot-PPI risk-off day (see model.json/news.json for the full causal chain): August PPI ran hot on annual terms, pushing Sep 15-16 FOMC hike odds from ~60% to ~70%, hitting gold/silver hard via the real-yield channel while the Hormuz war separately escalated to its largest attack wave yet. fearGreed: CNN's own page was fetched via a reader proxy (direct fetch still 451-blocked; the JSON API returned 418) -- the headline score (33) is corroborated by a second independent tracker and treated as high-confidence; the 7 component labels came through as qualitative signals only (no numeric sub-scores retrievable this run) and are lower-confidence than the headline number. breadth: could NOT be refreshed past Wed 9 Sep's close this run -- StockCharts/Barchart pages returned empty/blocked to the research agent; the prior reading is carried forward with an explicit staleness flag rather than guessed forward, even though the Thu VIX spike makes further deterioration likely. flows: still no release fresher than the week ended 2 Sep 2026 -- a search hit that looked like a week-ended-9-Sep EPFR figure was traced to a mis-dated 2025 article and excluded rather than published.",
   "fearGreed": {
-    "value": 36,
+    "value": 33,
     "rating": "Fear",
     "asOf": "2026-09-10",
-    "prevClose": 39,
-    "prev1w": 44,
-    "prev1m": 65,
-    "prev1y": 58,
+    "prevClose": 38,
+    "prev1w": 47,
+    "prev1m": 64,
+    "prev1y": 57,
     "cryptoValue": 69,
     "cryptoRating": "Greed",
     "components": [
       {
         "name": "Market Momentum",
-        "reading": "28.0 -- S&P 500 trading meaningfully below its 125-day average after the three-session pullback since 3 Sep.",
+        "reading": "Extreme Fear -- S&P 500 fell a 4th straight session on 10 Sep as hot-on-annual PPI pushed Fed hike odds to ~70%; numeric sub-score not retrievable this run (CNN's JSON API returned HTTP 418).",
         "signal": "fear"
       },
       {
         "name": "Stock Price Strength",
-        "reading": "7.6 (Extreme Fear) -- new highs vs new lows have collapsed; 57 new highs vs 230 new lows (broader ~4,730-issue universe) as of 9 Sep.",
+        "reading": "Extreme Fear -- consistent with the deteriorating breadth already on file through Wed 9 Sep (57 new highs vs 230 new lows); no fresher numeric reading retrievable this run.",
         "signal": "fear"
       },
       {
         "name": "Stock Price Breadth",
-        "reading": "16.0 (Extreme Fear) -- Wed 9 Sep's NYSE advance-decline was a lopsided 21.6% advancing vs 75.9% declining, a sharp one-day deterioration from Tue's 32.9%/64.4%.",
+        "reading": "Extreme Fear -- weak breadth persists per the qualitative CNN signal; the underlying NYSE advance-decline figure could not be refreshed past Wed 9 Sep's 21.6%/75.9% this run.",
         "signal": "fear"
       },
       {
         "name": "Put/Call Options",
-        "reading": "61.2 -- options positioning remains complacent/greedy even as the underlying market has weakened, a mild internal divergence.",
-        "signal": "greed"
+        "reading": "Fear -- options positioning has flipped more cautious since the prior run's 61.2/greedy reading, consistent with the VIX spike.",
+        "signal": "fear"
       },
       {
         "name": "Market Volatility",
-        "reading": "50.0 (Neutral) -- VIX has risen steadily to 16.46 but remains within a range consistent with its 50-day average, not yet signaling panic.",
+        "reading": "Neutral -- VIX spiked 8.38% to 17.84 on 10 Sep but remains within a range CNN still classifies as neutral rather than panic-level.",
         "signal": "neutral"
       },
       {
         "name": "Safe Haven Demand",
-        "reading": "22.2 (Extreme Fear) -- bonds/gold both outperforming equities as the Hormuz war escalates and hike odds revive, a classic flight-to-safety signature.",
+        "reading": "Extreme Fear -- though notably, gold itself sold off hard on 10 Sep (real-yield reaction to the hot PPI), so this reading likely reflects Treasury demand more than gold on this specific day.",
         "signal": "fear"
       },
       {
         "name": "Junk Bond Demand",
-        "reading": "68.8 -- high-yield spreads remain resilient/tight despite the equity-market stress, no credit-specific stress signal found this run.",
+        "reading": "Greed -- high-yield spreads were not confirmed to have widened on 10 Sep despite the equity/vol stress; treat with lower confidence given no dated credit-spread source was found this run.",
         "signal": "greed"
       }
     ],
     "sources": [
-      "https://production.dataviz.cnn.io/index/fearandgreed/graphdata",
-      "https://feargreedmeter.com/",
+      "https://www.cnn.com/markets/fear-and-greed",
       "https://feargreedtracker.com/fear-greed-index-stock-market",
-      "https://api.alternative.me/fng/?limit=10"
+      "https://alternative.me/crypto/fear-and-greed-index/"
     ]
   },
   "breadth": {
@@ -101,7 +100,7 @@
         "pct": null
       }
     ],
-    "note": "Breadth deteriorated sharply this week: %>50-DMA nearly halved (45.52% -> 36.97%) and Wednesday's advance-decline was one of the worst single sessions in the recent record (21.6%/75.9%). The McClellan Oscillator's more moderate -45.38 reading (smoothed/EMA-based, so it lags single-day shocks) suggests this is a genuine but not yet extreme deterioration -- worth watching for confirmation or reversal over the next few sessions into CPI/FOMC.",
+    "note": "STALE, CARRIED FORWARD: this breadth snapshot is still Wed 9 Sep's close -- Thu 10 Sep's hot-PPI/VIX-spike session (VIX +8.38% to 17.84) almost certainly pushed breadth further into deterioration, but StockCharts/Barchart returned empty to this run's research pass, so no fresher number is published rather than guessed. Treat the deterioration direction as likely, the magnitude as unverified, pending a live terminal check.",
     "sources": [
       "https://www.investing.com/indices/sp-500-stocks-above-200-day-average",
       "https://www.investing.com/indices/s-p-500-stocks-above-50-day-average",
@@ -110,8 +109,8 @@
     ]
   },
   "flows": {
-    "asOf": "2026-09-10",
-    "period": "Week ended Wed 2 Sep 2026 (LSEG Lipper / BofA-EPFR Flow Show) -- one full week newer than the prior 26-Aug baseline; the week-ended-9-Sep release is due today/tomorrow and not yet published.",
+    "asOf": "2026-09-11",
+    "period": "Week ended Wed 2 Sep 2026 (LSEG Lipper / BofA-EPFR Flow Show) -- re-verified 11 Sep, still the freshest published release. A search hit that looked like a week-ended-9-Sep EPFR figure was traced to a mis-dated 2025 article (isimarkets.com republishes an annual template) and excluded rather than published as current.",
     "narrative": "The week ended 2 Sep showed a classic flight-to-safety rotation: global money-market/cash funds drew +$46.1bn (Lipper), the largest weekly inflow in about a month, as US-Iran tension and a global bond selloff pushed investors toward cash. US equity funds saw a further -$11.12bn outflow (Lipper) / -$5.9bn (BofA-EPFR, a second straight week of outflows) even as Europe (+$13.09bn) and Asia (+$4.22bn) equity funds took in fresh money. EM equities show a genuine cross-provider discrepancy: Lipper's mutual-fund data shows an 8th consecutive weekly inflow (+$1.99bn) while BofA-EPFR's ETF-inclusive data shows outflows resumed (-$5.4bn) -- flagged rather than reconciled. Gold/precious-metals funds logged their 8th consecutive weekly inflow (+$2.85bn Lipper / +$3.2bn BofA), consistent with the miners complex's continued strength this week.",
     "regions": [
       {
