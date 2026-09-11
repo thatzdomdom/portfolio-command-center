@@ -51,7 +51,13 @@ function businessDays(n, endYmd) {
 }
 let days;
 if (opt('--date')) days = [opt('--date').replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3')];
-else days = businessDays(+(opt('--days') || 2), etDate(new Date()));
+else {
+  // The current ET day's index is not posted until the evening; a run at 12:15 ET got 503/403 for
+  // it. Count the current day as complete only after 22:00 ET (EDGAR's filing cutoff).
+  const et = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', hour: '2-digit', hour12: false }).formatToParts(new Date()).find(x => x.type === 'hour');
+  const endYmd = (+et.value >= 22) ? etDate(new Date()) : etDate(new Date(Date.now() - 864e5));
+  days = businessDays(+(opt('--days') || 2), endYmd);
+}
 const onlyCiks = opt('--cik') ? new Set(opt('--cik').split(',').map(s => String(+s))) : null;
 const limit = +(opt('--limit') || 0);
 

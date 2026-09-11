@@ -84,6 +84,25 @@ const out = []; const push = a => { if (!existing.has(a.id)) { out.push({ at: ne
     else if (tag !== 'market-wide') push({ id: `f4:${f.id}:Psmall`, date: ymd(f.filed), severity: 'Log', family: 'insider', ticker: t, issuer: name, tags: [tag, 'open-market'],
       headline: `${t} · ${who} bought ${usd(total)}`, detail: `${sh.toLocaleString()} sh — below Notable thresholds`, url: f.url, clearsWhen: 'read' });
   }
+  // ── large market-wide sells: ONE Log line per issuer-day (the Dell case) ───
+  // Per-filing sells market-wide would be ~500 lines a day; a sponsor distributing $60M in 200
+  // lots is still one event. Aggregate by issuer and filing date; alert once above the floor.
+  const MW = P.marketWideSellAggregate;
+  if (MW) {
+    const agg = {};
+    signals.form4.filter(f => tagOf(f.issuer.ticker) === 'market-wide' && f.txns.some(x => x.code === 'S')).forEach(f => {
+      const k = `${f.issuer.cik || f.indexCik}:${f.filed}`; const a = agg[k] = agg[k] || { f, usd: 0, sh: 0, owners: new Set(), plan: true };
+      f.txns.filter(x => x.code === 'S').forEach(x => { a.usd += (x.shares || 0) * (x.price || 0); a.sh += (x.shares || 0); });
+      a.owners.add((f.owners[0] && f.owners[0].name) || f.id); if (!f.aff10b5) a.plan = false;
+    });
+    for (const [k, a] of Object.entries(agg)) {
+      if (a.usd < MW.minUSDPerIssuerDay) continue;
+      const t = a.f.issuer.ticker, id = `mwsell:${k}`;
+      push({ id, date: ymd(a.f.filed), severity: MW.severity, family: 'insider', ticker: t, issuer: a.f.issuer.name || a.f.indexName, tags: ['market-wide', a.plan ? '10b5-1' : 'discretionary', 'aggregate'],
+        headline: `${t} · ${a.owners.size} insider${a.owners.size > 1 ? 's' : ''} sold ${usd(a.usd)} · ${a.plan ? '10b5-1 plan' : 'discretionary'} · not in book`,
+        detail: `${a.sh.toLocaleString()} sh across ${[...a.owners].slice(0, 3).join(', ')}${a.owners.size > 3 ? ' +' + (a.owners.size - 3) : ''} — sells carry little return information; logged so the question "did those trades mean anything" has an answer`, url: a.f.url, clearsWhen: 'read' });
+    }
+  }
   // ── clusters (any tag, any size) ──────────────────────────────────────────
   const win = P.cluster.windowDays * 864e5;
   const byIssuer = {};
