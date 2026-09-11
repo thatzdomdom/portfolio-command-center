@@ -370,6 +370,22 @@ else {
   else ok(`manifest: ${Object.keys(man.files || {}).length} files, sgtDate today`);
 }
 
+// ── PHASE 2: the signal feed must be alive, not merely present ─────────────
+{
+  const sig = J('signals.json'), al = J('alerts.json');
+  if (!sig) warn('signals.json', 'absent — form4-scan.js has not run (GitHub Actions or launchd)');
+  else {
+    const last = (sig.scans || []).slice(-1)[0];
+    const a = last ? daysAgo(last.date) : null;
+    if (a == null) warn('signals.json', 'no scan log');
+    else if (a > 4) fail('signals.json', `last EDGAR scan is ${a} days old — the market-wide insider feed is DEAD, not quiet`);
+    else if (last.form4Lines === 0 && !last.error) warn('signals.json', `scan ${last.date} saw ZERO Form 4 lines — a weekday index with no filings is a fetch problem, not a quiet day`);
+    else ok(`signals: last scan ${last.date} · ${last.form4Lines || 0} Form 4 lines · ${(sig.form4 || []).length} facts retained`);
+  }
+  if (!al) warn('alerts.json', 'absent — alerts.js has not run');
+  else { const a = daysAgo(String(al.generatedAt || '').slice(0, 10)); if (a != null && a > 2) warn('alerts.json', `not re-evaluated for ${a} days`); else ok(`alerts: ${(al.alerts || []).length} in the log · ${(al.alerts || []).filter(x => x.severity === 'Notable').length} Notable`); }
+}
+
 // ── report ─────────────────────────────────────────────────────────────────
 const report = { checkedOn: today, at: new Date().toISOString(), problems, warnings, passed: checks };
 fs.writeFileSync(path.join(D, '.validation.json'), JSON.stringify(report, null, 1) + '\n');

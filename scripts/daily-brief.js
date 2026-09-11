@@ -105,7 +105,24 @@ try {
   } else integrityLines.push('Note: the universal file check did not run today — treat the figures below with extra care.');
 } catch (e) {}
 
-if (insiderLines.length) sections.unshift(['🔔 INSIDER FILINGS CAUGHT LIVE (US names, last 24h)', insiderLines]);
+// Phase 2 (11 Sep 2026): insider and ownership signals now come from data/alerts.json — the
+// append-only log written by scripts/alerts.js from the market-wide EDGAR scan — not from the
+// retired 15-name poller's queue. Notables since the previous brief lead; held/watch sells get ONE
+// count line; market-wide sells never appear here (policy.json).
+try {
+  const AL = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'alerts.json'), 'utf8'));
+  const prevBrief = (() => { try { return fs.readFileSync(path.join(ROOT, 'data', '.last-brief-date'), 'utf8').trim(); } catch (_) { return null; } })();
+  const since = prevBrief || new Date(Date.now() - 2 * 864e5).toISOString().slice(0, 10);
+  const fresh = (AL.alerts || []).filter(a => a.date > since);
+  const notable = fresh.filter(a => a.severity === 'Notable');
+  const sells = fresh.filter(a => a.family === 'insider' && /insider sell/.test(a.headline || ''));
+  const lines = notable.slice(0, 8).map(a => `${a.headline} [${(a.tags || []).filter(t => ['in-book', 'watchlist', 'market-wide', 'cluster'].includes(t)).join(' ')}] — ${a.detail}`);
+  if (sells.length) lines.push(`${sells.length} insider sell(s) on held/watch names since ${since}${sells.every(a => (a.tags || []).includes('10b5-1')) ? ', all 10b5-1 plans' : ''} — see inbox.html`);
+  if (!lines.length) lines.push(`no Notable insider or ownership events since ${since} · ${(AL.alerts || []).length} in the log · inbox.html`);
+  const scanNote = (() => { try { const S = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'signals.json'), 'utf8')); const last = (S.scans || []).slice(-1)[0]; return last ? ` · Form 4 scan ${last.date}: ${last.form4Lines || 0} filings, ${last.kept || 0} with open-market trades` : ''; } catch (_) { return ' · signals.json absent'; } })();
+  sections.unshift(['🔔 SIGNALS SINCE LAST BRIEF (insiders & ownership, market-wide)' + scanNote, lines]);
+} catch (e) { sections.unshift(['🔔 SIGNALS', ['alerts.json unavailable — scripts/alerts.js did not run (' + e.message + ')']]); }
+if (insiderLines.length) sections.unshift(['🔔 INSIDER FILINGS CAUGHT LIVE (legacy queue)', insiderLines]);
 if (integrityLines.length) sections.push(['DATA-INTEGRITY CHECKS', integrityLines]);
 
 const stamp = (brief && brief.date) || (model && model.updated) || 'unknown';
@@ -343,6 +360,7 @@ if (env.EMAIL_TO && env.SMTP_HOST && env.SMTP_USER && env.SMTP_PASS) {
   if (r.status === 0) {
     smtpDone = true; emailOk = true;
     try { fs.writeFileSync(STATE, todayISO); } catch (_) {}
+    try { fs.writeFileSync(path.join(ROOT, 'data', '.last-brief-date'), todaySGT); } catch (_) {}
     log.push('email: ' + (r.stdout || '').trim());
   } else {
     log.push('smtp failed, falling back to Mail.app: ' + ((r.stderr || r.stdout || '').trim() || `exit ${r.status}`).slice(0, 140));

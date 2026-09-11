@@ -30,6 +30,10 @@ const SPEC = {
   'fx.json':          { as: j => j.asOf,               cadence: 'daily',   count: j => Object.keys(j.rates || {}).length, source: 'fx.js (ECB reference rates)' },
   'book.json':        { as: j => j.asOf,               cadence: 'manual',  count: j => (j.holdings || []).length, source: 'extract-book.js', published: 'book.enc' },
   'valuation.json':   { as: j => j.asOf,               cadence: 'daily',   count: j => (j.lines || []).length, source: 'valuate.js', published: 'valuation.enc' },
+  'signals.json':     { as: j => (j.scans || []).slice(-1)[0] && (j.scans.slice(-1)[0].date), cadence: 'daily', count: j => (j.form4 || []).length, source: 'form4-scan.js (EDGAR daily index; GitHub Actions)' },
+  'alerts.json':      { as: j => String(j.generatedAt || '').slice(0, 10), cadence: 'daily', count: j => (j.alerts || []).length, source: 'alerts.js (policy.json applied to signals)' },
+  'watchlist.json':   { as: j => j.asOf, cadence: 'manual', count: j => (j.us || []).length, source: 'owner' },
+  'policy.json':      { as: j => j.version, cadence: 'manual', count: null, source: 'owner-editable thresholds' },
   '.validation.json': { as: j => j.checkedOn,          cadence: 'daily',   count: j => (j.problems || []).length, source: 'validate-all.js (count = problems)' },
 };
 

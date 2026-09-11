@@ -73,7 +73,8 @@ if (tracked) red('git guard', `plaintext sensitive file(s) are TRACKED: ${tracke
 const ALLOW = ['data/news.json', 'data/model.json', 'data/market.json', 'data/brief.json', 'data/intel.json', 'data/investors.json',
   'data/track.json', 'data/flows-investors.json', 'data/flows-history.json', 'data/version.json',
   'data/.prices.json', 'data/.calendar.json', 'data/.validation.json', 'data/.track-fingerprint.json',
-  'data/fx.json', 'data/manifest.json', 'data/book.enc', 'data/valuation.enc'];
+  'data/fx.json', 'data/manifest.json', 'data/book.enc', 'data/valuation.enc',
+  'data/signals.json', 'data/alerts.json', 'data/watchlist.json', 'data/policy.json'];
 run('git', ['add', '--', ...ALLOW.filter(f => fs.existsSync(path.join(ROOT, f)))]);
 const staged = run('git', ['diff', '--cached', '--name-only']).out.trim().split('\n').filter(Boolean);
 if (!staged.length) { log('nothing changed — no commit'); process.exit(0); }

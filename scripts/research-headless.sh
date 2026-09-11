@@ -5,6 +5,9 @@ LOG="$HOME/Library/Logs/portfolio-research.log"
 exec >>"$LOG" 2>&1
 echo "=== $(date '+%F %T') research start ==="
 cd /Users/dominiczhao/portfolio-dashboard || exit 1
+# Phase 2: GitHub Actions commits data/signals.json (the market-wide Form 4 scan) at 06:30 and
+# 11:00 SGT. Pull it before anything reads data/, so alerts.js judges this morning's facts.
+git pull --rebase -q origin main 2>/dev/null || echo "$(date '+%F %T') git pull failed — continuing with local data"
 
 # ── AUTH: long-lived token, not the expiring OAuth session ────────────────
 # The interactive OAuth refresh token lasts ~a month. Yours expired
@@ -46,6 +49,7 @@ echo "ok" > "$HOME/.claude/portfolio-auth.state"
 /opt/homebrew/bin/node scripts/calendar-spine.js || echo "$(date '+%F %T') calendar spine unavailable/stale — see data/.calendar.json"
 /opt/homebrew/bin/node scripts/fx.js || echo "$(date '+%F %T') fx.js failed or stale — valuation will use prior rates"
 /opt/homebrew/bin/node scripts/valuate.js || echo "$(date '+%F %T') valuate.js FAILED — no NAV this run"
+/opt/homebrew/bin/node scripts/alerts.js || echo "$(date '+%F %T') alerts.js FAILED — no insider/ownership judgments this run"
 
 # The ONLY date in the system is the machine clock in SGT, passed in explicitly. A run was once
 # framed on a date four days wrong because an injected date was trusted over the clock.

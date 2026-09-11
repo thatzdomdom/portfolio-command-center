@@ -1,0 +1,30 @@
+{
+  "version": "2026-09-11",
+  "note": "Severity is a function of EVIDENCE CLASS first and size second. Sells and congress never rise above Log. Push carries a prescribed action or it is not push; insider signals never push — a cluster buy's edge plays out over 6-12 months. Thresholds in USD unless stated. Edit here, not in code.",
+  "insider": {
+    "excludeCodes": ["A", "M", "F", "G", "J", "W", "X", "C", "D", "I", "L", "O", "U", "Z"],
+    "excludeCodesNote": "Only P (open-market purchase) and S (open-market sale) are information. A/M/F are grants, option exercises and tax withholding — compensation, not conviction.",
+    "cluster": { "minDistinctInsiders": 3, "windowDays": 30, "requireNon10b5": true, "anySize": true, "severity": "Notable",
+      "why": "Three or more insiders independently buying with their own money inside a month is the single best-evidenced insider signal in the literature; size is secondary." },
+    "seniorOfficerBuy": { "titles": ["CEO", "Chief Executive", "CFO", "Chief Financial", "Chair", "President", "COO", "Chief Operating"], "minUSD": 100000, "severity": "Notable" },
+    "stakeIncreaseBuy": { "minIncreasePct": 25, "severity": "Notable", "why": "a buy that lifts the officer's own holding by a quarter is conviction regardless of dollar size" },
+    "drawdownBuy": { "minBelow52wHighPct": 30, "severity": "Notable", "why": "insiders buying into a 30%+ drawdown is a classic reversal tell" },
+    "otherInsiderBuy": { "minUSD": 200000, "severity": "Notable" },
+    "tenPercentOwnerBuy": { "minUSD": 1000000, "severity": "Notable" },
+    "sells": { "severity": "Log", "briefOnlyForHeldOrWatch": true, "why": "sells carry almost no return information (diversification, tax, 10b5-1 plans); shown in the Inbox at Log; ONE count line in the brief for held/watch names; market-wide sells never reach the brief" },
+    "tenB5OneBuy": { "severity": "Log", "why": "a pre-scheduled plan purchase is not a decision made today" }
+  },
+  "ownership": {
+    "activists": ["Elliott", "Starboard", "Pershing Square", "Icahn", "Third Point", "ValueAct", "Trian", "Jana", "Engaged Capital", "Ancora", "Sachem Head", "Land & Buildings"],
+    "sc13dOnHeldOrWatch": { "severity": "Notable", "canEnterOneAction": true, "why": "a 5% holder with intent to influence, in a name you own, is a re-underwrite trigger" },
+    "sc13dByActivist": { "severity": "Notable" },
+    "sc13gOnHeldOrWatch": { "severity": "Log", "why": "passive 5% crossings are informational" },
+    "other": { "severity": "ignore" }
+  },
+  "channels": {
+    "Notable": ["inbox", "brief"],
+    "Log": ["inbox"],
+    "ignore": []
+  },
+  "retention": { "signalsDays": 45, "alertsMax": 2000, "note": "45 days of raw facts covers the 30-day cluster window with margin; alerts.json is append-only and capped by count" }
+}

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Inbox — Portfolio Command Center</title>
+<!--
+  inbox.html — the append-only event log. Phase 2 of the 11 Sep 2026 redesign; the minimal version
+  ("a list renderer over alerts.json, under 200 lines"). This is where an insider cluster in a name
+  you do not hold has somewhere to live that tomorrow's brief does not overwrite — Dell's home.
+  Zero external calls: everything is same-origin data/*.json. alerts.json is public-filing data
+  (tickers, filers, amounts from EDGAR) and is published in the clear; nothing here is a balance.
+-->
+<style>
+  :root{--bg:#fff;--ink:#111827;--muted:#6b7280;--rule:#e5e7eb;--panel:#f9fafb;--accent:#0f766e;--notable:#b45309;--notable-bg:#fef3c7;--log:#6b7280;--log-bg:#f3f4f6;--book:#1d4ed8;--book-bg:#dbeafe;--watch:#7c3aed;--watch-bg:#ede9fe;--red:#b91c1c;--amber:#b45309}
+  @media(prefers-color-scheme:dark){:root{--bg:#0b0f14;--ink:#e5e7eb;--muted:#9ca3af;--rule:#1f2937;--panel:#111827;--accent:#2dd4bf;--notable:#fbbf24;--notable-bg:#3b2a05;--log:#9ca3af;--log-bg:#1f2937;--book:#93c5fd;--book-bg:#172554;--watch:#c4b5fd;--watch-bg:#2e1065}}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  .wrap{max-width:820px;margin:0 auto;padding:18px 16px 60px}
+  header{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;border-bottom:1px solid var(--rule);padding-bottom:12px;margin-bottom:12px}
+  h1{font-size:20px;margin:0;letter-spacing:-.01em}
+  .nav a{color:var(--accent);text-decoration:none;font-size:13px;margin-right:12px}
+  .sum{color:var(--muted);font-size:13px}
+  .filters{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px}
+  .chip{border:1px solid var(--rule);background:var(--panel);color:var(--ink);border-radius:999px;padding:4px 11px;font-size:12.5px;cursor:pointer}
+  .chip.on{border-color:var(--accent);color:var(--accent);font-weight:600}
+  input.q{border:1px solid var(--rule);background:var(--panel);color:var(--ink);border-radius:8px;padding:5px 10px;font-size:13px;min-width:140px}
+  .mark{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:12px;margin:14px 0 8px}
+  .mark::before,.mark::after{content:"";flex:1;border-top:1px dashed var(--rule)}
+  .a{display:grid;grid-template-columns:78px 1fr;gap:4px 12px;padding:10px 0;border-bottom:1px solid var(--rule);font-variant-numeric:tabular-nums}
+  .a .d{color:var(--muted);font-size:12.5px;padding-top:2px}
+  .a .h{font-weight:600}
+  .a .m{color:var(--muted);font-size:13px}
+  .a .m a{color:var(--accent);text-decoration:none}
+  .tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:4px;padding:1px 6px;margin-right:5px;vertical-align:1px}
+  .Notable{background:var(--notable-bg);color:var(--notable)} .Log{background:var(--log-bg);color:var(--log)}
+  .in-book{background:var(--book-bg);color:var(--book)} .watchlist{background:var(--watch-bg);color:var(--watch)} .market-wide{background:var(--log-bg);color:var(--log)}
+  .empty{color:var(--muted);padding:30px 0;text-align:center}
+  .foot{margin-top:24px;color:var(--muted);font-size:12px;line-height:1.7}
+  .gap{background:var(--panel);border-left:3px solid var(--amber);padding:8px 12px;font-size:12.5px;color:var(--muted);margin:10px 0}
+  @media(max-width:520px){.a{grid-template-columns:1fr}.a .d{font-size:12px}}
+</style></head><body><div class="wrap">
+<header><h1>Inbox</h1><span class="nav"><a href="index.html">Today</a></span><span class="sum" id="sum">Loading…</span></header>
+<div class="filters" id="filters">
+  <button class="chip on" data-sev="all">All</button><button class="chip" data-sev="Notable">Notable</button><button class="chip" data-sev="Log">Log</button>
+  <button class="chip" data-tag="in-book">In book</button><button class="chip" data-tag="watchlist">Watchlist</button><button class="chip" data-tag="market-wide">Market-wide</button>
+  <input class="q" id="q" placeholder="ticker or text" aria-label="filter">
+</div>
+<div class="gap">Honest gap: your US holdings are ETFs and file no Form 4s — market-wide and watchlist coverage is where your US exposure is seen. HKEX/SGX insider coverage: not built (phase 7).</div>
+<div id="list"></div>
+<div class="foot" id="foot"></div>
+</div>
+<script src="common.js"></script>
+<script>
+(async()=>{
+  const $=s=>document.querySelector(s), esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const J=async u=>{try{const r=await fetch(u+'?t='+Date.now(),{cache:'no-store'});return r.ok?await r.json():null}catch(_){return null}};
+  const [A,B,M]=await Promise.all([J('data/alerts.json'),J('data/brief.json'),J('data/manifest.json')]);
+  const alerts=(A&&A.alerts)||[], lastBrief=B&&B.date?String(B.date).slice(0,10):null;
+  let sev='all', tag=null, q='';
+  const render=()=>{
+    const list=alerts.filter(a=>(sev==='all'||a.severity===sev)&&(!tag||(a.tags||[]).includes(tag))&&(!q||JSON.stringify(a).toLowerCase().includes(q)));
+    const isNew=a=>lastBrief&&a.date>lastBrief;
+    const fresh=alerts.filter(isNew).length;
+    $('#sum').textContent=`${fresh} new since ${lastBrief?'the '+lastBrief+' brief':'last brief'} · ${alerts.length} in the log · showing ${list.length}`;
+    let html='', drawn=false;
+    for(const a of list){
+      if(!drawn&&lastBrief&&a.date<=lastBrief){html+=`<div class="mark">last brief · ${esc(lastBrief)}</div>`;drawn=true;}
+      const tags=(a.tags||[]).filter(t=>['in-book','watchlist','market-wide'].includes(t)).map(t=>`<span class="tag ${t}">${t}</span>`).join('');
+      html+=`<div class="a"><div class="d">${esc(a.date)}</div><div><span class="tag ${esc(a.severity)}">${esc(a.severity)}</span>${tags}<span class="h">${esc(a.headline)}</span><div class="m">${esc(a.detail)}${a.url?` · <a href="${esc(a.url)}" target="_blank" rel="noopener">filing</a>`:''}${a.clearsWhen?` · clears: ${esc(a.clearsWhen)}`:''}</div></div></div>`;
+    }
+    $('#list').innerHTML=html||'<div class="empty">Nothing matches.</div>';
+  };
+  $('#filters').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;
+    if(b.dataset.sev){sev=b.dataset.sev;document.querySelectorAll('[data-sev]').forEach(x=>x.classList.toggle('on',x===b));}
+    if(b.dataset.tag){tag=tag===b.dataset.tag?null:b.dataset.tag;document.querySelectorAll('[data-tag]').forEach(x=>x.classList.toggle('on',x.dataset.tag===tag));}
+    render();});
+  $('#q').addEventListener('input',e=>{q=e.target.value.trim().toLowerCase();render();});
+  render();
+  const f=M&&M.files||{}, st=(n,c)=>f[n]&&f[n].asOf?window.PCC.stampHTML(f[n].asOf,c,n):`<span class="stamp">${n}: not in manifest</span>`;
+  $('#foot').innerHTML=`${st('signals.json','daily')}<br>${st('alerts.json','daily')}<br>${A&&A.policyVersion?'policy '+esc(A.policyVersion)+' · ':''}alerts are append-only; nothing here is edited or removed, only cleared. Source: SEC EDGAR daily form index.`;
+})();
+</script></body></html>
