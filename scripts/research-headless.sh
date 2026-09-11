@@ -7,7 +7,7 @@ echo "=== $(date '+%F %T') research start ==="
 cd /Users/dominiczhao/portfolio-dashboard || exit 1
 # Phase 2: GitHub Actions commits data/signals.json (the market-wide Form 4 scan) at 06:30 and
 # 11:00 SGT. Pull it before anything reads data/, so alerts.js judges this morning's facts.
-git pull --rebase -q origin main 2>/dev/null || echo "$(date '+%F %T') git pull failed — continuing with local data"
+git pull --rebase --autostash -q origin main 2>/dev/null || echo "$(date '+%F %T') git pull failed — continuing with local data"   # --autostash: the tree is dirty with pipeline scratch files after any red publish
 
 # ── AUTH: long-lived token, not the expiring OAuth session ────────────────
 # The interactive OAuth refresh token lasts ~a month. Yours expired
