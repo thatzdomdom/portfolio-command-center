@@ -121,5 +121,40 @@
     "signalsDays": 45,
     "alertsMax": 2000,
     "note": "45 days of raw facts covers the 30-day cluster window with margin; alerts.json is append-only and capped by count"
+  },
+  "trend": {
+    "gate": "close > SMA200 AND 12-1 month momentum > 0",
+    "offAfterConsecutiveClosesBelow": 5,
+    "slopeInGate": false,
+    "why": "the only durable edge in the July post-mortem (12,871 observations, 11.5y monthly); the 200-day slope is reported but stays OUT of the gate until the silver backtest says otherwise"
+  },
+  "sizing": {
+    "riskPerNameVolTarget": 0.04,
+    "maxSingleName": 0.1,
+    "maxCluster": 0.2,
+    "clusterMergeCorrelation": 0.75,
+    "lookbackDays": 60,
+    "shadowStart": "2026-09-12",
+    "shadowDays": 90,
+    "why": "inverse-vol with a hard 10% name cap and a 20% cluster cap, clusters by correlation not label; runs in SHADOW \u2014 diffed daily, no action asked"
+  },
+  "regime": {
+    "status": "default \u00b7 CIO recommendation \u00b7 unconfirmed",
+    "asOf": "2026-09-12",
+    "expected": "~13% CAGR at ~-25% max drawdown at the risk-sleeve level (post-mortem); roughly -12% to -15% at net-worth level once property, SSB, T-bill and cash ballast is counted",
+    "notRules": [
+      "P&L-triggered de-grossing (tested: harmful, return/drawdown 0.67 vs 0.80)",
+      "volatility ceiling (tested: harmful; high-vol bucket was the best over 12y)"
+    ],
+    "killSwitch": "a signal is switched off when its live realised slope turns negative \u2014 calibration, not P&L"
+  },
+  "silverLeverage": {
+    "status": "UNSIGNED \u2014 the owner sees the 2006-2026 backtest first (decision 1)",
+    "asOf": "2026-09-12",
+    "targetLeverage": 1.6,
+    "stressMultiplier": 1.5,
+    "rule1": "survive a 2-day -20% and a 2-week -35% silver decline without a margin call, at 1.5x the maintenance rate",
+    "rule2": "leverage above 1.0x only while the trend gate is ON; on flip (5 closes below the 200-day), reduce the loan to 1.0x \u2014 remove the borrowing, not the thesis",
+    "rule3": "daily carry line: annualised loan cost against silver trailing 12-month return"
   }
 }

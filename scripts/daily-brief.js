@@ -41,6 +41,36 @@ function valuationLines() {
   if (creds && creds.warnings && creds.warnings.length) creds.warnings.forEach(w => L.push('CREDENTIAL: ' + w));
   return L;
 }
+// Phase 3 (12 Sep 2026): the RISK STATE block — every line computed by code from the price
+// spine and book.json, every rule with a threshold. Standing conditions are permanent state
+// lines; nothing here nags daily. The silver line applies Rule 2 (unsigned) and says so.
+function riskLines() {
+  const L = [];
+  const T = readJson('technicals.json'), TG = readJson('targets.json'), CAL = readJson('.calendar.json'), SB = readJson('silver-backtest.json'), POL = readJson('policy.json'), BK = readJson('book.json');
+  const v = valuation, s = v && v.silver;
+  const slv = T && T.instruments && (T.instruments.SLV || T.instruments['SI=F']);
+  if (slv && s) {
+    const g = slv.gate.on === true ? 'ON' : slv.gate.on === false ? 'OFF' : String(slv.gate.on);
+    L.push(`silver    gate ${g} · ${slv.distPct200 >= 0 ? '+' : ''}${slv.distPct200}% vs 200d (SLV proxy) · 12-1 mom ${slv.mom12_1Pct}% · ${s.distanceToCallPct}% to margin call (${s.distanceToCallPctStressed}% at 1.5x rate) · survivability ${s.survivability.pass ? 'PASS' : 'FAIL'} · leverage ${s.leverage}x`
+      + (slv.gate.on === false && s.leverage > 1.05 ? ' — RULE 2 (unsigned): gate OFF with leverage above 1.0x → reduce the loan to 1.0x' : ''));
+    L.push(`carry     loan ${s.carry.loanRatePct}% vs silver 12m ${s.carry.silver12mPct == null ? 'n/a' : s.carry.silver12mPct + '%'}`);
+  }
+  if (TG && TG.clusters && TG.clusters[0]) { const c = TG.clusters[0]; L.push(`cluster   ${c.name} ${(c.actualRiskShare * 100).toFixed(0)}% of quoted-sleeve risk · cap 20%${c.overCapActual ? ' · OVER' : ''} · portfolio vol ${TG.portfolioVolActualPct}% (target ${TG.portfolioVolTargetPct}%) · targets in SHADOW`); }
+  try { const hist = fs.readFileSync(path.join(ROOT, 'data', 'nav-history.ndjson'), 'utf8').trim().split('\n').map(l => JSON.parse(l)); const pk = hist.reduce((m, x) => x.nav > m.nav ? x : m, hist[0]); const cur = hist[hist.length - 1]; const dd = (cur.nav / pk.nav - 1) * 100;
+    L.push(`drawdown  NAV ${dd <= 0 ? dd.toFixed(1) : '+' + dd.toFixed(1)}% from high (${pk.date}) · ${hist.length}d of history${dd <= -10 ? ' — over 10%: lead item' : ''}`); } catch (_) { L.push('drawdown  NAV history starts today'); }
+  if (CAL && s && s.leverage > 1.0) { const soon = (CAL.upcoming || []).filter(e => e.relevance && /Fed|inflation|China|FOMC/i.test(e.relevance) && (Date.parse(e.whenISO) - Date.now()) < 48 * 3600e3 && (Date.parse(e.whenISO) - Date.now()) > 0);
+    if (soon.length) L.push(`events    ${soon.slice(0, 3).map(e => e.country + ' ' + e.title + ' ' + e.whenSGT.slice(5, 16)).join(' · ')} — within 48h with leverage ${s.leverage}x · acknowledge`); }
+  try { const fh = fs.readFileSync(path.join(ROOT, 'data', 'fx-history.ndjson'), 'utf8').trim().split('\n').map(l => JSON.parse(l)); const cur = fh[fh.length - 1]; const mo = fh.filter(x => x.date.slice(0, 7) === cur.date.slice(0, 7))[0]; const mv = (cur.rates.USD / mo.rates.USD - 1) * 100;
+    L.push(`fx        USD/SGD ${mv >= 0 ? '+' : ''}${mv.toFixed(2)}% MTD${Math.abs(mv) > 3 ? ' — over 3%: FX cash review' : ''} · ${fh.length}d of history`); } catch (_) { L.push('fx        FX history starts today'); }
+  if (T && T.summary && BK) {
+    const heldYf = new Set(BK.holdings.filter(h => h.yf).map(h => h.yf)); const top10 = new Set((v.lines || []).filter(l => l.source === 'live').sort((a, b) => b.valueSGD - a.valueSGD).slice(0, 10).map(l => BK.holdings.find(h => h.id === l.id)).filter(Boolean).map(h => h.yf));
+    const below = T.summary.crossedBelow5d.filter(x => heldYf.has(x)), topCross = below.filter(x => top10.has(x));
+    const offHeld = [...heldYf].filter(x => T.instruments[x] && T.instruments[x].gate.on === false).length, nHeld = [...heldYf].filter(x => T.instruments[x]).length;
+    L.push(`trend     ${offHeld}/${nHeld} held names gate OFF · crossed below 200d (5 closes): ${below.join(', ') || 'none'}${topCross.length ? ' · TOP-10 POSITION crossed: ' + topCross.join(', ') + ' — re-underwrite by a date (One Action candidate)' : ''}${T.summary.volSpike.filter(x => heldYf.has(x)).length ? ' · vol spike: ' + T.summary.volSpike.filter(x => heldYf.has(x)).join(', ') : ''}`);
+  }
+  if (POL) L.push(`policy    regime ${POL.regime ? POL.regime.status : '—'} · silver rules 1&2 ${POL.silverLeverage ? POL.silverLeverage.status.split(' — ')[0] : '—'}` + (SB ? ` · backtest ${SB.from.slice(0, 4)}–${SB.asOf.slice(0, 4)}: always-${SB.rules.targetLeverage}x ${SB.summary.always.marginCalls} margin call(s), gated ${SB.summary.gated.marginCalls}, CAGR ${SB.summary.always.cagrPct}% vs ${SB.summary.gated.cagrPct}%` : ''));
+  return L;
+}
 const news = readJson('news.json'), model = readJson('model.json'), market = readJson('market.json'), intel = readJson('intel.json');
 const today = new Date().toLocaleDateString('en-SG', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
 
@@ -53,6 +83,7 @@ if (fresh) {
   if (brief.whatChanged && brief.whatChanged.length) sections.push(['WHAT WAS UPDATED', brief.whatChanged]);
   if (brief.regime) sections.push(['MACRO REGIME', [ `${brief.regime.label} — risk-on ${Math.round((brief.regime.riskOn || 0) * 100)}%`, brief.regime.oneLiner || '' ].filter(Boolean)]);
   sections.push(['VALUATION & LEVERAGE', valuationLines()]);
+    sections.push(['RISK STATE', riskLines()]);
   if (brief.topNews && brief.topNews.length) sections.push(['NEWS THAT MATTERS TO YOUR BOOK', brief.topNews.map(n => `[${(n.impact || '').toUpperCase()}] ${n.headline}\n   → ${n.actionable || ''}`)]);
   if (brief.signals && brief.signals.length) sections.push(['MODEL SIGNALS / POSSIBLE TRADES', brief.signals]);
   if (brief.watch && brief.watch.length) sections.push(['WATCHING', brief.watch]);
@@ -61,6 +92,7 @@ if (fresh) {
   // agent failed to write brief.json — the brief is then marked as such).
   tldr.push('(auto-composed fallback — agent did not write a fresh brief.json)');
   sections.push(['VALUATION & LEVERAGE', valuationLines()]);
+    sections.push(['RISK STATE', riskLines()]);
   if (model && model.macro) tldr.push(`Regime: ${model.macro.regime} · risk-on ${Math.round((model.macro.riskOnProb || 0) * 100)}%`);
   if (market && market.fearGreed) tldr.push(`Fear & Greed ${market.fearGreed.value} (${market.fearGreed.rating}) · crypto ${market.fearGreed.cryptoValue ?? '—'}`);
   if (news && news.items && news.items[0]) tldr.push(`Top story: ${news.items[0].headline}`);
@@ -185,6 +217,7 @@ if (isStale) {
   tldr = [];
   sections = [
     ['VALUATION & LEVERAGE (computed in code this morning — unaffected by the research outage)', valuationLines()],
+    ['RISK STATE (computed in code)', riskLines()],
     ...sections.filter(([h]) => /^🔔 SIGNALS/.test(h)),
     ['RESEARCH MISSING TODAY', ['TLDR', 'Macro regime and risk-on read', 'News that matters to your book', 'Model signals / watch list',
       `Cause: ${staleCause}`].concat(staleFix ? [`Fix on the Mac: ${staleFix}`] : [])],

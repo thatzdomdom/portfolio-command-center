@@ -72,6 +72,9 @@ async function yahooCheck() {
       note: worst > 1 ? `WARNING: ECB and Yahoo disagree by ${worst}% on at least one pair — inspect` : `agree within ${worst}%` },
   };
   fs.writeFileSync(OUT, JSON.stringify(out, null, 2) + '\n');
+  // FX history for the monthly-move line (>3% = FX cash review). Public data; committed.
+  try { const HP = path.join(__dirname, '..', 'data', 'fx-history.ndjson'); const last = fs.existsSync(HP) ? fs.readFileSync(HP, 'utf8').trim().split('\n').pop() : '';
+    if (!last || JSON.parse(last).date !== primary.asOf) fs.appendFileSync(HP, JSON.stringify({ date: primary.asOf, rates: primary.rates }) + '\n'); } catch (_) {}
   console.log(`fx.json: ECB ${primary.asOf} · ` + NEED.map(c => `${c} ${primary.rates[c]}`).join(' · ') + ` · vs Yahoo: ${out.crossCheck.note}`);
   if (worst > 1) process.exit(2);
 })();

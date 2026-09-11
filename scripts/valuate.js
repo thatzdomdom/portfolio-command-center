@@ -104,6 +104,10 @@ const out = {
   fxAsOf: fx.asOf, byClass, silver, stale, lines,
 };
 fs.writeFileSync(D('valuation.json'), JSON.stringify(out, null, 2) + '\n');
+// NAV history for the drawdown-from-high line (Rule table: >10% = brief lead). Append-only,
+// one row per SGT day; carries a balance, so gitignored — the brief reads it locally.
+try { const HP = D('nav-history.ndjson'); const last = fs.existsSync(HP) ? fs.readFileSync(HP, 'utf8').trim().split('\n').pop() : '';
+  if (!last || JSON.parse(last).date !== today) fs.appendFileSync(HP, JSON.stringify({ date: today, nav: out.navSGD, pricesAsOf: out.asOf }) + '\n'); } catch (_) {}
 const sgd = n => 'S$' + (n / 1e6).toFixed(3) + 'M';
 console.log(`valuation.json: NAV ${sgd(nav)} (${out.dayChgPct == null ? '—' : (out.dayChgPct >= 0 ? '+' : '') + out.dayChgPct + '%'} vs prev close) · prices as of ${priceAsOfMin} · fx ${fx.asOf} · ${stale.length} stale item(s)`);
 if (silver) console.log(`  silver: ${silver.oz} oz @ $${silver.priceUSD} · leverage ${silver.leverage}x · call at $${silver.callPriceUSD} (${silver.distanceToCallPct}% away; $${silver.callPriceUSDStressed} / ${silver.distanceToCallPctStressed}% at 1.5x rate) · survivability ${silver.survivability.pass ? 'PASS' : 'FAIL'} · carry: ${silver.carry.note}`);

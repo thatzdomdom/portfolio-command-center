@@ -49,6 +49,8 @@ echo "ok" > "$HOME/.claude/portfolio-auth.state"
 /opt/homebrew/bin/node scripts/calendar-spine.js || echo "$(date '+%F %T') calendar spine unavailable/stale — see data/.calendar.json"
 /opt/homebrew/bin/node scripts/fx.js || echo "$(date '+%F %T') fx.js failed or stale — valuation will use prior rates"
 /opt/homebrew/bin/node scripts/valuate.js || echo "$(date '+%F %T') valuate.js FAILED — no NAV this run"
+/opt/homebrew/bin/node scripts/technicals.js || echo "$(date '+%F %T') technicals.js FAILED — no trend gate this run"
+/opt/homebrew/bin/node scripts/targets.js || echo "$(date '+%F %T') targets.js FAILED — no shadow targets this run"
 /opt/homebrew/bin/node scripts/alerts.js || echo "$(date '+%F %T') alerts.js FAILED — no insider/ownership judgments this run"
 
 # The ONLY date in the system is the machine clock in SGT, passed in explicitly. A run was once

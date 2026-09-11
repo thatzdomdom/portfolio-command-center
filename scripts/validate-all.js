@@ -386,6 +386,14 @@ else {
   else { const a = daysAgo(String(al.generatedAt || '').slice(0, 10)); if (a != null && a > 2) warn('alerts.json', `not re-evaluated for ${a} days`); else ok(`alerts: ${(al.alerts || []).length} in the log · ${(al.alerts || []).filter(x => x.severity === 'Notable').length} Notable`); }
 }
 
+// ── PHASE 3: the technical layer must be current ───────────────────────────
+{
+  const T = J('technicals.json');
+  if (!T) warn('technicals.json', 'absent — technicals.js has not run');
+  else { const a = daysAgo(T.asOf); if (a != null && a > 4) fail('technicals.json', `trend gate is ${a} days old — stale gate, stale risk block`); else ok(`technicals: ${T.summary.instruments} instruments · gate ON ${T.summary.gateOn} / OFF ${T.summary.gateOff} · as of ${T.asOf}`); }
+  const G = J('targets.json'); if (G) ok(`targets (shadow): ${G.eligible}/${G.universe} eligible · top cluster ${(G.clusters[0] || {}).name || '—'} ${G.clusters[0] ? (G.clusters[0].actualRiskShare * 100).toFixed(0) + '%' : ''} of risk`);
+}
+
 // ── report ─────────────────────────────────────────────────────────────────
 const report = { checkedOn: today, at: new Date().toISOString(), problems, warnings, passed: checks };
 fs.writeFileSync(path.join(D, '.validation.json'), JSON.stringify(report, null, 1) + '\n');
