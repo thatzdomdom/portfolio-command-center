@@ -184,6 +184,7 @@ if (isStale) {
   tldr = [];
   sections = [
     ['VALUATION & LEVERAGE (computed in code this morning — unaffected by the research outage)', valuationLines()],
+    ...sections.filter(([h]) => /^🔔 SIGNALS/.test(h)),
     ['RESEARCH MISSING TODAY', ['TLDR', 'Macro regime and risk-on read', 'News that matters to your book', 'Model signals / watch list',
       `Cause: ${staleCause}`].concat(staleFix ? [`Fix on the Mac: ${staleFix}`] : [])],
   ];
