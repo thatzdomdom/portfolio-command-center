@@ -44,6 +44,8 @@ echo "ok" > "$HOME/.claude/portfolio-auth.state"
 # them. Both are non-fatal: if a feed is down the run continues and says so.
 /opt/homebrew/bin/node scripts/price-spine.js || echo "$(date '+%F %T') price spine FAILED — agents will lack a price anchor this run"
 /opt/homebrew/bin/node scripts/calendar-spine.js || echo "$(date '+%F %T') calendar spine unavailable/stale — see data/.calendar.json"
+/opt/homebrew/bin/node scripts/fx.js || echo "$(date '+%F %T') fx.js failed or stale — valuation will use prior rates"
+/opt/homebrew/bin/node scripts/valuate.js || echo "$(date '+%F %T') valuate.js FAILED — no NAV this run"
 
 # The ONLY date in the system is the machine clock in SGT, passed in explicitly. A run was once
 # framed on a date four days wrong because an injected date was trusted over the clock.
@@ -73,10 +75,7 @@ if /opt/homebrew/bin/node scripts/validate-intel.js --fix; then
   echo "$(date '+%F %T') price gate: clean"
 else
   echo "$(date '+%F %T') price gate: quarantined bad price(s) — committing correction"
-  git add data/intel.json 2>/dev/null
-  git commit -q -m "Price gate: quarantine insider entries asserting untraded prices $(TZ=Asia/Singapore date +%F)" 2>/dev/null \
-    && (git push -q origin main 2>/dev/null || (git pull --rebase -q origin main && git push -q origin main)) \
-    && echo "$(date '+%F %T') price-gate correction pushed"
+  echo "$(date '+%F %T') price-gate correction staged for publish.js"
   NTFY=$(grep '^NTFY_TOPIC=' "$HOME/.claude/portfolio-brief.env" 2>/dev/null | cut -d= -f2)
   [ -n "$NTFY" ] && curl -s -o /dev/null -H "Title: Portfolio: fabricated price caught" -H "Priority: high" -H "Tags: warning" \
     -d "The price gate removed an insider entry whose stated price never traded. See the Smart Money tab's data-quality note." "https://ntfy.sh/${NTFY}"
@@ -108,8 +107,9 @@ if [ "$VC" = "1" ]; then
 else
   echo "$(date '+%F %T') validate-all: exit $VC"
 fi
-git add data/.validation.json 2>/dev/null
-git commit -q -m "Validation report $(TZ=Asia/Singapore date +%F)" 2>/dev/null \
-  && (git push -q origin main 2>/dev/null || (git pull --rebase -q origin main && git push -q origin main))
+# ── PUBLISH (phase 1, 11 Sep 2026) — the ONLY path to origin ───────────────
+# Every gate re-runs inside publish.js; red = no push + alarm. The agent no longer pushes.
+if /opt/homebrew/bin/node scripts/publish.js; then echo "$(date '+%F %T') publish: pushed"
+else echo "$(date '+%F %T') publish: BLOCKED — nothing reached the live site; 08:15 brief will be [DEGRADED] if research is missing"; fi
 
 echo "=== $(date '+%F %T') research end (exit $EC) ==="

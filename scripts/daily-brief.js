@@ -20,6 +20,27 @@ function readEnv() {
 }
 
 const brief = readJson('brief.json');
+// Phase 1 (11 Sep 2026): net worth and the silver margin arithmetic now exist on disk, computed
+// in code before any page renders them — and the brief reads them here. valuation.json is the
+// output of scripts/valuate.js; .credentials.json of scripts/credentials.js. Both survive a
+// research outage, so they are shown even in a [DEGRADED] brief.
+const valuation = readJson('valuation.json');
+const creds = (() => { try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'data', '.credentials.json'), 'utf8')); } catch (_) { return null; } })();
+function valuationLines() {
+  if (!valuation) return ['valuation.json absent — scripts/valuate.js did not run'];
+  const v = valuation, L = [], m = n => 'S$' + (n / 1e6).toFixed(3) + 'M';
+  const pct = v.dayChgPct == null ? '—' : (v.dayChgPct >= 0 ? '+' : '') + v.dayChgPct.toFixed(2) + '%';
+  L.push(`NAV ${m(v.navSGD)} · ${pct} (${v.dayChgSGD >= 0 ? '+' : ''}S$${Math.round(v.dayChgSGD).toLocaleString()}) vs prev close · prices ${v.asOf} · fx ${v.fxAsOf}`);
+  const s = v.silver;
+  if (s) {
+    L.push(`SILVER ${s.oz} oz @ $${s.priceUSD.toFixed(2)} · equity S$${s.equitySGD.toLocaleString()} · leverage ${s.leverage}x · margin call at $${s.callPriceUSD} (${s.distanceToCallPct}% away; $${s.callPriceUSDStressed} / ${s.distanceToCallPctStressed}% away if maintenance rises to ${(s.maintenanceRateStressed * 100).toFixed(0)}%)`);
+    L.push(`Rule 1 survivability (2-day −20% and 2-week −35% at the stressed rate): ${s.survivability.pass ? 'PASS' : 'FAIL — position outside policy; reduce the loan or add collateral'} · carry: loan ${s.carry.loanRatePct}% vs silver 12m ${s.carry.silver12mPct == null ? 'n/a' : s.carry.silver12mPct + '%'} — ${s.carry.note}`);
+    if (String(s.maintenanceRateSource).startsWith('ASSUMED')) L.push(`Maintenance rate ${(s.maintenanceRate * 100).toFixed(0)}% is ASSUMED (as of ${s.maintenanceRateAsOf}) — confirm on the IBKR account page and update data/book.json`);
+  }
+  if (v.stale && v.stale.length) L.push(`${v.stale.length} stale mark(s): ${v.stale.slice(0, 5).map(x => x.t || x.id).join(', ')}${v.stale.length > 5 ? '…' : ''} — manual marks over 90 days (maintenance rate: 30) need updating in data/book.json`);
+  if (creds && creds.warnings && creds.warnings.length) creds.warnings.forEach(w => L.push('CREDENTIAL: ' + w));
+  return L;
+}
 const news = readJson('news.json'), model = readJson('model.json'), market = readJson('market.json'), intel = readJson('intel.json');
 const today = new Date().toLocaleDateString('en-SG', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
 
@@ -31,6 +52,7 @@ if (fresh) {
   tldr = brief.tldr || [];
   if (brief.whatChanged && brief.whatChanged.length) sections.push(['WHAT WAS UPDATED', brief.whatChanged]);
   if (brief.regime) sections.push(['MACRO REGIME', [ `${brief.regime.label} — risk-on ${Math.round((brief.regime.riskOn || 0) * 100)}%`, brief.regime.oneLiner || '' ].filter(Boolean)]);
+  sections.push(['VALUATION & LEVERAGE', valuationLines()]);
   if (brief.topNews && brief.topNews.length) sections.push(['NEWS THAT MATTERS TO YOUR BOOK', brief.topNews.map(n => `[${(n.impact || '').toUpperCase()}] ${n.headline}\n   → ${n.actionable || ''}`)]);
   if (brief.signals && brief.signals.length) sections.push(['MODEL SIGNALS / POSSIBLE TRADES', brief.signals]);
   if (brief.watch && brief.watch.length) sections.push(['WATCHING', brief.watch]);
@@ -38,6 +60,7 @@ if (fresh) {
   // Fallback: compose mechanically from the data files (works even if the
   // agent failed to write brief.json — the brief is then marked as such).
   tldr.push('(auto-composed fallback — agent did not write a fresh brief.json)');
+  sections.push(['VALUATION & LEVERAGE', valuationLines()]);
   if (model && model.macro) tldr.push(`Regime: ${model.macro.regime} · risk-on ${Math.round((model.macro.riskOnProb || 0) * 100)}%`);
   if (market && market.fearGreed) tldr.push(`Fear & Greed ${market.fearGreed.value} (${market.fearGreed.rating}) · crypto ${market.fearGreed.cryptoValue ?? '—'}`);
   if (news && news.items && news.items[0]) tldr.push(`Top story: ${news.items[0].headline}`);
@@ -137,11 +160,22 @@ const staleBanner = isStale
     + `Do not trade on it. Prices, probabilities and risk on the dashboard still\n`
     + `recompute live.\n${'\u2588'.repeat(56)}\n\n`
   : '';
+// [DEGRADED] (phase 1): when research did not run, do NOT resend yesterday's analysis under
+// today's date. Send what code computed this morning (valuation) and NAME the missing sections —
+// an omitted section looks like a quiet day; a named gap looks like a failure.
+if (isStale) {
+  tldr = [];
+  sections = [
+    ['VALUATION & LEVERAGE (computed in code this morning — unaffected by the research outage)', valuationLines()],
+    ['RESEARCH MISSING TODAY', ['TLDR', 'Macro regime and risk-on read', 'News that matters to your book', 'Model signals / watch list',
+      `Cause: ${staleCause}`].concat(staleFix ? [`Fix on the Mac: ${staleFix}`] : [])],
+  ];
+}
 const bullets = a => a.map(x => `\u2022 ${x}`).join('\n');
 // The subject line is the only part he sees on a locked phone. When there is no
 // research, it must not say "Morning Brief".
 const SUBJ = isStale
-  ? `\u{1F534} NO RESEARCH \u2014 day ${outageDays} \u2014 brief is ${briefDay || 'old'} data, not ${today}`
+  ? `[DEGRADED] \u{1F534} NO RESEARCH \u2014 day ${outageDays} \u2014 brief is ${briefDay || 'old'} data, not ${today}`
   : `\u{1F4CA} Portfolio Morning Brief \u2014 ${today}`;
 const fullText = [
   staleBanner + `PORTFOLIO MORNING BRIEF — ${today}`,

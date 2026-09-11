@@ -290,10 +290,17 @@ else {
           if (claimed < lo || claimed > hi) continue;
           // A claim counts as reconciled if it matches ANY completed close in the window —
           // items legitimately quote several sessions, and highs/lows are quoted too.
+          // "toward $108-109", "~$64", "about 4,400" are approximations, not asserted closes. On
+          // 11 Sep a futures contract roll moved Brent's close 108.95 -> 107.63 after the brief had
+          // said "toward $108-109"; 0.25% blocked the push over a rounded range. Widen to 1% ONLY
+          // when the claim is explicitly approximate or a range; exact assertions keep 0.25%.
+          const after = text.slice(m.index + m[0].length, m.index + m[0].length + 8);
+          const approx = /(toward|towards|about|near|around|roughly|circa|~)\s*(?:US\$|HK\$|S\$|\$)?\s*[\d,]+\.?\d*$/i.test(m[0]) || /^\s*[-–]\s*\d/.test(after);
+          const tol = approx ? 0.01 : 0.0025;
           const hit = inst.bars.some(b =>
-            Math.abs(b.c - claimed) <= Math.max(0.011, b.c * 0.0025) ||
-            Math.abs(b.h - claimed) <= Math.max(0.011, b.h * 0.0025) ||
-            Math.abs(b.l - claimed) <= Math.max(0.011, b.l * 0.0025));
+            Math.abs(b.c - claimed) <= Math.max(0.011, b.c * tol) ||
+            Math.abs(b.h - claimed) <= Math.max(0.011, b.h * tol) ||
+            Math.abs(b.l - claimed) <= Math.max(0.011, b.l * tol));
           checked++;
           if (hit) matched++;
           else mismatches.push({ where, sym, claimed, near: inst.bars.slice(-4).map(b => b.c) });
@@ -315,6 +322,52 @@ else {
       if (mismatches.length > 6) fail('prices', `…and ${mismatches.length - 6} more unreconciled price claim(s)`);
     }
   }
+}
+
+// ── PHASE 1 GUARDS (added 11 Sep 2026) ──────────────────────────────────────
+// (a) book.json ↔ index.html parity. During the parallel week the HTML keeps its own copy of the
+//     holdings and keeps rendering from it. Two copies of the same truth WILL drift unless a gate
+//     fails on the first divergence — so this compares every id/ticker/qty/book/manual mark.
+// (b) sensitive plaintext must never be tracked. book.json and valuation.json carry cash balances,
+//     property marks and the margin loan; only their .enc envelopes may be committed.
+// (c) manifest.json should be today's; warn (not fail) because publish.js writes it last.
+{
+  const book = J('book.json');
+  if (!book) warn('book.json', 'absent — run scripts/extract-book.js (phase 1)');
+  else {
+    try {
+      const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8').split('\n');
+      const fromHtml = {};
+      html.forEach(ln => {
+        if (!/^\s*\{id:\s*\d+\s*,.*\}\s*,?\s*(\/\/.*)?$/.test(ln)) return;
+        const lit = ln.trim().replace(/,\s*(\/\/.*)?$/, '').replace(/\/\/.*$/, '');
+        const o = new Function('return ' + lit)();
+        fromHtml[o.id] = { t: o.t, yf: o.yf ?? null, qty: o.qty ?? null, book: o.book ?? null, manualNative: o.manualNative ?? null };
+      });
+      const diffs = [];
+      for (const h of book.holdings) {
+        const x = fromHtml[h.id];
+        if (!x) { diffs.push(`id ${h.id} (${h.t}) in book.json but not in index.html`); continue; }
+        for (const k of ['t', 'yf', 'qty', 'book', 'manualNative']) {
+          const a = h[k] ?? null, b = x[k] ?? null;
+          if (JSON.stringify(a) !== JSON.stringify(b)) diffs.push(`id ${h.id} ${h.t}: ${k} book.json=${a} html=${b}`);
+        }
+      }
+      const htmlIds = Object.keys(fromHtml).map(Number), bookIds = new Set(book.holdings.map(h => h.id));
+      htmlIds.filter(i => !bookIds.has(i)).forEach(i => diffs.push(`id ${i} (${fromHtml[i].t}) in index.html but not in book.json`));
+      if (diffs.length) { diffs.slice(0, 6).forEach(d => fail('book.json', `DRIFT vs index.html — ${d}`)); if (diffs.length > 6) fail('book.json', `…and ${diffs.length - 6} more`); }
+      else ok(`book: ${book.holdings.length} holdings match index.html exactly`);
+    } catch (e) { warn('book.json', `parity check could not run: ${e.message}`); }
+  }
+  const { spawnSync } = require('child_process');
+  const tracked = spawnSync('git', ['ls-files', '--', 'data/book.json', 'data/valuation.json', 'data/.prices-2y.json', 'data/.credentials.json'],
+    { cwd: path.join(__dirname, '..'), encoding: 'utf8' }).stdout.trim();
+  if (tracked) fail('git', `sensitive PLAINTEXT is tracked: ${tracked.replace(/\n/g, ', ')} — must be gitignored; only .enc envelopes may be committed`);
+  else ok('git: no sensitive plaintext tracked');
+  const man = J('manifest.json');
+  if (!man) warn('manifest.json', 'absent — publish.js writes it');
+  else if (man.sgtDate !== today) warn('manifest.json', `sgtDate ${man.sgtDate} ≠ today ${today} (publish has not run yet today)`);
+  else ok(`manifest: ${Object.keys(man.files || {}).length} files, sgtDate today`);
 }
 
 // ── report ─────────────────────────────────────────────────────────────────

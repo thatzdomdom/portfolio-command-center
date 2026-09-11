@@ -38,6 +38,7 @@ const EXCH = {
   SG:  { tz: 'Asia/Singapore',   close: [17, 0] },
   JP:  { tz: 'Asia/Tokyo',       close: [15, 30] },
   KR:  { tz: 'Asia/Seoul',       close: [15, 30] },
+  AU:  { tz: 'Australia/Sydney', close: [16, 0] },
   FUT: { tz: 'America/New_York', close: [17, 0] },  // CME/ICE settlement window
   CRYPTO: { tz: 'UTC', close: null },               // never closes; today's bar is a LEVEL
 };
@@ -80,6 +81,17 @@ const UNIVERSE = [
   ['MP', 'MP Materials', 'US'], ['LYC.AX', 'Lynas', 'US'], ['UUUU', 'Energy Fuels', 'US'],
   ['BTC-USD', 'Bitcoin', 'CRYPTO'],
 ];
+// Phase 1: every quoted holding in book.json joins the universe, so valuate.js never lacks a
+// price for a name the owner actually holds. Exchange inferred from the Yahoo suffix.
+try {
+  const bk = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'book.json'), 'utf8'));
+  const have = new Set(UNIVERSE.map(u => u[0]));
+  for (const h of bk.holdings || []) {
+    if (!h.yf || have.has(h.yf)) continue;
+    const ex = /\.SI$/.test(h.yf) ? 'SG' : /\.HK$/.test(h.yf) ? 'HK' : /\.AX$/.test(h.yf) ? 'AU' : /=F$/.test(h.yf) ? 'FUT' : 'US';
+    UNIVERSE.push([h.yf, h.n, ex]); have.add(h.yf);
+  }
+} catch (_) { /* no book.json yet — spine still covers its own list */ }
 
 const get = url => new Promise((res, rej) => {
   https.get(url, { headers: { 'User-Agent': 'Mozilla/5.0' } }, r => {
@@ -107,7 +119,7 @@ function sessionComplete(barDate, exch) {
   return (n.hh * 60 + n.mm) >= (e.close[0] * 60 + e.close[1]);
 }
 
-async function fetchOne(sym, exch, range = '1mo') {
+async function fetchOne(sym, exch, range = '2y') {
   const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?range=${range}&interval=1d`;
   const r = await get(url);
   if (r.status !== 200) return { error: `HTTP ${r.status}` };
@@ -137,15 +149,21 @@ async function fetchOne(sym, exch, range = '1mo') {
 
 async function main() {
   const out = { generated: new Date().toISOString(), source: 'Yahoo Finance chart API (keyless)', instruments: {}, errors: {}, dropped: {} };
+  // Two outputs from one fetch: .prices.json keeps 12 bars (committed, the audit trail the revision
+  // detector diffs); .prices-2y.json keeps the full two years (gitignored, local) for valuate.js and
+  // the phase-3 technicals, which need ~260 bars for a 200-day average and 12-month momentum.
+  const out2y = { generated: out.generated, source: out.source, range: '2y', instruments: {} };
   for (const [sym, name, exch] of UNIVERSE) {
     try {
       const r = await fetchOne(sym, exch);
       if (r.error) { out.errors[sym] = r.error; continue; }
-      const b = r.bars.slice(-12);
-      if (!b.length) { out.errors[sym] = 'no completed sessions returned'; continue; }
-      const withChg = b.map((x, i) => i === 0 ? { ...x, chg: null, pct: null }
-        : { ...x, chg: +(x.c - b[i - 1].c).toFixed(6), pct: +(((x.c / b[i - 1].c) - 1) * 100).toFixed(4) });
-      out.instruments[sym] = { name, exchange: exch, currency: r.currency, bars: withChg };
+      const full = r.bars;
+      if (!full.length) { out.errors[sym] = 'no completed sessions returned'; continue; }
+      const chg = arr => arr.map((x, i) => i === 0 ? { ...x, chg: null, pct: null }
+        : { ...x, chg: +(x.c - arr[i - 1].c).toFixed(6), pct: +(((x.c / arr[i - 1].c) - 1) * 100).toFixed(4) });
+      const fullChg = chg(full);
+      out.instruments[sym] = { name, exchange: exch, currency: r.currency, bars: fullChg.slice(-12) };
+      out2y.instruments[sym] = { name, exchange: exch, currency: r.currency, bars: fullChg };
       if (r.dropped.length) out.dropped[sym] = r.dropped;
     } catch (e) { out.errors[sym] = e.message; }
     await new Promise(r => setTimeout(r, 90));   // be polite; this is an unauthenticated endpoint
@@ -164,6 +182,7 @@ async function main() {
     const median = recent.slice().sort((a, b) => a - b)[Math.floor(recent.length / 2)] || 0;
     inst.proxy = PROXY[sym] || null;
     inst.trust = median >= floor ? 'ok' : 'low';
+    if (out2y.instruments[sym]) Object.assign(out2y.instruments[sym], { trust: inst.trust, proxy: inst.proxy });
     if (inst.trust === 'low') {
       inst.trustNote = `median recent volume ${median} is below the ${floor} plausibility floor for this contract — ` +
         `the series is probably a rolled or back-month contract. Quote ${inst.proxy || 'an ETF proxy'} for percentage moves instead.`;
@@ -218,6 +237,8 @@ async function main() {
     if (last && (!out.latestByExchange[e] || last > out.latestByExchange[e])) out.latestByExchange[e] = last;
   }
   fs.writeFileSync(path.join(__dirname, '..', 'data', '.prices.json'), JSON.stringify(out, null, 2) + '\n');
+  out2y.latestByExchange = out.latestByExchange;
+  fs.writeFileSync(path.join(__dirname, '..', 'data', '.prices-2y.json'), JSON.stringify(out2y) + '\n');
 
   const n = Object.keys(out.instruments).length, e = Object.keys(out.errors).length,
         d = Object.values(out.dropped).reduce((a, x) => a + x.length, 0);
