@@ -119,7 +119,7 @@ try {
   const lines = notable.slice(0, 8).map(a => `${a.headline} [${(a.tags || []).filter(t => ['in-book', 'watchlist', 'market-wide', 'cluster'].includes(t)).join(' ')}] — ${a.detail}`);
   if (sells.length) lines.push(`${sells.length} insider sell(s) on held/watch names since ${since}${sells.every(a => (a.tags || []).includes('10b5-1')) ? ', all 10b5-1 plans' : ''} — see inbox.html`);
   if (!lines.length) lines.push(`no Notable insider or ownership events since ${since} · ${(AL.alerts || []).length} in the log · inbox.html`);
-  const scanNote = (() => { try { const S = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'signals.json'), 'utf8')); const last = (S.scans || []).slice(-1)[0]; return last ? ` · Form 4 scan ${last.date}: ${last.form4Lines || 0} filings, ${last.kept || 0} with open-market trades` : ''; } catch (_) { return ' · signals.json absent'; } })();
+  const scanNote = (() => { try { const S = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'signals.json'), 'utf8')); const last = (S.scans || []).filter(x => !x.error).slice(-1)[0]; return last ? ` · Form 4 scan ${last.date}: ${last.form4Lines || 0} filings, ${last.kept || 0} with open-market trades` : ''; } catch (_) { return ' · signals.json absent'; } })();
   sections.unshift(['🔔 SIGNALS SINCE LAST BRIEF (insiders & ownership, market-wide)' + scanNote, lines]);
 } catch (e) { sections.unshift(['🔔 SIGNALS', ['alerts.json unavailable — scripts/alerts.js did not run (' + e.message + ')']]); }
 if (insiderLines.length) sections.unshift(['🔔 INSIDER FILINGS CAUGHT LIVE (legacy queue)', insiderLines]);

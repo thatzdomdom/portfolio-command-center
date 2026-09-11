@@ -375,7 +375,7 @@ else {
   const sig = J('signals.json'), al = J('alerts.json');
   if (!sig) warn('signals.json', 'absent — form4-scan.js has not run (GitHub Actions or launchd)');
   else {
-    const last = (sig.scans || []).slice(-1)[0];
+    const last = (sig.scans || []).filter(x => !x.error).slice(-1)[0];   // freshness from the last scan that actually read an index
     const a = last ? daysAgo(last.date) : null;
     if (a == null) warn('signals.json', 'no scan log');
     else if (a > 4) fail('signals.json', `last EDGAR scan is ${a} days old — the market-wide insider feed is DEAD, not quiet`);
