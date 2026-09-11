@@ -198,13 +198,11 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
 
 <div class="nav">
   <button class="nav-btn active" onclick="showTab('overview',this)">Overview</button>
-  <button class="nav-btn" onclick="showTab('opportunity',this)">🎯 Opportunity Matrix</button>
   <button class="nav-btn" onclick="showTab('risk',this)">🛡️ Portfolio Risk</button>
   <button class="nav-btn" onclick="showTab('alloc',this)">⚖️ Allocation</button>
   <button class="nav-btn" onclick="showTab('flows',this)">🌊 Fund Flows</button>
   <button class="nav-btn" onclick="showTab('smart',this)">💼 Smart Money</button>
   <button class="nav-btn" onclick="showTab('investors',this)">🐋 Investors</button>
-  <button class="nav-btn" onclick="showTab('reddit',this)">🔥 Reddit Trends</button>
   <button class="nav-btn" onclick="showTab('analytics',this)">Analytics</button>
   <span style="border-left:1px solid var(--border);margin:6px 4px;"></span>
   <button class="nav-btn" onclick="showTab('holdings',this)">Holdings</button>
@@ -226,7 +224,7 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
   </div>
   <div class="card" style="margin-bottom:16px;border-left:3px solid var(--accent);">
     <div class="sh">🏅 Consensus Picks — every source combined</div>
-    <p style="font-size:12px;color:var(--muted);margin:-4px 0 10px;">One ranked list linking super-investor 13Fs, Congress buys, insiders, Reddit crowd interest and the quant model. More independent sources agreeing = higher rank. Signals, not advice.</p>
+    <p style="font-size:12px;color:var(--muted);margin:-4px 0 10px;">One ranked list linking super-investor 13Fs, Congress buys, insiders. More independent sources agreeing = higher rank. Signals, not advice.</p>
     <div id="consensus-body"><div class="ld"><span class="spin"></span>Combining sources…</div></div>
   </div>
   <div class="card" style="margin-bottom:16px;">
@@ -304,49 +302,6 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
   </div>
 </div>
 
-<div class="panel" id="panel-opportunity">
-  <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px;">
-    <div style="font-size:18px;font-weight:800;letter-spacing:-.02em;">🎯 Opportunity Matrix</div>
-    <div style="font-size:12px;color:var(--muted);">Systematic, probability-first. Directional odds &amp; expected value across horizons — built to raise return <em>and</em> cut drawdown.</div>
-  </div>
-  <div id="opp-regime" style="margin-bottom:14px;"></div>
-  <div id="opp-status" class="small" style="color:var(--muted);margin-bottom:12px;"></div>
-  <div id="opp-alerts" style="margin-bottom:16px;"></div>
-  <div class="card" style="margin-bottom:16px;">
-    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;">
-      <div class="sh" style="margin:0;">The Matrix — every instrument scored</div>
-      <div style="margin-left:auto;display:flex;align-items:center;gap:6px;">
-        <span class="small" style="color:var(--muted)">horizon:</span>
-        <select id="opp-horizon" onchange="setOppHorizon(this.value)" style="background:var(--surf2);border:1px solid var(--border);color:var(--text);padding:5px 11px;border-radius:8px;font-size:12px;font-weight:800;cursor:pointer">
-          <option value="1m">1 Month</option>
-          <option value="3m" selected>3 Months</option>
-          <option value="12m">12 Months</option>
-        </select>
-      </div>
-    </div>
-    <div class="cp-filters" id="opp-filters" style="margin-bottom:10px;">
-      <button class="cpf active" data-g="all" onclick="setOppGroup('all')">All</button>
-      <button class="cpf" data-g="Equity" onclick="setOppGroup('Equity')">Equities/Regions</button>
-      <button class="cpf" data-g="Factor" onclick="setOppGroup('Factor')">Factors/Sectors</button>
-      <button class="cpf" data-g="Commodity" onclick="setOppGroup('Commodity')">Commodities</button>
-      <button class="cpf" data-g="Crypto" onclick="setOppGroup('Crypto')">Crypto</button>
-      <button class="cpf" data-g="Bond" onclick="setOppGroup('Bond')">Bonds/Rates</button>
-      <button class="cpf" data-g="RareEarth" onclick="setOppGroup('RareEarth')">⛏️ Rare Earth</button>
-      <button class="cpf" data-g="buys" onclick="setOppGroup('buys')">★ Buy-rated only</button>
-    </div>
-    <div class="tbl-wrap"><div id="opp-matrix"><div class="ld"><span class="spin"></span>Loading market universe…</div></div></div>
-  </div>
-  <div class="card" style="margin-bottom:16px;">
-    <div class="sh">📈 Track record — is the model actually right?</div>
-    <p style="font-size:12px;color:var(--muted);margin:-4px 0 10px;">Every research call is snapshotted daily and scored against what prices actually did. No memory-holing bad calls — hit rates below are computed live from the stored history.</p>
-    <div id="opp-track"><div class="ld"><span class="spin"></span>Scoring past calls…</div></div>
-  </div>
-  <div class="card" style="margin-bottom:16px;">
-    <div class="sh">How the model works — methodology</div>
-    <div id="opp-method" style="font-size:12.5px;line-height:1.75;color:var(--text)"></div>
-  </div>
-</div>
-
 <div class="panel" id="panel-risk">
   <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px;">
     <div style="font-size:18px;font-weight:800;letter-spacing:-.02em;">🛡️ Portfolio Risk &amp; Scenarios</div>
@@ -360,7 +315,6 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
   </div>
   <div class="card" style="margin-bottom:16px;"><div class="sh">⚡ Scenario stress tests — estimated impact on your liquid book</div><div class="tbl-wrap"><div id="risk-scenarios"></div></div></div>
   <div class="card" style="margin-bottom:16px;"><div class="sh">🚩 Where your book is offside vs the current regime</div><div id="risk-offside"></div></div>
-  <div class="card" style="margin-bottom:16px;"><div class="sh">Model read on your holdings (same engine as the Opportunity Matrix)</div><div class="tbl-wrap"><div id="risk-holdings"></div></div></div>
   <div class="card" style="margin-bottom:16px;"><div class="sh">Methodology & caveats</div><div id="risk-method" style="font-size:12.5px;line-height:1.7"></div></div>
 </div>
 
@@ -459,25 +413,6 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
   <p style="font-size:11px;color:var(--muted);margin-top:14px;">Researched &amp; written by a scheduled Claude "Intel" agent from public disclosures (US House/Senate STOCK Act filings, SEC 13F &amp; Form 4). Not financial advice. Refreshes daily.</p>
 </div>
 
-<div class="panel" id="panel-reddit">
-  <div class="card">
-    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;">
-      <div class="sh" style="margin:0;">🔥 Reddit Trending Stocks</div>
-      <div style="margin-left:auto;display:flex;gap:6px;align-items:center;">
-        <button class="filter-pill active" id="rd-all" onclick="setReddit('all-stocks',this)">All Subreddits</button>
-        <button class="filter-pill" id="rd-wsb" onclick="setReddit('wallstreetbets',this)">r/wallstreetbets</button>
-        <button class="btn" onclick="loadReddit(true)">↻</button>
-      </div>
-    </div>
-    <div class="small" id="reddit-status" style="color:var(--muted);font-size:12px;margin-bottom:8px;">Loading trending stocks…</div>
-    <div class="tbl-wrap"><table>
-      <thead><tr><th>#</th><th>Ticker</th><th class="hide-sm">Name</th><th class="r">24h Δ rank</th><th class="r">Mentions</th><th class="r hide-sm">Δ ment.</th><th class="r hide-sm">Upvotes</th></tr></thead>
-      <tbody id="reddit-tbody"></tbody>
-    </table></div>
-    <p style="font-size:11px;color:var(--muted);margin-top:10px;">Live from ApeWisdom (Reddit mentions across investing subs). 🟡 = a ticker you hold. Green ▲ = climbing the rankings. <strong>Deep AI analysis of the biggest movers is coming via the scheduled Intel agent.</strong></p>
-  </div>
-</div>
-
 <div class="panel" id="panel-analytics">
   <div class="card"><div class="sh">Performance Attribution — Listed Securities</div>
     <p style="font-size:12px;color:var(--muted);margin-bottom:8px;">Each security's contribution to the listed-securities return for the period. Contribution = (security value ÷ total securities value) × its return. Bars are centred at zero; the table sums to the total.</p>
@@ -529,8 +464,6 @@ tr.grp td{background:var(--surf2);color:var(--accent);font-weight:800;font-size:
   <div class="modal"><button class="modal-close-btn" onclick="closeCP()">✕</button><div id="cp-content"></div></div>
 </div>
 
-<div class="overlay" id="opp-overlay" onclick="closeOpp(event)">
-  <div class="modal"><button class="modal-close-btn" onclick="closeOpp()">✕</button><div id="opp-content"></div></div>
 </div>
 
 <div class="overlay" id="fg-overlay" onclick="closeFg(event)">
@@ -1280,10 +1213,8 @@ function setChartPeriod(p){
 }
 
 function showTab(id,b){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active'));el('panel-'+id).classList.add('active');b.classList.add('active');
-  if(id==='reddit'&&!redditLoaded) loadReddit();
   if(id==='smart'&&!intelLoaded) loadIntel();
   if(id==='investors'&&!investorsLoaded) loadInvestors();
-  if(id==='opportunity'&&!modelStarted) loadModel();
   if(id==='risk'&&!riskStarted) loadRisk();
   if(id==='flows'){ if(!flowsLoaded) loadFlows(); flowsWatchdog(); }}
 // If the panel is STILL on the spinner 8s after opening the tab, stop hiding the
@@ -1296,7 +1227,7 @@ function showTab(id,b){document.querySelectorAll('.panel').forEach(p=>p.classLis
 // because the fix simply was not running). data/version.json is fetched with a
 // cache-buster on every load; if the server is ahead of this file, reload once
 // against the new build. sessionStorage guards against a reload loop.
-const BUILD=60;
+const BUILD=61;
 async function checkBuild(){
   try{
     const r=await fetch('data/version.json?cb='+Date.now(),{cache:'no-store'});
@@ -1870,39 +1801,8 @@ function renderSmart(){
 }
 
 // ── Reddit trending (ApeWisdom feed via proxy) ──
-let redditLoaded=false, redditFilter='all-stocks';
-const HELD=new Set(H.filter(h=>h.yf).map(h=>h.t.toUpperCase()));
-function setReddit(f,btn){redditFilter=f;document.querySelectorAll('#rd-all,#rd-wsb').forEach(x=>x.classList.remove('active'));btn.classList.add('active');loadReddit(true);}
-async function loadReddit(force){
-  if(redditLoaded&&!force) return;
-  el('reddit-status').innerHTML='<span class="ld"><span class="spin"></span>Loading trending stocks…</span>';
-  try{
-    const data=await yfFetch(`https://apewisdom.io/api/v1.0/filter/${redditFilter}/page/1`);
-    const rows=(data?.results||[]).slice(0,25);
-    if(!rows.length) throw new Error('no data');
-    el('reddit-tbody').innerHTML=rows.map(r=>{
-      const prev=r.rank_24h_ago||0; const chg=prev>0?(prev-r.rank):null; // + = climbed
-      const arrow=chg==null?'<span style="color:var(--muted)">new</span>'
-        :chg>0?`<span style="color:var(--green)">▲ ${chg}</span>`
-        :chg<0?`<span style="color:var(--red)">▼ ${-chg}</span>`
-        :'<span style="color:var(--muted)">—</span>';
-      const mchg=(r.mentions_24h_ago!=null)?r.mentions-r.mentions_24h_ago:null;
-      const mchgStr=mchg==null?'—':`<span style="color:${mchg>=0?'var(--green)':'var(--red)'}">${mchg>=0?'+':''}${mchg}</span>`;
-      const held=HELD.has((r.ticker||'').toUpperCase());
-      const name=(r.name||'').replace(/&amp;/g,'&');
-      return `<tr><td style="color:var(--muted)">${r.rank}</td><td>${tkr(r.ticker)}${held?' 🟡':''}</td><td class="hide-sm" style="color:var(--muted)">${name}</td><td class="r">${arrow}</td><td class="r" style="font-weight:700">${r.mentions.toLocaleString('en-SG')}</td><td class="r hide-sm">${mchgStr}</td><td class="r hide-sm" style="color:var(--muted)">${(r.upvotes||0).toLocaleString('en-SG')}</td></tr>`;
-    }).join('');
-    redditLoaded=true;
-    el('reddit-status').textContent=`Top ${rows.length} · ${redditFilter==='all-stocks'?'all investing subreddits':'r/wallstreetbets'} · updated ${new Date().toLocaleTimeString('en-SG')}`;
-  }catch(e){ el('reddit-status').innerHTML=`<span style="color:var(--red)">Couldn't load Reddit feed (${e.message}). Tap ↻ to retry.</span>`; }
-}
-// ═══════════════════════════════════════════════════════════════════════
-// 🎯 OPPORTUNITY MATRIX — systematic, probability-first cross-asset model
-// Drift-diffusion (GBM) engine: a multi-factor drift estimate + realized
-// vol → calibrated P(up) and Expected Value per horizon, all from live data.
-// ═══════════════════════════════════════════════════════════════════════
 let modelStarted=false, modelLoading=false, modelLoaded=false, modelMacro=null, modelData={}, modelSmartSectors=null, MODEL_RESULTS=[], oppHorizon='3m', oppGroup='all', MACRO_TILT={};
-// Refresh button: re-price holdings AND (if the matrix was ever opened) re-pull the Opportunity Matrix — fresh macro + fresh prices.
+// Refresh button: re-price holdings and re-pull risk — fresh prices. (The Opportunity Matrix and its P(up) calls were removed in phase 0 of the 11 Sep 2026 redesign; the engine below is retained until phase 5 because loadRisk still reads model.json for its macro tilt.)
 // ↻ Refresh must re-pull EVERY published file, not just prices. Until 31 Jul
 // it skipped investors.json and intel.json entirely — and because their loaders
 // early-return once loaded, the Investors/Trump and Smart Money tabs kept
@@ -1915,7 +1815,7 @@ function refreshAll(){
   loadIntel(true); loadInvestors(true);
   if(flowsLoaded) loadFlows(true);
   buildConsensus();
-  if(modelStarted) loadModel(true); if(riskStarted) loadRisk(true);
+  if(riskStarted) loadRisk(true);
 }
 const GLABEL={Equity:'Equity / Region',Factor:'Factor / Sector',Commodity:'Commodity',Crypto:'Crypto',Bond:'Bond / Rate',RareEarth:'Rare Earth'};
 // universe — must stay aligned across app. {t ticker, yf, n name, g group, mc macro-class, prior μ-prior, cap drift-cap, fit portfolio-fit}
@@ -2058,189 +1958,6 @@ async function fetchModelOne(u){
     modelData[u.t]={hist,price:(res.meta?.regularMarketPrice>0)?res.meta.regularMarketPrice:hist[hist.length-1].close,name:res.meta?.longName||res.meta?.shortName||u.n};
   }catch(_){}
 }
-async function loadModel(force){
-  if(modelLoading)return; if(modelStarted&&!force)return; modelStarted=true; modelLoading=true;
-  el('opp-status').innerHTML='<span class="spin"></span> Loading macro regime…';
-  try{const r=await fetch('data/model.json?t='+Date.now());if(r.ok)modelMacro=await r.json();}catch(_){}
-  buildMacroTilt(); await ensureSmart(); renderRegime(); renderMethod();
-  const U=MODEL_UNIVERSE; let done=0;
-  for(let i=0;i<U.length;i+=3){
-    await Promise.allSettled(U.slice(i,i+3).map(u=>fetchModelOne(u)));
-    done=Math.min(U.length,i+3);
-    el('opp-status').innerHTML=`<span class="spin"></span> Pricing instruments & computing odds… ${done}/${U.length}`;
-    renderModel(); await sleep(280);
-  }
-  for(let round=0;round<3;round++){
-    const miss=U.filter(u=>!modelData[u.t]); if(!miss.length)break;
-    el('opp-status').innerHTML=`<span class="spin"></span> Retrying ${miss.length} slow instrument(s)…`;
-    for(let i=0;i<miss.length;i+=2){await Promise.allSettled(miss.slice(i,i+2).map(u=>fetchModelOne(u)));renderModel();await sleep(500);}
-  }
-  const got=U.filter(u=>modelData[u.t]).length; modelLoaded=true; renderModel();
-  el('opp-status').innerHTML=`✓ Model live · ${got}/${U.length} instruments priced${modelMacro?.asOf?` · macro input ${modelMacro.asOf}`:''} · technicals as of ${new Date().toLocaleString('en-SG')} · tap ↻ Refresh to re-pull`;
-  modelLoading=false;
-  loadTrack();
-}
-function renderModel(){MODEL_RESULTS=MODEL_UNIVERSE.map(buildModel).filter(Boolean);renderRegime();renderAlerts();renderMatrix();}
-
-function sigStyle(label){const m={'STRONG BUY':['#065f46','rgba(16,185,129,.18)'],'BUY':['#15803d','rgba(34,197,94,.16)'],'ACCUMULATE':['#3f6212','rgba(132,204,22,.18)'],'HOLD':['#57534e','rgba(120,113,108,.14)'],'REDUCE':['#b45309','rgba(245,158,11,.16)'],'AVOID':['#b91c1c','rgba(239,68,68,.14)'],'RISK-OFF':['#fff','#b91c1c']};const[c,bg]=m[label]||m.HOLD;return `color:${c};background:${bg};`;}
-function pUpStyle(p){return p>=0.58?'color:var(--green)':p<=0.42?'color:var(--red)':'color:var(--muted)';}
-function flagChip(f){const m={up:['#15803d','▲'],down:['#dc2626','▼'],warn:['#b45309','⚠'],good:['#15803d','✓']};const[c,ic]=m[f.k]||['#78716c','•'];return `<span style="font-size:10px;font-weight:700;color:${c};background:${c}1a;padding:1px 6px;border-radius:5px;margin:0 3px 3px 0;display:inline-block;white-space:nowrap">${ic} ${f.t}</span>`;}
-function scoreBar(s){const c=s>=60?'var(--green)':s>=47?'var(--accent)':'var(--red)';return `<div style="display:flex;align-items:center;gap:6px"><div style="flex:1;min-width:34px;height:6px;background:var(--surf2);border-radius:3px;overflow:hidden"><div style="width:${Math.round(s)}%;height:100%;background:${c}"></div></div><b style="font-size:11px;width:20px;text-align:right">${Math.round(s)}</b></div>`;}
-function oppRow(m){const h=m[oppHorizon];return `<tr class="clickable" onclick="openOppDetail('${m.t}')">
-  <td><span class="ticker-badge">${m.t}</span> <span class="hide-sm" style="color:var(--muted);font-size:11px">${m.n}</span></td>
-  <td class="hide-sm" style="color:var(--muted)">${m.glabel}</td>
-  <td><span style="font-size:10px;font-weight:800;padding:2px 7px;border-radius:5px;${sigStyle(m.label)}">${m.label}</span></td>
-  <td class="r"><b style="${pUpStyle(h.pUp)}">${Math.round(h.pUp*100)}%</b></td>
-  <td class="r ${clr(h.ev)}">${fmtP(h.ev)}</td>
-  <td class="r hide-sm">${Math.round(m.sigma*100)}%</td>
-  <td class="r hide-sm neg">${(m.maxDD*100).toFixed(0)}%</td>
-  <td class="hide-sm">${m.flags.slice(0,2).map(flagChip).join('')||'<span style="color:var(--muted)">—</span>'}</td>
-  <td style="min-width:84px">${scoreBar(m.score)}</td></tr>`;}
-function renderMatrix(){
-  const box=el('opp-matrix'); if(!box)return;
-  if(!MODEL_RESULTS.length){box.innerHTML='<div class="ld"><span class="spin"></span>Computing…</div>';return;}
-  let arr=MODEL_RESULTS.slice();
-  if(oppGroup==='buys')arr=arr.filter(m=>['STRONG BUY','BUY','ACCUMULATE'].includes(m.label));
-  else if(oppGroup!=='all')arr=arr.filter(m=>m.g===oppGroup);
-  arr.sort((a,b)=>b.score-a.score);
-  const hl={'1m':'1M','3m':'3M','12m':'12M'}[oppHorizon];
-  let html=`<table><thead><tr><th>Instrument</th><th class="hide-sm">Class</th><th>Signal</th><th class="r">P↑ ${hl}</th><th class="r">EV ${hl}</th><th class="r hide-sm">Vol</th><th class="r hide-sm">Max DD 1y</th><th class="hide-sm">Trend</th><th>Score</th></tr></thead><tbody>`;
-  html+=arr.map(oppRow).join('')+'</tbody></table>';
-  const loaded=MODEL_RESULTS.length,total=MODEL_UNIVERSE.length;
-  if(loaded<total&&!modelLoaded)html+=`<div class="small" style="color:var(--muted);margin-top:8px"><span class="spin"></span> ${loaded}/${total} instruments priced…</div>`;
-  box.innerHTML=html;
-}
-function stanceChip(stance){const s=stance||'';const c=/O[W]|Overweight/.test(s)?['#15803d','rgba(34,197,94,.14)']:/U[W]|Underweight/.test(s)?['#b91c1c','rgba(239,68,68,.14)']:['#57534e','rgba(120,113,108,.14)'];return `color:${c[0]};background:${c[1]}`;}
-function renderRegime(){
-  const box=el('opp-regime'); if(!box)return; const M=modelMacro?.macro; if(!M){box.innerHTML='';return;}
-  const ro=Math.round((M.riskOnProb??0.5)*100);
-  const drivers=(M.drivers||[]).slice(0,6).map(d=>{const o=typeof d==='string'?{factor:d.split(/:\s/)[0],read:(d.split(/:\s(.+)/)[1]||''),impact:''}:d;const c=/support/.test(o.impact||'')?'var(--green)':/(caution|head)/.test(o.impact||'')?'var(--red)':'var(--accent)';return `<div style="font-size:11.5px;line-height:1.5;padding:6px 9px;background:var(--surf2);border:1px solid var(--border);border-radius:7px"><b style="color:${c}">${o.factor}</b>${o.read?` — ${o.read}`:''}</div>`;}).join('');
-  const stances=(M.byAssetClass||[]).map(a=>`<span title="${(a.note||'').replace(/"/g,'&quot;')}" style="font-size:11px;font-weight:700;padding:3px 9px;border-radius:6px;${stanceChip(a.stance)};white-space:nowrap">${a.assetClass} · ${a.stance}</span>`).join(' ');
-  const nsrc=(M.sources||[]).length;
-  box.innerHTML=`<div class="card" style="border-left:3px solid var(--accent)">
-    <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:10px">
-      <div><div class="sh" style="margin:0 0 2px">Macro regime · CIO read</div><div style="font-size:16px;font-weight:800">${M.regime}</div></div>
-      <div style="margin-left:auto;min-width:200px;flex:1;max-width:320px">
-        <div class="small" style="color:var(--muted);margin-bottom:3px">Risk-on probability <b style="color:var(--text)">${ro}%</b></div>
-        <div style="height:8px;background:var(--surf2);border-radius:4px;overflow:hidden"><div style="width:${ro}%;height:100%;background:linear-gradient(90deg,var(--red),var(--accent),var(--green))"></div></div>
-        <div class="small" style="display:flex;justify-content:space-between;color:var(--muted);margin-top:2px"><span>risk-off</span><span>risk-on</span></div>
-      </div>
-    </div>
-    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">${stances}</div>
-    <p style="font-size:12.5px;line-height:1.65;margin-bottom:10px">${M.narrative}</p>
-    <div class="grid2" style="gap:6px">${drivers}</div>
-    <div class="small" style="color:var(--muted);margin-top:10px"><span style="color:${freshCol(M.asOf)}">●</span> <b>Macro commentary</b> as of ${fmtStamp(M.asOf)} · ${agoTxt(M.asOf)} · ${nsrc} cited sources · technicals recompute live on every load. Tap any instrument for its full quant + research breakdown.</div></div>`;
-}
-function renderAlerts(){
-  const box=el('opp-alerts'); if(!box)return; if(!MODEL_RESULTS.length){box.innerHTML='';return;}
-  const byScore=[...MODEL_RESULTS].sort((a,b)=>b.score-a.score);
-  // BUY-or-better (score ≥60) — the bucket the 9y & 30y backtests favoured over
-  // STRONG-BUY-only (Sharpe 0.41 vs 0.33 over 30y). Equal-weight: inverse-vol
-  // sizing lost ~2-4.5pts CAGR in both backtests.
-  const qual=byScore.filter(m=>['STRONG BUY','BUY'].includes(m.label));
-  const buys=qual.slice(0,8);
-  // Concentration guard — June 2022 failure mode: 4 picks, all commodities, at the top
-  const themeN={}; qual.forEach(m=>themeN[m.glabel]=(themeN[m.glabel]||0)+1);
-  const dom=Object.entries(themeN).sort((a,b)=>b[1]-a[1])[0]||['—',0];
-  const guardOn=qual.length>0&&(qual.length<6||dom[1]/qual.length>0.5);
-  const eqw=buys.length?Math.round(100/buys.length):0;
-  const guard=guardOn?`<div style="border-left:3px solid var(--red);background:rgba(239,68,68,.07);border-radius:0 8px 8px 0;padding:8px 10px;margin-bottom:8px;font-size:11.5px;line-height:1.5"><b>⚠️ Concentration guard:</b> ${qual.length<6?`only ${qual.length} name${qual.length===1?'':'s'} qualify`:''}${qual.length<6&&dom[1]/qual.length>0.5?' and ':''}${dom[1]/qual.length>0.5?`${dom[1]} of ${qual.length} are ${dom[0]}`:''}. In the 30-year backtest this exact setup preceded the worst whipsaws (Jun 2022: 4 picks, all commodities → −23% year). Cap any single theme at ~50% of what you deploy; keep the remainder in ballast/cash.</div>`:'';
-  const buyCards=buys.map(m=>`<div onclick="openOppDetail('${m.t}')" style="cursor:pointer;border:1px solid var(--border);border-radius:8px;padding:10px;background:var(--surf)">
-    <div style="display:flex;align-items:center;gap:6px"><span class="ticker-badge">${m.t}</span><span style="font-size:10px;font-weight:800;padding:1px 6px;border-radius:5px;${sigStyle(m.label)}">${m.label}</span><b style="margin-left:auto;font-size:12px">${Math.round(m.score)}</b></div>
-    <div style="font-size:11px;color:var(--muted);margin:4px 0 6px">${m.n} · <span style="color:var(--accent)">${m.glabel}</span></div>
-    <div style="display:flex;gap:12px;font-size:11px"><span>P↑3M <b style="${pUpStyle(m['3m'].pUp)}">${Math.round(m['3m'].pUp*100)}%</b></span><span>EV12M <b class="${clr(m['12m'].ev)}">${fmtP(m['12m'].ev)}</b></span></div>
-    <div style="font-size:10.5px;color:var(--muted);margin-top:5px">Equal-weight ~<b>${eqw}%</b> of deployed amount · σ ${Math.round(m.sigma*100)}%</div></div>`).join('');
-  const HED=['TLT','IEF','SHY','GLD','USMV','BND','TIP'];
-  const hedges=byScore.filter(m=>HED.includes(m.t)).slice(0,5);
-  const hedgeCards=hedges.map(m=>`<div onclick="openOppDetail('${m.t}')" style="cursor:pointer;border:1px solid var(--border);border-radius:8px;padding:9px;background:var(--surf)">
-    <div style="display:flex;align-items:center;gap:6px"><span class="ticker-badge">${m.t}</span><span style="margin-left:auto;font-size:11px;${pUpStyle(m['3m'].pUp)}"><b>${Math.round(m['3m'].pUp*100)}%</b> P↑3M</span></div>
-    <div style="font-size:11px;color:var(--muted);margin-top:4px">${m.n} · σ ${Math.round(m.sigma*100)}% · DD ${(m.maxDD*100).toFixed(0)}%</div></div>`).join('');
-  const risk=[...MODEL_RESULTS].filter(m=>m.label==='RISK-OFF'||m.flags.some(f=>f.k==='down')||(m.flags.some(f=>f.t==='Overbought')&&m['1m'].ev<0)).sort((a,b)=>a.score-b.score).slice(0,5);
-  const riskCards=risk.map(m=>`<div onclick="openOppDetail('${m.t}')" style="cursor:pointer;border:1px solid var(--border);border-radius:8px;padding:9px;background:var(--surf)">
-    <div style="display:flex;align-items:center;gap:6px"><span class="ticker-badge">${m.t}</span><span style="font-size:10px;font-weight:800;padding:1px 6px;border-radius:5px;${sigStyle(m.label)}">${m.label}</span></div>
-    <div style="font-size:11px;color:var(--muted);margin-top:4px">${m.flags.map(f=>f.t).join(' · ')||m.n}</div></div>`).join('');
-  box.innerHTML=`<div class="grid3">
-    <div class="card"><div class="sh">🟢 Buy candidates — BUY or better (score ≥60)</div><div class="small" style="color:var(--muted);margin:-4px 0 10px">The backtested bucket (see methodology): equal-weighted, ${qual.length} qualifying name${qual.length===1?'':'s'}${qual.length>8?' (top 8 shown)':''}.</div>${guard}<div style="display:flex;flex-direction:column;gap:8px">${buyCards||'<span class="small" style="color:var(--muted)">None meet the ≥60 threshold right now — the backtested response is ballast/cash, not forcing a trade.</span>'}</div></div>
-    <div class="card"><div class="sh">🛡️ Drawdown-control ballast</div><div class="small" style="color:var(--muted);margin:-4px 0 10px">Low-overlap diversifiers &amp; hedges. Raising these lowers portfolio max-drawdown.</div><div style="display:flex;flex-direction:column;gap:8px">${hedgeCards||'<span class="small" style="color:var(--muted)">—</span>'}</div></div>
-    <div class="card"><div class="sh">🔴 Risk warnings — trim / avoid</div><div class="small" style="color:var(--muted);margin:-4px 0 10px">Downtrend, overbought-into-weakness, or risk-off — reduce/hedge, especially names overlapping your book.</div><div style="display:flex;flex-direction:column;gap:8px">${riskCards||'<span class="small" style="color:var(--muted)">No acute risk flags.</span>'}</div></div></div>`;
-}
-function openOppDetail(t){
-  const m=MODEL_RESULTS.find(x=>x.t===t); if(!m)return;
-  const row=(lbl,h)=>`<tr><td style="font-weight:700">${lbl}</td><td class="r"><b style="${pUpStyle(h.pUp)}">${Math.round(h.pUp*100)}%</b></td><td class="r ${clr(h.ev)}">${fmtP(h.ev)}</td><td class="r ${clr(h.q05)}">${fmtP(h.q05)}</td><td class="r ${clr(h.q95)}">${fmtP(h.q95)}</td></tr>`;
-  const f=(lbl,val,extra)=>`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border)"><span style="color:var(--muted)">${lbl}</span><span style="font-weight:700">${val}${extra?` <span style="color:var(--muted);font-weight:400">${extra}</span>`:''}</span></div>`;
-  el('opp-content').innerHTML=`
-   <div style="display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:10px">
-     <div><div style="font-size:26px;font-weight:800">${m.t}</div><div style="font-size:12px;color:var(--muted)">${m.n} · ${m.glabel}</div></div>
-     <div style="margin-left:auto;text-align:right"><span style="font-size:12px;font-weight:800;padding:3px 10px;border-radius:6px;${sigStyle(m.label)}">${m.label}</span><div style="font-size:12px;color:var(--muted);margin-top:4px">Score ${Math.round(m.score)}/100</div></div></div>
-   <div style="display:flex;flex-wrap:wrap;margin-bottom:12px">${m.flags.map(flagChip).join('')||'<span class="small" style="color:var(--muted)">no acute flags</span>'}</div>
-   <div class="sh">Directional odds &amp; expected value by horizon</div>
-   <div class="tbl-wrap"><table style="margin-bottom:6px"><thead><tr><th>Horizon</th><th class="r">P(up)</th><th class="r">Expected value</th><th class="r">5% case</th><th class="r">95% case</th></tr></thead><tbody>${row('1 Month',m['1m'])}${row('3 Months',m['3m'])}${row('12 Months',m['12m'])}</tbody></table></div>
-   <div class="small" style="color:var(--muted);margin-bottom:14px">P(up)=Φ((μ−½σ²)√T ÷ σ); EV=e^(μT)−1. The 5%/95% columns are the lognormal return quantiles — your realistic drawdown / upside band for that horizon.${m.research?` Values above blend the live quant model with the CIO research panel at <b>${Math.round(m.rw*100)}%</b> research weight.`:' No CIO research call for this instrument — pure quant.'}</div>
-   ${m.research?`<div style="background:var(--surf2);border-radius:8px;margin-bottom:14px;padding:12px">
-     <div class="sh" style="margin-bottom:8px">Quant model vs CIO research panel → blend</div>
-     <div class="tbl-wrap"><table><thead><tr><th>Horizon</th><th class="r">Quant P↑</th><th class="r">Research P↑</th><th class="r">Blend P↑</th><th class="r">Blend EV</th></tr></thead><tbody>
-       ${['1m','3m','12m'].map((k,i)=>`<tr><td>${['1 Month','3 Months','12 Months'][i]}</td><td class="r" style="${pUpStyle(m.quant[k].pUp)}">${Math.round(m.quant[k].pUp*100)}%</td><td class="r" style="${pUpStyle(m.research['pUp'+k])}">${Math.round(m.research['pUp'+k]*100)}%</td><td class="r"><b style="${pUpStyle(m[k].pUp)}">${Math.round(m[k].pUp*100)}%</b></td><td class="r ${clr(m[k].ev)}">${fmtP(m[k].ev)}</td></tr>`).join('')}
-     </tbody></table></div>
-     <div class="sh" style="margin:12px 0 6px">CIO research drivers · confidence ${Math.round((m.research.confidence||0.5)*100)}%</div>
-     <ul style="font-size:12px;line-height:1.65;padding-left:16px;margin:0">${(m.research.drivers||[]).map(d=>`<li>${d}</li>`).join('')}</ul>
-   </div>`:''}
-   <div class="grid2">
-     <div><div class="sh">Statistical factors (live)</div>
-       ${f('Price vs 200-day SMA',((m.price/m.sma200-1)*100).toFixed(1)+'%')}
-       ${f('50-day vs 200-day',((m.sma50/m.sma200-1)*100).toFixed(1)+'%')}
-       ${f('12-1 momentum',(m.mom12_1>=0?'+':'')+(m.mom12_1*100).toFixed(0)+'%')}
-       ${f('RSI (14)',Math.round(m.rsi))}
-       ${f('Realized vol (annualized)',(m.sigma*100).toFixed(0)+'%')}
-       ${f('Max drawdown (1y)',(m.maxDD*100).toFixed(0)+'%')}
-       ${f('Drawdown from 52w high',(m.curDD*100).toFixed(0)+'%')}
-       ${f('Sharpe proxy (μ−rf)/σ',m.sharpe.toFixed(2))}</div>
-     <div><div class="sh">Model drift &amp; tilts (annualized)</div>
-       ${f('Long-horizon drift μ',(m.muLong*100).toFixed(1)+'%')}
-       ${f('Short-horizon drift μ',(m.muShort*100).toFixed(1)+'%')}
-       ${f('Macro regime tilt',(m.macroTilt>=0?'+':'')+(m.macroTilt*100).toFixed(1)+'%',m.macroCls+' '+macroStanceFor(m.macroCls))}
-       ${f('Smart-money tilt',(m.smartTilt>=0?'+':'')+(m.smartTilt*100).toFixed(1)+'%')}
-       ${f('CIO research weight',m.research?Math.round(m.rw*100)+'%':'—',m.research?'confidence '+Math.round((m.research.confidence||0.5)*100)+'%':'no call')}
-       <div class="sh" style="margin-top:12px">Why</div>
-       <ul style="font-size:12px;line-height:1.7;padding-left:16px">${m.drivers.map(d=>`<li>${d}</li>`).join('')}</ul></div></div>
-   <div style="margin-top:12px;padding:10px;background:var(--surf2);border-radius:8px;font-size:12px"><b>Portfolio fit:</b> ${FIT_NOTE[m.fit]||''}</div>
-   <div style="margin-top:14px;text-align:center"><button class="btn btn-primary" onclick="closeOpp();openTicker('${m.t}')">View live candlestick chart →</button></div>
-   <div class="small" style="color:var(--muted);margin-top:10px;text-align:center">Statistical model · decision-support only · not financial advice. Probabilities are model estimates, not guarantees.</div>`;
-  el('opp-overlay').classList.add('open');
-}
-function closeOpp(e){if(e&&e.target!==el('opp-overlay'))return;el('opp-overlay').classList.remove('open');}
-function setOppHorizon(v){oppHorizon=v;renderMatrix();}
-function setOppGroup(g){oppGroup=g;document.querySelectorAll('#opp-filters .cpf').forEach(b=>b.classList.toggle('active',b.dataset.g===g));renderMatrix();}
-function renderMethod(){
-  const box=el('opp-method'); if(!box)return;
-  box.innerHTML=`<p style="margin-bottom:8px">Decisions here are <b>probability- and statistics-driven, not opinions</b>. Every instrument is run through the same engine on 2 years of live daily data:</p>
-  <ol style="padding-left:18px;line-height:1.8;margin-bottom:10px">
-    <li><b>Multi-factor drift (μ).</b> A forward annualized return estimate blends the instrument's own trailing drift (shrunk 30%), a long-run asset-class prior (50%), and a trend-momentum tilt (κ·S): 200-day trend, 50/200 cross, and 12-1 momentum — the factors with the most robust historical premia. μ is capped per asset class so a 2-year bull can't run away.</li>
-    <li><b>Realized volatility (σ).</b> Blend of 90-day and 252-day log-return vol, annualized.</li>
-    <li><b>Geometric-Brownian-motion probabilities.</b> Treating returns as lognormal, <b>P(up) = Φ((μ−½σ²)√T ÷ σ)</b> and <b>Expected Value = e^(μT) − 1</b> for each horizon T (1M, 3M, 12M). P(up) and EV come from the <em>same</em> (μ,σ), so they're always internally consistent. The 5% / 95% columns are the return quantiles — your realistic loss / gain band.</li>
-    <li><b>Macro &amp; smart-money tilts to μ.</b> A <b>macro-regime</b> stance per asset class (currently <em>${(modelMacro?.macro?.regime)||'—'}</em>) and a <b>smart-money</b> tilt from super-investor sector concentration (quarter-over-quarter) nudge the quant drift. Tilts are small by design — the price data leads.</li>
-    <li><b>CIO research panel blend.</b> A multi-agent research workflow (with adversarial verification and ${(modelMacro?.macro?.sources||[]).length||'cited'} sources) produces a forward-looking P(up) &amp; EV per instrument per horizon. We <b>blend</b> it with the live quant estimate at the probability level — research weight scales with its stated confidence and is <b>capped at 55%</b>, so the statistical engine stays primary. Every instrument's drill-down shows quant vs research vs blend side by side.</li>
-    <li><b>Drawdown control.</b> Sizing uses <b>inverse-volatility (risk-parity) weights</b> so low-vol names get larger allocations — this is the single biggest lever on portfolio max-drawdown. The model surfaces ballast (Treasuries, gold, min-vol) as a deliberate counterweight to your equity/REIT/precious-metals book, and flags overbought, downtrending and high-vol names to trim.</li>
-    <li><b>Composite score &amp; signal.</b> 0–100 from the 3M and 12M edge over 50/50, the Sharpe proxy, and trend — mapped to STRONG BUY → AVOID, with a RISK-OFF override when an asset is in a confirmed downtrend with negative drift.</li>
-  </ol>
-  <p style="color:var(--muted)">Tap any row for the full factor breakdown and a live candlestick chart. This is decision-support for your own analysis — <b>not financial advice</b>, and the dashboard never places trades. Model refreshes its macro input daily; technicals recompute live each time you open the tab.</p>
-  <div style="margin-top:14px;padding:12px;background:var(--surf2);border-radius:8px">
-    <div class="sh">📜 Backtested — Jul 2026 (scripts/backtest.js, reproducible)</div>
-    <p style="margin:4px 0 6px">The exact quant scoring above (macro/research tilts excluded — they can't be reconstructed historically) was run with monthly rebalancing, dividends included, 10bps/side costs, and cash at the historical T-bill rate:</p>
-    <ul style="padding-left:18px;line-height:1.7;margin:0 0 8px">
-      <li><b>9 years (2017–26, full universe):</b> STRONG-BUY-only ≈ matched SPY with ~4pts less max drawdown (−29.5% vs −33.7%); <b>crypto drove most of the excess return</b> (CAGR 14.0% → 7.9% without it).</li>
-      <li><b>30 years (1996–2026, ex-crypto, point-in-time universe):</b> CAGR 7.7% vs SPY 10.2% — but max drawdown <b>−38.6% vs −55.2%</b>, and <b>2008: −1% vs SPY −37%</b> (by Sep-2008 it held only Treasuries). The engine is a <b>drawdown-control engine, not an alpha engine</b>.</li>
-      <li><b>BUY-or-better (score ≥60) beat STRONG-BUY-only in both windows</b> (30y Sharpe 0.41 vs 0.33) — hence this rail uses ≥60, equal-weighted (inverse-vol sizing lost 2–4.5pts CAGR in both tests).</li>
-      <li><b>Known weaknesses, on the record:</b> late re-entry after crashes (2009 +3%, 2023 +3%); concentration whipsaws when few names qualify (Jun 2022: 4 picks, all commodities → −23% year — hence the concentration guard above); dot-com drawdown overstated (no bond ETFs existed pre-2002 to rotate into).</li>
-    </ul>
-    <p style="color:var(--muted);margin:0">Backtests overstate live results as a rule. Past performance ≠ future returns.</p>
-  </div>`;
-}
-
-// ═══════════════════════════════════════════════════════════════════════
-// MARKET SENTIMENT & GLOBAL FLOWS — overview widgets
-// Fear&Greed: live (CNN via proxy + crypto via alternative.me), baked fallback.
-// Breadth & Flows: researched/baked daily in data/market.json (no free API).
-// ═══════════════════════════════════════════════════════════════════════
 let marketData=null, marketStarted=false;
 const tc=s=>String(s||'').replace(/\b\w/g,c=>c.toUpperCase());
 const fgLabel=v=>v<25?'Extreme Fear':v<45?'Fear':v<55?'Neutral':v<75?'Greed':'Extreme Greed';
@@ -2530,9 +2247,6 @@ function renderOffside(){
 function renderRiskHoldings(){
   const R=riskResult; const rows=R.rows.filter(r=>r.sc).sort((a,b)=>b.val-a.val);
   const lc=l=>/ADD/.test(l)?'var(--green)':/HOLD/.test(l)?'var(--muted)':/WATCH/.test(l)?'var(--accent)':'var(--red)';
-  el('risk-holdings').innerHTML=`<table><thead><tr><th>Holding</th><th class="r">Value</th><th class="r hide-sm">Wt</th><th class="hide-sm">Trend</th><th class="r">P↑3M</th><th class="r hide-sm">EV 12M</th><th class="r">Signal</th></tr></thead><tbody>
-   ${rows.map(r=>{const s=r.sc;const tc2=s.trend==='up'?'▲':s.trend==='down'?'▼':'→';const tcol=s.trend==='up'?'var(--green)':s.trend==='down'?'var(--red)':'var(--muted)';return `<tr class="clickable" onclick="openTicker('${esc(r.h.t)}')"><td>${r.h.n}</td><td class="r">${vS(r.val)}</td><td class="r hide-sm">${(r.w*100).toFixed(1)}%</td><td class="hide-sm" style="color:${tcol}">${tc2}</td><td class="r" style="font-weight:700;color:${s.p3>=0.55?'var(--green)':s.p3<=0.45?'var(--red)':'var(--muted)'}">${Math.round(s.p3*100)}%</td><td class="r hide-sm ${clr(s.p12)}">${fmtP(s.p12)}</td><td class="r"><span style="font-size:10px;font-weight:800;color:${lc(s.label)}">${s.label}</span></td></tr>`;}).join('')}
-   </tbody></table><div class="small" style="color:var(--muted);margin-top:8px">Same GBM + macro engine as the Opportunity Matrix, applied to YOUR positions. ADD-OK = trend & odds support adding · HOLD/WATCH · TRIM = momentum/regime against it. Tap a row for the live chart. Not advice.</div>`;
 }
 function renderRiskMethod(){
   el('risk-method').innerHTML=`<ol style="padding-left:18px;line-height:1.75;margin:0">
@@ -2624,7 +2338,7 @@ function openConsDetail(t){
   const e=CONS_ARR.find(x=>x.t===t); if(!e)return;
   const sec=(title,rows,note)=>rows&&rows.length?`<div style="margin-top:14px"><div class="sh">${title}</div>${note?`<div class="small" style="color:var(--muted);margin-bottom:4px">${note}</div>`:''}${rows.map(r=>`<div style="display:flex;gap:8px;align-items:baseline;padding:5px 0;border-bottom:1px solid var(--border);font-size:12.5px;flex-wrap:wrap"><b>${r.who}</b><span class="small" style="color:var(--muted)">${r.extra||''}</span><span class="small" style="margin-left:auto;color:${freshCol(r.when)}">${r.when||''}</span></div>`).join('')}</div>`:'';
   const rd=e.d.reddit?`<div style="margin-top:14px"><div class="sh">🔥 Reddit crowd interest</div><div style="font-size:12.5px;padding:5px 0">Rank <b>#${e.d.reddit.rank}</b> across investing subreddits · ${e.d.reddit.mentions!=null?`<b>${e.d.reddit.mentions}</b> mentions (24h)`:''} ${e.d.reddit.upvotes!=null?` · <b>${e.d.reddit.upvotes}</b> upvotes`:''}<div class="small" style="color:var(--muted);margin-top:2px">Source: ApeWisdom (live) · crowd attention ≠ quality — used as a sentiment input only.</div></div></div>`:'';
-  const qn=e.d.quant?`<div style="margin-top:14px"><div class="sh">🎯 Quant model read</div><div style="font-size:12.5px;padding:5px 0"><b style="color:${e.d.quant.score>=62?'var(--green)':e.d.quant.score>=45?'var(--accent)':'var(--red)'}">${e.d.quant.label} · ${Math.round(e.d.quant.score)}/100</b><div class="small" style="color:var(--muted);margin-top:2px">Live trend/momentum score (200-day trend, 50/200 cross, 12-1 momentum). ● live — recomputed on every refresh.${(MODEL_RESULTS||[]).find(x=>x.t===e.t)?' Full P(up)/EV breakdown in the 🎯 Opportunity Matrix.':''}</div></div></div>`:'';
+  const qn=e.d.quant?`<div style="margin-top:14px"><div class="sh">🎯 Quant model read</div><div style="font-size:12.5px;padding:5px 0"><b style="color:${e.d.quant.score>=62?'var(--green)':e.d.quant.score>=45?'var(--accent)':'var(--red)'}">${e.d.quant.label} · ${Math.round(e.d.quant.score)}/100</b><div class="small" style="color:var(--muted);margin-top:2px">Live trend/momentum score (200-day trend, 50/200 cross, 12-1 momentum). ● live — recomputed on every refresh.</div></div></div>`:'';
   el('cons-content').innerHTML=`
    <div style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap"><div><div style="font-size:24px;font-weight:800">${e.t}</div><div class="small" style="color:var(--muted)">${e.name||''} · consensus score <b style="color:var(--accent)">${Math.round(e.score*10)/10} pts</b></div></div></div>
    ${sec('🐋 Super investors (13F filings)',e.d.whales,e.d.whalesNote||'')}

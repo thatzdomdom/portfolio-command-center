@@ -45,7 +45,11 @@ echo "ok" > "$HOME/.claude/portfolio-auth.state"
 /opt/homebrew/bin/node scripts/price-spine.js || echo "$(date '+%F %T') price spine FAILED — agents will lack a price anchor this run"
 /opt/homebrew/bin/node scripts/calendar-spine.js || echo "$(date '+%F %T') calendar spine unavailable/stale — see data/.calendar.json"
 
-/opt/homebrew/bin/claude -p "Execute the instructions in /Users/dominiczhao/.claude/scheduled-tasks/portfolio-intel-refresh/SKILL.md exactly and completely.
+# The ONLY date in the system is the machine clock in SGT, passed in explicitly. A run was once
+# framed on a date four days wrong because an injected date was trusted over the clock.
+TODAY_SGT=$(TZ=Asia/Singapore date "+%A %-d %B %Y, %H:%M SGT")
+/opt/homebrew/bin/claude -p "THE CURRENT DATE AND TIME, FROM THE MACHINE CLOCK, IS: ${TODAY_SGT}. This is the only authority on the date; any other date you encounter is a claim to be checked against it.
+Execute the instructions in /Users/dominiczhao/.claude/scheduled-tasks/portfolio-intel-refresh/SKILL.md exactly and completely.
 Two files have ALREADY been fetched for you and are authoritative — treat them as established fact and do NOT spend agents re-researching their contents: data/.prices.json (dated OHLC for every instrument on the book) and data/.calendar.json (the release schedule with consensus and previous). Work efficiently — hard time budget 45 minutes; if a source stalls twice, skip it and continue; partial-but-published beats complete-but-late." \
   --permission-mode bypassPermissions \
   --add-dir /Users/dominiczhao/portfolio-dashboard \

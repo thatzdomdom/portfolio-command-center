@@ -42,7 +42,7 @@ if (fresh) {
   if (market && market.fearGreed) tldr.push(`Fear & Greed ${market.fearGreed.value} (${market.fearGreed.rating}) · crypto ${market.fearGreed.cryptoValue ?? '—'}`);
   if (news && news.items && news.items[0]) tldr.push(`Top story: ${news.items[0].headline}`);
   if (news && news.items) sections.push(['NEWS THAT MATTERS TO YOUR BOOK', news.items.slice(0, 6).map(n => `[${(n.impact || '').toUpperCase()}] ${n.headline}\n   → ${n.actionable || ''}`)]);
-  if (model && model.macro && model.macro.byAssetClass) sections.push(['MACRO STANCES', model.macro.byAssetClass.map(a => `${a.assetClass}: ${a.stance} (12m P-up ${Math.round((a.pUp12m || 0) * 100)}%)`)]);
+  if (model && model.macro && model.macro.byAssetClass) sections.push(['MACRO STANCES', model.macro.byAssetClass.map(a => `${a.assetClass}: ${a.stance}`)]);
   if (intel && intel.insiders) sections.push(['LATEST INSIDER FILINGS ON YOUR NAMES', intel.insiders.slice(0, 4).map(x => `${x.date} ${x.ticker} — ${x.insider}: ${x.type}`)]);
 }
 
