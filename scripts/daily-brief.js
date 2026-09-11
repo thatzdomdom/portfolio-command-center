@@ -114,7 +114,8 @@ try {
   const prevBrief = (() => { try { return fs.readFileSync(path.join(ROOT, 'data', '.last-brief-date'), 'utf8').trim(); } catch (_) { return null; } })();
   const since = prevBrief || new Date(Date.now() - 2 * 864e5).toISOString().slice(0, 10);
   const fresh = (AL.alerts || []).filter(a => a.date > since);
-  const notable = fresh.filter(a => a.severity === 'Notable');
+  const rank = a => (a.tags || []).includes('in-book') ? 0 : (a.tags || []).includes('watchlist') ? 1 : 2;
+  const notable = fresh.filter(a => a.severity === 'Notable').sort((a, b) => rank(a) - rank(b) || (b.usd || 0) - (a.usd || 0));
   const sells = fresh.filter(a => a.family === 'insider' && /insider sell/.test(a.headline || ''));
   const lines = notable.slice(0, 8).map(a => `${a.headline} [${(a.tags || []).filter(t => ['in-book', 'watchlist', 'market-wide', 'cluster'].includes(t)).join(' ')}] — ${a.detail}`);
   if (sells.length) lines.push(`${sells.length} insider sell(s) on held/watch names since ${since}${sells.every(a => (a.tags || []).includes('10b5-1')) ? ', all 10b5-1 plans' : ''} — see inbox.html`);

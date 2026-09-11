@@ -52,7 +52,8 @@ function below52wHigh(ticker) {
 }
 const existing = new Set(prior.alerts.map(a => a.id));
 const evaluated = new Set(prior.meta.evaluated || []);
-const out = []; const push = a => { if (!existing.has(a.id)) { out.push({ at: new Date().toISOString(), ...a }); existing.add(a.id); } };
+const seenEvent = new Set(prior.alerts.map(a => a.event).filter(Boolean));
+const out = []; const push = a => { if (existing.has(a.id)) return; if (a.event && seenEvent.has(a.event)) return; if (a.event) seenEvent.add(a.event); out.push({ at: new Date().toISOString(), ...a }); existing.add(a.id); };
 
 (async () => {
   // ── Form 4 ────────────────────────────────────────────────────────────────
@@ -75,13 +76,14 @@ const out = []; const push = a => { if (!existing.has(a.id)) { out.push({ at: ne
       headline: `${t} · scheduled (10b5-1) buy · ${usd(total)}`, detail: `${who} (${role}) — pre-scheduled plan purchase; carries no decision made today`, url: f.url, clearsWhen: 'read' }); continue; }
     const reasons = [];
     if (isSenior(owner.title) && total >= P.seniorOfficerBuy.minUSD) reasons.push(`senior officer buy ≥ ${usd(P.seniorOfficerBuy.minUSD)}`);
-    if (incPct != null && incPct >= P.stakeIncreaseBuy.minIncreasePct) reasons.push(`raises own stake ${incPct}%`);
+    if (incPct != null && incPct >= P.stakeIncreaseBuy.minIncreasePct && total >= (P.stakeIncreaseBuy.minUSD || 0)) reasons.push(`raises own stake ${incPct}%`);
     if (dd != null && dd >= P.drawdownBuy.minBelow52wHighPct) reasons.push(`name is ${dd}% below its 52-week high`);
     if (owner.is10 && total >= P.tenPercentOwnerBuy.minUSD) reasons.push(`10% owner buy ≥ ${usd(P.tenPercentOwnerBuy.minUSD)}`);
     if (!reasons.length && total >= P.otherInsiderBuy.minUSD) reasons.push(`insider buy ≥ ${usd(P.otherInsiderBuy.minUSD)}`);
-    if (reasons.length) push({ id: `f4:${f.id}:P`, date: ymd(f.filed), severity: 'Notable', family: 'insider', ticker: t, issuer: name, tags: [tag, 'open-market'],
+    const event = `${t}|${who}|${buys[0].date || f.filed}|${sh}`;
+    if (reasons.length) push({ id: `f4:${f.id}:P`, event, usd: Math.round(total), date: ymd(f.filed), severity: 'Notable', family: 'insider', ticker: t, issuer: name, tags: [tag, 'open-market'],
       headline: `${t} · ${who} (${role}) bought ${usd(total)}`, detail: `${sh.toLocaleString()} sh${buys[0].price ? ' at ~$' + buys[0].price : ''}${after ? ' · now holds ' + after.toLocaleString() : ''} · ${reasons.join('; ')}`, url: f.url, clearsWhen: 'read' });
-    else if (tag !== 'market-wide') push({ id: `f4:${f.id}:Psmall`, date: ymd(f.filed), severity: 'Log', family: 'insider', ticker: t, issuer: name, tags: [tag, 'open-market'],
+    else if (tag !== 'market-wide') push({ id: `f4:${f.id}:Psmall`, event, usd: Math.round(total), date: ymd(f.filed), severity: 'Log', family: 'insider', ticker: t, issuer: name, tags: [tag, 'open-market'],
       headline: `${t} · ${who} bought ${usd(total)}`, detail: `${sh.toLocaleString()} sh — below Notable thresholds`, url: f.url, clearsWhen: 'read' });
   }
   // ── large market-wide sells: ONE Log line per issuer-day (the Dell case) ───
@@ -98,7 +100,7 @@ const out = []; const push = a => { if (!existing.has(a.id)) { out.push({ at: ne
     for (const [k, a] of Object.entries(agg)) {
       if (a.usd < MW.minUSDPerIssuerDay) continue;
       const t = a.f.issuer.ticker, id = `mwsell:${k}`;
-      push({ id, date: ymd(a.f.filed), severity: MW.severity, family: 'insider', ticker: t, issuer: a.f.issuer.name || a.f.indexName, tags: ['market-wide', a.plan ? '10b5-1' : 'discretionary', 'aggregate'],
+      push({ id, usd: Math.round(a.usd), date: ymd(a.f.filed), severity: MW.severity, family: 'insider', ticker: t, issuer: a.f.issuer.name || a.f.indexName, tags: ['market-wide', a.plan ? '10b5-1' : 'discretionary', 'aggregate'],
         headline: `${t} · ${a.owners.size} insider${a.owners.size > 1 ? 's' : ''} sold ${usd(a.usd)} · ${a.plan ? '10b5-1 plan' : 'discretionary'} · not in book`,
         detail: `${a.sh.toLocaleString()} sh across ${[...a.owners].slice(0, 3).join(', ')}${a.owners.size > 3 ? ' +' + (a.owners.size - 3) : ''} — sells carry little return information; logged so the question "did those trades mean anything" has an answer`, url: a.f.url, clearsWhen: 'read' });
     }
