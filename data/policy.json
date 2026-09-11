@@ -1,160 +1,168 @@
 {
-  "version": "2026-09-12",
-  "note": "Severity is a function of EVIDENCE CLASS first and size second. Sells and congress never rise above Log. Push carries a prescribed action or it is not push; insider signals never push \u2014 a cluster buy's edge plays out over 6-12 months. Thresholds in USD unless stated. Edit here, not in code.",
-  "insider": {
-    "excludeCodes": [
-      "A",
-      "M",
-      "F",
-      "G",
-      "J",
-      "W",
-      "X",
-      "C",
-      "D",
-      "I",
-      "L",
-      "O",
-      "U",
-      "Z"
-    ],
-    "excludeCodesNote": "Only P (open-market purchase) and S (open-market sale) are information. A/M/F are grants, option exercises and tax withholding \u2014 compensation, not conviction.",
-    "cluster": {
-      "minDistinctInsiders": 3,
-      "windowDays": 30,
-      "requireNon10b5": true,
-      "anySize": true,
-      "severity": "Notable",
-      "why": "Three or more insiders independently buying with their own money inside a month is the single best-evidenced insider signal in the literature; size is secondary."
-    },
-    "seniorOfficerBuy": {
-      "titles": [
-        "CEO",
-        "Chief Executive",
-        "CFO",
-        "Chief Financial",
-        "Chair",
-        "President",
-        "COO",
-        "Chief Operating"
-      ],
-      "minUSD": 100000,
-      "severity": "Notable"
-    },
-    "stakeIncreaseBuy": {
-      "minIncreasePct": 25,
-      "severity": "Notable",
-      "why": "a buy that lifts the officer's own holding by a quarter is conviction regardless of dollar size \u2014 ABOVE a floor. Day-one calibration (10 Sep scan) fired on a $1,740 and a $1,212 buy: a 33% increase of a tiny stake in a penny stock is not a signal.",
-      "minUSD": 25000
-    },
-    "drawdownBuy": {
-      "minBelow52wHighPct": 30,
-      "severity": "Notable",
-      "why": "insiders buying into a 30%+ drawdown is a classic reversal tell"
-    },
-    "otherInsiderBuy": {
-      "minUSD": 200000,
-      "severity": "Notable"
-    },
-    "tenPercentOwnerBuy": {
-      "minUSD": 1000000,
-      "severity": "Notable"
-    },
-    "sells": {
-      "severity": "Log",
-      "briefOnlyForHeldOrWatch": true,
-      "why": "sells carry almost no return information (diversification, tax, 10b5-1 plans); shown in the Inbox at Log; ONE count line in the brief for held/watch names; market-wide sells never reach the brief"
-    },
-    "tenB5OneBuy": {
-      "severity": "Log",
-      "why": "a pre-scheduled plan purchase is not a decision made today"
-    },
-    "marketWideSellAggregate": {
-      "minUSDPerIssuerDay": 5000000,
-      "severity": "Log",
-      "oneLinePerIssuerDay": true,
-      "why": "the Dell case: a sponsor distributing tens of millions in hundreds of lots is worth ONE Log line answering 'did those trades mean anything' \u2014 never the brief, never per-filing noise. CTO dissent adopted in aggregate form."
-    }
+ "version": "2026-09-12",
+ "note": "Severity is a function of EVIDENCE CLASS first and size second. Sells and congress never rise above Log. Push carries a prescribed action or it is not push; insider signals never push — a cluster buy's edge plays out over 6-12 months. Thresholds in USD unless stated. Edit here, not in code.",
+ "insider": {
+  "excludeCodes": [
+   "A",
+   "M",
+   "F",
+   "G",
+   "J",
+   "W",
+   "X",
+   "C",
+   "D",
+   "I",
+   "L",
+   "O",
+   "U",
+   "Z"
+  ],
+  "excludeCodesNote": "Only P (open-market purchase) and S (open-market sale) are information. A/M/F are grants, option exercises and tax withholding — compensation, not conviction.",
+  "cluster": {
+   "minDistinctInsiders": 3,
+   "windowDays": 30,
+   "requireNon10b5": true,
+   "anySize": true,
+   "severity": "Notable",
+   "why": "Three or more insiders independently buying with their own money inside a month is the single best-evidenced insider signal in the literature; size is secondary."
   },
-  "ownership": {
-    "activists": [
-      "Elliott",
-      "Starboard",
-      "Pershing Square",
-      "Icahn",
-      "Third Point",
-      "ValueAct",
-      "Trian",
-      "Jana",
-      "Engaged Capital",
-      "Ancora",
-      "Sachem Head",
-      "Land & Buildings"
-    ],
-    "sc13dOnHeldOrWatch": {
-      "severity": "Notable",
-      "canEnterOneAction": true,
-      "why": "a 5% holder with intent to influence, in a name you own, is a re-underwrite trigger"
-    },
-    "sc13dByActivist": {
-      "severity": "Notable"
-    },
-    "sc13gOnHeldOrWatch": {
-      "severity": "Log",
-      "why": "passive 5% crossings are informational"
-    },
-    "other": {
-      "severity": "ignore"
-    }
+  "seniorOfficerBuy": {
+   "titles": [
+    "CEO",
+    "Chief Executive",
+    "CFO",
+    "Chief Financial",
+    "Chair",
+    "President",
+    "COO",
+    "Chief Operating"
+   ],
+   "minUSD": 100000,
+   "severity": "Notable"
   },
-  "channels": {
-    "Notable": [
-      "inbox",
-      "brief"
-    ],
-    "Log": [
-      "inbox"
-    ],
-    "ignore": []
+  "stakeIncreaseBuy": {
+   "minIncreasePct": 25,
+   "severity": "Notable",
+   "why": "a buy that lifts the officer's own holding by a quarter is conviction regardless of dollar size — ABOVE a floor. Day-one calibration (10 Sep scan) fired on a $1,740 and a $1,212 buy: a 33% increase of a tiny stake in a penny stock is not a signal.",
+   "minUSD": 25000
   },
-  "retention": {
-    "signalsDays": 45,
-    "alertsMax": 2000,
-    "note": "45 days of raw facts covers the 30-day cluster window with margin; alerts.json is append-only and capped by count"
+  "drawdownBuy": {
+   "minBelow52wHighPct": 30,
+   "severity": "Notable",
+   "why": "insiders buying into a 30%+ drawdown is a classic reversal tell"
   },
-  "trend": {
-    "gate": "close > SMA200 AND 12-1 month momentum > 0",
-    "offAfterConsecutiveClosesBelow": 5,
-    "slopeInGate": false,
-    "why": "the only durable edge in the July post-mortem (12,871 observations, 11.5y monthly); the 200-day slope is reported but stays OUT of the gate until the silver backtest says otherwise"
+  "otherInsiderBuy": {
+   "minUSD": 200000,
+   "severity": "Notable"
   },
-  "sizing": {
-    "riskPerNameVolTarget": 0.04,
-    "maxSingleName": 0.1,
-    "maxCluster": 0.2,
-    "clusterMergeCorrelation": 0.75,
-    "lookbackDays": 60,
-    "shadowStart": "2026-09-12",
-    "shadowDays": 90,
-    "why": "inverse-vol with a hard 10% name cap and a 20% cluster cap, clusters by correlation not label; runs in SHADOW \u2014 diffed daily, no action asked"
+  "tenPercentOwnerBuy": {
+   "minUSD": 1000000,
+   "severity": "Notable"
   },
-  "regime": {
-    "status": "default \u00b7 CIO recommendation \u00b7 unconfirmed",
-    "asOf": "2026-09-12",
-    "expected": "~13% CAGR at ~-25% max drawdown at the risk-sleeve level (post-mortem); roughly -12% to -15% at net-worth level once property, SSB, T-bill and cash ballast is counted",
-    "notRules": [
-      "P&L-triggered de-grossing (tested: harmful, return/drawdown 0.67 vs 0.80)",
-      "volatility ceiling (tested: harmful; high-vol bucket was the best over 12y)"
-    ],
-    "killSwitch": "a signal is switched off when its live realised slope turns negative \u2014 calibration, not P&L"
+  "sells": {
+   "severity": "Log",
+   "briefOnlyForHeldOrWatch": true,
+   "why": "sells carry almost no return information (diversification, tax, 10b5-1 plans); shown in the Inbox at Log; ONE count line in the brief for held/watch names; market-wide sells never reach the brief"
   },
-  "silverLeverage": {
-    "status": "UNSIGNED \u2014 the owner sees the 2006-2026 backtest first (decision 1)",
-    "asOf": "2026-09-12",
-    "targetLeverage": 1.6,
-    "stressMultiplier": 1.5,
-    "rule1": "survive a 2-day -20% and a 2-week -35% silver decline without a margin call, at 1.5x the maintenance rate",
-    "rule2": "leverage above 1.0x only while the trend gate is ON; on flip (5 closes below the 200-day), reduce the loan to 1.0x \u2014 remove the borrowing, not the thesis",
-    "rule3": "daily carry line: annualised loan cost against silver trailing 12-month return"
+  "tenB5OneBuy": {
+   "severity": "Log",
+   "why": "a pre-scheduled plan purchase is not a decision made today"
+  },
+  "marketWideSellAggregate": {
+   "minUSDPerIssuerDay": 5000000,
+   "severity": "Log",
+   "oneLinePerIssuerDay": true,
+   "why": "the Dell case: a sponsor distributing tens of millions in hundreds of lots is worth ONE Log line answering 'did those trades mean anything' — never the brief, never per-filing noise. CTO dissent adopted in aggregate form."
   }
+ },
+ "ownership": {
+  "activists": [
+   "Elliott",
+   "Starboard",
+   "Pershing Square",
+   "Icahn",
+   "Third Point",
+   "ValueAct",
+   "Trian",
+   "Jana",
+   "Engaged Capital",
+   "Ancora",
+   "Sachem Head",
+   "Land & Buildings"
+  ],
+  "sc13dOnHeldOrWatch": {
+   "severity": "Notable",
+   "canEnterOneAction": true,
+   "why": "a 5% holder with intent to influence, in a name you own, is a re-underwrite trigger"
+  },
+  "sc13dByActivist": {
+   "severity": "Notable"
+  },
+  "sc13gOnHeldOrWatch": {
+   "severity": "Log",
+   "why": "passive 5% crossings are informational"
+  },
+  "other": {
+   "severity": "ignore"
+  }
+ },
+ "channels": {
+  "Notable": [
+   "inbox",
+   "brief"
+  ],
+  "Log": [
+   "inbox"
+  ],
+  "ignore": []
+ },
+ "retention": {
+  "signalsDays": 45,
+  "alertsMax": 2000,
+  "note": "45 days of raw facts covers the 30-day cluster window with margin; alerts.json is append-only and capped by count"
+ },
+ "trend": {
+  "gate": "close > SMA200 AND 12-1 month momentum > 0",
+  "offAfterConsecutiveClosesBelow": 5,
+  "slopeInGate": false,
+  "why": "the only durable edge in the July post-mortem (12,871 observations, 11.5y monthly); the 200-day slope is reported but stays OUT of the gate until the silver backtest says otherwise"
+ },
+ "sizing": {
+  "riskPerNameVolTarget": 0.04,
+  "maxSingleName": 0.1,
+  "maxCluster": 0.2,
+  "clusterMergeCorrelation": 0.75,
+  "lookbackDays": 60,
+  "shadowStart": "2026-09-12",
+  "shadowDays": 90,
+  "why": "inverse-vol with a hard 10% name cap and a 20% cluster cap, clusters by correlation not label; runs in SHADOW — diffed daily, no action asked"
+ },
+ "regime": {
+  "status": "default · CIO recommendation · unconfirmed",
+  "asOf": "2026-09-12",
+  "expected": "~13% CAGR at ~-25% max drawdown at the risk-sleeve level (post-mortem); roughly -12% to -15% at net-worth level once property, SSB, T-bill and cash ballast is counted",
+  "notRules": [
+   "P&L-triggered de-grossing (tested: harmful, return/drawdown 0.67 vs 0.80)",
+   "volatility ceiling (tested: harmful; high-vol bucket was the best over 12y)"
+  ],
+  "killSwitch": "a signal is switched off when its live realised slope turns negative — calibration, not P&L"
+ },
+ "silverLeverage": {
+  "status": "UNSIGNED — backtest delivered 2026-09-12 (decision 1); CIO recommendation revised, see backtestVerdict",
+  "asOf": "2026-09-12",
+  "targetLeverage": 1.6,
+  "stressMultiplier": 1.5,
+  "rule1": "survive a 2-day -20% and a 2-week -35% silver decline without a margin call, at 1.5x the maintenance rate",
+  "rule2": "leverage above 1.0x only while the trend gate is ON; on flip (5 closes below the 200-day), reduce the loan to 1.0x — remove the borrowing, not the thesis",
+  "rule3": "daily carry line: annualised loan cost against silver trailing 12-month return",
+  "backtestVerdict": {
+   "asOf": "2026-09-12",
+   "source": "data/silver-backtest.json (SLV 2006-04-28 → 2026-09-10, margin-account model)",
+   "rule1": "the 1.6x target FAILS Rule 1 by arithmetic: at a 45% stressed rate the largest leverage that survives a 2-week -35% is 1.556x at strike, and leverage drifts up as price falls",
+   "rule2": "the gate did not deliver Rule 1: the gated book was still levered entering 6 of the 8 worst 2-week drops (crashes start from highs, where the gate is ON). Gated 1.6x returned 6.76% CAGR vs 7.25% unlevered with a deeper max drawdown (-85.9% vs -76.3%), 26 de-levers, 9 whipsaws",
+   "fixed": "a never-managed 1.6x loan took one margin call (2008-09-10, forced sale 68.8% below peak equity) and ended at 5.38% CAGR",
+   "recommendation": "do not sign 1.6x. Size the loan by Rule 1 alone (headroom below 1.556x at the stressed rate; 1.0x–1.4x); do not use the trend gate to time leverage. The gate remains the position signal, not the borrowing signal."
+  }
+ }
 }

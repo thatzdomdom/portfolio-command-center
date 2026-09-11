@@ -36,7 +36,7 @@ const SPEC = {
   'policy.json':      { as: j => j.version, cadence: 'manual', count: null, source: 'owner-editable thresholds' },
   'technicals.json':  { as: j => j.asOf, cadence: 'daily', count: j => Object.keys(j.instruments || {}).length, source: 'technicals.js (trend gate, vol, drawdown from .prices-2y)' },
   'targets.json':     { as: j => j.asOf, cadence: 'daily', count: j => (j.diff || []).length, source: 'targets.js (SHADOW policy weights)' },
-  'silver-backtest.json': { as: j => j.asOf, cadence: 'weekly', count: j => (j.delevers || []).length, source: 'silver-backtest.js (SLV full history)' },
+  'silver-backtest.json': { as: j => j.asOf, cadence: 'weekly', count: j => ((j.delevers && j.delevers.gated) || []).length, source: 'silver-backtest.js (SLV full history, margin-account model)' },
   '.validation.json': { as: j => j.checkedOn,          cadence: 'daily',   count: j => (j.problems || []).length, source: 'validate-all.js (count = problems)' },
 };
 

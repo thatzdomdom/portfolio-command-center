@@ -1,6 +1,6 @@
 {
-  "sgtDate": "2026-09-11",
-  "generatedAt": "2026-09-11T14:01:24.965Z",
+  "sgtDate": "2026-09-12",
+  "generatedAt": "2026-09-11T16:53:34.310Z",
   "files": {
     "news.json": {
       "asOf": "2026-09-11",
@@ -60,7 +60,7 @@
     },
     "fx.json": {
       "asOf": "2026-09-11",
-      "generatedAt": "2026-09-11T13:57:45.377Z",
+      "generatedAt": "2026-09-11T16:46:34.228Z",
       "cadence": "daily",
       "count": 5,
       "source": "fx.js (ECB reference rates)"
@@ -75,17 +75,66 @@
     },
     "valuation.json": {
       "asOf": "2026-09-10",
-      "generatedAt": "2026-09-11T13:57:57.436Z",
+      "generatedAt": "2026-09-11T16:46:32.193Z",
       "cadence": "daily",
       "count": 59,
       "source": "valuate.js",
       "published": "valuation.enc"
     },
-    ".validation.json": {
+    "signals.json": {
+      "asOf": "2026-09-11",
+      "generatedAt": "2026-09-11T16:22:27.404Z",
+      "cadence": "daily",
+      "count": 257,
+      "source": "form4-scan.js (EDGAR daily index; GitHub Actions)"
+    },
+    "alerts.json": {
+      "asOf": "2026-09-11",
+      "generatedAt": "2026-09-11T16:24:52.832Z",
+      "cadence": "daily",
+      "count": 38,
+      "source": "alerts.js (policy.json applied to signals)"
+    },
+    "watchlist.json": {
       "asOf": "2026-09-11",
       "generatedAt": null,
+      "cadence": "manual",
+      "count": 15,
+      "source": "owner"
+    },
+    "policy.json": {
+      "asOf": "2026-09-12",
+      "generatedAt": null,
+      "cadence": "manual",
+      "count": null,
+      "source": "owner-editable thresholds"
+    },
+    "technicals.json": {
+      "asOf": "2026-09-11",
+      "generatedAt": "2026-09-11T16:46:32.009Z",
       "cadence": "daily",
-      "count": 0,
+      "count": 66,
+      "source": "technicals.js (trend gate, vol, drawdown from .prices-2y)"
+    },
+    "targets.json": {
+      "asOf": "2026-09-11",
+      "generatedAt": "2026-09-11T16:46:32.120Z",
+      "cadence": "daily",
+      "count": 38,
+      "source": "targets.js (SHADOW policy weights)"
+    },
+    "silver-backtest.json": {
+      "asOf": "2026-09-10",
+      "generatedAt": "2026-09-11T16:53:04.156Z",
+      "cadence": "weekly",
+      "count": 51,
+      "source": "silver-backtest.js (SLV full history, margin-account model)"
+    },
+    ".validation.json": {
+      "asOf": "2026-09-12",
+      "generatedAt": null,
+      "cadence": "daily",
+      "count": 1,
       "source": "validate-all.js (count = problems)"
     }
   }
