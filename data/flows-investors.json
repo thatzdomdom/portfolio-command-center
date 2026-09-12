@@ -1,14 +1,14 @@
 {
- "updated": "2026-09-12",
- "retrievedOn": "2026-09-12",
- "note": "Weekend run -- most markets have no fresher print than mid-week given the Sat/Sun gap. JPX's own site 403'd; Japan's foreign-flow line uses Japan MOF's weekly international-securities-transactions release (same official weekly cadence) as a near-equivalent substitute.",
+ "updated": "2026-09-13",
+ "retrievedOn": "2026-09-13",
+ "note": "Sunday weekend run -- refreshed Korea (KRX), Hong Kong (Southbound) and China (margin balance) with fresher mid-week daily prints found this pass; Japan (MOF's next release isn't due until Thu 17 Sep) and Singapore (still Aug-dated SGX weekly tracker) had no fresher official data. JPX's own site 403'd again; Japan's foreign-flow line still uses Japan MOF's weekly international-securities-transactions release as a near-equivalent substitute.",
  "markets": [
   {
    "market": "Japan (TSE)",
    "available": true,
    "cadence": "Official JPX 'Trading by Type of Investors' published weekly, ~1-week lag. JPX's own site returned HTTP 403 this session; figures below use Japan's Ministry of Finance weekly 'International Transactions in Securities' release (official, same weekly cadence, via Reuters) as a near-equivalent proxy for the foreign-flow line.",
    "latestPeriod": "week ending 6 September 2026",
-   "asOf": "2026-09-12",
+   "asOf": "2026-09-13",
    "flows": [
     {
      "investorType": "Foreign institutional",
@@ -27,15 +27,15 @@
     "https://asia.nikkei.com/business/markets/equities/foreign-investors-scoop-up-half-year-record-60bn-in-japan-stocks"
    ],
    "dataGaps": [
-    "JPX's own equity 'Trading by Type of Investors' release (individuals/trust banks/investment trusts split) was not independently retrieved this session due to a site access error; only the aggregate foreign-flow figure via MOF/Reuters was confirmed."
+    "JPX's own equity 'Trading by Type of Investors' release (individuals/trust banks/investment trusts split) was not independently retrieved this session due to a site access error; only the aggregate foreign-flow figure via MOF/Reuters was confirmed. MOF's next release (week ending 11 Sep) is not due until Thursday 17 Sep."
    ]
   },
   {
    "market": "South Korea (KOSPI)",
    "available": true,
    "cadence": "KRX publishes official daily net buy/sell by foreigners, institutions and individuals, generally same-day/next-day.",
-   "latestPeriod": "1-7 September 2026 (no more recent daily print located; last confirmed data point is Monday 7 Sep)",
-   "asOf": "2026-09-12",
+   "latestPeriod": "1-10 September 2026 (fresher daily prints for Tue 9 Sep and Thu 10 Sep confirmed this run)",
+   "asOf": "2026-09-13",
    "flows": [
     {
      "investorType": "Foreign institutional",
@@ -45,14 +45,6 @@
      "period": "1-6 Sep 2026 (month-to-date)",
      "isProxy": false,
      "note": "KRX official cumulative daily data"
-    },
-    {
-     "investorType": "Domestic institutional",
-     "direction": "outflow",
-     "amount": "-81.3 billion",
-     "unit": "KRW",
-     "period": "1-6 Sep 2026",
-     "isProxy": false
     },
     {
      "investorType": "Retail (individuals)",
@@ -66,46 +58,63 @@
     {
      "investorType": "Foreign institutional",
      "direction": "inflow",
-     "amount": "+441.6 billion",
-     "unit": "KRW",
-     "period": "7 Sep 2026 (early-session print)",
+     "amount": "+382",
+     "unit": "KRW bn",
+     "period": "9 Sep 2026",
      "isProxy": false,
-     "note": "KOSPI jumped ~3% intraday on chip-stock (Samsung Electronics, SK hynix) strength; an early/intraday reading, not a confirmed final close-of-day tally"
+     "note": "KOSPI reclaimed the 7,000 level; foreigners and institutions both net bought"
     },
     {
      "investorType": "Domestic institutional",
      "direction": "inflow",
-     "amount": "+326.8 billion",
-     "unit": "KRW",
-     "period": "7 Sep 2026 (early-session print)",
+     "amount": "+294",
+     "unit": "KRW bn",
+     "period": "9 Sep 2026",
+     "isProxy": false
+    },
+    {
+     "investorType": "Foreign institutional",
+     "direction": "outflow",
+     "amount": "-2,714",
+     "unit": "KRW bn",
+     "period": "10 Sep 2026",
+     "isProxy": false,
+     "note": "KOSPI fell 0.25% to 7,033.92 (intraday low 6,898.45); a sharp one-day reversal from 9 Sep's foreign buying"
+    },
+    {
+     "investorType": "Domestic institutional",
+     "direction": "inflow",
+     "amount": "+158",
+     "unit": "KRW bn",
+     "period": "10 Sep 2026",
      "isProxy": false
     },
     {
      "investorType": "Retail (individuals)",
-     "direction": "outflow",
-     "amount": "-812.2 billion",
-     "unit": "KRW",
-     "period": "7 Sep 2026 (early-session print)",
+     "direction": "inflow",
+     "amount": "+2,542",
+     "unit": "KRW bn",
+     "period": "10 Sep 2026",
      "isProxy": false,
-     "note": "Retail sold into the rally that foreigners and institutions bought"
+     "note": "Retail absorbed almost all of the foreign selling on 10 Sep"
     }
    ],
-   "trend": "Broad net selling by all investor types in early September flipped to a foreign+institutional buying / retail-selling pattern on 7 Sep, driven by semiconductor-stock strength. No fresher (post-7 Sep) daily print was located this session.",
-   "interpretation": "The foreign/institutional return to buying Korean chip majors is a mild positive read-through for AI/semiconductor-adjacent risk appetite in the region generally, which correlates loosely with HK-listed tech sentiment, though Korea itself isn't a direct proxy for a HK/SG book.",
+   "trend": "Broad net selling by all investor types in early September gave way to a one-day foreign+institutional buying spree on 9 Sep (chip-stock strength, KOSPI +~3% intraday earlier in the week), which fully reversed on 10 Sep when foreigners sold ~2.71tn won and retail absorbed nearly all of it. No print for 11 Sep (Friday) or the weekend was located this session -- Korea is swinging session-to-session rather than trending in either direction right now.",
+   "interpretation": "The whipsaw between foreign buying (9 Sep) and foreign selling (10 Sep) around Korean chip majors shows AI/semiconductor-adjacent risk appetite in the region is jumpy heading into FOMC week, not settling into a clear direction -- a loose read-through for HK-listed tech sentiment but not a direct proxy for the HK/SG book.",
    "sources": [
     "https://en.sedaily.com/finance/2026/09/07/kospi-jumps-3-percent-past-6900-as-foreigners-institutions",
-    "https://en.sedaily.com/society/2026/09/07/retail-foreign-and-institutional-investors-all-sell-capping"
+    "https://www.businesskorea.co.kr (articleView idxno=276660, 276554)"
    ],
    "dataGaps": [
-    "No KRX daily print for 8-11 Sep was retrieved this session (weekend gap); the 7 Sep figures are early-session snapshots rather than confirmed end-of-day closing tallies."
+    "No KRX daily print for 11 Sep (Friday) or the weekend was retrieved this session."
    ]
   },
   {
    "market": "Hong Kong",
    "available": false,
    "cadence": "No official retail/institutional split exists for HK cash equities. Southbound Stock Connect net flow (mainland money into HK) is published daily by HKEX, T+1.",
-   "latestPeriod": "1 September 2026 (most recent daily Southbound figure retrieved)",
-   "asOf": "2026-09-12",
+   "latestPeriod": "1-7 September 2026 (fresher daily prints for 3 Sep and 7 Sep confirmed this run)",
+   "asOf": "2026-09-13",
    "flows": [
     {
      "investorType": "Southbound (mainland)",
@@ -119,6 +128,23 @@
     {
      "investorType": "Southbound (mainland)",
      "direction": "inflow",
+     "amount": "+33.95",
+     "unit": "HKD bn",
+     "period": "3 Sep 2026",
+     "isProxy": false,
+     "note": "7th consecutive day of net southbound buying"
+    },
+    {
+     "investorType": "Southbound (mainland)",
+     "direction": "inflow",
+     "amount": "+1.276",
+     "unit": "HKD bn",
+     "period": "7 Sep 2026",
+     "isProxy": false
+    },
+    {
+     "investorType": "Southbound (mainland)",
+     "direction": "inflow",
      "amount": "+1.19 trillion HKD (~US$151.8bn)",
      "unit": "HKD",
      "period": "12 months to March 2026",
@@ -126,31 +152,31 @@
      "note": "Record pace of mainland buying of HK shares"
     }
    ],
-   "trend": "Sustained, near-record mainland southbound buying of HK equities over the past year; the single confirmed daily data point (1 Sep, +HK$7.76bn) is consistent with that trend, though no reading closer to 11 Sep was retrieved.",
+   "trend": "Sustained, near-record mainland southbound buying of HK equities over the past year, with the 3 Sep print (+HK$33.95bn) marking a 7th straight day of net buying before moderating to +HK$1.28bn by 7 Sep. No print for 8-11 Sep (Fri close) or the weekend was retrieved this session.",
    "interpretation": "For a book heavy in HK tech, persistent southbound buying (Tencent, Alibaba and other internet/tech names are perennial southbound favorites) is a structurally supportive flow backdrop. However this measures mainland demand only -- there is no way to read pure foreign/Western institutional sentiment toward HK from official data, which matters given HK tech's foreign-institutional ownership base.",
    "sources": [
     "https://finance.biggo.com/news/099a638f-f6aa-4df5-987d-71b9e5bb5158",
     "https://www.hkexgroup.com/Media-Centre/Insight/Insight/2024/HKEX-Insight/Southbound-Stock-Connect-Trends-and-Prospects"
    ],
    "dataGaps": [
-    "No official HK retail-vs-institutional split exists at all. Real-time (intraday) Stock Connect turnover/quota disclosure remains curtailed since 2024 -- only daily (T+1) aggregate net flow is available, and none fresher than 1 Sep was retrieved. No EPFR/BofA-specific HK-only weekly fund-flow figure confirmed either."
+    "No official HK retail-vs-institutional split exists at all. Real-time (intraday) Stock Connect turnover/quota disclosure remains curtailed since 2024 -- only daily (T+1) aggregate net flow is available, and none fresher than 7 Sep was retrieved this run. No EPFR/BofA-specific HK-only weekly fund-flow figure confirmed either."
    ]
   },
   {
    "market": "China (A-shares)",
    "available": false,
    "cadence": "No official retail/institutional trading split for A-shares. Margin-trading balance is official daily SSE/SZSE data (T+1), the standard retail-leverage proxy. Northbound real-time disclosure remains curtailed since Aug 2024 -- confirmed still curtailed as of Sep 2026; only lagged monthly HKEX aggregates published.",
-   "latestPeriod": "1 September 2026 (margin balance)",
-   "asOf": "2026-09-12",
+   "latestPeriod": "10 September 2026 (margin balance)",
+   "asOf": "2026-09-13",
    "flows": [
     {
      "investorType": "Retail (margin proxy)",
      "direction": "inflow",
-     "amount": "~2.28",
+     "amount": "~2.65",
      "unit": "RMB trillion (outstanding margin balance)",
-     "period": "as of 1 Sep 2026",
+     "period": "as of 10 Sep 2026",
      "isProxy": true,
-     "note": "Margin financing balance hit a new all-time high on 1 Sep 2026, surpassing the prior 2015 bull-market peak of RMB2.27tn. Other sources cite a broader margin+securities-lending aggregate exceeding RMB2.5-3.0tn earlier in 2026 -- figures are inconsistent across outlets but all point to record retail leverage."
+     "note": "Margin balance = RMB2,646.4bn (Shanghai RMB1,355.9bn + Shenzhen RMB1,282.1bn + Beijing RMB8.4bn), down RMB22.3bn day-on-day but still well above the 1 Sep RMB2.28tn reading and the prior 2015 bull-market peak of RMB2.27tn. Other sources cite a broader margin+securities-lending aggregate exceeding RMB2.5-3.0tn earlier in 2026 -- figures are inconsistent across outlets but all point to record retail leverage."
     },
     {
      "investorType": "Foreign institutional (northbound)",
@@ -177,7 +203,7 @@
    "available": true,
    "cadence": "SGX Research's weekly Fund Flow Tracker publishes institutional vs retail net buy/sell weekly, at top-10-stock/STI-constituent/sector level (not a single full-market figure), with a short lag.",
    "latestPeriod": "August 2026 (S-REIT sector aggregate; no fresher whole-market weekly figure retrieved)",
-   "asOf": "2026-09-12",
+   "asOf": "2026-09-13",
    "flows": [
     {
      "investorType": "Retail (individuals)",
@@ -210,8 +236,8 @@
    "market": "United States",
    "available": false,
    "cadence": "No official retail/institutional split exists. ICI publishes weekly estimated fund flows (~1-week lag). EPFR/BofA Flow Show is weekly, similarly lagged. Vanda Research publishes a proprietary near-daily retail-flow gauge, reported via press.",
-   "latestPeriod": "week ended 26 August 2026 (ICI); week ended 2 September 2026 (EPFR/BofA)",
-   "asOf": "2026-09-12",
+   "latestPeriod": "week ended 26 August 2026 (ICI); week ended 9 September 2026 (EPFR/BofA)",
+   "asOf": "2026-09-13",
    "flows": [
     {
      "investorType": "Retail/institutional (ICI domestic equity funds, aggregate)",
@@ -242,11 +268,11 @@
     {
      "investorType": "Retail/institutional (EPFR/BofA US equity funds)",
      "direction": "outflow",
-     "amount": "-7.84 (latest week); -14.2 over trailing 3 weeks",
+     "amount": "-4.48 (week ended 9 Sep, narrower than -7.84 the prior week); -14.2 over the 3 weeks to 2 Sep",
      "unit": "USD bn",
-     "period": "week ended 2 Sep 2026 / 3-week trailing",
+     "period": "week ended 9 Sep 2026",
      "isProxy": true,
-     "note": "Largest 3-week US equity fund outflow since January 2026"
+     "note": "Outflow pace decelerated from the prior week; the 3-week -$14.2B drawdown through 2 Sep remains the largest since January 2026"
     },
     {
      "investorType": "Retail (Vanda Research VandaTrack)",
