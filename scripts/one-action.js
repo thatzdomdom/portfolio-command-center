@@ -72,25 +72,32 @@ function main() {
   const series = silverH.yf || 'SI=F', lowTrust = s.priceTrust === 'low';
   const priceTag = `${series}, ${s.priceAsOf}${lowTrust ? ', low-trust' : ''}`;
   const p = s.priceUSD, mS = s.maintenanceRateStressed, pass = s.survivability ? s.survivability.pass : null;
-  // Rule 1 closed form: after a −35% leg the account survives iff loan ≤ 0.65 × (1 − mS) × value.
-  const L1 = 0.65 * (1 - mS) * s.valueSGD, xRaw = s.loanSGD - L1;
-  const x = xRaw > 0 ? Math.ceil(xRaw / 100) * 100 : 0, Lcap = s.loanSGD - x;
   const sigStatus = String((POL.silverLeverage || {}).status || 'UNSIGNED'), sigShort = sigStatus.split(' — ')[0].split(/[\s(]/)[0] || 'UNSIGNED';
-  const signed = /^SIGNED/.test(sigStatus);
+  const signed = /^SIGNED/.test(sigStatus), rule2InForce = signed && (POL.silverLeverage || {}).rule2InForce !== false;
+  // decision 1 (12 Sep 2026): a signed ceiling sizes the ask — Rule 1's bare minimum is only the floor
+  const maxLev = signed && (POL.silverLeverage || {}).maxLeverage > 1 ? +(POL.silverLeverage.maxLeverage) : null;
+  // Rule 1 closed form: after a −35% leg the account survives iff loan ≤ 0.65 × (1 − mS) × value.
+  const L1 = 0.65 * (1 - mS) * s.valueSGD, xRule1 = Math.max(0, s.loanSGD - L1);
+  const Lmax = maxLev ? s.valueSGD * (1 - 1 / maxLev) : null, xLev = Lmax != null ? Math.max(0, s.loanSGD - Lmax) : 0;
+  const xRaw = Math.max(xRule1, xLev), x = xRaw > 0 ? Math.ceil(xRaw / 100) * 100 : 0, Lcap = s.loanSGD - x;
+  const x1 = xRule1 > 0 ? Math.ceil(xRule1 / 100) * 100 : 0;
+
   const decisions = POL.decisions || {};
   const decisionText = n => { const r = journal.filter(r => String(r.verb).toUpperCase() === 'DECIDE' && String(r.arg || '').trim().split(/\s+/)[0] === String(n)).pop(); return r ? String(r.arg).trim().replace(/^\d+\s*/, '').slice(0, 160) : null; };
   const decided = n => decisions[n] && decisions[n].status === 'decided' ? decisions[n] : null;
   const decisionLine = n => decided(n)
-    ? `decision ${n} decided ${sgtDate(decided(n).at) || '?'}${decisionText(n) ? ` ("${decisionText(n)}")` : ''} — policy still ${sigShort} until edited by hand`
+    ? `decision ${n} decided ${sgtDate(decided(n).at) || '?'}${decisionText(n) ? ` ("${decisionText(n)}")` : ''} — ${signed ? `policy SIGNED ${(POL.silverLeverage || {}).asOf || ''}`.trim() : `policy still ${sigShort} until edited by hand`}`
     : `decision ${n} pending — CIO's unsigned recommendation is Rule 1 alone at 1.0–1.4x; reply DECIDE ${n} <text> to sign or amend`;
   const policyStr = `silverLeverage · ${sigShort} · ${decided(1) ? 'decision 1 decided ' + (sgtDate(decided(1).at) || '?') : 'decision 1 pending'}`;
 
   // why-lines shared by the silver asks — every number with its as-of
   const why35 = `−35% from $${p.toFixed(2)} = $${(p * 0.65).toFixed(2)}, ${p * 0.65 < s.callPriceUSDStressed ? 'below' : 'above'} the stressed call price $${s.callPriceUSDStressed} (${priceTag})`;
   const whyLev = `leverage ${s.leverage}x now (price ${s.priceAsOf}, loan mark ${loanMarkAsOf || '?'}); the arithmetic ceiling at strike is ${SB.rule1 ? SB.rule1.binding + 'x' : 'n/a'}${SB.asOf ? ` (silver-backtest as of ${SB.asOf})` : ''}`;
-  const whyDec = signed ? `policy silverLeverage ${sigShort} (as of ${(POL.silverLeverage || {}).asOf || '?'})` : decisionLine(1);
+  const whyDec = decided(1) ? decisionLine(1) : signed ? `policy silverLeverage ${sigShort} (as of ${(POL.silverLeverage || {}).asOf || '?'})` : decisionLine(1);
   const whyGate = gateOn === false && s.leverage > 1.05
-    ? `Rule 2 (${signed ? 'signed' : 'unsigned'}) would go further, to 1.0x: gate OFF since ${lastCross.date || '?'} (${gate.belowStreak ?? '?'} sessions below the 200-day, SLV as of ${gateAsOf})` : null;
+    ? (signed && !rule2InForce
+      ? `trend gate OFF since ${lastCross.date || '?'} (${gate.belowStreak ?? '?'} sessions below the 200-day, SLV as of ${gateAsOf}) — a position signal; Rule 2 was struck by decision 1, so it does not size the loan`
+      : `Rule 2 (${signed ? 'signed' : 'unsigned'}) would go further, to 1.0x: gate OFF since ${lastCross.date || '?'} (${gate.belowStreak ?? '?'} sessions below the 200-day, SLV as of ${gateAsOf})`) : null;
   const assumed = ['maintenanceRate', 'loanRate'].some(k => ibkr[k] && /^ASSUMED/.test(String(ibkr[k].source || '')));
   const whyRates = assumed ? `maintenance ${pct(s.maintenanceRate)}% and loan ${s.carry ? s.carry.loanRatePct : '?'}% are assumed — confirm on IBKR` : null;
   let navDD = null, navNote = null;
@@ -109,13 +116,21 @@ function main() {
     decision: signed ? null : 1, policy: policyStr, clearsWhen: 'distance to the stressed margin call ≥ 25%' });
   if (pass === false) asks.push({
     key: 'silver.rule1', kind: 'action', push: flipped('survivability', true, false, false),
-    text: x > 0 ? `repay at least ${sgd(x)} of the silver loan (loan ≤ ${sgd(Lcap)}) so the account survives a two-week −35% at the ${pct(mS)}% stressed maintenance rate.`
+    text: x > 0 && maxLev && xLev > xRule1 ? `repay at least ${sgd(x)} of the silver loan (loan ≤ ${sgd(Lcap)}) to bring leverage to the signed ${maxLev}x ceiling; Rule 1's bare minimum is ${sgd(x1)}.`
+      : x > 0 ? `repay at least ${sgd(x)} of the silver loan (loan ≤ ${sgd(Lcap)}) so the account survives a two-week −35% at the ${pct(mS)}% stressed maintenance rate.`
       : `reduce the silver loan until the account survives a two-week −35% at the ${pct(mS)}% stressed maintenance rate.`,
     why: silverWhy([why35]), ask: ASK, short: x > 0 ? `Repay ≥S$${kfmt(x)} of the silver loan · reply DONE/DEFER` : 'Reduce the silver loan · reply DONE/DEFER',
-    decision: signed ? null : 1, policy: policyStr, clearsWhen: 'survivability PASS at the stressed rate' });
-  const rule2Cond = gateOn === false && s.leverage > 1.05 && pass === true;
+    decision: signed ? null : 1, policy: policyStr, clearsWhen: maxLev ? `leverage ≤ ${maxLev}x and survivability PASS at the stressed rate` : 'survivability PASS at the stressed rate' });
+  // a signed ceiling is also an ask on its own when survivability already passes but leverage sits above it
+  if (pass === true && maxLev && s.leverage > maxLev + 0.02 && xLev > 0) asks.push({
+    key: 'silver.ceiling', kind: 'action', push: false,
+    text: `repay at least ${sgd(x)} of the silver loan (loan ≤ ${sgd(Lcap)}) to bring leverage ${s.leverage}x back under the signed ${maxLev}x ceiling.`,
+    why: silverWhy([]), ask: ASK, short: `Repay ≥S$${kfmt(x)} of the silver loan (over the ${maxLev}x ceiling) · reply DONE/DEFER`,
+    decision: null, policy: policyStr, clearsWhen: `leverage ≤ ${maxLev}x` });
+  // unsigned → a candidate and a why-line; signed with rule 2 in force → the ask; signed with rule 2 struck → nothing
+  const rule2Cond = gateOn === false && s.leverage > 1.05 && pass === true && (!signed || rule2InForce);
   if (rule2Cond) asks.push({
-    key: 'silver.rule2', kind: 'action', candidateOnly: !signed,
+    key: 'silver.rule2', kind: 'action', candidateOnly: !rule2InForce,
     push: signed && (gate.belowStreak === HYST || flipped('silverGate', true, false, false)),
     text: `reduce the silver loan to 1.0x: the trend gate is OFF (${gate.belowStreak ?? '?'} closes below the 200-day since ${lastCross.date || '?'}, SLV as of ${gateAsOf}) and leverage is ${s.leverage}x — policy rule 2, ${sigShort}${signed ? '' : ' (why-line only until signed)'}.`,
     why: silverWhy([]), ask: ASK, short: 'Reduce the silver loan to 1.0x (gate OFF) · reply DONE/DEFER',

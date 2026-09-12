@@ -149,12 +149,12 @@
   "killSwitch": "a signal is switched off when its live realised slope turns negative — calibration, not P&L"
  },
  "silverLeverage": {
-  "status": "UNSIGNED — backtest delivered 2026-09-12 (decision 1); CIO recommendation revised, see backtestVerdict",
+  "status": "SIGNED 2026-09-12 — Rule 1 alone (decision 1): size the loan so the account survives a 2-day −20% and a 2-week −35% at 1.5x the maintenance rate; leverage ceiling 1.4x with headroom; the trend gate is the position signal, not the borrowing signal",
   "asOf": "2026-09-12",
   "targetLeverage": 1.6,
   "stressMultiplier": 1.5,
   "rule1": "survive a 2-day -20% and a 2-week -35% silver decline without a margin call, at 1.5x the maintenance rate",
-  "rule2": "leverage above 1.0x only while the trend gate is ON; on flip (5 closes below the 200-day), reduce the loan to 1.0x — remove the borrowing, not the thesis",
+  "rule2": "STRUCK 2026-09-12 (decision 1) — was: leverage above 1.0x only while the trend gate is ON. The gate remains the position signal; it does not govern the borrowing.",
   "rule3": "daily carry line: annualised loan cost against silver trailing 12-month return",
   "backtestVerdict": {
    "asOf": "2026-09-12",
@@ -163,6 +163,17 @@
    "rule2": "the gate did not deliver Rule 1: the gated book was still levered entering 6 of the 8 worst 2-week drops (crashes start from highs, where the gate is ON). Gated 1.6x returned 6.76% CAGR vs 7.25% unlevered with a deeper max drawdown (-85.9% vs -76.3%), 26 de-levers, 9 whipsaws",
    "fixed": "a never-managed 1.6x loan took one margin call (2008-09-10, forced sale 68.8% below peak equity) and ended at 5.38% CAGR",
    "recommendation": "do not sign 1.6x. Size the loan by Rule 1 alone (headroom below 1.556x at the stressed rate; 1.0x–1.4x); do not use the trend gate to time leverage. The gate remains the position signal, not the borrowing signal."
+  },
+  "maxLeverage": 1.4,
+  "targetLeverageNote": "1.6 was the proposal's target; backtested 12 Sep 2026 and rejected (fails Rule 1 by arithmetic). Kept here so silver-backtest.js keeps producing the evidence; one-action.js sizes to maxLeverage.",
+  "rule2InForce": false
+ },
+ "decisions": {
+  "1": {
+   "status": "decided",
+   "at": "2026-09-12T05:31:44Z",
+   "via": "session",
+   "summary": "Rule 1 alone; Rule 2 struck; leverage ceiling 1.4x"
   }
  }
 }

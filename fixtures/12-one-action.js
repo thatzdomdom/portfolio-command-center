@@ -23,7 +23,8 @@ module.exports = {
       ctx.resetData();
       ctx.edit('alerts.json', a => { a.alerts = (a.alerts || []).filter(x => x.family !== 'ownership'); });
       ctx.edit('technicals.json', T => { for (const [k, i] of Object.entries(T.instruments)) if (k !== 'SLV' && i.gate && i.gate.on === false && i.gate.belowStreak >= HYST && i.gate.belowStreak <= HYST + 2) i.gate.belowStreak = 30; });
-      ctx.edit('policy.json', p => { delete p.decisions; });
+      // the live policy was SIGNED on 12 Sep (decision 1); sub-cases start UNSIGNED and sign explicitly
+      ctx.edit('policy.json', p => { delete p.decisions; p.silverLeverage.status = 'UNSIGNED — fixture'; delete p.silverLeverage.maxLeverage; delete p.silverLeverage.rule2InForce; });
       for (const f of ['journal.ndjson', '.oneaction-history.ndjson', '.state-history.ndjson']) ctx.rm(f);
     };
     const silver = ({ pass, dist, lev }) => ctx.edit('valuation.json', v => { v.silver.survivability.pass = pass; if (dist != null) v.silver.distanceToCallPctStressed = dist; if (lev != null) v.silver.leverage = lev; });
@@ -39,7 +40,7 @@ module.exports = {
     ctx.check('(a) date today · kind action|none · as-of on prices, gate, leverage, nav', j.date === ctx.today && ['action', 'none'].includes(j.action.kind) && !!(j.asOf && j.asOf.prices) && !!st.silverGateAsOf && !!(st.leverageAsOf && st.leverageAsOf.price) && !!st.navAsOf, JSON.stringify({ date: j.date, kind: j.action.kind, asOf: j.asOf }));
     const rule1 = st.survivability === false && st.distStressedPct >= 25;
     ctx.check(rule1 ? '(a) survivability FAIL ≥25% from the stressed call → silver.rule1 with the data-derived repayment and a DONE|DEFER ask' : `(a) real data no longer in the 12 Sep state (survivability ${st.survivability}, ${st.distStressedPct}% from the call) — key is data-derived: ${j.action.key}`,
-      !rule1 || (j.action.key === 'silver.rule1' && j.action.kind === 'action' && /^DONE \| DEFER/.test(j.action.ask || '') && /^repay at least S\$[\d,]+ of the silver loan \(loan ≤ S\$[\d,]+\) so the account survives a two-week −35% at the 45% stressed maintenance rate\.$/.test(j.action.text)), `${j.action.key} · ${j.action.text}`);
+      !rule1 || (j.action.key === 'silver.rule1' && j.action.kind === 'action' && /^DONE \| DEFER/.test(j.action.ask || '') && /^repay at least S\$[\d,]+ of the silver loan \(loan ≤ S\$[\d,]+\) (so the account survives a two-week −35% at the 45% stressed maintenance rate|to bring leverage to the signed [\d.]+x ceiling; Rule 1's bare minimum is S\$[\d,]+)\.$/.test(j.action.text)), `${j.action.key} · ${j.action.text}`);
     ctx.check('(a) short ≤ 80 chars with one number', String(j.action.short || '').length <= 80, j.action.short);
     ctx.check('(a) push only on a crossing: first day ⇔ pushNote "first day — no crossing history"', (st.prevStateDate == null) === /first day/.test(j.action.pushNote || '') && j.action.push === false, `prevStateDate ${st.prevStateDate} · push ${j.action.push} · ${j.action.pushNote}`);
     ctx.check('(a) every silver why-line names its series/as-of; assumed rates get their line', (j.action.why || []).some(w => /\(SI=F, \d{4}-\d{2}-\d{2}(, low-trust)?\)/.test(w)) && (j.action.why || []).some(w => /are assumed — confirm on IBKR/.test(w)), (j.action.why || []).join(' ‖ '));
@@ -104,5 +105,16 @@ module.exports = {
     j = act('(i) DECIDE 1');
     ctx.check(`(i) why-line "decision 1 decided ${yd} ("Rule 1 alone at 1.4x") — policy still UNSIGNED"`, (j.action.why || []).some(w => w === `decision 1 decided ${yd} ("Rule 1 alone at 1.4x") — policy still UNSIGNED until edited by hand`) && /decision 1 decided/.test(j.action.policy || ''), (j.action.why || []).join(' ‖ ') + ' · ' + j.action.policy);
     ctx.check('(i) journal.decisions[0] = {n:1, status:decided, text from the journal}', j.journal.decisions && j.journal.decisions[0] && j.journal.decisions[0].n === 1 && j.journal.decisions[0].status === 'decided' && j.journal.decisions[0].text === 'Rule 1 alone at 1.4x', JSON.stringify(j.journal.decisions));
+    // (j) the signed policy (decision 1, 12 Sep): a 1.4x ceiling sizes the ask; Rule 2 struck never asks
+    base(); silver({ pass: false, dist: 30, lev: 1.62 }); gate('SLV', false, { belowStreak: 60 });
+    ctx.edit('policy.json', p => { p.silverLeverage.status = 'SIGNED 2026-09-12 — Rule 1 alone (fixture)'; p.silverLeverage.maxLeverage = 1.4; p.silverLeverage.rule2InForce = false; });
+    j = act('(j1) SIGNED 1.4x ceiling, survivability FAIL');
+    ctx.check("(j1) silver.rule1 sized to the ceiling: 'to bring leverage to the signed 1.4x ceiling; Rule 1's bare minimum is S$…'; Rule 2 is a why-line that says struck, never a candidate", j.action.key === 'silver.rule1' && /to bring leverage to the signed 1\.4x ceiling; Rule 1's bare minimum is S\$[\d,]+\.$/.test(j.action.text) && !keys(j).includes('silver.rule2') && (j.action.why || []).some(w => /Rule 2 was struck by decision 1/.test(w)) && /leverage ≤ 1\.4x and survivability PASS/.test(j.action.clearsWhen || ''), `${j.action.key} · ${j.action.text} · ${keys(j)} · ${(j.action.why || []).join(' ‖ ')}`);
+    silver({ pass: true, dist: 40, lev: 1.5 });
+    j = act('(j2) SIGNED, survivability PASS, leverage 1.5 over the ceiling');
+    ctx.check("(j2) → key 'silver.ceiling' (over the signed ceiling), push false, one repayment number", j.action.key === 'silver.ceiling' && j.action.push === false && /^repay at least S\$[\d,]+ of the silver loan \(loan ≤ S\$[\d,]+\) to bring leverage 1\.5x back under the signed 1\.4x ceiling\.$/.test(j.action.text), `${j.action.key} · ${j.action.text}`);
+    silver({ pass: true, dist: 40, lev: 1.3 });
+    j = act('(j3) SIGNED, PASS, leverage 1.3 under the ceiling, gate OFF');
+    ctx.check("(j3) → 'none' (Rule 2 struck: gate OFF with leverage under the ceiling asks nothing)", j.action.key === 'none' && !keys(j).includes('silver.rule2'), `${j.action.key} · ${keys(j)}`);
   },
 };
