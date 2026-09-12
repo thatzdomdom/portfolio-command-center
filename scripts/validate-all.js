@@ -416,6 +416,23 @@ else {
   else if (G) ok(`targets (shadow): ${G.eligible}/${G.universe} eligible · top cluster ${(G.clusters[0] || {}).name || '—'} ${G.clusters[0] ? (G.clusters[0].actualRiskShare * 100).toFixed(0) + '%' : ''} of risk`);
 }
 
+// ── PHASE 5: the pages themselves must be structurally sound ───────────────
+// (added 13 Sep 2026) The three new surfaces — today.html, book.html, inbox.html — and the
+// pcc.css/common.js contract under them. scripts/validate-pages.js holds the rules (zero external
+// calls, unique ids, today.html ≡ the email's block order, nothing fetched that publish.js does not
+// publish, no data through innerHTML) and returns lines rather than printing, so they land in
+// .validation.json with everything else. A page that does not exist yet WARNS; the checker failing
+// to run WARNS too — a bug in a structure test must never be the reason the 07:02 publish stops.
+{
+  try {
+    const { validatePages } = require('./validate-pages.js');
+    const r = validatePages({ root: path.join(__dirname, '..') });
+    r.problems.forEach(p => fail(p.file, p.msg));
+    r.warnings.forEach(w => warn(w.file, w.msg));
+    r.passed.forEach(c => ok(c));
+  } catch (e) { warn('validate-pages', `did not run: ${String((e && e.message) || e).slice(0, 120)}`); }
+}
+
 // ── report ─────────────────────────────────────────────────────────────────
 // Always written — even from the catch-all below — so research-headless.sh's alarm and the brief
 // never read yesterday's report for today's failure.

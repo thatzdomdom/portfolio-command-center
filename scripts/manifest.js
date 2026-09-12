@@ -26,6 +26,7 @@ const SPEC = {
   'intel.json':       { as: j => j.updated || j.asOf,  cadence: 'daily',   count: j => ((j.insiders || []).length + (j.congress || []).length), source: 'research agent; price-gated' },
   'investors.json':   { as: j => String(j.updated || '').slice(0, 10), cadence: 'daily-verify', count: j => (j.notableTrades || []).length, source: '13F ingest; quarterly by law' },
   '.prices.json':     { as: j => j.latestByExchange && Object.entries(j.latestByExchange).filter(([k]) => k !== 'CRYPTO').map(([, v]) => v).sort().pop(), cadence: 'daily', count: j => Object.keys(j.instruments || {}).length, source: 'price-spine.js (Yahoo chart, ETF-proxied)' },
+  'closes.json':      { as: j => j.asOf, cadence: 'daily', count: j => Object.keys(j.instruments || {}).length, source: 'closes.js (2y daily closes, exchange-indexed, from .prices-2y)' },
   '.calendar.json':   { as: j => String(j.generated || '').slice(0, 10), cadence: 'daily', count: j => ((j.released || []).length + (j.upcoming || []).length), source: 'calendar-spine.js (ForexFactory)' },
   'fx.json':          { as: j => j.asOf,               cadence: 'daily',   count: j => Object.keys(j.rates || {}).length, source: 'fx.js (ECB reference rates)' },
   'book.json':        { as: j => j.asOf,               cadence: 'manual',  count: j => (j.holdings || []).length, source: 'extract-book.js', published: 'book.enc' },

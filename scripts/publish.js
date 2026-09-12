@@ -44,11 +44,15 @@ const LEAK_RE = /data\/(book|valuation|journal|oneaction)\.json$|data\/journal\.
 // Files that may be committed. index.html is guarded (see indexGuard); everything else is data.
 const ALLOW = ['data/news.json', 'data/model.json', 'data/market.json', 'data/brief.json', 'data/intel.json', 'data/investors.json',
   'data/track.json', 'data/flows-investors.json', 'data/flows-history.json', 'data/version.json',
-  'data/.prices.json', 'data/.calendar.json', 'data/.validation.json', 'data/.track-fingerprint.json',
+  'data/.prices.json', 'data/closes.json', 'data/.calendar.json', 'data/.validation.json', 'data/.track-fingerprint.json',
   'data/fx.json', 'data/manifest.json', 'data/book.enc', 'data/valuation.enc',
   'data/signals.json', 'data/alerts.json', 'data/watchlist.json', 'data/policy.json',
   'data/technicals.json', 'data/targets.json', 'data/silver-backtest.json', 'data/fx-history.ndjson',
-  'data/journal.enc', 'data/oneaction.enc', 'index.html'];
+  'data/journal.enc', 'data/oneaction.enc', 'index.html',
+  // phase 5 (13 Sep 2026): the three surfaces and what they are built on. index.html is guarded
+  // to holdings lines because edit-book.js rewrites one; these five are ordinary code and ship
+  // whole. Without them the pages 404 on Pages while every data file they read is published.
+  'pcc.css', 'common.js', 'today.html', 'book.html', 'inbox.html'];
 
 // ── pure guard helpers (exported; unit-tested with node -e, never by running the pipeline) ──
 const HOLDING_LINE = /^[-+]\s*\{id:\s*\d+,/;

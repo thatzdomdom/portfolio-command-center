@@ -29,6 +29,7 @@ git pull --rebase --autostash -q origin main 2>/dev/null || echo "$(date '+%F %T
 # The agent is handed these files as established fact and must not re-research
 # them. Both are non-fatal: if a feed is down the run continues and says so.
 /opt/homebrew/bin/node scripts/price-spine.js || echo "$(date '+%F %T') price spine FAILED — agents will lack a price anchor this run"
+/opt/homebrew/bin/node scripts/closes.js || echo "$(date '+%F %T') closes.js FAILED — the pages lose their charts and period returns this run"
 /opt/homebrew/bin/node scripts/calendar-spine.js || echo "$(date '+%F %T') calendar spine unavailable/stale — see data/.calendar.json"
 /opt/homebrew/bin/node scripts/fx.js || echo "$(date '+%F %T') fx.js failed or stale — valuation will use prior rates"
 /opt/homebrew/bin/node scripts/valuate.js || echo "$(date '+%F %T') valuate.js FAILED — no NAV this run"
