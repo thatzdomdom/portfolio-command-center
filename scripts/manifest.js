@@ -38,6 +38,11 @@ const SPEC = {
   'targets.json':     { as: j => j.asOf, cadence: 'daily', count: j => (j.diff || []).length, source: 'targets.js (SHADOW policy weights)' },
   'silver-backtest.json': { as: j => j.asOf, cadence: 'weekly', count: j => ((j.delevers && j.delevers.gated) || []).length, source: 'silver-backtest.js (SLV full history, margin-account model)' },
   '.validation.json': { as: j => j.checkedOn,          cadence: 'daily',   count: j => (j.problems || []).length, source: 'validate-all.js (count = problems)' },
+  // Phase 4 (12 Sep 2026): the write path. Both are private (encrypted at publish); the manifest
+  // carries a count only — never the action text or a reply. The publish ledger is local and has
+  // no entry here at all.
+  'oneaction.json':   { as: j => j.date, cadence: 'daily', count: j => (j.action && j.action.kind === 'action' ? 1 : 0), source: 'one-action.js (count = 1 when an action is open)', published: 'oneaction.enc' },
+  'journal.json':     { as: j => j.asOf, cadence: 'manual', count: j => (j.count != null ? j.count : (j.entries || []).length), source: 'journal.js (email replies; count = entries)', published: 'journal.enc' },
 };
 
 const files = {};

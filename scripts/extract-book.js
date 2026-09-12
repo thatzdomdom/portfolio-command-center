@@ -44,13 +44,26 @@ function blameDate(lineNo) {
 }
 
 const today = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Singapore' });
+// Phase 4 (12 Sep 2026): CARRY FORWARD what a re-extract must not reset. The previous book.json's
+// ibkr block (maintenance/loan rate, their asOf and source — hand-confirmed values would otherwise
+// snap back to ASSUMED-today), and any manual mark that edit-book.js / an email LOAN reply stamped
+// (its asOf is the edit date, more honest than git blame on an uncommitted line).
+const prev = (() => { try { return JSON.parse(fs.readFileSync(OUT, 'utf8')); } catch (_) { return null; } })();
+const prevMark = id => { const p = prev && (prev.holdings || []).find(x => x.id === id); return p && p.mark ? p.mark : null; };
 const holdings = rows.map(({ obj: h, line }) => {
   const base = { id: h.id, n: h.n, t: h.t, yf: h.yf ?? null, ac: h.ac, region: h.region, cur: h.cur };
   if (h.yf) return { ...base, qty: h.qty, book: h.book ?? null, valued: 'live' };
+  const pm = prevMark(h.id);
+  if (pm && pm.value === h.manualNative && /^(edit-book|email reply)/.test(String(pm.source || ''))) {
+    return { ...base, manualNative: h.manualNative, valued: 'manual', mark: { value: pm.value, asOf: pm.asOf, source: pm.source } };
+  }
   const asOf = blameDate(line) || today;
   return { ...base, manualNative: h.manualNative, valued: 'manual',
     mark: { value: h.manualNative, asOf, source: `index.html line ${line} (git blame ${asOf === today ? '— no history, stamped today' : 'author date'})` } };
 });
+const prevIbkr = prev && prev.ibkr && typeof prev.ibkr === 'object' ? prev.ibkr : null;
+const rate = (key, fallback) => (prevIbkr && prevIbkr[key] && typeof prevIbkr[key].value === 'number' && prevIbkr[key].asOf)
+  ? { value: prevIbkr[key].value, asOf: prevIbkr[key].asOf, source: prevIbkr[key].source } : fallback;
 
 const book = {
   asOf: today,
@@ -66,9 +79,9 @@ const book = {
   // rate amber at 30 days because IBKR raises it, sharply and with days of notice, in exactly the
   // conditions where it matters.
   ibkr: {
-    silverId: 57, loanId: 58,
-    maintenanceRate: { value: 0.30, asOf: today, source: 'ASSUMED — typical IBKR metals maintenance; confirm on the IBKR account page and update' },
-    loanRate: { value: 0.060, asOf: today, source: 'ASSUMED — IBKR SGD margin rate tier; confirm and update' },
+    silverId: (prevIbkr && prevIbkr.silverId) || 57, loanId: (prevIbkr && prevIbkr.loanId) || 58,
+    maintenanceRate: rate('maintenanceRate', { value: 0.30, asOf: today, source: 'ASSUMED — typical IBKR metals maintenance; confirm on the IBKR account page and update' }),
+    loanRate: rate('loanRate', { value: 0.060, asOf: today, source: 'ASSUMED — IBKR SGD margin rate tier; confirm and update' }),
   },
 };
 fs.writeFileSync(OUT, JSON.stringify(book, null, 2) + '\n');

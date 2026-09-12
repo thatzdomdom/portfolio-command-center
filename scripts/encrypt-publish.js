@@ -20,7 +20,9 @@
  */
 const fs = require('fs'), path = require('path'), crypto = require('crypto');
 const D = f => path.join(__dirname, '..', 'data', f);
-const FILES = ['book.json', 'valuation.json'];
+// Phase 4 (12 Sep 2026): oneaction.json (the action text names the loan) and journal.json (the
+// owner's replies) join the envelope set. Absent files are skipped, never invented.
+const FILES = ['book.json', 'valuation.json', 'oneaction.json', 'journal.json'];
 const ITER = 150000;
 
 function readEnv() {

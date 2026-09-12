@@ -32,6 +32,9 @@ const fail = (file, msg) => problems.push(`${file}: ${msg}`);
 const warn = (file, msg) => warnings.push(`${file}: ${msg}`);
 const ok = msg => checks.push(msg);
 const isBareDomain = u => { try { const p = new URL(String(u)).pathname; return p === '' || p === '/'; } catch (_) { return true; } };
+// Catch-all (phase 4, 12 Sep 2026): a crash anywhere below becomes a FAIL line and the report is
+// still written (writeReport is hoisted). Exit 1 either way — publish.js stays red.
+process.on('uncaughtException', e => { fail('validate-all', `crashed: ${String((e && e.message) || e).slice(0, 120)}`); try { writeReport(); } catch (_) {} process.exit(1); });
 
 // ── news.json ──────────────────────────────────────────────────────────────
 const news = J('news.json');
@@ -246,7 +249,11 @@ else {
   if (!fs.existsSync(PF)) {
     warn('prices', 'data/.prices.json missing — run `node scripts/price-spine.js` before validating');
   } else {
-    const spine = JSON.parse(fs.readFileSync(PF, 'utf8'));
+    // Phase 4: an unparseable spine used to crash the whole validator here (exit 1, no report
+    // written, research-headless.sh's alarm then quoted YESTERDAY's report). It is a FAIL line now.
+    let spine = null;
+    try { spine = JSON.parse(fs.readFileSync(PF, 'utf8')); } catch (e) { fail('prices', `data/.prices.json is unparseable (${e.message.slice(0, 80)}) — re-run price-spine.js; no price claim was reconciled`); }
+    if (spine) {
     const ageMin = Math.floor((Date.now() - Date.parse(spine.generated)) / 60000);
     if (ageMin > 24 * 60) warn('prices', `spine is ${Math.floor(ageMin / 60)}h old — re-run price-spine.js`);
 
@@ -321,6 +328,7 @@ else {
         fail('prices', `${x.where} asserts ${x.sym} at ${x.claimed}, which matches no traded close/high/low (recent closes: ${x.near.join(', ')})`));
       if (mismatches.length > 6) fail('prices', `…and ${mismatches.length - 6} more unreconciled price claim(s)`);
     }
+    }
   }
 }
 
@@ -360,10 +368,19 @@ else {
     } catch (e) { warn('book.json', `parity check could not run: ${e.message}`); }
   }
   const { spawnSync } = require('child_process');
-  const tracked = spawnSync('git', ['ls-files', '--', 'data/book.json', 'data/valuation.json', 'data/.prices-2y.json', 'data/.credentials.json'],
-    { cwd: path.join(__dirname, '..'), encoding: 'utf8' }).stdout.trim();
+  // Same list as publish.js PRIVATE and .gitignore (phase 4 added the write path's files).
+  const PLAINTEXT = ['data/book.json', 'data/valuation.json', 'data/.prices-2y.json', 'data/.credentials.json',
+    'data/journal.json', 'data/journal.ndjson', 'data/oneaction.json', 'data/.oneaction-history.ndjson',
+    'data/.state-history.ndjson', 'data/.publish-history.ndjson', 'data/.tickers.json', 'data/.cutover.json',
+    'data/.last-brief-at', 'data/.last-brief-date'];
+  let tracked = null;
+  try {
+    const g = spawnSync('git', ['ls-files', '--', ...PLAINTEXT], { cwd: path.join(__dirname, '..'), encoding: 'utf8' });
+    if (g.error) throw g.error;
+    tracked = (g.stdout || '').trim();
+  } catch (e) { fail('git', `could not run git ls-files (${String(e.message || e).slice(0, 60)}) — the plaintext guard did not run`); }
   if (tracked) fail('git', `sensitive PLAINTEXT is tracked: ${tracked.replace(/\n/g, ', ')} — must be gitignored; only .enc envelopes may be committed`);
-  else ok('git: no sensitive plaintext tracked');
+  else if (tracked === '') ok('git: no sensitive plaintext tracked');
   const man = J('manifest.json');
   if (!man) warn('manifest.json', 'absent — publish.js writes it');
   else if (man.sgtDate !== today) warn('manifest.json', `sgtDate ${man.sgtDate} ≠ today ${today} (publish has not run yet today)`);
@@ -388,19 +405,28 @@ else {
 
 // ── PHASE 3: the technical layer must be current ───────────────────────────
 {
+  // Phase 4: a technicals.json without `summary` or a targets.json without `clusters` used to throw
+  // here — exit 1 with NO report written. Malformed is a FAIL line, and the report still lands.
   const T = J('technicals.json');
   if (!T) warn('technicals.json', 'absent — technicals.js has not run');
+  else if (!T.summary || typeof T.summary !== 'object') fail('technicals.json', 'malformed — no `summary` block (technicals.js did not finish); the trend gate cannot be trusted this run');
   else { const a = daysAgo(T.asOf); if (a != null && a > 4) fail('technicals.json', `trend gate is ${a} days old — stale gate, stale risk block`); else ok(`technicals: ${T.summary.instruments} instruments · gate ON ${T.summary.gateOn} / OFF ${T.summary.gateOff} · as of ${T.asOf}`); }
-  const G = J('targets.json'); if (G) ok(`targets (shadow): ${G.eligible}/${G.universe} eligible · top cluster ${(G.clusters[0] || {}).name || '—'} ${G.clusters[0] ? (G.clusters[0].actualRiskShare * 100).toFixed(0) + '%' : ''} of risk`);
+  const G = J('targets.json');
+  if (G && !Array.isArray(G.clusters)) fail('targets.json', 'malformed — no `clusters` array (targets.js did not finish)');
+  else if (G) ok(`targets (shadow): ${G.eligible}/${G.universe} eligible · top cluster ${(G.clusters[0] || {}).name || '—'} ${G.clusters[0] ? (G.clusters[0].actualRiskShare * 100).toFixed(0) + '%' : ''} of risk`);
 }
 
 // ── report ─────────────────────────────────────────────────────────────────
-const report = { checkedOn: today, at: new Date().toISOString(), problems, warnings, passed: checks };
-fs.writeFileSync(path.join(D, '.validation.json'), JSON.stringify(report, null, 1) + '\n');
-
-console.log(`validate-all — ${today}\n`);
-checks.forEach(c => console.log('  ✓ ' + c));
-if (warnings.length) { console.log(''); warnings.forEach(w => console.log('  ⚠ ' + w)); }
-if (problems.length) { console.log(''); problems.forEach(p => console.log('  ❌ ' + p)); }
-console.log(`\n${checks.length} passed · ${warnings.length} warning(s) · ${problems.length} problem(s)`);
-process.exit(problems.length ? 1 : warnings.length ? 2 : 0);
+// Always written — even from the catch-all below — so research-headless.sh's alarm and the brief
+// never read yesterday's report for today's failure.
+function writeReport() {
+  const report = { checkedOn: today, at: new Date().toISOString(), problems, warnings, passed: checks };
+  fs.writeFileSync(path.join(D, '.validation.json'), JSON.stringify(report, null, 1) + '\n');
+  console.log(`validate-all — ${today}\n`);
+  checks.forEach(c => console.log('  ✓ ' + c));
+  if (warnings.length) { console.log(''); warnings.forEach(w => console.log('  ⚠ ' + w)); }
+  if (problems.length) { console.log(''); problems.forEach(p => console.log('  ❌ ' + p)); }
+  console.log(`\n${checks.length} passed · ${warnings.length} warning(s) · ${problems.length} problem(s)`);
+  return problems.length ? 1 : warnings.length ? 2 : 0;
+}
+process.exit(writeReport());

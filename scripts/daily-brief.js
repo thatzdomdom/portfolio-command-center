@@ -19,6 +19,81 @@ function readEnv() {
   return out;
 }
 
+// Phase 4 (12 Sep 2026): the owner's replies and THE ONE ACTION are computed by code BEFORE this
+// file reads a single data file. journal.js ingests Mail.app replies (idempotent; --quiet = no ntfy
+// alarm from here), then one-action.js recomputes data/oneaction.json with the keyed journal status.
+// Both also run at 07:02 from research-headless.sh; running them again here means a reply sent
+// between 07:02 and 08:15 is in THIS morning's brief, and the block and the REPLIES section can
+// never contradict each other. Non-fatal: the brief must go out even if Mail is unreachable.
+// Never under --dry-run (a dry run must not touch Mail) unless --read-mail is passed explicitly.
+const READ_MAIL = process.argv.includes('--read-mail');
+const preLog = [];
+if (!DRY || READ_MAIL) {
+  for (const [script, args, timeout] of [['journal.js', ['--quiet'], 320000], ['one-action.js', [], 60000]]) {
+    try {
+      const r = spawnSync(process.execPath, [path.join(__dirname, script), ...args], { encoding: 'utf8', timeout });
+      const tail = ((r.stderr || r.stdout || '').trim().split('\n').pop() || '').slice(0, 160);
+      preLog.push(`${script}: ${r.status === 0 ? 'ok' : `exit ${r.status}${r.signal ? ' (' + r.signal + ')' : ''} — ${tail || 'no output'}`}`);
+    } catch (e) { preLog.push(`${script}: not run (${e.message})`); }
+  }
+} else preLog.push('journal.js / one-action.js: skipped under --dry-run (pass --read-mail to run them)');
+
+// Singapore date, explicitly — toISOString() is UTC and reports the wrong day just after midnight SGT.
+const todaySGT = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Singapore' });
+const ndjson = f => { try { return fs.readFileSync(path.join(ROOT, 'data', f), 'utf8').split('\n').filter(Boolean).map(l => { try { return JSON.parse(l); } catch (_) { return null; } }).filter(Boolean); } catch (_) { return []; } };
+const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const dmy = iso => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso || '')); return m ? `${+m[3]} ${MON[+m[2] - 1]}` : String(iso || '?'); };
+const sgtDay = iso => { const t = Date.parse(iso); return isNaN(t) ? String(iso || '').slice(0, 10) : new Date(t).toLocaleDateString('en-CA', { timeZone: 'Asia/Singapore' }); };
+const sgtStamp = iso => { const d = new Date(iso); return d.toLocaleDateString('en-CA', { timeZone: 'Asia/Singapore' }) + ' ' + d.toLocaleTimeString('en-GB', { timeZone: 'Asia/Singapore', hour: '2-digit', minute: '2-digit' }) + ' SGT'; };
+// The send stamp data/.last-brief-at (ISO, written on EVERY successful Mail.app send) is the window
+// for SIGNALS and REPLIES. Before phase 4 only the dead SMTP branch wrote a stamp, so the live path
+// never had one and the window silently fell back to now − 2d. Fallback now: now − 48h.
+const lastBriefAt = (() => { try { const t = fs.readFileSync(path.join(ROOT, 'data', '.last-brief-at'), 'utf8').trim(); if (!isNaN(Date.parse(t))) return t; } catch (_) {} return new Date(Date.now() - 48 * 3600e3).toISOString(); })();
+// THE ONE ACTION (scripts/one-action.js): only today's file counts — a stale one would repeat an
+// ask the data may already have cleared.
+const oneAction = (() => { const o = readJson('oneaction.json'); return o && o.date === todaySGT && o.action ? o : null; })();
+function actionLines() {
+  if (!oneAction) return ['One Action not computed this morning — scripts/one-action.js did not run'];
+  const a = oneAction.action, j = oneAction.journal || {}, L = [];
+  L.push(a.kind === 'none' ? a.text : `ACTION: ${a.text}`);
+  (a.why || []).forEach(w => L.push(w));
+  // deferred = state, not a nag: the ACTION line stays, the Reply line goes
+  if (j.status === 'deferred' && j.lastReply) L.push(`deferred until ${dmy(j.deferredUntil)} ("${j.lastReply.arg || 'no reason given'}") — reply DONE when done`);
+  else if (a.ask) L.push(`Reply ${a.ask}.`);
+  if (j.status === 'reported-done' && j.lastReply) L.push(`you replied DONE on ${dmy(sgtDay(j.lastReply.receivedAt || j.lastReply.at))}${j.note ? ' — ' + j.note : ''}`);
+  (oneAction.candidates || []).forEach(c => L.push(`also open · ${c.key}: ${c.text} — reply DONE ${c.key} when done`));
+  return L;
+}
+// One line per journal row received after the last send. Rows come from journal.js
+// ({at, briefDate, receivedAt, messageId, verb, arg, key, raw}); the action is named by the
+// `short` text of the brief being replied to (.oneaction-history.ndjson), never by its key.
+function repliesLines() {
+  const seen = new Set();
+  const rows = ndjson('journal.ndjson').filter(r => { const t = r.receivedAt || r.at || ''; if (!(t > lastBriefAt)) return false; const id = r.messageId || t + '|' + r.verb + '|' + r.key; if (seen.has(id)) return false; seen.add(id); return true; })
+    .sort((a, b) => (a.receivedAt || a.at || '') < (b.receivedAt || b.at || '') ? -1 : 1);
+  if (!rows.length) return [];
+  const hist = ndjson('.oneaction-history.ndjson'), WL = readJson('watchlist.json');
+  const shortFor = r => { const h = hist.find(x => x.date === r.briefDate); return h && h.short && (!r.key || r.key === h.key) ? h.short : (r.key || '(no action bound)'); };
+  const wname = t => { const w = ((WL && WL.us) || []).find(x => x.t === t); return w && w.n ? w.n : 'name pending'; };
+  const L = [], ignored = {}; let grammar = false;
+  for (const r of rows) {
+    const verb = String(r.verb || '').toUpperCase(), arg = String(r.arg == null ? '' : r.arg).trim(), bd = r.briefDate ? `${dmy(r.briefDate)} brief` : 'unbound';
+    if (r.trusted === false || r.ignored === true || verb === 'IGNORED' || verb === 'UNTRUSTED') { const d = String(r.domain || r.sender || '?').replace(/[>\s]/g, '').split('@').pop(); ignored[d] = (ignored[d] || 0) + 1; continue; }
+    if (verb === 'DONE') L.push(`DONE · ${bd} · ${shortFor(r)}${arg ? ` ("${arg}")` : ''}`);
+    else if (verb === 'DEFER') L.push(`DEFER · ${bd} · ${shortFor(r)} — ${arg ? `"${arg}"` : 'DEFER without a reason — say why next time'}`);
+    else if (verb === 'WATCH' || verb === 'UNWATCH') {
+      const t = (arg.split(/\s+/)[0] || '?').toUpperCase(), bad = r.applied === false || /unresolved/i.test(String(r.note || r.result || ''));
+      L.push(bad ? `${verb} ${t} → ${String(r.note || r.result || 'unresolved ticker')} — not ${verb === 'WATCH' ? 'added' : 'removed'}` : verb === 'WATCH' ? `WATCH ${t} → added to the watchlist (${wname(t)})` : `UNWATCH ${t} → removed from the watchlist`);
+    }
+    else if (verb === 'DECIDE') { const m = /^(\d+)\s*([\s\S]*)$/.exec(arg); L.push(m ? `DECIDE ${m[1]} → logged: "${m[2]}"` : `DECIDE → "${arg}"`); }
+    else if (verb === 'NOTE') L.push(`NOTE · "${arg}"`);
+    else if (verb === 'LOAN') L.push(`LOAN ${arg} → ${r.applied === false ? 'NOT applied — ' + String(r.note || r.error || 'edit-book refused') : 'loan mark updated in book.json'}`);
+    else { L.push(`reply not understood: "${String(r.raw || arg).replace(/\s+/g, ' ').slice(0, 120)}"${r.reason ? ` (${r.reason})` : ''}${grammar ? '' : ' — DONE · DEFER <why> · WATCH <ticker> · NOTE <text> · DECIDE <n> <text>'}`); grammar = true; }
+  }
+  Object.entries(ignored).forEach(([d, n]) => L.push(`ignored ${n} repl${n === 1 ? 'y' : 'ies'} from an untrusted address (${d})`));
+  return L;
+}
+
 const brief = readJson('brief.json');
 // Phase 1 (11 Sep 2026): net worth and the silver margin arithmetic now exist on disk, computed
 // in code before any page renders them — and the brief reads them here. valuation.json is the
@@ -101,19 +176,8 @@ if (fresh) {
   if (intel && intel.insiders) sections.push(['LATEST INSIDER FILINGS ON YOUR NAMES', intel.insiders.slice(0, 4).map(x => `${x.date} ${x.ticker} — ${x.insider}: ${x.type}`)]);
 }
 
-// ── insider filings caught in real time since the last brief ─────────────
-// scripts/insider-watch.js polls SEC EDGAR every 20 min and queues what it
-// finds; the brief reports the last ~26h so nothing is only ever seen in a
-// push you might have missed. US names only — SGX/HKEX have no open feed.
-let insiderLines = [];
-try {
-  const q = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', '.insider-queue.json'), 'utf8'));
-  const cutoff = Date.now() - 26 * 3600 * 1000;
-  const recent = (q.items || []).filter(i => Date.parse(i.at) >= cutoff);
-  const mat = recent.filter(i => i.material), other = recent.filter(i => !i.material);
-  insiderLines = mat.map(i => `${i.ticker} — ${i.owner || 'insider'} (${i.role || ''}): ${i.summary} · filed ${i.filed}`);
-  if (other.length) insiderLines.push(`plus ${other.length} non-market filing(s) (grants / option exercises / tax withholding — compensation, not conviction)`);
-} catch (e) {}
+// (Phase 4: the "INSIDER FILINGS CAUGHT LIVE" block that read the retired insider-watch.js queue is
+// gone — alerts.json below is the only insider/ownership source.)
 
 // ── what the data-integrity gates did ────────────────────────────────────
 let integrityLines = [];
@@ -143,9 +207,11 @@ try {
 // count line; market-wide sells never appear here (policy.json).
 try {
   const AL = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'alerts.json'), 'utf8'));
-  const prevBrief = (() => { try { return fs.readFileSync(path.join(ROOT, 'data', '.last-brief-date'), 'utf8').trim(); } catch (_) { return null; } })();
-  const since = prevBrief || new Date(Date.now() - 2 * 864e5).toISOString().slice(0, 10);
-  const fresh = (AL.alerts || []).filter(a => a.date > since);
+  // Phase 4: the window is INGEST time (a.at) after the last successful send (.last-brief-at), not
+  // filing date after .last-brief-date — a filing dated yesterday that alerts.js only saw this
+  // morning must still reach today's brief. Fallback when no send stamp exists: now − 48h.
+  const since = sgtStamp(lastBriefAt);
+  const fresh = (AL.alerts || []).filter(a => a.at > lastBriefAt);
   const rank = a => (a.tags || []).includes('in-book') ? 0 : (a.tags || []).includes('watchlist') ? 1 : 2;
   const notable = fresh.filter(a => a.severity === 'Notable').sort((a, b) => rank(a) - rank(b) || (b.usd || 0) - (a.usd || 0));
   const sells = fresh.filter(a => a.family === 'insider' && /insider sell/.test(a.headline || ''));
@@ -155,7 +221,19 @@ try {
   const scanNote = (() => { try { const S = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'signals.json'), 'utf8')); const last = (S.scans || []).filter(x => !x.error).slice(-1)[0]; return last ? ` · Form 4 scan ${last.date}: ${last.form4Lines || 0} filings, ${last.kept || 0} with open-market trades` : ''; } catch (_) { return ' · signals.json absent'; } })();
   sections.unshift(['🔔 SIGNALS SINCE LAST BRIEF (insiders & ownership, market-wide)' + scanNote, lines]);
 } catch (e) { sections.unshift(['🔔 SIGNALS', ['alerts.json unavailable — scripts/alerts.js did not run (' + e.message + ')']]); }
-if (insiderLines.length) sections.unshift(['🔔 INSIDER FILINGS CAUGHT LIVE (legacy queue)', insiderLines]);
+// Phase 4: the cutover clock — seven clean parallel days (code-fetched NAV beside the page's own)
+// before index.html loses its Yahoo path. Read from Agent C's outputs, data/.cutover.json
+// (scripts/cutover-check.js) and the local publish ledger data/.publish-history.ndjson; both may be
+// absent on the first mornings and that is reported, never assumed.
+try {
+  const ck = (() => { try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'data', '.cutover.json'), 'utf8')); } catch (_) { return null; } })();
+  const ledger = ndjson('.publish-history.ndjson').filter(r => r.status && r.status !== 'dry-run'), last = ledger[ledger.length - 1] || null;
+  const clock = ck
+    ? `${ck.cleanDays ?? '?'}/${ck.needed || 7} clean parallel days (since ${dmy(ck.since || '2026-09-12')})${ck.ready ? ' · READY for cutover' : ck.earliestReady ? ' · earliest ' + dmy(ck.earliestReady) : ''}`
+      + (ck.pageParity && ck.pageParity.checkedOn ? ` · page parity confirmed ${dmy(ck.pageParity.checkedOn)} (${ck.pageParity.diffPct}%)` : ' · page parity not yet confirmed')
+    : 'not computed — scripts/cutover-check.js has not run';
+  integrityLines.push(`cutover clock: ${clock} · publish ${last ? `${last.status} at ${last.step || '?'} (${last.date || '?'})` : 'no ledger row yet'}`);
+} catch (_) {}
 if (integrityLines.length) sections.push(['DATA-INTEGRITY CHECKS', integrityLines]);
 
 const stamp = (brief && brief.date) || (model && model.updated) || 'unknown';
@@ -165,8 +243,7 @@ const stamp = (brief && brief.date) || (model && model.updated) || 'unknown';
 // the sender never asked. Now the sender checks too, and says so LOUDLY in both
 // the subject and the first line rather than quietly shipping stale content.
 // Singapore date, explicitly — toISOString() is UTC and would report the wrong
-// day for a run just after midnight SGT.
-const todaySGT = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Singapore' });
+// day for a run just after midnight SGT (todaySGT is defined at the top since phase 4).
 const briefDay = brief && brief.date ? String(brief.date).slice(0, 10) : null;
 const isStale = briefDay !== todaySGT;
 // HOW LONG has this been going on? A one-off miss and a fortnight-long outage
@@ -223,12 +300,20 @@ if (isStale) {
       `Cause: ${staleCause}`].concat(staleFix ? [`Fix on the Mac: ${staleFix}`] : [])],
   ];
 }
+// Phase 4: THE ONE ACTION leads every brief \u2014 fresh or degraded \u2014 straight after TLDR, because it
+// is computed by code from files that survive a research outage. Then the owner's own replies
+// since the last send, so the loop closes visibly.
+sections.unshift(['THE ONE ACTION', actionLines()]);
+{ const rl = repliesLines(); if (rl.length) sections.splice(1, 0, ['YOUR REPLIES SINCE LAST BRIEF', rl]); }
+const actionPush = !!(oneAction && oneAction.action.push);
 const bullets = a => a.map(x => `\u2022 ${x}`).join('\n');
 // The subject line is the only part he sees on a locked phone. When there is no
 // research, it must not say "Morning Brief".
+// Phase 4: `[ACTION] ` leads the fresh subject only on a push day (a crossing, or the stressed margin
+// call under 25% away) \u2014 a standing condition does not shout. The degraded subject is unchanged.
 const SUBJ = isStale
   ? `[DEGRADED] \u{1F534} NO RESEARCH \u2014 day ${outageDays} \u2014 brief is ${briefDay || 'old'} data, not ${today}`
-  : `\u{1F4CA} Portfolio Morning Brief \u2014 ${today}`;
+  : `${actionPush ? '[ACTION] ' : ''}\u{1F4CA} Portfolio Morning Brief \u2014 ${today}`;
 const fullText = [
   staleBanner + `PORTFOLIO MORNING BRIEF — ${today}`,
   `Data refreshed: ${stamp}`,
@@ -297,6 +382,8 @@ const impactChip = t => {
 };
 const SECTION_ICON = h => {
   if (/TLDR/i.test(h)) return '📌';
+  if (/ACTION/i.test(h)) return '🎯';
+  if (/REPLIES/i.test(h)) return '↩️';
   if (/INSIDER/i.test(h)) return '🔔';
   if (/NEWS/i.test(h)) return '📰';
   if (/REGIME/i.test(h)) return '🌏';
@@ -350,8 +437,12 @@ const fullHtml = `<div style="font-family:-apple-system,BlinkMacSystemFont,'Helv
   </div>
 </div>`;
 
+// Phase 4: the One Action's `short` line (≤80 chars, one number) leads the push text — it is the
+// one line read on a locked phone. The ntfy body drops the header line (its Title carries it).
+const tgHeader = `📊 *Portfolio Brief — ${today}*`;
 const tgText = [
-  `📊 *Portfolio Brief — ${today}*`,
+  oneAction && oneAction.action.short ? oneAction.action.short : '',
+  tgHeader,
   '',
   bullets(tldr.slice(0, 6)),
   '',
@@ -365,7 +456,10 @@ const env = readEnv();
 let emailOk = false, tgOk = false, log = [];
 
 if (DRY) {
-  console.log('===== EMAIL =====\n' + fullText + '\n\n===== TELEGRAM =====\n' + tgText);
+  // Line 1 is the harness contract (scripts/test-fixtures.js reads the subject from it); line 2 the
+  // email banner. Skip reasons for journal.js / one-action.js go to stderr so stdout stays clean.
+  console.log('SUBJECT: ' + SUBJ + '\n===== EMAIL =====\n' + fullText + '\n\n===== TELEGRAM =====\n' + tgText);
+  if (preLog.length) console.error(preLog.join('\n'));
   process.exit(0);
 }
 
@@ -373,6 +467,14 @@ if (DRY) {
 const FORCE = process.argv.includes('--force');
 const STATE = path.join(process.env.HOME, '.claude', 'portfolio-brief.last');
 const todayISO = new Date().toISOString().slice(0, 10);
+// Phase 4: ONE stamp for every successful send — SMTP or Mail.app, fresh, degraded or --force.
+// data/.last-brief-at (ISO) is the SIGNALS / REPLIES window of the next brief; .last-brief-date
+// (SGT) its readable twin. Until now only the dead SMTP branch wrote a stamp, so the live path never
+// had one and the "since last brief" window was a silent now − 2d every morning.
+function markSent() {
+  try { fs.writeFileSync(STATE, todayISO); } catch (_) {}
+  try { fs.writeFileSync(path.join(ROOT, 'data', '.last-brief-at'), new Date().toISOString()); fs.writeFileSync(path.join(ROOT, 'data', '.last-brief-date'), todaySGT); } catch (_) {}
+}
 try { if (!FORCE && fs.readFileSync(STATE, 'utf8').trim() === todayISO) { console.log('already sent today (' + todayISO + ') — use --force to resend'); process.exit(0); } } catch (e) {}
 
 // ── PREFERRED PATH: raw MIME over SMTP ────────────────────────────────────
@@ -394,8 +496,7 @@ if (env.EMAIL_TO && env.SMTP_HOST && env.SMTP_USER && env.SMTP_PASS) {
   try { fs.unlinkSync(tf); fs.unlinkSync(hf); } catch (_) {}
   if (r.status === 0) {
     smtpDone = true; emailOk = true;
-    try { fs.writeFileSync(STATE, todayISO); } catch (_) {}
-    try { fs.writeFileSync(path.join(ROOT, 'data', '.last-brief-date'), todaySGT); } catch (_) {}
+    markSent();
     log.push('email: ' + (r.stdout || '').trim());
   } else {
     log.push('smtp failed, falling back to Mail.app: ' + ((r.stderr || r.stdout || '').trim() || `exit ${r.status}`).slice(0, 140));
@@ -441,13 +542,11 @@ if (env.EMAIL_TO && !smtpDone) {
     end tell
   end timeout
 end run`;
-  // PLAIN TEXT via Mail.app — deliberately NOT the styled HTML card.
-  // Mail wraps every scripted body in <blockquote type="cite">. With plain text
-  // that wrapper is invisible (Apple neutralises its border), which is why the
-  // brief looked normal before 29 Jul. Putting a white styled card inside that
-  // quote block made it read as an embedded/forwarded message, and from 30 Jul
-  // Mail also started attaching a multipart/related PNG. The card only belongs
-  // on the SMTP path, where there is no wrapper at all.
+  // HTML via Mail.app (`html content` above) — the same card-less fullHtml the dormant SMTP path
+  // would send. Mail wraps every scripted body in <blockquote type="cite"> whatever the format;
+  // what made the 29 Jul brief read as forwarded was the white CARD inside that wrapper, not HTML
+  // itself, and the card is gone (see HTML BRIEF above). Replies quote this HTML under Mail's
+  // blockquote; journal.js strips it (`>` lines after "On … wrote:").
   const args = ['-', SUBJ, fullHtml, env.EMAIL_TO];
   if (env.EMAIL_FROM) args.push(env.EMAIL_FROM);
   // Up to 3 attempts with widening gaps — a launchd 08:15 run may catch Mail
@@ -466,7 +565,7 @@ end run`;
     r = spawnSync('osascript', args, { input: as, encoding: 'utf8', timeout: 260000 });
   }
   emailOk = r.status === 0;
-  if (emailOk) try { fs.writeFileSync(STATE, todayISO); } catch (e) {}
+  if (emailOk) markSent();
   log.push('email: ' + (emailOk ? 'sent to ' + env.EMAIL_TO + ' (from ' + (env.EMAIL_FROM || env.EMAIL_TO) + ')' : 'FAILED ' + (r.stderr || '').slice(0, 200)));
 
   // Second copy to another address (e.g. iCloud). Why: Mail's AppleScript
@@ -504,14 +603,15 @@ if (env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_CHAT_ID) {
 // no credentials, no AppleScript, no TCC. User subscribes to the topic in the ntfy app.
 let ntfyOk = false;
 if (env.NTFY_TOPIC) {
-  const plain = tgText.replace(/[*_\[\]()]/g, '').replace(/📊 /, '');
+  // Phase 4: urgent + rotating_light ONLY on a push day; a standing condition stays a normal push.
+  const plain = tgText.split('\n').filter(l => l !== tgHeader).join('\n').replace(/[*_\[\]()]/g, '');
   const r = spawnSync('curl', ['-s', '-o', '/dev/null', '-w', '%{http_code}',
-    '-H', `Title: Portfolio Brief — ${today}`, '-H', 'Tags: chart_with_upwards_trend',
-    '-H', 'Priority: high', '-d', plain.slice(0, 3800),
+    '-H', `Title: Portfolio Brief — ${today}`, '-H', `Tags: ${actionPush ? 'rotating_light' : 'chart_with_upwards_trend'}`,
+    '-H', `Priority: ${actionPush ? 'urgent' : 'high'}`, '-d', plain.slice(0, 3800),
     `https://ntfy.sh/${env.NTFY_TOPIC}`], { encoding: 'utf8', timeout: 20000 });
   ntfyOk = (r.stdout || '').trim() === '200';
   log.push('ntfy push: ' + (ntfyOk ? 'sent' : 'FAILED ' + (r.stdout || r.stderr || '').slice(0, 100)));
 } else log.push('ntfy push: skipped (no NTFY_TOPIC)');
 
-console.log(log.join('\n'));
+console.log(preLog.concat(log).join('\n'));
 process.exit(emailOk || tgOk || ntfyOk ? 0 : 1);

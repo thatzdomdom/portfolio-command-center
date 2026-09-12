@@ -96,12 +96,28 @@ if (sp) {
 
 const byClass = {};
 lines.forEach(l => { byClass[l.ac] = +((byClass[l.ac] || 0) + l.valueSGD).toFixed(2); });
+
+// ── FX-source sensitivity (phase 4, 12 Sep 2026) — information only, never in the cutover clock.
+// The page prices its NAV with Yahoo's =X pairs; this file uses ECB. During the parallel week a
+// NAV gap between the two can only come from FX source and bar timing, so the NAV is recomputed
+// here with the Yahoo cross-check rates fx.js already records. A currency Yahoo had no bar for
+// falls back to ECB and is named in fellBackToEcb, so a 0.0% diff never hides a missing pair.
+const fxSourceSensitivity = (() => {
+  const y = (fx.crossCheck && fx.crossCheck.yahoo) || null;
+  if (!y || !Object.values(y).some(v => v && v.rate > 0)) return null;
+  const fellBackToEcb = [];
+  const yFX = c => { if (c === 'SGD') return 1; const r = y[c] && y[c].rate; if (r > 0) return r; if (!fellBackToEcb.includes(c)) fellBackToEcb.push(c); return FX(c); };
+  const navY = lines.reduce((s, l) => s + (l.source === 'manual' ? l.native * yFX(l.cur) : l.source === 'live' ? l.qty * l.price * yFX(l.cur) : l.valueSGD), 0);
+  return { navWithYahooFxSGD: +navY.toFixed(2), diffPct: nav ? +(((navY / nav) - 1) * 100).toFixed(3) : null, fellBackToEcb,
+    note: 'NAV recomputed with the browser\'s FX source (Yahoo =X pairs from fx.json crossCheck); the page\'s own NAV differs from navSGD only by FX source and bar timing' };
+})();
+
 const out = {
   asOf: priceAsOfMin, generatedAt: new Date().toISOString(), base: 'SGD',
   navSGD: +nav.toFixed(2), navPrevSGD: +navPrev.toFixed(2), dayChgSGD: +(nav - navPrev).toFixed(2),
   dayChgPct: navPrev ? +(((nav / navPrev) - 1) * 100).toFixed(3) : null,
   note: 'dayChg uses today\'s FX for both legs (fx.json carries one date); FX attribution arrives when a second day of fx history exists',
-  fxAsOf: fx.asOf, byClass, silver, stale, lines,
+  fxAsOf: fx.asOf, fxSourceSensitivity, byClass, silver, stale, lines,
 };
 fs.writeFileSync(D('valuation.json'), JSON.stringify(out, null, 2) + '\n');
 // NAV history for the drawdown-from-high line (Rule table: >10% = brief lead). Append-only,
@@ -111,4 +127,7 @@ try { const HP = D('nav-history.ndjson'); const last = fs.existsSync(HP) ? fs.re
 const sgd = n => 'S$' + (n / 1e6).toFixed(3) + 'M';
 console.log(`valuation.json: NAV ${sgd(nav)} (${out.dayChgPct == null ? '—' : (out.dayChgPct >= 0 ? '+' : '') + out.dayChgPct + '%'} vs prev close) · prices as of ${priceAsOfMin} · fx ${fx.asOf} · ${stale.length} stale item(s)`);
 if (silver) console.log(`  silver: ${silver.oz} oz @ $${silver.priceUSD} · leverage ${silver.leverage}x · call at $${silver.callPriceUSD} (${silver.distanceToCallPct}% away; $${silver.callPriceUSDStressed} / ${silver.distanceToCallPctStressed}% at 1.5x rate) · survivability ${silver.survivability.pass ? 'PASS' : 'FAIL'} · carry: ${silver.carry.note}`);
+console.log(fxSourceSensitivity
+  ? `  fxSourceSensitivity: NAV with Yahoo FX ${sgd(fxSourceSensitivity.navWithYahooFxSGD)} (${fxSourceSensitivity.diffPct >= 0 ? '+' : ''}${fxSourceSensitivity.diffPct}% vs ECB)${fxSourceSensitivity.fellBackToEcb.length ? ' · fell back to ECB for ' + fxSourceSensitivity.fellBackToEcb.join(', ') : ''}`
+  : '  fxSourceSensitivity: null (fx.json crossCheck has no Yahoo rate)');
 stale.slice(0, 5).forEach(s => console.log(`  ~ stale: ${s.t || s.id} — ${s.why}`));

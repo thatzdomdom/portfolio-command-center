@@ -9,6 +9,36 @@ cd /Users/dominiczhao/portfolio-dashboard || exit 1
 # 11:00 SGT. Pull it before anything reads data/, so alerts.js judges this morning's facts.
 git pull --rebase --autostash -q origin main 2>/dev/null || echo "$(date '+%F %T') git pull failed — continuing with local data"   # --autostash: the tree is dirty with pipeline scratch files after any red publish
 
+# ── ORDER (phase 4, 12 Sep 2026) ──────────────────────────────────────────
+# Everything deterministic runs BEFORE the auth check, so a lapsed Claude credential (the 4 Aug
+# and 8-21 Aug incidents) can no longer take the replies, the prices, the NAV, the trend gate and
+# THE ONE ACTION down with it. The auth check gates only `claude -p`. Order:
+#   journal.js (replies) → price/calendar/fx/valuate/technicals/targets/alerts → one-action.js
+#   → auth check → claude -p → price gate → validate-all → publish.js → cutover-check.js
+
+# Replies first: a WATCH sent overnight must be in watchlist.json before alerts.js judges the
+# morning's filings, and a DONE/DEFER/LOAN must be in journal.ndjson before one-action.js runs.
+# Non-fatal: journal.js alarms itself (ntfy, once per day) and exits 2 when Mail is unreadable.
+/opt/homebrew/bin/node scripts/journal.js || echo "$(date '+%F %T') journal: failed — replies not read this run (see journal.js log line above)"
+
+# ── DETERMINISTIC DATA LAYERS — run BEFORE any agent work ─────────────────
+# Added 18 Aug 2026 after a daily run cost ~2.4M tokens, most of it spent on
+# verification agents re-opening quote pages to check arithmetic. Prices and
+# release schedules are structured data; fetching them in code is faster, free,
+# and more accurate than having a language model read them off a web page.
+# The agent is handed these files as established fact and must not re-research
+# them. Both are non-fatal: if a feed is down the run continues and says so.
+/opt/homebrew/bin/node scripts/price-spine.js || echo "$(date '+%F %T') price spine FAILED — agents will lack a price anchor this run"
+/opt/homebrew/bin/node scripts/calendar-spine.js || echo "$(date '+%F %T') calendar spine unavailable/stale — see data/.calendar.json"
+/opt/homebrew/bin/node scripts/fx.js || echo "$(date '+%F %T') fx.js failed or stale — valuation will use prior rates"
+/opt/homebrew/bin/node scripts/valuate.js || echo "$(date '+%F %T') valuate.js FAILED — no NAV this run"
+/opt/homebrew/bin/node scripts/technicals.js || echo "$(date '+%F %T') technicals.js FAILED — no trend gate this run"
+/opt/homebrew/bin/node scripts/targets.js || echo "$(date '+%F %T') targets.js FAILED — no shadow targets this run"
+/opt/homebrew/bin/node scripts/alerts.js || echo "$(date '+%F %T') alerts.js FAILED — no insider/ownership judgments this run"
+# THE ONE ACTION is computed here, in code, from the files above — never by the agent and never
+# by daily-brief.js (which only renders data/oneaction.json). Runs again at 08:15 (upsert by date).
+/opt/homebrew/bin/node scripts/one-action.js || echo "$(date '+%F %T') one-action.js FAILED — the brief will say the One Action was not computed"
+
 # ── AUTH: long-lived token, not the expiring OAuth session ────────────────
 # The interactive OAuth refresh token lasts ~a month. Yours expired
 # 2026-08-04 02:13 UTC and the 07:02 job then failed silently for two days
@@ -37,21 +67,6 @@ if [ $? != 0 ]; then
 fi
 echo "$(date '+%F %T') auth: $AUTH_REASON"
 echo "ok" > "$HOME/.claude/portfolio-auth.state"
-
-# ── DETERMINISTIC DATA LAYERS — run BEFORE any agent work ─────────────────
-# Added 18 Aug 2026 after a daily run cost ~2.4M tokens, most of it spent on
-# verification agents re-opening quote pages to check arithmetic. Prices and
-# release schedules are structured data; fetching them in code is faster, free,
-# and more accurate than having a language model read them off a web page.
-# The agent is handed these files as established fact and must not re-research
-# them. Both are non-fatal: if a feed is down the run continues and says so.
-/opt/homebrew/bin/node scripts/price-spine.js || echo "$(date '+%F %T') price spine FAILED — agents will lack a price anchor this run"
-/opt/homebrew/bin/node scripts/calendar-spine.js || echo "$(date '+%F %T') calendar spine unavailable/stale — see data/.calendar.json"
-/opt/homebrew/bin/node scripts/fx.js || echo "$(date '+%F %T') fx.js failed or stale — valuation will use prior rates"
-/opt/homebrew/bin/node scripts/valuate.js || echo "$(date '+%F %T') valuate.js FAILED — no NAV this run"
-/opt/homebrew/bin/node scripts/technicals.js || echo "$(date '+%F %T') technicals.js FAILED — no trend gate this run"
-/opt/homebrew/bin/node scripts/targets.js || echo "$(date '+%F %T') targets.js FAILED — no shadow targets this run"
-/opt/homebrew/bin/node scripts/alerts.js || echo "$(date '+%F %T') alerts.js FAILED — no insider/ownership judgments this run"
 
 # The ONLY date in the system is the machine clock in SGT, passed in explicitly. A run was once
 # framed on a date four days wrong because an injected date was trusted over the clock.
@@ -117,5 +132,7 @@ fi
 # Every gate re-runs inside publish.js; red = no push + alarm. The agent no longer pushes.
 if /opt/homebrew/bin/node scripts/publish.js; then echo "$(date '+%F %T') publish: pushed"
 else echo "$(date '+%F %T') publish: BLOCKED — nothing reached the live site; 08:15 brief will be [DEGRADED] if research is missing"; fi
+# ── CUTOVER CLOCK (phase 4) — reads the ledger publish.js just wrote; never gates anything.
+/opt/homebrew/bin/node scripts/cutover-check.js || echo "$(date '+%F %T') cutover-check: failed — data/.cutover.json not updated this run"
 
 echo "=== $(date '+%F %T') research end (exit $EC) ==="
