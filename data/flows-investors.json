@@ -1,14 +1,14 @@
 {
- "updated": "2026-09-13",
- "retrievedOn": "2026-09-13",
- "note": "Sunday weekend run -- refreshed Korea (KRX), Hong Kong (Southbound) and China (margin balance) with fresher mid-week daily prints found this pass; Japan (MOF's next release isn't due until Thu 17 Sep) and Singapore (still Aug-dated SGX weekly tracker) had no fresher official data. JPX's own site 403'd again; Japan's foreign-flow line still uses Japan MOF's weekly international-securities-transactions release as a near-equivalent substitute.",
+ "updated": "2026-09-14",
+ "retrievedOn": "2026-09-14",
+ "note": "Monday pre-Asia-open run -- Korea (KRX) refreshed with a Friday 11 Sep daily print and US ICI with a newer week-ended-2-Sep release; Hong Kong (Southbound), China (margin balance), Japan (MOF next due Thu 17 Sep) and Singapore (still Aug-dated SGX weekly tracker) had no fresher official data checked/found this pass and carry forward unchanged.",
  "markets": [
   {
    "market": "Japan (TSE)",
    "available": true,
    "cadence": "Official JPX 'Trading by Type of Investors' published weekly, ~1-week lag. JPX's own site returned HTTP 403 this session; figures below use Japan's Ministry of Finance weekly 'International Transactions in Securities' release (official, same weekly cadence, via Reuters) as a near-equivalent proxy for the foreign-flow line.",
    "latestPeriod": "week ending 6 September 2026",
-   "asOf": "2026-09-13",
+   "asOf": "2026-09-14",
    "flows": [
     {
      "investorType": "Foreign institutional",
@@ -34,9 +34,35 @@
    "market": "South Korea (KOSPI)",
    "available": true,
    "cadence": "KRX publishes official daily net buy/sell by foreigners, institutions and individuals, generally same-day/next-day.",
-   "latestPeriod": "1-10 September 2026 (fresher daily prints for Tue 9 Sep and Thu 10 Sep confirmed this run)",
-   "asOf": "2026-09-13",
+   "latestPeriod": "1-11 September 2026 (fresher daily print for Fri 11 Sep confirmed this run)",
+   "asOf": "2026-09-14",
    "flows": [
+    {
+     "investorType": "Foreign institutional",
+     "direction": "outflow",
+     "amount": "-2,458.7",
+     "unit": "KRW bn",
+     "period": "11 Sep 2026",
+     "isProxy": false,
+     "note": "KOSPI only; foreign net sell amid US-Iran conflict escalation and a semiconductor selloff (index -1.76% to 6,909.91)"
+    },
+    {
+     "investorType": "Domestic institutional",
+     "direction": "outflow",
+     "amount": "-1,644.3",
+     "unit": "KRW bn",
+     "period": "11 Sep 2026",
+     "isProxy": false
+    },
+    {
+     "investorType": "Retail (individuals)",
+     "direction": "inflow",
+     "amount": "+2,425.9",
+     "unit": "KRW bn",
+     "period": "11 Sep 2026",
+     "isProxy": false,
+     "note": "Retail absorbed foreign and institutional selling for a second straight session, same pattern as 10 Sep"
+    },
     {
      "investorType": "Foreign institutional",
      "direction": "outflow",
@@ -99,14 +125,14 @@
      "note": "Retail absorbed almost all of the foreign selling on 10 Sep"
     }
    ],
-   "trend": "Broad net selling by all investor types in early September gave way to a one-day foreign+institutional buying spree on 9 Sep (chip-stock strength, KOSPI +~3% intraday earlier in the week), which fully reversed on 10 Sep when foreigners sold ~2.71tn won and retail absorbed nearly all of it. No print for 11 Sep (Friday) or the weekend was located this session -- Korea is swinging session-to-session rather than trending in either direction right now.",
-   "interpretation": "The whipsaw between foreign buying (9 Sep) and foreign selling (10 Sep) around Korean chip majors shows AI/semiconductor-adjacent risk appetite in the region is jumpy heading into FOMC week, not settling into a clear direction -- a loose read-through for HK-listed tech sentiment but not a direct proxy for the HK/SG book.",
+   "trend": "Broad net selling by all investor types in early September gave way to a one-day foreign+institutional buying spree on 9 Sep (chip-stock strength), which reversed on 10 Sep and extended into a third straight foreign-selling session on 11 Sep (-2.46tn won) as US-Iran conflict escalation and a semiconductor selloff weighed on the index (-1.76% to 6,909.91) -- retail has now absorbed foreign+institutional selling for two consecutive sessions.",
+   "interpretation": "Foreign selling accelerating into Friday's close, fully absorbed by retail, shows AI/semiconductor-adjacent risk appetite in the region turning cautious heading into FOMC week rather than settling into a clear direction -- a loose read-through for HK-listed tech sentiment but not a direct proxy for the HK/SG book.",
    "sources": [
-    "https://en.sedaily.com/finance/2026/09/07/kospi-jumps-3-percent-past-6900-as-foreigners-institutions",
-    "https://www.businesskorea.co.kr (articleView idxno=276660, 276554)"
+    "https://www.fnnews.com/news/202609111555122620",
+    "https://www.businesskorea.co.kr/news/articleView.html?idxno=276778"
    ],
    "dataGaps": [
-    "No KRX daily print for 11 Sep (Friday) or the weekend was retrieved this session."
+    "No KRX print for the weekend (Korea does not trade Sat/Sun); next print due for Monday 14 Sep's session."
    ]
   },
   {
@@ -114,7 +140,7 @@
    "available": false,
    "cadence": "No official retail/institutional split exists for HK cash equities. Southbound Stock Connect net flow (mainland money into HK) is published daily by HKEX, T+1.",
    "latestPeriod": "1-7 September 2026 (fresher daily prints for 3 Sep and 7 Sep confirmed this run)",
-   "asOf": "2026-09-13",
+   "asOf": "2026-09-14",
    "flows": [
     {
      "investorType": "Southbound (mainland)",
@@ -167,7 +193,7 @@
    "available": false,
    "cadence": "No official retail/institutional trading split for A-shares. Margin-trading balance is official daily SSE/SZSE data (T+1), the standard retail-leverage proxy. Northbound real-time disclosure remains curtailed since Aug 2024 -- confirmed still curtailed as of Sep 2026; only lagged monthly HKEX aggregates published.",
    "latestPeriod": "10 September 2026 (margin balance)",
-   "asOf": "2026-09-13",
+   "asOf": "2026-09-14",
    "flows": [
     {
      "investorType": "Retail (margin proxy)",
@@ -203,7 +229,7 @@
    "available": true,
    "cadence": "SGX Research's weekly Fund Flow Tracker publishes institutional vs retail net buy/sell weekly, at top-10-stock/STI-constituent/sector level (not a single full-market figure), with a short lag.",
    "latestPeriod": "August 2026 (S-REIT sector aggregate; no fresher whole-market weekly figure retrieved)",
-   "asOf": "2026-09-13",
+   "asOf": "2026-09-14",
    "flows": [
     {
      "investorType": "Retail (individuals)",
@@ -237,7 +263,7 @@
    "available": false,
    "cadence": "No official retail/institutional split exists. ICI publishes weekly estimated fund flows (~1-week lag). EPFR/BofA Flow Show is weekly, similarly lagged. Vanda Research publishes a proprietary near-daily retail-flow gauge, reported via press.",
    "latestPeriod": "week ended 26 August 2026 (ICI); week ended 9 September 2026 (EPFR/BofA)",
-   "asOf": "2026-09-13",
+   "asOf": "2026-09-14",
    "flows": [
     {
      "investorType": "Retail/institutional (ICI domestic equity funds, aggregate)",
@@ -247,6 +273,15 @@
      "period": "week ended 26 Aug 2026",
      "isProxy": true,
      "note": "ICI weekly estimated long-term fund flows -- a broad demand proxy, not segmented by investor type"
+    },
+    {
+     "investorType": "Retail/institutional (ICI estimated long-term mutual fund flows, equity funds)",
+     "direction": "outflow",
+     "amount": "-23.66",
+     "unit": "USD bn",
+     "period": "week ended 2 Sep 2026",
+     "isProxy": true,
+     "note": "Newer ICI weekly release than the week-ended-26-Aug figure above; a distinct ICI series (mutual funds only, not the combined mutual-fund+ETF series) from the EPFR figure below -- extracted via page-fetch summarization rather than the raw table, worth a sanity check against the ICI PDF/XLS if precision matters"
     },
     {
      "investorType": "Retail/institutional (ICI world/intl equity funds)",

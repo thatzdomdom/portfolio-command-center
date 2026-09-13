@@ -1,15 +1,15 @@
 {
- "updated": "2026-09-13",
- "note": "Weekend run, Sunday 13 Sep 2026 SGT, no session since Friday 11 Sep's US close (S&P +0.86%, VIX -11.2%). CNN Fear&Greed's own site/API again returned HTTP 451/418 to automated fetch (also tried feargreedtracker.com and MacroMicro, both unreliable/blocked) -- the dashboard fetches it live in-browser regardless, so this baked value is a fallback only, still last confirmed at Thursday's 33/Fear reading; a directional improvement is plausible given Friday's rally/VIX collapse but is not verified so is not fabricated here. Weekly EPFR/BofA fund flows DID refresh this run (week ended 9 Sep 2026, published 10-11 Sep) -- see flows below.",
+ "updated": "2026-09-14",
+ "note": "Monday run, 14 Sep 2026 07:02 SGT, still no US session since Friday 11 Sep's close (S&P +0.86%, VIX -11.2%) -- Monday's NYSE session hasn't opened yet. CNN Fear&Greed's site (both cnn.com and edition.cnn.com) again returned HTTP 451, and its data API (production.dataviz.cnn.io) again returned HTTP 418, on this run too -- third consecutive run blocked. Baked value stays honestly at Thursday's last-confirmed 33/Fear; do not treat as current, the dashboard's live in-browser fetch is authoritative. Crypto Fear&Greed DID refresh via alternative.me's API (verified via raw JSON + timestamp decode): 56 (Sat 11 Sep) -> 63 (Sun 12 Sep) -> 61 (Mon 13 Sep, latest confirmed daily print as of this run). No fresher StockCharts $NYMO/$NYSI or sector-breadth data found (still a gap, JS-only charts). No newer weekly EPFR/BofA flow print beyond week ended 9 Sep 2026; region-specific (Europe/EM/China/Japan) flows still unconfirmed.",
  "fearGreed": {
   "value": 33,
   "rating": "Fear",
-  "asOf": "2026-09-10 (Thursday close -- last confirmed reading; Friday 11 Sep and this weekend's updates could not be retrieved across two consecutive runs, CNN's site returns HTTP 451 and its data API HTTP 418 on repeated attempts)",
+  "asOf": "2026-09-10 (Thursday close -- last confirmed reading; three consecutive runs since (Fri 11, weekend, and this Mon 14 Sep run) have all been blocked -- CNN's site returns HTTP 451 on both cnn.com and edition.cnn.com, and its data API returns HTTP 418, every time)",
   "prevClose": 36,
   "prev1w": null,
   "prev1m": null,
   "prev1y": null,
-  "cryptoValue": 63,
+  "cryptoValue": 61,
   "cryptoRating": "Greed",
   "components": [
    {
@@ -49,13 +49,14 @@
    }
   ],
   "sources": [
-   "https://feargreedtracker.com/fear-greed-index-stock-market",
-   "https://api.alternative.me/fng/?limit=10",
-   "https://www.cnn.com/markets/fear-and-greed"
+   "https://api.alternative.me/fng/?limit=10 (crypto value confirmed working this run, daily timestamps decoded)",
+   "https://www.cnn.com/markets/fear-and-greed (HTTP 451, blocked)",
+   "https://edition.cnn.com/markets/fear-and-greed (HTTP 451, blocked)",
+   "https://production.dataviz.cnn.io/index/fearandgreed/graphdata (HTTP 418, blocked)"
   ]
  },
  "breadth": {
-  "asOf": "2026-09-11 (Friday close, US session), with some component data as of 2026-09-04 where noted",
+  "asOf": "2026-09-11 (Friday close, US session, still the latest completed session as of this Mon 14 Sep 07:02 SGT check -- Monday's NYSE session had not opened yet); some component data as of 2026-09-04 where noted",
   "metrics": [
    {
     "label": "% S&P 500 > 200-DMA",
@@ -106,7 +107,7 @@
     "pct": null
    }
   ],
-  "note": "Broad-vs-narrow read: Friday's rally had genuinely broad one-day participation (2:1 NYSE advancers, mega- and mid-cap breadth both up), but week-level new-high/new-low data (Nasdaq lows swamping highs 128-to-38) shows underlying erosion beneath the index -- a mega-cap/momentum-led bounce sitting on top of narrowing breadth, not a clean all-clear. Weekend re-check found no fresher McClellan/sector-breadth data (StockCharts/MacroMicro remain unfetchable); this read carries forward from Friday's close, unrevised.",
+  "note": "Broad-vs-narrow read: Friday's rally had genuinely broad one-day participation (2:1 NYSE advancers, mega- and mid-cap breadth both up), but week-level new-high/new-low data (Nasdaq lows swamping highs 128-to-38) shows underlying erosion beneath the index -- a mega-cap/momentum-led bounce sitting on top of narrowing breadth, not a clean all-clear. Re-checked again this Mon 14 Sep run: still no fresher McClellan Oscillator/Summation Index or sector->200-DMA data (StockCharts $NYMO/$NYSI remain JS-only charts, not fetchable as text); a stray '49.9% of S&P 500 > 200-DMA' figure surfaced in search but traces to a Sept 1 2026 article, predates and conflicts with the already-confirmed 67.1% figure, so it was discarded rather than used. This read carries forward from Friday's close, unrevised.",
   "sources": [
    "https://historyofmarket.com/sp500/sp500-breadth/",
    "https://www.thetrading.tools/market-breadth"
@@ -114,7 +115,7 @@
  },
  "flows": {
   "asOf": "2026-09-13",
-  "period": "week ending 9 September 2026 (freshest published EPFR/BofA Flow Show data, released 10-11 Sep 2026; prior week ended 2 Sep carried below for context)",
+  "period": "week ending 9 September 2026 (freshest published EPFR/BofA Flow Show data, released 10-11 Sep 2026; prior week ended 2 Sep carried below for context). Re-checked this Mon 14 Sep run: no newer weekly print has published (next Flow Show for week ended 16 Sep isn't due until ~17-18 Sep); Bloomberg's 9/11 article is now behind a fetch block (HTTP 403) so was not re-read in full this run, only re-confirmed via search snippet. Region-specific (Europe/Intl DM, EM, China, Japan) EPFR figures remain unconfirmed -- searches this run surfaced only older EPFR Global Navigator posts (Jan-Feb 2026 vintage), nothing dated to the current week.",
   "narrative": "The week ended 9 Sep 2026 showed US equity fund outflows narrowing to -$4.48bn (from -$7.84bn the prior week) -- still net selling, but decelerating -- while money-market funds flipped to a -$5.97bn outflow, a reversal from the prior week's +$22.89bn inflow, and US high-grade bond funds kept taking in money (+$4.74bn, though decelerating from +$7.76bn). This is the first weekly print to partially reflect the run-up into Friday's CPI print; the pattern (equity outflows moderating, cash flows reversing) is consistent with de-risking easing slightly ahead of the FOMC rather than a resumption of risk-taking.",
   "regions": [
    {
