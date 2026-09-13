@@ -101,7 +101,9 @@
 window.INBOX = (function () {
   'use strict';
   var SEV = ['Notable', 'Log'];
-  var FAM = ['insider', 'ownership', 'journal'];
+  // 'fund' (phase 6, 13 Sep 2026): 13F rows written by scripts/alerts.js from data/13f.json — a fund's
+  // quarterly filing, a tracked fund moving a name he holds or watches, a name three funds opened.
+  var FAM = ['insider', 'ownership', 'fund', 'journal'];
   var TAG = ['in-book', 'watchlist', 'market-wide', 'cluster'];
   var PAGE = 300;                                   // paginate beyond this; a year of log stays fast
   var SGT = { timeZone: 'Asia/Singapore' };
@@ -306,7 +308,7 @@ window.INBOX = (function () {
     var r1 = [txt('Severity', 'lbl'), chip('sev', 'all', 'All')];
     X.SEV.forEach(function (s) { r1.push(chip('sev', s, s)); });
     var r2 = [txt('Family', 'lbl'), chip('fam', '', 'All')];
-    X.FAM.forEach(function (s) { r2.push(chip('fam', s, s === 'journal' ? 'my replies' : s)); });
+    X.FAM.forEach(function (s) { r2.push(chip('fam', s, s === 'journal' ? 'my replies' : s === 'fund' ? 'funds (13F)' : s)); });
     var r3 = [txt('Tag', 'lbl'), chip('tag', '', 'All')];
     X.TAG.forEach(function (s) { r3.push(chip('tag', s, s)); });
 
@@ -494,6 +496,7 @@ window.INBOX = (function () {
     if (A && A.policyVersion) f.appendChild(el('div', { text: 'policy ' + A.policyVersion }));
     f.appendChild(el('div', { text: 'Ordered by when each event entered the log — the scan that found a filing, the minute a reply arrived — not by filing date; a row says so when the two differ.' }));
     f.appendChild(el('div', { text: 'alerts.json is append-only: nothing here is edited or removed, only cleared. Source: SEC EDGAR daily form index. Replies: your email, read by scripts/journal.js.' }));
+    f.appendChild(el('div', { text: 'funds (13F): tracked funds' + "'" + ' quarterly holdings parsed from EDGAR by scripts/13f-scan.js — a quarter-end snapshot filed up to 45 days later, never a trade today. Rows tagged backfill were first read by the scan weeks after they were filed.' }));
     f.appendChild(el('div', { text: 'There is no write path on this page. To act, reply to the morning email: DONE · DEFER <reason> · WATCH <ticker> · UNWATCH <ticker> · DECIDE <n> <text> · NOTE <text> · LOAN <amount>.' }));
     if (rows.length > X.PAGE) f.appendChild(el('div', { text: 'Paginated at ' + X.PAGE + ' rows a page.' }));
   }

@@ -99,10 +99,12 @@
     <p class="note" id="tblnote"></p>
   </section>
 
+  <section id="sec-funds"></section>
   <section id="sec-foot"><div class="foot" id="foot"></div></section>
 </div>
 
 <script src="common.js"></script>
+<script src="funds.js"></script>
 
 <script id="book-core">
 /* PURE. No DOM, no fetch. The join and the two series transforms live here so a node harness can
@@ -520,6 +522,8 @@ window.BOOK = (function () {
       if (fl.length > 8) ul.appendChild(E('li', { class: 'soft', text: (fl.length - 8) + ' older filings — the full log is the Inbox.' }));
     }
     left.appendChild(ul);
+    // Phase 6: which tracked funds' 13F tables carry this ticker, or why 13F cannot see it (funds.js).
+    if (window.FUNDS) left.appendChild(window.FUNDS.forPosition(row, S.f13));
     grid.appendChild(left);
 
     // ── right: range, mark, policy ──
@@ -812,6 +816,14 @@ window.BOOK = (function () {
       + 'external calls. NAV history is not published, so this page does not draw one.' }));
   }
 
+  // Phase 6: the Funds (13F) section — EDGAR tables parsed by scripts/13f-scan.js. Public data, so it
+  // renders locked. funds.js failing to load must read as a missing section, never as a quiet quarter.
+  function funds() {
+    var sec = $('#sec-funds'); sec.textContent = '';
+    if (!window.FUNDS) { sec.appendChild(P.err('funds.js did not load, so the Funds (13F) section is missing — not empty.')); return; }
+    window.FUNDS.render(sec, S.f13, S.rows);
+  }
+
   // ── boot ────────────────────────────────────────────────────────────────
   function openFromHash() {
     var h = String(P.hash() || '').replace(/^#/, '');
@@ -829,10 +841,11 @@ window.BOOK = (function () {
     slot.textContent = '';
     if (banner) slot.appendChild(banner);
 
-    P.loadAll(['closes.json', 'technicals.json', 'targets.json', 'alerts.json', 'signals.json', 'manifest.json'])
+    P.loadAll(['closes.json', 'technicals.json', 'targets.json', 'alerts.json', 'signals.json', 'manifest.json', '13f.json'])
       .then(function (pub) {
         S.closes = pub['closes.json']; S.tech = pub['technicals.json']; S.tgt = pub['targets.json'];
         S.alerts = pub['alerts.json']; S.signals = pub['signals.json']; S.man = pub['manifest.json'];
+        S.f13 = pub['13f.json'];
         if (P.locked() && !afterUnlock) return [null, null];
         return Promise.all([P.priv('book'), P.priv('valuation')]);
       })
@@ -867,6 +880,7 @@ window.BOOK = (function () {
             + 'This page cannot rewind a mark it was never given.'));
         }
         header(); silver(); chips(); note(); headRow(); body(); foot();
+        funds();
         openFromHash();
       })
       .catch(function (e) {

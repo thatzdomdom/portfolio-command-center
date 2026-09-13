@@ -1,5 +1,5 @@
 {
- "version": "2026-09-12",
+ "version": "2026-09-14",
  "note": "Severity is a function of EVIDENCE CLASS first and size second. Sells and congress never rise above Log. Push carries a prescribed action or it is not push; insider signals never push — a cluster buy's edge plays out over 6-12 months. Thresholds in USD unless stated. Edit here, not in code.",
  "insider": {
   "excludeCodes": [
@@ -106,6 +106,38 @@
   "other": {
    "severity": "ignore"
   }
+ },
+ "funds": {
+  "newQuarter": {
+   "severity": "Log",
+   "why": "a tracked fund filed its quarter"
+  },
+  "bookHit": {
+   "severity": "Notable",
+   "actions": [
+    "New",
+    "Exited"
+   ],
+   "minPctChg": 25,
+   "why": "a tracked discretionary fund opened, exited or moved ≥25% in a name you hold or watch",
+   "excludeKinds": [
+    "macro"
+   ],
+   "excludeKindsWhy": "Bridgewater (kind macro, ~1,000 positions) moved 11 of the 14 watchlist names in 2026 Q2 — portfolio-scale rebalancing, not conviction. Its moves stay in the Inbox at Log. Remove 'macro' to escalate them."
+  },
+  "consensus": {
+   "severity": "Log",
+   "minFunds": 3
+  },
+  "excludeKinds": [
+   "quant",
+   "index"
+  ],
+  "backfill": {
+   "severity": "Log",
+   "why": "the first scan (13 Sep 2026) ingested every fund’s latest quarter weeks after it was filed (13f.json events[].bootstrap). A mid-August filing announced as news on 14 Sep is an old table under a fresh date — logged in the Inbox, never the brief"
+  },
+  "note": "13F is quarterly and 45 days late by law — never a push, never the One Action."
  },
  "channels": {
   "Notable": [

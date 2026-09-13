@@ -165,7 +165,13 @@ else {
   // printed "2026 Q1 is past its 13F deadline — legitimately current" while Q2 had been public
   // since Friday the 14th and Berkshire's Alphabet position had more than doubled inside it.
   const qEndOf = (q, y) => new Date(Date.UTC(y, q * 3, 0));           // last day of the quarter
-  const dueOf  = (q, y) => new Date(qEndOf(q, y).getTime() + 45 * 864e5);
+  // The deadline ROLLS to the next weekday (phase 6, 13 Sep 2026). 2026 Q3's day 45 is Saturday 14 Nov
+  // and EDGAR takes the filings on Monday 16 Nov; unrolled, this check called Q3 public over a weekend
+  // on which no Q3 13F can exist yet, and would have failed the publish for correctly showing Q2.
+  const dueOf  = (q, y) => { const d = new Date(qEndOf(q, y).getTime() + 45 * 864e5), w = d.getUTCDay(); return w === 6 ? new Date(d.getTime() + 2 * 864e5) : w === 0 ? new Date(d.getTime() + 864e5) : d; };
+  // …and a quarter is public only from the SGT day AFTER that rolled deadline: at 07:02 SGT on the
+  // deadline itself it is still the previous evening in New York, so no deadline-day 13F exists yet.
+  const DAY_AFTER = 864e5;
   const cur = inv.convictionPlays && inv.convictionPlays.current;
   if (cur) {
     const m = /Q([1-4])\s*(\d{4})/.exec(cur) || /(\d{4})\s*Q([1-4])/.exec(cur);
@@ -173,14 +179,14 @@ else {
     const yr = m ? (m[1].length === 4 ? +m[1] : +m[2]) : null;
     if (qn && yr) {
       const due = dueOf(qn, yr);
-      if (Date.parse(today) < due.getTime()) {
+      if (Date.parse(today) < due.getTime() + DAY_AFTER) {
         fail('investors.json', `presents ${cur} as current, but those 13Fs are not due until ${due.toISOString().slice(0, 10)}`);
       } else {
         // Walk forward: is there a LATER quarter whose deadline has also passed?
         let nq = qn, ny = yr, newest = null;
         for (let i = 0; i < 8; i++) {
           nq++; if (nq > 4) { nq = 1; ny++; }
-          if (Date.parse(today) >= dueOf(nq, ny).getTime()) newest = `${ny} Q${nq}`; else break;
+          if (Date.parse(today) >= dueOf(nq, ny).getTime() + DAY_AFTER) newest = `${ny} Q${nq}`; else break;
         }
         if (newest) {
           fail('investors.json', `shows ${cur} but ${newest} 13Fs are ALREADY PUBLIC (deadline passed) — the tables are a full quarter behind`);
@@ -431,6 +437,77 @@ else {
     r.warnings.forEach(w => warn(w.file, w.msg));
     r.passed.forEach(c => ok(c));
   } catch (e) { warn('validate-pages', `did not run: ${String((e && e.message) || e).slice(0, 120)}`); }
+}
+
+// ── PHASE 6: 13F from EDGAR, in code ───────────────────────────────────────
+// (added 13 Sep 2026) scripts/13f-scan.js (GitHub Actions, 06:15 SGT) reads the tracked funds' filings
+// into data/13f.json; investors-compat.js copies them into investors.json. Three questions, each one a
+// failure this pipeline has already had: is the feed ALIVE (a scan that stopped reads exactly like a
+// quiet quarter — the 8–11 Sep Form 4 lesson); did EDGAR get a quarter we did NOT ingest (the 18 Aug
+// lesson, now asked per fund against EDGAR itself rather than against the calendar); does every stored
+// table add up to its own cover page. A fund that simply has not filed is THEIR lateness and only warns.
+// funds.json is the authority on status — the scan's inference only warns. Wrapped: a bug in this block
+// warns; it is never, on its own, the reason the 07:02 publish stops.
+{
+  try {
+    const F13 = J('13f.json');
+    if (!F13) {
+      if (fs.existsSync(path.join(D, '13f.json'))) fail('13f.json', 'unparseable — the 13F tables, and every page that reads them, are broken this run');
+      else warn('13f.json', 'absent — 13f-scan.js has not run (GitHub Actions)');
+    } else {
+      const sgtOf = iso => { const t = Date.parse(iso); return isNaN(t) ? null : new Date(t).toLocaleDateString('en-CA', { timeZone: 'Asia/Singapore' }); };
+      const qLabel = p => `${String(p).slice(0, 4)} Q${Math.ceil(+String(p).slice(5, 7) / 3)}`;
+      // quarter end + 45 days, rolled off a weekend — the rule 13f-scan.js's deadlineFor uses
+      const rolledDue = p => { const d = new Date(p + 'T00:00:00Z'); d.setUTCDate(d.getUTCDate() + 45); const w = d.getUTCDay(); if (w === 6) d.setUTCDate(d.getUTCDate() + 2); else if (w === 0) d.setUTCDate(d.getUTCDate() + 1); return d.toISOString().slice(0, 10); };
+      // the newest quarter end whose ROLLED deadline is today or earlier
+      let qy = +today.slice(0, 4), qm = Math.ceil(+today.slice(5, 7) / 3) * 3;
+      const qEnd = () => new Date(Date.UTC(qy, qm, 0)).toISOString().slice(0, 10);
+      let passed = qEnd();
+      // a quarter counts as passed only from the SGT day after its rolled deadline (see DAY_AFTER above)
+      while (passed > today || rolledDue(passed) >= today) { qm -= 3; if (qm <= 0) { qm += 12; qy--; } passed = qEnd(); }
+
+      const checked = sgtOf(F13.scan && F13.scan.checkedAt), age = checked ? daysAgo(checked) : null;
+      if (age == null) fail('13f.json', 'no scan.checkedAt — a live 13F feed cannot be told from a dead one');
+      else if (age > 3) fail('13f.json', `last EDGAR check is ${age} days old (${checked}) — the 13F feed is DEAD, not quiet`);
+      else ok(`13f: last EDGAR check ${checked} (${age === 0 ? 'today' : age + 'd ago'})`);
+      const errs = F13.scan && Array.isArray(F13.scan.errors) ? F13.scan.errors : [];
+      if (errs.length) warn('13f.json', `last scan recorded ${errs.length} error(s) — ${errs.slice(0, 3).map(e => `${e.fund || '?'} ${e.stage || ''}: ${String(e.message || '').slice(0, 60)}`).join('; ')} (each fund keeps its last good table)`);
+
+      const declared = {};
+      (((J('funds.json') || {}).funds) || []).forEach(x => { if (x && x.id) declared[x.id] = x; });
+      const unrec = [];
+      let tables = 0, active = 0, current = 0;
+      for (const [id, f] of Object.entries(F13.funds || {})) {
+        const name = f.name || id, status = (declared[id] && declared[id].status) || f.status;
+        // every stored table — latest, prior and history — whatever the fund's status
+        const periods = new Map();
+        for (const r of [f.latest, f.prior, ...(Array.isArray(f.history) ? f.history : [])]) {
+          if (!r || !r.period) continue;
+          const p = periods.get(r.period) || { quarter: r.quarter || qLabel(r.period), bad: false, why: null };
+          if (r.reconciled === false) { p.bad = true; p.why = p.why || (r.filings || []).filter(x => x && x.inTable !== false).flatMap(x => x.why || [])[0] || null; }
+          periods.set(r.period, p);
+        }
+        tables += periods.size;
+        for (const p of periods.values()) if (p.bad) unrec.push(`${name} ${p.quarter}${p.why ? ` (${p.why})` : ''}`);
+        if (f.proposedCik && f.proposedCik.cik) warn('13f.json', `${name}: add CIK ${f.proposedCik.cik} (${f.proposedCik.name || 'unnamed filer'}) to funds.json${f.proposedCik.period ? ` — it reported ${qLabel(f.proposedCik.period)} for this fund` : ''}`);
+        if (status !== 'active') continue;
+        active++;
+        const lp = f.latest && f.latest.period, ep = f.edgarLatestPeriod;
+        if (ep && (!lp || ep > lp)) { fail('13f.json', `${name} filed ${qLabel(ep)} on EDGAR but it is not ingested`); continue; }
+        if (f.pendingNotice) warn('13f.json', `${name}: a 13F-NT for ${f.pendingNotice.quarter} is on EDGAR (filed ${f.pendingNotice.filed || '?'}) but the reporting manager's holdings are not posted yet — normal for hours on a deadline day`);
+        if (f.inferredStatus === 'stopped') { warn('13f.json', `${name}: nothing on EDGAR after ${ep ? qLabel(ep) : 'any period'}${f.missedDeadlines != null ? ` (${f.missedDeadlines} deadlines missed)` : ''} — the scan infers STOPPED but funds.json says active; the owner decides`); continue; }
+        if (!lp || lp < passed) warn('13f.json', `${name} has not filed ${qLabel(passed)} — their lateness, not ours`);
+        else current++;
+      }
+      unrec.slice(0, 6).forEach(u => fail('13f.json', `${u} does not reconcile to its own cover page — its figures cannot be trusted`));
+      if (unrec.length > 6) fail('13f.json', `…and ${unrec.length - 6} more stored 13F table(s) that do not reconcile`);
+      if (!unrec.length) ok(`13f: all ${tables} stored tables reconcile to their cover pages`);
+      if (active && current === active) ok(`13f: all ${active} active tracked funds current through ${qLabel(passed)} (rolled deadline ${rolledDue(passed)})`);
+      const integ = Array.isArray(F13.integrity) ? F13.integrity : [];
+      integ.slice(0, 6).forEach(x => warn('13f.json', `units cross-check ${x.quarter || ''} ${x.ticker || x.cusip}: price per share differs ×${x.ratio} across ${(x.funds || []).map(g => `${g.fund} $${g.pricePerShare}`).join(' vs ')} — one filer's units or shares are probably wrong`));
+      if (integ.length > 6) warn('13f.json', `…and ${integ.length - 6} more units cross-check disagreement(s)`);
+    }
+  } catch (e) { warn('13f.json', `PHASE 6 check did not run: ${String((e && e.message) || e).slice(0, 120)}`); }
 }
 
 // ── report ─────────────────────────────────────────────────────────────────

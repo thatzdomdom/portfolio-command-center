@@ -44,6 +44,10 @@ const SPEC = {
   // no entry here at all.
   'oneaction.json':   { as: j => j.date, cadence: 'daily', count: j => (j.action && j.action.kind === 'action' ? 1 : 0), source: 'one-action.js (count = 1 when an action is open)', published: 'oneaction.enc' },
   'journal.json':     { as: j => j.asOf, cadence: 'manual', count: j => (j.count != null ? j.count : (j.entries || []).length), source: 'journal.js (email replies; count = entries)', published: 'journal.enc' },
+  // Phase 6 (13 Sep 2026): 13F from EDGAR, parsed by code. asOf is the newest PERIOD a tracked fund reported,
+  // never the scan time — a quarterly table ages as quarterly however often it is re-checked.
+  '13f.json':         { as: j => Object.values(j.funds || {}).map(f => f.latest && f.latest.period).filter(Boolean).sort().pop(), cadence: 'quarterly', count: j => Object.values(j.funds || {}).filter(f => f.latest && f.latest.period).length, source: '13f-scan.js (SEC EDGAR 13F filings; GitHub Actions; count = funds with a table)' },
+  'funds.json':       { as: j => j.asOf, cadence: 'manual', count: j => (j.funds || []).filter(f => f.track).length, source: 'owner-curated 13F filer list (count = tracked)' },
 };
 
 const files = {};

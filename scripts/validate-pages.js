@@ -79,6 +79,7 @@ const TARGETS = [
   { f: 'inbox.html', kind: 'html' },
   { f: 'pcc.css', kind: 'css' },
   { f: 'common.js', kind: 'js' },
+  { f: 'funds.js', kind: 'js' },
 ];
 
 // ── helpers ────────────────────────────────────────────────────────────────

@@ -30,3 +30,8 @@ noProblems})` — one check per key — and `gap(id, text, observed)` for a KNOW
 Every assertion targets a specific `problems[]` / `passed[]` / `warnings[]` line or a specific
 stdout line; an exit code alone is never enough. No Date shim: fixtures compute expectations from
 the real clock (05 derives the 13F quarter labels, 16 the cutover streak).
+
+Stored filings: `fixtures/data/13f/` holds five public EDGAR files for `19-13f` — Berkshire Hathaway and
+Baupost 2026 Q2 cover pages and information tables, and Pershing Square's 13F-NT that names CIK 2026053.
+They were copied from what 13f-scan.js fetched on 13 Sep 2026; no fixture ever fetches. The runner loads
+only top-level `NN-*.js`, so the folder is never mistaken for a fixture.

@@ -140,10 +140,81 @@ const out = []; const push = a => { if (existing.has(a.id)) return; if (a.event 
       headline: `${subjT || (s.subject && s.subject.name) || '?'} · ${s.form} by ${filer}${s.percent != null ? ' · ' + s.percent + '%' : ''}`,
       detail: is13D ? (tag !== 'market-wide' ? 'a 5% holder with intent to influence, in a name you hold or watch — re-underwrite by a date' : `activist filer (${activist})`) : 'passive 5% crossing', url: s.url, clearsWhen: is13D ? 'until re-underwritten' : 'read' });
   }
+  // ── 13F: tracked funds (phase 6, 13 Sep 2026) ─────────────────────────────
+  // data/13f.json is EDGAR primary data parsed by scripts/13f-scan.js on GitHub Actions; this block
+  // only judges it, against policy.funds. A 13F is a quarter-end snapshot filed up to 45 days after
+  // the quarter — never a trade today — so nothing here is a push or the One Action: a filing is a
+  // Log, a tracked fund opening, exiting or moving ≥25% in a name he holds or watches is a Notable,
+  // a name ≥3 funds opened is a Log. The FIRST scan backfilled every fund's latest quarter weeks
+  // after it was filed (events[].bootstrap). Announcing a mid-August filing as news on 14 Sep would
+  // be the 18 Aug failure turned round — an old table under a fresh date — so a hit whose filing
+  // was backfilled (or has no ingest event at all) is written at policy.funds.backfill.severity and
+  // tagged 'backfill'. Ids are per fund+period(+name+action): a quarter alerts once, like every
+  // other family. No 13f.json (or no policy.funds) → nothing, silently.
+  const F13 = J('13f.json'), PF = policy.funds;
+  const n13 = { filing: 0, hit: 0, consensus: 0 };
+  if (F13 && PF) {
+    const FUNDS = F13.funds || {}, skipKind = new Set(PF.excludeKinds || []);
+    const tracked = id => !!FUNDS[id] && !skipKind.has(FUNDS[id].kind);
+    const events = (F13.events || []).filter(e => e && tracked(e.fund));
+    const eventOf = new Map(events.map(e => [`${e.fund}|${e.period}`, e]));
+    const isBackfill = (fund, period) => { const e = eventOf.get(`${fund}|${period}`); return !e || e.bootstrap === true; };
+    const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const dm = iso => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso || '')); return m ? `${+m[3]} ${MON[+m[2] - 1]}` : '?'; };
+    const big = n => { const a = Math.abs(n || 0), s = (n || 0) < 0 ? '−' : ''; return a >= 1e9 ? `${s}$${(a / 1e9).toFixed(2)}bn` : a >= 1e6 ? `${s}$${(a / 1e6).toFixed(1)}M` : `${s}${usd(a)}`; };
+    const sgn = n => (n > 0 ? '+' : n < 0 ? '−' : '') + Math.abs(Math.round(n || 0)).toLocaleString();
+    const SNAP = 'a quarter-end snapshot filed weeks later, not a trade today';
+    for (const e of events) {
+      const id = `13f:${e.fund}:${e.period}`;
+      if (existing.has(id)) continue;
+      const hits = (e.bookHits || []).map(h => tagOf(h.ticker)), tag = hits.includes('in-book') ? 'in-book' : hits.includes('watchlist') ? 'watchlist' : 'market-wide';
+      const f = FUNDS[e.fund] || {}, L = f.latest && f.latest.period === e.period ? f.latest : null;
+      push({ id, what: 'filing', fund: e.fund, period: e.period, quarter: e.quarter, date: e.filed, severity: PF.newQuarter.severity, family: 'fund', ticker: null, issuer: e.name,
+        tags: [tag, 'SC 13F', ...(e.bootstrap ? ['backfill'] : [])],
+        headline: `${e.name} · 13F ${e.quarter} · ${Number(e.positions || 0).toLocaleString()} positions · ${e.new} new, ${e.added} added, ${e.reduced} reduced, ${e.exited} exited`,
+        detail: [`${big(e.valueUSD)} reported`, `filed ${dm(e.filed)}`, e.via === 'notice' ? `via 13F-NT notice → CIK ${e.cik}` : null, L && L.units === 'thousands' ? 'filer reports in thousands (×1000 applied)' : null,
+          (e.bookHits || []).length ? `book/watch: ${e.bookHits.slice(0, 6).map(h => `${h.ticker} ${h.action}`).join(', ')}${e.bookHits.length > 6 ? ` +${e.bookHits.length - 6}` : ''}` : 'no book or watchlist names',
+          e.bootstrap ? 'backfill — first ingest by the 13F scan, not a new filing' : null].filter(Boolean).join(' · '),
+        url: e.url || null, clearsWhen: 'read' });
+      n13.filing++;
+    }
+    const BH = PF.bookHit;
+    for (const h of (F13.bookHits || [])) {
+      if (!h || !h.ticker || !tracked(h.fund) || !BH) continue;
+      const pc = h.pctChg == null ? null : Math.abs(h.pctChg);
+      if (!((BH.actions || []).includes(h.action) || (pc != null && pc >= BH.minPctChg))) continue;
+      // policy.funds.bookHit.excludeKinds: a fund of that kind is logged but never escalated (Bridgewater,
+      // kind 'macro', rebalances ~1,000 lines a quarter and moved 11 of Q2's 14 watchlist names).
+      const live = tagOf(h.ticker), tag = live !== 'market-wide' ? live : (h.tag || 'market-wide'), old = isBackfill(h.fund, h.period),
+        macroScale = (BH.excludeKinds || []).includes((FUNDS[h.fund] || {}).kind);
+      const verb = h.action === 'New' ? 'opened a position' : h.action === 'Exited' ? 'exited' : `${h.action === 'Added' ? 'added' : 'reduced'} ${pc == null ? '' : pc + '% '}`.trim();
+      const id = `13f:${h.fund}:${h.period}:${h.key || h.ticker}:${h.action}`;
+      if (existing.has(id)) continue;
+      push({ id, what: 'book-hit', fund: h.fund, period: h.period, quarter: h.quarter, usd: Math.round(Math.abs(h.valueChgUSD || 0)), date: h.filed, severity: old ? ((PF.backfill && PF.backfill.severity) || 'Log') : macroScale ? 'Log' : BH.severity, family: 'fund', ticker: h.ticker,
+        issuer: h.name, tags: [tag, 'SC 13F', ...(old ? ['backfill'] : []), ...(macroScale ? ['macro-scale'] : [])],
+        headline: `${h.ticker} · ${h.name} ${verb}${h.putCall ? ` (${h.putCall} options)` : ''} · 13F ${h.quarter}`,
+        detail: [`${sgn(h.sharesChg)} sh`, `position now ${big(h.valueUSD)} (${h.valueChgUSD >= 0 ? '+' : ''}${big(h.valueChgUSD)})`, `filed ${dm(h.filed)}`, SNAP, old ? 'backfill — first ingest by the 13F scan' : null].filter(Boolean).join(' · '),
+        url: h.url || null, clearsWhen: 'read' });
+      n13.hit++;
+    }
+    const C = F13.consensus, CS = PF.consensus;
+    if (C && CS) for (const r of (C.New || [])) {
+      if (!r || (r.count || 0) < CS.minFunds) continue;
+      const id = `13f:consensus:${C.period}:${r.key}:New`;
+      if (existing.has(id)) continue;
+      const filed = (r.funds || []).map(x => FUNDS[x] && FUNDS[x].latest && FUNDS[x].latest.period === C.period ? FUNDS[x].latest.filed : null).filter(Boolean).sort().pop() || null;
+      push({ id, what: 'consensus', period: C.period, quarter: C.quarter, usd: Math.round(Math.abs(r.valueUSD || 0)), date: filed, severity: CS.severity, family: 'fund', ticker: r.ticker || null, issuer: r.name,
+        tags: [tagOf(r.ticker), 'SC 13F'],
+        headline: `${r.ticker || r.key}${r.putCall ? ` ${r.putCall}` : ''} · ${r.count} of ${C.funds} tracked funds opened new positions · 13F ${C.quarter}`,
+        detail: `${(r.names || r.funds || []).join(', ')} · ${big(r.valueUSD)} combined · ${SNAP}`, url: null, clearsWhen: 'read' });
+      n13.consensus++;
+    }
+  }
   // ── write, append-only ────────────────────────────────────────────────────
   const alerts = out.concat(prior.alerts).sort((a, b) => (b.date || '').localeCompare(a.date || '') || (b.at || '').localeCompare(a.at || '')).slice(0, policy.retention.alertsMax);
   fs.writeFileSync(D('alerts.json'), JSON.stringify({ generatedAt: new Date().toISOString(), policyVersion: policy.version, meta: { evaluated: [...evaluated].slice(-8000) }, alerts }, null, 1) + '\n');
   const n = out.filter(a => a.severity === 'Notable');
   console.log(`alerts.json: +${out.length} (${n.length} Notable) · ${alerts.length} total · evaluated ${evaluated.size} filings`);
   n.slice(0, 8).forEach(a => console.log(`  ! ${a.date} ${a.headline} [${a.tags.join(' ')}]`));
+  if (F13 && PF) console.log(`  13F: +${n13.filing} filing · +${n13.hit} book/watch hit · +${n13.consensus} consensus (scan checked ${(F13.scan && F13.scan.checkedAt) || 'never'})`);
 })();

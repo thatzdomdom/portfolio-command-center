@@ -501,7 +501,10 @@
     // The window is INGEST time (a.at), not the filing date: EDGAR dates a trade 1-3 days before
     // alerts.js ever sees it, so comparing filing date to the brief's date matched nothing at all.
     var sinceTs = B && B.date ? Date.parse(B.date) : NaN;
-    var fresh = isNaN(sinceTs) ? alerts : alerts.filter(function (x) { return Date.parse(x.at) > sinceTs; });
+    // One day back: alerts.js ingests at 07:02 BEFORE the agent stamps brief.json, so this morning's rows
+    // are always older than the brief beside them. The window is "since yesterday's send", not "since
+    // this file was written" — which on a normal morning matched nothing at all.
+    var fresh = isNaN(sinceTs) ? alerts : alerts.filter(function (x) { return Date.parse(x.at) > sinceTs - 864e5; });
     var rank = function (x) {
       var t = x.tags || [];
       return t.indexOf('in-book') > -1 ? 0 : t.indexOf('watchlist') > -1 ? 1 : 2;
@@ -524,9 +527,23 @@
     }
 
     var owner = fresh.filter(function (x) { return x.family === 'ownership'; });
-    kids.push(line('13D/G', owner.length
-      ? owner.length + ' ownership filing(s) since the last brief — see the Inbox'
-      : 'no 13D/13G or 13F line since ' + (since ? 'the ' + dshort(since) + ' brief' : 'the last brief')));
+    // Phase 6: 13F filings join this line. They come from alerts.json's family 'fund' filing rows —
+    // alerts.js writes one per data/13f.json events[] row when it first sees it — so the window is the
+    // same ingest-time window as every alert above, and the phone never downloads the ~1 MB 13f.json
+    // to count a dozen rows. The first scan's backfill (tag 'backfill') is not news and is skipped.
+    var f13 = fresh.filter(function (x) { return x.family === 'fund' && x.what === 'filing' && (x.tags || []).indexOf('backfill') < 0; });
+    if (f13.length) {
+      kids.push(lineEls('13D/G', [
+        txt((owner.length ? owner.length + ' ownership filing(s) and ' : '') + f13.length + ' 13F filing(s) since the last brief: '
+          + f13.slice(0, 4).map(function (x) { return x.issuer + (x.quarter ? ' ' + x.quarter : ''); }).join(', ')
+          + (f13.length > 4 ? ' +' + (f13.length - 4) + ' more' : '') + ' — '),
+        el('a', { class: 'tap', href: deep('inbox', 'a-' + f13[0].id), text: 'see the Inbox' })
+      ]));
+    } else {
+      kids.push(line('13D/G', owner.length
+        ? owner.length + ' ownership filing(s) since the last brief — see the Inbox'
+        : 'no 13D/13G or 13F line since ' + (since ? 'the ' + dshort(since) + ' brief' : 'the last brief')));
+    }
 
     kids.push(el('div', {}, [
       el('a', { class: 'tap', href: deep('inbox', null), text: 'Open the Inbox →' })

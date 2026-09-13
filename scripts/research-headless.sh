@@ -85,6 +85,14 @@ WATCHER=$!
 wait "$PID"; EC=$?
 kill "$WATCHER" 2>/dev/null
 
+# ── 13F COMPAT (phase 6, 13 Sep 2026) ─────────────────────────────────────
+# investors.json's conviction tables, notable trades, roster and stamp belong to code now:
+# 13f-scan.js (GitHub Actions, 06:15) → data/13f.json → investors-compat.js. It runs AFTER the agent so
+# code wins whatever the agent wrote to those keys, and BEFORE the gates so validate-all judges what will
+# ship. Non-fatal: a missing, week-old or consensus-less 13f.json leaves the file exactly as the agent
+# left it, and the REFUSED line above this one says why.
+/opt/homebrew/bin/node scripts/investors-compat.js || echo "$(date '+%F %T') investors-compat: refused — investors.json 13F keys left as the agent wrote them"
+
 # ── PRICE GATE (added 31 Jul 2026) ────────────────────────────────────────
 # The agent published an insider buy of M44U at "~S$1.91/unit" on a day the
 # unit traded S$1.21-1.23 — and had never traded above S$1.80 in three years.

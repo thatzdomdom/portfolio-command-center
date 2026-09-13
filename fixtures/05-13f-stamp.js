@@ -8,9 +8,10 @@
 module.exports = {
   name: '05-13f-stamp', incident: '18 Aug 2026 — Q1 tables served as current with a fresh stamp while Q2 13Fs were public', needsGreen: true,
   run(ctx) {
-    const t = Date.parse(ctx.today), due = (q, y) => Date.UTC(y, q * 3, 0) + 45 * 864e5;
+    const t = Date.parse(ctx.today), due = (q, y) => { const d = Date.UTC(y, q * 3, 0) + 45 * 864e5, w = new Date(d).getUTCDay(); return d + (w === 6 ? 2 : w === 0 ? 1 : 0) * 864e5; };   // rolled like validate-all's dueOf
     let q = 1, y = 2020, cur = null;
-    while (due(q, y) <= t) { cur = [q, y]; q++; if (q > 4) { q = 1; y++; } }
+    // public from the SGT day after the rolled deadline, exactly as validate-all decides it
+    while (due(q, y) + 864e5 <= t) { cur = [q, y]; q++; if (q > 4) { q = 1; y++; } }
     const next = [q, y], prev = cur[0] === 1 ? [4, cur[1] - 1] : [cur[0] - 1, cur[1]];
     const lbl = ([qq, yy]) => `${yy} Q${qq}`, iso = ms => new Date(ms).toISOString().slice(0, 10);
     ctx.note = `clock: ${lbl(cur)} public since ${iso(due(...cur))} · ${lbl(next)} due ${iso(due(...next))}`;

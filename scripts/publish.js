@@ -52,7 +52,11 @@ const ALLOW = ['data/news.json', 'data/model.json', 'data/market.json', 'data/br
   // phase 5 (13 Sep 2026): the three surfaces and what they are built on. index.html is guarded
   // to holdings lines because edit-book.js rewrites one; these five are ordinary code and ship
   // whole. Without them the pages 404 on Pages while every data file they read is published.
-  'pcc.css', 'common.js', 'today.html', 'book.html', 'inbox.html'];
+  'pcc.css', 'common.js', 'today.html', 'book.html', 'inbox.html', 'funds.js',
+  // phase 6 (13 Sep 2026): 13F from EDGAR, all public data. Actions commits 13f.json and .cusips.json (the
+  // Mac only ships what it pulled); funds.json is the owner's hand-curated filer list. Without them the
+  // Funds section of book.html 404s on Pages while investors.json ships.
+  'data/13f.json', 'data/funds.json', 'data/.cusips.json'];
 
 // ── pure guard helpers (exported; unit-tested with node -e, never by running the pipeline) ──
 const HOLDING_LINE = /^[-+]\s*\{id:\s*\d+,/;

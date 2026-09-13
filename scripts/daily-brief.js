@@ -201,6 +201,51 @@ try {
   } else integrityLines.push('Note: the universal file check did not run today — treat the figures below with extra care.');
 } catch (e) {}
 
+// Phase 6 (13 Sep 2026): 13F holdings come from EDGAR in code — scripts/13f-scan.js on GitHub Actions
+// writes data/13f.json at 06:15 SGT — no longer from the research agent's investors.json, whose stamp
+// was bumped every morning over a quarter-old table (18 Aug). Two things reach the brief, both computed
+// here. SIGNALS: one line per filing INGESTED since the last send (events[].at — the same ingest-time
+// window as the alerts); the first scan's backfill (bootstrap:true, mid-August filings first read on
+// 13 Sep) is not news and is never listed. DATA-INTEGRITY: one line every day saying how current the
+// feed is, because a quarterly feed that has died reads exactly like a quiet quarter. Neither throws.
+const f13 = (() => { try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'data', '13f.json'), 'utf8')); } catch (e) { return e.code === 'ENOENT' ? null : { unreadable: String(e.message).slice(0, 80) }; } })();
+const f13Checked = () => f13 && f13.scan && f13.scan.checkedAt ? dmy(sgtDay(f13.scan.checkedAt)) : 'never';
+function f13SignalLines() {
+  try {
+    if (!f13 || f13.unreadable) return [];
+    return (f13.events || []).filter(e => e && String(e.at || '') > lastBriefAt && e.bootstrap !== true)
+      .sort((a, b) => String(a.filed).localeCompare(String(b.filed)) || String(a.name).localeCompare(String(b.name)))
+      .map(e => `13F · ${e.name} ${e.quarter} filed ${dmy(e.filed)} · ${Number(e.positions || 0).toLocaleString()} positions · ${e.new} new, ${e.exited} exited · checked ${f13Checked()}`);
+  } catch (_) { return []; }
+}
+function f13IntegrityLine() {
+  try {
+    if (!f13) return '13F: data/13f.json absent — scripts/13f-scan.js (GitHub Actions, 06:15 SGT) has not produced it; no fund holdings are checked';
+    if (f13.unreadable) return `13F: data/13f.json unreadable (${f13.unreadable}) — treat every 13F figure as unchecked`;
+    const S = f13.scan || {}, checked = S.checkedAt ? sgtDay(S.checkedAt) : null;
+    const age = checked ? Math.round((Date.parse(todaySGT) - Date.parse(checked)) / 864e5) : null;
+    if (age == null || age > 3) return `13F feed is DEAD, not quiet — last checked ${f13Checked()}${age == null ? '' : ` (${age}d ago)`}; the 06:15 SGT 13f-scan workflow has not completed since`;
+    // Deadline = quarter end + 45 days, rolled to the next weekday (2026 Q3: Sat 14 Nov → Mon 16 Nov).
+    const DOW = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], Q = [], y0 = +todaySGT.slice(0, 4);
+    for (let y = y0 - 1; y <= y0 + 1; y++) ['03-31', '06-30', '09-30', '12-31'].forEach((md, i) => {
+      const d = new Date(Date.parse(`${y}-${md}T00:00:00Z`) + 45 * 864e5); d.setUTCDate(d.getUTCDate() + (d.getUTCDay() === 6 ? 2 : d.getUTCDay() === 0 ? 1 : 0));
+      Q.push({ period: `${y}-${md}`, label: `${y} Q${i + 1}`, due: d.toISOString().slice(0, 10), dow: DOW[d.getUTCDay()] });
+    });
+    const past = Q.filter(q => q.due < todaySGT), due = past[past.length - 1], next = Q.find(q => q.due >= todaySGT);
+    const ql = p => (Q.find(q => q.period === p) || { label: p }).label, lat = f => (f.latest && f.latest.period) || '';
+    const excl = new Set(((readJson('policy.json') || {}).funds || {}).excludeKinds || ['quant', 'index']);
+    const all = Object.values(f13.funds || {}).filter(f => f && !excl.has(f.kind)), act = all.filter(f => f.status === 'active' && f.inferredStatus !== 'stopped');
+    const cur = act.filter(f => lat(f) >= due.period), gap = act.filter(f => f.edgarLatestPeriod && f.edgarLatestPeriod > lat(f));
+    const late = act.filter(f => lat(f) < due.period && !gap.includes(f)), odd = all.filter(f => f.status === 'active' && f.inferredStatus === 'stopped');
+    const errs = S.errors || [], names = a => a.slice(0, 3).map(f => f.name).join(', ') + (a.length > 3 ? ` +${a.length - 3}` : '');
+    return `13F: ${cur.length === act.length ? act.length : `${cur.length} of ${act.length}`} tracked funds current through ${due.label}`
+      + (late.length ? ` — not yet filed: ${names(late)} (their lateness, not ours)` : '')
+      + (gap.length ? ` · NOT INGESTED: ${gap.slice(0, 3).map(f => `${f.name} filed ${ql(f.edgarLatestPeriod)} on EDGAR`).join(', ')}` : '')
+      + (odd.length ? ` · ${names(odd)} looks stopped (no filing for 2 deadlines) — funds.json still says active` : '')
+      + ` · next deadline ${next.dow} ${dmy(next.due)} (${next.label}) · checked ${f13Checked()}`
+      + (S.ok === false || errs.length ? ` · last scan: ${errs.length} error(s)${errs[0] ? ` — ${errs[0].fund} ${errs[0].stage}` : ''}` : '');
+  } catch (e) { return `13F: status line could not be computed (${String(e.message).slice(0, 80)})`; }
+}
 // Phase 2 (11 Sep 2026): insider and ownership signals now come from data/alerts.json — the
 // append-only log written by scripts/alerts.js from the market-wide EDGAR scan — not from the
 // retired 15-name poller's queue. Notables since the previous brief lead; held/watch sells get ONE
@@ -218,6 +263,7 @@ try {
   const lines = notable.slice(0, 8).map(a => `${a.headline} [${(a.tags || []).filter(t => ['in-book', 'watchlist', 'market-wide', 'cluster'].includes(t)).join(' ')}] — ${a.detail}`);
   if (sells.length) lines.push(`${sells.length} insider sell(s) on held/watch names since ${since}${sells.every(a => (a.tags || []).includes('10b5-1')) ? ', all 10b5-1 plans' : ''} — see inbox.html`);
   if (!lines.length) lines.push(`no Notable insider or ownership events since ${since} · ${(AL.alerts || []).length} in the log · inbox.html`);
+  lines.push(...f13SignalLines());   // phase 6: one line per 13F filing ingested since the last send
   const scanNote = (() => { try { const S = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'signals.json'), 'utf8')); const last = (S.scans || []).filter(x => !x.error).slice(-1)[0]; return last ? ` · Form 4 scan ${last.date}: ${last.form4Lines || 0} filings, ${last.kept || 0} with open-market trades` : ''; } catch (_) { return ' · signals.json absent'; } })();
   sections.unshift(['🔔 SIGNALS SINCE LAST BRIEF (insiders & ownership, market-wide)' + scanNote, lines]);
 } catch (e) { sections.unshift(['🔔 SIGNALS', ['alerts.json unavailable — scripts/alerts.js did not run (' + e.message + ')']]); }
@@ -234,6 +280,7 @@ try {
     : 'not computed — scripts/cutover-check.js has not run';
   integrityLines.push(`cutover clock: ${clock} · publish ${last ? `${last.status} at ${last.step || '?'} (${last.date || '?'})` : 'no ledger row yet'}`);
 } catch (_) {}
+integrityLines.push(f13IntegrityLine());   // phase 6: every day — a dead quarterly feed reads like a quiet quarter
 if (integrityLines.length) sections.push(['DATA-INTEGRITY CHECKS', integrityLines]);
 
 const stamp = (brief && brief.date) || (model && model.updated) || 'unknown';
