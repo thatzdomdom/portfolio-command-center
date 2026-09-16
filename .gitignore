@@ -1,1 +1,24 @@
 .DS_Store
+.backtest-cache/
+.claude/
+.insider-queue.json
+.signal-lab-cache/
+data/book.json
+data/valuation.json
+data/.credentials.json
+data/.prices-2y.json
+data/nav-history.ndjson
+# phase 4 (12 Sep 2026) — the write path is private: replies, the action text, the local ledgers,
+# the cursor files. Only journal.enc / oneaction.enc ship. Same list as publish.js PRIVATE and
+# validate-all.js's plaintext check.
+data/journal.ndjson
+data/journal.json
+data/oneaction.json
+data/.oneaction-history.ndjson
+data/.state-history.ndjson
+data/.publish-history.ndjson
+data/.tickers.json
+data/.cutover.json
+data/.last-brief-at
+data/.last-brief-date
+data/.ciks.json

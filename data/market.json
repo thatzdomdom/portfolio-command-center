@@ -1,0 +1,216 @@
+{
+ "updated": "2026-09-14",
+ "note": "Monday run, 14 Sep 2026 07:02 SGT, still no US session since Friday 11 Sep's close (S&P +0.86%, VIX -11.2%) -- Monday's NYSE session hasn't opened yet. CNN Fear&Greed's site (both cnn.com and edition.cnn.com) again returned HTTP 451, and its data API (production.dataviz.cnn.io) again returned HTTP 418, on this run too -- third consecutive run blocked. Baked value stays honestly at Thursday's last-confirmed 33/Fear; do not treat as current, the dashboard's live in-browser fetch is authoritative. Crypto Fear&Greed DID refresh via alternative.me's API (verified via raw JSON + timestamp decode): 56 (Sat 11 Sep) -> 63 (Sun 12 Sep) -> 61 (Mon 13 Sep, latest confirmed daily print as of this run). No fresher StockCharts $NYMO/$NYSI or sector-breadth data found (still a gap, JS-only charts). No newer weekly EPFR/BofA flow print beyond week ended 9 Sep 2026; region-specific (Europe/EM/China/Japan) flows still unconfirmed.",
+ "fearGreed": {
+  "value": 33,
+  "rating": "Fear",
+  "asOf": "2026-09-10 (Thursday close -- last confirmed reading; three consecutive runs since (Fri 11, weekend, and this Mon 14 Sep run) have all been blocked -- CNN's site returns HTTP 451 on both cnn.com and edition.cnn.com, and its data API returns HTTP 418, every time)",
+  "prevClose": 36,
+  "prev1w": null,
+  "prev1m": null,
+  "prev1y": null,
+  "cryptoValue": 61,
+  "cryptoRating": "Greed",
+  "components": [
+   {
+    "name": "Market Momentum (S&P 500 vs 125-day MA)",
+    "reading": "not directly retrieved from CNN this session (blocked)",
+    "signal": "neutral"
+   },
+   {
+    "name": "Stock Price Strength (NYSE new highs vs lows)",
+    "reading": "S&P new highs/lows roughly balanced (7 vs 6) but Nasdaq new lows (128) far outnumber new highs (38) over the week",
+    "signal": "fear"
+   },
+   {
+    "name": "Stock Price Breadth (McClellan Volume Summation)",
+    "reading": "not directly retrieved from CNN this session (blocked)",
+    "signal": "neutral"
+   },
+   {
+    "name": "Put and Call Options",
+    "reading": "not directly retrieved from CNN this session (blocked)",
+    "signal": "neutral"
+   },
+   {
+    "name": "Market Volatility (VIX vs 50-day MA)",
+    "reading": "VIX fell from 17.84 (Thu) to 15.84 (Fri), -11.2% on the day",
+    "signal": "greed"
+   },
+   {
+    "name": "Safe Haven Demand (stocks vs bonds returns)",
+    "reading": "not directly retrieved from CNN this session (blocked)",
+    "signal": "neutral"
+   },
+   {
+    "name": "Junk Bond Demand (spread vs investment grade)",
+    "reading": "BofA/EPFR shows HY funds +$0.61bn in latest week, a mild positive",
+    "signal": "neutral"
+   }
+  ],
+  "sources": [
+   "https://api.alternative.me/fng/?limit=10 (crypto value confirmed working this run, daily timestamps decoded)",
+   "https://www.cnn.com/markets/fear-and-greed (HTTP 451, blocked)",
+   "https://edition.cnn.com/markets/fear-and-greed (HTTP 451, blocked)",
+   "https://production.dataviz.cnn.io/index/fearandgreed/graphdata (HTTP 418, blocked)"
+  ]
+ },
+ "breadth": {
+  "asOf": "2026-09-11 (Friday close, US session, still the latest completed session as of this Mon 14 Sep 07:02 SGT check -- Monday's NYSE session had not opened yet); some component data as of 2026-09-04 where noted",
+  "metrics": [
+   {
+    "label": "% S&P 500 > 200-DMA",
+    "value": "~67.1%",
+    "signal": "bullish",
+    "pct": 67.1
+   },
+   {
+    "label": "% S&P 500 > 50-DMA",
+    "value": "~63.6% (approximate)",
+    "signal": "bullish",
+    "pct": 63.6
+   },
+   {
+    "label": "NYSE advancers vs decliners (Fri 11 Sep)",
+    "value": "1,701 advancing vs 924 declining (~2:1)",
+    "signal": "bullish",
+    "pct": null
+   },
+   {
+    "label": "Broad market advance/decline (Fri 11 Sep, all US-listed)",
+    "value": "53.9% advancing (3,025 issues) vs 41.9% declining (2,351 issues)",
+    "signal": "bullish",
+    "pct": 53.9
+   },
+   {
+    "label": "52-week New Highs minus Lows (week of 7-11 Sep)",
+    "value": "S&P 500: 7 new highs vs 6 new lows (roughly flat); Nasdaq Composite: 38 new highs vs 128 new lows (net -90, narrow)",
+    "signal": "bearish",
+    "pct": null
+   },
+   {
+    "label": "McClellan Oscillator / Summation Index",
+    "value": "not sourced this session -- data gap (StockCharts $NYMO/$NYSI are chart-only, no extractable text via fetch)",
+    "signal": "neutral",
+    "pct": null
+   },
+   {
+    "label": "A-D line trend",
+    "value": "not independently sourced this session -- last qualitative read is Tue 8 Sep (net advances -1,673; cumulative A-D line 121,362), now 3 sessions stale",
+    "signal": "neutral",
+    "pct": null
+   },
+   {
+    "label": "Sectors > 200-DMA",
+    "value": "not sourced this session -- two low-reliability aggregators gave contradictory aggregate reads (~53% vs ~95%), so neither is used",
+    "signal": "neutral",
+    "pct": null
+   }
+  ],
+  "note": "Broad-vs-narrow read: Friday's rally had genuinely broad one-day participation (2:1 NYSE advancers, mega- and mid-cap breadth both up), but week-level new-high/new-low data (Nasdaq lows swamping highs 128-to-38) shows underlying erosion beneath the index -- a mega-cap/momentum-led bounce sitting on top of narrowing breadth, not a clean all-clear. Re-checked again this Mon 14 Sep run: still no fresher McClellan Oscillator/Summation Index or sector->200-DMA data (StockCharts $NYMO/$NYSI remain JS-only charts, not fetchable as text); a stray '49.9% of S&P 500 > 200-DMA' figure surfaced in search but traces to a Sept 1 2026 article, predates and conflicts with the already-confirmed 67.1% figure, so it was discarded rather than used. This read carries forward from Friday's close, unrevised.",
+  "sources": [
+   "https://historyofmarket.com/sp500/sp500-breadth/",
+   "https://www.thetrading.tools/market-breadth"
+  ]
+ },
+ "flows": {
+  "asOf": "2026-09-13",
+  "period": "week ending 9 September 2026 (freshest published EPFR/BofA Flow Show data, released 10-11 Sep 2026; prior week ended 2 Sep carried below for context). Re-checked this Mon 14 Sep run: no newer weekly print has published (next Flow Show for week ended 16 Sep isn't due until ~17-18 Sep); Bloomberg's 9/11 article is now behind a fetch block (HTTP 403) so was not re-read in full this run, only re-confirmed via search snippet. Region-specific (Europe/Intl DM, EM, China, Japan) EPFR figures remain unconfirmed -- searches this run surfaced only older EPFR Global Navigator posts (Jan-Feb 2026 vintage), nothing dated to the current week.",
+  "narrative": "The week ended 9 Sep 2026 showed US equity fund outflows narrowing to -$4.48bn (from -$7.84bn the prior week) -- still net selling, but decelerating -- while money-market funds flipped to a -$5.97bn outflow, a reversal from the prior week's +$22.89bn inflow, and US high-grade bond funds kept taking in money (+$4.74bn, though decelerating from +$7.76bn). This is the first weekly print to partially reflect the run-up into Friday's CPI print; the pattern (equity outflows moderating, cash flows reversing) is consistent with de-risking easing slightly ahead of the FOMC rather than a resumption of risk-taking.",
+  "regions": [
+   {
+    "region": "US Equities",
+    "direction": "outflow",
+    "amount": "-$4.48B",
+    "amountUSD": -4480000000,
+    "note": "week ended 9 Sep 2026, narrower than the prior week's -$7.84B; prior week itself was part of a -$14.2B/3-week drawdown, the largest since January"
+   },
+   {
+    "region": "Europe/Intl DM",
+    "direction": "inflow",
+    "amount": "n/a",
+    "amountUSD": null,
+    "note": "Global ex-US equity funds broadly still positive but decelerating; region-specific figure not confirmed this session"
+   },
+   {
+    "region": "EM",
+    "direction": "inflow",
+    "amount": "n/a",
+    "amountUSD": null,
+    "note": "not independently confirmed this session (a headline 'nearly $1tn' figure surfaced but is almost certainly a units error and was discarded)"
+   },
+   {
+    "region": "China",
+    "direction": "n/a",
+    "amount": "n/a",
+    "amountUSD": null,
+    "note": "no EPFR-specific China equity-fund weekly figure confirmed this session -- see flows-investors.json for margin-balance/Stock-Connect proxies"
+   },
+   {
+    "region": "Japan",
+    "direction": "n/a",
+    "amount": "n/a",
+    "amountUSD": null,
+    "note": "no EPFR-specific Japan equity-fund weekly figure confirmed this session -- see flows-investors.json for MOF/JPX-adjacent data"
+   },
+   {
+    "region": "Money-market/Cash",
+    "direction": "outflow",
+    "amount": "-$5.97B",
+    "amountUSD": -5970000000,
+    "note": "week ended 9 Sep 2026 -- a reversal from the prior week's +$22.89B inflow"
+   },
+   {
+    "region": "Bonds/Credit",
+    "direction": "inflow",
+    "amount": "+$4.74B",
+    "amountUSD": 4740000000,
+    "note": "week ended 9 Sep 2026, US high-grade bonds only (BofA's narrower category this release); decelerating from +$7.76B the prior week"
+   },
+   {
+    "region": "Gold",
+    "direction": "inflow",
+    "amount": "+$7.3B (week ended 28 Aug)",
+    "amountUSD": 7300000000,
+    "note": "biggest weekly gold-fund inflow since Oct 2025; no confirmed gold-fund figure for week ended 9 Sep"
+   }
+  ],
+  "movements": [
+   {
+    "from": "US equities",
+    "to": "broad de-risking, moderating",
+    "amount": "-$4.48B",
+    "note": "week ended 9 Sep 2026 -- narrower than the prior week's -$7.84B, suggesting outflow pace is slowing into FOMC"
+   },
+   {
+    "from": "Money-market/cash",
+    "to": "n/a (net redemption)",
+    "amount": "-$5.97B",
+    "note": "week ended 9 Sep 2026 -- cash itself saw outflows this week, a reversal from the prior week's +$22.89B inflow; not simply a mirror of the equity outflow"
+   },
+   {
+    "from": "US equities specifically",
+    "to": "US investment-grade bonds",
+    "amount": "-$4.48B / +$4.74B",
+    "note": "week ended 9 Sep 2026 -- still a roughly offsetting size, though both flows decelerated from the prior week"
+   },
+   {
+    "from": "US equities specifically",
+    "to": "broad de-risking",
+    "amount": "-$14.2B over the 3 weeks to 2 Sep",
+    "note": "largest 3-week US equity outflow since January 2026; the 9 Sep week's narrower -$4.48B suggests this pace eased somewhat"
+   },
+   {
+    "from": "Equities (broad)",
+    "to": "Gold + crypto",
+    "amount": "+$7.3B gold / +$3.2B crypto",
+    "note": "week ended 28 Aug 2026, ahead of the PPI/CPI risk events"
+   }
+  ],
+  "sources": [
+   "https://www.bloomberg.com/news/articles/2026-09-11/bofa-strategists-warn-of-stock-volatility-as-outflows-hit-us",
+   "https://finvaulta.com/research/bank-of-america/situation-room-flows-holding-back-2026-09-10",
+   "https://www.cryptotimes.io/2026/08/31/crypto-funds-see-3-2b-weekly-inflow-most-since-october-2025-bank-of-america/"
+  ]
+ }
+}

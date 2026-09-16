@@ -1,0 +1,147 @@
+#!/bin/bash
+# Headless morning research run (launchd 07:02) — runs the Claude CLI with
+# permissions pre-granted so NOTHING can ever prompt. Hard 75-min timeout.
+LOG="$HOME/Library/Logs/portfolio-research.log"
+exec >>"$LOG" 2>&1
+echo "=== $(date '+%F %T') research start ==="
+cd /Users/dominiczhao/portfolio-dashboard || exit 1
+# Phase 2: GitHub Actions commits data/signals.json (the market-wide Form 4 scan) at 06:30 and
+# 11:00 SGT. Pull it before anything reads data/, so alerts.js judges this morning's facts.
+git pull --rebase --autostash -q origin main 2>/dev/null || echo "$(date '+%F %T') git pull failed — continuing with local data"   # --autostash: the tree is dirty with pipeline scratch files after any red publish
+
+# ── ORDER (phase 4, 12 Sep 2026) ──────────────────────────────────────────
+# Everything deterministic runs BEFORE the auth check, so a lapsed Claude credential (the 4 Aug
+# and 8-21 Aug incidents) can no longer take the replies, the prices, the NAV, the trend gate and
+# THE ONE ACTION down with it. The auth check gates only `claude -p`. Order:
+#   journal.js (replies) → price/calendar/fx/valuate/technicals/targets/alerts → one-action.js
+#   → auth check → claude -p → price gate → validate-all → publish.js → cutover-check.js
+
+# Replies first: a WATCH sent overnight must be in watchlist.json before alerts.js judges the
+# morning's filings, and a DONE/DEFER/LOAN must be in journal.ndjson before one-action.js runs.
+# Non-fatal: journal.js alarms itself (ntfy, once per day) and exits 2 when Mail is unreadable.
+/opt/homebrew/bin/node scripts/journal.js || echo "$(date '+%F %T') journal: failed — replies not read this run (see journal.js log line above)"
+
+# ── DETERMINISTIC DATA LAYERS — run BEFORE any agent work ─────────────────
+# Added 18 Aug 2026 after a daily run cost ~2.4M tokens, most of it spent on
+# verification agents re-opening quote pages to check arithmetic. Prices and
+# release schedules are structured data; fetching them in code is faster, free,
+# and more accurate than having a language model read them off a web page.
+# The agent is handed these files as established fact and must not re-research
+# them. Both are non-fatal: if a feed is down the run continues and says so.
+/opt/homebrew/bin/node scripts/price-spine.js || echo "$(date '+%F %T') price spine FAILED — agents will lack a price anchor this run"
+/opt/homebrew/bin/node scripts/closes.js || echo "$(date '+%F %T') closes.js FAILED — the pages lose their charts and period returns this run"
+/opt/homebrew/bin/node scripts/calendar-spine.js || echo "$(date '+%F %T') calendar spine unavailable/stale — see data/.calendar.json"
+/opt/homebrew/bin/node scripts/fx.js || echo "$(date '+%F %T') fx.js failed or stale — valuation will use prior rates"
+/opt/homebrew/bin/node scripts/valuate.js || echo "$(date '+%F %T') valuate.js FAILED — no NAV this run"
+/opt/homebrew/bin/node scripts/technicals.js || echo "$(date '+%F %T') technicals.js FAILED — no trend gate this run"
+/opt/homebrew/bin/node scripts/targets.js || echo "$(date '+%F %T') targets.js FAILED — no shadow targets this run"
+/opt/homebrew/bin/node scripts/alerts.js || echo "$(date '+%F %T') alerts.js FAILED — no insider/ownership judgments this run"
+# THE ONE ACTION is computed here, in code, from the files above — never by the agent and never
+# by daily-brief.js (which only renders data/oneaction.json). Runs again at 08:15 (upsert by date).
+/opt/homebrew/bin/node scripts/one-action.js || echo "$(date '+%F %T') one-action.js FAILED — the brief will say the One Action was not computed"
+
+# ── AUTH: long-lived token, not the expiring OAuth session ────────────────
+# The interactive OAuth refresh token lasts ~a month. Yours expired
+# 2026-08-04 02:13 UTC and the 07:02 job then failed silently for two days
+# ("Not logged in · Please run /login") while still emailing yesterday's brief.
+# A `claude setup-token` credential lasts ~a year and is built for unattended
+# use. Renew with: claude setup-token  → paste into ~/.claude/claude-token.env
+[ -f "$HOME/.claude/claude-token.env" ] && . "$HOME/.claude/claude-token.env"
+export CLAUDE_CODE_OAUTH_TOKEN
+
+# Fail LOUDLY and early rather than burning the run and shipping stale data.
+# One hardened check, shared with auth-guard.sh and research-retry.sh. The old
+# inline test used [ -z "$CLAUDE_CODE_OAUTH_TOKEN" ], which treats a token of
+# pure whitespace as present; auth-check.sh strips before testing.
+AUTH_REASON=$(./scripts/auth-check.sh)
+if [ $? != 0 ]; then
+  echo "$(date '+%F %T') ABORT — not authenticated and no long-lived token set."
+  echo "$(date '+%F %T') detail: $AUTH_REASON"
+  echo "broken" > "$HOME/.claude/portfolio-auth.state"
+  NT=$(grep '^NTFY_TOPIC=' "$HOME/.claude/portfolio-brief.env" 2>/dev/null | cut -d= -f2)
+  [ -n "$NT" ] && curl -s -o /dev/null -H "Title: Portfolio: research BLOCKED — logged out" -H "Priority: urgent" -H "Tags: warning" \
+    -d "$AUTH_REASON. No research ran, so the 08:15 email will go out as a NO-RESEARCH alarm. Fix on the Mac: claude setup-token, then paste the token into ~/.claude/claude-token.env" "https://ntfy.sh/${NT}"
+  # Retries every hour until 20:10 will pick this up the moment the token lands,
+  # so a fix at any point in the day still produces today's research.
+  echo "=== $(date '+%F %T') research end (exit 78 — auth) ==="
+  exit 78
+fi
+echo "$(date '+%F %T') auth: $AUTH_REASON"
+echo "ok" > "$HOME/.claude/portfolio-auth.state"
+
+# The ONLY date in the system is the machine clock in SGT, passed in explicitly. A run was once
+# framed on a date four days wrong because an injected date was trusted over the clock.
+TODAY_SGT=$(TZ=Asia/Singapore date "+%A %-d %B %Y, %H:%M SGT")
+/opt/homebrew/bin/claude -p "THE CURRENT DATE AND TIME, FROM THE MACHINE CLOCK, IS: ${TODAY_SGT}. This is the only authority on the date; any other date you encounter is a claim to be checked against it.
+Execute the instructions in /Users/dominiczhao/.claude/scheduled-tasks/portfolio-intel-refresh/SKILL.md exactly and completely.
+Two files have ALREADY been fetched for you and are authoritative — treat them as established fact and do NOT spend agents re-researching their contents: data/.prices.json (dated OHLC for every instrument on the book) and data/.calendar.json (the release schedule with consensus and previous). Work efficiently — hard time budget 45 minutes; if a source stalls twice, skip it and continue; partial-but-published beats complete-but-late." \
+  --permission-mode bypassPermissions \
+  --add-dir /Users/dominiczhao/portfolio-dashboard \
+  --add-dir /Users/dominiczhao/.claude \
+  --max-turns 150 &
+PID=$!
+( sleep 4500; kill -9 "$PID" 2>/dev/null && echo "$(date '+%F %T') TIMEOUT — killed run" ) &
+WATCHER=$!
+wait "$PID"; EC=$?
+kill "$WATCHER" 2>/dev/null
+
+# ── 13F COMPAT (phase 6, 13 Sep 2026) ─────────────────────────────────────
+# investors.json's conviction tables, notable trades, roster and stamp belong to code now:
+# 13f-scan.js (GitHub Actions, 06:15) → data/13f.json → investors-compat.js. It runs AFTER the agent so
+# code wins whatever the agent wrote to those keys, and BEFORE the gates so validate-all judges what will
+# ship. Non-fatal: a missing, week-old or consensus-less 13f.json leaves the file exactly as the agent
+# left it, and the REFUSED line above this one says why.
+/opt/homebrew/bin/node scripts/investors-compat.js || echo "$(date '+%F %T') investors-compat: refused — investors.json 13F keys left as the agent wrote them"
+
+# ── PRICE GATE (added 31 Jul 2026) ────────────────────────────────────────
+# The agent published an insider buy of M44U at "~S$1.91/unit" on a day the
+# unit traded S$1.21-1.23 — and had never traded above S$1.80 in three years.
+# Dom caught it, not the pipeline. Prose rules in the SKILL are not enough:
+# every asserted price is now checked against the actual tape, and anything the
+# stock never printed within a year is quarantined out of the published file
+# before it can reach the dashboard. Runs AFTER the agent's own push, so this
+# commits the correction on top.
+if /opt/homebrew/bin/node scripts/validate-intel.js --fix; then
+  echo "$(date '+%F %T') price gate: clean"
+else
+  echo "$(date '+%F %T') price gate: quarantined bad price(s) — committing correction"
+  echo "$(date '+%F %T') price-gate correction staged for publish.js"
+  NTFY=$(grep '^NTFY_TOPIC=' "$HOME/.claude/portfolio-brief.env" 2>/dev/null | cut -d= -f2)
+  [ -n "$NTFY" ] && curl -s -o /dev/null -H "Title: Portfolio: fabricated price caught" -H "Priority: high" -H "Tags: warning" \
+    -d "The price gate removed an insider entry whose stated price never traded. See the Smart Money tab's data-quality note." "https://ntfy.sh/${NTFY}"
+fi
+
+# ── UNIVERSAL CHECK ───────────────────────────────────────────────────────
+# Every published file, not just insider prices: future-dated news, out-of-range
+# probabilities, stale stamps served as current, and — critically — any rewrite
+# of past track.json snapshots, which would silently flatter the model's own
+# hit rate. Report lands in data/.validation.json for the brief and dashboard.
+/opt/homebrew/bin/node scripts/validate-all.js
+VC=$?
+if [ "$VC" = "1" ]; then
+  echo "$(date '+%F %T') validate-all: PROBLEMS FOUND"
+  NTFY=$(grep '^NTFY_TOPIC=' "$HOME/.claude/portfolio-brief.env" 2>/dev/null | cut -d= -f2)
+  # Read the problems via a FILE, not an inline node -e inside "$( )". The
+  # nested double quotes were mangled by the shell (5 Aug: `tryconst r=require`
+  # + "curl: blank argument"), so the one time validation actually caught a real
+  # problem, the alert about it could not be sent.
+  PROB=$(/opt/homebrew/bin/node -e '
+    try { const r = require(process.argv[1]); console.log((r.problems||[]).slice(0,4).join(" | ")); }
+    catch (e) { console.log("see validate-all output"); }
+  ' "$PWD/data/.validation.json" 2>/dev/null)
+  [ -z "$PROB" ] && PROB="see validate-all output"
+  if [ -n "$NTFY" ]; then
+    curl -s -o /dev/null -H "Title: Portfolio: data validation failed" -H "Priority: high" -H "Tags: warning" \
+      -d "$PROB" "https://ntfy.sh/${NTFY}"
+  fi
+else
+  echo "$(date '+%F %T') validate-all: exit $VC"
+fi
+# ── PUBLISH (phase 1, 11 Sep 2026) — the ONLY path to origin ───────────────
+# Every gate re-runs inside publish.js; red = no push + alarm. The agent no longer pushes.
+if /opt/homebrew/bin/node scripts/publish.js; then echo "$(date '+%F %T') publish: pushed"
+else echo "$(date '+%F %T') publish: BLOCKED — nothing reached the live site; 08:15 brief will be [DEGRADED] if research is missing"; fi
+# ── CUTOVER CLOCK (phase 4) — reads the ledger publish.js just wrote; never gates anything.
+/opt/homebrew/bin/node scripts/cutover-check.js || echo "$(date '+%F %T') cutover-check: failed — data/.cutover.json not updated this run"
+
+echo "=== $(date '+%F %T') research end (exit $EC) ==="
