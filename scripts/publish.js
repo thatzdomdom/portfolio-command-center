@@ -56,7 +56,13 @@ const ALLOW = ['data/news.json', 'data/model.json', 'data/market.json', 'data/br
   // phase 6 (13 Sep 2026): 13F from EDGAR, all public data. Actions commits 13f.json and .cusips.json (the
   // Mac only ships what it pulled); funds.json is the owner's hand-curated filer list. Without them the
   // Funds section of book.html 404s on Pages while investors.json ships.
-  'data/13f.json', 'data/funds.json', 'data/.cusips.json'];
+  'data/13f.json', 'data/funds.json', 'data/.cusips.json',
+  // phase 7 (19 Sep 2026): HKEX disclosure of interests, public keyless data committed by Actions
+  // (hkex-di.yml, 06:45 SGT) and only pulled here. Without this line git add never stages it — the
+  // add is ALLOW.filter(existsSync) — so the file would sit untracked on the Mac for ever while the
+  // Inbox rows built from it shipped inside alerts.json with nothing behind them. The sid cache
+  // (data/.hkex-sids.json) is deliberately NOT here: it is gitignored local scaffolding.
+  'data/hkex.json'];
 
 // ── pure guard helpers (exported; unit-tested with node -e, never by running the pipeline) ──
 const HOLDING_LINE = /^[-+]\s*\{id:\s*\d+,/;

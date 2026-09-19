@@ -210,6 +210,95 @@ const out = []; const push = a => { if (existing.has(a.id)) return; if (a.event 
       n13.consensus++;
     }
   }
+  // ── PHASE 7: HKEX disclosure of interests (19 Sep 2026) ───────────────────
+  // data/hkex.json is di.hkex.com.hk's own notices table parsed by scripts/hkex-di.js on GitHub
+  // Actions; this block only judges it, against policy.hkex. Four things decided here, each one a
+  // way this feed could have lied:
+  //
+  //  1. THE TIER KEYS OFF direction + role, NEVER OFF WORDS. hkex-di.js derives direction from an
+  //     allow-list of HKEX's own standard codes, because the "Reason for disclosure" column is a
+  //     number whose wording includes "you acquired a security interest" (a pledge against a
+  //     stock-lending book — not a purchase) and "the percentage level of your interest has reduced
+  //     because: any other event" (SMIC's 24 Jun crossing, caused by SMIC issuing 547m new shares —
+  //     not a sale). Matching prose here would turn both into trades. Only direction 'buy'/'sell'
+  //     can reach the buy/sell tiers; everything else is policy.hkex.other, at Log, and its line
+  //     says NOT A TRADE in HKEX's own wording rather than inventing a verb.
+  //  2. THE DATE ON THE ROW IS THE FILING DATE. A notice carries two: `date` is the relevant event
+  //     and `filed` comes from the form serial, three business days later at most. The Inbox sorts
+  //     by date and a row must never claim to be newer than the moment the fact became public, so
+  //     `date` here is `filed` and the detail line names the dealing date out loud.
+  //  3. MONEY IS QUOTED IN HKD, WHICH IS WHAT THE FILING SAYS. `usd` exists only so this family
+  //     sorts against the others; it is derived through fx.json (SGD per unit), and when either the
+  //     price, the share count or the rate is missing there is no number at all — never a zero.
+  //  4. TAGS COME FROM THE BOOK, NOT FROM tagOf(). tagOf's map deliberately drops .HK/.SI/.AX
+  //     symbols (EDGAR cannot see them), so asking it about 0700 would answer 'market-wide' about a
+  //     name that is 3.0% of the book. The HK codes are read from book.json here instead.
+  //
+  // policy.hkex.substantialShareholder.minPctChange is NOT applied: a notice records the percentage
+  // AFTER the event and hkex.json carries no before, so the change is unknown. Deriving it from the
+  // share count would assume the class size did not move — the exact assumption SMIC's crossing
+  // breaks. The key stays in policy.json for the day hkex.json carries pctBefore; until then every
+  // substantial-shareholder row is Log on its own merits, which is where the tier puts it anyway.
+  // No hkex.json (or no policy.hkex) → nothing, silently.
+  const HK = J('hkex.json'), PH = policy.hkex;
+  const nhk = { rows: 0, notable: 0 };
+  if (HK && PH) {
+    const fx = (J('fx.json') || {}).rates || {};
+    const hkCode = yf => { const m = /^(\d{3,5})\.HK$/i.exec(String(yf || '').trim()); return m ? (m[1].length < 4 ? m[1].padStart(4, '0') : m[1]) : null; };
+    const hkHeld = new Map();
+    book.holdings.forEach(h => { const c = hkCode(h.yf); if (c) hkHeld.set(c, 'in-book'); });
+    Object.values(watch).forEach(arr => { if (!Array.isArray(arr)) return; arr.forEach(e => {
+      if (!e || typeof e !== 'object') return;
+      const c = hkCode(e.yf) || hkCode(e.t) || hkCode(e.symbol) || (/^\d{4,5}$/.test(String(e.hk || '')) ? String(e.hk) : null);
+      if (c && !hkHeld.has(c)) hkHeld.set(c, 'watchlist');
+    }); });
+    const hkTag = c => hkHeld.get(String(c)) || 'market-wide';
+    const money = (n, cur) => { const a = Math.abs(n);
+      return `${cur} ${a >= 1e9 ? (a / 1e9).toFixed(2) + 'bn' : a >= 1e6 ? (a / 1e6).toFixed(1) + 'M' : Math.round(a).toLocaleString()}`; };
+    const sg = n => `S$${Math.abs(n) >= 1e6 ? (Math.abs(n) / 1e6).toFixed(1) + 'M' : Math.round(Math.abs(n)).toLocaleString()}`;
+    const dm = iso => { const M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso || '')); return m ? `${+m[3]} ${M[+m[2] - 1]}` : '?'; };
+    for (const f of (HK.filings || [])) {
+      if (!f || !f.serial || !f.code) continue;
+      const id = `hk:${f.code}:${f.serial}`;
+      if (existing.has(id)) continue;
+      const director = f.role === 'director-or-ceo';
+      const tier = director && f.direction === 'buy' ? PH.directorBuy
+        : director && f.direction === 'sell' ? PH.directorSell
+        : f.role === 'substantial-shareholder' && (f.direction === 'buy' || f.direction === 'sell') ? PH.substantialShareholder
+        : PH.other;
+      const sev = (tier && tier.severity) || 'Log';
+      if (sev === 'ignore') continue;
+      const roleLabel = director ? 'director or chief executive' : f.role === 'substantial-shareholder' ? 'substantial shareholder' : 'filer';
+      const cur = f.currency || 'HKD';
+      const native = f.sharesInvolved != null && f.avgPrice != null ? f.sharesInvolved * f.avgPrice : null;
+      const sgd = native != null && fx[cur] ? native * fx[cur] : null;
+      const usdEq = sgd != null && fx.USD ? sgd / fx.USD : null;
+      const verb = f.direction === 'buy' ? 'bought' : f.direction === 'sell' ? 'sold' : null;
+      const size = native != null ? money(native, cur) : f.sharesInvolved != null ? `${f.sharesInvolved.toLocaleString()} sh` : 'shares';
+      const why = f.reasonText ? `“${f.reasonText}”` : f.reason ? `reason code ${f.reason}` : 'no reason code on the row';
+      const stake = f.sharesAfter != null
+        ? `now holds ${f.sharesAfter.toLocaleString()} sh${f.pctAfter != null ? ` (${f.pctAfter}% of that share class${f.position ? ', ' + f.position : ''})` : ''}`
+        : null;
+      const when = `dealt ${dm(f.date)}, filed ${dm(f.filed)}${f.filedLagDays != null ? ` (${f.filedLagDays}d)` : ''}`;
+      push({ id, date: f.filed || f.date, ...(usdEq != null ? { usd: Math.round(usdEq) } : {}),
+        severity: sev, family: 'insider', ticker: f.code, issuer: f.name || f.yf,
+        tags: [hkTag(f.code), 'HKEX', f.role || 'unclassified-form'],
+        headline: verb
+          ? `${f.yf} · ${f.filer || 'a filer'} (${roleLabel}) ${verb} ${size}`
+          : `${f.yf} · ${f.filer || 'a filer'} (${roleLabel}) · NOT A TRADE · HKEX code ${f.reason || '?'}`,
+        detail: [
+          f.sharesInvolved != null ? `${f.sharesInvolved.toLocaleString()} sh${f.avgPrice != null ? ` at ${cur} ${f.avgPrice}` : ' · no price on the notice'}` : 'no share figure on the notice',
+          sgd != null ? `≈ ${sg(sgd)}` : null,
+          stake, when,
+          verb ? `HKEX code ${f.reason}: ${why}` : `HKEX's own wording: ${why} — a code that is neither a purchase nor a sale, so no trade is claimed`,
+          tier && tier.why ? `why ${sev}: ${tier.why}` : null,
+        ].filter(Boolean).join(' · '),
+        url: f.url || null, clearsWhen: 'read' });
+      nhk.rows++;
+      if (sev === 'Notable') nhk.notable++;
+    }
+  }
   // ── write, append-only ────────────────────────────────────────────────────
   const alerts = out.concat(prior.alerts).sort((a, b) => (b.date || '').localeCompare(a.date || '') || (b.at || '').localeCompare(a.at || '')).slice(0, policy.retention.alertsMax);
   fs.writeFileSync(D('alerts.json'), JSON.stringify({ generatedAt: new Date().toISOString(), policyVersion: policy.version, meta: { evaluated: [...evaluated].slice(-8000) }, alerts }, null, 1) + '\n');
@@ -217,4 +306,5 @@ const out = []; const push = a => { if (existing.has(a.id)) return; if (a.event 
   console.log(`alerts.json: +${out.length} (${n.length} Notable) · ${alerts.length} total · evaluated ${evaluated.size} filings`);
   n.slice(0, 8).forEach(a => console.log(`  ! ${a.date} ${a.headline} [${a.tags.join(' ')}]`));
   if (F13 && PF) console.log(`  13F: +${n13.filing} filing · +${n13.hit} book/watch hit · +${n13.consensus} consensus (scan checked ${(F13.scan && F13.scan.checkedAt) || 'never'})`);
+  if (HK && PH) console.log(`  HKEX: +${nhk.rows} notice(s) (${nhk.notable} Notable) of ${(HK.filings || []).length} retained · ${(HK.universe || []).length} code(s) (scan checked ${(HK.scan && HK.scan.checkedAt) || 'never'})`);
 })();

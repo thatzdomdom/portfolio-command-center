@@ -332,7 +332,7 @@ else {
     else if (!mismatches.length) ok(`prices: ${matched}/${checked} asserted prices reconcile against the spine`);
     else {
       mismatches.slice(0, 6).forEach(x =>
-        fail('prices', `${x.where} asserts ${x.sym} at ${x.claimed}, which matches no traded close/high/low (recent closes: ${x.near.join(', ')})`));
+        fail('prices', `${x.where} asserts ${x.sym} at ${x.claimed}, which matches no traded close/high/low (recent closes: ${x.near.map(v => +Number(v).toFixed(4)).join(', ')})`));
       if (mismatches.length > 6) fail('prices', `…and ${mismatches.length - 6} more unreconciled price claim(s)`);
     }
     }
@@ -509,6 +509,58 @@ else {
       if (integ.length > 6) warn('13f.json', `…and ${integ.length - 6} more units cross-check disagreement(s)`);
     }
   } catch (e) { warn('13f.json', `PHASE 6 check did not run: ${String((e && e.message) || e).slice(0, 120)}`); }
+}
+
+// ── PHASE 7: HKEX disclosure of interests ──────────────────────────────────
+// (added 19 Sep 2026) scripts/hkex-di.js (GitHub Actions, 06:45 SGT) reads di.hkex.com.hk's notices
+// table for the book's HK codes into data/hkex.json; alerts.js judges it against policy.hkex.
+//
+// LIVENESS IS JUDGED ON THE SCAN, NEVER ON THE ROW COUNT. This feed is genuinely quiet: across all
+// three HK names over the 90 days to 19 Sep 2026 there was exactly one purchase and one sale, and a
+// normal 7-day window returns nothing at all. "No filings" is therefore the usual healthy answer,
+// and a test on filings.length would declare a working feed dead most weeks — the 8–11 Sep Form 4
+// lesson pointing the other way. What must not happen is the scan silently stopping, or quietly
+// covering fewer codes than the book holds, and both of those are visible in the scan log.
+// Wrapped: a bug in this block warns; it is never, on its own, the reason the 07:02 publish stops.
+{
+  try {
+    const HK = J('hkex.json');
+    if (!HK) {
+      if (fs.existsSync(path.join(D, 'hkex.json'))) fail('hkex.json', 'unparseable — the HK insider rows, and every page that reads them, are broken this run');
+      else warn('hkex.json', 'absent — hkex-di.js has not run (GitHub Actions)');
+    } else {
+      const sgtOf = iso => { const t = Date.parse(iso); return isNaN(t) ? null : new Date(t).toLocaleDateString('en-CA', { timeZone: 'Asia/Singapore' }); };
+      const scans = Array.isArray(HK.scans) ? HK.scans : [];
+      const lastOk = scans.filter(s => s && !s.error).slice(-1)[0] || null;
+      const when = (lastOk && sgtOf(lastOk.at)) || (HK.scan && sgtOf(HK.scan.checkedAt)) || null;
+      const age = when ? daysAgo(when) : null;
+      const filings = (HK.filings || []).length;
+      const newest = (HK.filings || []).map(f => f && f.filed).filter(Boolean).sort().pop() || null;
+      if (age == null) fail('hkex.json', 'no successful scan recorded — a live HKEX feed cannot be told from a dead one, and this one is quiet by nature');
+      else if (age > 4) fail('hkex.json', `last successful scan is ${age} days old (${when}) — the HKEX disclosure feed is DEAD, not quiet`);
+      else ok(`hkex: last scan ${when} (${age === 0 ? 'today' : age + 'd ago'}) · ${(HK.universe || []).length} code(s) · ${filings} notice(s) retained · newest filed ${newest || 'none in the window'}`);
+      const errs = (HK.scan && Array.isArray(HK.scan.errors)) ? HK.scan.errors : [];
+      if (errs.length) warn('hkex.json', `last scan recorded ${errs.length} error(s) — ${errs.slice(0, 3).map(e => `${e.code || '?'} ${e.stage || ''}: ${String(e.message || '').slice(0, 60)}`).join('; ')}`);
+      if (HK.bookSource === 'none') warn('hkex.json', "bookSource 'none' — the scan found neither book.json nor index.html holdings, so its universe is whatever the watchlist gave it, not the book");
+      // The book is the authority on which codes must be covered. On GitHub Actions book.json is not
+      // present (it is private); there the universe came from index.html and this sub-check is skipped
+      // rather than guessed at.
+      const bk = J('book.json');
+      if (bk && Array.isArray(bk.holdings) && lastOk) {
+        const codeOf = yf => { const m = /^(\d{3,5})\.HK$/i.exec(String(yf || '').trim()); return m ? (m[1].length < 4 ? m[1].padStart(4, '0') : m[1]) : null; };
+        const bookCodes = [...new Set(bk.holdings.map(h => codeOf(h.yf)).filter(Boolean))].sort();
+        const scanned = new Set((HK.universe || []).map(u => u && u.code).filter(Boolean));
+        const missing = bookCodes.filter(c => !scanned.has(c));
+        if ((lastOk.codes || 0) < bookCodes.length) {
+          warn('hkex.json', `the last scan covered ${lastOk.codes || 0} code(s) but the book holds ${bookCodes.length} HK line(s)${missing.length ? ` — ${missing.join(', ')} never scanned` : ' — the scan log and the universe disagree'}`);
+        } else if (missing.length) {
+          warn('hkex.json', `the book holds ${missing.join(', ')} but the scanned universe does not — ${missing.join(', ')} never scanned`);
+        } else if (bookCodes.length) {
+          ok(`hkex: all ${bookCodes.length} HK book line(s) covered (${bookCodes.join(', ')})`);
+        }
+      }
+    }
+  } catch (e) { warn('hkex.json', `PHASE 7 check did not run: ${String((e && e.message) || e).slice(0, 120)}`); }
 }
 
 // ── report ─────────────────────────────────────────────────────────────────

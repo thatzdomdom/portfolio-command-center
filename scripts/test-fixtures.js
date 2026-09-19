@@ -87,7 +87,11 @@ function makeEnv(sb) {
   delete env.TZ; delete env.NODE_OPTIONS;
   env.HOME = sb.home;
   env.PATH = sb.stub + ':' + path.dirname(process.execPath) + ':' + (process.env.PATH || '');
-  Object.assign(env, { GIT_AUTHOR_NAME: 'fixture', GIT_AUTHOR_EMAIL: 'fixture@example.invalid', GIT_COMMITTER_NAME: 'fixture',
+  // /usr/bin/git is Apple's xcrun shim and refuses every command until the Xcode licence is accepted.
+  // The sandbox runs its own `git init`, so it needs the same escape hatch the pipeline got on 19 Sep:
+  // aim DEVELOPER_DIR at the Command Line Tools, which need no licence and no password.
+  Object.assign(env, { DEVELOPER_DIR: process.env.DEVELOPER_DIR || '/Library/Developer/CommandLineTools',
+    GIT_AUTHOR_NAME: 'fixture', GIT_AUTHOR_EMAIL: 'fixture@example.invalid', GIT_COMMITTER_NAME: 'fixture',
     GIT_COMMITTER_EMAIL: 'fixture@example.invalid', GIT_CONFIG_GLOBAL: '/dev/null', GIT_CONFIG_NOSYSTEM: '1' });
   return env;
 }

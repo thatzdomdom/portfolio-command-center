@@ -48,6 +48,19 @@ const SPEC = {
   // never the scan time — a quarterly table ages as quarterly however often it is re-checked.
   '13f.json':         { as: j => Object.values(j.funds || {}).map(f => f.latest && f.latest.period).filter(Boolean).sort().pop(), cadence: 'quarterly', count: j => Object.values(j.funds || {}).filter(f => f.latest && f.latest.period).length, source: '13f-scan.js (SEC EDGAR 13F filings; GitHub Actions; count = funds with a table)' },
   'funds.json':       { as: j => j.asOf, cadence: 'manual', count: j => (j.funds || []).filter(f => f.track).length, source: 'owner-curated 13F filer list (count = tracked)' },
+  // Phase 7 (19 Sep 2026): HKEX disclosure of interests. asOf is the last SUCCESSFUL SCAN, not the
+  // newest notice, and this is the one place in this table where that is the honest answer. The HK
+  // sleeve files almost nothing — Tencent lodged ONE notice in the 90 days to 19 Sep 2026 — so a
+  // daily cadence measured against the newest filing would read STALE on most mornings, turn
+  // today.html's pipeline block red and move it to the top of the page for a feed that is working
+  // perfectly. What refreshes daily here is the CHECK, so the check is what is stamped, exactly as
+  // .validation.json stamps checkedOn. The same rule is why validate-all's PHASE 7 judges liveness
+  // on scan.checkedAt and never on filings.length. count is the notices retained, and zero is a
+  // normal week, not a red.
+  'hkex.json':        { as: j => { const s = (j.scans || []).filter(x => x && !x.error).slice(-1)[0], t = Date.parse((s && s.at) || (j.scan && j.scan.checkedAt) || '');
+                          return isNaN(t) ? null : new Date(t).toLocaleDateString('en-CA', { timeZone: 'Asia/Singapore' }); },
+                        cadence: 'daily', count: j => (j.filings || []).length,
+                        source: 'hkex-di.js (HKEX Disclosure of Interests, keyless; GitHub Actions; asOf = last successful scan, count = notices retained)' },
 };
 
 const files = {};

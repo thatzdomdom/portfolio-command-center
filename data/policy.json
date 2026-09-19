@@ -1,5 +1,5 @@
 {
- "version": "2026-09-14",
+ "version": "2026-09-20",
  "note": "Severity is a function of EVIDENCE CLASS first and size second. Sells and congress never rise above Log. Push carries a prescribed action or it is not push; insider signals never push — a cluster buy's edge plays out over 6-12 months. Thresholds in USD unless stated. Edit here, not in code.",
  "insider": {
   "excludeCodes": [
@@ -138,6 +138,25 @@
    "why": "the first scan (13 Sep 2026) ingested every fund’s latest quarter weeks after it was filed (13f.json events[].bootstrap). A mid-August filing announced as news on 14 Sep is an old table under a fresh date — logged in the Inbox, never the brief"
   },
   "note": "13F is quarterly and 45 days late by law — never a push, never the One Action."
+ },
+ "hkex": {
+  "directorBuy": {
+   "severity": "Notable",
+   "why": "a director or chief executive buying their own listed company, on a name you hold"
+  },
+  "directorSell": {
+   "severity": "Log",
+   "why": "sells carry little return information — the same rule as the US Form 4 feed"
+  },
+  "substantialShareholder": {
+   "severity": "Log",
+   "minPctChange": 1,
+   "why": "a 5% holder crossing is usually index or custodian mechanics"
+  },
+  "other": {
+   "severity": "Log"
+  },
+  "note": "HKEX disclosures are filed within 3 business days and carry an average price, so they are fresher than a 13F and more specific than a crossing. Every HK name here is already in the book, so there is no market-wide tier."
  },
  "channels": {
   "Notable": [

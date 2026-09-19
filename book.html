@@ -502,9 +502,9 @@ window.BOOK = (function () {
     var fl = row.filings || [];
     if (!fl.length) {
       ul.appendChild(E('li', { class: 'soft', text:
-        'No filings joined to this line. EDGAR is the only source here: the US holdings are ETFs and '
-        + 'file no Form 4, and HKEX/SGX insider coverage is not built. Absence of a filing is not '
-        + 'evidence of nothing happening.' }));
+        'No filings joined to this line. The US holdings are ETFs and file no Form 4. HKEX: covered since 19 Sep 2026 — 0700, 0981 and 1810 are read daily from HKEX’s own disclosure-of-interests notices and any that exist appear in this list, with the filing linked on the Inbox row; a week with no HK notice is normal. '
+        + 'SGX, 31 lines: no mechanical route. The exchange’s announcements API has required authentication since Sep 2026, and a scraped key or a third-party mirror is not acceptable here. Subscribe to SGXNet’s own email alerts and the reply reader can parse them (decision 7). '
+        + 'Absence of a filing is not evidence of nothing happening.' }));
     } else {
       fl.slice(0, 8).forEach(function (f) {
         var li = E('li', {}, [E('span', { class: 'tk', text: f.date + ' · ' + f.kind + ' · ' })]);

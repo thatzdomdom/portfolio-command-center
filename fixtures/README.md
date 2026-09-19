@@ -31,6 +31,20 @@ Every assertion targets a specific `problems[]` / `passed[]` / `warnings[]` line
 stdout line; an exit code alone is never enough. No Date shim: fixtures compute expectations from
 the real clock (05 derives the 13F quarter labels, 16 the cutover streak).
 
+Stored notices: `fixtures/data/hkex/` holds three public HKEX Disclosure of Interests pages for `20-hkex`,
+saved verbatim on 19 Sep 2026 from `di.hkex.com.hk` (keyless, no login, no terms gate) — the exact URLs
+`scripts/hkex-di.js` builds:
+
+| file | sha256 | what it proves |
+|------|--------|----------------|
+| `notices-1810-90d.html` | `eaf1cbc5c3ad2eea6cb2b7b16772398f0f5465b76af4339e8d9f467ec2177192` | Xiaomi, 44 records over 23 Jun–20 Sep 2026: the only priced buy (CS20260903E00040, code 1001) and sell (CS20260829E00026, code 1201) in the whole HK sleeve, a crossing with no bought/sold figure (CS20260723E00550), the (L)/(S) legs, and the Lei Jun / Lin Bin class-conversion pairs |
+| `notices-0981-90d.html` | `466edad761cd9f158a165fdbaaea37fe073aa2dbd5444346994163b0fa2cbf60` | SMIC, 2 records, both code 1213 "any other event": one with no figures at all, one carrying 9,000,000 sh at HKD 79.70 that is still not a sale |
+| `notices-0700-90d.html` | `7c94c15a624621801a27236476c24d2e6463e00dd1cf825a2d6a86c6707555a7` | Tencent, ONE notice in ninety days — the quiet-name case: a valid table with almost nothing in it is normal, not a dead feed |
+
+`20-hkex` also rebuilds `data/hkex.json` in its sandbox from those pages before running `alerts.js` and
+`validate-all.js`, so its assertions do not move when the live file rolls; the one synthetic row it adds
+(a director buy, which the real 90-day window does not contain) is named `FIXTURE-20`.
+
 Stored filings: `fixtures/data/13f/` holds five public EDGAR files for `19-13f` — Berkshire Hathaway and
 Baupost 2026 Q2 cover pages and information tables, and Pershing Square's 13F-NT that names CIK 2026053.
 They were copied from what 13f-scan.js fetched on 13 Sep 2026; no fixture ever fetches. The runner loads

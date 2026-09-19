@@ -545,6 +545,18 @@
         : 'no 13D/13G or 13F line since ' + (since ? 'the ' + dshort(since) + ' brief' : 'the last brief')));
     }
 
+    // The coverage line (phase 7, 19 Sep 2026). It reads as boilerplate on a quiet morning, which is
+    // exactly why it is here: "no Notable event" above means nothing unless the reader knows which
+    // exchanges were actually looked at. HKEX is now read daily; SGX has no mechanical route at all
+    // and saying so every morning is cheaper than the owner assuming silence means nothing happened.
+    kids.push(line('coverage', 'US holdings are ETFs and file no Form 4 — market-wide and watchlist '
+      + 'coverage is where US exposure is seen. HKEX: covered since 19 Sep 2026 — 0700, 0981 and 1810 '
+      + 'are read daily from HKEX’s own disclosure-of-interests notices, and a week with no HK '
+      + 'notice is normal. SGX, 31 lines: no mechanical route. The exchange’s announcements API '
+      + 'has required authentication since Sep 2026, and a scraped key or a third-party mirror is not '
+      + 'acceptable here. Subscribe to SGXNet’s own email alerts and the reply reader can parse '
+      + 'them (decision 7).'));
+
     kids.push(el('div', {}, [
       el('a', { class: 'tap', href: deep('inbox', null), text: 'Open the Inbox →' })
     ]));
