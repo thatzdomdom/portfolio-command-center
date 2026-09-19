@@ -358,9 +358,10 @@ const bullets = a => a.map(x => `\u2022 ${x}`).join('\n');
 // research, it must not say "Morning Brief".
 // Phase 4: `[ACTION] ` leads the fresh subject only on a push day (a crossing, or the stressed margin
 // call under 25% away) \u2014 a standing condition does not shout. The degraded subject is unchanged.
+const sitePublish = (() => { try { const r = ndjson('.publish-history.ndjson').filter(x => x.status && x.status !== 'dry-run').pop(); return r && r.status === 'red' ? r : null; } catch (_) { return null; } })();
 const SUBJ = isStale
   ? `[DEGRADED] \u{1F534} NO RESEARCH \u2014 day ${outageDays} \u2014 brief is ${briefDay || 'old'} data, not ${today}`
-  : `${actionPush ? '[ACTION] ' : ''}\u{1F4CA} Portfolio Morning Brief \u2014 ${today}`;
+  : `${sitePublish ? '[SITE STALE] ' : ''}${actionPush ? '[ACTION] ' : ''}\u{1F4CA} Portfolio Morning Brief \u2014 ${today}`;
 const fullText = [
   staleBanner + `PORTFOLIO MORNING BRIEF — ${today}`,
   `Data refreshed: ${stamp}`,

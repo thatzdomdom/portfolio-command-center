@@ -5,6 +5,14 @@ LOG="$HOME/Library/Logs/portfolio-research.log"
 exec >>"$LOG" 2>&1
 echo "=== $(date '+%F %T') research start ==="
 cd /Users/dominiczhao/portfolio-dashboard || exit 1
+
+# /usr/bin/git is Apple's xcrun shim. After an Xcode update it refuses every command with "You have not
+# agreed to the Xcode license agreements" until someone runs sudo xcodebuild -license. That silently broke
+# `git pull` here from 16 Sep 2026: the Mac kept running on local data while GitHub's scans committed
+# fresh signals.json and 13f.json, the freshness checks called both feeds DEAD, and publish.js blocked for
+# four days. Pointing DEVELOPER_DIR at the Command Line Tools needs no licence and no password.
+export DEVELOPER_DIR=/Library/Developer/CommandLineTools
+
 # Phase 2: GitHub Actions commits data/signals.json (the market-wide Form 4 scan) at 06:30 and
 # 11:00 SGT. Pull it before anything reads data/, so alerts.js judges this morning's facts.
 git pull --rebase --autostash -q origin main 2>/dev/null || echo "$(date '+%F %T') git pull failed — continuing with local data"   # --autostash: the tree is dirty with pipeline scratch files after any red publish

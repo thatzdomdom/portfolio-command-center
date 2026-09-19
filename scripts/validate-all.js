@@ -309,7 +309,8 @@ else {
           // when the claim is explicitly approximate or a range; exact assertions keep 0.25%.
           const after = text.slice(m.index + m[0].length, m.index + m[0].length + 8);
           const approx = /(toward|towards|about|near|around|roughly|circa|~)\s*(?:US\$|HK\$|S\$|\$)?\s*[\d,]+\.?\d*$/i.test(m[0]) || /^\s*[-–]\s*\d/.test(after);
-          const tol = approx ? 0.01 : 0.0025;
+          const rounded = !/\d\.\d/.test(m[0]);   // "at 107" is a rounded claim; "at 107.63" is an assertion
+          const tol = (approx || rounded) ? 0.01 : 0.0025;
           const hit = inst.bars.some(b =>
             Math.abs(b.c - claimed) <= Math.max(0.011, b.c * tol) ||
             Math.abs(b.h - claimed) <= Math.max(0.011, b.h * tol) ||
