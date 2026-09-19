@@ -1,0 +1,223 @@
+{
+ "updated": "2026-09-19",
+ "retrievedOn": "2026-09-19",
+ "note": "Saturday pre-Asia-open run (2026-09-19 SGT, ~07:00), no market open until Monday. Korea refreshed to the 18 Sep KRX print -- foreign investors flipped to net buying (+₩977.3bn), ending a 7-session selling streak, on a semiconductor-led rally (Samsung Electronics +3.37%, SK Hynix +6.42%). Hong Kong Southbound refreshed to the 18 Sep print, a 10th straight day of mainland net buying, led by Baidu-W. China A-share margin balance refreshed to the 17 Sep print -- still rising but decelerating sharply. US EPFR/BofA proxy refreshed to the week-ended-16-Sep Flow Show (equity inflows accelerated, money-market outflows widened); the ICI long-term mutual fund retail proxy has no newer print (next due ~23 Sep) and carries forward from week ended 9 Sep. Japan carries forward unchanged -- JPX's next weekly release (week ended 18 Sep) is not due until ~24 Sep. Singapore carries forward unchanged -- no new SGX Research update found since the 16 Sep read.",
+ "markets": [
+  {
+   "market": "Japan (TSE)",
+   "available": true,
+   "cadence": "weekly, published by JPX ~4 business days after week close (typically Thursday/Wednesday); trade press (Kabutan/Nikkei) recaps same day",
+   "latestPeriod": "week ended 11 September 2026 (Mon 7 Sep - Fri 11 Sep)",
+   "asOf": "2026-09-17",
+   "flows": [
+    {
+     "investorType": "Foreign institutional",
+     "direction": "outflow",
+     "amount": "-¥303.6bn",
+     "unit": "JPY bn",
+     "period": "week ended 11 Sep 2026",
+     "isProxy": false,
+     "note": "Net sold after buying the prior two weeks; TSE+Nagoya cash+margin combined"
+    },
+    {
+     "investorType": "Trust banks",
+     "direction": "outflow",
+     "amount": "-¥550.6bn",
+     "unit": "JPY bn",
+     "period": "week ended 11 Sep 2026",
+     "isProxy": false,
+     "note": "Proxy for domestic pension/institutional trading desks"
+    },
+    {
+     "investorType": "Retail (individuals)",
+     "direction": "inflow",
+     "amount": "+¥449.1bn",
+     "unit": "JPY bn",
+     "period": "week ended 11 Sep 2026",
+     "isProxy": false,
+     "note": "Cash +¥74.7bn, margin +¥374.3bn; 3rd straight week of net buying"
+    }
+   ],
+   "trend": "Prior week (ended 5 Sep) foreign investors bought +¥131.4bn and individuals bought +¥165.7bn while trust banks sold -¥422.0bn; the week ended 11 Sep saw foreign investors flip to selling (-¥303.6bn), trust banks extend selling, and individuals accelerate buying (margin-driven). No newer weekly print has been published since.",
+   "interpretation": "Foreign and trust-bank selling against retail margin buying is a classic dip-buying-into-institutional-distribution pattern; it signals fading (not collapsing) foreign risk appetite for Japan equities. This now reads somewhat stale next to Korea's 18 Sep flip back to foreign buying -- worth confirming whether Japan's next weekly print (week ended 18 Sep, due ~24 Sep) shows a similar reversal.",
+   "sources": [
+    "https://s.kabutan.jp/news/n202609170889/"
+   ],
+   "dataGaps": [
+    "No new JPX weekly release since week ended 11 Sep -- next release (week ended 18 Sep) not expected until ~24 Sep (4 business days after week close); carried forward unchanged this run",
+    "JPX's own site returned 403 to direct fetch; relying on secondary (Kabutan) recap which itemizes only foreign/trust-bank/individual categories, not the full investor-type breakdown",
+    "Weekly cadence only -- no daily investor-type split published"
+   ]
+  },
+  {
+   "market": "South Korea (KOSPI)",
+   "available": true,
+   "cadence": "daily, published same evening after close via KRX/press",
+   "latestPeriod": "18 September 2026 (single session)",
+   "asOf": "2026-09-18",
+   "flows": [
+    {
+     "investorType": "Foreign institutional",
+     "direction": "inflow",
+     "amount": "+₩977.3bn",
+     "unit": "KRW bn",
+     "period": "18 Sep 2026",
+     "isProxy": false,
+     "note": "Ended a 7-consecutive-session net-selling streak; includes NXT alternative trading system volumes"
+    },
+    {
+     "investorType": "Domestic institutional",
+     "direction": "inflow",
+     "amount": "+₩1,716.8bn",
+     "unit": "KRW bn",
+     "period": "18 Sep 2026",
+     "isProxy": false,
+     "note": "Financial investment firms led buying (+₩1,403.3bn); investment trusts +₩156.3bn; pension funds a small net seller (-₩18.8bn)"
+    },
+    {
+     "investorType": "Retail (individuals)",
+     "direction": "outflow",
+     "amount": "-₩4,371.9bn",
+     "unit": "KRW bn",
+     "period": "18 Sep 2026",
+     "isProxy": false,
+     "note": "Profit-taking into the sharp rally"
+    }
+   ],
+   "trend": "Foreigners sold for 7 straight sessions through 17 Sep, then flipped decisively to net buying on 18 Sep as KOSPI jumped 2.66% to a record 6,894.23, led by semiconductors (Samsung Electronics +3.37%, SK Hynix +6.42%). Domestic institutions bought alongside foreigners while retail took profit into the surge.",
+   "interpretation": "The foreign flip to buying, concentrated in chip megacaps and paired with institutional buying against retail selling, is a bullish reversal of the prior week's regional de-risking pattern -- it decouples Korea from Japan's still-stale (week-old) foreign-selling read and is a mildly positive read-through for the owner's North Asia tech exposure, though a single session is not yet a trend.",
+   "sources": [
+    "https://www.newspim.com/news/view/20260918000748"
+   ],
+   "dataGaps": [
+    "KRX daily investor-type data does not separately break out retail vs. proprietary/pension components within 'institutions'"
+   ]
+  },
+  {
+   "market": "Hong Kong",
+   "available": true,
+   "cadence": "daily, published same day after close via HKEX Stock Connect data and financial press",
+   "latestPeriod": "18 September 2026 (single session)",
+   "asOf": "2026-09-18",
+   "flows": [
+    {
+     "investorType": "Southbound (mainland)",
+     "direction": "inflow",
+     "amount": "+HK$1.193bn",
+     "unit": "HKD bn",
+     "period": "18 Sep 2026",
+     "isProxy": false,
+     "note": "Shanghai Connect leg +HK$0.017bn, Shenzhen Connect leg +HK$1.176bn; 10th consecutive day of net Southbound buying"
+    }
+   ],
+   "trend": "Continues the run of net Southbound buying (10th straight day). Baidu-W led net buying (+HK$4.261bn), followed by Zhipu AI (+HK$0.854bn), Changfei Fibre-Optic Cable (+HK$0.564bn), SMIC (+HK$0.528bn) and Hua Hong Semiconductor (+HK$0.479bn); Tracker Fund of Hong Kong led net selling (-HK$2.265bn), with Alibaba-W (-HK$1.124bn) and Xiaomi-W (-HK$0.552bn) also net sold. Hang Seng Index rose 0.60%.",
+   "interpretation": "Sustained mainland buying via Southbound Connect, now a 10-day streak and rotating from Alibaba into Baidu, AI names and chip foundries (SMIC, Hua Hong), remains directly supportive of the owner's HK tech book, though the Alibaba/Tracker-Fund selling alongside broad-based AI/semi buying again points to stock-specific rotation rather than indiscriminate index-wide conviction.",
+   "sources": [
+    "https://finance.ifeng.com/c/8wWnBzJAx3H"
+   ],
+   "dataGaps": [
+    "No official institutional-vs-retail split exists for Hong Kong or Southbound flows -- only aggregate net buy/sell by Connect leg is disclosed"
+   ]
+  },
+  {
+   "market": "China (A-shares)",
+   "available": true,
+   "cadence": "daily, published next morning by exchanges (SSE/SZSE/BSE) and aggregated by data providers",
+   "latestPeriod": "17 September 2026 (session close)",
+   "asOf": "2026-09-18",
+   "flows": [
+    {
+     "investorType": "Retail (individuals) — margin balance proxy",
+     "direction": "inflow",
+     "amount": "+¥2.30bn",
+     "unit": "CNY bn",
+     "period": "17 Sep 2026 (change vs. prior session)",
+     "isProxy": true,
+     "note": "Combined margin financing + securities lending balance rose to ¥2,639.10bn total (2.69% of A-share float market cap); daily margin trading turnover ¥1,630.35bn"
+    }
+   ],
+   "trend": "Margin balance growth decelerated sharply -- +¥2.30bn on 17 Sep versus +¥9.33bn the prior session -- though the balance is still net rising, suggesting leveraged retail risk appetite is cooling off its September highs rather than reversing outright.",
+   "interpretation": "A still-positive but visibly slowing margin balance suggests domestic retail leverage-taking in A-shares is losing some momentum, a modest caution flag (via sentiment spillover) for the owner's HK tech names that also attract mainland Southbound flows -- this is a leverage proxy, not a direct flow measure.",
+   "sources": [
+    "http://stock.10jqka.com.cn/20260918/c680043136.shtml"
+   ],
+   "dataGaps": [
+    "Margin/securities-lending balance is a leverage-level proxy, not a direct net-buy/sell flow figure",
+    "Northbound (foreign) real-time daily net-buy disclosure via Stock Connect remains suspended since August 2024"
+   ]
+  },
+  {
+   "market": "Singapore (SGX)",
+   "available": true,
+   "cadence": "SGX Research publishes thematic/weekly institutional-vs-retail net fund flow updates on an ad hoc basis (roughly weekly to biweekly)",
+   "latestPeriod": "8 trading sessions, 4-16 September 2026 (since STI record high of 5,828.5 on 4 Sep)",
+   "asOf": "2026-09-16",
+   "flows": [
+    {
+     "investorType": "Retail (individuals)",
+     "direction": "inflow",
+     "amount": "+S$888m",
+     "unit": "SGD m",
+     "period": "4-16 Sep 2026 (8 sessions)",
+     "isProxy": false,
+     "note": "Lifted 2026 YTD cumulative net retail inflow from S$3.13bn to S$4.02bn; concentrated in DBS, OCBC and SGX itself (~2/3 of net retail buying), plus REITs and select mid-caps"
+    },
+    {
+     "investorType": "Domestic/Foreign institutional (combined)",
+     "direction": "outflow",
+     "amount": "-S$163m (widening)",
+     "unit": "SGD m",
+     "period": "4-16 Sep 2026 (8 sessions)",
+     "isProxy": false,
+     "note": "Institutional net selling widened over the same 8-session window"
+    }
+   ],
+   "trend": "No newer SGX Research update found as of this run (19 Sep) -- unchanged from the 4-16 Sep read: retail has been net buying aggressively into the STI's record run (S$888m over 8 sessions) even as institutions net sell into strength.",
+   "interpretation": "Directly relevant to the owner's largest exposure: retail is chasing the STI's record high via banks, SGX itself and REITs -- the same type of names likely held -- while institutions distribute into strength, a caution flag that the rally's marginal buyer has shifted from 'smart money' to retail, raising the risk of a sharper pullback if retail buying fades.",
+   "sources": [
+    "https://www.businesstoday.com.my/2026/09/17/retail-investors-buy-s888-million-of-singapore-stocks-after-sti-record/"
+   ],
+   "dataGaps": [
+    "Carried forward unchanged this run -- no new SGX Research thematic update was found published since the 16 Sep read; sgx.com's own research pages remain JS-gated to direct fetch",
+    "No further breakdown of the institutional side (foreign vs domestic)"
+   ]
+  },
+  {
+   "market": "United States",
+   "available": true,
+   "cadence": "ICI: weekly, week ends Wednesday, released following Wednesday (~1 week lag); BofA Flow Show/EPFR: weekly, released Thursday/Friday with ~1-2 day lag",
+   "latestPeriod": "week ended 9 September 2026 (ICI, carried forward); week ended 16 September 2026 (BofA/EPFR, fresh)",
+   "asOf": "2026-09-18",
+   "flows": [
+    {
+     "investorType": "Retail (individuals) — long-term mutual fund proxy",
+     "direction": "outflow",
+     "amount": "-$9.77bn",
+     "unit": "USD bn",
+     "period": "week ended 9 Sep 2026",
+     "isProxy": true,
+     "note": "ICI estimated long-term mutual fund flows; equity funds -$9.14bn, hybrid -$1.29bn, bond funds +$0.662bn; combined with ETF net issuance the total was +$1.56bn. Carried forward -- no newer ICI long-term-fund print yet (next due ~23 Sep for week ended 16 Sep)"
+    },
+    {
+     "investorType": "Domestic/Foreign institutional (combined) — EPFR/BofA proxy",
+     "direction": "inflow",
+     "amount": "+$79.3bn equities / -$75.9bn money market",
+     "unit": "USD bn",
+     "period": "week ended 16 Sep 2026 (BofA Flow Show)",
+     "isProxy": true,
+     "note": "US equities +$63.8bn (largest in 3 months); Japan +$1.4bn (4th straight week); EM equities +$1.4bn (2nd straight week); Europe -$0.6bn; Treasuries +$7.3bn (12-wk streak); EM debt +$3bn (7-wk streak); gold +$3.1bn; IG bonds -$1bn (first outflow since April), HY -$2.5bn; money-market outflow was the largest in 9 weeks; crypto funds -$0.8bn (largest outflow in 11 weeks)"
+    }
+   ],
+   "trend": "Fresh BofA Flow Show/EPFR print (week ended 16 Sep, published 17-18 Sep): global and US equity inflows accelerated sharply (US equities' best week in 3 months) even as money-market outflows widened to a 9-week high -- a rotation out of cash into risk assets. The ICI long-term mutual fund retail proxy has not refreshed since week ended 9 Sep and is carried forward unchanged.",
+   "interpretation": "The BofA/EPFR proxy shows institutional-style flows rotating decisively out of cash and into US equities (best week in 3 months) alongside continued EM and Japan equity fund inflows -- a broadly risk-on signal supportive of the owner's global tech/EM-linked exposure, though this remains a proxy (no official US investor-type split exists) and the retail-fund read is now over a week stale.",
+   "sources": [
+    "https://www.ici.org/research/stats/flows",
+    "https://www.investing.com/news/stock-market-news/bofas-hartnett-says-the-run-it-hot-policy-era-is-over-4906811"
+   ],
+   "dataGaps": [
+    "No official US equity investor-type (foreign/domestic/retail) split is published by any exchange or regulator -- ICI and EPFR/BofA are both proxies, not comprehensive measurements",
+    "ICI long-term mutual fund flow figure is carried forward from week ended 9 Sep 2026; next release (week ended 16 Sep) not expected until ~23 Sep"
+   ]
+  }
+ ]
+}

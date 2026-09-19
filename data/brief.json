@@ -1,0 +1,64 @@
+{
+ "date": "2026-09-19T08:15:00+08:00",
+ "coverage": "Saturday catch-up run, 19 Sep 2026 ~08:10-08:20 SGT. No market session today or tomorrow -- next open is SGX 09:00 / HKEX 09:30 SGT Monday 21 Sep. Latest completed sessions remain Friday 18 Sep US/HK/SGX cash close; JP/KR still show Thu 17 Sep in the price feed (late-week bar consolidation lag, not a holiday -- BOJ met and moved markets Friday). This morning's 07:02 SGT automated run already refreshed intel.json, model.json, market.json, news.json and flows-investors.json against Friday's close; this run verified that work is current (no new session has occurred since), cross-checked GLD/SLV/GDX/SILJ directly against Yahoo's live quote endpoint after the deterministic price spine's daily-bar array showed those specific tickers lagging a session behind the indices (bars array gap, not a bad print -- confirmed accurate: GLD $401.17 +0.71%, SLV $59.93 +1.63%, both Fri 18 Sep), and completed the two steps the automated run had not reached: today's track.json model-call snapshot and this brief. Investors.json profiles were last checked 13 Sep (within the at-most-weekly window, nothing changed) and were left untouched.",
+ "tldr": [
+  "The Fed's hawkish 25bp hike to 3.75-4.00% now looks absorbed, not feared: S&P and Nasdaq both closed at records Friday (+0.17%, +0.39%) on a second straight up day, with VIX falling a fifth straight session to 14.81 -- though breadth stayed weak underneath (McClellan -34, only ~31-43% of stocks above key MAs), so it's a narrow rally, not broad conviction.",
+  "The BOJ delivered its expected 25bp hike to 1.25% (highest since 1995) Friday with a softer-than-feared reception -- a 7-2 split vote, yen only -0.45%, and the 10y JGB yield actually fell ~5bp -- removing a near-term carry-unwind overhang for HK tech and broader Asia risk sentiment into Monday's open.",
+  "Silver and gold miners extended their post-FOMC rally for a second straight session (SLV +1.63% to $59.93, GLD +0.71% to $401.17) even as oil reversed sharply (WTI -6.3%, Brent -5.8%) -- the levered silver sleeve (1,777oz, 1.589x leverage, NAV S$10.38M) sits 47% from its margin call but still FAILS the 2-week stress-survivability test, so this remains a real, not free, position.",
+  "Oil's Friday reversal (Saudi pipeline repair de-risking faster than feared) is a genuine divergence from XLE itself, which barely moved (-0.26%) -- watch next week for either an energy-equity catch-down or a crude bounce if Gulf tensions resurface.",
+  "The Trump-Xi summit is now firmly dated Sept 23-25 (leaders meet Sept 24), only 4-6 trading days out -- the next concrete catalyst for FXI/EEM, HK tech and the rare-earth basket (MP, Lynas, JL MAG).",
+  "No new session since Friday's close -- all of Congress, insiders, super-investor and signals data in intel.json is unchanged from this morning's refresh; nothing new to report there today."
+ ],
+ "whatChanged": [
+  "Intel/model/market/news/flows-investors: already refreshed by this morning's 07:02 SGT automated run against Friday 18 Sep closes -- verified current, no new session since, no changes made.",
+  "Track: appended today's (19 Sep) snapshot of all 49 model calls for hit-rate scoring -- the one substantive data step this morning's run had not reached.",
+  "Brief: written fresh for today -- this morning's run stopped after news.json/flows-investors.json and never reached track.json or brief.json, so yesterday's (18 Sep) brief was the last one live until now.",
+  "Price check: GLD/SLV/GDX/SILJ Friday closes cross-verified directly against Yahoo's live quote endpoint after the deterministic price spine's bar history lagged a session for that specific batch of US-listed tickers (indices, HK/SG names and futures all had Friday bars; several individual US ETFs/miners did not) -- confirmed the already-published Friday figures are accurate; flagged as a spine backfill quirk worth a script fix, not a data error.",
+  "Investors.json profiles: last checked 13 Sep 2026, within the at-most-weekly cadence and no disclosure change found then -- left untouched this run per the skill's rule."
+ ],
+ "regime": {
+  "label": "Hawkish Fed hike now settled and absorbed; two-session relief rally + VIX collapse; BOJ hike delivered with a softer-than-feared reception; precious metals and crypto extending gains; oil unwinding its war premium",
+  "riskOn": 0.57,
+  "oneLiner": "Two full sessions of confirming price action -- a second-straight equity up day, a fifth-straight VIX decline, and a benign BOJ reception -- suggest the market has genuinely absorbed last week's hawkish surprises rather than merely bounced once."
+ },
+ "topNews": [
+  {
+   "headline": "BOJ hikes to 1.25%, highest since 1995, board splits 7-2 as yen fails to rally",
+   "impact": "mixed",
+   "actionable": "The softer-than-feared reception (yen only -0.45%, JGB yield down ~5bp) removes a near-term carry-unwind overhang for HK tech and broader Asia risk into Monday's open."
+  },
+  {
+   "headline": "Oil sinks ~6% Friday as Saudi pipeline restoration offsets widening Houthi attacks",
+   "impact": "mixed",
+   "actionable": "A real divergence versus XLE (barely moved, -0.26%) -- worth watching for either an energy-equity catch-down or a crude bounce if Gulf tensions resurface, relevant to the book's energy-adjacent commodity exposure."
+  },
+  {
+   "headline": "Gold and silver hit weekly highs Friday, silver spikes above $67.80 intraday",
+   "impact": "bullish",
+   "actionable": "Directly supportive of the core levered silver/miners sleeve, but the size of the intraday swing versus the $59.93 SLV close is a reminder of how much the 1.6x-levered position can move in a single session."
+  },
+  {
+   "headline": "S&P 500, Dow and Nasdaq rally as markets shrug off Fed's hawkish hike",
+   "impact": "bullish",
+   "actionable": "Broadly supportive for equity beta, but weak breadth underneath (McClellan -34, ~31-43% of stocks above key MAs) argues against reading this as an all-clear for risk generally."
+  },
+  {
+   "headline": "SMIC jumps 4.4% on Goldman upgrade and cloud-AI tailwind while Tencent slides to a multi-week low",
+   "impact": "mixed",
+   "actionable": "A split HK tech tape into the weekend -- SMIC strength is constructive for the semiconductor/China-tech read, but Tencent's slide is a direct read on the book's 0700.HK position."
+  }
+ ],
+ "signals": [
+  "No model call cleared the strict pUp3m>=0.6-or-<=0.4-with-confidence>=0.55 bar this run (closest: SPY pUp3m 0.59/conf 0.57, VLUE pUp3m 0.62/conf 0.52) -- worth noting plainly rather than padding with a marginal call.",
+  "VLUE (value factor) still carries the highest 12-month conviction in the universe (pUp12m 0.65, ev12m +10.5%) as the value-over-growth trend extends on rate-cycle logic; SMH (semis) close behind (pUp12m 0.59, ev12m +12%) on the AI-capex re-rating story -- consider for entry discipline rather than chasing given both are already richly re-rated.",
+  "SLV/GDX/SILJ show a modestly bullish but low-confidence tilt (pUp12m ~0.53, confidence 0.41-0.47) grounded in a political/Fed-credibility hedge reading rather than real-rate math -- a genuinely two-sided view given the position's own leverage already fails its stress-survivability test.",
+  "Congress/retail convergence names carried from this morning's refresh remain live watch items: INTC (Pelosi calls + $36B government stake gain), MU (#1 WSB trending into Sept 30 earnings) and PAAS (silver-mania-driven estimate revisions) -- consider watching into their respective catalysts rather than treating as consensus certainty.",
+  "Rare-earth basket (MP, LYC.AX, UUUU, REXC) holds a modestly positive 12m tilt (ev12m +9-13%) on confirmed DoD-backing and China's entity-list actions -- the Sept 23-25 Trump-Xi summit is the near-term swing factor worth watching for the whole complex."
+ ],
+ "watch": [
+  "Trump-Xi summit, 2026-09-23 to 2026-09-25 (leaders meet 24 Sep) -- key near-term catalyst for FXI/EEM, HK tech and the rare-earth basket.",
+  "Micron (MU) earnings, 2026-09-30 -- binary catalyst for the AI-memory-shortage thesis behind MU's current #1 WSB-trending signal.",
+  "Next FOMC meeting, 2026-10-27/28 -- 16 of 18 dots currently project at least one more 2026 hike.",
+  "Q3 2026 13F filing deadline, 2026-11-16 -- next scheduled refresh of code-owned convictionPlays/superInvestors data in investors.json."
+ ]
+}

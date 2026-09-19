@@ -1,0 +1,802 @@
+{
+ "asOf": "2026-09-18",
+ "generatedAt": "2026-09-19T00:10:21.219Z",
+ "status": "SHADOW — published and diffed daily, no action asked. Shadow started 2026-09-12; ratification is the owner's after 90 days.",
+ "regime": {
+  "status": "default · CIO recommendation · unconfirmed",
+  "asOf": "2026-09-12",
+  "expected": "~13% CAGR at ~-25% max drawdown at the risk-sleeve level (post-mortem); roughly -12% to -15% at net-worth level once property, SSB, T-bill and cash ballast is counted",
+  "notRules": [
+   "P&L-triggered de-grossing (tested: harmful, return/drawdown 0.67 vs 0.80)",
+   "volatility ceiling (tested: harmful; high-vol bucket was the best over 12y)"
+  ],
+  "killSwitch": "a signal is switched off when its live realised slope turns negative — calibration, not P&L"
+ },
+ "policy": {
+  "riskPerNameVolTarget": 0.04,
+  "maxSingleName": 0.1,
+  "maxCluster": 0.2,
+  "clusterMergeCorrelation": 0.75,
+  "lookbackDays": 60
+ },
+ "quotedSleeveSGD": 1936693,
+ "portfolioVolActualPct": 14.5,
+ "portfolioVolTargetPct": 12.4,
+ "cash": {
+  "target": 0.4
+ },
+ "eligible": 7,
+ "universe": 38,
+ "clusters": [
+  {
+   "name": "GDX+SILJ+SLVP+XAG",
+   "members": [
+    "GDX",
+    "SILJ",
+    "SLVP",
+    "XAG"
+   ],
+   "actualWeight": 0.2421,
+   "targetWeight": 0.2,
+   "actualRiskShare": 0.6645,
+   "targetRiskShare": 0.7274,
+   "overCapActual": true
+  },
+  {
+   "name": "0981",
+   "members": [
+    "0981"
+   ],
+   "actualWeight": 0.0603,
+   "targetWeight": 0,
+   "actualRiskShare": 0.0918,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "1810",
+   "members": [
+    "1810"
+   ],
+   "actualWeight": 0.0592,
+   "targetWeight": 0,
+   "actualRiskShare": 0.0646,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "D05",
+   "members": [
+    "D05"
+   ],
+   "actualWeight": 0.1191,
+   "targetWeight": 0.1,
+   "actualRiskShare": 0.0419,
+   "targetRiskShare": 0.0247,
+   "overCapActual": false
+  },
+  {
+   "name": "0700",
+   "members": [
+    "0700"
+   ],
+   "actualWeight": 0.0388,
+   "targetWeight": 0,
+   "actualRiskShare": 0.0274,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "BS6",
+   "members": [
+    "BS6"
+   ],
+   "actualWeight": 0.0267,
+   "targetWeight": 0.1,
+   "actualRiskShare": 0.0233,
+   "targetRiskShare": 0.1854,
+   "overCapActual": false
+  },
+  {
+   "name": "S20",
+   "members": [
+    "S20"
+   ],
+   "actualWeight": 0.0452,
+   "targetWeight": 0,
+   "actualRiskShare": 0.0131,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "5E2",
+   "members": [
+    "5E2"
+   ],
+   "actualWeight": 0.0219,
+   "targetWeight": 0,
+   "actualRiskShare": 0.0122,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "C09",
+   "members": [
+    "C09"
+   ],
+   "actualWeight": 0.0333,
+   "targetWeight": 0,
+   "actualRiskShare": 0.011,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "WJP",
+   "members": [
+    "WJP"
+   ],
+   "actualWeight": 0.0567,
+   "targetWeight": 0.1,
+   "actualRiskShare": 0.0097,
+   "targetRiskShare": 0.0215,
+   "overCapActual": false
+  },
+  {
+   "name": "Z25",
+   "members": [
+    "Z25"
+   ],
+   "actualWeight": 0.0213,
+   "targetWeight": 0,
+   "actualRiskShare": 0.0095,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "U14",
+   "members": [
+    "U14"
+   ],
+   "actualWeight": 0.0234,
+   "targetWeight": 0,
+   "actualRiskShare": 0.0085,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "AU8U",
+   "members": [
+    "AU8U"
+   ],
+   "actualWeight": 0.0211,
+   "targetWeight": 0,
+   "actualRiskShare": 0.0071,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "F03",
+   "members": [
+    "F03"
+   ],
+   "actualWeight": 0.0054,
+   "targetWeight": 0,
+   "actualRiskShare": 0.0045,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "H13",
+   "members": [
+    "H13"
+   ],
+   "actualWeight": 0.0259,
+   "targetWeight": 0,
+   "actualRiskShare": 0.0034,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "W05",
+   "members": [
+    "W05"
+   ],
+   "actualWeight": 0.0278,
+   "targetWeight": 0,
+   "actualRiskShare": 0.003,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "M01",
+   "members": [
+    "M01"
+   ],
+   "actualWeight": 0.0071,
+   "targetWeight": 0,
+   "actualRiskShare": 0.0021,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "F99",
+   "members": [
+    "F99"
+   ],
+   "actualWeight": 0.0723,
+   "targetWeight": 0,
+   "actualRiskShare": 0.002,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "G92",
+   "members": [
+    "G92"
+   ],
+   "actualWeight": 0.0016,
+   "targetWeight": 0,
+   "actualRiskShare": 0.0013,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "K71U",
+   "members": [
+    "K71U"
+   ],
+   "actualWeight": 0.0061,
+   "targetWeight": 0,
+   "actualRiskShare": 0.0012,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "O5RU",
+   "members": [
+    "O5RU"
+   ],
+   "actualWeight": 0.0044,
+   "targetWeight": 0,
+   "actualRiskShare": 0.0007,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "VNM",
+   "members": [
+    "VNM"
+   ],
+   "actualWeight": 0.0052,
+   "targetWeight": 0,
+   "actualRiskShare": 0.0007,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "C38U",
+   "members": [
+    "C38U"
+   ],
+   "actualWeight": 0.0018,
+   "targetWeight": 0,
+   "actualRiskShare": 0.0005,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "S7OU",
+   "members": [
+    "S7OU"
+   ],
+   "actualWeight": 0.0014,
+   "targetWeight": 0,
+   "actualRiskShare": 0.0005,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "H07",
+   "members": [
+    "H07"
+   ],
+   "actualWeight": 0.0049,
+   "targetWeight": 0,
+   "actualRiskShare": 0.0003,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "N2IU",
+   "members": [
+    "N2IU"
+   ],
+   "actualWeight": 0.0037,
+   "targetWeight": 0,
+   "actualRiskShare": 0.0003,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "H18",
+   "members": [
+    "H18"
+   ],
+   "actualWeight": 0.0041,
+   "targetWeight": 0,
+   "actualRiskShare": 0.0001,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "S08",
+   "members": [
+    "S08"
+   ],
+   "actualWeight": 0.0016,
+   "targetWeight": 0,
+   "actualRiskShare": 0.0001,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "BQM",
+   "members": [
+    "BQM"
+   ],
+   "actualWeight": 0.0057,
+   "targetWeight": 0,
+   "actualRiskShare": -0.0002,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "A7RU",
+   "members": [
+    "A7RU"
+   ],
+   "actualWeight": 0.0029,
+   "targetWeight": 0,
+   "actualRiskShare": -0.0003,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "E5H",
+   "members": [
+    "E5H"
+   ],
+   "actualWeight": 0.0032,
+   "targetWeight": 0.1,
+   "actualRiskShare": -0.0003,
+   "targetRiskShare": 0.0409,
+   "overCapActual": false
+  },
+  {
+   "name": "B28",
+   "members": [
+    "B28"
+   ],
+   "actualWeight": 0.0049,
+   "targetWeight": 0,
+   "actualRiskShare": -0.0005,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "Z74",
+   "members": [
+    "Z74"
+   ],
+   "actualWeight": 0.0164,
+   "targetWeight": 0,
+   "actualRiskShare": -0.0006,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "T24",
+   "members": [
+    "T24"
+   ],
+   "actualWeight": 0.0069,
+   "targetWeight": 0,
+   "actualRiskShare": -0.0007,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  },
+  {
+   "name": "B73",
+   "members": [
+    "B73"
+   ],
+   "actualWeight": 0.0174,
+   "targetWeight": 0,
+   "actualRiskShare": -0.0026,
+   "targetRiskShare": 0,
+   "overCapActual": false
+  }
+ ],
+ "diff": [
+  {
+   "t": "E5H",
+   "n": "Golden Agri-Resources",
+   "gateOn": true,
+   "vol60": 24.4,
+   "target": 0.1,
+   "actual": 0.0032,
+   "delta": 0.0968,
+   "riskShareActual": -0.0003
+  },
+  {
+   "t": "XAG",
+   "n": "Silver — unallocated (IBKR)",
+   "gateOn": false,
+   "vol60": 36.2,
+   "target": 0,
+   "actual": 0.0783,
+   "delta": -0.0783,
+   "riskShareActual": 0.186
+  },
+  {
+   "t": "BS6",
+   "n": "YZJ Shipbuilding",
+   "gateOn": true,
+   "vol60": 37,
+   "target": 0.1,
+   "actual": 0.0267,
+   "delta": 0.0733,
+   "riskShareActual": 0.0233
+  },
+  {
+   "t": "F99",
+   "n": "Fraser & Neave",
+   "gateOn": false,
+   "vol60": 15.2,
+   "target": 0,
+   "actual": 0.0723,
+   "delta": -0.0723,
+   "riskShareActual": 0.002
+  },
+  {
+   "t": "0981",
+   "n": "SMIC",
+   "gateOn": false,
+   "vol60": 65.3,
+   "target": 0,
+   "actual": 0.0603,
+   "delta": -0.0603,
+   "riskShareActual": 0.0918
+  },
+  {
+   "t": "1810",
+   "n": "Xiaomi Corp",
+   "gateOn": false,
+   "vol60": 50,
+   "target": 0,
+   "actual": 0.0592,
+   "delta": -0.0592,
+   "riskShareActual": 0.0646
+  },
+  {
+   "t": "S20",
+   "n": "Straits Trading",
+   "gateOn": false,
+   "vol60": 11.6,
+   "target": 0,
+   "actual": 0.0452,
+   "delta": -0.0452,
+   "riskShareActual": 0.0131
+  },
+  {
+   "t": "WJP",
+   "n": "VICOM",
+   "gateOn": true,
+   "vol60": 10.7,
+   "target": 0.1,
+   "actual": 0.0567,
+   "delta": 0.0433,
+   "riskShareActual": 0.0097
+  },
+  {
+   "t": "0700",
+   "n": "Tencent Holdings",
+   "gateOn": false,
+   "vol60": 36.1,
+   "target": 0,
+   "actual": 0.0388,
+   "delta": -0.0388,
+   "riskShareActual": 0.0274
+  },
+  {
+   "t": "C09",
+   "n": "City Developments",
+   "gateOn": false,
+   "vol60": 20.8,
+   "target": 0,
+   "actual": 0.0333,
+   "delta": -0.0333,
+   "riskShareActual": 0.011
+  },
+  {
+   "t": "W05",
+   "n": "Wing Tai Holdings",
+   "gateOn": false,
+   "vol60": 11.4,
+   "target": 0,
+   "actual": 0.0278,
+   "delta": -0.0278,
+   "riskShareActual": 0.003
+  },
+  {
+   "t": "H13",
+   "n": "Ho Bee Land",
+   "gateOn": false,
+   "vol60": 13.9,
+   "target": 0,
+   "actual": 0.0259,
+   "delta": -0.0259,
+   "riskShareActual": 0.0034
+  },
+  {
+   "t": "U14",
+   "n": "UOL Group",
+   "gateOn": false,
+   "vol60": 27.2,
+   "target": 0,
+   "actual": 0.0234,
+   "delta": -0.0234,
+   "riskShareActual": 0.0085
+  },
+  {
+   "t": "5E2",
+   "n": "Seatrium",
+   "gateOn": false,
+   "vol60": 33.3,
+   "target": 0,
+   "actual": 0.0219,
+   "delta": -0.0219,
+   "riskShareActual": 0.0122
+  },
+  {
+   "t": "Z25",
+   "n": "Yanlord Land",
+   "gateOn": false,
+   "vol60": 34.2,
+   "target": 0,
+   "actual": 0.0213,
+   "delta": -0.0213,
+   "riskShareActual": 0.0095
+  },
+  {
+   "t": "AU8U",
+   "n": "CapLand China Trust",
+   "gateOn": false,
+   "vol60": 17.3,
+   "target": 0,
+   "actual": 0.0211,
+   "delta": -0.0211,
+   "riskShareActual": 0.0071
+  },
+  {
+   "t": "D05",
+   "n": "DBS Group",
+   "gateOn": true,
+   "vol60": 15.8,
+   "target": 0.1,
+   "actual": 0.1191,
+   "delta": -0.0191,
+   "riskShareActual": 0.0419
+  },
+  {
+   "t": "B73",
+   "n": "Global Investments",
+   "gateOn": false,
+   "vol60": 12.1,
+   "target": 0,
+   "actual": 0.0174,
+   "delta": -0.0174,
+   "riskShareActual": -0.0026
+  },
+  {
+   "t": "Z74",
+   "n": "Singtel",
+   "gateOn": false,
+   "vol60": 18,
+   "target": 0,
+   "actual": 0.0164,
+   "delta": -0.0164,
+   "riskShareActual": -0.0006
+  },
+  {
+   "t": "SILJ",
+   "n": "ETFMG Jr Silver Miners",
+   "gateOn": true,
+   "vol60": 51.5,
+   "target": 0.0647,
+   "actual": 0.0497,
+   "delta": 0.015,
+   "riskShareActual": 0.1504
+  },
+  {
+   "t": "SLVP",
+   "n": "iShares Global Silver",
+   "gateOn": true,
+   "vol60": 51.4,
+   "target": 0.0648,
+   "actual": 0.0507,
+   "delta": 0.0141,
+   "riskShareActual": 0.1544
+  },
+  {
+   "t": "M01",
+   "n": "Metro Holdings",
+   "gateOn": false,
+   "vol60": 28.4,
+   "target": 0,
+   "actual": 0.0071,
+   "delta": -0.0071,
+   "riskShareActual": 0.0021
+  },
+  {
+   "t": "GDX",
+   "n": "VanEck Gold Miners (GDX)",
+   "gateOn": true,
+   "vol60": 47.3,
+   "target": 0.0705,
+   "actual": 0.0633,
+   "delta": 0.0071,
+   "riskShareActual": 0.1738
+  },
+  {
+   "t": "T24",
+   "n": "Tuan Sing Holdings",
+   "gateOn": false,
+   "vol60": 27.4,
+   "target": 0,
+   "actual": 0.0069,
+   "delta": -0.0069,
+   "riskShareActual": -0.0007
+  },
+  {
+   "t": "K71U",
+   "n": "Keppel REIT",
+   "gateOn": false,
+   "vol60": 13.8,
+   "target": 0,
+   "actual": 0.0061,
+   "delta": -0.0061,
+   "riskShareActual": 0.0012
+  },
+  {
+   "t": "BQM",
+   "n": "Tiong Woon",
+   "gateOn": false,
+   "vol60": 23.5,
+   "target": 0,
+   "actual": 0.0057,
+   "delta": -0.0057,
+   "riskShareActual": -0.0002
+  },
+  {
+   "t": "F03",
+   "n": "Food Empire",
+   "gateOn": false,
+   "vol60": 30,
+   "target": 0,
+   "actual": 0.0054,
+   "delta": -0.0054,
+   "riskShareActual": 0.0045
+  },
+  {
+   "t": "VNM",
+   "n": "VanEck Vietnam (VNM)",
+   "gateOn": false,
+   "vol60": 23.2,
+   "target": 0,
+   "actual": 0.0052,
+   "delta": -0.0052,
+   "riskShareActual": 0.0007
+  },
+  {
+   "t": "B28",
+   "n": "Bonvests Holdings",
+   "gateOn": false,
+   "vol60": 17.1,
+   "target": 0,
+   "actual": 0.0049,
+   "delta": -0.0049,
+   "riskShareActual": -0.0005
+  },
+  {
+   "t": "H07",
+   "n": "Stamford Land",
+   "gateOn": false,
+   "vol60": 15.6,
+   "target": 0,
+   "actual": 0.0049,
+   "delta": -0.0049,
+   "riskShareActual": 0.0003
+  },
+  {
+   "t": "O5RU",
+   "n": "AIMS APAC REIT",
+   "gateOn": false,
+   "vol60": 17.6,
+   "target": 0,
+   "actual": 0.0044,
+   "delta": -0.0044,
+   "riskShareActual": 0.0007
+  },
+  {
+   "t": "H18",
+   "n": "Hotel Grand Central",
+   "gateOn": false,
+   "vol60": 17.1,
+   "target": 0,
+   "actual": 0.0041,
+   "delta": -0.0041,
+   "riskShareActual": 0.0001
+  },
+  {
+   "t": "N2IU",
+   "n": "Mapletree PACT",
+   "gateOn": false,
+   "vol60": 15.4,
+   "target": 0,
+   "actual": 0.0037,
+   "delta": -0.0037,
+   "riskShareActual": 0.0003
+  },
+  {
+   "t": "A7RU",
+   "n": "Keppel Infra Trust",
+   "gateOn": false,
+   "vol60": 18.5,
+   "target": 0,
+   "actual": 0.0029,
+   "delta": -0.0029,
+   "riskShareActual": -0.0003
+  },
+  {
+   "t": "C38U",
+   "n": "CapLand Integrated Comm",
+   "gateOn": false,
+   "vol60": 13.1,
+   "target": 0,
+   "actual": 0.0018,
+   "delta": -0.0018,
+   "riskShareActual": 0.0005
+  },
+  {
+   "t": "G92",
+   "n": "China Aviation Oil",
+   "gateOn": false,
+   "vol60": 43.1,
+   "target": 0,
+   "actual": 0.0016,
+   "delta": -0.0016,
+   "riskShareActual": 0.0013
+  },
+  {
+   "t": "S08",
+   "n": "SingPost",
+   "gateOn": false,
+   "vol60": 26.9,
+   "target": 0,
+   "actual": 0.0016,
+   "delta": -0.0016,
+   "riskShareActual": 0.0001
+  },
+  {
+   "t": "S7OU",
+   "n": "Asian Pay TV Trust",
+   "gateOn": false,
+   "vol60": 23.3,
+   "target": 0,
+   "actual": 0.0014,
+   "delta": -0.0014,
+   "riskShareActual": 0.0005
+  }
+ ]
+}

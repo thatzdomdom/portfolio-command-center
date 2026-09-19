@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Inbox — Portfolio Command Center</title>
+<link rel="stylesheet" href="pcc.css">
+<!--
+  inbox.html — "what happened since I last read". Phase 5 of the 11 Sep 2026 redesign; it replaces
+  the 79-line phase-2 list renderer, which owned its own colours, its own fetch and its own escaper.
+
+  Why it exists: an insider cluster in a name he does not hold needs somewhere to live that
+  tomorrow's brief does not overwrite. That was the second half of the Dell failure — the alert
+  was real, the brief moved on, and nothing remembered it. alerts.json is append-only and this
+  page is its reader.
+
+  Why it grew: the log only told half the story. His REPLIES (journal.enc, read out of Mail by
+  scripts/journal.js) are the other half — a cluster arrives, he replies WATCH, the watchlist
+  changes. Interleaved by ARRIVAL time, that loop is visible on one screen; kept apart, it is
+  invisible and he cannot tell whether answering the email ever did anything.
+
+  Rules it obeys: zero external calls (every fetch is same-origin data/*), every figure wears its
+  as-of via PCC.stampHTML, all data reaches the DOM through PCC.el's `text` — never innerHTML,
+  because headlines come from EDGAR and from an LLM. Money never appears here; the journal is as
+  private as book.json and arrives encrypted, so a locked device still gets the whole public log.
+
+  The page is two scripts on purpose: `inbox-core` is pure (no DOM, no fetch) so the merge and the
+  filter counts can be exercised by node against the real data files; `inbox-view` is the DOM.
+-->
+<style>
+  /* Only what is specific to a log of events. Every colour is a pcc.css token (fallbacks are the
+     token's own light value, so a failed stylesheet load degrades to readable, not to invisible). */
+  .hdr{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;border-bottom:1px solid var(--rule,#E4E2DC);padding-bottom:12px;margin:10px 0 12px}
+  .hdr h1{font-size:20px;margin:0;letter-spacing:-.01em}
+  .sum{color:var(--muted,#77808D);font-size:13px}
+  .filters{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 8px}
+  .filters .lbl{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted,#77808D);font-weight:600;min-width:64px}
+  .chip .n{opacity:.62;font-variant-numeric:tabular-nums;margin-left:6px}
+  .chip[aria-disabled="true"]{opacity:.45}
+  .fin{border:1px solid var(--rule,#E4E2DC);background:var(--sunk,#F4F3EF);color:var(--ink,#15181D);border-radius:8px;padding:6px 10px;font:inherit;font-size:13px}
+  .fin.q{min-width:150px;flex:1 1 150px}
+  .mark{display:flex;align-items:center;gap:10px;color:var(--muted,#77808D);font-size:12px;margin:18px 0 8px}
+  .mark::before,.mark::after{content:"";flex:1;border-top:1px dashed var(--rule,#E4E2DC)}
+  .ev{display:grid;grid-template-columns:88px 1fr;gap:4px 12px;padding:10px 2px;border-bottom:1px solid var(--rule-2,#EFEDE8);scroll-margin-top:16px}
+  .ev .d{color:var(--muted,#77808D);font-size:12.5px;padding-top:2px;font-variant-numeric:tabular-nums}
+  .ev .tags{margin-bottom:3px}
+  .ev .hl{font-weight:600;line-height:1.4}
+  .ev .m{color:var(--ink-2,#4A535F);font-size:13px;margin-top:2px}
+  .ev a{color:var(--accent,#0E5F57)}
+  .ev.j{background:var(--accent-soft,#E2F0EE);border-left:3px solid var(--accent,#0E5F57);padding-left:11px;border-radius:0 8px 8px 0}
+  .ev.tgt{outline:2px solid var(--accent,#0E5F57);outline-offset:3px;border-radius:6px}
+  .tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:4px;padding:1px 6px;margin-right:5px;vertical-align:1px;white-space:nowrap}
+  .t-Notable{background:var(--warn-soft,#FAF0DC);color:var(--warn,#8A5A0B)}
+  .t-Log{background:var(--sunk,#F4F3EF);color:var(--muted,#77808D)}
+  .t-Reply{background:var(--accent,#0E5F57);color:var(--accent-ink,#FFFFFF)}
+  .t-in-book{background:var(--accent,#0E5F57);color:var(--accent-ink,#FFFFFF)}
+  .t-watchlist{background:var(--accent-soft,#E2F0EE);color:var(--accent,#0E5F57)}
+  .t-market-wide,.t-other{background:var(--sunk,#F4F3EF);color:var(--muted,#77808D)}
+  .t-cluster{background:var(--warn-soft,#FAF0DC);color:var(--warn,#8A5A0B)}
+  .tk{font-family:var(--mono,ui-monospace,Menlo,monospace);font-weight:600}
+  .note{border-left:3px solid var(--warn,#8A5A0B);background:var(--warn-soft,#FAF0DC);color:var(--ink-2,#4A535F);padding:8px 12px;font-size:12.5px;margin:12px 0;border-radius:0 8px 8px 0}
+  .note.lock{border-left-color:var(--accent,#0E5F57);background:var(--accent-soft,#E2F0EE);display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  .pipe{font-size:13px;color:var(--ink-2,#4A535F);margin:12px 0;line-height:1.7}
+  .pipe .red{color:var(--bad,#A32A24);font-weight:600}
+  .empty{color:var(--muted,#77808D);padding:30px 0;text-align:center}
+  .pager{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0;font-size:13px;color:var(--muted,#77808D)}
+  .foot{margin-top:26px;color:var(--muted,#77808D);font-size:12px;line-height:1.75;border-top:1px solid var(--rule,#E4E2DC);padding-top:12px}
+  .foot div{margin-bottom:3px}
+  #filters[open] #filters-head{margin-bottom:8px}
+  #filters-head{cursor:pointer;display:flex;gap:10px;align-items:baseline;min-height:32px}
+  #filters-head .lbl{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted,#77808D);font-weight:600}
+  @media(max-width:520px){
+    #filters-head{min-height:40px;align-items:center}
+    .ev{grid-template-columns:1fr}
+    .filters .lbl{min-width:0;width:100%}
+    .fin,.filters button,.pager button{min-height:40px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="navbar"></div>
+  <div id="asofbanner"></div>
+  <div class="hdr" id="hdr"><h1>Inbox</h1><span class="sum" id="sum">Loading…</span></div>
+  <details class="card" id="filters" open>
+    <summary id="filters-head"><span class="lbl">Filters</span><span class="sum" id="filters-count"></span></summary>
+    <div id="filter-body"></div>
+  </details>
+  <div class="note" id="gapnote">Honest gap: your US holdings are ETFs and file no Form 4s — market-wide and watchlist coverage is where your US exposure is seen. HKEX: covered since 19 Sep 2026 — 0700, 0981 and 1810 are read daily from HKEX&rsquo;s own disclosure-of-interests notices and every row links to the filing; a week with no HK notice is normal (across all three names in the 90 days to 19 Sep there was one purchase and one sale). SGX, 31 lines: no mechanical route. The exchange&rsquo;s announcements API has required authentication since Sep 2026, and a scraped key or a third-party mirror is not acceptable here. Subscribe to SGXNet&rsquo;s own email alerts and the reply reader can parse them (decision 7).</div>
+  <div class="pipe" id="pipe"></div>
+  <div id="lockline"></div>
+  <div id="list"></div>
+  <div class="pager" id="pager"></div>
+  <div class="foot" id="foot"></div>
+</div>
+
+<script src="common.js"></script>
+
+<script id="inbox-core">
+/* PURE. No DOM, no fetch, no PCC. Everything the page decides about ORDER and COUNTS lives here so
+   scripts can run it under node against the real data/alerts.json and data/journal.json. */
+window.INBOX = (function () {
+  'use strict';
+  var SEV = ['Notable', 'Log'];
+  // 'fund' (phase 6, 13 Sep 2026): 13F rows written by scripts/alerts.js from data/13f.json — a fund's
+  // quarterly filing, a tracked fund moving a name he holds or watches, a name three funds opened.
+  // 'theme' (phase 8, 20 Sep 2026): theme-radar rows written by scripts/alerts.js from
+  // data/themes.json — a theme moving on the DISCOVERY ladder (Watching → Candidate → Evidenced →
+  // Priced) and, on its own axis with its own id, a theme's CROWDING moving (none → proposed →
+  // packaged → crowded). The two are separate on purpose: a theme can be crowded having never been
+  // a Candidate, and folding them into one rung is what made the radar's first file say "Crowded"
+  // three lines under the sentence explaining why the theme was not even a Candidate.
+  var FAM = ['insider', 'ownership', 'fund', 'journal', 'theme'];
+  var TAG = ['in-book', 'watchlist', 'market-wide', 'cluster'];
+  var PAGE = 300;                                   // paginate beyond this; a year of log stays fast
+  var SGT = { timeZone: 'Asia/Singapore' };
+
+  function sgtDay(ms) { return new Date(ms).toLocaleDateString('en-CA', SGT); }
+  // An event's place in the log is when it ARRIVED, not when it was filed: a Form 4 filed on the
+  // 8th and found by the 11th scan cannot sit above a reply he sent on the 10th.
+  function when(iso, fallbackDay) {
+    var t = Date.parse(iso || '');
+    if (!isNaN(t)) return t;
+    t = Date.parse(String(fallbackDay || '') + 'T00:00:00+08:00');
+    return isNaN(t) ? 0 : t;
+  }
+  function blobOf(parts) {
+    return parts.filter(function (p) { return p != null && p !== ''; }).join(' ').toLowerCase();
+  }
+
+  function fromAlert(a) {
+    var tags = Array.isArray(a.tags) ? a.tags.slice() : [];
+    var date = String(a.date || '').slice(0, 10) || sgtDay(when(a.at, null));
+    return {
+      kind: 'alert', id: String(a.id || ''), anchor: 'a-' + String(a.id || ''),
+      ts: when(a.at, date), date: date, loggedDay: a.at ? sgtDay(Date.parse(a.at)) : date,
+      severity: a.severity === 'Notable' ? 'Notable' : 'Log',
+      family: a.family || 'insider', tags: tags, inBook: tags.indexOf('in-book') >= 0,
+      ticker: a.ticker || null, issuer: a.issuer || null,
+      headline: String(a.headline || ''), detail: String(a.detail || ''),
+      url: a.url || null, clearsWhen: a.clearsWhen || null, usd: typeof a.usd === 'number' ? a.usd : null,
+      blob: blobOf([a.id, a.ticker, a.issuer, a.severity, a.family, tags.join(' '), a.headline, a.detail, date])
+    };
+  }
+
+  var VERB = {
+    DONE: 'You replied DONE', DEFER: 'You replied DEFER', NOTE: 'You replied NOTE',
+    WATCH: 'You replied WATCH', UNWATCH: 'You replied UNWATCH', DECIDE: 'You replied DECIDE',
+    LOAN: 'You replied LOAN', UNPARSED: 'A reply could not be parsed',
+    UNTRUSTED: 'A reply from an untrusted sender was ignored'
+  };
+  function fromJournal(e) {
+    var verb = String(e.verb || 'UNPARSED').toUpperCase();
+    var head = VERB[verb] || ('You replied ' + verb);
+    if ((verb === 'WATCH' || verb === 'UNWATCH') && e.ticker) head += ' ' + e.ticker;
+    else if (verb === 'DECIDE' && e.n != null) head += ' ' + e.n;
+    else if (verb === 'LOAN' && e.amount != null) head += ' ' + e.amount;
+    var at = e.receivedAt || e.at;
+    var ts = when(at, e.briefDate);
+    var id = String(e.messageId || e.mailId || (verb + ':' + at));
+    return {
+      kind: 'journal', id: id, anchor: 'j-' + id,
+      ts: ts, date: sgtDay(ts), loggedDay: sgtDay(ts),
+      severity: 'Reply', family: 'journal', tags: [], inBook: false,
+      ticker: e.ticker || null, issuer: null,
+      headline: head, detail: '',
+      verb: verb, arg: e.arg == null ? '' : String(e.arg), raw: e.raw == null ? '' : String(e.raw),
+      applied: e.applied === true ? true : e.applied === false ? false : null,
+      note: e.note || null, briefDate: e.briefDate || null, key: e.key && e.key !== 'none' ? e.key : null,
+      trusted: e.trusted === false ? false : true, domain: e.domain || null,
+      url: null, clearsWhen: null, usd: null,
+      blob: blobOf([id, verb, e.ticker, e.arg, e.raw, e.note, e.key, e.briefDate, 'reply journal'])
+    };
+  }
+
+  // Newest first. Ties (one scan writes 38 rows with one `at`) fall back to the filing date, then
+  // to the id, so the order is total and the same on every render.
+  function order(a, b) {
+    if (b.ts !== a.ts) return b.ts - a.ts;
+    if (b.date !== a.date) return b.date < a.date ? -1 : 1;
+    return a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
+  }
+  function merge(alertsObj, journalObj) {
+    var out = [];
+    var A = alertsObj && Array.isArray(alertsObj.alerts) ? alertsObj.alerts : [];
+    for (var i = 0; i < A.length; i++) out.push(fromAlert(A[i]));
+    var E = journalObj && Array.isArray(journalObj.entries) ? journalObj.entries : [];
+    for (var k = 0; k < E.length; k++) out.push(fromJournal(E[k]));
+    var seen = {};
+    return out.filter(function (r) { var key = r.kind + '|' + r.id; if (seen[key]) return false; seen[key] = 1; return true; })
+      .sort(order);
+  }
+
+  var BLANK = { sev: 'all', fam: null, tag: null, q: '', from: '', to: '' };
+  function filters(f) {
+    f = f || {};
+    return { sev: f.sev || 'all', fam: f.fam || null, tag: f.tag || null, q: (f.q || '').trim().toLowerCase(), from: f.from || '', to: f.to || '' };
+  }
+  function matches(r, f) {
+    if (f.sev !== 'all' && r.severity !== f.sev) return false;
+    if (f.fam && r.family !== f.fam) return false;
+    if (f.tag && r.tags.indexOf(f.tag) < 0) return false;
+    if (f.from && r.date < f.from) return false;
+    if (f.to && r.date > f.to) return false;
+    if (f.q && r.blob.indexOf(f.q) < 0) return false;
+    return true;
+  }
+  function apply(rows, f) { var g = filters(f); return rows.filter(function (r) { return matches(r, g); }); }
+
+  // Faceted: each chip's count is what WOULD show if that chip were the value for its own
+  // dimension, every other filter held where it is. A count that ignored the other chips would
+  // promise rows the click cannot deliver.
+  function countWith(rows, f, dim, val) {
+    var g = filters(f); g[dim] = val;
+    var n = 0;
+    for (var i = 0; i < rows.length; i++) if (matches(rows[i], g)) n++;
+    return n;
+  }
+  function facets(rows, f) {
+    var g = filters(f), out = { sev: {}, fam: {}, tag: {}, total: rows.length, showing: apply(rows, g).length };
+    out.sev.all = countWith(rows, g, 'sev', 'all');
+    SEV.forEach(function (s) { out.sev[s] = countWith(rows, g, 'sev', s); });
+    out.fam.all = countWith(rows, g, 'fam', null);
+    FAM.forEach(function (x) { out.fam[x] = countWith(rows, g, 'fam', x); });
+    out.tag.all = countWith(rows, g, 'tag', null);
+    TAG.forEach(function (x) { out.tag[x] = countWith(rows, g, 'tag', x); });
+    return out;
+  }
+
+  // The watermark: index of the first row that is NOT newer than the last brief. -1 = no brief
+  // date, so no line is drawn (never guess where he stopped reading).
+  function watermark(rows, briefTs) {
+    if (!briefTs) return -1;
+    for (var i = 0; i < rows.length; i++) if (rows[i].ts <= briefTs) return i;
+    return rows.length;
+  }
+  function newSince(rows, briefTs) {
+    if (!briefTs) return 0;
+    var n = 0;
+    for (var i = 0; i < rows.length; i++) if (rows[i].ts > briefTs) n++;
+    return n;
+  }
+
+  // signals.json scans[]: the newest attempt, and the newest one that actually completed.
+  function scanState(signals, todaySGT) {
+    var S = signals && Array.isArray(signals.scans) ? signals.scans.slice() : [];
+    if (!S.length) return { last: null, lastOk: null, ageDays: null, red: true, reason: 'no scan has ever been recorded' };
+    S.sort(function (a, b) { return String(a.at || a.date) < String(b.at || b.date) ? 1 : -1; });
+    var last = S[0], lastOk = null;
+    for (var i = 0; i < S.length; i++) if (!S[i].error) { lastOk = S[i]; break; }
+    var age = null;
+    if (lastOk && todaySGT) {
+      var t = Date.parse(String(lastOk.date) + 'T00:00:00Z'), n = Date.parse(todaySGT + 'T00:00:00Z');
+      if (!isNaN(t) && !isNaN(n)) age = Math.floor((n - t) / 864e5);
+    }
+    return { last: last, lastOk: lastOk, ageDays: age, red: !lastOk || (age != null && age > 4), reason: null };
+  }
+
+  return {
+    SEV: SEV, FAM: FAM, TAG: TAG, PAGE: PAGE, BLANK: BLANK,
+    sgtDay: sgtDay, when: when, fromAlert: fromAlert, fromJournal: fromJournal, merge: merge,
+    filters: filters, matches: matches, apply: apply, facets: facets,
+    watermark: watermark, newSince: newSince, scanState: scanState
+  };
+})();
+</script>
+
+<script id="inbox-view">
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var P = window.PCC || {};
+  // common.js is the contract (spec section B). If it is the old build, say so in one line rather
+  // than rendering half a page — the same honesty rule the stamps obey.
+  var NEED = ['loadAll', 'priv', 'locked', 'unlock', 'el', 'nav', 'stampHTML', 'dateShort', 'dateLong',
+    'ago', 'sgtToday', 'ageDays', 'num', 'err', 'deepLink', 'hash', 'asof', 'asofBanner'];
+  var gone = NEED.filter(function (k) { return typeof P[k] !== 'function'; });
+  if (gone.length) {
+    var warn = document.createElement('div');
+    warn.className = 'empty';
+    warn.textContent = 'The shared runtime (common.js) is missing ' + gone.join(', ') + ' — the log cannot render. Nothing is wrong with the data.';
+    $('list').appendChild(warn);
+    $('sum').textContent = 'common.js out of date';
+    return;
+  }
+
+  var X = window.INBOX, el = P.el, ASOF = P.asof();
+  var state = { sev: 'all', fam: null, tag: null, q: '', from: '', to: '', page: 0 };
+  var rows = [], briefTs = 0, briefDay = null, data = {}, journal = null, journalState = 'locked';
+  var ui = {};
+
+  function clear(node) { while (node.firstChild) node.removeChild(node.firstChild); }
+  function txt(s, cls) { return el('span', cls ? { class: cls, text: String(s) } : { text: String(s) }); }
+  function sep() { return el('span', { text: ' · ' }); }
+  // stampHTML builds its HTML from a file name and a date this page passes in — no fetched data
+  // goes near it, which is why this is the only innerHTML on the page.
+  function stamp(asOf, cadence, what) { var s = el('span', {}); s.innerHTML = P.stampHTML(asOf, cadence, what); return s; }
+  function hhmm(ms) {
+    try { return new Date(ms).toLocaleTimeString('en-GB', { timeZone: 'Asia/Singapore', hour: '2-digit', minute: '2-digit' }); }
+    catch (_) { return ''; }
+  }
+
+  // ── filters: built once, counts refreshed in place so typing never loses focus ─────────────
+  function chip(dim, val, label) {
+    var n = txt('0', 'n');
+    var b = el('button', { class: 'chip', type: 'button', 'data-dim': dim, 'data-val': val == null ? '' : String(val) }, [txt(label), n]);
+    b._n = n; b._dim = dim; b._val = val == null ? '' : String(val); b._label = label;
+    ui.chips.push(b);
+    return b;
+  }
+  function buildFilters() {
+    var f = $('filter-body');
+    ui.chips = [];
+    clear(f);
+    var r1 = [txt('Severity', 'lbl'), chip('sev', 'all', 'All')];
+    X.SEV.forEach(function (s) { r1.push(chip('sev', s, s)); });
+    var r2 = [txt('Family', 'lbl'), chip('fam', '', 'All')];
+    X.FAM.forEach(function (s) { r2.push(chip('fam', s, s === 'journal' ? 'my replies' : s === 'fund' ? 'funds (13F)' : s === 'theme' ? 'themes (radar)' : s)); });
+    var r3 = [txt('Tag', 'lbl'), chip('tag', '', 'All')];
+    X.TAG.forEach(function (s) { r3.push(chip('tag', s, s)); });
+
+    ui.q = el('input', { class: 'fin q', id: 'f-q', type: 'search', placeholder: 'ticker, filer or text', 'aria-label': 'free text filter' });
+    ui.from = el('input', { class: 'fin', id: 'f-from', type: 'date', 'aria-label': 'from date' });
+    ui.to = el('input', { class: 'fin', id: 'f-to', type: 'date', 'aria-label': 'to date' });
+    ui.count = $('filters-count');
+    var reset = el('button', { class: 'chip', type: 'button', id: 'f-reset', text: 'Reset' });
+    var r4 = [txt('Find', 'lbl'), ui.q, ui.from, txt('to'), ui.to, reset];
+    [r1, r2, r3, r4].forEach(function (kids) { f.appendChild(el('div', { class: 'filters' }, kids)); });
+    // On a phone the panel would push the whole log below the fold; the count stays in the
+    // summary so nothing is hidden by closing it.
+    try { if (window.matchMedia('(max-width:520px)').matches) $('filters').removeAttribute('open'); } catch (_) {}
+  }
+  // Every chip's count is what WOULD show if that chip were pressed with the other filters where
+  // they are — a count that ignored them would promise rows the click cannot deliver.
+  function refreshCounts() {
+    var c = X.facets(rows, state);
+    ui.chips.forEach(function (b) {
+      var n = b._dim === 'sev' ? c.sev[b._val === '' ? 'all' : b._val] : c[b._dim][b._val === '' ? 'all' : b._val];
+      b._n.textContent = String(n == null ? 0 : n);
+      // The count is glued to the label in textContent ("All38"), so name the button explicitly.
+      b.setAttribute('aria-label', b._label + ': ' + (n == null ? 0 : n) + ' row' + (n === 1 ? '' : 's'));
+      var on = b._dim === 'sev' ? state.sev === b._val : (state[b._dim] || '') === b._val;
+      b.className = 'chip' + (on ? ' on' : '');
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      if (!n && !on) b.setAttribute('aria-disabled', 'true'); else b.removeAttribute('aria-disabled');
+    });
+    ui.count.textContent = c.showing + ' of ' + c.total + ' rows';
+  }
+
+  // ── one row ───────────────────────────────────────────────────────────────
+  function tagEls(r) {
+    var out = [el('span', { class: 'tag t-' + r.severity, text: r.severity })];
+    r.tags.forEach(function (t) {
+      out.push(el('span', { class: 'tag ' + (X.TAG.indexOf(t) >= 0 ? 't-' + t : 't-other'), text: t }));
+    });
+    return out;
+  }
+  // The ticker links into the Book only when the row is tagged in-book: book.html has a #pos-
+  // anchor for a name he holds and nothing at all for the thirty-odd market-wide tickers a day,
+  // and a link that lands nowhere is worse than plain text.
+  function headEls(r) {
+    var line = [], head = r.headline;
+    if (r.ticker && r.inBook) {
+      line.push(el('a', { class: 'tk', href: P.deepLink('book', 'pos-' + r.ticker, ASOF), text: r.ticker }));
+      if (head.indexOf(r.ticker + ' · ') === 0) head = head.slice(r.ticker.length + 3);
+      line.push(sep());
+    }
+    line.push(el('span', { class: 'h', text: head }));
+    // Badges get their own line: on a 375px screen a headline that starts mid-badge-row is unreadable.
+    return [el('div', { class: 'tags' }, tagEls(r)), el('div', { class: 'hl' }, line)];
+  }
+
+  function alertMeta(r) {
+    var bits = [], kids = [];
+    if (r.detail) bits.push(r.detail);
+    if (r.loggedDay && r.loggedDay !== r.date) bits.push('filed ' + P.dateShort(r.date) + ', logged ' + P.dateShort(r.loggedDay));
+    if (r.clearsWhen) bits.push('clears: ' + r.clearsWhen);
+    if (bits.length) kids.push(txt(bits.join(' · ')));
+    if (r.url) { if (kids.length) kids.push(sep()); kids.push(el('a', { href: r.url, target: '_blank', rel: 'noopener noreferrer', text: 'filing' })); }
+    return kids;
+  }
+  function journalMeta(r) {
+    var bits = [];
+    if (r.trusted === false) {
+      bits.push('sender domain ' + (r.domain || 'unknown') + ' is not trusted, so nothing was applied');
+    } else {
+      // WATCH DELL already says DELL in the headline; quoting the argument again says nothing.
+      var said = r.arg || r.raw;
+      if (said && !(r.ticker && said.toUpperCase() === r.ticker.toUpperCase())) {
+        bits.push('“' + (said.length > 180 ? said.slice(0, 179) + '…' : said) + '”');
+      }
+      if (r.briefDate) bits.push('answers the ' + P.dateShort(r.briefDate) + ' brief');
+      // journal.js binds EVERY reply to the day's open action key, so the key only means "this
+      // answered it" for the two verbs the ask offers. On a WATCH it would be a false claim.
+      if (r.key && (r.verb === 'DONE' || r.verb === 'DEFER')) bits.push('answers action ' + r.key);
+      if (r.applied === true) bits.push(r.note ? 'applied · ' + r.note : 'applied');
+      else if (r.applied === false) bits.push(r.note ? 'not applied — ' + r.note : 'not applied');
+    }
+    return bits.length ? [txt(bits.join(' · '))] : [];
+  }
+  function rowEl(r) {
+    var when = P.dateShort(r.date) + (r.kind === 'journal' ? ' · ' + hhmm(r.ts) : '');
+    var body = el('div', {}, headEls(r).concat([el('div', { class: 'm' }, r.kind === 'journal' ? journalMeta(r) : alertMeta(r))]));
+    return el('div', { class: 'ev' + (r.kind === 'journal' ? ' j' : ''), id: r.anchor }, [el('div', { class: 'd', text: when }), body]);
+  }
+
+  // ── the log ───────────────────────────────────────────────────────────────
+  function markEl() { return el('div', { class: 'mark', text: 'last brief · ' + (briefDay ? P.dateLong(briefDay) : '') }); }
+  function renderList() {
+    var list = $('list'), shown = X.apply(rows, state);
+    clear(list);
+    if (!shown.length) {
+      list.appendChild(el('div', { class: 'empty', text: 'Nothing matches those filters.' }));
+      renderPager(shown, 0, 0);
+      return;
+    }
+    var pages = Math.ceil(shown.length / X.PAGE);
+    if (state.page >= pages) state.page = pages - 1;
+    if (state.page < 0) state.page = 0;
+    var start = state.page * X.PAGE, end = Math.min(start + X.PAGE, shown.length);
+    var wm = X.watermark(shown, briefTs);
+    for (var i = start; i < end; i++) {
+      if (i === wm) list.appendChild(markEl());
+      list.appendChild(rowEl(shown[i]));
+    }
+    if (wm === shown.length && end === shown.length) list.appendChild(markEl());
+    renderPager(shown, start, end);
+  }
+  function renderPager(shown, start, end) {
+    var p = $('pager');
+    clear(p);
+    if (shown.length <= X.PAGE) return;
+    var pages = Math.ceil(shown.length / X.PAGE);
+    var prev = el('button', { class: 'chip', type: 'button', id: 'pg-prev', text: '‹ Newer' });
+    var next = el('button', { class: 'chip', type: 'button', id: 'pg-next', text: 'Older ›' });
+    if (state.page === 0) prev.setAttribute('disabled', 'disabled');
+    if (state.page >= pages - 1) next.setAttribute('disabled', 'disabled');
+    p.appendChild(prev);
+    p.appendChild(txt('rows ' + (start + 1) + '–' + end + ' of ' + shown.length + ' · page ' + (state.page + 1) + ' of ' + pages));
+    p.appendChild(next);
+  }
+  function renderSummary() {
+    var alerts = 0, replies = 0;
+    rows.forEach(function (r) { if (r.kind === 'journal') replies++; else alerts++; });
+    var fresh = X.newSince(rows, briefTs), shown = X.apply(rows, state).length;
+    $('sum').textContent = fresh + ' new since ' + (briefDay ? 'the ' + P.dateShort(briefDay) + ' brief' : 'the last brief')
+      + ' · ' + alerts + ' alert' + (alerts === 1 ? '' : 's')
+      + (replies ? ' · ' + replies + ' repl' + (replies === 1 ? 'y' : 'ies') : '')
+      + ' · showing ' + shown;
+  }
+
+  // ── pipeline events ───────────────────────────────────────────────────────
+  function renderPipe() {
+    var p = $('pipe');
+    clear(p);
+    if (!data['signals.json']) { p.appendChild(P.err('signals.json did not load — the scan history is unknown.')); return; }
+    var s = X.scanState(data['signals.json'], P.sgtToday());
+    if (s.lastOk) {
+      p.appendChild(el('div', { text: 'Last completed EDGAR scan ' + P.dateShort(s.lastOk.date) + ' (' + P.ago(s.lastOk.date) + ')'
+        + (s.lastOk.form4Lines != null ? ' · ' + P.num(s.lastOk.form4Lines, 0) + ' Form 4 lines' : '')
+        + (s.lastOk.parsed != null ? ' · ' + P.num(s.lastOk.parsed, 0) + ' parsed' : '')
+        + (s.lastOk.kept != null ? ' · ' + P.num(s.lastOk.kept, 0) + ' kept' : '') }));
+    } else {
+      p.appendChild(el('div', { text: 'No completed EDGAR scan is on record.' }));
+    }
+    if (s.last && s.last.error) p.appendChild(el('div', { text: 'Last attempt ' + P.dateShort(s.last.date) + ' failed: ' + s.last.error }));
+    if (s.red) {
+      p.appendChild(el('div', { class: 'red', text: s.ageDays != null
+        ? 'The insider scan has not completed for ' + s.ageDays + ' days — anything filed since is not in this log yet.'
+        : 'The insider scan has never completed — this log is not current.' }));
+    }
+  }
+
+  // ── his replies ───────────────────────────────────────────────────────────
+  function renderLock() {
+    var box = $('lockline');
+    clear(box);
+    if (journalState === 'ok') return;
+    if (journalState === 'empty') {
+      box.appendChild(el('div', { class: 'note lock', text: 'No replies are on record yet. Reply to the morning email and the answer lands here beside the alert it answered.' }));
+      return;
+    }
+    if (journalState === 'locked') {
+      box.appendChild(el('div', { class: 'note lock' }, [
+        txt('Your replies are encrypted (journal.enc) and stay hidden on a locked device. The public log below is complete.'),
+        el('button', { class: 'chip', type: 'button', id: 'do-unlock', text: 'Unlock' })]));
+      return;
+    }
+    box.appendChild(el('div', { class: 'note lock', text:
+      'Your replies could not be read: data/journal.enc is missing, or the passphrase was refused. The public log below is complete.' }));
+  }
+
+  // ── foot ──────────────────────────────────────────────────────────────────
+  function renderFoot() {
+    var f = $('foot'), files = (data['manifest.json'] && data['manifest.json'].files) || {};
+    clear(f);
+    ['signals.json', 'alerts.json', 'journal.json'].forEach(function (n) {
+      var rec = files[n];
+      if (rec && rec.asOf) f.appendChild(el('div', {}, [stamp(rec.asOf, rec.cadence || 'daily', n)]));
+      else f.appendChild(el('div', { class: 'stamp', text: n + ': no as-of in the manifest' }));
+    });
+    var A = data['alerts.json'];
+    if (A && A.policyVersion) f.appendChild(el('div', { text: 'policy ' + A.policyVersion }));
+    f.appendChild(el('div', { text: 'Ordered by when each event entered the log — the scan that found a filing, the minute a reply arrived — not by filing date; a row says so when the two differ.' }));
+    f.appendChild(el('div', { text: 'alerts.json is append-only: nothing here is edited or removed, only cleared. Source: SEC EDGAR daily form index. Replies: your email, read by scripts/journal.js.' }));
+    f.appendChild(el('div', { text: 'funds (13F): tracked funds' + "'" + ' quarterly holdings parsed from EDGAR by scripts/13f-scan.js — a quarter-end snapshot filed up to 45 days later, never a trade today. Rows tagged backfill were first read by the scan weeks after they were filed.' }));
+    f.appendChild(el('div', { text: 'There is no write path on this page. To act, reply to the morning email: DONE · DEFER <reason> · WATCH <ticker> · UNWATCH <ticker> · DECIDE <n> <text> · NOTE <text> · LOAN <amount>.' }));
+    if (rows.length > X.PAGE) f.appendChild(el('div', { text: 'Paginated at ' + X.PAGE + ' rows a page.' }));
+  }
+
+  function renderAll() { refreshCounts(); renderSummary(); renderList(); renderLock(); }
+
+  // ── deep links ────────────────────────────────────────────────────────────
+  // A link from Today (#a-<id>) must land on its row even when a filter or a page would hide it:
+  // clear the filters and jump to the page holding it rather than silently showing nothing.
+  function gotoHash() {
+    var h = (P.hash() || '').replace(/^#/, '');
+    var prev = document.querySelector('.ev.tgt');
+    if (prev) prev.classList.remove('tgt');
+    if (!h) return;
+    var known = false;
+    for (var i = 0; i < rows.length; i++) if (rows[i].anchor === h) { known = true; break; }
+    if (!known) return;
+    if (!$(h)) {
+      state.sev = 'all'; state.fam = null; state.tag = null; state.q = ''; state.from = ''; state.to = '';
+      ui.q.value = ''; ui.from.value = ''; ui.to.value = '';
+      var shown = X.apply(rows, state), pos = -1;
+      for (var k = 0; k < shown.length; k++) if (shown[k].anchor === h) { pos = k; break; }
+      state.page = pos < 0 ? 0 : Math.floor(pos / X.PAGE);
+      renderAll();
+    }
+    var node = $(h);
+    if (!node) return;
+    node.classList.add('tgt');
+    node.scrollIntoView({ block: 'center' });
+  }
+
+  // ── events ────────────────────────────────────────────────────────────────
+  // Following a #a-<id> link from a row already on this page is a same-document navigation: the
+  // page does not reload and boot never runs again, so the row would never light up.
+  window.addEventListener('hashchange', gotoHash);
+  $('filters').addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (!b) return;
+    if (b.id === 'f-reset') {
+      state.sev = 'all'; state.fam = null; state.tag = null; state.q = ''; state.from = ''; state.to = ''; state.page = 0;
+      ui.q.value = ''; ui.from.value = ''; ui.to.value = '';
+      renderAll();
+      return;
+    }
+    if (!b._dim) return;
+    if (b._dim === 'sev') state.sev = b._val || 'all';
+    else state[b._dim] = b._val ? (state[b._dim] === b._val ? null : b._val) : null;
+    state.page = 0;
+    renderAll();
+  });
+  $('filters').addEventListener('input', function (e) {
+    var t = e.target;
+    if (t === ui.q) state.q = t.value;
+    else if (t === ui.from) state.from = t.value;
+    else if (t === ui.to) state.to = t.value;
+    else return;
+    state.page = 0;
+    renderAll();
+  });
+  $('pager').addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (!b || b.hasAttribute('disabled')) return;
+    state.page += (b.id === 'pg-next' ? 1 : -1);
+    renderList();
+    window.scrollTo(0, 0);
+  });
+  $('lockline').addEventListener('click', function (e) {
+    var b = e.target.closest('#do-unlock');
+    if (!b) return;
+    b.setAttribute('disabled', 'disabled');
+    P.unlock().then(function (ok) {
+      b.removeAttribute('disabled');
+      if (!ok) return;
+      return loadJournal().then(function () {
+
+        if (!data['alerts.json']) { renderLock(); return; }   // a failed fetch must not be overwritten by an empty log
+
+        rows = X.merge(data['alerts.json'], journal);
+        renderAll();
+      });
+    });
+  });
+
+  function loadJournal() {
+    if (P.locked()) { journal = null; journalState = 'locked'; return Promise.resolve(); }
+    return P.priv('journal').then(function (j) {
+      journal = j;
+      journalState = !j ? 'error' : (j.entries && j.entries.length ? 'ok' : 'empty');
+    });
+  }
+
+  (function boot() {
+    buildFilters();
+    P.loadAll(['alerts.json', 'brief.json', 'manifest.json', 'signals.json']).then(function (d) {
+      data = d || {};
+      var files = (data['manifest.json'] && data['manifest.json'].files) || {};
+      var A = data['alerts.json'];
+      // The bar's stamp is the LOG's as-of, never the render time — that is how quarter-old data
+      // once wore a green dot.
+      var logAsOf = (files['alerts.json'] && files['alerts.json'].asOf) || (A && A.generatedAt) || null;
+      $('navbar').appendChild(P.nav('inbox', logAsOf));
+      var banner = P.asofBanner();
+      if (banner) $('asofbanner').appendChild(banner);
+      // The banner says "viewing 10 Sep". The log is NOT rewound to it — book.html truncates its
+      // price series, this page cannot truncate an append-only log without hiding events. Say so
+      // rather than let the date imply a time machine.
+      if (P.asof()) $('asofbanner').appendChild(P.err('The log itself is not rewound: every event through '
+        + 'today is listed below, newest first. That date travels only with the links you follow out of here.'));
+
+      var B = data['brief.json'];
+      if (B && B.date) { briefDay = String(B.date).slice(0, 10); briefTs = X.when(B.date, briefDay); }
+
+      return loadJournal().then(function () {
+        if (!A) {
+          $('sum').textContent = 'alerts.json did not load';
+          $('list').appendChild(P.err('data/alerts.json did not load, so the log is empty on this page — not on the server. The file is append-only; nothing has been lost.'));
+          renderPipe(); renderFoot(); renderLock();
+          return;
+        }
+        rows = X.merge(A, journal);
+        renderAll();
+        renderPipe();
+        renderFoot();
+        gotoHash();
+      });
+    });
+  })();
+})();
+</script>
+</body></html>

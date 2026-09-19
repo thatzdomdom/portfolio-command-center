@@ -1,0 +1,263 @@
+{
+ "version": "2026-09-20",
+ "note": "Severity is a function of EVIDENCE CLASS first and size second. Sells and congress never rise above Log. Push carries a prescribed action or it is not push; insider signals never push — a cluster buy's edge plays out over 6-12 months. Thresholds in USD unless stated. Edit here, not in code.",
+ "insider": {
+  "excludeCodes": [
+   "A",
+   "M",
+   "F",
+   "G",
+   "J",
+   "W",
+   "X",
+   "C",
+   "D",
+   "I",
+   "L",
+   "O",
+   "U",
+   "Z"
+  ],
+  "excludeCodesNote": "Only P (open-market purchase) and S (open-market sale) are information. A/M/F are grants, option exercises and tax withholding — compensation, not conviction.",
+  "cluster": {
+   "minDistinctInsiders": 3,
+   "windowDays": 30,
+   "requireNon10b5": true,
+   "anySize": true,
+   "severity": "Notable",
+   "why": "Three or more insiders independently buying with their own money inside a month is the single best-evidenced insider signal in the literature; size is secondary."
+  },
+  "seniorOfficerBuy": {
+   "titles": [
+    "CEO",
+    "Chief Executive",
+    "CFO",
+    "Chief Financial",
+    "Chair",
+    "President",
+    "COO",
+    "Chief Operating"
+   ],
+   "minUSD": 100000,
+   "severity": "Notable"
+  },
+  "stakeIncreaseBuy": {
+   "minIncreasePct": 25,
+   "severity": "Notable",
+   "why": "a buy that lifts the officer's own holding by a quarter is conviction regardless of dollar size — ABOVE a floor. Day-one calibration (10 Sep scan) fired on a $1,740 and a $1,212 buy: a 33% increase of a tiny stake in a penny stock is not a signal.",
+   "minUSD": 25000
+  },
+  "drawdownBuy": {
+   "minBelow52wHighPct": 30,
+   "severity": "Notable",
+   "why": "insiders buying into a 30%+ drawdown is a classic reversal tell"
+  },
+  "otherInsiderBuy": {
+   "minUSD": 200000,
+   "severity": "Notable"
+  },
+  "tenPercentOwnerBuy": {
+   "minUSD": 1000000,
+   "severity": "Notable"
+  },
+  "sells": {
+   "severity": "Log",
+   "briefOnlyForHeldOrWatch": true,
+   "why": "sells carry almost no return information (diversification, tax, 10b5-1 plans); shown in the Inbox at Log; ONE count line in the brief for held/watch names; market-wide sells never reach the brief"
+  },
+  "tenB5OneBuy": {
+   "severity": "Log",
+   "why": "a pre-scheduled plan purchase is not a decision made today"
+  },
+  "marketWideSellAggregate": {
+   "minUSDPerIssuerDay": 5000000,
+   "severity": "Log",
+   "oneLinePerIssuerDay": true,
+   "why": "the Dell case: a sponsor distributing tens of millions in hundreds of lots is worth ONE Log line answering 'did those trades mean anything' — never the brief, never per-filing noise. CTO dissent adopted in aggregate form."
+  }
+ },
+ "ownership": {
+  "activists": [
+   "Elliott",
+   "Starboard",
+   "Pershing Square",
+   "Icahn",
+   "Third Point",
+   "ValueAct",
+   "Trian",
+   "Jana",
+   "Engaged Capital",
+   "Ancora",
+   "Sachem Head",
+   "Land & Buildings"
+  ],
+  "sc13dOnHeldOrWatch": {
+   "severity": "Notable",
+   "canEnterOneAction": true,
+   "why": "a 5% holder with intent to influence, in a name you own, is a re-underwrite trigger"
+  },
+  "sc13dByActivist": {
+   "severity": "Notable"
+  },
+  "sc13gOnHeldOrWatch": {
+   "severity": "Log",
+   "why": "passive 5% crossings are informational"
+  },
+  "other": {
+   "severity": "ignore"
+  }
+ },
+ "funds": {
+  "newQuarter": {
+   "severity": "Log",
+   "why": "a tracked fund filed its quarter"
+  },
+  "bookHit": {
+   "severity": "Notable",
+   "actions": [
+    "New",
+    "Exited"
+   ],
+   "minPctChg": 25,
+   "why": "a tracked discretionary fund opened, exited or moved ≥25% in a name you hold or watch",
+   "excludeKinds": [
+    "macro"
+   ],
+   "excludeKindsWhy": "Bridgewater (kind macro, ~1,000 positions) moved 11 of the 14 watchlist names in 2026 Q2 — portfolio-scale rebalancing, not conviction. Its moves stay in the Inbox at Log. Remove 'macro' to escalate them."
+  },
+  "consensus": {
+   "severity": "Log",
+   "minFunds": 3
+  },
+  "excludeKinds": [
+   "quant",
+   "index"
+  ],
+  "backfill": {
+   "severity": "Log",
+   "why": "the first scan (13 Sep 2026) ingested every fund’s latest quarter weeks after it was filed (13f.json events[].bootstrap). A mid-August filing announced as news on 14 Sep is an old table under a fresh date — logged in the Inbox, never the brief"
+  },
+  "note": "13F is quarterly and 45 days late by law — never a push, never the One Action."
+ },
+ "hkex": {
+  "directorBuy": {
+   "severity": "Notable",
+   "why": "a director or chief executive buying their own listed company, on a name you hold"
+  },
+  "directorSell": {
+   "severity": "Log",
+   "why": "sells carry little return information — the same rule as the US Form 4 feed"
+  },
+  "substantialShareholder": {
+   "severity": "Log",
+   "minPctChange": 1,
+   "why": "a 5% holder crossing is usually index or custodian mechanics"
+  },
+  "other": {
+   "severity": "Log"
+  },
+  "note": "HKEX disclosures are filed within 3 business days and carry an average price, so they are fresher than a 13F and more specific than a crossing. Every HK name here is already in the book, so there is no market-wide tier."
+ },
+ "themes": {
+  "cadence": "weekly",
+  "addedOn": "2026-09-20",
+  "ladder": [
+   "Watching",
+   "Candidate",
+   "Evidenced",
+   "Priced"
+  ],
+  "ladderWhy": "stage is the DISCOVERY ladder and nothing else — the highest rung ever attained, because discovery is a historical event. Crowding is a separate axis (see crowdingChange): the radar's first run folded 'Crowded' in as a top rung and produced a file that said stage Crowded three lines under the sentence explaining why the theme was not even a Candidate. A stage this list does not contain is a regression, and validate-all fails on it.",
+  "stageChange": {
+   "severity": "Notable",
+   "channels": [
+    "inbox",
+    "brief"
+   ],
+   "why": "a theme crossing a stage is the only theme event worth a line; a standing stage is wallpaper"
+  },
+  "newTheme": {
+   "severity": "Log",
+   "why": "the first reading of a theme is where the radar found it, not something that happened this week — the same rule as the 13F backfill. A rung reached years ago and only measured now is not news."
+  },
+  "crowdingChange": {
+   "severity": "Log",
+   "why": "crowding is product, not discovery: a theme moving packaged → crowded is the state the owner's own guidance line names, so it is logged in the Inbox every time it moves. It stays below stageChange because it says nothing about whether the filer base ever broadened — a theme can be crowded having never been a Candidate."
+  },
+  "crowdedNeedsEffectiveTrusts": 3,
+  "crowdedWhy": "three DISTINCT trusts with an EFFECTIVE (485BPOS) prospectus, never three filings: 485APOS is a proposal, and one trust amending one prospectus eight times is one ETF family.",
+  "entryWindow": "Evidenced→Priced",
+  "neverInitiateAt": "crowded",
+  "neverInitiateAtWhy": "'crowded' is a value of crowding.level, not a rung — themes.json computes entryWindow as stage === 'Priced' AND crowding.level !== 'crowded', and the pages and the brief report that boolean rather than deriving it again.",
+  "note": "The radar counts filings. It never sizes a position and never enters The One Action."
+ },
+ "channels": {
+  "Notable": [
+   "inbox",
+   "brief"
+  ],
+  "Log": [
+   "inbox"
+  ],
+  "ignore": []
+ },
+ "retention": {
+  "signalsDays": 45,
+  "alertsMax": 2000,
+  "note": "45 days of raw facts covers the 30-day cluster window with margin; alerts.json is append-only and capped by count"
+ },
+ "trend": {
+  "gate": "close > SMA200 AND 12-1 month momentum > 0",
+  "offAfterConsecutiveClosesBelow": 5,
+  "slopeInGate": false,
+  "why": "the only durable edge in the July post-mortem (12,871 observations, 11.5y monthly); the 200-day slope is reported but stays OUT of the gate until the silver backtest says otherwise"
+ },
+ "sizing": {
+  "riskPerNameVolTarget": 0.04,
+  "maxSingleName": 0.1,
+  "maxCluster": 0.2,
+  "clusterMergeCorrelation": 0.75,
+  "lookbackDays": 60,
+  "shadowStart": "2026-09-12",
+  "shadowDays": 90,
+  "why": "inverse-vol with a hard 10% name cap and a 20% cluster cap, clusters by correlation not label; runs in SHADOW — diffed daily, no action asked"
+ },
+ "regime": {
+  "status": "default · CIO recommendation · unconfirmed",
+  "asOf": "2026-09-12",
+  "expected": "~13% CAGR at ~-25% max drawdown at the risk-sleeve level (post-mortem); roughly -12% to -15% at net-worth level once property, SSB, T-bill and cash ballast is counted",
+  "notRules": [
+   "P&L-triggered de-grossing (tested: harmful, return/drawdown 0.67 vs 0.80)",
+   "volatility ceiling (tested: harmful; high-vol bucket was the best over 12y)"
+  ],
+  "killSwitch": "a signal is switched off when its live realised slope turns negative — calibration, not P&L"
+ },
+ "silverLeverage": {
+  "status": "SIGNED 2026-09-12 — Rule 1 alone (decision 1): size the loan so the account survives a 2-day −20% and a 2-week −35% at 1.5x the maintenance rate; leverage ceiling 1.4x with headroom; the trend gate is the position signal, not the borrowing signal",
+  "asOf": "2026-09-12",
+  "targetLeverage": 1.6,
+  "stressMultiplier": 1.5,
+  "rule1": "survive a 2-day -20% and a 2-week -35% silver decline without a margin call, at 1.5x the maintenance rate",
+  "rule2": "STRUCK 2026-09-12 (decision 1) — was: leverage above 1.0x only while the trend gate is ON. The gate remains the position signal; it does not govern the borrowing.",
+  "rule3": "daily carry line: annualised loan cost against silver trailing 12-month return",
+  "backtestVerdict": {
+   "asOf": "2026-09-12",
+   "source": "data/silver-backtest.json (SLV 2006-04-28 → 2026-09-10, margin-account model)",
+   "rule1": "the 1.6x target FAILS Rule 1 by arithmetic: at a 45% stressed rate the largest leverage that survives a 2-week -35% is 1.556x at strike, and leverage drifts up as price falls",
+   "rule2": "the gate did not deliver Rule 1: the gated book was still levered entering 6 of the 8 worst 2-week drops (crashes start from highs, where the gate is ON). Gated 1.6x returned 6.76% CAGR vs 7.25% unlevered with a deeper max drawdown (-85.9% vs -76.3%), 26 de-levers, 9 whipsaws",
+   "fixed": "a never-managed 1.6x loan took one margin call (2008-09-10, forced sale 68.8% below peak equity) and ended at 5.38% CAGR",
+   "recommendation": "do not sign 1.6x. Size the loan by Rule 1 alone (headroom below 1.556x at the stressed rate; 1.0x–1.4x); do not use the trend gate to time leverage. The gate remains the position signal, not the borrowing signal."
+  },
+  "maxLeverage": 1.4,
+  "targetLeverageNote": "1.6 was the proposal's target; backtested 12 Sep 2026 and rejected (fails Rule 1 by arithmetic). Kept here so silver-backtest.js keeps producing the evidence; one-action.js sizes to maxLeverage.",
+  "rule2InForce": false
+ },
+ "decisions": {
+  "1": {
+   "status": "decided",
+   "at": "2026-09-12T05:31:44Z",
+   "via": "session",
+   "summary": "Rule 1 alone; Rule 2 struck; leverage ceiling 1.4x"
+  }
+ }
+}
