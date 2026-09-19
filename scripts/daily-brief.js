@@ -359,9 +359,10 @@ const bullets = a => a.map(x => `\u2022 ${x}`).join('\n');
 // Phase 4: `[ACTION] ` leads the fresh subject only on a push day (a crossing, or the stressed margin
 // call under 25% away) \u2014 a standing condition does not shout. The degraded subject is unchanged.
 const sitePublish = (() => { try { const r = ndjson('.publish-history.ndjson').filter(x => x.status && x.status !== 'dry-run').pop(); return r && r.status === 'red' ? r : null; } catch (_) { return null; } })();
-const SUBJ = isStale
+const BY = ' \u00b7 Claude';   // every email Claude sends says so, so it can be told from other assistants'
+const SUBJ = (isStale
   ? `[DEGRADED] \u{1F534} NO RESEARCH \u2014 day ${outageDays} \u2014 brief is ${briefDay || 'old'} data, not ${today}`
-  : `${sitePublish ? '[SITE STALE] ' : ''}${actionPush ? '[ACTION] ' : ''}\u{1F4CA} Portfolio Morning Brief \u2014 ${today}`;
+  : `${sitePublish ? '[SITE STALE] ' : ''}${actionPush ? '[ACTION] ' : ''}\u{1F4CA} Portfolio Morning Brief \u2014 ${today}`) + BY;
 const fullText = [
   staleBanner + `PORTFOLIO MORNING BRIEF — ${today}`,
   `Data refreshed: ${stamp}`,
@@ -372,6 +373,7 @@ const fullText = [
   ...sections.flatMap(([h, items]) => [`━━ ${h} ━━`, bullets(items), '']),
   `Live dashboard (prices/risk recompute on open): ${DASH}`,
   '',
+  'Sent by Claude (Anthropic) · Portfolio Command Center · research 07:02 SGT, delivered 08:15 SGT.',
   'Decision-support only — not financial advice. Nothing is ever traded automatically.'
 ].join('\n');
 
@@ -481,13 +483,14 @@ const fullHtml = `<div style="font-family:-apple-system,BlinkMacSystemFont,'Helv
   <div style="margin:26px 0 0 0;padding:12px 0 0 0;border-top:1px solid ${AC.grey}44">
     <a href="${DASH}" style="color:${AC.blue};font-weight:700;text-decoration:none">📈 Open the live dashboard →</a>
     <div style="color:${AC.grey};font-size:12px;padding:7px 0 0 0">Prices, probabilities and risk recompute in-browser on every open.</div>
-    <div style="color:${AC.grey};font-size:12px;padding:8px 0 0 0">Decision-support only — not financial advice. Nothing is ever traded automatically.</div>
+    <div style="color:${AC.grey};font-size:12px;padding:8px 0 0 0">Sent by <b style="color:${AC.grey}">Claude</b> (Anthropic) · Portfolio Command Center · research 07:02 SGT, delivered 08:15 SGT.</div>
+    <div style="color:${AC.grey};font-size:12px;padding:4px 0 0 0">Decision-support only — not financial advice. Nothing is ever traded automatically.</div>
   </div>
 </div>`;
 
 // Phase 4: the One Action's `short` line (≤80 chars, one number) leads the push text — it is the
 // one line read on a locked phone. The ntfy body drops the header line (its Title carries it).
-const tgHeader = `📊 *Portfolio Brief — ${today}*`;
+const tgHeader = `📊 *Portfolio Brief — ${today}* · Claude`;
 const tgText = [
   oneAction && oneAction.action.short ? oneAction.action.short : '',
   tgHeader,
@@ -654,7 +657,7 @@ if (env.NTFY_TOPIC) {
   // Phase 4: urgent + rotating_light ONLY on a push day; a standing condition stays a normal push.
   const plain = tgText.split('\n').filter(l => l !== tgHeader).join('\n').replace(/[*_\[\]()]/g, '');
   const r = spawnSync('curl', ['-s', '-o', '/dev/null', '-w', '%{http_code}',
-    '-H', `Title: Portfolio Brief — ${today}`, '-H', `Tags: ${actionPush ? 'rotating_light' : 'chart_with_upwards_trend'}`,
+    '-H', `Title: Claude · Portfolio Brief — ${today}`, '-H', `Tags: ${actionPush ? 'rotating_light' : 'chart_with_upwards_trend'}`,
     '-H', `Priority: ${actionPush ? 'urgent' : 'high'}`, '-d', plain.slice(0, 3800),
     `https://ntfy.sh/${env.NTFY_TOPIC}`], { encoding: 'utf8', timeout: 20000 });
   ntfyOk = (r.stdout || '').trim() === '200';
