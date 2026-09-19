@@ -299,6 +299,169 @@ const out = []; const push = a => { if (existing.has(a.id)) return; if (a.event 
       if (sev === 'Notable') nhk.notable++;
     }
   }
+  // ── PHASE 8: the theme radar (20 Sep 2026) ────────────────────────────────
+  // data/themes.json is EDGAR full-text search COUNTED by scripts/themes.js (GitHub Actions, 06:20
+  // SGT on Mondays); this block only judges it, against policy.themes. Four decisions, each one a
+  // way this feed could contradict itself in the Inbox:
+  //
+  //  1. TWO AXES, TWO ROWS. `stage` is the DISCOVERY ladder (Watching → Candidate → Evidenced →
+  //     Priced) and `crowding` is a separate axis (none / proposed / packaged / crowded). A theme
+  //     can be crowded having never been a Candidate — humanoid robot is exactly that today: its
+  //     distinct filers peaked at 9 and four trusts already have an effective prospectus. Product
+  //     without breadth is a real state, not a contradiction, so it gets its own row with its own
+  //     id, and a stage row never names a crowding level as though it were a rung.
+  //  2. THE LADDER IS POLICY, NOT CODE (policy.themes.ladder). A history row whose `to` is not on
+  //     it belongs to the superseded shape of the file — the radar's first run folded 'Crowded' in
+  //     as a top rung and produced a file that said stage Crowded three lines under the sentence
+  //     explaining why the theme was not even a Candidate. Those rows are counted on stdout and
+  //     never alerted: announcing a stage that no longer exists is the contradiction this phase
+  //     was fixed to remove. A row whose `from` is off the ladder is the same theme RE-DERIVED
+  //     under the new contract, so it is written as the first reading of the rung — never as a
+  //     demotion, because nothing about the theme fell.
+  //  3. A FIRST READING IS NOT NEWS. The rung is the highest ever attained, so a theme found at
+  //     Evidenced was Evidenced months before the radar existed (physical AI's candidateOn is
+  //     2026-03-31). policy.themes.newTheme puts that at Log — the same rule the 13F backfill got
+  //     on 13 Sep. Only a move between two rungs on the ladder is Notable.
+  //  4. CROWDING IS DIFFED AGAINST THIS LOG. themes.json's history[] records stage transitions
+  //     only, so the previous crowding level is read back from the newest theme:…:crowding: row
+  //     already in alerts.json — itself an append-only history, and the only durable record of
+  //     what was last said. Each row carries its level in a `crowding` field so the next run does
+  //     not have to parse an id. When themes.js starts writing crowding into history[], read it
+  //     from there instead and delete the fallback.
+  //
+  // Nothing here pushes (this file has no push channel at all) and nothing here sizes. Every figure
+  // in a row is one themes.json carries, or arithmetic on the numbers it carries; the entry rule is
+  // quoted as the file's own guidance line, attributed, never issued as an instruction. No
+  // themes.json (or no policy.themes) → nothing, silently.
+  const TH = J('themes.json'), PT = policy.themes;
+  const nth = { stage: 0, crowding: 0, offLadder: 0 };
+  let thLog = null;
+  if (TH && PT) {
+    const LADDER = Array.isArray(PT.ladder) && PT.ladder.length ? PT.ladder : ['Watching', 'Candidate', 'Evidenced', 'Priced'];
+    const RUNG = LADDER.join(' → ');
+    const onLadder = s => LADDER.indexOf(s) >= 0;
+    const slug = s => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    const themeOf = new Map((TH.themes || []).map(t => [t.term, t]));
+    const nOf = v => v == null ? '?' : Number(v).toLocaleString();
+    const GUIDE = TH.guidance ? `themes.json’s own guidance line, quoted: “${TH.guidance}”` : null;
+    const NOTE = PT.note ? `policy.themes: ${PT.note}` : null;
+    // Which of the theme's filers the owner actually owns or watches. Zero is the normal answer and
+    // is said out loud — the tag would otherwise imply a book connection that does not exist.
+    function bookOverlap(t) {
+      const seen = new Set(), hits = [];
+      for (const f of (t && t.filersNewest) || []) {
+        const k = f && f.ticker ? String(f.ticker).toUpperCase() : null;
+        if (!k || seen.has(k)) continue;
+        seen.add(k);
+        const g = held.get(k);
+        if (g) hits.push({ ticker: k, where: g });
+      }
+      return { tag: hits.some(h => h.where === 'in-book') ? 'in-book' : hits.some(h => h.where === 'watchlist') ? 'watchlist' : 'market-wide', hits };
+    }
+    // Every fragment is a number themes.json carries, or arithmetic over the numbers it carries.
+    function numbers(t) {
+      const L = [];
+      const comp = (t.quarters || []).filter(q => q && !q.partial && q.filers != null);
+      const open = (t.quarters || []).filter(q => q && q.partial).pop() || null;
+      const a = comp[comp.length - 2] || null, b = comp[comp.length - 1] || null;
+      if (a && b) L.push(`distinct filers ${a.q} ${nOf(a.filers)} → ${b.q} ${nOf(b.filers)}${a.truncated || b.truncated ? ' — a quarter at the paging ceiling carries a floor, not a count, so that pair is set aside unscored' : ''}`);
+      else if (b) L.push(`distinct filers ${b.q} ${nOf(b.filers)} — only one complete quarter carries a count`);
+      else L.push('no complete quarter carries a filer count');
+      if (open) L.push(`${open.q} is still open (${nOf(open.filings)} filings, ${nOf(open.filers)} filers through ${open.to}) — reported, never compared`);
+      const peak = comp.reduce((m, q) => (m && m.filers >= q.filers ? m : q), null);
+      if (peak) L.push(`highest in any complete quarter: ${nOf(peak.filers)} filers (${peak.q})`);
+      L.push(t.candidateOn ? `first doubled its distinct filers from a base above ten on ${t.candidateOn}` : 'has never doubled its distinct filers from a base above ten, so it has never been a Candidate');
+      const c = t.crowding || {};
+      L.push(`crowding ${c.level || '?'} — ${nOf(c.effectiveTrusts)} distinct trust(s) with an EFFECTIVE (485BPOS) prospectus across ${nOf(c.effectiveFilings)} filing(s), ${nOf(c.proposedFilings)} proposed (485APOS/N-1A), ${nOf(c.initiations)} fund-launch headline(s)`);
+      if ((c.trusts || []).length) L.push(`trusts: ${c.trusts.slice(0, 4).map(x => `${x.trust} ${x.form} ${x.date}`).join('; ')}${c.trusts.length > 4 ? ` +${c.trusts.length - 4} more` : ''}`);
+      const cl = (t.insiderOverlap || []).filter(o => o && o.cluster);
+      L.push(cl.length
+        ? `insider cluster among the theme’s own filers: ${cl.map(o => `${o.ticker || o.cik} (${nOf(o.insiders)} insiders by ${o.clusterOn})`).join(', ')}`
+        : `no insider cluster among the ${(t.insiderOverlap || []).length} theme filer(s) that also appear in signals.json`);
+      L.push(`${(t.pricedNames || []).length} of the theme’s names are in closes.json${(t.pricedNames || []).length ? ` (${t.pricedNames.join(', ')})` : ''} — co-movement needs 3, so the price leg is refused rather than invented`);
+      L.push(`entry window ${t.entryWindow ? 'OPEN' : 'closed'} — themes.json computes it as stage Priced AND crowding not crowded`);
+      const bo = bookOverlap(t);
+      L.push(bo.hits.length
+        ? `book/watchlist overlap: ${bo.hits.map(h => `${h.ticker} (${h.where})`).join(', ')}`
+        : 'none of the theme’s filers is in the book or on the watchlist');
+      return L;
+    }
+
+    // ── stage rows, straight from history[] ────────────────────────────────
+    const hist = (TH.history || []).slice().sort((x, y) => String(x.at || '').localeCompare(String(y.at || '')));
+    for (const h of hist) {
+      if (!h || !h.term || !h.to) continue;
+      if (!onLadder(h.to)) { nth.offLadder++; continue; }
+      const at = String(h.at || TH.asOf || today).slice(0, 10);
+      const id = `theme:${slug(h.term)}:stage:${h.from || 'none'}->${h.to}:${at}`;
+      if (existing.has(id)) continue;
+      const first = !h.from || !onLadder(h.from);
+      const tier = first ? PT.newTheme : PT.stageChange;
+      const sev = (tier && tier.severity) || (first ? 'Log' : 'Notable');
+      if (sev === 'ignore') continue;
+      const t = themeOf.get(h.term) || null;
+      const bo = bookOverlap(t);
+      const lead = first
+        ? (h.from
+          ? `history records this row as ‘${h.from}’ → ‘${h.to}’. ‘${h.from}’ is not on the discovery ladder (${RUNG}): crowding became a separate axis on ${PT.addedOn || '2026-09-20'}, so this is the FIRST READING of the rung and nothing about the theme fell`
+          : `the first time the radar placed this theme on the discovery ladder (${RUNG}) — the rung is the highest ever attained, not this quarter’s reading`)
+        : `moved ${h.from} → ${h.to} on the discovery ladder (${RUNG}) — the rung is the highest ever attained, so it never falls back on a quiet quarter`;
+      push({ id, date: at, severity: sev, family: 'theme', ticker: null, issuer: h.term,
+        term: h.term, axis: 'stage', stage: h.to,
+        tags: [bo.tag, 'theme', 'stage', h.to, ...(first ? ['first-reading'] : [])],
+        headline: first
+          ? `${h.term} · theme stage ${h.to} · first reading`
+          : `${h.term} · theme stage ${h.from} → ${h.to}`,
+        detail: [lead,
+          ...(t ? numbers(t) : ['this term is no longer carried in themes.json.themes[], so no count can be quoted for it']),
+          (h.why || []).length ? `themes.json why[]: ${h.why.join(' | ')}` : null,
+          t && (t.entryWindow || (t.crowding && t.crowding.level === 'crowded')) ? GUIDE : null,
+          tier && tier.why ? `why ${sev}: ${tier.why}` : null, NOTE].filter(Boolean).join(' · '),
+        url: null, clearsWhen: 'read' });
+      nth.stage++;
+    }
+
+    // ── crowding rows, diffed against the newest crowding row in this log ──
+    const levelOf = a => (a && a.crowding) || (/->([a-z]+):\d{4}-\d{2}-\d{2}$/.exec(String((a && a.id) || '')) || [])[1] || null;
+    for (const t of (TH.themes || [])) {
+      if (!t || !t.term || !t.crowding || !t.crowding.level) continue;
+      const level = t.crowding.level;
+      const pre = prior.alerts.filter(a => a && typeof a.id === 'string' && a.id.indexOf(`theme:${slug(t.term)}:crowding:`) === 0)
+        .sort((x, y) => String(y.at || '').localeCompare(String(x.at || '')))[0] || null;
+      const prev = levelOf(pre);
+      if (prev === level) continue;
+      // The ABSENCE of product is not an event. A term seeded this week with no ETF at all would
+      // otherwise open its life with a row announcing that nobody has filed a prospectus about it.
+      if (!prev && level === 'none') continue;
+      const at = String(TH.asOf || today).slice(0, 10);
+      const id = `theme:${slug(t.term)}:crowding:${prev || 'none'}->${level}:${at}`;
+      if (existing.has(id)) continue;
+      const tier = PT.crowdingChange || {};
+      const sev = tier.severity || 'Log';
+      if (sev === 'ignore') continue;
+      const c = t.crowding, bo = bookOverlap(t);
+      const newest = (t.etfs || []).filter(e => e && e.effective && e.url)
+        .sort((x, y) => String(y.date).localeCompare(String(x.date)))[0] || null;
+      const lead = prev
+        ? `crowding moved ${prev} → ${level}; the discovery rung is unchanged at ${t.stage}`
+        : `the first crowding reading the radar has recorded for this term; the discovery rung is ${t.stage}`;
+      const split = level === 'crowded' && !t.candidateOn
+        ? `this theme is crowded while its rung is ${t.stage} and it has never been a Candidate — product without breadth: the prospectuses exist, the filer base never doubled. Both readings are true at once and neither cancels the other`
+        : null;
+      push({ id, date: at, severity: sev, family: 'theme', ticker: null, issuer: t.term,
+        term: t.term, axis: 'crowding', crowding: level, stage: t.stage,
+        tags: [bo.tag, 'theme', 'crowding', level, ...(prev ? [] : ['first-reading'])],
+        headline: `${t.term} · theme crowding ${prev ? `${prev} → ${level}` : `${level} · first reading`} · ${nOf(c.effectiveTrusts)} trust(s) with an effective prospectus`,
+        detail: [lead, split, ...numbers(t),
+          level === 'crowded' || t.entryWindow ? GUIDE : null,
+          tier.why ? `why ${sev}: ${tier.why}` : null, NOTE].filter(Boolean).join(' · '),
+        url: newest ? newest.url : null, clearsWhen: 'read' });
+      nth.crowding++;
+    }
+    thLog = `  themes: +${nth.stage} stage · +${nth.crowding} crowding`
+      + (nth.offLadder ? ` · ${nth.offLadder} history row(s) name a stage that is not on the ladder (${RUNG}) — the superseded shape of the file, not alerted` : '')
+      + ` · ${(TH.themes || []).length} theme(s) (scan checked ${(TH.scan && TH.scan.checkedAt) || 'never'})`;
+  }
   // ── write, append-only ────────────────────────────────────────────────────
   const alerts = out.concat(prior.alerts).sort((a, b) => (b.date || '').localeCompare(a.date || '') || (b.at || '').localeCompare(a.at || '')).slice(0, policy.retention.alertsMax);
   fs.writeFileSync(D('alerts.json'), JSON.stringify({ generatedAt: new Date().toISOString(), policyVersion: policy.version, meta: { evaluated: [...evaluated].slice(-8000) }, alerts }, null, 1) + '\n');
@@ -306,5 +469,6 @@ const out = []; const push = a => { if (existing.has(a.id)) return; if (a.event 
   console.log(`alerts.json: +${out.length} (${n.length} Notable) · ${alerts.length} total · evaluated ${evaluated.size} filings`);
   n.slice(0, 8).forEach(a => console.log(`  ! ${a.date} ${a.headline} [${a.tags.join(' ')}]`));
   if (F13 && PF) console.log(`  13F: +${n13.filing} filing · +${n13.hit} book/watch hit · +${n13.consensus} consensus (scan checked ${(F13.scan && F13.scan.checkedAt) || 'never'})`);
+  if (thLog) console.log(thLog);
   if (HK && PH) console.log(`  HKEX: +${nhk.rows} notice(s) (${nhk.notable} Notable) of ${(HK.filings || []).length} retained · ${(HK.universe || []).length} code(s) (scan checked ${(HK.scan && HK.scan.checkedAt) || 'never'})`);
 })();

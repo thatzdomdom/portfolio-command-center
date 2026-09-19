@@ -61,6 +61,16 @@ const SPEC = {
                           return isNaN(t) ? null : new Date(t).toLocaleDateString('en-CA', { timeZone: 'Asia/Singapore' }); },
                         cadence: 'daily', count: j => (j.filings || []).length,
                         source: 'hkex-di.js (HKEX Disclosure of Interests, keyless; GitHub Actions; asOf = last successful scan, count = notices retained)' },
+  // Phase 8 (20 Sep 2026): the theme radar. asOf is the SGT date of the RUN (themes.json.asOf, the
+  // date the quarters were counted through), not the newest filing and not a quarter end, because
+  // what this file measures is a COUNT taken on a day — the same distinction 13f.json makes the
+  // other way round. Cadence weekly: filing counts move on a quarterly clock, so freshness() gives
+  // it 8 days before amber, which is one missed Monday of slack and no more. count is the number of
+  // seeded terms, and a term that returned nothing is still a term — zero terms would mean
+  // watchlist.json lost its themes[], which is a red the dashboard should show.
+  'themes.json':      { as: j => j.asOf || (j.scan && j.scan.checkedAt ? new Date(Date.parse(j.scan.checkedAt)).toLocaleDateString('en-CA', { timeZone: 'Asia/Singapore' }) : null),
+                        cadence: 'weekly', count: j => (j.themes || []).length,
+                        source: 'themes.js (SEC EDGAR full-text search, keyless; GitHub Actions, 06:20 SGT Monday; count = seeded terms)' },
 };
 
 const files = {};

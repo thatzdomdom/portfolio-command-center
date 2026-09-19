@@ -246,6 +246,96 @@ function f13IntegrityLine() {
       + (S.ok === false || errs.length ? ` · last scan: ${errs.length} error(s)${errs[0] ? ` — ${errs[0].fund} ${errs[0].stage}` : ''}` : '');
   } catch (e) { return `13F: status line could not be computed (${String(e.message).slice(0, 80)})`; }
 }
+// Phase 8 (20 Sep 2026): THE THEME RADAR, MONDAY ONLY. data/themes.json is written weekly by
+// scripts/themes.js (GitHub Actions, 06:20 SGT Monday, before the 07:02 Mac run): EDGAR full-text
+// search COUNTED, quarter by quarter, so a trend sentence has a number under it. Three things
+// decide how this block reads:
+//
+//  - MONDAY ONLY, AND IT NEVER DISAPPEARS. Filing counts move on a quarterly clock, so a daily
+//    theme line would be the same sentence five mornings running — wallpaper, which is what the
+//    proposal said a standing stage is. But a block that vanishes when nothing moved is
+//    indistinguishable from a block whose file died, so on a quiet Monday it says "no stage change
+//    this week" out loud and stamps the radar's own last check beside it.
+//  - TWO AXES. `stage` is the discovery ladder (policy.themes.ladder) and the rung is the HIGHEST
+//    EVER ATTAINED — physical AI is Evidenced on a quarter that did not double. `crowding` is a
+//    separate axis, and a theme can be crowded having never been a Candidate. Reporting the two as
+//    one number is what produced a file that said "Crowded" three lines under the sentence
+//    explaining why the theme was not even a Candidate.
+//  - IT REPORTS, IT DOES NOT ADVISE. themes.json's guidance line is quoted as the file's own line,
+//    attributed, and every figure here is one themes.json carries. No sizing, no entry, nothing
+//    that could become The One Action — that is computed by one-action.js from other files.
+//
+// The Monday test is the SGT weekday of the RUN. Under --dry-run only, --weekday=Mon substitutes a
+// weekday so the block can be read on any day; the 08:15 job runs without --dry-run and can never
+// reach that branch.
+try {
+  const WD = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const wdArg = (process.argv.find(a => /^--weekday=/.test(a)) || '').split('=')[1];
+  const dow = DRY && wdArg ? String(wdArg).slice(0, 3).replace(/^./, c => c.toUpperCase()) : WD[new Date(Date.parse(todaySGT + 'T00:00:00Z')).getUTCDay()];
+  if (dow === 'Mon') {
+    const TH = readJson('themes.json'), PT = (readJson('policy.json') || {}).themes || {};
+    const L = [];
+    if (!TH) {
+      L.push('data/themes.json is absent — scripts/themes.js (GitHub Actions, 06:20 SGT Monday) has not produced it. No theme is counted this week, and nothing below stands in for the count.');
+    } else {
+      const LADDER = Array.isArray(PT.ladder) && PT.ladder.length ? PT.ladder : ['Watching', 'Candidate', 'Evidenced', 'Priced'];
+      const onLadder = s => LADDER.indexOf(s) >= 0;
+      const since = new Date(Date.parse(todaySGT + 'T00:00:00Z') - 7 * 864e5).toISOString().slice(0, 10);
+      const ths = (TH.themes || []).filter(Boolean);
+      const themeOf = new Map(ths.map(t => [t.term, t]));
+      const nOf = v => v == null ? '?' : Number(v).toLocaleString();
+      const qOf = t => {
+        const c = (t.quarters || []).filter(q => q && !q.partial && q.filers != null);
+        const a = c[c.length - 2], b = c[c.length - 1];
+        return a && b ? `distinct filers ${a.q} ${nOf(a.filers)} → ${b.q} ${nOf(b.filers)}`
+          : b ? `distinct filers ${b.q} ${nOf(b.filers)} (only one complete quarter carries a count)`
+          : 'no complete quarter carries a filer count';
+      };
+      // A history row whose `to` is not on the ladder belongs to the superseded shape of the file
+      // (the first run folded 'Crowded' in as a top rung); it is not a stage change and is not read.
+      const moves = (TH.history || []).filter(h => h && h.to && onLadder(h.to) && String(h.at || '') >= since)
+        .sort((a, b) => String(a.at).localeCompare(String(b.at)) || String(a.term).localeCompare(String(b.term)));
+      moves.forEach(h => {
+        const t = themeOf.get(h.term) || {};
+        const first = !h.from || !onLadder(h.from);
+        L.push(`${h.term}: ${first ? `first reading on the ladder — ${h.to}` : `${h.from} → ${h.to}`} (${dmy(h.at)})`
+          + `\n   → ${qOf(t)} · ${t.candidateOn ? `first doubled its filers from a base above ten on ${dmy(t.candidateOn)}` : 'has never doubled its filers from a base above ten'}`
+          + ` · ${(t.pricedNames || []).length} of its names are in closes.json${(t.pricedNames || []).length ? ` (${t.pricedNames.join(', ')})` : ''}, and co-movement needs 3, so the price leg is refused rather than invented`);
+      });
+      if (!moves.length) {
+        L.push(`no stage change this week — nothing moved on the ladder since ${dmy(since)}. ${ths.length ? ths.map(t => `${t.term} ${t.stage}`).join(' · ') : 'no term is seeded'}. The rung is the highest ever attained, so a quiet week leaves it exactly where it was.`);
+      }
+      // The standing state. On the radar's first real Mondays this is the whole output, and it is a
+      // reading, not a recommendation: the entry window is a boolean themes.json already computed.
+      const open = ths.filter(t => t.entryWindow), crowded = ths.filter(t => t.crowding && t.crowding.level === 'crowded');
+      const noCand = crowded.filter(t => !t.candidateOn);
+      const quote = TH.guidance ? ` themes.json’s own guidance line, quoted: “${TH.guidance}”` : '';
+      if (open.length) {
+        L.push(`entry window OPEN: ${open.map(t => `${t.term} (${t.stage}, crowding ${t.crowding ? t.crowding.level : '?'})`).join(', ')} — themes.json computes entryWindow as stage Priced AND crowding not crowded.${quote}`);
+      } else {
+        L.push(`entry window: none open. ${ths.map(t => `${t.term} is ${t.stage} with crowding ${t.crowding ? t.crowding.level : '?'} (${nOf(t.crowding && t.crowding.effectiveTrusts)} trust(s) with an effective 485BPOS prospectus across ${nOf(t.crowding && t.crowding.effectiveFilings)} filing(s))`).join('; ')}.`
+          + (ths.length && crowded.length === ths.length ? ' Every term the radar carries is already packaged and sold.' : '')
+          + (noCand.length ? ` ${noCand.map(t => t.term).join(' and ')} reached that state without ever being a Candidate — product without breadth: the prospectuses exist, the filer base never doubled. Both readings are true at once.` : '')
+          + ' That is what has been filed, reported as a state; it is not a suggestion to do anything or to avoid anything.' + quote);
+      }
+      const trunc = ths.filter(t => ((t.quarters || []).filter(q => q && !q.partial).pop() || {}).truncated);
+      if (trunc.length) L.push(`${trunc.map(t => t.term).join(', ')}: the newest complete quarter hit the 200-hit paging ceiling, so its filer count is a floor and every pair touching it is set aside unscored.`);
+      // The research step's paragraphs (SKILL, Monday only). One per stage change, citing accession
+      // numbers; no stage change means no paragraph and no tokens spent.
+      const paras = (fresh && brief && Array.isArray(brief.themes) ? brief.themes : [])
+        .map(p => typeof p === 'string' ? p : (p && (p.text || p.paragraph)) || '').map(s => String(s).trim()).filter(Boolean);
+      paras.forEach(p => L.push(p));
+      if (moves.length && !paras.length) L.push(`brief.json carries no themes[] paragraph for ${moves.length === 1 ? 'this change' : 'these changes'} — the research step writes one per stage change, citing the accession numbers in themes.json. The counts above stand on their own.`);
+      const checked = TH.scan && TH.scan.checkedAt ? sgtDay(TH.scan.checkedAt) : null;
+      const age = checked ? Math.round((Date.parse(todaySGT) - Date.parse(checked)) / 864e5) : null;
+      L.push(age == null || age > 10
+        ? `the theme radar is DEAD, not quiet — last checked ${checked ? dmy(checked) : 'never'}${age == null ? '' : ` (${age}d ago)`}; the weekly 06:20 SGT themes workflow has not completed since, so every count above is at least that old.`
+        : `radar checked ${dmy(checked)} (${age === 0 ? 'today' : age + 'd ago'}) · ${TH.scan && TH.scan.requests != null ? TH.scan.requests : '?'} EFTS request(s), ${((TH.scan && TH.scan.errors) || []).length} error(s) · ${ths.length} term(s) · weekly by design: a daily run would spend requests watching a number that cannot move · every theme row is in inbox.html under family "theme".`);
+    }
+    sections.unshift(['🔔 SIGNALS — THEME RADAR (weekly, Mondays only)', L]);
+  }
+} catch (e) { sections.unshift(['🔔 SIGNALS — THEME RADAR', [`the theme block could not be composed (${String(e.message).slice(0, 100)}) — data/themes.json is there or it is not, but this line is not a count`]]); }
+
 // Phase 2 (11 Sep 2026): insider and ownership signals now come from data/alerts.json — the
 // append-only log written by scripts/alerts.js from the market-wide EDGAR scan — not from the
 // retired 15-name poller's queue. Notables since the previous brief lead; held/watch sells get ONE
@@ -432,6 +522,7 @@ const impactChip = t => {
 };
 const SECTION_ICON = h => {
   if (/TLDR/i.test(h)) return '📌';
+  if (/THEME/i.test(h)) return '🧭';
   if (/ACTION/i.test(h)) return '🎯';
   if (/REPLIES/i.test(h)) return '↩️';
   if (/INSIDER/i.test(h)) return '🔔';

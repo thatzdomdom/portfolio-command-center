@@ -563,6 +563,74 @@ else {
   } catch (e) { warn('hkex.json', `PHASE 7 check did not run: ${String((e && e.message) || e).slice(0, 120)}`); }
 }
 
+// ── PHASE 8: the theme radar ───────────────────────────────────────────────
+// (added 20 Sep 2026) scripts/themes.js (GitHub Actions, 06:20 SGT Monday) counts EDGAR full-text
+// search hits per quarter into data/themes.json; alerts.js judges it against policy.themes.
+//
+// LIVENESS IS JUDGED ON THE SCAN, AT A WEEKLY CADENCE PLUS SLACK. Filing counts move on a quarterly
+// clock, so the numbers in this file are SUPPOSED to sit still for weeks — a test on whether a count
+// changed would call a healthy radar dead every week of the quarter. What must not happen is the
+// weekly workflow quietly stopping, and that is visible in scan.checkedAt alone: 7 days of cadence
+// plus 3 of slack, so one missed Monday warns nobody and two are a failure.
+//
+// THE REST OF THIS BLOCK GUARDS THE FILE AGAINST ITSELF. The radar's first real run wrote a file
+// that said stage "Crowded" three lines under the sentence explaining why the theme was not even a
+// Candidate: Crowded had been folded into the ladder as a top rung. The fix split the two axes, and
+// these checks are what stops them being folded back together — a stage off policy.themes.ladder,
+// an entry window open while the theme is crowded or not Priced, a candidateOn on a theme still at
+// Watching, 'crowded' claimed on fewer than three EFFECTIVE trusts. The Priced check is the one the
+// spec named: Priced with fewer than three priced names is a fabricated price leg, which is the
+// 6 Jul failure in a new costume, so it is a FAIL and not a warning.
+// Wrapped: a bug in this block warns; it is never, on its own, the reason the 07:02 publish stops.
+{
+  try {
+    const TH = J('themes.json');
+    if (!TH) {
+      if (fs.existsSync(path.join(D, 'themes.json'))) fail('themes.json', 'unparseable — the theme rows, the Monday brief block and every page that reads them are broken this run');
+      else warn('themes.json', 'absent — themes.js has not run (GitHub Actions, weekly, 06:20 SGT Monday)');
+    } else {
+      const POL = J('policy.json') || {};
+      const PT = POL.themes || {};
+      const LADDER = Array.isArray(PT.ladder) && PT.ladder.length ? PT.ladder : ['Watching', 'Candidate', 'Evidenced', 'Priced'];
+      const onLadder = s => LADDER.indexOf(s) >= 0;
+      const NEED_TRUSTS = PT.crowdedNeedsEffectiveTrusts == null ? 3 : PT.crowdedNeedsEffectiveTrusts;
+      const sgtOf = iso => { const t = Date.parse(iso); return isNaN(t) ? null : new Date(t).toLocaleDateString('en-CA', { timeZone: 'Asia/Singapore' }); };
+      const when = (TH.scan && sgtOf(TH.scan.checkedAt)) || null;
+      const age = when ? daysAgo(when) : null;
+      const themes = (TH.themes || []).filter(Boolean);
+      if (age == null) fail('themes.json', 'no scan time recorded — a live theme radar cannot be told from a dead one, and its numbers are meant to sit still for weeks');
+      else if (age > 10) fail('themes.json', `last checked ${age} days ago (${when}) — the theme radar is DEAD, not quiet (weekly cadence plus 3 days of slack)`);
+      else ok(`themes: last checked ${when} (${age === 0 ? 'today' : age + 'd ago'}) · ${themes.length} term(s) · ${(TH.history || []).length} history row(s) · ${(TH.scan && TH.scan.requests != null) ? TH.scan.requests : '?'} EFTS request(s)`);
+      const errs = (TH.scan && Array.isArray(TH.scan.errors)) ? TH.scan.errors : [];
+      if (errs.length) warn('themes.json', `last scan recorded ${errs.length} error(s) — ${errs.slice(0, 3).map(e => `${e.term || e.stage || '?'}: ${String(e.why || e.message || '').slice(0, 60)}`).join('; ')}`);
+      let clean = 0;
+      for (const t of themes) {
+        const term = t.term || '(unnamed term)';
+        const qs = (t.quarters || []).filter(Boolean);
+        const newest = qs[qs.length - 1] || null;
+        const trunc = qs.filter(q => q.truncated);
+        const priced = (t.pricedNames || []).length;
+        const lvl = (t.crowding && t.crowding.level) || null;
+        const effT = t.crowding && t.crowding.effectiveTrusts != null ? t.crowding.effectiveTrusts : null;
+        const inits = (t.crowding && t.crowding.initiations) || 0;
+        let bad = 0;
+        if (newest && newest.truncated) { warn('themes.json', `${term}: the newest quarter ${newest.q} hit the paging ceiling (truncated) — its filer count is a floor, not a count, and every pair touching it is set aside unscored`); bad++; }
+        else if (trunc.length) { warn('themes.json', `${term}: ${trunc.map(q => q.q).join(', ')} hit the paging ceiling (truncated) — those pairs are floors and are set aside unscored`); bad++; }
+        if (!onLadder(t.stage)) { fail('themes.json', `${term}: stage "${t.stage}" is not on the discovery ladder (${LADDER.join(' → ')}) — crowding is a separate axis and must never be folded back in as a rung`); bad++; }
+        if (t.stage === 'Priced' && priced < 3) { fail('themes.json', `${term}: stage Priced with only ${priced} of its names in closes.json — co-movement needs 3, so this price leg was fabricated`); bad++; }
+        if (t.entryWindow === true && t.stage !== 'Priced') { fail('themes.json', `${term}: entryWindow is true at stage ${t.stage} — the window is stage Priced AND crowding not crowded, and nothing else`); bad++; }
+        if (t.entryWindow === true && lvl === 'crowded') { fail('themes.json', `${term}: entryWindow is true while crowding is crowded — the two contradict each other and the brief would print both`); bad++; }
+        if (t.candidateOn && t.stage === 'Watching') { fail('themes.json', `${term}: candidateOn ${t.candidateOn} but stage Watching — the rung is the highest EVER attained, so a theme that once doubled its filers cannot fall back to Watching`); bad++; }
+        if (lvl === 'crowded' && effT != null && effT < NEED_TRUSTS && inits < 3) { fail('themes.json', `${term}: crowded on ${effT} effective trust(s) — crowded needs ${NEED_TRUSTS} DISTINCT trusts with a 485BPOS prospectus (or an initiation wave), never ${NEED_TRUSTS} filings from one trust`); bad++; }
+        if (!bad) clean++;
+      }
+      const offLadder = (TH.history || []).filter(h => h && h.to && !onLadder(h.to));
+      if (offLadder.length) warn('themes.json', `${offLadder.length} history row(s) name a stage that is not on the ladder (${[...new Set(offLadder.map(h => h.to))].join(', ')}) — written by a superseded shape of the file; alerts.js does not announce them`);
+      if (themes.length && clean === themes.length) ok(`themes: all ${themes.length} term(s) internally consistent — stage on the ladder, entry window only at Priced and not crowded, no Priced without 3 priced names, no quarter at the paging ceiling`);
+    }
+  } catch (e) { warn('themes.json', `PHASE 8 check did not run: ${String((e && e.message) || e).slice(0, 120)}`); }
+}
+
 // ── report ─────────────────────────────────────────────────────────────────
 // Always written — even from the catch-all below — so research-headless.sh's alarm and the brief
 // never read yesterday's report for today's failure.

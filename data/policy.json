@@ -158,6 +158,39 @@
   },
   "note": "HKEX disclosures are filed within 3 business days and carry an average price, so they are fresher than a 13F and more specific than a crossing. Every HK name here is already in the book, so there is no market-wide tier."
  },
+ "themes": {
+  "cadence": "weekly",
+  "addedOn": "2026-09-20",
+  "ladder": [
+   "Watching",
+   "Candidate",
+   "Evidenced",
+   "Priced"
+  ],
+  "ladderWhy": "stage is the DISCOVERY ladder and nothing else — the highest rung ever attained, because discovery is a historical event. Crowding is a separate axis (see crowdingChange): the radar's first run folded 'Crowded' in as a top rung and produced a file that said stage Crowded three lines under the sentence explaining why the theme was not even a Candidate. A stage this list does not contain is a regression, and validate-all fails on it.",
+  "stageChange": {
+   "severity": "Notable",
+   "channels": [
+    "inbox",
+    "brief"
+   ],
+   "why": "a theme crossing a stage is the only theme event worth a line; a standing stage is wallpaper"
+  },
+  "newTheme": {
+   "severity": "Log",
+   "why": "the first reading of a theme is where the radar found it, not something that happened this week — the same rule as the 13F backfill. A rung reached years ago and only measured now is not news."
+  },
+  "crowdingChange": {
+   "severity": "Log",
+   "why": "crowding is product, not discovery: a theme moving packaged → crowded is the state the owner's own guidance line names, so it is logged in the Inbox every time it moves. It stays below stageChange because it says nothing about whether the filer base ever broadened — a theme can be crowded having never been a Candidate."
+  },
+  "crowdedNeedsEffectiveTrusts": 3,
+  "crowdedWhy": "three DISTINCT trusts with an EFFECTIVE (485BPOS) prospectus, never three filings: 485APOS is a proposal, and one trust amending one prospectus eight times is one ETF family.",
+  "entryWindow": "Evidenced→Priced",
+  "neverInitiateAt": "crowded",
+  "neverInitiateAtWhy": "'crowded' is a value of crowding.level, not a rung — themes.json computes entryWindow as stage === 'Priced' AND crowding.level !== 'crowded', and the pages and the brief report that boolean rather than deriving it again.",
+  "note": "The radar counts filings. It never sizes a position and never enters The One Action."
+ },
  "channels": {
   "Notable": [
    "inbox",

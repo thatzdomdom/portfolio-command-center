@@ -282,9 +282,27 @@ window.BOOK = (function () {
     out.sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : 0; });
     return out;
   }
+  // Phase 8 (20 Sep 2026): which themes name this line among their own EDGAR filers. The spec asked
+  // for the join to be made on CIK, and the CIK is what the answer QUOTES — but data/book.json
+  // carries no CIK on any of its 59 holdings, so the only key that exists on both sides is the
+  // ticker EDGAR's display_names carry. The match is therefore ticker → filersNewest[].ticker and
+  // the matched filer's cik is printed so the claim can be checked against EDGAR by hand. Saying
+  // the join was made on CIK when it was made on a ticker would be exactly the small lie this page
+  // exists to avoid. A theme's stage is the discovery ladder; crowding is a separate axis.
+  function themesFor(row, themes) {
+    var keys = {}, out = [], SUF = /\.(SI|HK|AX|KS|T)$/;
+    if (row.t) keys[String(row.t).toUpperCase()] = 1;
+    if (row.yf) keys[String(row.yf).replace(SUF, '').toUpperCase()] = 1;
+    ((themes && themes.themes) || []).forEach(function (th) {
+      var hits = ((th && th.filersNewest) || []).filter(function (f) { return f && f.ticker && keys[String(f.ticker).toUpperCase()]; });
+      if (hits.length) out.push({ term: th.term, stage: th.stage, candidateOn: th.candidateOn || null,
+        crowding: (th.crowding && th.crowding.level) || null, entryWindow: th.entryWindow === true, filers: hits });
+    });
+    return out;
+  }
   /* JOIN:END */
 
-  return { joinRows: joinRows, filingsFor: filingsFor, sma200Series: sma200Series,
+  return { joinRows: joinRows, filingsFor: filingsFor, themesFor: themesFor, sma200Series: sma200Series,
     gateOffBands: gateOffBands, ytdPct: ytdPct, symbolIndex: symbolIndex, sliceTo: sliceTo };
 })();
 </script>
@@ -522,6 +540,26 @@ window.BOOK = (function () {
       if (fl.length > 8) ul.appendChild(E('li', { class: 'soft', text: (fl.length - 8) + ' older filings — the full log is the Inbox.' }));
     }
     left.appendChild(ul);
+    // Phase 8: the theme radar's filer lists, joined to this line. A count of filings that named a
+    // phrase — never a view on the position, and never a reason to do anything with it.
+    var tmatch = B.themesFor(row, S.themes);
+    if (tmatch.length || (S.themes && row.quoted)) {
+      left.appendChild(E('h3', { text: 'Themes' }));
+      var tul = E('ul', {});
+      tmatch.forEach(function (x) {
+        tul.appendChild(E('li', {}, [E('span', { class: 'tk', text: x.term + ' · ' }), E('span', { text:
+          'stage ' + x.stage + (x.candidateOn ? ' (first doubled its distinct filers from a base above ten on ' + P.dateShort(x.candidateOn) + ')' : ' — never a Candidate')
+          + ' · crowding ' + (x.crowding || '?') + ' · entry window ' + (x.entryWindow ? 'open' : 'closed')
+          + ' · this line is in its filer list as ' + x.filers.map(function (f) { return f.ticker + ' (CIK ' + f.cik + ', ' + f.filings + ' filing(s) in the newest quarter)'; }).join(', ')
+          + ' — filings that named the phrase, counted; the radar does not size or recommend.' })]));
+      });
+      if (!tmatch.length) {
+        tul.appendChild(E('li', { class: 'soft', text: 'No theme names this line among its filers. The radar carries '
+          + (((S.themes && S.themes.themes) || []).map(function (t) { return t.term; }).join(', ') || 'no term')
+          + ', matched on ticker because the book carries no CIK. Absence here means this issuer did not file the phrase, not that nothing is happening.' }));
+      }
+      left.appendChild(tul);
+    }
     // Phase 6: which tracked funds' 13F tables carry this ticker, or why 13F cannot see it (funds.js).
     if (window.FUNDS) left.appendChild(window.FUNDS.forPosition(row, S.f13));
     grid.appendChild(left);
@@ -841,11 +879,11 @@ window.BOOK = (function () {
     slot.textContent = '';
     if (banner) slot.appendChild(banner);
 
-    P.loadAll(['closes.json', 'technicals.json', 'targets.json', 'alerts.json', 'signals.json', 'manifest.json', '13f.json'])
+    P.loadAll(['closes.json', 'technicals.json', 'targets.json', 'alerts.json', 'signals.json', 'manifest.json', '13f.json', 'themes.json'])
       .then(function (pub) {
         S.closes = pub['closes.json']; S.tech = pub['technicals.json']; S.tgt = pub['targets.json'];
         S.alerts = pub['alerts.json']; S.signals = pub['signals.json']; S.man = pub['manifest.json'];
-        S.f13 = pub['13f.json'];
+        S.f13 = pub['13f.json']; S.themes = pub['themes.json'];
         if (P.locked() && !afterUnlock) return [null, null];
         return Promise.all([P.priv('book'), P.priv('valuation')]);
       })

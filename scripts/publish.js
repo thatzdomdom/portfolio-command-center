@@ -62,7 +62,12 @@ const ALLOW = ['data/news.json', 'data/model.json', 'data/market.json', 'data/br
   // add is ALLOW.filter(existsSync) — so the file would sit untracked on the Mac for ever while the
   // Inbox rows built from it shipped inside alerts.json with nothing behind them. The sid cache
   // (data/.hkex-sids.json) is deliberately NOT here: it is gitignored local scaffolding.
-  'data/hkex.json'];
+  'data/hkex.json',
+  // phase 8 (20 Sep 2026): the theme radar, public EDGAR full-text counts committed by Actions
+  // (themes.yml, 06:20 SGT Monday) and only pulled here. today.html and book.html both fetch it, so
+  // without this line the pages 404 on Pages and render as a quiet week while alerts.json ships the
+  // theme rows built from it — a file that exists on this Mac and nowhere else.
+  'data/themes.json'];
 
 // ── pure guard helpers (exported; unit-tested with node -e, never by running the pipeline) ──
 const HOLDING_LINE = /^[-+]\s*\{id:\s*\d+,/;

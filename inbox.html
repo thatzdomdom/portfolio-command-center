@@ -103,7 +103,13 @@ window.INBOX = (function () {
   var SEV = ['Notable', 'Log'];
   // 'fund' (phase 6, 13 Sep 2026): 13F rows written by scripts/alerts.js from data/13f.json — a fund's
   // quarterly filing, a tracked fund moving a name he holds or watches, a name three funds opened.
-  var FAM = ['insider', 'ownership', 'fund', 'journal'];
+  // 'theme' (phase 8, 20 Sep 2026): theme-radar rows written by scripts/alerts.js from
+  // data/themes.json — a theme moving on the DISCOVERY ladder (Watching → Candidate → Evidenced →
+  // Priced) and, on its own axis with its own id, a theme's CROWDING moving (none → proposed →
+  // packaged → crowded). The two are separate on purpose: a theme can be crowded having never been
+  // a Candidate, and folding them into one rung is what made the radar's first file say "Crowded"
+  // three lines under the sentence explaining why the theme was not even a Candidate.
+  var FAM = ['insider', 'ownership', 'fund', 'journal', 'theme'];
   var TAG = ['in-book', 'watchlist', 'market-wide', 'cluster'];
   var PAGE = 300;                                   // paginate beyond this; a year of log stays fast
   var SGT = { timeZone: 'Asia/Singapore' };
@@ -308,7 +314,7 @@ window.INBOX = (function () {
     var r1 = [txt('Severity', 'lbl'), chip('sev', 'all', 'All')];
     X.SEV.forEach(function (s) { r1.push(chip('sev', s, s)); });
     var r2 = [txt('Family', 'lbl'), chip('fam', '', 'All')];
-    X.FAM.forEach(function (s) { r2.push(chip('fam', s, s === 'journal' ? 'my replies' : s === 'fund' ? 'funds (13F)' : s)); });
+    X.FAM.forEach(function (s) { r2.push(chip('fam', s, s === 'journal' ? 'my replies' : s === 'fund' ? 'funds (13F)' : s === 'theme' ? 'themes (radar)' : s)); });
     var r3 = [txt('Tag', 'lbl'), chip('tag', '', 'All')];
     X.TAG.forEach(function (s) { r3.push(chip('tag', s, s)); });
 

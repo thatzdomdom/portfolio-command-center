@@ -224,7 +224,7 @@
   // invisible to that gate and it passed the page without checking anything.
   var PUBLIC_FILES = ['data/manifest.json', 'data/.validation.json', 'data/technicals.json',
                       'data/targets.json', 'data/alerts.json', 'data/brief.json', 'data/news.json',
-                      'data/policy.json', 'data/fx.json', 'data/closes.json'];
+                      'data/policy.json', 'data/fx.json', 'data/closes.json', 'data/themes.json'];
   var FX_HISTORY = 'data/fx-history.ndjson';
   var D = {};          // public files, name -> obj|null
   var V = null;        // valuation.enc
@@ -543,6 +543,64 @@
       kids.push(line('13D/G', owner.length
         ? owner.length + ' ownership filing(s) since the last brief — see the Inbox'
         : 'no 13D/13G or 13F line since ' + (since ? 'the ' + dshort(since) + ' brief' : 'the last brief')));
+    }
+
+    // The theme radar (phase 8, 20 Sep 2026), MONDAYS ONLY — the same gate the email's THEME RADAR
+    // block uses, for the same reason: filing counts move on a quarterly clock, so a daily theme
+    // line would be the same sentence five mornings running. On a Monday it never silently
+    // disappears: a quiet week says "no stage change this week" and stamps the radar's own last
+    // check, because a block that vanishes reads exactly like a file that died. Two axes, never
+    // folded into one: `stage` is the discovery ladder and the rung is the HIGHEST EVER ATTAINED,
+    // `crowding` is separate, and a theme can be crowded having never been a Candidate.
+    var TH = D['themes.json'], isMon = false;
+    try { isMon = new Date(Date.parse(TODAY + 'T00:00:00Z')).getUTCDay() === 1; } catch (_) {}
+    if (isMon && !TH) {
+      kids.push(line('themes', 'data/themes.json did not load — no theme is counted on this page today. It is written weekly by scripts/themes.js.'));
+    } else if (isMon) {
+      var POLT = (D['policy.json'] && D['policy.json'].themes) || {};
+      var LAD = (POLT.ladder && POLT.ladder.length) ? POLT.ladder : ['Watching', 'Candidate', 'Evidenced', 'Priced'];
+      var onLad = function (s) { return LAD.indexOf(s) > -1; };
+      var wk = new Date(Date.parse(TODAY + 'T00:00:00Z') - 7 * 864e5).toISOString().slice(0, 10);
+      var ths = (TH.themes || []).filter(Boolean);
+      var tOf = function (term) { for (var i = 0; i < ths.length; i++) if (ths[i].term === term) return ths[i]; return null; };
+      var nOf = function (v) { return v == null ? '?' : String(v); };
+      var mv = (TH.history || []).filter(function (h) { return h && h.to && onLad(h.to) && String(h.at || '') >= wk; });
+      mv.sort(function (a, b) { return String(a.at) < String(b.at) ? -1 : String(a.at) > String(b.at) ? 1 : 0; });
+      mv.forEach(function (h) {
+        var t = tOf(h.term) || {}, qs = (t.quarters || []).filter(function (q) { return q && !q.partial && q.filers != null; });
+        var a = qs[qs.length - 2], b = qs[qs.length - 1];
+        kids.push(line('theme', h.term + ': ' + (!h.from || !onLad(h.from) ? 'first reading on the ladder — ' + h.to : h.from + ' → ' + h.to)
+          + ' on ' + dshort(h.at) + ' · ' + (a && b ? 'distinct filers ' + a.q + ' ' + nOf(a.filers) + ' → ' + b.q + ' ' + nOf(b.filers) : 'no complete quarter carries a filer count')
+          + ' · ' + (t.candidateOn ? 'first doubled from a base above ten on ' + dshort(t.candidateOn) : 'has never doubled from a base above ten')
+          + ' · ' + ((t.pricedNames || []).length) + ' of its names are in closes.json, and co-movement needs 3'));
+      });
+      if (!mv.length) {
+        kids.push(line('theme', 'no stage change this week — nothing moved on the ladder since ' + dshort(wk) + '. '
+          + (ths.length ? ths.map(function (t) { return t.term + ' ' + t.stage; }).join(' · ') : 'no term is seeded')
+          + '. The rung is the highest ever attained, so a quiet week leaves it where it was.'));
+      }
+      var openW = ths.filter(function (t) { return t.entryWindow; });
+      var crowd = ths.filter(function (t) { return t.crowding && t.crowding.level === 'crowded'; });
+      var noCand = crowd.filter(function (t) { return !t.candidateOn; });
+      kids.push(line('theme', openW.length
+        ? 'entry window OPEN: ' + openW.map(function (t) { return t.term + ' (' + t.stage + ', crowding ' + (t.crowding ? t.crowding.level : '?') + ')'; }).join(', ')
+          + ' — themes.json computes it as stage Priced AND crowding not crowded.'
+        : 'entry window: none open. ' + ths.map(function (t) {
+            return t.term + ' is ' + t.stage + ' with crowding ' + (t.crowding ? t.crowding.level : '?')
+              + ' (' + nOf(t.crowding && t.crowding.effectiveTrusts) + ' trust(s) with an effective 485BPOS prospectus)';
+          }).join('; ') + '.'
+          + (ths.length && crowd.length === ths.length ? ' Every term the radar carries is already packaged and sold.' : '')
+          + (noCand.length ? ' ' + noCand.map(function (t) { return t.term; }).join(' and ') + ' reached that state without ever being a Candidate — product without breadth: the prospectuses exist, the filer base never doubled.' : '')
+          + ' That is what has been filed, reported as a state; it is not a suggestion to do anything or to avoid anything.'));
+      var thAlert = alerts.filter(function (x) { return x.family === 'theme'; })[0] || null;
+      // scan.checkedAt is an instant, and dateShort reads the UTC date out of it: a 06:20 SGT run
+      // lands at 22:20 UTC the day BEFORE and the stamp would report yesterday. SGT first, always.
+      var sgtOf = function (iso) { var t = Date.parse(iso);
+        return isNaN(t) ? String(iso || '').slice(0, 10) : new Date(t).toLocaleDateString('en-CA', { timeZone: 'Asia/Singapore' }); };
+      kids.push(lineEls('radar', [
+        txt('checked ' + dshort(sgtOf((TH.scan && TH.scan.checkedAt) || TH.asOf)) + ' · weekly, because a daily run would spend requests watching a number that cannot move · '),
+        el('a', { class: 'tap', href: deep('inbox', thAlert ? 'a-' + thAlert.id : null), text: thAlert ? 'the theme rows in the Inbox' : 'Open the Inbox' })
+      ]));
     }
 
     // The coverage line (phase 7, 19 Sep 2026). It reads as boilerplate on a quiet morning, which is

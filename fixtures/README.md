@@ -45,6 +45,28 @@ saved verbatim on 19 Sep 2026 from `di.hkex.com.hk` (keyless, no login, no terms
 `validate-all.js`, so its assertions do not move when the live file rolls; the one synthetic row it adds
 (a director buy, which the real 90-day window does not contain) is named `FIXTURE-20`.
 
+Stored theme pages: `fixtures/data/themes/` holds two EDGAR full-text-search response pages for `21-themes`.
+**They are RECONSTRUCTED from `data/themes.json`, not captured from `efts.sec.gov`** — the wiring agent was
+not permitted to call that endpoint, and no fixture ever fetches. They carry only values the live file
+vouched for on 20 Sep 2026, and each one carries an `_expect` block — the parser output frozen that day.
+The round trip that makes them worth having runs against `_expect`, **not** against `data/themes.json`:
+the radar is weekly and the live file will roll to a new quarter, and a fixture that went red because a
+scheduled job ran on time is a fixture nobody trusts. Whether the live file still agrees is printed in
+the fixture's note line, never as a failure; what the live file is held to in every week is the set of
+invariants (stage on the ladder, `entryWindow === (Priced AND not crowded)`, no `candidateOn` under
+Watching, no Priced without three priced names, no `crowded` on fewer than three effective trusts).
+
+| file | sha256 | what it proves |
+|------|--------|----------------|
+| `physical-ai-2026q3-hits.json` | `3b2ee7e431bbcc73ad4bc285dab98e0befe991b8d98c45bee2920e89a08eb132` | "physical AI", 2026 Q3: 120 hits over 56 distinct filer CIKs while `aggregations.entity_filter` carries only **30** buckets — the aggregation truncates, and taking its word for it is a 46% undercount. Also the 27 real `sic_filter` buckets. Each hit carries only `ciks[]` and `display_names[]`: the live file records no per-filing date or accession, so none was invented |
+| `physical-ai-etfs-24m-hits.json` | `94dfe13282a7b67e1e85fc007fdb359e5ef6e44bd4993632ecbad66f32b8f81e` | the 36 ETF filings (485APOS/485BPOS/N-1A) over 24 months, every field real (trust, CIK, form, file date, accession). The **37th hit repeats the first accession** on purpose — EDGAR returns one accession under several root forms and `etfRows()` must dedupe it |
+
+`21-themes` then asserts every stage rule against synthetic quarter series (the 2× rule at a base of exactly
+10 and of 11, Evidenced by ETF versus by cluster, Priced refused at 2 priced names and granted at 3, crowded
+needing three **distinct effective trusts** and not three filings, the open quarter never scored, a pair
+touching the paging ceiling set aside), and the wiring against a synthetic `data/themes.json` whose three
+terms are named `FIXTURE-21 …` so they can never be mistaken for a seeded theme.
+
 Stored filings: `fixtures/data/13f/` holds five public EDGAR files for `19-13f` — Berkshire Hathaway and
 Baupost 2026 Q2 cover pages and information tables, and Pershing Square's 13F-NT that names CIK 2026053.
 They were copied from what 13f-scan.js fetched on 13 Sep 2026; no fixture ever fetches. The runner loads
