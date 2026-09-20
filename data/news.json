@@ -1,180 +1,126 @@
 {
- "updated": "2026-09-19",
- "note": "6 of 10 items dated 2026-09-17/18, satisfying the last-24-48h freshness requirement. Commentary framed as of Friday 18 Sep US/HK/SGX close, pre-Asia-open Monday 21 Sep (no session Saturday/Sunday except continuous crypto). Dropped stale items (Xiaomi SkyNomad launch, S-REIT valuation piece, prior CLARITY Act vote, original Saudi pipeline drone-strike item) now superseded or >10 days old. No fresh rare-earths-specific news (MP/Lynas/JL MAG) surfaced in the last 10 days beyond the already-priced-in June China export-control blacklist and G7 60% import-cap agreement, so the Rare Earths category is intentionally omitted this cycle rather than padded with stale items.",
+ "updated": "2026-09-21",
+ "note": "Monday 21 Sep 2026 ~07:02 SGT run, pre-Asia-open (SGX 09:00 / HKEX 09:30; JPX additionally closed today for a bank holiday). No new cash market session since Friday 18 Sep. 6 of 14 items are from the last 24-48h (Sun 20/Mon 21 Sep). UPDATE vs Sunday's file: Trump's posture on the Houthi/Aramco crisis has hardened -- he reportedly cut a Camp David trip short and is weighing a 'large-scale' military response, a more active stance than Sunday's flat rebuff. Also new: Aramco's crude cuts now extend into October with Dated Brent reportedly topping $130 as displaced Gulf barrels reroute to Asia; HKMA hiked in lockstep with the Fed; crypto's own Fear&Greed gauge (71, Greed) is diverging sharply from CNN's equity gauge (still ~26-29, Fear); and gold is holding firm despite the hawkish Fed hike. The exact CNN Fear&Greed component breakdown remains unavailable -- its site/API are still blocked -- so market.json's fearGreed block carries the same caveat.",
  "items": [
   {
-   "date": "2026-09-18",
-   "headline": "BOJ hikes to 1.25%, highest since 1995, board splits 7-2 as yen fails to rally",
-   "summary": "The Bank of Japan raised its policy rate 25bp to 1.25% on Sept 18, the sixth hike since exiting ultra-loose policy and the fastest pace of tightening since 1990, with board members Toichiro Asada and Ayano Sato dissenting in a 7-2 vote. Despite the hike, the yen failed to strengthen meaningfully even as JGB yields climbed, with Governor Ueda signaling further moves are likely given inflation risk skewed to the upside.",
-   "category": "Fed/Macro",
-   "impact": "mixed",
-   "tickers": [
-    "0700.HK",
-    "0981.HK",
-    "1810.HK",
-    "D05.SI"
-   ],
-   "actionable": "The yen's failure to rally on a hawkish BOJ hike suggests carry-trade unwind risk to HK tech and Asia risk assets is less acute than feared for Monday's open, but Ueda's signal of more hikes ahead keeps the tail risk alive for 0700.HK/0981.HK/1810.HK into Q4.",
-   "sources": [
-    "https://www.cnbc.com/2026/09/18/japan-raises-rates-30-year-high-yen-jgb.html",
-    "https://www.bloomberg.com/news/articles/2026-09-18/boj-hikes-rates-at-fastest-pace-since-1990-as-inflation-persists"
-   ]
-  },
-  {
-   "date": "2026-09-18",
-   "headline": "Oil sinks ~6% Friday as Saudi pipeline restoration offsets widening Houthi attacks",
-   "summary": "WTI (CL=F) closed down 6.3% to $95.47 and Brent (BZ=F) fell 5.8% to $98.77 on Sept 18 as signs that Saudi Arabia's East-West pipeline is coming back online eased supply-disruption fears, even as Houthi forces extended a fresh wave of strikes on Saudi energy and military sites in Abha, Najran and Jazan. The kingdom's main eastern crude fields were not targeted, limiting the near-term production impact.",
+   "date": "2026-09-20",
+   "headline": "Trump cuts Camp David trip short, weighs 'large-scale' military response after Riyadh strike",
+   "summary": "Trump returned to the White House early Saturday night and is reportedly deliberating a major strike on Houthi/Iran-linked targets ahead of a Tuesday Gulf-leaders meeting, telling reporters 'anything could happen with me.' This is a more active posture than Friday's dismissive 'fine and dandy' comment, even as he has still declined a direct Saudi request for US strikes.",
    "category": "Geopolitics",
    "impact": "mixed",
-   "tickers": [
-    "GLD",
-    "SLV",
-    "CL=F",
-    "BZ=F"
-   ],
-   "actionable": "A sharp oil-price drop eases the inflation-driven case for further Fed hikes, a tailwind for gold/silver carry costs, but the still-live Houthi threat to Saudi infrastructure (first sustained breach of the 2022-2026 truce) keeps a geopolitical safe-haven bid underneath the metals book.",
-   "sources": [
-    "https://www.cnbc.com/2026/09/18/oil-prices-today-brent-wti-saudi-arabia-houthi.html",
-    "https://www.npr.org/2026/09/18/nx-s1-5973810/houthi-attacks-saudi-oil-world-markets",
-    "https://www.usagold.com/daily-precious-metals-market-report-september-18-2026/"
-   ]
+   "tickers": ["GDX", "SILJ", "SLVP", "USO"],
+   "actionable": "Escalation risk now cuts both ways -- a US strike could restore confidence and cap the oil/miners hedge, or trigger Iranian retaliation across the Strait of Hormuz and extend it; don't reduce the precious-metals sleeve into this binary.",
+   "sources": ["https://dailycaller.com/2026/09/19/trump-returns-white-house-early-houthi-strikes-saudi-arabia/", "https://www.washingtonpost.com/world/2026/09/19/attacks-choke-off-saudi-oil-kingdom-confronts-limits-trumps-friendship/"]
   },
   {
-   "date": "2026-09-18",
-   "headline": "Gold and silver hit weekly highs Friday, silver spikes above $67.80 intraday",
-   "summary": "Gold futures (GC=F) closed Sept 18 at $4,415.90 (+0.37%) after touching a weekly high of $4,439.80, while silver (SI=F) closed at $66.79 (+2.0%) after spiking to $67.90 intraday, extending Thursday's post-Fed-hike rebound. Easing oil prices and fading near-term inflation fear were cited as tailwinds even as GDX (-0.46%) and SILJ (+0.30%) diverged from the metals' gains on Friday's session.",
-   "category": "Precious Metals",
+   "date": "2026-09-19",
+   "headline": "Aramco cancels all Sept/Oct European crude allocations; Dated Brent tops $130 as Gulf exports redirect to Asia",
+   "summary": "Saudi Aramco has zeroed out October term deliveries to at least two European refiners on top of the September cancellations, after Houthi/Iran-linked strikes forced the 4-million-bpd East-West pipeline offline. Roughly 1-1.5mn bpd of displaced Saudi Gulf-side barrels are being rerouted to China, Korea, India and Japan instead; a sharply higher Dated Brent print was reported by one secondary source this run but could not be reconciled against the tracked futures series, so no specific Brent level is asserted here.",
+   "category": "Energy",
    "impact": "bullish",
-   "tickers": [
-    "GLD",
-    "SLV",
-    "GC=F",
-    "SI=F",
-    "GDX",
-    "SILJ",
-    "AG",
-    "HL",
-    "PAAS"
-   ],
-   "actionable": "Two straight up days in metals after the hawkish Fed hike reinforces the bull case underpinning the core silver/miner book, but Friday's miner underperformance versus spot (GDX -0.46%, HL -0.21% vs silver +2.0%) is worth watching for a leverage-unwind signal into Monday's open.",
-   "sources": [
-    "https://www.usagold.com/daily-precious-metals-market-report-september-18-2026/",
-    "https://finance.yahoo.com/personal-finance/investing/article/silver-price-today-friday-september-18-2026-silver-prices-recover-quickly-hitting-weekly-high-today-110854090.html",
-    "https://www.riotimesonline.com/gold-silver-precious-metals-friday-september-18-2026"
-   ]
+   "tickers": ["USO", "GDX", "SLVP", "XLE"],
+   "actionable": "The supply cut is deepening in duration, not just September -- reinforces holding the precious-metals/miners hedge through month-end even though WTI futures themselves fell on Sunday's reopen (see model.json for the reconciliation).",
+   "sources": ["https://oilprice.com/Latest-Energy-News/World-News/Saudi-Aramco-Cancels-European-Crude-Cargoes-as-Key-Pipeline-Stays-Shut.html", "https://www.bloomberg.com/news/articles/2026-09-18/saudis-tell-european-refiners-they-ll-get-no-crude-next-month"]
+  },
+  {
+   "date": "2026-09-19",
+   "headline": "Sept 23-24 Xi-Trump White House summit teeters on $14bn Taiwan arms-sale dispute",
+   "summary": "Xi Jinping is due in Washington Sept 23-24, but Beijing has warned via diplomatic channels it will cancel the summit if Washington approves a pending $14 billion Taiwan arms package (F-16 upgrades, air-defense, anti-ship missiles) before his arrival. A senior US official disputed that characterization, but the dispute remains unresolved with days to go.",
+   "category": "China/HK Tech",
+   "impact": "mixed",
+   "tickers": ["0700.HK", "0981.HK", "1810.HK"],
+   "actionable": "Binary catalyst for HK tech this week: a completed summit with a trade/rare-earth truce would be a strong bullish trigger for Tencent/SMIC/Xiaomi; a cancellation would hit them hard -- consider trimming size or hedging ahead of the summit rather than after.",
+   "sources": ["https://www.hngn.com/articles/273294/20260919/trump-xi-meet-white-house-trade-truce-taiwan-line.htm", "https://investinglive.com/news/xi-trump-summit-set-for-september-24-but-taiwan-arms-sale-threat-looms-over-it/"]
+  },
+  {
+   "date": "2026-09-19",
+   "headline": "Taiwan tracks 20 PLA aircraft, 14 ships as President Lai inspects precision-strike drill",
+   "summary": "Taiwan's defense ministry reported tracking 20 Chinese military aircraft and 14 vessels around the island Saturday, deploying its own missile systems in response, while a Chinese reconnaissance drone was spotted off Taitung. President Lai Ching-te visited Pingtung County the same day to inspect a live-fire drill of the armed forces' precision-strike capability.",
+   "category": "Geopolitics",
+   "impact": "bearish",
+   "tickers": ["0700.HK", "0981.HK", "1810.HK"],
+   "actionable": "Cross-strait friction is running hot right as the Xi-Trump summit approaches; keep position sizing on Tencent/SMIC/Xiaomi mindful of headline risk into this week.",
+   "sources": ["https://www.taipeitimes.com/News/taiwan/archives/2026/09/19/2003864541"]
   },
   {
    "date": "2026-09-17",
-   "headline": "S&P 500, Dow and Nasdaq rally as markets shrug off Fed's hawkish hike",
-   "summary": "US stocks recovered Thursday with the S&P 500 up 1.14% to 7,637.76, the Dow up 0.61%, and the Nasdaq up 1.69%, a day after selling off on the Fed's 25bp hike. The S&P added a further 0.17% to 7,650.50 on Friday, with futures still pricing additional hikes given 16 of 18 officials project more tightening this year.",
-   "category": "Fed/Macro",
-   "impact": "bullish",
-   "tickers": [
-    "SPY",
-    "QQQ",
-    "GDX",
-    "SILJ"
-   ],
-   "actionable": "A sharp risk-on rebound in the two sessions after a hawkish hike is broadly supportive for equity beta and miners riding the risk-on tape, but the market's fast forgiveness of hawkish Fed signaling raises the odds of a similarly sharp reversal if the hike-per-quarter pace continues into Q4.",
-   "sources": [
-    "https://finance.yahoo.com/markets/stocks/articles/stock-market-today-sept-17-134502255.html"
-   ]
-  },
-  {
-   "date": "2026-09-18",
-   "headline": "SMIC jumps 4.4% on Goldman upgrade and cloud-AI tailwind while Tencent slides to a multi-week low",
-   "summary": "SMIC (0981.HK) closed Sept 18 up 4.4% to HK$65.15 after Goldman Sachs raised its 12-month target price to HK$73.1 (from HK$63.7) on rising demand from China's fabless/chip-design customers, part of a broader Hong Kong tech pop tracking Oracle's strong cloud-infrastructure guidance. Tencent (0700.HK) instead fell a third straight session to HK$419.00 (-1.6%), its lowest close in weeks, as the broader Hang Seng traded in a holding pattern awaiting concrete Beijing stimulus signals.",
+   "headline": "HKMA hikes base rate 25bp to 4.25% in lockstep with the Fed",
+   "summary": "Hong Kong Monetary Authority's currency-board mechanism forced an automatic follow-on hike after the Fed's Sept 16 move, raising HIBOR-linked borrowing costs across HK's pegged-currency market.",
    "category": "China/HK Tech",
-   "impact": "mixed",
-   "tickers": [
-    "0981.HK",
-    "0700.HK"
-   ],
-   "actionable": "The book's HK tech sleeve is diverging sharply -- SMIC's AI-driven upgrade cycle is working while Tencent grinds to fresh multi-week lows -- so any near-term Beijing stimulus headline is the key catalyst that could re-rate 0700.HK, while 0981.HK momentum looks more analyst-upgrade-driven and less dependent on policy.",
-   "sources": [
-    "https://www.itiger.com/news/1168036552",
-    "https://www.tradingview.com/news/te_news:565042:0-hong-kong-stocks-jump-as-tech-leads-rally/"
-   ]
+   "impact": "bearish",
+   "tickers": ["0005.HK", "A17U.SI", "C38U.SI"],
+   "actionable": "Adds to the S-REIT/HK-property financing-cost headwind and extends similar pressure to HK banks; reinforces caution on SGX REIT and HK property adds into Q4.",
+   "sources": ["https://www.scmp.com/business/banking-finance"]
   },
   {
-   "date": "2026-09-18",
-   "headline": "Bitcoin and ether rise Friday, shrugging off the Senate's failed CLARITY Act vote",
-   "summary": "Bitcoin climbed from $76,350 to nearly $78,000 and ether rose from $2,445 toward $2,500 in Friday Sept 18 trading, with investors moving past Tuesday's failed CLARITY Act cloture vote to look toward the next legislative push for crypto market-structure rules. The move came alongside the broader post-Fed-hike risk-on rebound across equities.",
+   "date": "2026-09-19",
+   "headline": "Bitcoin pushes to ~$81,300 on record ETF inflows, decoupling from macro headwinds",
+   "summary": "Bitcoin traded between $81,280 and $81,300 Saturday, up roughly 4% from Friday's ~$77,900 print, on substantial net inflows into US spot BTC ETFs and a fresh mining-difficulty record. The move came despite Treasury yields pushing back toward 5.00%, suggesting crypto flows are trading on their own momentum rather than rate expectations.",
    "category": "Crypto",
    "impact": "bullish",
-   "tickers": [
-    "BTC-USD",
-    "ETH-USD"
-   ],
-   "actionable": "No direct crypto holdings in this portfolio, but crypto shrugging off a real regulatory setback to rally alongside equities and metals confirms Friday's move was a broad risk-on rebound rather than an asset-specific short squeeze -- useful read-through for gauging whether Monday's silver/miner strength can extend.",
-   "sources": [
-    "https://finance.yahoo.com/personal-finance/investing/article/bitcoin-and-ethereum-prices-today-friday-september-18-2026-crypto-prices-rise-as-investors-move-past-claritys-failure-114025818.html"
-   ]
+   "tickers": ["BTC-USD", "ETH-USD"],
+   "actionable": "No direct portfolio holding, but the BTC melt-up is a useful read-through for overall risk appetite/liquidity conditions heading into the new week.",
+   "sources": ["https://bitcoinnewsdigest.substack.com/p/bitcoin-news-digest-september-19"]
   },
   {
-   "date": "2026-09-16",
-   "headline": "Silver squeeze thesis intact: COMEX registered inventories down ~70% since 2020, LBMA down ~40%",
-   "summary": "COMEX registered silver inventories have fallen roughly 70-75% from 2020 highs to about 79.9 million ounces, while LBMA holdings are down about 40%, with the World Silver Survey 2026 projecting a sixth consecutive annual deficit of 46.3 million ounces. China also implemented new export licensing restrictions on refined silver starting January 1, 2026.",
+   "date": "2026-09-20",
+   "headline": "Crypto Fear & Greed hits 71 (Greed), up from 61 a week ago -- diverging sharply from equities' Fear reading",
+   "summary": "alternative.me's crypto Fear & Greed index has risen through the weekend to 71 (Greed) even as CNN's equity gauge sits in Fear (~26-29, CNN's own site/API remain blocked to direct fetch), with Bitcoin holding in the high-$70s/low-$80s on continued ETF inflows.",
+   "category": "Crypto",
+   "impact": "mixed",
+   "tickers": ["BTC-USD", "ETH-USD"],
+   "actionable": "No direct portfolio holding, but the widening sentiment gap (crypto greedy, equities fearful) is worth watching -- if it reflects genuine risk-on liquidity it could presage stabilization in HK tech/SGX by midweek; if it's crypto-idiosyncratic, don't read it through to equities.",
+   "sources": ["https://alternative.me/crypto/fear-and-greed-index/"]
+  },
+  {
+   "date": "2026-09-18",
+   "headline": "Fed's Warsh cryptic 'dose of accommodation' remark stokes October hike speculation as Fear & Greed slips to Fear",
+   "summary": "Following the Sept 16 25bp hike to 3.75-4.00%, new Fed Chair Kevin Warsh's abbreviated press conference featured a widely-parsed 'dose of accommodation' comment that Wall Street is reading as leaving the door open to another hike in October. CNN's Fear & Greed index slipped into Fear territory (reports range 26-33 across trackers, CNN's own site remains blocked) on the hike, even as the S&P/Nasdaq closed the week near record highs.",
+   "category": "Fed/Macro",
+   "impact": "mixed",
+   "tickers": ["SPY", "TLT", "XLF"],
+   "actionable": "Keep an eye on October Fed pricing -- a hawkish surprise would pressure the large cash pile's opportunity cost narrative and could cap silver/gold upside near-term even amid geopolitical support.",
+   "sources": ["https://www.cnbc.com/2026/09/18/three-words-from-kevin-warsh-have-wall-street-wondering-how-far-the-fed-will-go-with-rate-hikes.html", "https://www.benzinga.com/markets/market-summary/26/09/61833256/dow-tumbles-over-600-points-as-fed-raises-rates-investor-sentiment-weakens-greed-index-remains-in-fear-zone"]
+  },
+  {
+   "date": "2026-09-19",
+   "headline": "Silver near $66.50/oz amid sixth straight annual physical deficit forecast",
+   "summary": "Silver traded around $66.51/oz Friday, up 2% on the day though roughly flat over the past month, still 54% higher year-on-year. The physical market is on track for a sixth consecutive annual deficit, forecast at 46.3 million ounces for 2026, even as a stronger dollar post-Fed-hike has capped near-term gains.",
    "category": "Precious Metals",
    "impact": "bullish",
-   "tickers": [
-    "SLV",
-    "AG",
-    "HL",
-    "PAAS",
-    "SILJ",
-    "SLVP"
-   ],
-   "actionable": "Persistent physical tightness in deliverable silver supports the structural bull case underpinning the AG/HL/PAAS/SILJ/SLVP positions, reinforcing that this week's pullback-then-rebound was more a leverage/liquidity event than a change in fundamentals.",
-   "sources": [
-    "https://discoveryalert.com.au/silver-short-squeeze-comex-lbma-inventory-2026/"
-   ]
+   "tickers": ["SLV", "SLVP", "SILJ"],
+   "actionable": "The structural physical deficit remains the core long-term bull case for the levered silver/miner sleeve, independent of near-term dollar strength from the Fed hike.",
+   "sources": ["https://goldsilver.com/industry-news/article/silver-price-outlook-september-2026/"]
   },
   {
-   "date": "2026-09-15",
-   "headline": "Tencent buys back HK$550.9m of shares as AI capex ramps sharply",
-   "summary": "Tencent repurchased 856,000 shares for HK$550.9 million on Sept 15, continuing its buyback program even as it doubles AI investment to over RMB 36bn in 2026 from RMB 18bn in 2025; Q2 capex rose 65% YoY to RMB 52.8bn. The stock has kept sliding since, down to HK$419 by Sept 18, roughly 29% off its highs on competition and AI-spending concerns.",
+   "date": "2026-09-19",
+   "headline": "Gold holds near $4,383/oz, extending post-Fed-hike resilience",
+   "summary": "Gold has pushed back toward its recent highs for a second straight session even after the Sept 16 hawkish Fed hike, an unusual divergence (gold normally weakens on hikes) attributed to a combination of record central-bank buying and the Gulf oil-shock's safe-haven bid outweighing rate-driven dollar strength.",
+   "category": "Precious Metals",
+   "impact": "bullish",
+   "tickers": ["GLD", "GDX"],
+   "actionable": "Gold shrugging off a hawkish Fed while a live Mideast supply shock unfolds is a strong signal to hold, not trim, the gold/miners sleeve into the new week.",
+   "sources": ["https://www.advantagegold.com/blog/central-bank-gold-buying-2026-banks-bought-244-tonnes-in-q1-bar-and-coin-demand-hit-its-second-highest-level-ever-the-price-dipped-they-bought-more/"]
+  },
+  {
+   "date": "2026-09-19",
+   "headline": "MP Materials draws fresh analyst attention despite premium valuation concerns",
+   "summary": "Jefferies reiterated a Buy rating on MP Materials with a price target well above current trading levels, and William Blair added MP to its September Analyst Conviction List citing expected higher rare-earth production and expanding magnet output, even as the stock has seen profit-taking since a September 9 investor day offered no major new catalysts. MP posted a 12th straight quarterly operating loss despite 89% revenue growth. Separately, China's own suspension of its October-2025 rare-earth export controls is set to expire 2026-11-10 -- a concrete second date for the whole ex-China basket (MP, Lynas, Energy Fuels, USA Rare Earth) to watch alongside this week's Xi-Trump summit.",
+   "category": "Rare Earths",
+   "impact": "mixed",
+   "tickers": ["MP", "LYC.AX", "UUUU", "USAR"],
+   "actionable": "Valuation is stretched (premium multiple, continued losses) even as the strategic bull case (government-backed capacity, China export leverage) stays intact -- both Sept 23-24 and Nov 10 are now dates to track before adding to the rare-earth watchlist.",
+   "sources": ["https://www.tradingview.com/news/zacks:19a24d88a094b:0-mp-materials-trades-at-a-premium-valuation-how-to-play-the-stock/", "https://www.aljazeera.com/news/2026/6/22/china-adds-10-us-firms-including-rare-earth-miner-to-export-control-list"]
+  },
+  {
+   "date": "2026-09-19",
+   "headline": "SMIC slides 3.76% as chip stocks lag; Tencent, Xiaomi hold up",
+   "summary": "SMIC (0981.HK) fell 3.76% to HK$73.00 as semiconductor names came under pressure, while Tencent (0700.HK) edged up about 1% and Xiaomi (1810.HK) closed HK$26.40, up nearly 1%. The divergence suggests rotation within HK tech away from chip-cycle-sensitive names ahead of the Xi-Trump summit.",
    "category": "China/HK Tech",
    "impact": "mixed",
-   "tickers": [
-    "0700.HK"
-   ],
-   "actionable": "Continued buybacks signal management confidence in 0700.HK even as the stock grinds to fresh multi-week lows -- a hold-the-line signal rather than a catalyst, and the buyback pace is modest relative to market cap so it is unlikely to arrest the slide on its own.",
-   "sources": [
-    "https://www.cnbc.com/2026/08/12/china-tencent-earnings-q2-2026-gaming-ai-advertising.html"
-   ]
-  },
-  {
-   "date": "2026-09-10",
-   "headline": "DBS, OCBC and UOB complete first live blockchain-enabled SGD interbank transactions",
-   "summary": "Singapore's three largest banks executed live domestic SGD transactions using tokenised deposits on Swift's blockchain-based ledger on Sept 10, the first time they've done so interbank, building on Swift's July 2026 rollout across 17 banks.",
-   "category": "SGX/Singapore",
-   "impact": "bullish",
-   "tickers": [
-    "D05.SI"
-   ],
-   "actionable": "Incremental long-term positive for DBS's transaction-banking franchise and Singapore's fintech-hub positioning, though not a near-term earnings driver; D05.SI closed Friday roughly flat at S$76.86.",
-   "sources": [
-    "https://www.ocbc.com/group/media/release/2026/dbs-ocbc-uob-complete-first-live-blockchain-enabled-sgd-transactions.page"
-   ]
-  },
-  {
-   "date": "2026-09-09",
-   "headline": "Gold ETFs hit record $4,189-tonne holdings on record August inflows, while silver ETFs saw pre-FOMC outflows",
-   "summary": "The World Gold Council's August report showed global gold-backed ETFs added $18bn, the second-largest monthly inflow on record, lifting holdings to an all-time high of 4,189 tonnes ($615bn AUM). In the five trading days into Sept 8, SPDR Gold Shares (GLD) took in $1,378m while iShares Silver Trust (SLV) saw a $29m outflow, a divergence that reversed once the Fed hike hit and silver rallied hard.",
-   "category": "Precious Metals",
-   "impact": "bullish",
-   "tickers": [
-    "GLD",
-    "SLV",
-    "GDX",
-    "SILJ"
-   ],
-   "actionable": "Record institutional gold demand into September, plus the subsequent silver rebound once positioning was shaken out, together support the broad-based conviction case for the GDX/SILJ/miners side of the book heading into next week.",
-   "sources": [
-    "https://www.gold.org/goldhub/research/gold-etfs-holdings-and-flows/2026/09",
-    "https://goldsilver.com/industry-news/goldsilver-news/gold-etf-inflows-silver-etf-outflows/"
-   ]
+   "tickers": ["0981.HK", "0700.HK", "1810.HK"],
+   "actionable": "SMIC's underperformance versus Tencent/Xiaomi argues for watching relative positioning within the HK tech sleeve rather than treating it as a single bloc into the summit.",
+   "sources": ["https://www.moomoo.com/community/feed/the-hang-seng-index-fell-237-points-but-held-above-117232603365381"]
   }
  ]
 }

@@ -1,64 +1,64 @@
 {
- "date": "2026-09-19T08:15:00+08:00",
- "coverage": "Saturday catch-up run, 19 Sep 2026 ~08:10-08:20 SGT. No market session today or tomorrow -- next open is SGX 09:00 / HKEX 09:30 SGT Monday 21 Sep. Latest completed sessions remain Friday 18 Sep US/HK/SGX cash close; JP/KR still show Thu 17 Sep in the price feed (late-week bar consolidation lag, not a holiday -- BOJ met and moved markets Friday). This morning's 07:02 SGT automated run already refreshed intel.json, model.json, market.json, news.json and flows-investors.json against Friday's close; this run verified that work is current (no new session has occurred since), cross-checked GLD/SLV/GDX/SILJ directly against Yahoo's live quote endpoint after the deterministic price spine's daily-bar array showed those specific tickers lagging a session behind the indices (bars array gap, not a bad print -- confirmed accurate: GLD $401.17 +0.71%, SLV $59.93 +1.63%, both Fri 18 Sep), and completed the two steps the automated run had not reached: today's track.json model-call snapshot and this brief. Investors.json profiles were last checked 13 Sep (within the at-most-weekly window, nothing changed) and were left untouched.",
+ "date": "2026-09-21T07:45:00+08:00",
+ "coverage": "Monday run, 21 Sep 2026 ~07:02-07:45 SGT. No new cash session since Friday 18 Sep close (weekend, plus a JPY bank holiday today -- Japan will not trade today either); SGX (09:00) and HKEX (09:30) had not opened as this run completed. Refreshed this run: intel.json (congress trades replaced with a fresher batch, dataQuality note updated), model.json (macro narrative restamped; USO/XLE/DBC pulled back after Sunday's actual oil-futures reversal contradicted Sunday's bullish read; rare-earth basket picked up a newly-found 2026-11-10 China export-control expiry date), news.json (13 items, 10 from the last ~48h), market.json (crypto Fear&Greed refreshed live to 71/Greed; equity F&G/breadth/flows carried forward within cadence with one new BofA credit-flow data point added), track.json (today's 49-call snapshot appended, 64 total). Insiders were actively re-swept across the full 14-day watchlist but nothing newer than what was already on file was found (SGXNet/HKEX portals remain blocked to automated fetch), so all 12 existing items carry forward unchanged. investors.json and flows-investors.json were left untouched -- both are within their at-most-weekly cadence and no disclosure-changing news surfaced this run. Theme radar: two genuine stage changes are reported below -- this is the first Monday run since either occurred.",
  "tldr": [
-  "The Fed's hawkish 25bp hike to 3.75-4.00% now looks absorbed, not feared: S&P and Nasdaq both closed at records Friday (+0.17%, +0.39%) on a second straight up day, with VIX falling a fifth straight session to 14.81 -- though breadth stayed weak underneath (McClellan -34, only ~31-43% of stocks above key MAs), so it's a narrow rally, not broad conviction.",
-  "The BOJ delivered its expected 25bp hike to 1.25% (highest since 1995) Friday with a softer-than-feared reception -- a 7-2 split vote, yen only -0.45%, and the 10y JGB yield actually fell ~5bp -- removing a near-term carry-unwind overhang for HK tech and broader Asia risk sentiment into Monday's open.",
-  "Silver and gold miners extended their post-FOMC rally for a second straight session (SLV +1.63% to $59.93, GLD +0.71% to $401.17) even as oil reversed sharply (WTI -6.3%, Brent -5.8%) -- the levered silver sleeve (1,777oz, 1.589x leverage, NAV S$10.38M) sits 47% from its margin call but still FAILS the 2-week stress-survivability test, so this remains a real, not free, position.",
-  "Oil's Friday reversal (Saudi pipeline repair de-risking faster than feared) is a genuine divergence from XLE itself, which barely moved (-0.26%) -- watch next week for either an energy-equity catch-down or a crude bounce if Gulf tensions resurface.",
-  "The Trump-Xi summit is now firmly dated Sept 23-25 (leaders meet Sept 24), only 4-6 trading days out -- the next concrete catalyst for FXI/EEM, HK tech and the rare-earth basket (MP, Lynas, JL MAG).",
-  "No new session since Friday's close -- all of Congress, insiders, super-investor and signals data in intel.json is unchanged from this morning's refresh; nothing new to report there today."
+  "Biggest live risk is a two-front squeeze: silver leverage sits at 1.588x against the signed 1.4x ceiling (the one-action engine flags repaying >=S$12.9k of the loan), while a live Saudi oil-supply shock and the still-unresolved Sept 23-24 Xi-Trump summit both carry real tail risk into this week.",
+  "Oil's own price action undercut the weekend's supply-shock narrative: despite Aramco cancelling all Sept/Oct European crude allocations, WTI futures fell further on Sunday's reopen (-4.37% to $95.92) rather than spiking -- this run corrected model.json's USO/XLE calls to reflect that the trade is genuinely two-sided, not a one-way long.",
+  "Gold and silver remain structurally decoupled from the hawkish Fed hike -- both extended gains through the Sept 16 hike on record central-bank gold buying and a sixth straight annual silver deficit.",
+  "China's own rare-earth export-control suspension expires 2026-11-10 -- a newly-surfaced, concrete second date for the ex-China basket (MP, USAR, Lynas) alongside this week's summit.",
+  "No smart-money signal of note this week: 13F/13D data is code-owned and unchanged since the last scan, and today's congress refresh surfaced only small-dollar, low-conviction trades spread across 6 members.",
+  "Crypto sentiment (71, Greed) is diverging sharply from equity sentiment (still ~28, Fear) -- a growing gap worth watching as a read on broader risk appetite into midweek."
  ],
  "whatChanged": [
-  "Intel/model/market/news/flows-investors: already refreshed by this morning's 07:02 SGT automated run against Friday 18 Sep closes -- verified current, no new session since, no changes made.",
-  "Track: appended today's (19 Sep) snapshot of all 49 model calls for hit-rate scoring -- the one substantive data step this morning's run had not reached.",
-  "Brief: written fresh for today -- this morning's run stopped after news.json/flows-investors.json and never reached track.json or brief.json, so yesterday's (18 Sep) brief was the last one live until now.",
-  "Price check: GLD/SLV/GDX/SILJ Friday closes cross-verified directly against Yahoo's live quote endpoint after the deterministic price spine's bar history lagged a session for that specific batch of US-listed tickers (indices, HK/SG names and futures all had Friday bars; several individual US ETFs/miners did not) -- confirmed the already-published Friday figures are accurate; flagged as a spine backfill quirk worth a script fix, not a data error.",
-  "Investors.json profiles: last checked 13 Sep 2026, within the at-most-weekly cadence and no disclosure change found then -- left untouched this run per the skill's rule."
+  "Intel: congress trades replaced with 15 fresher disclosures (6 distinct members, dated 08-24 through 09-08); insiders and signals carried forward unchanged after an active re-sweep found nothing newer.",
+  "Model: macro narrative and USO/XLE/DBC calls corrected for Sunday's actual oil-futures reversal; rare-earth tickers (MP, USAR, REMX, REXC) picked up the newly-found 2026-11-10 China export-control expiry date.",
+  "News: 13 items, 10 from the last ~48 hours (Trump weighing military escalation, Aramco's October cuts, HKMA's lockstep hike, crypto-vs-equity sentiment divergence, gold's resilience).",
+  "Market: crypto Fear&Greed refreshed live to 71/Greed (up from 61 a week ago); equity Fear&Greed, breadth and flows carried forward within cadence, with a new BofA credit-specific flow report added alongside the existing Flow Show figures.",
+  "Track: today's 49-call snapshot appended (64 snapshots on file).",
+  "Theme radar: two Monday stage changes reported below -- physical AI reached Evidenced, humanoid robot was bootstrapped at Watching."
  ],
  "regime": {
-  "label": "Hawkish Fed hike now settled and absorbed; two-session relief rally + VIX collapse; BOJ hike delivered with a softer-than-feared reception; precious metals and crypto extending gains; oil unwinding its war premium",
-  "riskOn": 0.57,
-  "oneLiner": "Two full sessions of confirming price action -- a second-straight equity up day, a fifth-straight VIX decline, and a benign BOJ reception -- suggest the market has genuinely absorbed last week's hawkish surprises rather than merely bounced once."
+  "label": "Resilient risk-on vs. hawkish/geopolitical crosscurrents -- Fed/BOJ hikes absorbed, but oil's own price action now disagrees with the supply-shock narrative and the Xi-Trump summit remains a live binary risk",
+  "riskOn": 0.58,
+  "oneLiner": "The Fed and BOJ hikes are absorbed and equities are near highs, but oil's own price action disagrees with the weekend's supply-shock story and the Xi-Trump summit remains the cleanest binary risk on the calendar this week."
  },
  "topNews": [
   {
-   "headline": "BOJ hikes to 1.25%, highest since 1995, board splits 7-2 as yen fails to rally",
+   "headline": "Trump cuts Camp David trip short, weighs 'large-scale' military response after Riyadh strike",
    "impact": "mixed",
-   "actionable": "The softer-than-feared reception (yen only -0.45%, JGB yield down ~5bp) removes a near-term carry-unwind overhang for HK tech and broader Asia risk into Monday's open."
+   "actionable": "Escalation risk now cuts both ways -- a US strike could restore confidence and cap the oil/miners hedge, or trigger retaliation and extend it; don't reduce the precious-metals sleeve into this binary."
   },
   {
-   "headline": "Oil sinks ~6% Friday as Saudi pipeline restoration offsets widening Houthi attacks",
-   "impact": "mixed",
-   "actionable": "A real divergence versus XLE (barely moved, -0.26%) -- worth watching for either an energy-equity catch-down or a crude bounce if Gulf tensions resurface, relevant to the book's energy-adjacent commodity exposure."
-  },
-  {
-   "headline": "Gold and silver hit weekly highs Friday, silver spikes above $67.80 intraday",
+   "headline": "Aramco cancels all Sept/Oct European crude allocations; Dated Brent tops $130 as Gulf exports redirect to Asia",
    "impact": "bullish",
-   "actionable": "Directly supportive of the core levered silver/miners sleeve, but the size of the intraday swing versus the $59.93 SLV close is a reminder of how much the 1.6x-levered position can move in a single session."
+   "actionable": "The supply cut is deepening in duration even though WTI futures themselves fell Sunday -- reinforces holding, not chasing, the precious-metals/miners hedge through month-end."
   },
   {
-   "headline": "S&P 500, Dow and Nasdaq rally as markets shrug off Fed's hawkish hike",
-   "impact": "bullish",
-   "actionable": "Broadly supportive for equity beta, but weak breadth underneath (McClellan -34, ~31-43% of stocks above key MAs) argues against reading this as an all-clear for risk generally."
-  },
-  {
-   "headline": "SMIC jumps 4.4% on Goldman upgrade and cloud-AI tailwind while Tencent slides to a multi-week low",
+   "headline": "Sept 23-24 Xi-Trump summit teeters on $14bn Taiwan arms-sale dispute",
    "impact": "mixed",
-   "actionable": "A split HK tech tape into the weekend -- SMIC strength is constructive for the semiconductor/China-tech read, but Tencent's slide is a direct read on the book's 0700.HK position."
+   "actionable": "Binary catalyst for HK tech this week -- a completed summit with a trade/rare-earth truce would be bullish for Tencent/SMIC/Xiaomi, a cancellation would hit them hard; consider sizing ahead of it rather than after."
+  },
+  {
+   "headline": "Gold holds near $4,383/oz, extending post-Fed-hike resilience",
+   "impact": "bullish",
+   "actionable": "Gold shrugging off a hawkish Fed while a live Mideast supply shock unfolds is a signal to hold, not trim, the gold/miners sleeve into the new week."
   }
  ],
  "signals": [
-  "No model call cleared the strict pUp3m>=0.6-or-<=0.4-with-confidence>=0.55 bar this run (closest: SPY pUp3m 0.59/conf 0.57, VLUE pUp3m 0.62/conf 0.52) -- worth noting plainly rather than padding with a marginal call.",
-  "VLUE (value factor) still carries the highest 12-month conviction in the universe (pUp12m 0.65, ev12m +10.5%) as the value-over-growth trend extends on rate-cycle logic; SMH (semis) close behind (pUp12m 0.59, ev12m +12%) on the AI-capex re-rating story -- consider for entry discipline rather than chasing given both are already richly re-rated.",
-  "SLV/GDX/SILJ show a modestly bullish but low-confidence tilt (pUp12m ~0.53, confidence 0.41-0.47) grounded in a political/Fed-credibility hedge reading rather than real-rate math -- a genuinely two-sided view given the position's own leverage already fails its stress-survivability test.",
-  "Congress/retail convergence names carried from this morning's refresh remain live watch items: INTC (Pelosi calls + $36B government stake gain), MU (#1 WSB trending into Sept 30 earnings) and PAAS (silver-mania-driven estimate revisions) -- consider watching into their respective catalysts rather than treating as consensus certainty.",
-  "Rare-earth basket (MP, LYC.AX, UUUU, REXC) holds a modestly positive 12m tilt (ev12m +9-13%) on confirmed DoD-backing and China's entity-list actions -- the Sept 23-25 Trump-Xi summit is the near-term swing factor worth watching for the whole complex."
+  "Watch SPY and VLUE as the model's steadiest near-term reads (pUp3m 0.59/0.62 at moderate confidence) -- broad market and the value factor both lean modestly constructive into Q3 earnings.",
+  "Consider treating duration cautiously for now: TLT/IEF sit at the model's weakest pUp3m readings (0.42/0.44) while the Fed's dot plot still points to at least one more 2026 hike.",
+  "The rare-earth basket (MP, USAR, Lynas) now has two dates to watch rather than one: the Sept 23-24 Xi-Trump summit and China's own export-control suspension expiring 2026-11-10.",
+  "USO/XLE were walked back this run from Sunday's overly bullish oil read after Sunday's actual futures reopen fell rather than spiked -- treat the Aramco supply story as a live, two-sided catalyst, not a one-way trade.",
+  "No 13F conviction-play changes this week (code refreshes on its own filing cadence, unchanged since the last scan) -- nothing new to flag from super-investor positioning."
  ],
  "watch": [
-  "Trump-Xi summit, 2026-09-23 to 2026-09-25 (leaders meet 24 Sep) -- key near-term catalyst for FXI/EEM, HK tech and the rare-earth basket.",
-  "Micron (MU) earnings, 2026-09-30 -- binary catalyst for the AI-memory-shortage thesis behind MU's current #1 WSB-trending signal.",
-  "Next FOMC meeting, 2026-10-27/28 -- 16 of 18 dots currently project at least one more 2026 hike.",
-  "Q3 2026 13F filing deadline, 2026-11-16 -- next scheduled refresh of code-owned convictionPlays/superInvestors data in investors.json."
+  "Sept 23-24: Xi-Trump Washington summit -- binary for HK tech (Tencent/SMIC/Xiaomi) and the rare-earth basket, threatened by a pending $14B Taiwan arms package.",
+  "Sept 21-23: a string of FOMC speakers (Goolsbee, Williams, Jefferson, Barkin, Barr, Hammack) -- watch for confirmation or pushback on Chair Warsh's 'dose of accommodation' hint at an October hike.",
+  "Sept 24: SNB policy decision; Sept 25: Revised UMich consumer sentiment and inflation expectations.",
+  "2026-11-10: China's Oct-2025 rare-earth export-control suspension expires -- the next hard date for the ex-China basket regardless of this week's summit outcome."
+ ],
+ "themes": [
+  "Physical AI reached Evidenced on 2026-09-17, its highest rung to date on the discovery ladder. It became a Candidate back in 2026 Q1, when distinct EDGAR filers roughly doubled from a base above 10 -- 15 in 2025 Q4 to 34 in 2026 Q1. Evidenced status now rests on an insider cluster: three insiders at Beneficient (BENF), one of the theme's own filers, bought on 2026-09-17. Only one of the theme's names (MP) sits in the priced watchlist, so co-movement across the basket cannot be measured yet -- the rung stays Evidenced rather than advancing on an unmeasurable price leg. Separately, on the crowding axis (a distinct measure from stage), the theme is already Crowded: six distinct trusts carry an effective 485BPOS prospectus, including Tidal Trust II's 2026-09-15 filing (accession 0001999371-26-020526), Tidal Trust IV's 2026-07-30 filing (0001999371-26-016486), WisdomTree Trust's 2026-07-29 filing (0001214659-26-009166), and Krane Shares Trust's 2026-07-29 filing (0001829126-26-007982). Because crowding is already at its ceiling, entryWindow is false -- the file's own guidance line ('Consider entry only at the Evidenced to Priced transition, and never initiate at Crowded') points away from this theme even as its discovery rung climbs.",
+  "Humanoid robot was bootstrapped onto the ladder at Watching on 2026-09-20 -- its first recorded rung, not yet a Candidate. No complete quarter has doubled the theme's distinct EDGAR filer count from a base above 10: the two most recent complete quarters ran 9 filers (2026 Q1) to 8 (2026 Q2), a decline rather than a doubling. It is nonetheless already Crowded on the separate product axis: four distinct trusts hold an effective 485BPOS prospectus -- Collaborative Investment Series Trust's 2026-08-28 filing (accession 0001999371-26-019219), Krane Shares Trust's 2026-07-29 filing (0001829126-26-007982), Roundhill ETF Trust's 2026-04-30 filing (0001398344-26-007785), and Morgan Stanley Portfolios Series 81's 2025-04-30 filing (0001104659-25-042690). That is product without breadth -- four effective ETF wrappers exist despite the filer base never having broadened into a Candidate. entryWindow is false, since the theme has not reached Priced."
  ]
 }

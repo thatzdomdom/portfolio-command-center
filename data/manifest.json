@@ -1,73 +1,73 @@
 {
-  "sgtDate": "2026-09-19",
-  "generatedAt": "2026-09-19T07:52:07.369Z",
+  "sgtDate": "2026-09-21",
+  "generatedAt": "2026-09-20T23:23:20.981Z",
   "files": {
     "news.json": {
-      "asOf": "2026-09-19",
+      "asOf": "2026-09-21",
       "generatedAt": null,
       "cadence": "daily",
-      "count": 10,
+      "count": 12,
       "source": "research agent + adversarial verifier"
     },
     "model.json": {
-      "asOf": "2026-09-19",
+      "asOf": "2026-09-21",
       "generatedAt": null,
       "cadence": "daily",
       "count": 49,
       "source": "research agent (macro); pUp calls unpublished since phase 0"
     },
     "market.json": {
-      "asOf": "2026-09-19",
+      "asOf": "2026-09-21",
       "generatedAt": null,
       "cadence": "daily",
       "count": null,
       "source": "research agent"
     },
     "brief.json": {
-      "asOf": "2026-09-19",
+      "asOf": "2026-09-21",
       "generatedAt": null,
       "cadence": "daily",
       "count": 6,
       "source": "research agent"
     },
     "intel.json": {
-      "asOf": "2026-09-19",
+      "asOf": "2026-09-21",
       "generatedAt": null,
       "cadence": "daily",
       "count": 27,
       "source": "research agent; price-gated"
     },
     "investors.json": {
-      "asOf": "2026-09-14",
+      "asOf": "2026-09-20",
       "generatedAt": null,
       "cadence": "daily-verify",
       "count": 12,
       "source": "13F ingest; quarterly by law"
     },
     ".prices.json": {
-      "asOf": "2026-09-18",
-      "generatedAt": "2026-09-19T00:10:07.564Z",
+      "asOf": "2026-09-20",
+      "generatedAt": "2026-09-20T23:02:16.538Z",
       "cadence": "daily",
       "count": 66,
       "source": "price-spine.js (Yahoo chart, ETF-proxied)"
     },
     "closes.json": {
-      "asOf": "2026-09-18",
-      "generatedAt": "2026-09-19T00:10:19.591Z",
+      "asOf": "2026-09-20",
+      "generatedAt": "2026-09-20T23:02:28.491Z",
       "cadence": "daily",
       "count": 66,
       "source": "closes.js (2y daily closes, exchange-indexed, from .prices-2y)"
     },
     ".calendar.json": {
-      "asOf": "2026-09-18",
-      "generatedAt": "2026-09-18T23:02:19.981Z",
+      "asOf": "2026-09-20",
+      "generatedAt": "2026-09-20T23:02:28.561Z",
       "cadence": "daily",
-      "count": 32,
+      "count": 26,
       "source": "calendar-spine.js (ForexFactory)"
     },
     "fx.json": {
       "asOf": "2026-09-18",
-      "generatedAt": "2026-09-19T00:10:20.934Z",
+      "generatedAt": "2026-09-20T23:02:29.915Z",
       "cadence": "daily",
       "count": 5,
       "source": "fx.js (ECB reference rates)"
@@ -81,8 +81,8 @@
       "published": "book.enc"
     },
     "valuation.json": {
-      "asOf": "2026-09-17",
-      "generatedAt": "2026-09-19T00:10:21.040Z",
+      "asOf": "2026-09-18",
+      "generatedAt": "2026-09-20T23:02:30.014Z",
       "cadence": "daily",
       "count": 59,
       "source": "valuate.js",
@@ -96,10 +96,10 @@
       "source": "form4-scan.js (EDGAR daily index; GitHub Actions)"
     },
     "alerts.json": {
-      "asOf": "2026-09-19",
-      "generatedAt": "2026-09-19T00:10:21.318Z",
+      "asOf": "2026-09-20",
+      "generatedAt": "2026-09-20T23:02:30.307Z",
       "cadence": "daily",
-      "count": 91,
+      "count": 339,
       "source": "alerts.js (policy.json applied to signals)"
     },
     "watchlist.json": {
@@ -110,22 +110,22 @@
       "source": "owner"
     },
     "policy.json": {
-      "asOf": "2026-09-14",
+      "asOf": "2026-09-20",
       "generatedAt": null,
       "cadence": "manual",
       "count": null,
       "source": "owner-editable thresholds"
     },
     "technicals.json": {
-      "asOf": "2026-09-18",
-      "generatedAt": "2026-09-19T00:10:21.105Z",
+      "asOf": "2026-09-20",
+      "generatedAt": "2026-09-20T23:02:30.082Z",
       "cadence": "daily",
       "count": 66,
       "source": "technicals.js (trend gate, vol, drawdown from .prices-2y)"
     },
     "targets.json": {
-      "asOf": "2026-09-18",
-      "generatedAt": "2026-09-19T00:10:21.219Z",
+      "asOf": "2026-09-20",
+      "generatedAt": "2026-09-20T23:02:30.194Z",
       "cadence": "daily",
       "count": 38,
       "source": "targets.js (SHADOW policy weights)"
@@ -138,15 +138,15 @@
       "source": "silver-backtest.js (SLV full history, margin-account model)"
     },
     ".validation.json": {
-      "asOf": "2026-09-19",
+      "asOf": "2026-09-21",
       "generatedAt": null,
       "cadence": "daily",
       "count": 0,
       "source": "validate-all.js (count = problems)"
     },
     "oneaction.json": {
-      "asOf": "2026-09-19",
-      "generatedAt": "2026-09-19T00:17:00.945Z",
+      "asOf": "2026-09-21",
+      "generatedAt": "2026-09-20T23:02:30.370Z",
       "cadence": "daily",
       "count": 1,
       "source": "one-action.js (count = 1 when an action is open)",
@@ -173,6 +173,20 @@
       "cadence": "manual",
       "count": 13,
       "source": "owner-curated 13F filer list (count = tracked)"
+    },
+    "hkex.json": {
+      "asOf": "2026-09-20",
+      "generatedAt": "2026-09-19T16:02:03.768Z",
+      "cadence": "daily",
+      "count": 47,
+      "source": "hkex-di.js (HKEX Disclosure of Interests, keyless; GitHub Actions; asOf = last successful scan, count = notices retained)"
+    },
+    "themes.json": {
+      "asOf": "2026-09-20",
+      "generatedAt": "2026-09-19T17:13:55.948Z",
+      "cadence": "weekly",
+      "count": 2,
+      "source": "themes.js (SEC EDGAR full-text search, keyless; GitHub Actions, 06:20 SGT Monday; count = seeded terms)"
     }
   }
 }

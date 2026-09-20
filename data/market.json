@@ -1,15 +1,15 @@
 {
- "updated": "2026-09-19",
- "note": "Saturday pre-Asia-open run, 19 Sep 2026 ~07:02 SGT -- latest completed US session is Friday 18 Sep close (no new session until Monday): S&P +0.17% to 7650.50 (record closing-high territory, a 2nd straight up day post-FOMC), Dow -0.18% to 51682.64, Nasdaq +0.39% to 26522.54 (record), Russell 2000 -0.50% to 2860.40 -- a mixed, narrow session (small-caps lagged, large-cap indices at/near highs). VIX fell a further -4.08% to 14.81, now well off the FOMC-day spike. Gold/silver extended gains (GLD +0.71% to 401.17, SLV +1.63% to 59.93) while miners were mixed (GDX -0.46%, SILJ +0.30%). CNN Fear&Greed's site/API blocked for an 8th consecutive run (451/418); third-party CNN-methodology trackers read 29/Fear, flat vs Thursday -- index-level strength (S&P/Nasdaq at records) has not lifted sentiment off the Fear floor, consistent with still-weak breadth under the surface (McClellan Oscillator -34, worse than Thu's -28; only ~31-43% of stocks above key moving averages per the most internally-consistent tracker). A genuinely NEW weekly BofA/EPFR Flow Show print (week ended 16 Sep 2026, published 17 Sep) landed this run for the first time in three runs -- but it sharply diverges from the same week's LSEG Lipper read (BofA/EPFR: +$79.3B global equity INFLOW led by +$63.8B into US stocks, ETF-driven; Lipper: -$23.21B global equity OUTFLOW led by -$31.44B from US funds, a 4th straight weekly outflow) -- both are reported below, clearly labeled, rather than picked as if the divergence didn't exist.",
+ "updated": "2026-09-21",
+ "note": "Monday pre-Asia-open run, 21 Sep 2026 ~07:02 SGT -- latest completed US session remains Friday 18 Sep close (no new session over the weekend; JPX is additionally closed today for a bank holiday): S&P +0.17% to 7650.50 (record closing-high territory, a 2nd straight up day post-FOMC), Dow -0.18% to 51682.64, Nasdaq +0.39% to 26522.54 (record), Russell 2000 -0.50% to 2860.40 -- a mixed, narrow session (small-caps lagged, large-cap indices at/near highs). VIX fell a further -4.08% to 14.81, now well off the FOMC-day spike. Gold/silver extended gains (GLD +0.71% to 401.17, SLV +1.63% to 59.93) while miners were mixed (GDX -0.46%, SILJ +0.30%). CNN Fear&Greed's site/API remain blocked (451/418) for a 10th consecutive run; third-party CNN-methodology trackers still cluster around 26-33/Fear (unchanged from Saturday's 29 read), consistent with still-weak breadth under the surface (McClellan Oscillator -34 as of Fri 18 Sep, the last figure available; only ~31-43% of stocks above key moving averages per the most internally-consistent tracker -- a separate ~67-95% reading circulating this run is dated pre-selloff/inconsistent with the Fear-zone read and is flagged as unreliable). Crypto's own Fear&Greed (alternative.me, a live, unblocked source) has risen to 71/Greed from 61 a week ago, a genuine and growing divergence from the equity gauge's Fear reading -- refreshed below. Flows: BofA's Sept 17 Flow Show (week ended 16 Sep, equity/aggregate view) and BofA's separate Sept 18 'Follow the Flow' credit-specific report both landed this run; the credit report shows IG/HY funds posting their first outflow in 23 weeks (IG -$2.71B, HY -$0.72B) alongside a -$14.9B money-market draw, a more granular and partly different cut of the same week's data than the aggregate Flow Show figures below -- both are reported, clearly labeled, rather than picked as if the divergence didn't exist. The same week's LSEG Lipper read (-$23.21B global equity outflow) continues to diverge sharply from BofA/EPFR's own +$79.3B equity inflow figure, as flagged since Saturday.",
  "fearGreed": {
-  "value": 29,
+  "value": 28,
   "rating": "Fear",
-  "asOf": "2026-09-18 (Fri US close). CNN's own site (cnn.com -> HTTP 451) and data API (production.dataviz.cnn.io -> HTTP 418) tried again and remain blocked -- an 8th consecutive blocked run. Value corroborated by two third-party CNN-methodology trackers (fearandgreedgraph.com and feargreedmeter.com, both reading 29/Fear, flat vs Thursday), not a CNN-direct read. The 7 component readings below are analyst-inferred approximations (no live source exposes CNN's exact sub-index breakdown today), clearly flagged as low-confidence estimates rather than measured values.",
+  "asOf": "2026-09-18 (Fri US close). CNN's own site (cnn.com -> HTTP 451) and data API (production.dataviz.cnn.io -> HTTP 418) tried again and remain blocked -- a 10th consecutive blocked run. Third-party CNN-methodology trackers now show a wider 26-33 range (vs Saturday's single 29 read); 28 is used as the midpoint of that range rather than a single clean reading. The 7 component readings below are analyst-inferred approximations (no live source exposes CNN's exact sub-index breakdown today), clearly flagged as low-confidence estimates rather than measured values.",
   "prevClose": 29,
   "prev1w": 33,
   "prev1m": 55,
   "prev1y": 67,
-  "cryptoValue": 56,
+  "cryptoValue": 71,
   "cryptoRating": "Greed",
   "components": [
    {
@@ -49,16 +49,17 @@
    }
   ],
   "sources": [
-   "https://www.cnn.com/markets/fear-and-greed (HTTP 451, blocked, 8th consecutive run)",
+   "https://www.cnn.com/markets/fear-and-greed (HTTP 451, blocked, 10th consecutive run)",
    "https://production.dataviz.cnn.io/index/fearandgreed/graphdata (HTTP 418, blocked)",
    "https://fearandgreedgraph.com/",
    "https://feargreedmeter.com/fear-and-greed-index",
    "https://feargreedmeter.com/crypto-fear-and-greed-index",
-   "https://alternative.me/crypto/fear-and-greed-index/"
+   "https://alternative.me/crypto/fear-and-greed-index/",
+   "https://www.benzinga.com/markets/market-summary/26/09/61833256/dow-tumbles-over-600-points-as-fed-raises-rates-investor-sentiment-weakens-greed-index-remains-in-fear-zone"
   ]
  },
  "breadth": {
-  "asOf": "2026-09-18 (Fri US close, the latest completed session as of this Sat 19 Sep run)",
+  "asOf": "2026-09-18 (Fri US close, the latest completed session as of this Mon 21 Sep run; no fresher breadth data has printed over the weekend)",
   "metrics": [
    {
     "label": "% US stocks above 200-day MA",
@@ -109,14 +110,14 @@
     "pct": null
    }
   ],
-  "note": "Broad-vs-narrow split has widened: the S&P 500 and Nasdaq closed at record highs Sep 18, yet only ~31-43% of stocks sit above their 50-/200-day MAs (thetrading.tools) and the McClellan Oscillator fell further to -34 from -28, with decliners outpacing advancers on the very session the index made new highs -- textbook narrow leadership (a handful of large caps carrying the index) rather than broad participation. One aggregator (condoredge.com) reports a much healthier ~95% above 200-DMA, inconsistent with both the Fear-zone sentiment reading and its own same-day negative advance-decline count, and is flagged as likely unreliable.",
+  "note": "Broad-vs-narrow split has widened: the S&P 500 and Nasdaq closed at record highs Sep 18, yet only ~31-43% of stocks sit above their 50-/200-day MAs (thetrading.tools) and the McClellan Oscillator fell further to -34 from -28, with decliners outpacing advancers on the very session the index made new highs -- textbook narrow leadership (a handful of large caps carrying the index) rather than broad participation. Two other aggregators checked again this run (condoredge.com ~95%, a separate MacroMicro-style feed ~67.1%) are both inconsistent with the Fear-zone sentiment reading and, in the second case, dated pre-selloff (~Sep 4) rather than current -- both flagged as unreliable/stale rather than blended in.",
   "sources": [
    "https://www.thetrading.tools/market-breadth",
    "https://condoredge.com/stocks/market-breadth"
   ]
  },
  "flows": {
-  "asOf": "2026-09-19 (re-checked this run)",
+  "asOf": "2026-09-21 (re-checked this run; underlying data still week ended 2026-09-16, unchanged)",
   "period": "week ending 16 September 2026 (freshest published BofA/EPFR Flow Show data, released 17 Sep 2026) -- genuinely NEW this run, first fresh weekly print in three runs; a same-week LSEG Lipper cut sharply diverges and is reported alongside rather than blended in",
   "narrative": "BofA's Flow Show ('Peaks and Shovels', 17 Sep) reports the week ended 16 Sep 2026 saw +$79.3B into global equity funds (ETF-driven: +$90.8B to ETFs vs -$11.4B mutual-fund outflows), with US stocks alone pulling in +$63.8B, their first weekly inflow in 4 weeks and the largest in three months; cash/money-market funds saw their biggest outflow in 9 weeks (-$75.9B) and crypto funds their biggest outflow in 11 weeks (-$800M). This directly contradicts a same-week LSEG Lipper cut showing global equity funds posting their largest weekly OUTFLOW in nine months (-$23.21B), led by a 4th consecutive weekly US equity outflow (-$31.44B), attributed to a crude-oil-driven inflation scare pushing Treasury yields higher. Both readings are genuine, differently-sourced datasets (BofA/EPFR vs LSEG Lipper) covering overlapping but non-identical fund universes -- the same EPFR-vs-Lipper divergence flagged in the prior weekly print persists and, if anything, has widened to opposite signs this week.",
   "regions": [
@@ -165,9 +166,9 @@
    {
     "region": "Bonds/Credit",
     "direction": "inflow",
-    "amount": "+$9.8B (BofA/EPFR)",
+    "amount": "+$9.8B (BofA/EPFR Flow Show, aggregate)",
     "amountUSD": 9800000000,
-    "note": "BofA/EPFR, week ended 2026-09-16, up from the prior week's US-only +$4.74B print; global bonds/credit aggregate this week."
+    "note": "BofA/EPFR Flow Show, week ended 2026-09-16, up from the prior week's US-only +$4.74B print; global bonds/credit aggregate this week. A separate, credit-specific BofA report published 2026-09-18 ('Follow the Flow: The Streak Is Over') cuts the same week more narrowly and shows the opposite sign at the IG/HY level: IG -$2.71B and HY -$0.72B, the first credit outflow after a 23-week inflow streak, alongside a -$14.9B money-market draw and +$2.28B into government bonds -- reported here as a more granular, partly divergent read of the same week rather than blended into the aggregate figure above."
    },
    {
     "region": "Gold",
@@ -213,7 +214,8 @@
    "https://finvaulta.com/research/bank-of-america/the-flow-show-peaks-and-shovels-2026-09-17",
    "https://finvaulta.com/research/bank-of-america/series/the-flow-show",
    "https://www.investing.com/news/economy-news/global-equity-fund-outflows-hit-ninemonth-high-on-inflation-fears-4907011",
-   "https://www.933thedrive.com/2026/09/18/global-equity-fund-outflows-hit-nine-month-high-on-inflation-fears/"
+   "https://www.933thedrive.com/2026/09/18/global-equity-fund-outflows-hit-nine-month-high-on-inflation-fears/",
+   "https://finvaulta.com/research/bank-of-america/follow-the-flow-the-streak-is-over-2026-09-18"
   ]
  }
 }
