@@ -1,124 +1,125 @@
 {
- "updated": "2026-09-21",
- "note": "Monday pre-Asia-open run, 21 Sep 2026 ~07:02 SGT -- latest completed US session remains Friday 18 Sep close (no new session over the weekend; JPX is additionally closed today for a bank holiday): S&P +0.17% to 7650.50 (record closing-high territory, a 2nd straight up day post-FOMC), Dow -0.18% to 51682.64, Nasdaq +0.39% to 26522.54 (record), Russell 2000 -0.50% to 2860.40 -- a mixed, narrow session (small-caps lagged, large-cap indices at/near highs). VIX fell a further -4.08% to 14.81, now well off the FOMC-day spike. Gold/silver extended gains (GLD +0.71% to 401.17, SLV +1.63% to 59.93) while miners were mixed (GDX -0.46%, SILJ +0.30%). CNN Fear&Greed's site/API remain blocked (451/418) for a 10th consecutive run; third-party CNN-methodology trackers still cluster around 26-33/Fear (unchanged from Saturday's 29 read), consistent with still-weak breadth under the surface (McClellan Oscillator -34 as of Fri 18 Sep, the last figure available; only ~31-43% of stocks above key moving averages per the most internally-consistent tracker -- a separate ~67-95% reading circulating this run is dated pre-selloff/inconsistent with the Fear-zone read and is flagged as unreliable). Crypto's own Fear&Greed (alternative.me, a live, unblocked source) has risen to 71/Greed from 61 a week ago, a genuine and growing divergence from the equity gauge's Fear reading -- refreshed below. Flows: BofA's Sept 17 Flow Show (week ended 16 Sep, equity/aggregate view) and BofA's separate Sept 18 'Follow the Flow' credit-specific report both landed this run; the credit report shows IG/HY funds posting their first outflow in 23 weeks (IG -$2.71B, HY -$0.72B) alongside a -$14.9B money-market draw, a more granular and partly different cut of the same week's data than the aggregate Flow Show figures below -- both are reported, clearly labeled, rather than picked as if the divergence didn't exist. The same week's LSEG Lipper read (-$23.21B global equity outflow) continues to diverge sharply from BofA/EPFR's own +$79.3B equity inflow figure, as flagged since Saturday.",
+ "updated": "2026-09-22",
+ "note": "Tuesday pre-Asia-open run, 22 Sep 2026 -- latest completed US session is Monday 21 Sep close: S&P +1.49% to 7765 (fresh record-high territory, a strong risk-on session) capping a +1.9% week; VIX ticked up a marginal +0.41% to 14.87 on the day itself despite being down a sharp -13.04% over the week, i.e. vol has been collapsing into this rally. CNN Fear&Greed's own site/API remain blocked (HTTP 451/418) again this run; third-party CNN-methodology trackers (feargreedmeter.com) now read 34/Fear, up from the 26-33 cluster seen Sat-Mon, consistent with the sharp VIX decline pulling the volatility sub-component toward neutral even as breadth stays narrow. Crypto's own Fear&Greed (alternative.me, live/unblocked) eased slightly to 70/Greed from 71 the prior day -- still a wide, persistent divergence from the equity gauge's Fear reading. Breadth: thetrading.tools' Mon 21 Sep read shows 32.4%/43.8% of stocks above 50d/200d MAs (still weak) with the McClellan Oscillator improving to -22 (26th pctile) from -34, yet NYSE decliners outpaced advancers 1.78:1 and new 52-wk lows (346) swamped new highs (92) on the very session the index hit a record -- narrow, mega-cap-led leadership persists. condoredge.com's divergent read (66.7%/95% above 50d/200d, A/D 1.27:1 bullish, 'Healthy Bull') remains an outlier inconsistent with the Fear-zone/narrow-breadth signals from other trackers and is flagged rather than blended in. Flows: no fresher BofA/EPFR weekly print has landed since the 17 Sep 'Peaks and Shovels' release (week ended 16 Sep) -- the next weekly cut (week ended 23 Sep) is not expected until ~24-25 Sep, so all flow figures below are carried forward unchanged from the prior run.",
  "fearGreed": {
-  "value": 28,
+  "value": 34,
   "rating": "Fear",
-  "asOf": "2026-09-18 (Fri US close). CNN's own site (cnn.com -> HTTP 451) and data API (production.dataviz.cnn.io -> HTTP 418) tried again and remain blocked -- a 10th consecutive blocked run. Third-party CNN-methodology trackers now show a wider 26-33 range (vs Saturday's single 29 read); 28 is used as the midpoint of that range rather than a single clean reading. The 7 component readings below are analyst-inferred approximations (no live source exposes CNN's exact sub-index breakdown today), clearly flagged as low-confidence estimates rather than measured values.",
+  "asOf": "2026-09-21 (Mon US close). CNN's own site (cnn.com -> HTTP 451) and data API (production.dataviz.cnn.io -> HTTP 418) tried again and remain blocked -- an 11th consecutive blocked run. Third-party CNN-methodology tracker feargreedmeter.com now reads 34/Fear (vs the 26-33 range seen over the weekend), a rise consistent with the sharp -13% weekly VIX decline and S&P record highs, though the underlying page did not expose a historical breakdown this run so prevClose/prev1w/prev1m/prev1y below are carried forward from the last confirmed reads. The 7 component readings below are analyst-inferred approximations (no live source exposes CNN's exact sub-index breakdown today), clearly flagged as low-confidence estimates rather than measured values.",
   "prevClose": 29,
   "prev1w": 33,
   "prev1m": 55,
   "prev1y": 67,
-  "cryptoValue": 71,
+  "cryptoValue": 70,
   "cryptoRating": "Greed",
   "components": [
    {
     "name": "Market Momentum (S&P 500 vs 125-day MA)",
-    "reading": "approx., not measured directly; S&P +0.17% to 7650.50 on Sep 18, a 2nd straight post-FOMC up session and record closing-high territory",
-    "signal": "neutral"
+    "reading": "approx., not measured directly; S&P +1.49% to 7765 on Mon 21 Sep, a strong risk-on session and fresh record-closing-high territory, capping a +1.9% week",
+    "signal": "greed"
    },
    {
     "name": "Stock Price Strength (52-wk highs vs lows, NYSE)",
-    "reading": "approx., not measured directly this run",
+    "reading": "approx.; NYSE saw only 92 new 52-wk highs vs 346 new lows on Mon 21 Sep (thin upside participation even as the index made a record)",
     "signal": "fear"
    },
    {
     "name": "Stock Price Breadth (McClellan Volume Summation)",
-    "reading": "approx., inferred from McClellan Oscillator -34 (~16th percentile) as of Sep 18, weaker than Thu's -28 despite the index-level gain",
+    "reading": "approx., inferred from McClellan Oscillator -22 (~26th percentile) as of Mon 21 Sep, improved from Fri's -34 but still negative; NYSE decliners outpaced advancers ~1.78:1 the same session",
     "signal": "fear"
    },
    {
     "name": "Put/Call Options",
     "reading": "approx., not measured directly this run",
-    "signal": "fear"
+    "signal": "neutral"
    },
    {
     "name": "Market Volatility (VIX vs 50-day MA)",
-    "reading": "VIX fell -4.08% to 14.81 on Sep 18, a 2nd straight decline off the FOMC-day spike",
-    "signal": "neutral"
+    "reading": "VIX +0.41% to 14.87 on Mon 21 Sep (small daily uptick) but -13.04% over the past week -- vol has been falling hard into this rally",
+    "signal": "greed"
    },
    {
     "name": "Safe Haven Demand (stocks vs bonds, 20-day)",
     "reading": "approx., not measured directly this run",
-    "signal": "fear"
+    "signal": "neutral"
    },
    {
     "name": "Junk Bond Demand (spread vs IG)",
-    "reading": "approx.; HY OAS remains tight, no credit stress; BofA/EPFR flows also showed bonds/credit taking in +$9.8B the week ended Sep 16",
+    "reading": "approx.; HY OAS remains tight, no credit stress; most recent BofA/EPFR flow data (week ended Sep 16, carried forward) also showed bonds/credit taking in +$9.8B",
     "signal": "neutral"
    }
   ],
   "sources": [
-   "https://www.cnn.com/markets/fear-and-greed (HTTP 451, blocked, 10th consecutive run)",
+   "https://www.cnn.com/markets/fear-and-greed (HTTP 451, blocked, 11th consecutive run)",
    "https://production.dataviz.cnn.io/index/fearandgreed/graphdata (HTTP 418, blocked)",
-   "https://fearandgreedgraph.com/",
    "https://feargreedmeter.com/fear-and-greed-index",
    "https://feargreedmeter.com/crypto-fear-and-greed-index",
    "https://alternative.me/crypto/fear-and-greed-index/",
-   "https://www.benzinga.com/markets/market-summary/26/09/61833256/dow-tumbles-over-600-points-as-fed-raises-rates-investor-sentiment-weakens-greed-index-remains-in-fear-zone"
+   "https://www.thetrading.tools/market-breadth",
+   "https://sg.finance.yahoo.com/news/stock-market-news-sep-21-131500959.html"
   ]
  },
  "breadth": {
-  "asOf": "2026-09-18 (Fri US close, the latest completed session as of this Mon 21 Sep run; no fresher breadth data has printed over the weekend)",
+  "asOf": "2026-09-21 (Mon US close, the latest completed session as of this Tue 22 Sep run)",
   "metrics": [
    {
     "label": "% US stocks above 200-day MA",
-    "value": "43.2% (thetrading.tools); condoredge.com reports a starkly higher 95%, inconsistent with the Fear-zone sentiment reading and flagged low confidence/likely outlier",
+    "value": "43.8% (thetrading.tools); condoredge.com reports a starkly higher 95%, inconsistent with the Fear-zone sentiment reading and flagged low confidence/likely outlier",
     "signal": "bearish",
-    "pct": 43.2
+    "pct": 43.8
    },
    {
     "label": "% US stocks above 50-day MA",
-    "value": "31.4% (thetrading.tools); condoredge.com reports 52.1%, wide dispersion between trackers, treat as approximate",
+    "value": "32.4% (thetrading.tools); condoredge.com reports 66.7%, wide dispersion between trackers, treat as approximate",
     "signal": "bearish",
-    "pct": 31.4
+    "pct": 32.4
    },
    {
     "label": "50d/200d breadth ratio",
-    "value": "0.73 -- fast breadth lagging slow breadth (short-term participation weaker than long-term trend), approx.",
+    "value": "0.74 -- fast breadth lagging slow breadth (short-term participation weaker than long-term trend), approx.",
     "signal": "bearish",
     "pct": null
    },
    {
-    "label": "NYSE advancers vs decliners (Fri 18 Sep)",
-    "value": "~1,049 advancing vs ~1,852 declining (condoredge.com), a ~0.57:1 ratio -- decliners outpaced advancers on a mixed/flattish session (S&P +0.17%, Dow -0.18%, Russell -0.50%)",
+    "label": "NYSE advancers vs decliners (Mon 21 Sep)",
+    "value": "decliners outnumbered advancers ~1.78:1 on the NYSE (Nasdaq ~1.42:1 decliners) even as the S&P rose +1.49% to a record 7765 -- a narrow, mega-cap-led session",
+    "signal": "bearish",
+    "pct": null
+   },
+   {
+    "label": "52-week new highs minus new lows",
+    "value": "NYSE: 92 new highs vs 346 new lows (net -254); Nasdaq: 45 highs vs 162 lows; S&P 500: 5 highs vs 30 lows -- thin upside participation despite the index record",
     "signal": "bearish",
     "pct": null
    },
    {
     "label": "McClellan Oscillator",
-    "value": "-34 (~16th percentile) as of Sep 18 -- weaker than Thu's -28, breadth deteriorated even as headline indices hit fresh highs",
+    "value": "-22 (~26th percentile) as of Mon 21 Sep -- improved from Fri's -34 but still negative; breadth momentum lagging the index-level surge",
     "signal": "bearish",
     "pct": null
    },
    {
     "label": "McClellan Summation Index",
-    "value": "not available from checked free sources today (StockCharts $NYSI page requires login); data gap",
-    "signal": "neutral",
-    "pct": null
-   },
-   {
-    "label": "52-week new highs minus new lows",
-    "value": "not available -- no reliable live count found; data gap",
+    "value": "not available from checked free sources today (StockCharts $NYSI page requires login); data gap, carried forward",
     "signal": "neutral",
     "pct": null
    },
    {
     "label": "% of sectors above 200-day MA",
-    "value": "not available -- sector-level breakdown not retrievable from free sources; data gap",
+    "value": "not available -- sector-level breakdown not retrievable from free sources this run; data gap, carried forward. Sector performance Mon 21 Sep: only XLK (+0.8%) gained; 10 of 11 S&P sectors closed lower, led down by XLU (-1.4%)",
     "signal": "neutral",
     "pct": null
    }
   ],
-  "note": "Broad-vs-narrow split has widened: the S&P 500 and Nasdaq closed at record highs Sep 18, yet only ~31-43% of stocks sit above their 50-/200-day MAs (thetrading.tools) and the McClellan Oscillator fell further to -34 from -28, with decliners outpacing advancers on the very session the index made new highs -- textbook narrow leadership (a handful of large caps carrying the index) rather than broad participation. Two other aggregators checked again this run (condoredge.com ~95%, a separate MacroMicro-style feed ~67.1%) are both inconsistent with the Fear-zone sentiment reading and, in the second case, dated pre-selloff (~Sep 4) rather than current -- both flagged as unreliable/stale rather than blended in.",
+  "note": "Broad-vs-narrow split remains wide: the S&P 500 closed at a fresh record (+1.49% to 7765) on Mon 21 Sep, yet only ~32-44% of stocks sit above their 50-/200-day MAs (thetrading.tools), decliners outpaced advancers ~1.78:1, and new 52-wk lows (346) far exceeded new highs (92) -- textbook narrow leadership (a handful of large/mega-caps, mainly tech, carrying the index) rather than broad participation, even as the McClellan Oscillator ticked up to -22 from -34. condoredge.com's divergent read (~67%/95% above 50d/200d, 'Healthy Bull') is inconsistent with the Fear-zone sentiment reading and the advancer/decliner and new-high/low data above, and is flagged as unreliable rather than blended in.",
   "sources": [
    "https://www.thetrading.tools/market-breadth",
-   "https://condoredge.com/stocks/market-breadth"
+   "https://condoredge.com/stocks/market-breadth",
+   "https://sg.finance.yahoo.com/news/stock-market-news-sep-21-131500959.html"
   ]
  },
  "flows": {
-  "asOf": "2026-09-21 (re-checked this run; underlying data still week ended 2026-09-16, unchanged)",
-  "period": "week ending 16 September 2026 (freshest published BofA/EPFR Flow Show data, released 17 Sep 2026) -- genuinely NEW this run, first fresh weekly print in three runs; a same-week LSEG Lipper cut sharply diverges and is reported alongside rather than blended in",
+  "asOf": "2026-09-22 (re-checked this run; underlying data still week ended 2026-09-16, unchanged -- carried forward as no fresher BofA/EPFR weekly print exists yet; the next weekly cut, week ended 23 Sep, is not expected until ~24-25 Sep)",
+  "period": "week ending 16 September 2026 (freshest published BofA/EPFR Flow Show data, released 17 Sep 2026) -- carried forward unchanged this run; a same-week LSEG Lipper cut sharply diverges and is reported alongside rather than blended in",
   "narrative": "BofA's Flow Show ('Peaks and Shovels', 17 Sep) reports the week ended 16 Sep 2026 saw +$79.3B into global equity funds (ETF-driven: +$90.8B to ETFs vs -$11.4B mutual-fund outflows), with US stocks alone pulling in +$63.8B, their first weekly inflow in 4 weeks and the largest in three months; cash/money-market funds saw their biggest outflow in 9 weeks (-$75.9B) and crypto funds their biggest outflow in 11 weeks (-$800M). This directly contradicts a same-week LSEG Lipper cut showing global equity funds posting their largest weekly OUTFLOW in nine months (-$23.21B), led by a 4th consecutive weekly US equity outflow (-$31.44B), attributed to a crude-oil-driven inflation scare pushing Treasury yields higher. Both readings are genuine, differently-sourced datasets (BofA/EPFR vs LSEG Lipper) covering overlapping but non-identical fund universes -- the same EPFR-vs-Lipper divergence flagged in the prior weekly print persists and, if anything, has widened to opposite signs this week.",
   "regions": [
    {
