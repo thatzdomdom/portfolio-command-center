@@ -1,7 +1,7 @@
 {
- "updated": "2026-09-22",
- "retrievedOn": "2026-09-22",
- "note": "Tuesday 2026-09-22 SGT run. Korea refreshed to the 21 Sep KRX close -- KOSPI closed above 7,000 for the first time (+1.65% to 7,007.72) on record semiconductor-export data, with domestic institutions the primary buyer (+₩1,492.4bn) against both foreign (-₩160.3bn) and retail (-₩2,979.0bn) net selling. Hong Kong Southbound refreshed to the 21 Sep print, an 11th straight day of mainland net buying and the largest single-day amount of the streak (+HK$4.074bn). China A-share margin balance refreshed to the 18 Sep print -- the three-exchange combined balance ticked down (-¥0.87bn), the first daily decline after several sessions of gains, though electronics-sector balances kept rising. Japan carries forward unchanged -- JPX's/Kabutan's next weekly release (week ended 18 Sep) still has not been published; next due ~24 Sep. Singapore carries forward unchanged for a second run -- no new SGX Research update found since the 16 Sep read (now 6 days stale). US carries forward unchanged -- ICI's next long-term-fund print (week ended 16 Sep) is not out yet (due ~23 Sep) and BofA/EPFR's next Flow Show (week ended 23 Sep) is not due until ~24-25 Sep.",
+ "updated": "2026-09-24",
+ "retrievedOn": "2026-09-23",
+ "note": "All figures sourced from document-level official releases (JPX/Kabutan, KRX-derived press, HKEX Stock Connect-derived press, SSE/SZSE margin data, SGX Research, ICI, BofA/EPFR) as of 2026-09-24 07:02 SGT; Korea and Hong Kong refreshed to fresh 23 Sep prints, China margin balance refreshed one session to 22 Sep, Japan/Singapore/US carried forward unchanged with no fresher official print found this run -- proxies (China margin, US ICI/EPFR) are flagged isProxy:true and never treated as direct net-buy/sell measures.",
  "markets": [
   {
    "market": "Japan (TSE)",
@@ -38,13 +38,13 @@
      "note": "Cash +¥74.7bn, margin +¥374.3bn; 3rd straight week of net buying"
     }
    ],
-   "trend": "Prior week (ended 5 Sep) foreign investors bought +¥131.4bn and individuals bought +¥165.7bn while trust banks sold -¥422.0bn; the week ended 11 Sep saw foreign investors flip to selling (-¥303.6bn), trust banks extend selling, and individuals accelerate buying (margin-driven). No newer weekly print has been published since -- still the case as of 22 Sep.",
-   "interpretation": "Foreign and trust-bank selling against retail margin buying is a classic dip-buying-into-institutional-distribution pattern; it signals fading (not collapsing) foreign risk appetite for Japan equities. This read is now 11 days stale and looks increasingly disconnected from the region -- Korea has since broken above KOSPI 7,000 on foreign-adjacent institutional buying and Hong Kong Southbound has extended to an 11-day streak -- so it remains an open question whether Japan's next weekly print (week ended 18 Sep, due ~24 Sep) shows a similar reversal or continued foreign caution.",
+   "trend": "Prior week (ended 5 Sep) foreign investors bought +¥131.4bn and individuals bought +¥165.7bn while trust banks sold -¥422.0bn; the week ended 11 Sep saw foreign investors flip to selling (-¥303.6bn), trust banks extend selling, and individuals accelerate buying (margin-driven). No newer weekly print has been published since -- checked again 24 Sep with no update.",
+   "interpretation": "Foreign and trust-bank selling against retail margin buying is a classic dip-buying-into-institutional-distribution pattern; it signals fading (not collapsing) foreign risk appetite for Japan equities. This read is now 13 days stale and increasingly disconnected from the region -- Korea sold off into a 4-day Chuseok closure after touching a fresh intraday record, and Hong Kong Southbound has extended to a 13-day streak (albeit decelerating sharply) -- so it remains an open question whether Japan's overdue weekly print (week ended 18 Sep) shows a similar pattern.",
    "sources": [
     "https://s.kabutan.jp/news/n202609170889/"
    ],
    "dataGaps": [
-    "No new JPX/Kabutan weekly release since week ended 11 Sep -- next release (week ended 18 Sep) not expected until ~24 Sep (4 business days after week close); carried forward unchanged for a second consecutive run (19 and 22 Sep) with no new data available",
+    "No new JPX/Kabutan weekly release since week ended 11 Sep -- next release (week ended 18 Sep) was due ~24 Sep (4 business days after week close) but had not posted as of this run (07:02 SGT, ahead of JPX's ~15:30 JST/16:30 SGT publication window); carried forward unchanged for a 4th consecutive run",
     "JPX's own site returned 403 to direct fetch; relying on secondary (Kabutan) recap which itemizes only foreign/trust-bank/individual categories, not the full investor-type breakdown",
     "Weekly cadence only -- no daily investor-type split published"
    ]
@@ -53,99 +53,103 @@
    "market": "South Korea (KOSPI)",
    "available": true,
    "cadence": "daily, published same evening after close via KRX/press",
-   "latestPeriod": "21 September 2026 (single session)",
-   "asOf": "2026-09-21",
+   "latestPeriod": "23 September 2026 (single session)",
+   "asOf": "2026-09-23",
    "flows": [
     {
      "investorType": "Foreign institutional",
      "direction": "outflow",
-     "amount": "-₩160.3bn",
+     "amount": "-₩510.1bn",
      "unit": "KRW bn",
-     "period": "21 Sep 2026",
+     "period": "23 Sep 2026",
      "isProxy": false,
-     "note": "Modest net selling even as KOSPI closed above 7,000 for the first time; includes NXT alternative trading system volumes"
+     "note": "Net sold as KOSPI touched an intraday record 7,153 before paring gains into the 4-day Chuseok closure (24-27 Sep)"
     },
     {
      "investorType": "Domestic institutional",
      "direction": "inflow",
-     "amount": "+₩1,492.4bn",
+     "amount": "+₩317.0bn",
      "unit": "KRW bn",
-     "period": "21 Sep 2026",
+     "period": "23 Sep 2026",
      "isProxy": false,
-     "note": "Primary buyer driving the index through the 7,000 milestone on record Sep 1-20 semiconductor-export data (chip exports +259.4% y/y)"
+     "note": "Lone net buyer of the session, lifting KOSPI to a fresh closing record despite foreign and retail selling"
     },
     {
      "investorType": "Retail (individuals)",
      "direction": "outflow",
-     "amount": "-₩2,979.0bn",
+     "amount": "-₩1,439.7bn",
      "unit": "KRW bn",
-     "period": "21 Sep 2026",
+     "period": "23 Sep 2026",
      "isProxy": false,
-     "note": "Heavy profit-taking into the record-high breakout; Samsung Electronics +4.98%"
+     "note": "Heavy pre-holiday profit-taking ahead of the 4-day Chuseok market closure"
     }
    ],
-   "trend": "Foreigners flipped to net buying on 18 Sep (+₩977.3bn, ending a 7-session selling streak) but reverted to modest net selling on 21 Sep (-₩160.3bn) even as KOSPI broke above 7,000 intraday and closed there for the first time (+1.65% to 7,007.72). Domestic institutions were the dominant buyer on 21 Sep (+₩1,492.4bn) against heavy retail profit-taking (-₩2,979.0bn).",
-   "interpretation": "The 7,000 breakout being driven by domestic institutions rather than foreigners, with retail booking large profits and foreigners only modest net sellers, is a more measured signal than the 18 Sep foreign-buying flip implied -- foreign conviction has not yet chased the milestone, worth watching for whether foreigners re-engage at the new highs given the owner's North Asia tech exposure.",
+   "trend": "KOSPI closed at a fresh record 7,080.92 (+63.01pt, +0.90%) on 23 Sep, the third straight record-setting session, after spiking to an intraday high of 7,153 on NY-led AI/semiconductor strength; gains were pared into the close as position-adjustment ahead of the 4-day Chuseok holiday (24-27 Sep) took hold. Institutions were the only net buyer (+₩317.0bn) while both foreigners (-₩510.1bn) and retail (-₩1,439.7bn, the largest single-day retail outflow of the recent run) sold, a reversal of the smaller, rotating flows seen on 21-22 Sep.",
+   "interpretation": "A third consecutive record close on institution-only buying, with both foreign and retail investors de-risking ahead of a 4-day market closure, reads as pre-holiday position trimming rather than a change in trend -- but the size of the retail and foreign outflows (the largest of the week) leaves the reopening session (29 Sep, after Chuseok) as a key tell for whether North Asia tech conviction (relevant to the owner's exposure) survives the break or whether profit-taking resumes.",
    "sources": [
-    "https://www.fnnews.com/news/202609211543556508"
+    "https://firebat.co.kr/stock-blog/20260923-close",
+    "https://www.seoul.co.kr/news/economy/securities/2026/09/23/20260923500251"
    ],
    "dataGaps": [
-    "KRX daily investor-type data does not separately break out retail vs. proprietary/pension components within 'institutions'"
+    "KRX daily investor-type data does not separately break out retail vs. proprietary/pension components within 'institutions'",
+    "Korean markets are closed 24-27 Sep for Chuseok; no new daily print will be available until the 29 Sep reopen"
    ]
   },
   {
    "market": "Hong Kong",
    "available": true,
    "cadence": "daily, published same day after close via HKEX Stock Connect data and financial press",
-   "latestPeriod": "21 September 2026 (single session)",
-   "asOf": "2026-09-21",
+   "latestPeriod": "23 September 2026 (single session)",
+   "asOf": "2026-09-23",
    "flows": [
     {
      "investorType": "Southbound (mainland)",
      "direction": "inflow",
-     "amount": "+HK$4.074bn",
+     "amount": "+HK$3.449bn",
      "unit": "HKD bn",
-     "period": "21 Sep 2026",
+     "period": "23 Sep 2026",
      "isProxy": false,
-     "note": "Shanghai Connect leg +HK$3.118bn, Shenzhen Connect leg +HK$0.956bn; 11th consecutive day of net Southbound buying, and the largest single-day amount of the streak"
+     "note": "Shanghai Connect leg +HK$4.424bn, Shenzhen Connect leg -HK$0.974bn; 13th consecutive day of net Southbound buying but a sharp deceleration from 22 Sep's +HK$12.691bn; 13-day streak cumulative ~HK$52.327bn"
     }
    ],
-   "trend": "Southbound net buying extended to an 11th consecutive session on 21 Sep (+HK$4.074bn), up sharply from +HK$1.193bn on 18 Sep and +HK$1.194bn on 17 Sep. Hang Seng Index rose 1.18% on 21 Sep with total Connect turnover of HK$92.18bn.",
-   "interpretation": "An 11th straight day of mainland net buying, with the streak's daily pace accelerating rather than fading, continues to directly support the owner's HK tech book (0700/0981/1810); this run's source reported only aggregate net-buy-by-Connect-leg, not the stock-level detail seen on 18 Sep (Baidu/AI/semis-led), so it is not possible to confirm whether that rotation persisted or flows broadened back into the mega-cap platforms.",
+   "trend": "Southbound net buying extended to a 13th consecutive session on 23 Sep but slowed sharply to +HK$3.449bn, roughly a quarter of 22 Sep's pace (+HK$12.691bn). Top net buys were Tencent (+HK$2.035bn) and Xiaomi-W (+HK$0.457bn); top net sells were Kingboard Laminates (-HK$2.168bn, a reversal from being a net buy on 22 Sep), Zhipu AI (-HK$0.3bn, also reversing from 22 Sep's top buy) and SMIC (-HK$0.331bn).",
+   "interpretation": "The streak's 13th day but at a much slower pace, with the prior session's AI/optical darlings (Zhipu, Kingboard Laminates) flipping to net sells while flows rotate back into Tencent, suggests mainland conviction into HK is cooling from its recent one-month-high pace even though it remains net positive -- a mild caution signal for the owner's HK tech book (0700/0981/1810) after twelve days of accelerating support, worth watching for whether the deceleration continues or reverses once Korea reopens post-Chuseok.",
    "sources": [
-    "https://finance.ifeng.com/c/8wbUmVcE9Xj"
+    "https://news.futunn.com/post/1000089046/southbound-capital-tracker-net-purchases-exceed-hkd-3-4-billion",
+    "https://finance.eastmoney.com/a/202609233882549676.html"
    ],
    "dataGaps": [
     "No official institutional-vs-retail split exists for Hong Kong or Southbound flows -- only aggregate net buy/sell by Connect leg is disclosed",
-    "This run's source did not itemize top net-bought/net-sold stocks, unlike the 18 Sep read"
+    "Stock-level detail sourced from aggregator recaps; not cross-verified against HKEX's own itemized disclosure"
    ]
   },
   {
    "market": "China (A-shares)",
    "available": true,
    "cadence": "daily, published next morning by exchanges (SSE/SZSE/BSE) and aggregated by data providers",
-   "latestPeriod": "18 September 2026 (session close)",
-   "asOf": "2026-09-18",
+   "latestPeriod": "22 September 2026 (session close)",
+   "asOf": "2026-09-22",
    "flows": [
     {
      "investorType": "Retail (individuals) — margin balance proxy",
-     "direction": "outflow",
-     "amount": "-¥0.87bn",
+     "direction": "inflow",
+     "amount": "+¥3.422bn",
      "unit": "CNY bn",
-     "period": "18 Sep 2026 (change vs. prior session)",
+     "period": "22 Sep 2026 (change vs. prior session)",
      "isProxy": true,
-     "note": "Combined margin financing + securities lending balance (SSE+SZSE+BSE) fell to ¥2,638.22bn total (Shanghai ¥1,353.3bn +¥5.91bn; Shenzhen ¥1,276.5bn -¥15.47bn; Beijing ¥8.4bn +¥0.82bn); first daily decline after several sessions of gains, though electronics-sector balances still rose the most (+¥19.32bn)"
+     "note": "SSE+SZSE combined margin financing balance rose to ¥2,617.869bn total (Shanghai ¥1,340.797bn +¥0.907bn; Shenzhen ¥1,277.072bn +¥2.515bn); second straight session of growth after 21 Sep's +¥14.171bn. Beijing Stock Exchange (BSE) component not available from this run's source"
     }
    ],
-   "trend": "Margin balance growth reversed to a slight decline on 18 Sep (-¥0.87bn), after +¥2.30bn on 17 Sep and +¥9.33bn on 16 Sep -- the drop was concentrated in Shenzhen-listed names (-¥15.47bn) and partly offset by continued Shanghai gains (+¥5.91bn), with electronics/semis balances still expanding even as the aggregate ticked down. No 21 Sep print was available as of this run (T+1 publication lag pushes it to 22-23 Sep).",
-   "interpretation": "The first net decline in leveraged retail positioning in several sessions, even as electronics/semis balances kept rising, suggests profit-taking or de-risking is starting in laggard sectors while conviction concentrates further into tech -- a modestly cautious but not alarming signal (via sentiment spillover) for the owner's HK tech names that also draw mainland Southbound flows. This remains a leverage-level proxy, not a direct net-buy/sell flow measure.",
+   "trend": "Margin balance growth continued on 22 Sep (+¥3.422bn) for a second straight session after 21 Sep's larger +¥14.171bn rise, with both Shanghai and Shenzhen legs contributing. No 23 Sep print was available as of this run (T+1 publication lag typically pushes same-day figures to the following morning; a 23 Sep print should post later on 24 Sep China time).",
+   "interpretation": "A second consecutive (if smaller) rise in leveraged retail positioning is consistent with continuation of the risk-on backdrop rather than de-risking -- broadly consistent (via sentiment spillover) with the owner's HK tech names that also draw mainland Southbound flows, though Southbound itself decelerated sharply on 23 Sep, a divergence worth monitoring. This remains a leverage-level proxy, not a direct net-buy/sell flow measure.",
    "sources": [
-    "https://finance.eastmoney.com/a/202609213879557437.html"
+    "http://stock.10jqka.com.cn/20260923/c680193217.shtml"
    ],
    "dataGaps": [
     "Margin/securities-lending balance is a leverage-level proxy, not a direct net-buy/sell flow figure",
     "Northbound (foreign) real-time daily net-buy disclosure via Stock Connect remains suspended since August 2024",
-    "21 Sep session data not yet published as of this run; next available print due 22-23 Sep"
+    "23 Sep session data not yet published as of this run; next available print due later on 24 Sep China time",
+    "This run's source reports SSE+SZSE only (BSE component unavailable), consistent with the prior run"
    ]
   },
   {
@@ -174,13 +178,13 @@
      "note": "Institutional net selling widened over the same 8-session window"
     }
    ],
-   "trend": "No newer SGX Research update found as of this run (22 Sep) -- unchanged from the 4-16 Sep read: retail has been net buying aggressively into the STI's record run (S$888m over 8 sessions) even as institutions net sell into strength.",
-   "interpretation": "Directly relevant to the owner's largest exposure: retail is chasing the STI's record high via banks, SGX itself and REITs -- the same type of names likely held -- while institutions distribute into strength, a caution flag that the rally's marginal buyer has shifted from 'smart money' to retail, raising the risk of a sharper pullback if retail buying fades. This read is now six days old with no confirmation of whether the pattern has continued, reversed, or how it interacts with STI's subsequent moves this week.",
+   "trend": "No newer SGX Research update found as of this run (24 Sep) -- unchanged from the 4-16 Sep read: retail has been net buying aggressively into the STI's record run (S$888m over 8 sessions) even as institutions net sell into strength.",
+   "interpretation": "Directly relevant to the owner's largest exposure: retail is chasing the STI's record high via banks, SGX itself and REITs -- the same type of names likely held -- while institutions distribute into strength, a caution flag that the rally's marginal buyer has shifted from 'smart money' to retail, raising the risk of a sharper pullback if retail buying fades. This read is now eight days old with no confirmation of whether the pattern has continued or reversed.",
    "sources": [
     "https://www.businesstoday.com.my/2026/09/17/retail-investors-buy-s888-million-of-singapore-stocks-after-sti-record/"
    ],
    "dataGaps": [
-    "Carried forward unchanged for a second consecutive run (19 and 22 Sep) -- no new SGX Research thematic update was found published since the 16 Sep read; sgx.com's own research pages remain JS-gated/blocked to direct fetch (403 and empty-content responses both encountered this run)",
+    "Carried forward unchanged for a 4th consecutive run -- no new SGX Research thematic update was found published since the 16 Sep read; sgx.com's own research/market-updates pages remain JS-gated/blocked to direct fetch",
     "No further breakdown of the institutional side (foreign vs domestic)"
    ]
   },
@@ -198,7 +202,7 @@
      "unit": "USD bn",
      "period": "week ended 9 Sep 2026",
      "isProxy": true,
-     "note": "ICI estimated long-term mutual fund flows; equity funds -$9.14bn, hybrid -$1.29bn, bond funds +$0.662bn; combined with ETF net issuance the total was +$1.56bn. Carried forward -- no newer ICI long-term-fund print yet (next due ~23 Sep for week ended 16 Sep)"
+     "note": "ICI estimated long-term mutual fund flows; equity funds -$9.14bn, hybrid -$1.29bn, bond funds +$0.662bn; combined with ETF net issuance the total was +$1.56bn. Carried forward -- ICI's next long-term-fund print (week ended 16 Sep) was due ~23 Sep but remains unpublished as of this 24 Sep check"
     },
     {
      "investorType": "Domestic/Foreign institutional (combined) — EPFR/BofA proxy",
@@ -210,15 +214,15 @@
      "note": "US equities +$63.8bn (largest in 3 months); Japan +$1.4bn (4th straight week); EM equities +$1.4bn (2nd straight week); Europe -$0.6bn; Treasuries +$7.3bn (12-wk streak); EM debt +$3bn (7-wk streak); gold +$3.1bn; IG bonds -$1bn (first outflow since April), HY -$2.5bn; money-market outflow was the largest in 9 weeks; crypto funds -$0.8bn (largest outflow in 11 weeks). Carried forward -- next Flow Show (week ended 23 Sep) not due until ~24-25 Sep"
     }
    ],
-   "trend": "No newer print for either series as of this run (22 Sep). BofA Flow Show/EPFR (week ended 16 Sep, published 17-18 Sep) remains the freshest institutional-style read: global and US equity inflows accelerated sharply (US equities' best week in 3 months) even as money-market outflows widened to a 9-week high -- a rotation out of cash into risk assets. The ICI long-term mutual fund retail proxy has not refreshed since week ended 9 Sep and is carried forward unchanged.",
-   "interpretation": "The BofA/EPFR proxy shows institutional-style flows rotating decisively out of cash and into US equities (best week in 3 months) alongside continued EM and Japan equity fund inflows -- a broadly risk-on signal supportive of the owner's global tech/EM-linked exposure, though this remains a proxy (no official US investor-type split exists) and both series are now stale (BofA six days, ICI thirteen days) with no confirmation of whether the risk-on rotation has continued through the current week.",
+   "trend": "No newer print for either series as of this run (24 Sep). BofA Flow Show/EPFR (week ended 16 Sep, published 17-18 Sep) remains the freshest institutional-style read: global and US equity inflows accelerated sharply even as money-market outflows widened to a 9-week high. ICI's long-term mutual fund retail proxy (week ended 9 Sep) is now overdue a refresh -- its week-ended-16-Sep print was due ~23 Sep US time but had not posted as of this SGT-morning check.",
+   "interpretation": "The BofA/EPFR proxy shows institutional-style flows rotating decisively out of cash and into US equities (best week in 3 months) alongside continued EM and Japan equity fund inflows -- a broadly risk-on signal supportive of the owner's global tech/EM-linked exposure, though this remains a proxy (no official US investor-type split exists) and both series are now stale (BofA eight days, ICI fifteen days) with no confirmation of whether the risk-on rotation has continued through the current week.",
    "sources": [
     "https://www.ici.org/research/stats/flows",
     "https://www.investing.com/news/stock-market-news/bofas-hartnett-says-the-run-it-hot-policy-era-is-over-4906811"
    ],
    "dataGaps": [
     "No official US equity investor-type (foreign/domestic/retail) split is published by any exchange or regulator -- ICI and EPFR/BofA are both proxies, not comprehensive measurements",
-    "ICI long-term mutual fund flow figure is carried forward from week ended 9 Sep 2026; next release (week ended 16 Sep) not expected until ~23 Sep",
+    "ICI long-term mutual fund flow figure is carried forward from week ended 9 Sep 2026; next release (week ended 16 Sep) was due ~23 Sep US time but remains unpublished as of this 24 Sep SGT-morning check",
     "BofA/EPFR Flow Show carried forward from week ended 16 Sep 2026; next release (week ended 23 Sep) not expected until ~24-25 Sep -- both series carried forward unchanged this run with no new data found"
    ]
   }

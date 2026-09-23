@@ -1,222 +1,199 @@
 {
- "updated": "2026-09-22",
- "note": "Tuesday pre-Asia-open run, 22 Sep 2026 -- latest completed US session is Monday 21 Sep close: S&P +1.49% to 7765 (fresh record-high territory, a strong risk-on session) capping a +1.9% week; VIX ticked up a marginal +0.41% to 14.87 on the day itself despite being down a sharp -13.04% over the week, i.e. vol has been collapsing into this rally. CNN Fear&Greed's own site/API remain blocked (HTTP 451/418) again this run; third-party CNN-methodology trackers (feargreedmeter.com) now read 34/Fear, up from the 26-33 cluster seen Sat-Mon, consistent with the sharp VIX decline pulling the volatility sub-component toward neutral even as breadth stays narrow. Crypto's own Fear&Greed (alternative.me, live/unblocked) eased slightly to 70/Greed from 71 the prior day -- still a wide, persistent divergence from the equity gauge's Fear reading. Breadth: thetrading.tools' Mon 21 Sep read shows 32.4%/43.8% of stocks above 50d/200d MAs (still weak) with the McClellan Oscillator improving to -22 (26th pctile) from -34, yet NYSE decliners outpaced advancers 1.78:1 and new 52-wk lows (346) swamped new highs (92) on the very session the index hit a record -- narrow, mega-cap-led leadership persists. condoredge.com's divergent read (66.7%/95% above 50d/200d, A/D 1.27:1 bullish, 'Healthy Bull') remains an outlier inconsistent with the Fear-zone/narrow-breadth signals from other trackers and is flagged rather than blended in. Flows: no fresher BofA/EPFR weekly print has landed since the 17 Sep 'Peaks and Shovels' release (week ended 16 Sep) -- the next weekly cut (week ended 23 Sep) is not expected until ~24-25 Sep, so all flow figures below are carried forward unchanged from the prior run.",
+ "updated": "2026-09-24",
+ "note": "Thursday pre-Asia-open run, 24 Sep 2026 -- latest completed US session is Wed 23 Sep close, which saw a broad equity pullback (S&P -0.76%, Nasdaq -0.69%, Dow -1.03%, Russell2000 -1.28%) with a vol pop (VIX +2.08% to 15.18), snapping the recent vol-compression trend on hawkish Fed commentary and a firmer dollar. Sentiment and breadth confirm the deterioration: CNN Fear & Greed held at 35/Fear on collapsing price-strength/breadth components even as safe-haven demand ticked toward greed, and only ~42%/29% of S&P names sit above their 200-/50-DMA with just Energy closing higher. Crypto's own gauge eased to 71/Greed from a recent Extreme-Greed reading, tracking Bitcoin's pullback. Fund-flow data still reflect the pre-selloff week (cash-into-equities rotation through 16 Sep); the next EPFR/BofA cut lands around 25 Sep and should reveal whether this reversal shows up in flows.",
  "fearGreed": {
-  "value": 34,
+  "value": 35,
   "rating": "Fear",
-  "asOf": "2026-09-21 (Mon US close). CNN's own site (cnn.com -> HTTP 451) and data API (production.dataviz.cnn.io -> HTTP 418) tried again and remain blocked -- an 11th consecutive blocked run. Third-party CNN-methodology tracker feargreedmeter.com now reads 34/Fear (vs the 26-33 range seen over the weekend), a rise consistent with the sharp -13% weekly VIX decline and S&P record highs, though the underlying page did not expose a historical breakdown this run so prevClose/prev1w/prev1m/prev1y below are carried forward from the last confirmed reads. The 7 component readings below are analyst-inferred approximations (no live source exposes CNN's exact sub-index breakdown today), clearly flagged as low-confidence estimates rather than measured values.",
-  "prevClose": 29,
-  "prev1w": 33,
+  "asOf": "2026-09-23 (Wed US close). CNN's own site (cnn.com -> HTTP 451) and data API (production.dataviz.cnn.io -> HTTP 418) remain blocked. Two independent third-party CNN-methodology trackers (feargreedmeter.com, finhacker.cz) corroborate 35/Fear; component breakdown sourced from aiStockSelection.com's CNN-component tracker, cross-referenced directionally against thetrading.tools' independent 7-factor gauge (44, same shape, different normalization).",
+  "prevClose": 35,
+  "prev1w": 27,
   "prev1m": 55,
-  "prev1y": 67,
-  "cryptoValue": 70,
+  "prev1y": null,
+  "cryptoValue": 71,
   "cryptoRating": "Greed",
   "components": [
    {
     "name": "Market Momentum (S&P 500 vs 125-day MA)",
-    "reading": "approx., not measured directly; S&P +1.49% to 7765 on Mon 21 Sep, a strong risk-on session and fresh record-closing-high territory, capping a +1.9% week",
-    "signal": "greed"
+    "reading": "approx. 40 -- S&P -0.76% Wed 23 Sep, still holding above its 125-day average despite the pullback",
+    "signal": "fear"
    },
    {
     "name": "Stock Price Strength (52-wk highs vs lows, NYSE)",
-    "reading": "approx.; NYSE saw only 92 new 52-wk highs vs 346 new lows on Mon 21 Sep (thin upside participation even as the index made a record)",
+    "reading": "approx. 2 -- deteriorated sharply; only 51 new highs vs 267 new lows across ~4,742 issues on 18 Sep, and just 7 S&P 500 new highs vs 30 new lows on 21 Sep",
     "signal": "fear"
    },
    {
     "name": "Stock Price Breadth (McClellan Volume Summation)",
-    "reading": "approx., inferred from McClellan Oscillator -22 (~26th percentile) as of Mon 21 Sep, improved from Fri's -34 but still negative; NYSE decliners outpaced advancers ~1.78:1 the same session",
+    "reading": "approx. 0 -- McClellan Oscillator fell to -33 (17th percentile) on 23 Sep from -10 the prior session",
     "signal": "fear"
    },
    {
     "name": "Put/Call Options",
-    "reading": "approx., not measured directly this run",
+    "reading": "approx. 48, not measured directly this run",
     "signal": "neutral"
    },
    {
     "name": "Market Volatility (VIX vs 50-day MA)",
-    "reading": "VIX +0.41% to 14.87 on Mon 21 Sep (small daily uptick) but -13.04% over the past week -- vol has been falling hard into this rally",
+    "reading": "VIX +2.08% to 15.18 on 23 Sep -- rising off a vol-compression stretch but still historically low",
+    "signal": "neutral"
+   },
+   {
+    "name": "Safe-Haven Demand (stocks vs bonds, 20-day)",
+    "reading": "approx. 58 -- modest bid for bonds/safe-havens as equities sold off",
     "signal": "greed"
    },
    {
-    "name": "Safe Haven Demand (stocks vs bonds, 20-day)",
-    "reading": "approx., not measured directly this run",
-    "signal": "neutral"
-   },
-   {
     "name": "Junk Bond Demand (spread vs IG)",
-    "reading": "approx.; HY OAS remains tight, no credit stress; most recent BofA/EPFR flow data (week ended Sep 16, carried forward) also showed bonds/credit taking in +$9.8B",
+    "reading": "approx. 48 -- HY OAS holding near 266-270bp, close to cycle-tight levels, no stress signal",
     "signal": "neutral"
    }
   ],
   "sources": [
-   "https://www.cnn.com/markets/fear-and-greed (HTTP 451, blocked, 11th consecutive run)",
-   "https://production.dataviz.cnn.io/index/fearandgreed/graphdata (HTTP 418, blocked)",
+   "https://www.cnn.com/markets/fear-and-greed",
+   "https://production.dataviz.cnn.io/index/fearandgreed/graphdata",
    "https://feargreedmeter.com/fear-and-greed-index",
-   "https://feargreedmeter.com/crypto-fear-and-greed-index",
-   "https://alternative.me/crypto/fear-and-greed-index/",
-   "https://www.thetrading.tools/market-breadth",
-   "https://sg.finance.yahoo.com/news/stock-market-news-sep-21-131500959.html"
+   "https://www.finhacker.cz/en/fear-and-greed-index-historical-data-and-chart/",
+   "https://www.aistockselection.com/en/fear-greed-today/",
+   "https://www.thetrading.tools/fear-greed-index",
+   "https://api.alternative.me/fng/?limit=10"
   ]
  },
  "breadth": {
-  "asOf": "2026-09-21 (Mon US close, the latest completed session as of this Tue 22 Sep run)",
+  "asOf": "2026-09-23",
   "metrics": [
    {
-    "label": "% US stocks above 200-day MA",
-    "value": "43.8% (thetrading.tools); condoredge.com reports a starkly higher 95%, inconsistent with the Fear-zone sentiment reading and flagged low confidence/likely outlier",
+    "label": "% of S&P 500 above 200-day MA",
+    "value": "41.8%",
     "signal": "bearish",
-    "pct": 43.8
+    "pct": 41.8
    },
    {
-    "label": "% US stocks above 50-day MA",
-    "value": "32.4% (thetrading.tools); condoredge.com reports 66.7%, wide dispersion between trackers, treat as approximate",
+    "label": "% of S&P 500 above 50-day MA",
+    "value": "28.7%",
     "signal": "bearish",
-    "pct": 32.4
-   },
-   {
-    "label": "50d/200d breadth ratio",
-    "value": "0.74 -- fast breadth lagging slow breadth (short-term participation weaker than long-term trend), approx.",
-    "signal": "bearish",
-    "pct": null
-   },
-   {
-    "label": "NYSE advancers vs decliners (Mon 21 Sep)",
-    "value": "decliners outnumbered advancers ~1.78:1 on the NYSE (Nasdaq ~1.42:1 decliners) even as the S&P rose +1.49% to a record 7765 -- a narrow, mega-cap-led session",
-    "signal": "bearish",
-    "pct": null
-   },
-   {
-    "label": "52-week new highs minus new lows",
-    "value": "NYSE: 92 new highs vs 346 new lows (net -254); Nasdaq: 45 highs vs 162 lows; S&P 500: 5 highs vs 30 lows -- thin upside participation despite the index record",
-    "signal": "bearish",
-    "pct": null
+    "pct": 28.7
    },
    {
     "label": "McClellan Oscillator",
-    "value": "-22 (~26th percentile) as of Mon 21 Sep -- improved from Fri's -34 but still negative; breadth momentum lagging the index-level surge",
+    "value": "-33 (17th percentile)",
     "signal": "bearish",
     "pct": null
    },
    {
-    "label": "McClellan Summation Index",
-    "value": "not available from checked free sources today (StockCharts $NYSI page requires login); data gap, carried forward",
-    "signal": "neutral",
+    "label": "S&P 500 sectors advancing",
+    "value": "Only Energy closed higher (+0.89%); Health Care, Real Estate, Cyclicals hit hardest",
+    "signal": "bearish",
+    "pct": 9
+   },
+   {
+    "label": "NYSE/market advance-decline",
+    "value": "Decliners broadly outnumbered advancers (proxy: Russell 2000 only 340/1972 issues advancing); precise NYSE tape not available in sources checked",
+    "signal": "bearish",
     "pct": null
    },
    {
-    "label": "% of sectors above 200-day MA",
-    "value": "not available -- sector-level breakdown not retrievable from free sources this run; data gap, carried forward. Sector performance Mon 21 Sep: only XLK (+0.8%) gained; 10 of 11 S&P sectors closed lower, led down by XLU (-1.4%)",
-    "signal": "neutral",
+    "label": "52-week new highs minus lows (trend)",
+    "value": "Deteriorating: 51 new highs vs 267 new lows (-216) across ~4,742 issues on 18 Sep; only 7 S&P 500 new highs vs 30 new lows on 21 Sep",
+    "signal": "bearish",
     "pct": null
    }
   ],
-  "note": "Broad-vs-narrow split remains wide: the S&P 500 closed at a fresh record (+1.49% to 7765) on Mon 21 Sep, yet only ~32-44% of stocks sit above their 50-/200-day MAs (thetrading.tools), decliners outpaced advancers ~1.78:1, and new 52-wk lows (346) far exceeded new highs (92) -- textbook narrow leadership (a handful of large/mega-caps, mainly tech, carrying the index) rather than broad participation, even as the McClellan Oscillator ticked up to -22 from -34. condoredge.com's divergent read (~67%/95% above 50d/200d, 'Healthy Bull') is inconsistent with the Fear-zone sentiment reading and the advancer/decliner and new-high/low data above, and is flagged as unreliable rather than blended in.",
+  "note": "Breadth deteriorated sharply on the down day -- under 3-in-10 S&P names above the 50-DMA and barely over 4-in-10 above the 200-DMA, McClellan deep negative, and only Energy closed green, confirming a narrow, weakening market beneath the index-level pullback.",
   "sources": [
    "https://www.thetrading.tools/market-breadth",
-   "https://condoredge.com/stocks/market-breadth",
-   "https://sg.finance.yahoo.com/news/stock-market-news-sep-21-131500959.html"
+   "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-sept-23-2026",
+   "https://www.mcoscillator.com/learning_center/weekly_chart/nyse_new_highs_data_say_uptrend_not_done_yet/",
+   "https://www.barchart.com/stocks/highs-lows"
   ]
  },
  "flows": {
-  "asOf": "2026-09-22 (re-checked this run; underlying data still week ended 2026-09-16, unchanged -- carried forward as no fresher BofA/EPFR weekly print exists yet; the next weekly cut, week ended 23 Sep, is not expected until ~24-25 Sep)",
-  "period": "week ending 16 September 2026 (freshest published BofA/EPFR Flow Show data, released 17 Sep 2026) -- carried forward unchanged this run; a same-week LSEG Lipper cut sharply diverges and is reported alongside rather than blended in",
-  "narrative": "BofA's Flow Show ('Peaks and Shovels', 17 Sep) reports the week ended 16 Sep 2026 saw +$79.3B into global equity funds (ETF-driven: +$90.8B to ETFs vs -$11.4B mutual-fund outflows), with US stocks alone pulling in +$63.8B, their first weekly inflow in 4 weeks and the largest in three months; cash/money-market funds saw their biggest outflow in 9 weeks (-$75.9B) and crypto funds their biggest outflow in 11 weeks (-$800M). This directly contradicts a same-week LSEG Lipper cut showing global equity funds posting their largest weekly OUTFLOW in nine months (-$23.21B), led by a 4th consecutive weekly US equity outflow (-$31.44B), attributed to a crude-oil-driven inflation scare pushing Treasury yields higher. Both readings are genuine, differently-sourced datasets (BofA/EPFR vs LSEG Lipper) covering overlapping but non-identical fund universes -- the same EPFR-vs-Lipper divergence flagged in the prior weekly print persists and, if anything, has widened to opposite signs this week.",
+  "asOf": "2026-09-24",
+  "period": "Week ended Wed 16 Sep 2026 (published 18 Sep) -- no fresher weekly EPFR/BofA cut has landed yet; next print (week ended 23 Sep) expected ~Fri 25 Sep 2026",
+  "narrative": "The freshest available EPFR/BofA weekly data still cover the week ended 16 September: global equity funds absorbed a three-month-high +$62.1bn while money-market funds saw a nine-week-high -$59.5bn redemption, a clear cash-to-equities rotation. Credit was more mixed -- IG inflows slowed to a trickle (+$0.4bn) and HY posted its worst outflow in six months (-$1.9bn) -- while government bonds kept drawing money (+$2.3bn) amid rising rate volatility, and gold ETFs extended a nine-week inflow streak. No newer cut has been published as of this research pass; granular regional equity splits (US/Europe/EM/China/Japan) were not separately disclosed in the secondary sources checked.",
   "regions": [
    {
     "region": "US Equities",
     "direction": "inflow",
-    "amount": "+$63.8B (BofA/EPFR)",
-    "amountUSD": 63800000000,
-    "note": "BofA/EPFR, week ended 2026-09-16: 1st inflow in 4 weeks, largest in 3 months, ETF-driven. Directly contradicted by LSEG Lipper for the same week: -$31.44B outflow, a 4th consecutive weekly outflow, attributed to oil-driven inflation fears lifting yields. Both figures reported as-is given the genuine methodology divergence."
+    "amount": "part of +$62.1bn global equity inflow (largest in 3 months)",
+    "amountUSD": null,
+    "note": "Aggregate-only figure disclosed in sources checked; US-specific split not published this week."
    },
    {
     "region": "Europe/Intl DM",
     "direction": "outflow",
-    "amount": "-$600M (BofA/EPFR)",
-    "amountUSD": -600000000,
-    "note": "BofA/EPFR, week ended 2026-09-16: first Europe outflow in 3 weeks. LSEG Lipper shows a much smaller -$295M for the same week -- directionally consistent, unlike the US figure."
+    "amount": "European HY funds saw outflows across regional sub-categories, led by Euro-focused HY",
+    "amountUSD": null,
+    "note": "Directional read from credit-fund commentary only; DM-ex-US equity split not disclosed."
    },
    {
     "region": "EM",
     "direction": "inflow",
-    "amount": "+$1.4B (BofA/EPFR)",
-    "amountUSD": 1400000000,
-    "note": "BofA/EPFR, week ended 2026-09-16: 2nd straight weekly inflow. LSEG Lipper's broader 'Asia funds' bucket (not identical to EM) shows +$6.26B inflow for the same week."
+    "amount": "not separately disclosed for wk-ended-16-Sep",
+    "amountUSD": null,
+    "note": "EPFR showed EM equity funds attracting money in 11 of the prior 15 weeks through early Sep; no updated weekly EM figure located."
    },
    {
     "region": "China",
-    "direction": "n/a",
-    "amount": "n/a (unverified this week)",
+    "direction": "inflow",
+    "amount": "not separately disclosed",
     "amountUSD": null,
-    "note": "No China-specific EPFR/BofA figure could be confirmed for the week ended 2026-09-16 from free sources. Most recent solid data point remains the week ended ~2026-09-02 (-$5.3B, 5th consecutive weekly outflow); LSEG Lipper's 'Asia funds' aggregate (includes China) was +$6.26B this week, but China-only is not broken out."
+    "note": "No China-specific weekly figure located for this period."
    },
    {
     "region": "Japan",
     "direction": "inflow",
-    "amount": "+$1.4B (BofA/EPFR)",
-    "amountUSD": 1400000000,
-    "note": "BofA/EPFR, week ended 2026-09-16: 4th consecutive weekly inflow."
+    "amount": "not separately disclosed",
+    "amountUSD": null,
+    "note": "No Japan-specific weekly figure located for this period."
    },
    {
     "region": "Money-market/Cash",
     "direction": "outflow",
-    "amount": "-$75.9B (BofA/EPFR)",
-    "amountUSD": -75900000000,
-    "note": "BofA/EPFR, week ended 2026-09-16: largest MM outflow in 9 weeks. LSEG Lipper shows a similarly large -$77.42B, ending a 2-week streak of net purchases -- the two sources agree directionally and roughly in magnitude here, unlike the equity figures."
+    "amount": "-$59.50bn",
+    "amountUSD": -59500000000,
+    "note": "Biggest money-market outflow in 9 weeks, funding the equity inflow."
    },
    {
     "region": "Bonds/Credit",
-    "direction": "inflow",
-    "amount": "+$9.8B (BofA/EPFR Flow Show, aggregate)",
-    "amountUSD": 9800000000,
-    "note": "BofA/EPFR Flow Show, week ended 2026-09-16, up from the prior week's US-only +$4.74B print; global bonds/credit aggregate this week. A separate, credit-specific BofA report published 2026-09-18 ('Follow the Flow: The Streak Is Over') cuts the same week more narrowly and shows the opposite sign at the IG/HY level: IG -$2.71B and HY -$0.72B, the first credit outflow after a 23-week inflow streak, alongside a -$14.9B money-market draw and +$2.28B into government bonds -- reported here as a more granular, partly divergent read of the same week rather than blended into the aggregate figure above."
+    "direction": "outflow",
+    "amount": "IG +$0.42bn, HY -$1.91bn, Government +$2.28bn",
+    "amountUSD": null,
+    "note": "Net credit outflow (HY worst in 6mo, IG sharply slower) offset by continued government-bond demand."
    },
    {
     "region": "Gold",
     "direction": "inflow",
-    "amount": "+$3.1B (BofA/EPFR)",
-    "amountUSD": 3100000000,
-    "note": "BofA/EPFR fund-flow measure, week ended 2026-09-16, consistent with GLD/SLV price strength that same week (GLD +0.7% to 401.17, SLV +1.6% to 59.93 on Fri 18 Sep alone)."
+    "amount": "+$4.24bn (wk ended 18 Sep, global gold ETFs)",
+    "amountUSD": 4240000000,
+    "note": "9th consecutive weekly inflow; date slightly offset (18 Sep) from the equity/credit cut (16 Sep) but freshest print available."
    }
   ],
   "movements": [
    {
-    "from": "Money-market/cash funds",
-    "to": "US equities and bonds",
-    "amount": "-$75.9B out of MM vs +$63.8B into US stocks, +$9.8B into bonds",
-    "note": "Largest cash outflow in 9 weeks, week ended 2026-09-16, coinciding with cash being redeployed into risk assets and credit per BofA/EPFR -- though note the LSEG Lipper read of the same week has US equities as a net outflow, so the destination of the cash outflow is disputed between sources."
+    "from": "Money-market/Cash",
+    "to": "Equities",
+    "amount": "~$60bn",
+    "note": "Biggest cash-to-stocks rotation in months, coincident with a 3-month-high equity inflow."
    },
    {
-    "from": "Mutual funds",
-    "to": "ETFs",
-    "amount": "-$11.4B mutual fund outflows vs +$90.8B into ETFs",
-    "note": "Within the +$79.3B global equity inflow figure, BofA/EPFR flags the entire net inflow (and then some) as ETF-driven, with traditional mutual funds still net redeeming."
+    "from": "High-yield credit",
+    "to": "Government bonds",
+    "amount": "~$4bn combined swing",
+    "note": "Rate-volatility spike pushed money out of HY (-$1.9bn) and into govvies (+$2.3bn)."
    },
    {
-    "from": "Crypto funds",
-    "to": "Cash/other",
-    "amount": "-$800M",
-    "note": "Biggest crypto fund outflow in 11 weeks, week ended 2026-09-16, per BofA/EPFR."
-   },
-   {
-    "from": "Europe equities",
-    "to": "US equities (per BofA/EPFR) or broadly out of equities (per Lipper)",
-    "amount": "-$600M Europe vs +$63.8B US (BofA/EPFR) / -$295M Europe vs -$31.44B US (Lipper)",
-    "note": "Europe's first outflow in 3 weeks under both measures; the destination/direction of the much larger US flow is the point of disagreement between BofA/EPFR and Lipper this week."
-   },
-   {
-    "from": "SPDR Gold Shares (GLD) / broad gold",
-    "to": "Gold ETFs generally",
-    "amount": "+$3.1B net gold inflow (BofA/EPFR, week ended 2026-09-16)",
-    "note": "Gold funds/ETFs saw a clean net inflow this week (vs the prior week's flat/wrapper-rotation-only picture), consistent with GLD/SLV/GDX/SILJ price strength through the FOMC and into Friday's close."
+    "from": "Cash/Credit",
+    "to": "Gold",
+    "amount": "~$4.2bn",
+    "note": "Gold ETFs extended a 9-week inflow streak as a hedge alongside rate-driven credit outflows."
    }
   ],
   "sources": [
-   "https://finvaulta.com/research/bank-of-america/the-flow-show-peaks-and-shovels-2026-09-17",
+   "https://finvaulta.com/research/bank-of-america/follow-the-flow-the-streak-is-over-2026-09-18",
+   "https://finvaulta.com/research/bank-of-america/situation-room-out-of-bonds-into-stocks-2026-09-17",
    "https://finvaulta.com/research/bank-of-america/series/the-flow-show",
-   "https://www.investing.com/news/economy-news/global-equity-fund-outflows-hit-ninemonth-high-on-inflation-fears-4907011",
-   "https://www.933thedrive.com/2026/09/18/global-equity-fund-outflows-hit-nine-month-high-on-inflation-fears/",
-   "https://finvaulta.com/research/bank-of-america/follow-the-flow-the-streak-is-over-2026-09-18"
+   "https://www.whalesbook.com/news/English/commodities/Gold-ETFs-See-9th-Straight-Week-of-Inflows-as-Demand-Stays-High/6ab139a132997ce1de8bdace",
+   "https://epfr.com/insights/global-navigator/flows-ebb-year-dragon-winds-down/"
   ]
  }
 }
