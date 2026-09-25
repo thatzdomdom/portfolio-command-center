@@ -1,14 +1,14 @@
 {
- "updated": "2026-09-25",
- "retrievedOn": "2026-09-25",
- "note": "All figures sourced from document-level official releases (JPX/Kabutan/Nikkei, KRX-derived press, HKEX Stock Connect-derived press, SSE/SZSE margin data, SGX Research, ICI, BofA/EPFR) as of 2026-09-25 07:02 SGT; Hong Kong refreshed to a fresh 24 Sep print, China margin refreshed one session to 23 Sep plus a new August new-account-opening proxy added, Japan partially refreshed (foreign-investor figure only, for week ended 19 Sep) with individual/trust-bank still carried forward from week ended 11 Sep, Korea carried forward unchanged (market closed 24-27 Sep for Chuseok; this run also corrects the reopen date to Mon 28 Sep, not 29 Sep as previously stated -- 29 Sep is the T+2 cash-settlement date, not the reopen date), Singapore/US carried forward unchanged with no fresher official print found this run -- proxies (China margin/new-accounts, US ICI/EPFR) are flagged isProxy:true and never treated as direct net-buy/sell measures.",
+ "updated": "2026-09-26",
+ "retrievedOn": "2026-09-26",
+ "note": "Saturday weekend run, retrieved 2026-09-26 07:02 SGT. Japan refreshed to a fuller investor-type breakdown for week ended 19 Sep (foreign, trust bank, individual, business corporation and securities-dealer rows all now dated to that week, superseding the individual/trust-bank rows carried forward from week ended 11 Sep in the prior run). Hong Kong Southbound: 24 Sep print (+HK$2.9bn, 14-day streak) reconfirmed; a 25 Sep figure could not be reliably resolved -- two searches returned contradictory readings (one recycled the 24-Sep figure, the other claimed a reversal to net selling but with a suspect/mismatched date), so 24 Sep remains the published asOf rather than publishing an unverified 25-Sep number. Korea, China A-shares and Singapore carried forward unchanged -- no newer prints found (Korea remains closed for Chuseok through 27 Sep, reopening Mon 28 Sep). United States carried forward unchanged; proxies (China margin/new-accounts, US ICI/EPFR) remain flagged isProxy:true and are never treated as direct net-buy/sell measures.",
  "markets": [
   {
    "market": "Japan (TSE)",
    "available": true,
    "cadence": "weekly, published by JPX ~4 business days after week close (typically Thursday/Wednesday); trade press (Kabutan/Nikkei) recaps same day",
-   "latestPeriod": "week ended 19 September 2026 (Tue 15 Sep holiday, trading Wed 16 - Fri 18 Sep -- press describes it as \"9月第3週\"/Sep 16-19) -- foreign-investor figure only; individual/trust-bank breakdown still carried forward from week ended 11 Sep",
-   "asOf": "2026-09-25",
+   "latestPeriod": "week ended 19 September 2026 (\"9月第3週\", trading Wed 16 - Fri 18-19 Sep) -- full investor-type breakdown now available",
+   "asOf": "2026-09-26",
    "flows": [
     {
      "investorType": "Foreign institutional",
@@ -17,37 +17,55 @@
      "unit": "JPY bn",
      "period": "week ended 18-19 Sep 2026",
      "isProxy": false,
-     "note": "TSE+Nagoya cash equities; 2nd consecutive week of net selling (prior week -¥303.6bn), attributed in press coverage to profit-taking as the Nikkei average held in a high range (Nikkei +277pt/+0.6% over the week). Corroborated by Nikkei and Kabutan headlines; full breakdown not yet accessible"
+     "note": "TSE+Nagoya cash equities; 2nd consecutive week of net selling (prior week -¥303.6bn), attributed in press coverage to profit-taking as the Nikkei average held in a high range (+277pt/+0.6% over the week)."
     },
     {
      "investorType": "Trust banks",
      "direction": "outflow",
-     "amount": "-¥550.6bn",
+     "amount": "-¥531.0bn",
      "unit": "JPY bn",
-     "period": "week ended 11 Sep 2026 (carried forward -- week ended 18-19 Sep breakdown not yet corroborated via a citable secondary source)",
+     "period": "week ended 19 Sep 2026",
      "isProxy": false,
-     "note": "Proxy for domestic pension/institutional trading desks"
+     "note": "4th consecutive week of net selling; proxy for domestic pension/institutional trading desks. Now refreshed to this week (supersedes the -¥550.6bn week-ended-11-Sep figure carried in the prior run)."
     },
     {
      "investorType": "Retail (individuals)",
-     "direction": "inflow",
-     "amount": "+¥449.1bn",
+     "direction": "outflow",
+     "amount": "-¥32.6bn",
      "unit": "JPY bn",
-     "period": "week ended 11 Sep 2026 (carried forward -- week ended 18-19 Sep breakdown not yet corroborated via a citable secondary source)",
+     "period": "week ended 19 Sep 2026",
      "isProxy": false,
-     "note": "Cash +¥74.7bn, margin +¥374.3bn; 3rd straight week of net buying as of week ended 11 Sep"
+     "note": "2nd consecutive week of net selling -- a reversal from the +¥449.1bn net buying reported for week ended 11 Sep in the prior run; retail did not fully absorb foreign/trust-bank supply this week."
+    },
+    {
+     "investorType": "Business corporations (buybacks)",
+     "direction": "inflow",
+     "amount": "+¥182.4bn",
+     "unit": "JPY bn",
+     "period": "week ended 19 Sep 2026",
+     "isProxy": false,
+     "note": "25th consecutive week of net buying, down from +¥207.7bn the prior week -- ongoing corporate buyback support."
+    },
+    {
+     "investorType": "Securities companies (dealers)",
+     "direction": "inflow",
+     "amount": "+¥754.0bn",
+     "unit": "JPY bn",
+     "period": "week ended 19 Sep 2026",
+     "isProxy": false,
+     "note": "Large continued net buying by dealer desks, the biggest single buyer category this week."
     }
    ],
-   "trend": "JPX's weekly investor-type data for the week ended 18-19 Sep 2026 (\"9月第3週\") has partially emerged via secondary press: foreign investors extended their selling to a second consecutive week (-¥294.3bn TSE+Nagoya cash equities, vs -¥303.6bn the prior week), with commentary attributing it to profit-taking as the Nikkei average held in a high range (+277pt/+0.6% over the week). The full individual/trust-bank breakdown for this newer week has not been corroborated via a citable secondary source this run (JPX's own site remains 403-blocked to direct fetch, and the Nikkei article itself is paywalled beyond the headline foreign-investor figure); those two rows are carried forward from the confirmed week-ended-11-Sep print, now 14 days stale.",
-   "interpretation": "A second straight week of foreign net selling into a still-firm Nikkei reads as continued, gradual profit-taking rather than capitulation -- but the incomplete breakdown means it isn't yet confirmed whether retail again absorbed the foreign supply as it did the prior week. Read alongside the rest of the region, it reinforces a pattern of foreign/institutional distribution against more resilient domestic absorption across North Asia (Korea's institution-only buying on 23 Sep, Hong Kong Southbound's still-positive but decelerating streak) -- consistent with fading, not collapsing, foreign risk appetite that owners of North Asia tech and Japan-linked exposure should watch for confirmation once the full weekly print posts.",
+   "trend": "The full JPX weekly investor-type breakdown for week ended 19 Sep 2026 is now available: foreign investors extended selling to a 2nd straight week (-¥294.3bn) and trust banks to a 4th straight week (-¥531.0bn), while retail also turned net seller (-¥32.6bn) -- a reversal from the prior week's retail buying. Corporate buybacks (+¥182.4bn, 25th straight week) and securities-dealer buying (+¥754.0bn) were the main offsetting bid.",
+   "interpretation": "This week retail did NOT absorb foreign/institutional selling the way it did the prior week -- foreign, trust-bank AND retail investors were all net sellers simultaneously, with only corporate buybacks and dealer desks providing support. That is a broader-based distribution pattern than the 'foreign sells, retail buys' read from two weeks ago, and a more cautious signal for North Asia tech / Japan-linked exposure than the headline foreign-selling figure alone suggests.",
    "sources": [
-    "https://www.nikkei.com/article/DGXZQOUB2680D0W5A920C2000000/",
     "https://kabutan.jp/news/marketnews/?b=n202509261149",
-    "https://s.kabutan.jp/news/n202609170889/"
+    "https://kabutan.jp/news/marketnews/?b=n202509261237",
+    "https://finance.yahoo.co.jp/news/detail/29981985598341be78fa1ae76e241d0963fb6dc1"
    ],
    "dataGaps": [
-    "Full JPX weekly investor-type breakdown for week ended 18-19 Sep 2026 not yet corroborated -- only the foreign-investor headline figure was found via Nikkei/Kabutan; individual and trust-bank rows above are carried forward from week ended 11 Sep and are now stale",
-    "JPX's own site (jpx.co.jp) returned 403 to direct fetch again this run; relying entirely on secondary press recaps",
+    "JPX's own site (jpx.co.jp) returned 403 to direct fetch again this run; relying entirely on secondary press (Kabutan/Yahoo Finance Japan) recaps",
+    "No week-ended-26-Sep print yet -- won't post until early next week",
     "Weekly cadence only -- no daily investor-type split published"
    ]
   },
@@ -123,7 +141,8 @@
    ],
    "dataGaps": [
     "No official institutional-vs-retail split exists for Hong Kong or Southbound flows -- only aggregate net buy/sell by Connect leg is disclosed",
-    "Stock-level detail sourced from aggregator recaps; not cross-verified against HKEX's own itemized disclosure"
+    "Stock-level detail sourced from aggregator recaps; not cross-verified against HKEX's own itemized disclosure",
+    "A 25 Sep 2026 figure was sought this run but could not be resolved -- two searches returned contradictory readings (one appeared to recycle the 24-Sep number, the other claimed a reversal to net selling but carried a mismatched/unreliable date stamp); HKEX's own Stock Connect statistics page would not render for automated fetch. 24 Sep remains the published asOf rather than publishing an unverified number."
    ]
   },
   {
