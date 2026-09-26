@@ -1,0 +1,955 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Book — Portfolio Command Center</title>
+<link rel="stylesheet" href="pcc.css">
+<!--
+  book.html — the Mac surface of the 11 Sep 2026 redesign (phase 5, section D). One row per
+  holding, a drawer per position, and nothing else.
+
+  Why it exists: the 08:15 brief answers "what should I do this morning" in three minutes on a
+  phone. It cannot answer "why did X move". index.html's answer to that was fourteen tabs over a
+  holdings array with every number recomputed in the browser from eight Yahoo calls on page load —
+  the same load-time-fetch habit that once put a fabricated price in front of the owner. So this
+  page fetches NOTHING off-origin: every figure was computed on the Mac by valuate.js,
+  technicals.js, targets.js and closes.js, carries its own as-of, and reaches the DOM through
+  textContent.
+
+  The join is the whole trick, and it is a known trap: valuation lines carry `t` and `id` but NOT
+  `yf`; technicals and closes are keyed by the YAHOO symbol; targets is keyed by `t`. So the chain
+  is book.enc(id → yf) × valuation.enc(id) × technicals.json(yf) × closes.json(yf) × targets.json(t).
+  Join on ticker instead and eleven cash accounts collapse into one row.
+
+  Twenty of the fifty-nine lines have no price series at all — eleven cash accounts, three
+  properties, the PE stake, the fund, the SSB ladder, the margin loan, two penny stubs — and one
+  quoted line (L46) had no completed bar in the spine. Those rows say "manual mark" and show the
+  mark's age. They never show a return, because a return computed off a mark that has not moved
+  since June is a lie with a decimal point. Marks over 90 days old wear an amber stamp;
+  trust:'low' prices say so on the price.
+
+  Money lives in book.enc / valuation.enc. Locked, the page still renders: the quoted sleeve comes
+  from targets.json — already public, already naming every quoted position — with gate, vol,
+  52-week and risk share intact and every value behind Unlock.
+
+  The join lives between the JOIN:BEGIN / JOIN:END markers and is pure (no DOM, no fetch) so it can
+  be run under node against the real data files. That is the only way to prove all 59 lines resolve.
+-->
+<style>
+  /* Page-local layout only. Every colour is a pcc.css token; this file defines none of its own.
+     `.row` and `.drawer` in pcc.css are flex/block boxes — a <tr> cannot wear them, so the table
+     rows use .hrow and the drawer's own contract class sits on the div INSIDE the cell. */
+  .book-head{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch;margin:4px 0 12px}
+  .book-head .card{flex:1 1 250px;min-width:250px;margin:0}
+  .lede{color:var(--ink-2);font-size:13px;margin:4px 0 0;line-height:1.6}
+  .k{color:var(--muted);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;font-weight:600}
+  .chips .k{margin-right:4px;align-self:center}
+  button.chip{cursor:pointer;font:inherit;font-size:12.5px}
+  .note{color:var(--muted);font-size:12px;margin:2px 0 12px;line-height:1.65}
+  #tbl{font-size:13.5px} #tbl td{vertical-align:top} #tbl th[data-sort]{cursor:pointer}
+  #tbl th:focus-visible{outline:2px solid var(--accent);outline-offset:-2px} #tbl th .dir{color:var(--accent)}
+  tr[hidden]{display:none} tr.hrow{cursor:pointer} tr.hrow.open td{background:var(--accent-soft)}
+  tr.grp td{background:var(--sunk);font-weight:600;border-bottom:1px solid var(--rule);text-align:left}
+  .nm{display:flex;flex-direction:column;gap:1px;min-height:34px;justify-content:center} .nm b{font-weight:600}
+  .tk{color:var(--muted);font-size:11.5px;font-family:var(--mono)} .soft{color:var(--muted)}
+  .mcell{text-align:left!important;color:var(--muted);font-style:italic}
+  .amber{background:var(--warn-soft);color:var(--warn);border-radius:4px;padding:0 5px;font-size:11px;font-weight:600;font-style:normal}
+  td.dr{padding:0 10px 14px!important;background:var(--sunk);text-align:left}
+  /* The drawer lives in a cell of a 14-column table inside .scroll, so it inherits the TABLE's
+     width. On a narrow window that pushed the numbers off the right edge, reachable only by
+     scrolling the table sideways. Pin it to the scroller's left edge and size it to the window. */
+  td.dr > .drawer{position:sticky;left:0;box-sizing:border-box;width:calc(100vw - 48px);max-width:1148px}
+  .dw{display:grid;grid-template-columns:minmax(340px,1.7fr) minmax(250px,1fr);gap:10px 24px}
+  .dw h3{font-size:13px;margin:10px 0 6px;letter-spacing:-.01em} .dw h3:first-child{margin-top:0}
+  .dw dl{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;margin:0;font-size:12.5px}
+  .dw dt{color:var(--muted)} .dw a{color:var(--accent)}
+  .dw dd{margin:0;text-align:right;font-variant-numeric:tabular-nums;font-family:var(--mono);overflow-wrap:anywhere}
+  .dw ul{margin:0;padding:0;list-style:none;font-size:12.5px}
+  .dw li{padding:4px 0;border-bottom:1px solid var(--rule-2)}
+  .chartbox{background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:8px}
+  .legend{color:var(--muted);font-size:11.5px;margin:6px 0 0;line-height:1.6}
+  .foot{margin-top:24px;color:var(--muted);font-size:12px;line-height:1.8;border-top:1px solid var(--rule);padding-top:12px}
+  .foot div{margin-bottom:3px}
+  .bootfail{color:var(--bad);font-size:13px;margin:16px 0;line-height:1.6}
+  @media(max-width:900px){.dw{grid-template-columns:1fr}}
+  @media(max-width:520px){button.chip{min-height:40px}.nm{min-height:40px}}
+</style>
+</head>
+<body>
+<div class="wrap wide">
+  <div id="navbar"></div>
+  <div id="asofbanner"></div>
+
+  <section id="sec-head">
+    <h1>Book</h1>
+    <p class="lede" id="lede">One row per holding. Click a row for the two-year chart, the filings and the mark behind it.</p>
+    <div class="book-head" id="headcards"></div>
+  </section>
+
+  <section id="sec-silver"></section>
+
+  <section id="sec-group">
+    <div class="chips" id="grpchips"><span class="k">Group by</span></div>
+    <p class="note" id="grpnote"></p>
+  </section>
+
+  <section id="sec-table">
+    <div id="tblerr"></div>
+    <div class="scroll"><table id="tbl"><thead><tr id="thead"></tr></thead><tbody id="tbody"></tbody></table></div>
+    <p class="note" id="tblnote"></p>
+  </section>
+
+  <section id="sec-funds"></section>
+  <section id="sec-foot"><div class="foot" id="foot"></div></section>
+</div>
+
+<script src="common.js"></script>
+<script src="funds.js"></script>
+
+<script id="book-core">
+/* PURE. No DOM, no fetch. The join and the two series transforms live here so a node harness can
+   run them against the real data/*.json and prove every line resolves. */
+window.BOOK = (function () {
+  'use strict';
+  var P = window.PCC || {};
+
+  /* JOIN:BEGIN */
+  function sliceTo(series, asOf) {
+    if (!asOf) return series || [];
+    var out = [], i, s = series || [];
+    for (i = 0; i < s.length; i++) { if (s[i].d <= asOf) out.push(s[i]); }
+    return out;
+  }
+  function lastClose(series) {
+    for (var i = (series || []).length - 1; i >= 0; i--) { if (series[i].c != null) return series[i]; }
+    return null;
+  }
+  // YTD is a calendar question, not a session count, so it cannot come from retPct(): the base is
+  // the last close of the previous year, whatever session that happened to be.
+  function ytdPct(series) {
+    var end = lastClose(series); if (!end) return null;
+    var jan = String(end.d).slice(0, 4) + '-01-01', base = null, i;
+    for (i = 0; i < series.length; i++) {
+      if (series[i].d >= jan) break;
+      if (series[i].c != null) base = series[i];
+    }
+    if (!base || !base.c) return null;
+    return (end.c / base.c - 1) * 100;
+  }
+  // The 200-day average, aligned one-to-one with the series so PCC.chart can overlay it (chart
+  // spreads an overlay across the full width by INDEX, so a short overlay would be drawn stretched
+  // and wrong). Before 200 sessions exist the window is shorter and `full` is false — the legend
+  // says so, and the gate bands below refuse to use those points.
+  function sma200Series(series) {
+    var out = [], win = [], sum = 0, i, c, s = series || [];
+    for (i = 0; i < s.length; i++) {
+      c = s[i].c;
+      if (c != null) { win.push(c); sum += c; if (win.length > 200) sum -= win.shift(); }
+      out.push({ d: s[i].d, c: win.length ? sum / win.length : null, full: win.length === 200 });
+    }
+    return out;
+  }
+  // Gate-OFF spans for the chart's shading. technicals.js turns the gate OFF after 5 consecutive
+  // closes below the 200-day (policy.trend.offAfterConsecutiveClosesBelow). The ON leg also needs
+  // positive 12-1 momentum, which cannot be reconstructed for the first year of a two-year window,
+  // so these bands are the OFF RULE exactly and the legend says that rather than implying the gate.
+  function gateOffBands(series, smaS, hyst) {
+    var h = hyst || 5, bands = [], run = 0, start = null, i, c, m, s = series || [];
+    for (i = 0; i < s.length; i++) {
+      m = smaS[i];
+      c = s[i].c;
+      if (c == null || !m || !m.full || m.c == null) { run = 0; continue; }
+      if (c < m.c) { run++; if (run === h) start = s[i - h + 1].d; }
+      else { if (start) { bands.push({ from: start, to: s[i - 1].d, kind: 'off' }); start = null; } run = 0; }
+    }
+    if (start) bands.push({ from: start, to: s[s.length - 1].d, kind: 'off' });
+    return bands;
+  }
+  // Yahoo symbol lookup built from the PUBLIC files. Used only on the locked path, where the book
+  // (and therefore `yf`) is not available: the symbol is recovered from technicals/closes keys, it
+  // is never guessed by bolting an exchange suffix onto a ticker.
+  function symbolIndex(tech, closes) {
+    var idx = {}, k;
+    var put = function (key, v) { if (key && idx[key] == null) idx[key] = v; };
+    var SUF = /\.(SI|HK|AX|KS|T)$/;
+    for (k in (tech && tech.instruments) || {}) { put(k, k); put(k.replace(SUF, ''), k); }
+    for (k in (closes && closes.instruments) || {}) { put(k, k); put(k.replace(SUF, ''), k); }
+    if (!idx.XAG && idx['SI=F']) idx.XAG = idx['SI=F'];   // silver spot rides the futures series
+    return idx;
+  }
+  // book may be null (locked): the quoted sleeve is then rebuilt from targets.json. The unquoted
+  // lines do not exist in any public file and the page says so rather than inventing them.
+  function joinRows(book, val, tech, tgt, closes, opts) {
+    opts = opts || {};
+    var asOf = opts.asOf || null;
+    var lines = {}, i, L, vlines = (val && val.lines) || [];
+    for (i = 0; i < vlines.length; i++) { L = vlines[i]; lines[L.id] = L; }
+    var staleWhy = {};
+    ((val && val.stale) || []).forEach(function (s) { staleWhy[s.id] = s.why; });
+    var tdiff = {};
+    ((tgt && tgt.diff) || []).forEach(function (d) { tdiff[d.t] = d; });
+    var clusterOf = {};
+    ((tgt && tgt.clusters) || []).forEach(function (c) {
+      (c.members || []).forEach(function (m) { clusterOf[m] = c; });
+    });
+    var ti = (tech && tech.instruments) || {}, sidx = symbolIndex(tech, closes);
+    var nav = (val && val.navSGD) || null;
+
+    var src;
+    if (book && book.holdings && book.holdings.length) {
+      src = book.holdings.slice();
+    } else {
+      src = ((tgt && tgt.diff) || []).map(function (d, k) {
+        return { id: 'tgt-' + k, n: d.n, t: d.t, yf: sidx[d.t] || null, ac: null, region: null,
+          cur: null, qty: null, valued: 'live', publicOnly: true };
+      });
+    }
+
+    var dupes = {}, rows = [];
+    src.forEach(function (h) { dupes[h.t] = (dupes[h.t] || 0) + 1; });
+    src.forEach(function (h) {
+      var line = lines[h.id] || null;
+      var yf = h.yf || (h.t ? sidx[h.t] : null) || null;
+      var t = (yf && ti[yf]) || null;
+      var series = yf ? sliceTo(P.closesFor(closes, yf), asOf) : [];
+      var quoted = series.length > 1;
+      var end = lastClose(series);
+      var d = tdiff[h.t] || null, cl = clusterOf[h.t] || null;
+      var mark = h.mark || null;
+      var manual = h.valued === 'manual' || (line && line.source === 'manual');
+      var markAsOf = (line && line.markAsOf) || (mark && mark.asOf) || null;
+      var markAge = (line && line.markAgeDays != null) ? line.markAgeDays
+        : (markAsOf && P.ageDays ? P.ageDays(markAsOf) : null);
+      rows.push({
+        id: h.id, t: h.t, n: h.n, yf: yf,
+        ac: h.ac || (line && line.ac) || null, region: h.region || null,
+        cur: h.cur || (line && line.cur) || null,
+        qty: h.qty != null ? h.qty : (line ? line.qty : null),
+        valued: h.valued, publicOnly: !!h.publicOnly,
+        // eleven lines share the ticker CASH and three share PROP, so the anchor falls back to the
+        // id. Every quoted position keeps the spec's plain `pos-<T>`.
+        anchor: 'pos-' + h.t + (dupes[h.t] > 1 ? '-' + h.id : ''),
+        valueSGD: line ? line.valueSGD : null,
+        pctNav: (line && nav) ? (line.valueSGD / nav) * 100 : null,
+        dayChgSGD: line ? line.dayChgSGD : null,
+        price: line ? line.price : null, priceAsOf: line ? line.priceAsOf : null,
+        fx: line ? line.fx : null, native: line ? line.native : null,
+        source: line ? line.source : (h.publicOnly ? 'targets.json (public)' : null),
+        trust: (line && line.trust) || (t && t.trust) || null,
+        markAsOf: markAsOf, markAgeDays: markAge, markSource: mark ? mark.source : null,
+        staleWhy: staleWhy[h.id] || null,
+        manual: !!manual, quoted: quoted,
+        tech: t, series: series, close: end ? end.c : null, closeAsOf: end ? end.d : null,
+        gateOn: t ? t.gate.on : (d ? d.gateOn : null),
+        vol60: t ? t.vol60 : (d ? d.vol60 : null),
+        vol20: t ? t.vol20 : null, volRegime: t ? t.volRegime : null,
+        high52w: t ? t.high52w : null, low52w: t ? t.low52w : null, dd52wPct: t ? t.dd52wPct : null,
+        r1d: quoted ? P.retPct(series, 1) : null,
+        r1w: quoted ? P.retPct(series, 5) : null,
+        r1m: quoted ? P.retPct(series, 21) : null,
+        rytd: quoted ? ytdPct(series) : null,
+        r1y: quoted ? P.retPct(series, 252) : null,
+        target: d ? d.target : null, actual: d ? d.actual : null, delta: d ? d.delta : null,
+        riskShare: d ? d.riskShareActual : null, cluster: cl
+      });
+    });
+    return rows;
+  }
+  // alerts.json is keyed by EDGAR ticker; the book's SGX and HKEX codes never appear there and the
+  // US lines are ETFs that file no Form 4. The drawer says that out loud instead of showing "0".
+  function filingsFor(row, alerts, signals) {
+    var keys = {}, out = [], SUF = /\.(SI|HK|AX|KS|T)$/;
+    if (row.t) keys[String(row.t).toUpperCase()] = 1;
+    if (row.yf) keys[String(row.yf).replace(SUF, '').toUpperCase()] = 1;
+    var iso = function (v) { return String(v || '').replace(/^(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3').slice(0, 10); };
+    ((alerts && alerts.alerts) || []).forEach(function (a) {
+      if (a.ticker && keys[String(a.ticker).toUpperCase()]) {
+        out.push({ date: iso(a.date), kind: a.family || 'alert', text: a.headline, url: a.url, id: a.id });
+      }
+    });
+    ((signals && signals.form4) || []).forEach(function (f) {
+      var tk = f.issuer && f.issuer.ticker;
+      if (tk && keys[String(tk).toUpperCase()]) {
+        out.push({ date: iso(f.filed), kind: 'Form 4', text: (f.issuer.name || tk) + ' — Form 4', url: f.url, id: f.id });
+      }
+    });
+    ((signals && signals.sc13) || []).forEach(function (f) {
+      var tk = f.issuer && f.issuer.ticker;
+      if (tk && keys[String(tk).toUpperCase()]) {
+        out.push({ date: iso(f.filed), kind: f.form || '13D/G', text: (f.issuer.name || tk) + ' — ' + (f.form || '13D/G'), url: f.url, id: f.id });
+      }
+    });
+    out.sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : 0; });
+    return out;
+  }
+  // Phase 8 (20 Sep 2026): which themes name this line among their own EDGAR filers. The spec asked
+  // for the join to be made on CIK, and the CIK is what the answer QUOTES — but data/book.json
+  // carries no CIK on any of its 59 holdings, so the only key that exists on both sides is the
+  // ticker EDGAR's display_names carry. The match is therefore ticker → filersNewest[].ticker and
+  // the matched filer's cik is printed so the claim can be checked against EDGAR by hand. Saying
+  // the join was made on CIK when it was made on a ticker would be exactly the small lie this page
+  // exists to avoid. A theme's stage is the discovery ladder; crowding is a separate axis.
+  function themesFor(row, themes) {
+    var keys = {}, out = [], SUF = /\.(SI|HK|AX|KS|T)$/;
+    if (row.t) keys[String(row.t).toUpperCase()] = 1;
+    if (row.yf) keys[String(row.yf).replace(SUF, '').toUpperCase()] = 1;
+    ((themes && themes.themes) || []).forEach(function (th) {
+      var hits = ((th && th.filersNewest) || []).filter(function (f) { return f && f.ticker && keys[String(f.ticker).toUpperCase()]; });
+      if (hits.length) out.push({ term: th.term, stage: th.stage, candidateOn: th.candidateOn || null,
+        crowding: (th.crowding && th.crowding.level) || null, entryWindow: th.entryWindow === true, filers: hits });
+    });
+    return out;
+  }
+  /* JOIN:END */
+
+  return { joinRows: joinRows, filingsFor: filingsFor, themesFor: themesFor, sma200Series: sma200Series,
+    gateOffBands: gateOffBands, ytdPct: ytdPct, symbolIndex: symbolIndex, sliceTo: sliceTo };
+})();
+</script>
+
+<script id="book-view">
+(function () {
+  'use strict';
+  var P = window.PCC || {}, B = window.BOOK || {};
+
+  // ── contract guard ──────────────────────────────────────────────────────
+  // This page is built on the phase-5 PCC surface (spec §B). If common.js has not been extended,
+  // say which piece is missing rather than rendering a blank page with a console error.
+  var NEED = ['load', 'loadAll', 'priv', 'locked', 'unlock', 'money', 'pct', 'num', 'dateShort',
+    'dateLong', 'ago', 'el', 'closesFor', 'retPct', 'spark', 'chart', 'nav', 'asof', 'asofBanner',
+    'deepLink', 'hash', 'gateLabel', 'err', 'stampHTML', 'sgtToday', 'ageDays'];
+  var missing = NEED.filter(function (k) { return typeof P[k] !== 'function'; });
+  if (missing.length) {
+    var fail = document.createElement('p');
+    fail.className = 'bootfail';
+    fail.textContent = 'book.html needs the phase-5 common.js (spec §B). Missing from window.PCC: '
+      + missing.join(', ') + '. Nothing is rendered rather than rendered wrong.';
+    document.getElementById('sec-head').appendChild(fail);
+    return;
+  }
+
+  var E = P.el, $ = function (s) { return document.querySelector(s); };
+  // [sort key, heading]. Every column sorts except the sparkline, which has nothing to sort ON.
+  var COLS = [['nm', 'Holding'], ['val', 'Value'], ['nav', '% NAV'], ['r1d', '1D'], ['r1w', '1W'],
+    ['r1m', '1M'], ['rytd', 'YTD'], ['r1y', '1Y'], ['gate', 'Gate'], ['vol', 'Vol'],
+    ['dd', 'From 52w high'], ['risk', 'Risk share'], ['fil', 'Filing'], ['spk', 'Trend', false]
+  ].map(function (c) { return { label: c[1], sort: c[2] === false ? null : c[0] }; });
+  var NCOL = COLS.length;
+  var GROUPS = [
+    { key: 'none', label: 'none' }, { key: 'ac', label: 'asset class' },
+    { key: 'region', label: 'region' }, { key: 'cur', label: 'currency' },
+    { key: 'cluster', label: 'cluster' }, { key: 'theme', label: 'theme' }
+  ];
+  var S = { rows: [], grp: 'none', sort: 'val', dir: -1, sortTouched: false, locked: true, open: {},
+    book: null, val: null, tech: null, tgt: null, closes: null, alerts: null, signals: null, man: null };
+
+  function groupOf(row) {
+    if (S.grp === 'none') return null;
+    if (S.grp === 'cluster') return row.cluster ? row.cluster.name : 'no cluster — unquoted or unmodelled';
+    // `theme` is the book's own `ac` field (spec §D). There is no separate theme taxonomy on disk
+    // and inventing one would be a label with no source, so the two chips agree by construction.
+    var k = S.grp === 'theme' ? 'ac' : S.grp;
+    if (row[k]) return row[k];
+    // Asset class, region and currency are attributes of the BOOK, and targets.json does not carry
+    // them — so on the locked path they are genuinely unknown rather than "unclassified".
+    return row.publicOnly ? 'not in the public file — unlock to group by this' : 'unclassified';
+  }
+  function sortVal(row, key) {
+    switch (key) {
+      case 'nm': return String(row.n || row.t || '').toLowerCase();
+      case 'val': return row.valueSGD;
+      case 'nav': return row.pctNav;
+      case 'gate': return row.gateOn === true ? 2 : row.gateOn === false ? 0 : 1;
+      case 'vol': return row.vol60;
+      case 'dd': return row.dd52wPct;
+      case 'risk': return row.riskShare;
+      case 'fil': return row.filings && row.filings.length ? row.filings[0].date : null;
+      default: return row[key];
+    }
+  }
+
+  // ── cells ───────────────────────────────────────────────────────────────
+  function retCell(v) {
+    var td = E('td', { class: 'num' });
+    if (v == null) { td.appendChild(E('span', { class: 'soft', text: '—' })); return td; }
+    td.appendChild(E('span', { class: v > 0 ? 'up' : v < 0 ? 'down' : 'flatnum',
+      text: P.pct(v, { dp: 1, sign: true }) }));
+    return td;
+  }
+  function stampInto(node, asOf, cadence, what) {
+    // stampHTML builds its markup from this file's own literals plus an ISO date. No fetched text
+    // goes through it; every value on this page uses PCC.el's `text`.
+    node.innerHTML = P.stampHTML(asOf, cadence, what);
+    return node;
+  }
+  // PCC.gateLabel answers for the two boolean states. technicals.js also emits 'pending-off' — below
+  // the 200-day but not yet through the 5-close hysteresis — and gateLabel renders that as 'gate —',
+  // which reads like missing data rather than like a state. Name it.
+  function gatePill(row) {
+    var gt = row.tech && row.tech.gate;
+    if (gt && typeof gt.on !== 'boolean' && gt.on != null) {
+      return E('span', { class: 'pill warn',
+        text: 'gate ' + String(gt.on) + (gt.belowStreak ? ' ' + gt.belowStreak + 'd' : '') });
+    }
+    if (row.tech) { var g = P.gateLabel(row.tech); return E('span', { class: 'pill ' + g.cls, text: g.text }); }
+    if (row.gateOn == null) return E('span', { class: 'pill flat', text: 'no series' });
+    return E('span', { class: 'pill ' + (row.gateOn ? 'good' : 'bad'), text: row.gateOn ? 'gate ON' : 'gate OFF' });
+  }
+  function markNote(row) {
+    var span = E('span', {});
+    if (row.markAgeDays != null && row.markAgeDays > 90) {
+      span.appendChild(E('span', { class: 'amber', text: 'mark ' + row.markAgeDays + 'd old' }));
+    } else if (row.markAsOf) {
+      span.appendChild(E('span', { class: 'tk', text: 'marked ' + P.dateShort(row.markAsOf) }));
+    } else {
+      span.appendChild(E('span', { class: 'tk', text: 'no mark date' }));
+    }
+    return span;
+  }
+
+  function headRow() {
+    var tr = $('#thead'); tr.textContent = '';
+    COLS.forEach(function (c) {
+      var th = E('th', { text: c.label });
+      if (c.sort) {
+        th.tabIndex = 0;
+        th.setAttribute('role', 'columnheader');
+        th.setAttribute('data-sort', c.sort);
+        th.setAttribute('aria-sort', S.sort === c.sort ? (S.dir < 0 ? 'descending' : 'ascending') : 'none');
+        if (S.sort === c.sort) th.appendChild(E('span', { class: 'dir', text: S.dir < 0 ? ' ▾' : ' ▴' }));
+      }
+      tr.appendChild(th);
+    });
+  }
+
+  function holdingRow(row) {
+    var tr = E('tr', { class: S.open[row.anchor] ? 'hrow open' : 'hrow' });
+    tr.id = 'row-' + row.anchor;
+    tr.setAttribute('data-anchor', row.anchor);
+    tr.setAttribute('aria-expanded', S.open[row.anchor] ? 'true' : 'false');
+    tr.setAttribute('aria-controls', row.anchor);
+
+    tr.appendChild(E('td', {}, [E('div', { class: 'nm' }, [
+      E('b', { text: row.n || row.t || '—' }),
+      E('span', { class: 'tk', text: [row.t, row.cur, row.ac].filter(Boolean).join(' · ') })
+    ])]));
+
+    if (S.locked) {
+      tr.appendChild(E('td', { class: 'num soft', text: 'locked' }));
+      tr.appendChild(E('td', { class: 'num soft', text: '·' }));
+    } else {
+      tr.appendChild(E('td', { class: 'num', text: row.valueSGD == null ? '—' : P.money(row.valueSGD, { cur: 'SGD', dp: 0 }) }));
+      tr.appendChild(E('td', { class: 'num', text: row.pctNav == null ? '—' : P.pct(row.pctNav, { dp: 2, sign: false }) }));
+    }
+
+    if (row.quoted) {
+      tr.appendChild(retCell(row.r1d));
+      tr.appendChild(retCell(row.r1w));
+      tr.appendChild(retCell(row.r1m));
+      tr.appendChild(retCell(row.rytd));
+      tr.appendChild(retCell(row.r1y));
+    } else {
+      var man = E('td', { class: 'mcell' }, [E('span', {
+        text: row.manual ? 'manual mark · ' : 'no price series · ' })]);
+      man.colSpan = 5;
+      man.appendChild(markNote(row));
+      tr.appendChild(man);
+    }
+
+    tr.appendChild(E('td', {}, [gatePill(row)]));
+    tr.appendChild(E('td', { class: 'num', text: row.vol60 == null ? '—'
+      : P.num(row.vol60, 1) + '%' + (row.volRegime ? ' ' + row.volRegime : '') }));
+    tr.appendChild(retCell(row.dd52wPct));
+    tr.appendChild(E('td', { class: 'num', text: row.riskShare == null ? '—' : P.pct(row.riskShare * 100, { dp: 1, sign: false }) }));
+
+    var f = row.filings && row.filings[0];
+    tr.appendChild(E('td', { class: 'num', text: f ? P.dateShort(f.date) : '—' }));
+
+    var spk = E('td', { class: row.r1y > 0 ? 'up' : row.r1y < 0 ? 'down' : '' });
+    if (row.quoted) spk.innerHTML = P.spark(row.series, { w: 84, h: 22 });
+    else spk.appendChild(E('span', { class: 'soft', text: '—' }));
+    tr.appendChild(spk);
+    return tr;
+  }
+
+  function drawerRow(row) {
+    var tr = E('tr', { class: 'drawer-tr' });
+    tr.id = row.anchor;
+    if (!S.open[row.anchor]) tr.hidden = true;
+    var td = E('td', { class: 'dr' });
+    td.colSpan = NCOL;
+    tr.appendChild(td);
+    if (S.open[row.anchor]) fillDrawer(td, row);
+    return tr;
+  }
+
+  function fillDrawer(td, row) {
+    if (td.getAttribute('data-filled') === '1') return;
+    td.setAttribute('data-filled', '1');
+    var wrap = E('div', { class: 'drawer open' });
+    var grid = E('div', { class: 'dw' });
+
+    // ── left: the two-year chart and the filings ──
+    var left = E('div', {});
+    left.appendChild(E('h3', { text: 'Two years of closes' }));
+    if (row.quoted && row.series.length > 2) {
+      var smaS = B.sma200Series(row.series);
+      var hyst = (S.tech && S.tech.gate && S.tech.gate.hysteresis) || 5;
+      var bands = B.gateOffBands(row.series, smaS, hyst);
+      var box = E('div', { class: 'chartbox' });
+      box.innerHTML = P.chart(row.series, { w: 820, h: 190, overlay: smaS, bands: bands, label: true });
+      left.appendChild(box);
+      var firstFull = smaS.filter(function (p) { return p.full; })[0];
+      left.appendChild(E('p', { class: 'legend', text:
+        'Close, with the 200-day average dashed over it. Shading is five or more consecutive closes '
+        + 'below the 200-day — the gate’s OFF rule. The ON leg also needs positive 12-1 momentum, '
+        + 'which cannot be reconstructed for the first year of a two-year window, so the shading is '
+        + 'the OFF rule only. ' + bands.length + ' such span' + (bands.length === 1 ? '' : 's') + ' in the window'
+        + (firstFull ? '; the average uses a full 200 sessions from ' + firstFull.d + ' and a shorter window before that' : '')
+        + '. Series: ' + row.series[0].d + ' to ' + row.series[row.series.length - 1].d + ', ' + row.series.length + ' sessions.' }));
+    } else {
+      left.appendChild(P.err(row.manual
+        ? 'No price series for this line — it is a manual mark, not a quote, so there is nothing to chart.'
+        : 'This line is priced from a quote, but it has no series in closes.json'
+          + (row.yf ? ' for ' + row.yf : ' (no Yahoo symbol on the holding)')
+          + ', so there is nothing to chart. ' + (row.staleWhy || 'The price spine reported no completed bars for it.')));
+    }
+
+    left.appendChild(E('h3', { text: 'Filings' }));
+    var ul = E('ul', {});
+    var fl = row.filings || [];
+    if (!fl.length) {
+      ul.appendChild(E('li', { class: 'soft', text:
+        'No filings joined to this line. The US holdings are ETFs and file no Form 4. HKEX: covered since 19 Sep 2026 — 0700, 0981 and 1810 are read daily from HKEX’s own disclosure-of-interests notices and any that exist appear in this list, with the filing linked on the Inbox row; a week with no HK notice is normal. '
+        + 'SGX, 31 lines: no mechanical route. The exchange’s announcements API has required authentication since Sep 2026, and a scraped key or a third-party mirror is not acceptable here. Subscribe to SGXNet’s own email alerts and the reply reader can parse them (decision 7). '
+        + 'Absence of a filing is not evidence of nothing happening.' }));
+    } else {
+      fl.slice(0, 8).forEach(function (f) {
+        var li = E('li', {}, [E('span', { class: 'tk', text: f.date + ' · ' + f.kind + ' · ' })]);
+        li.appendChild(E('span', { text: f.text || '' }));
+        if (f.url && /^https:\/\/www\.sec\.gov\//.test(f.url)) {
+          li.appendChild(E('span', { text: ' · ' }));
+          li.appendChild(E('a', { href: f.url, target: '_blank', rel: 'noopener', text: 'filing' }));
+        }
+        if (f.id) {
+          li.appendChild(E('span', { text: ' · ' }));
+          li.appendChild(E('a', { href: P.deepLink('inbox', 'a-' + f.id, P.asof()), text: 'in the inbox' }));
+        }
+        ul.appendChild(li);
+      });
+      if (fl.length > 8) ul.appendChild(E('li', { class: 'soft', text: (fl.length - 8) + ' older filings — the full log is the Inbox.' }));
+    }
+    left.appendChild(ul);
+    // Phase 8: the theme radar's filer lists, joined to this line. A count of filings that named a
+    // phrase — never a view on the position, and never a reason to do anything with it.
+    var tmatch = B.themesFor(row, S.themes);
+    if (tmatch.length || (S.themes && row.quoted)) {
+      left.appendChild(E('h3', { text: 'Themes' }));
+      var tul = E('ul', {});
+      tmatch.forEach(function (x) {
+        tul.appendChild(E('li', {}, [E('span', { class: 'tk', text: x.term + ' · ' }), E('span', { text:
+          'stage ' + x.stage + (x.candidateOn ? ' (first doubled its distinct filers from a base above ten on ' + P.dateShort(x.candidateOn) + ')' : ' — never a Candidate')
+          + ' · crowding ' + (x.crowding || '?') + ' · entry window ' + (x.entryWindow ? 'open' : 'closed')
+          + ' · this line is in its filer list as ' + x.filers.map(function (f) { return f.ticker + ' (CIK ' + f.cik + ', ' + f.filings + ' filing(s) in the newest quarter)'; }).join(', ')
+          + ' — filings that named the phrase, counted; the radar does not size or recommend.' })]));
+      });
+      if (!tmatch.length) {
+        tul.appendChild(E('li', { class: 'soft', text: 'No theme names this line among its filers. The radar carries '
+          + (((S.themes && S.themes.themes) || []).map(function (t) { return t.term; }).join(', ') || 'no term')
+          + ', matched on ticker because the book carries no CIK. Absence here means this issuer did not file the phrase, not that nothing is happening.' }));
+      }
+      left.appendChild(tul);
+    }
+    // Phase 6: which tracked funds' 13F tables carry this ticker, or why 13F cannot see it (funds.js).
+    if (window.FUNDS) left.appendChild(window.FUNDS.forPosition(row, S.f13));
+    grid.appendChild(left);
+
+    // ── right: range, mark, policy ──
+    var right = E('div', {});
+    right.appendChild(E('h3', { text: 'Range and regime' }));
+    var dl1 = E('dl', {});
+    var kv = function (dl, k, v) { dl.appendChild(E('dt', { text: k })); dl.appendChild(E('dd', { text: v })); };
+    kv(dl1, '52-week high', row.high52w == null ? '—' : P.num(row.high52w, 2));
+    kv(dl1, '52-week low', row.low52w == null ? '—' : P.num(row.low52w, 2));
+    kv(dl1, 'from the high', row.dd52wPct == null ? '—' : P.pct(row.dd52wPct, { dp: 1, sign: true }));
+    kv(dl1, 'vol 20d / 60d', (row.vol20 == null ? '—' : P.num(row.vol20, 1) + '%') + ' / ' + (row.vol60 == null ? '—' : P.num(row.vol60, 1) + '%'));
+    kv(dl1, 'vol regime', row.volRegime || '—');
+    if (row.tech) {
+      kv(dl1, 'vs the 200-day', P.pct(row.tech.distPct200, { dp: 1, sign: true }));
+      kv(dl1, '12-1 momentum', P.pct(row.tech.mom12_1Pct, { dp: 1, sign: true }));
+      kv(dl1, 'gate', (row.tech.gate.on === true ? 'ON' : row.tech.gate.on === false ? 'OFF' : String(row.tech.gate.on))
+        + (row.tech.gate.belowStreak ? ' · ' + row.tech.gate.belowStreak + ' closes below' : ''));
+      kv(dl1, 'last 200-day cross', row.tech.gate.lastCross
+        ? P.dateLong(row.tech.gate.lastCross.date) + ' · ' + row.tech.gate.lastCross.dir
+        : 'none in the window');
+      if ((row.tech.flags || []).length) kv(dl1, 'flags', row.tech.flags.join(', '));
+    }
+    right.appendChild(dl1);
+
+    right.appendChild(E('h3', { text: 'The mark' }));
+    var dl2 = E('dl', {});
+    if (S.locked) {
+      kv(dl2, 'value', 'locked');
+      kv(dl2, 'source', 'targets.json — the public policy file');
+    } else {
+      kv(dl2, 'value', row.valueSGD == null ? '—' : P.money(row.valueSGD, { cur: 'SGD', dp: 0 }));
+      kv(dl2, '% of NAV', row.pctNav == null ? '—' : P.pct(row.pctNav, { dp: 2, sign: false }));
+      kv(dl2, 'day change', row.dayChgSGD == null ? '—' : P.money(row.dayChgSGD, { cur: 'SGD', dp: 0 }));
+      if (row.qty != null) kv(dl2, 'quantity', P.num(row.qty, 0));
+      if (row.price != null) kv(dl2, 'price', P.num(row.price, 4) + (row.cur ? ' ' + row.cur : ''));
+      if (row.native != null) kv(dl2, 'native mark', P.num(row.native, 2) + (row.cur ? ' ' + row.cur : ''));
+      if (row.fx != null) kv(dl2, 'fx to SGD', P.num(row.fx, 6));
+      kv(dl2, 'valued', row.manual ? 'manual mark' : (row.source || '—'));
+    }
+    if (row.priceAsOf) kv(dl2, 'price as of', P.dateLong(row.priceAsOf) + ' · ' + P.ago(row.priceAsOf));
+    if (row.markAsOf) kv(dl2, 'mark as of', P.dateLong(row.markAsOf) + ' · ' + P.ago(row.markAsOf));
+    if (row.markSource) kv(dl2, 'mark source', row.markSource);
+    if (row.closeAsOf) kv(dl2, 'last close', P.num(row.close, 4) + ' · ' + P.dateLong(row.closeAsOf));
+    if (row.trust === 'low') kv(dl2, 'price trust', 'LOW — the spine flags this series; treat the price as indicative, not a quote');
+    if (row.markAgeDays != null && row.markAgeDays > 90) kv(dl2, 'stale', 'the mark is ' + row.markAgeDays + ' days old; the limit is 90');
+    if (row.staleWhy) kv(dl2, 'flagged by valuate.js', row.staleWhy);
+    right.appendChild(dl2);
+
+    right.appendChild(E('h3', { text: 'Target vs actual' }));
+    var dl3 = E('dl', {});
+    if (row.target == null && !row.cluster) {
+      kv(dl3, 'policy', 'outside the modelled sleeve — weights are of the QUOTED sleeve only; property, the SSB ladder and cash have no return series and are not pretended to');
+    } else {
+      if (row.actual != null) kv(dl3, 'actual weight', P.pct(row.actual * 100, { dp: 2, sign: false }));
+      if (row.target != null) kv(dl3, 'target weight', P.pct(row.target * 100, { dp: 2, sign: false }));
+      if (row.delta != null) kv(dl3, 'gap', P.pct(row.delta * 100, { dp: 2, sign: true }));
+      if (row.riskShare != null) kv(dl3, 'risk share', P.pct(row.riskShare * 100, { dp: 1, sign: false }));
+      if (row.cluster) {
+        kv(dl3, 'cluster', row.cluster.name);
+        kv(dl3, 'cluster weight', P.pct(row.cluster.actualWeight * 100, { dp: 1, sign: false })
+          + ' vs ' + P.pct(row.cluster.targetWeight * 100, { dp: 1, sign: false }) + ' target');
+        kv(dl3, 'cluster risk share', P.pct(row.cluster.actualRiskShare * 100, { dp: 1, sign: false })
+          + ' vs ' + P.pct(row.cluster.targetRiskShare * 100, { dp: 1, sign: false }) + ' target');
+        if (row.cluster.overCapActual) kv(dl3, 'cap', 'OVER the 20% cluster cap');
+      }
+    }
+    right.appendChild(dl3);
+    right.appendChild(E('p', { class: 'legend', text:
+      'Targets are published in SHADOW: diffed daily, no action asked, ratification is the owner’s.' }));
+    var link = E('p', { class: 'legend' });
+    link.appendChild(E('a', { href: P.deepLink('book', row.anchor, P.asof()), text: 'link to this position' }));
+    right.appendChild(link);
+    grid.appendChild(right);
+
+    wrap.appendChild(grid);
+    td.appendChild(wrap);
+  }
+
+  // ── the table ───────────────────────────────────────────────────────────
+  function body() {
+    var tb = $('#tbody'); tb.textContent = '';
+    var rows = S.rows.slice(), key = S.sort, dir = S.dir;
+    var counts = {}, sums = {}, order = [];
+    rows.forEach(function (r) {
+      var g = groupOf(r); if (g == null) return;
+      if (counts[g] == null) { counts[g] = 0; sums[g] = 0; order.push(g); }
+      counts[g]++;
+      sums[g] += (r.valueSGD || 0);
+    });
+    // A group is only a group if its rows stay together, so the group is the PRIMARY key and the
+    // clicked column sorts within it. Groups themselves run by size of money when there is money to
+    // sort by, alphabetically when locked, with the leftover bucket last either way.
+    var anyValue = order.some(function (g) { return sums[g] !== 0; });
+    var leftover = function (g) { return /^no cluster|^unclassified/.test(g) ? 1 : 0; };
+    order.sort(function (a, b) {
+      if (leftover(a) !== leftover(b)) return leftover(a) - leftover(b);
+      if (anyValue) return Math.abs(sums[b]) - Math.abs(sums[a]);
+      return a < b ? -1 : a > b ? 1 : 0;
+    });
+    var rank = {}; order.forEach(function (g, i) { rank[g] = i; });
+    var byKey = function (a, b) {
+      var x = sortVal(a, key), y = sortVal(b, key);
+      if (x == null && y == null) return 0;
+      if (x == null) return 1;            // blanks sink whichever way the arrow points
+      if (y == null) return -1;
+      if (typeof x === 'string' || typeof y === 'string') {
+        x = String(x); y = String(y);
+        return x < y ? -dir : x > y ? dir : 0;
+      }
+      return (x - y) * dir;
+    };
+    rows.sort(function (a, b) {
+      if (S.grp !== 'none') {
+        var ra = rank[groupOf(a)], rb = rank[groupOf(b)];
+        if (ra !== rb) return ra - rb;
+      }
+      return byKey(a, b);
+    });
+    var frag = document.createDocumentFragment(), last = null;
+    rows.forEach(function (r) {
+      var g = groupOf(r);
+      if (g !== last) {
+        last = g;
+        if (g != null) {
+          var gr = E('tr', { class: 'grp' });
+          var gt = E('td', {});
+          gt.colSpan = NCOL;
+          gt.appendChild(E('span', { text: g + '  ·  ' + counts[g] + (counts[g] === 1 ? ' line' : ' lines') }));
+          if (!S.locked && S.val && S.val.navSGD) {
+            gt.appendChild(E('span', { class: 'tk', text: '   ' + P.money(sums[g], { cur: 'SGD', dp: 0 })
+              + '  ·  ' + P.pct((sums[g] / S.val.navSGD) * 100, { dp: 2, sign: false }) + ' of NAV' }));
+          }
+          gr.appendChild(gt);
+          frag.appendChild(gr);
+        }
+      }
+      frag.appendChild(holdingRow(r));
+      frag.appendChild(drawerRow(r));
+    });
+    tb.appendChild(frag);
+    var note = $('#tblnote');
+    note.textContent = rows.length + ' lines. Returns are price returns in the line’s own currency, '
+      + 'straight from data/closes.json — no FX, no dividends. Values and % of NAV are SGD, from valuation.enc.';
+  }
+
+  function toggle(anchor) {
+    var row = null, i;
+    for (i = 0; i < S.rows.length; i++) { if (S.rows[i].anchor === anchor) { row = S.rows[i]; break; } }
+    if (!row) return;
+    var tr = document.getElementById('row-' + anchor), dr = document.getElementById(anchor);
+    if (!tr || !dr) return;
+    S.open[anchor] = !S.open[anchor];
+    dr.hidden = !S.open[anchor];
+    tr.setAttribute('class', S.open[anchor] ? 'hrow open' : 'hrow');
+    tr.setAttribute('aria-expanded', S.open[anchor] ? 'true' : 'false');
+    if (S.open[anchor]) fillDrawer(dr.firstChild, row);
+  }
+
+  // ── header ──────────────────────────────────────────────────────────────
+  function header() {
+    var box = $('#headcards'); box.textContent = '';
+
+    var c1 = E('div', { class: 'card' });
+    c1.appendChild(E('div', { class: 'k', text: 'Net asset value' }));
+    if (S.locked || !S.val) {
+      c1.appendChild(E('div', { class: 'big', text: 'locked' }));
+      c1.appendChild(E('button', { type: 'button', class: 'chip', text: 'Unlock',
+        onclick: function () { P.unlock().then(function (ok) { if (ok) boot(true); }); } }));
+      c1.appendChild(E('p', { class: 'lede', text:
+        'Value and % of NAV need the passphrase, asked once per device. Gate, vol, 52-week and risk '
+        + 'share are public and render either way.' }));
+    } else {
+      c1.appendChild(E('div', { class: 'big num', text: P.money(S.val.navSGD, { cur: 'SGD', dp: 0 }) }));
+      c1.appendChild(E('div', { class: 'num' }, [E('span', {
+        class: S.val.dayChgSGD >= 0 ? 'up' : 'down',
+        text: P.money(S.val.dayChgSGD, { cur: 'SGD', dp: 0 }) + '   ' + P.pct(S.val.dayChgPct, { dp: 2, sign: true }) + ' on the day'
+      })]));
+      c1.appendChild(stampInto(E('div', {}), S.val.asOf, 'daily', 'valuation'));
+    }
+    box.appendChild(c1);
+
+    var c2 = E('div', { class: 'card' });
+    c2.appendChild(E('div', { class: 'k', text: 'Lines' }));
+    var quoted = S.rows.filter(function (r) { return r.quoted; }).length;
+    c2.appendChild(E('div', { class: 'big num', text: String(S.rows.length) }));
+    c2.appendChild(E('p', { class: 'lede', text: quoted + ' with a price series · '
+      + (S.rows.length - quoted) + ' on a manual mark' }));
+    var staleN = S.rows.filter(function (r) { return r.markAgeDays != null && r.markAgeDays > 90; }).length;
+    if (staleN) c2.appendChild(E('p', { class: 'lede', text: staleN + ' mark'
+      + (staleN === 1 ? ' is' : 's are') + ' older than 90 days — amber on the row.' }));
+    if (S.book && S.book.asOf) c2.appendChild(stampInto(E('div', {}), S.book.asOf, 'manual', 'book'));
+    box.appendChild(c2);
+
+    var c3 = E('div', { class: 'card' });
+    c3.appendChild(E('div', { class: 'k', text: 'Trend gate' }));
+    var on = S.rows.filter(function (r) { return r.gateOn === true; }).length;
+    // the denominator is every line that HAS a gate state, including 'pending-off' — dropping the
+    // in-between states would quietly flatter the ratio.
+    var rated = S.rows.filter(function (r) { return r.gateOn != null; }).length;
+    c3.appendChild(E('div', { class: 'big num', text: on + ' / ' + rated }));
+    c3.appendChild(E('p', { class: 'lede', text:
+      'held lines with the gate ON. The gate — price above its 200-day and positive 12-1 momentum — '
+      + 'is the one durable edge the July post-mortem found. Everything else tested was noise or worse.' }));
+    if (S.tech) c3.appendChild(stampInto(E('div', {}), S.tech.asOf, 'daily', 'technicals'));
+    box.appendChild(c3);
+  }
+
+  // The silver and margin-loan line is permanent, not a drawer: it is the position that can end the
+  // plan in a fortnight, and it is why valuate.js computes a stressed call price at all.
+  function silver() {
+    var sec = $('#sec-silver'); sec.textContent = '';
+    var card = E('div', { class: 'card' });
+    card.appendChild(E('div', { class: 'k', text: 'Silver and the IBKR margin loan' }));
+    var s = S.val && S.val.silver;
+    if (!s) {
+      var pub = S.tech && S.tech.instruments && (S.tech.instruments['SI=F'] || S.tech.instruments.SLV);
+      if (pub) {
+        var g = P.gateLabel(pub);
+        var line = E('p', { class: 'lede' });
+        line.appendChild(E('span', { class: 'pill ' + g.cls, text: g.text }));
+        line.appendChild(E('span', { text: '   vol60 ' + P.num(pub.vol60, 1) + '% · '
+          + P.pct(pub.dd52wPct, { dp: 1, sign: true }) + ' from the 52-week high · '
+          + P.pct(pub.distPct200, { dp: 1, sign: true }) + ' vs the 200-day' }));
+        card.appendChild(line);
+      }
+      card.appendChild(E('p', { class: 'lede', text:
+        'Leverage, the call price and the survivability test live in valuation.enc. Unlock to see them.' }));
+    } else {
+      card.appendChild(E('p', { class: 'lede num', text:
+        P.money(s.valueSGD, { cur: 'SGD', dp: 0 }) + ' of silver  ·  loan ' + P.money(s.loanSGD, { cur: 'SGD', dp: 0 })
+        + '  ·  equity ' + P.money(s.equitySGD, { cur: 'SGD', dp: 0 }) + '  ·  leverage ' + P.num(s.leverage, 2) + '×' }));
+      card.appendChild(E('p', { class: 'lede num', text:
+        'Call at US$' + P.num(s.callPriceUSD, 2) + ' (' + P.pct(s.distanceToCallPct, { dp: 1, sign: false })
+        + ' below spot). At a stressed ' + P.pct(s.maintenanceRateStressed * 100, { dp: 0, sign: false })
+        + ' maintenance rate, US$' + P.num(s.callPriceUSDStressed, 2) + ' ('
+        + P.pct(s.distanceToCallPctStressed, { dp: 1, sign: false }) + ' below).' }));
+      var sv = s.survivability || {};
+      var p4 = E('p', { class: 'lede' });
+      p4.appendChild(E('span', { class: 'pill ' + (sv.pass ? 'good' : 'bad'),
+        text: sv.pass ? 'survivability PASS' : 'survivability FAIL' }));
+      p4.appendChild(E('span', { text: '   ' + (sv.rule || '') }));
+      card.appendChild(p4);
+      if (s.priceTrust === 'low') card.appendChild(E('p', { class: 'lede',
+        text: 'Silver price trust is LOW in the spine — treat the mark as indicative.' }));
+      if (s.maintenanceRateSource) card.appendChild(E('p', { class: 'lede', text: 'Maintenance rate: ' + s.maintenanceRateSource }));
+      if (s.carry && s.carry.loanRateSource) card.appendChild(E('p', { class: 'lede',
+        text: 'Loan rate ' + P.pct(s.carry.loanRatePct, { dp: 1, sign: false }) + ' — ' + s.carry.loanRateSource }));
+      card.appendChild(stampInto(E('div', {}), s.priceAsOf, 'daily', 'silver mark'));
+    }
+    sec.appendChild(card);
+  }
+
+  // ── chips and notes ─────────────────────────────────────────────────────
+  function chips() {
+    var box = $('#grpchips');
+    while (box.childNodes.length > 1) box.removeChild(box.lastChild);
+    GROUPS.forEach(function (g) {
+      box.appendChild(E('button', {
+        type: 'button', class: 'chip' + (S.grp === g.key ? ' on' : ''), text: g.label,
+        'aria-pressed': S.grp === g.key ? 'true' : 'false',
+        onclick: function () { S.grp = g.key; chips(); body(); note(); }
+      }));
+    });
+  }
+  function note() {
+    var n = $('#grpnote');
+    if (S.grp === 'cluster') {
+      n.textContent = 'Clusters come from targets.json: any two names whose 60-day returns correlate '
+        + 'above 0.75 are one position, by correlation rather than by label. Unquoted lines have no cluster.';
+    } else if (S.grp === 'theme') {
+      n.textContent = 'Theme is the book’s own asset-class field. There is no separate theme taxonomy '
+        + 'on disk and inventing one would be a label with no source — for the correlation view, use cluster.';
+    } else {
+      n.textContent = 'Click a column heading to sort. Click a row to open its drawer; every drawer has a '
+        + 'shareable link, and book.html?asof=YYYY-MM-DD#pos-TICKER opens straight into one.';
+    }
+  }
+
+  function foot() {
+    var f = $('#foot'); f.textContent = '';
+    var files = (S.man && S.man.files) || {};
+    ['closes.json', 'technicals.json', 'targets.json', 'alerts.json', 'signals.json'].forEach(function (p) {
+      var d = E('div', {});
+      if (files[p] && files[p].asOf) stampInto(d, files[p].asOf, 'daily', p);
+      else d.appendChild(E('span', { class: 'stamp', text: p + ' — not in the manifest' }));
+      f.appendChild(d);
+    });
+    f.appendChild(E('div', { text:
+      'Every figure here was computed on this Mac before the page loaded; the browser makes zero '
+      + 'external calls. NAV history is not published, so this page does not draw one.' }));
+  }
+
+  // Phase 6: the Funds (13F) section — EDGAR tables parsed by scripts/13f-scan.js. Public data, so it
+  // renders locked. funds.js failing to load must read as a missing section, never as a quiet quarter.
+  function funds() {
+    var sec = $('#sec-funds'); sec.textContent = '';
+    if (!window.FUNDS) { sec.appendChild(P.err('funds.js did not load, so the Funds (13F) section is missing — not empty.')); return; }
+    window.FUNDS.render(sec, S.f13, S.rows);
+  }
+
+  // ── boot ────────────────────────────────────────────────────────────────
+  function openFromHash() {
+    var h = String(P.hash() || '').replace(/^#/, '');
+    if (!h) return;
+    var target = document.getElementById(h);
+    if (!target || S.open[h]) return;
+    toggle(h);
+    try { target.scrollIntoView({ block: 'center' }); } catch (_) { target.scrollIntoView(); }
+  }
+
+  function boot(afterUnlock) {
+    var bar = $('#navbar');
+    if (!bar.firstChild) bar.appendChild(P.nav('book'));
+    var banner = P.asofBanner(), slot = $('#asofbanner');
+    slot.textContent = '';
+    if (banner) slot.appendChild(banner);
+
+    P.loadAll(['closes.json', 'technicals.json', 'targets.json', 'alerts.json', 'signals.json', 'manifest.json', '13f.json', 'themes.json'])
+      .then(function (pub) {
+        S.closes = pub['closes.json']; S.tech = pub['technicals.json']; S.tgt = pub['targets.json'];
+        S.alerts = pub['alerts.json']; S.signals = pub['signals.json']; S.man = pub['manifest.json'];
+        S.f13 = pub['13f.json']; S.themes = pub['themes.json'];
+        if (P.locked() && !afterUnlock) return [null, null];
+        return Promise.all([P.priv('book'), P.priv('valuation')]);
+      })
+      .then(function (pr) {
+        S.book = pr[0]; S.val = pr[1];
+        S.locked = !(S.val && S.val.navSGD);
+        S.rows = window.BOOK.joinRows(S.book, S.val, S.tech, S.tgt, S.closes, { asOf: P.asof() });
+        S.rows.forEach(function (r) { r.filings = window.BOOK.filingsFor(r, S.alerts, S.signals); });
+
+        // Locked, every value is null and a sort by Value degenerates into file order. Risk share is
+        // public, so that is the honest default until he unlocks or picks a column himself.
+        if (!S.sortTouched) S.sort = S.locked ? 'risk' : 'val';
+
+        var e = $('#tblerr'); e.textContent = '';
+        if (!S.closes) e.appendChild(P.err('data/closes.json did not load — every return and every chart on this page is blank. It is written by scripts/closes.js.'));
+        if (!S.tech) e.appendChild(P.err('data/technicals.json did not load — the gate, vol and 52-week columns are blank.'));
+        if (!S.tgt) e.appendChild(P.err('data/targets.json did not load — risk share, cluster grouping and the target weights are blank.'));
+        if (!S.book && S.val && S.rows.length) {
+          $('#tblerr').appendChild(P.err('The holdings list came from targets.json, not book.enc — so the '
+            + (S.val.lines ? S.val.lines.length - S.rows.length : 21) + ' unquoted lines (cash, property, the PE stake, '
+            + 'the SSB ladder, the margin loan) are missing from this table even though they are inside the '
+            + 'net worth above. Reload, or unlock again, to get the full book.'));
+        }
+        if (S.locked && !S.book && S.rows.length) {
+          $('#lede').textContent = 'Locked: ' + S.rows.length + ' quoted lines, rebuilt from the public '
+            + 'policy file. The unquoted lines — cash, property, the PE stake, the SSB ladder, the margin '
+            + 'loan — exist only in book.enc, and every value needs the passphrase.';
+        }
+        if (P.asof()) {
+          $('#tblerr').appendChild(P.err('Viewing as of ' + P.asof() + ': the price series are truncated to that '
+            + 'date, but gate, vol, the 52-week range and every value are as of their own files’ dates below. '
+            + 'This page cannot rewind a mark it was never given.'));
+        }
+        header(); silver(); chips(); note(); headRow(); body(); foot();
+        funds();
+        openFromHash();
+      })
+      .catch(function (e) {
+        var box = $('#tblerr');
+        box.appendChild(P.err('The book did not render: ' + (e && e.message ? e.message : String(e))));
+      });
+  }
+
+  $('#tbody').addEventListener('click', function (ev) {
+    if (ev.target.closest && ev.target.closest('a')) return;
+    var tr = ev.target.closest && ev.target.closest('tr.hrow');
+    if (tr && tr.getAttribute('data-anchor')) toggle(tr.getAttribute('data-anchor'));
+  });
+  $('#thead').addEventListener('click', function (ev) {
+    var th = ev.target.closest && ev.target.closest('th');
+    if (!th || !th.getAttribute('data-sort')) return;
+    var k = th.getAttribute('data-sort');
+    S.sortTouched = true;
+    if (S.sort === k) S.dir = -S.dir; else { S.sort = k; S.dir = k === 'nm' ? 1 : -1; }
+    headRow(); body();
+  });
+  $('#thead').addEventListener('keydown', function (ev) {
+    if (ev.key !== 'Enter' && ev.key !== ' ') return;
+    var th = ev.target.closest && ev.target.closest('th');
+    if (!th || !th.getAttribute('data-sort')) return;
+    ev.preventDefault();
+    th.click();
+  });
+  window.addEventListener('hashchange', openFromHash);
+
+  boot(false);
+})();
+</script>
+</body></html>

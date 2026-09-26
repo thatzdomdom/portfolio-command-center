@@ -1,0 +1,212 @@
+{
+ "updated": "2026-09-26",
+ "note": "Saturday weekend run, 26 Sep 2026 07:02 SGT -- latest completed US session is Fri 25 Sep close: S&P +0.51% to 7,743.41, Nasdaq +0.48% to 27,068.72, Dow +0.93% to 51,828.62 (snapping a 3-week losing streak), VIX eased to ~14.9, even as the 10-year Treasury yield pushed to 5.18%, its highest since 2008. Equities rallying while yields hit a post-2008 high is the key cross-current: the dominant driver remains a live ~7-month US-Iran war, with Iran issuing a fresh 4-5 day ultimatum on Hormuz reopening on 24 Sep (expiring ~Mon-Tue 28-29 Sep) and Houthi strikes on Saudi Aramco's Yanbu hub on 25 Sep, while Brent eased to ~$105.3 and WTI to ~$92.7 on truce-hope headlines. Gold/silver extended Wednesday's pullback into Friday (gold ~$4,265/oz, silver ~$63.5/oz) on a firmer dollar and the higher real-yield backdrop. Sentiment ticked up marginally (CNN Fear&Greed 37/Fear, from 36) on the equity rally, with breadth internals improving modestly off Thursday's oversold McClellan reading but still net-bearish. The freshest BofA/EPFR Flow Show (week ended 23 Sep) showed a sharp reversal: US equity funds -$21.1bn and global equity funds -$10.2bn, versus +$63.8bn the prior week -- an early tell that fund positioning is starting to react to the hawkish-Fed repricing even as the cash index rallied Friday.",
+ "fearGreed": {
+  "value": 37,
+  "rating": "Fear",
+  "asOf": "2026-09-25 (Fri US close). CNN's own site (cnn.com) and data API remain blocked to direct fetch (HTTP 403/451); the reading was triangulated from three independent mirror/aggregator sites (feargreedmeter.com, aistockselection.com, finhacker.cz) plus a Benzinga headline, all converging on ~36-38/Fear -- high confidence on the headline number (used the 37 consensus), lower confidence on exact component sub-scores (single-sourced to aistockselection.com).",
+  "prevClose": 36,
+  "prev1w": 28,
+  "prev1m": 55,
+  "prev1y": 55,
+  "cryptoValue": 71,
+  "cryptoRating": "Greed",
+  "components": [
+   {
+    "name": "Market Momentum",
+    "reading": "S&P 500 vs its 125-day average, still soft despite Friday's up day; score ~32",
+    "signal": "fear"
+   },
+   {
+    "name": "Stock Price Strength",
+    "reading": "52-week highs still badly outnumbered by lows; score ~0 (extreme fear)",
+    "signal": "fear"
+   },
+   {
+    "name": "Stock Price Breadth",
+    "reading": "McClellan Volume Summation still deeply negative despite Friday's up day; score ~0 (extreme fear)",
+    "signal": "fear"
+   },
+   {
+    "name": "Put/Call Options",
+    "reading": "Options positioning roughly balanced; score ~54",
+    "signal": "neutral"
+   },
+   {
+    "name": "Market Volatility",
+    "reading": "VIX eased to ~14.87 (-5.1% on 25 Sep) vs its 50-day average; score ~50",
+    "signal": "neutral"
+   },
+   {
+    "name": "Safe-Haven Demand",
+    "reading": "Stocks vs bonds over the past 20 trading days; score ~54",
+    "signal": "neutral"
+   },
+   {
+    "name": "Junk Bond Demand",
+    "reading": "Spread between junk and investment-grade yields; score ~62",
+    "signal": "greed"
+   }
+  ],
+  "sources": [
+   "https://www.aistockselection.com/en/fear-greed-today/",
+   "https://www.finhacker.cz/en/fear-and-greed-index-historical-data-and-chart/",
+   "https://feargreedmeter.com/",
+   "https://www.benzinga.com/markets/market-summary/26/09/61989154/dow-drops-for-third-session-investor-sentiment-improves-but-greed-index-remains-in-fear-zone",
+   "https://alternative.me/crypto/fear-and-greed-index/"
+  ]
+ },
+ "breadth": {
+  "asOf": "2026-09-25",
+  "metrics": [
+   {
+    "label": "S&P 500 close",
+    "value": "7,743.41 (+0.51%)",
+    "signal": "bullish",
+    "pct": null
+   },
+   {
+    "label": "VIX",
+    "value": "14.87 (-5.11% d/d, down from 15.67 Thu close)",
+    "signal": "bullish",
+    "pct": null
+   },
+   {
+    "label": "% of S&P 500 above 200-day MA",
+    "value": "41.2% (single-source approximation; down from the confirmed 45.0% Thu baseline -- likely a source-universe mismatch, treat cautiously)",
+    "signal": "bearish",
+    "pct": 41.2
+   },
+   {
+    "label": "% of S&P 500 above 50-day MA",
+    "value": "28.2% (approximated, up from the confirmed 25.4% Thu baseline, consistent with Friday's up day)",
+    "signal": "bearish",
+    "pct": 28.2
+   },
+   {
+    "label": "NYSE advancing vs declining issues",
+    "value": "1,621 advancers / 1,278 decliners (1.27:1) on 25 Sep -- positive breadth, consistent with the up day",
+    "signal": "bullish",
+    "pct": null
+   },
+   {
+    "label": "52-week new highs minus new lows",
+    "value": "Thu 24 Sep reference (not confirmed for Fri): S&P 500 14 highs vs 33 lows (net -19); broad market 51 highs vs 267 lows (net -216)",
+    "signal": "bearish",
+    "pct": null
+   },
+   {
+    "label": "McClellan Oscillator",
+    "value": "-23 (improved from -34 Thu, still ~25th percentile, oversold)",
+    "signal": "bearish",
+    "pct": null
+   },
+   {
+    "label": "Advance-decline line trend",
+    "value": "Improving on Friday's up day after several weeks of decline (directional read, not a precise line value)",
+    "signal": "neutral",
+    "pct": null
+   },
+   {
+    "label": "S&P sectors above 200-day MA",
+    "value": "Source conflict this run -- one recap has Tech/Industrials/Materials leading gainers with Real Estate/Energy/Communications lagging (8 of 11 sectors down despite the index gain); not independently confirmed",
+    "signal": "neutral",
+    "pct": null
+   }
+  ],
+  "note": "Breadth improved modestly on Friday's up day (advancers led decliners, McClellan off its Thursday low) but remains structurally narrow -- fewer than half of S&P 500 names hold above their 50- and 200-day averages and the McClellan Oscillator is still oversold, consistent with Fear & Greed's 'Fear' reading even as the index itself rallied and VIX eased.",
+  "sources": [
+   "https://finance.yahoo.com/markets/live/stock-market-today-friday-september-25-dow-sp-500-nasdaq-081738529.html",
+   "https://investrade.com/market-review-september-25-2026/",
+   "https://www.thetrading.tools/market-breadth"
+  ]
+ },
+ "flows": {
+  "asOf": "2026-09-26",
+  "period": "Week ended Wed 23 Sep 2026 (BofA Flow Show, published 25 Sep) -- a fresh cut superseding the week-ended-16-Sep print carried in prior runs",
+  "narrative": "BofA's weekly Flow Show (week ended 23 Sep 2026) shows a sharp reversal from the prior week: US equity funds lost $21.1bn and global equity funds lost a net $10.2bn, versus the +$63.8bn US inflow (best week in 3 months) reported for the week ended 16 Sep. Fixed income kept its inflow streak alive at +$17.3bn (a 74th consecutive week), and the Bull & Bear Indicator eased to 9.3 from 9.5-9.7, still deep in the contrarian 'Sell' zone. This is a genuinely new data point -- the regional (Europe/Japan/EM/China) breakdown, money-market and gold-ETF figures for this specific week could NOT be independently confirmed this run despite repeated targeted searches, so those rows below are retained from the week-ended-16-Sep cut and explicitly labeled as carried forward rather than re-dated.",
+  "regions": [
+   {
+    "region": "US Equities",
+    "direction": "outflow",
+    "amount": "-$21.1bn (reversal from +$63.8bn the prior week)",
+    "amountUSD": -21100000000,
+    "note": "BofA Flow Show, week ended 23 Sep 2026 -- newest confirmed figure, arriving the same week the 10-year yield hit a post-2008 high of 5.18%."
+   },
+   {
+    "region": "Europe/Intl DM",
+    "direction": "outflow",
+    "amount": "-$0.6bn (week ended 16 Sep figure, carried forward -- no wk-ended-23-Sep regional breakdown confirmed this run)",
+    "amountUSD": -600000000,
+    "note": "European equity funds, week ended 16 Sep 2026; not yet refreshed to the newer week."
+   },
+   {
+    "region": "EM",
+    "direction": "inflow",
+    "amount": "+$1.4bn (week ended 16 Sep figure, carried forward)",
+    "amountUSD": 1400000000,
+    "note": "EM equity funds, week ended 16 Sep 2026; not yet refreshed to the newer week."
+   },
+   {
+    "region": "China",
+    "direction": "inflow",
+    "amount": "not separately disclosed",
+    "amountUSD": null,
+    "note": "No China-specific weekly EPFR/BofA figure located; see data/flows-investors.json for China A-share margin-balance/new-account retail proxies and Hong Kong Southbound flow, refreshed more frequently."
+   },
+   {
+    "region": "Japan",
+    "direction": "inflow",
+    "amount": "+$1.4bn (week ended 16 Sep figure, carried forward)",
+    "amountUSD": 1400000000,
+    "note": "Japan equity funds (BofA/EPFR, wk ended 16 Sep); diverges from JPX's own cash-equity data, where foreign investors were net SELLERS of TSE cash equities for a 2nd straight week (-¥294.3bn, wk ended 18-19 Sep) -- see data/flows-investors.json for the fuller JPX investor-type breakdown now available for that week."
+   },
+   {
+    "region": "Money-market/Cash",
+    "direction": "outflow",
+    "amount": "-$59.50bn (week ended 16 Sep figure, carried forward)",
+    "amountUSD": -59500000000,
+    "note": "Biggest money-market outflow in 9 weeks as of the wk-ended-16-Sep cut; not yet refreshed to the newer week."
+   },
+   {
+    "region": "Bonds/Credit",
+    "direction": "inflow",
+    "amount": "+$17.3bn aggregate (74th consecutive weekly inflow)",
+    "amountUSD": 17300000000,
+    "note": "BofA Flow Show, week ended 23 Sep 2026 -- newest confirmed figure; sub-asset (IG/HY/Govt) split not confirmed for this week, so the wk-ended-16-Sep split (IG +$0.42bn, HY -$1.91bn, Govt +$2.28bn) is not repeated here to avoid conflating weeks."
+   },
+   {
+    "region": "Gold",
+    "direction": "inflow",
+    "amount": "+$4.24bn (wk ended 18 Sep, carried forward -- 9th consecutive weekly inflow)",
+    "amountUSD": 4240000000,
+    "note": "Freshest confirmed weekly gold-ETF print; not yet refreshed to a newer week this run."
+   }
+  ],
+  "movements": [
+   {
+    "from": "Equities",
+    "to": "Cash/Bonds",
+    "amount": "~$21bn (US) + ~$17bn (into bonds)",
+    "note": "The week-ended-23-Sep cut shows the cash-into-stocks rotation of the prior week reversing: US equity funds lost $21.1bn while fixed income kept drawing inflows -- a fresh, confirmed swing."
+   },
+   {
+    "from": "Europe/Intl DM equities",
+    "to": "US Equities",
+    "amount": "~$64bn combined swing (week ended 16 Sep, carried forward)",
+    "note": "Prior week's US-over-Europe tilt; not yet refreshed to the newer week."
+   },
+   {
+    "from": "Cash/Credit",
+    "to": "Gold",
+    "amount": "~$4.2bn (week ended 18 Sep, carried forward)",
+    "note": "Gold ETFs' 9-week inflow streak as of the last confirmed print."
+   }
+  ],
+  "sources": [
+   "https://finvaulta.com/research/bank-of-america/the-flow-show-china-in-a-bull-shop-2026-09-25",
+   "https://finvaulta.com/research/bank-of-america/series/the-flow-show",
+   "https://www.gold.org/goldhub/research/etf-flows"
+  ]
+ }
+}

@@ -1,0 +1,871 @@
+<!doctype html>
+<!--
+  today.html — the phone surface. Phase 5 of the 11 Sep 2026 redesign, section C of the build spec.
+
+  WHY this file exists: the 08:15 email and the dashboard had drifted into two different documents.
+  The email led with THE ONE ACTION and the risk state computed in code; index.html led with a
+  247KB grid that recomputed its own prices in the browser from Yahoo and could disagree with the
+  email it was supposed to be the live version of. On 5 Aug and again through 8–21 Aug the two told
+  different stories on the same morning and nobody could say which was right.
+
+  So this page is the SAME DOCUMENT as scripts/daily-brief.js in a second renderer: the same block
+  order, the same wording for the One Action and the risk lines, reading the same files the brief
+  read — never recomputing a figure the pipeline already computed. Three minutes, zero clicks, one
+  thumb. Every number wears its as-of; a figure without a stamp is a bug.
+
+  Zero external calls: no CDN, no fonts, no analytics, no off-origin fetch. System stack only.
+  Money (valuation, oneaction, book) is decrypted in this browser from .enc and is never published
+  in the clear; when it is locked the page shows every public block and an Unlock control where the
+  money would be — never a zero, never a spinner that never resolves.
+
+  index.html is untouched and keeps serving until the cutover clock reads 7/7. Styling and every
+  data helper come from pcc.css and common.js (spec §B); this file owns no tokens of its own.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="color-scheme" content="light dark">
+<title>Today — Portfolio Command Center</title>
+<link rel="stylesheet" href="pcc.css">
+<style>
+  /* Page-local only: the phone reading rhythm. Every colour is a pcc.css token — no new palette. */
+  .blk{margin:0 0 18px}
+  .blk-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:0 0 8px}
+  .blk-h h2{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:0}
+  .ln{display:grid;grid-template-columns:74px 1fr;gap:2px 10px;padding:7px 0;border-bottom:1px solid var(--rule-2)}
+  .ln:last-child{border-bottom:0}
+  .ln-k{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+  /* A breached line marks its LABEL, not its prose. The words already say FAIL and OVER — colour
+     is the second signal, never the only one (Mail strips styles; so does a colour-blind reader). */
+  .ln.bad .ln-k{color:var(--bad)}
+  .ln-v{line-height:1.55}
+  .sub{color:var(--ink-2);font-size:13.5px;line-height:1.55;margin:3px 0 0}
+  .act{border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 10px 10px 0;padding:13px 15px}
+  .act-tag{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}
+  .act-text{font-size:18px;line-height:1.4;letter-spacing:-.01em;margin:5px 0 0}
+  .why{margin:10px 0 0;padding:0;list-style:none}
+  .why li{position:relative;padding:0 0 0 15px;margin:0 0 6px;font-size:13.5px;line-height:1.5;color:var(--ink-2)}
+  .why li::before{content:"";position:absolute;left:2px;top:8px;width:4px;height:4px;border-radius:50%;background:var(--muted)}
+  .ask{margin:12px 0 0;padding:11px 0 0;border-top:1px solid var(--rule)}
+  .ask-do{font-weight:650}
+  .grammar{margin:5px 0 0;font-family:var(--mono);font-size:11.5px;color:var(--muted);word-break:break-word}
+  .items{margin:0;padding:0;list-style:none}
+  .items li{padding:10px 0;border-bottom:1px solid var(--rule-2)}
+  .items li:last-child{border-bottom:0}
+  .head{font-weight:600;line-height:1.45}
+  .mv{display:grid;grid-template-columns:1fr auto auto 92px;gap:2px 10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--rule-2)}
+  .mv:last-child{border-bottom:0}
+  .mv-n{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .mv-t{font-size:11.5px;color:var(--muted);font-family:var(--mono)}
+  .mv svg{display:block}
+  .tap{display:inline-flex;align-items:center;min-height:40px;color:var(--accent);text-decoration:none}
+  .tap+.tap{margin-left:14px}
+  /* .btn, .muted, .card, .num, .big, .stamp, .pill, .scroll, .up/.down all come from pcc.css —
+     this page defines no colour and no control of its own. */
+  .locked{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:6px 0 0}
+  .alarm{border-color:var(--bad);background:var(--bad-soft)}
+  .alarm .blk-h h2{color:var(--bad)}
+  .notice{border:1px solid var(--warn);background:var(--warn-soft);color:var(--ink);
+          border-radius:10px;padding:11px 14px;margin:0 0 16px;font-size:13.5px;line-height:1.5}
+  .notice.bad{border-color:var(--bad);background:var(--bad-soft)}
+  .pipe-more{margin:8px 0 0}
+  .pipe-more summary{cursor:pointer;font-size:13px;color:var(--accent);list-style-position:inside}
+  #pipe-table td{white-space:nowrap}
+  #pipe-table td:first-child{font-family:var(--mono);font-size:12.5px}
+  @media (max-width:380px){
+    .ln{grid-template-columns:1fr}
+    .mv{grid-template-columns:1fr auto auto}
+    .mv .mv-spark{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div id="nav-slot"></div>
+  <div id="asof-slot"></div>
+  <div id="boot-notice"></div>
+
+  <main id="blocks">
+    <!-- Block order is the email's (scripts/daily-brief.js), asserted by scripts/validate-pages.js.
+         blk-pipeline is last while it is green and is moved to the front of this list when the data
+         is stale or the validator failed — the only block that ever changes place. -->
+
+    <section class="blk card" id="blk-nav" aria-labelledby="h-nav">
+      <div class="blk-h"><h2 id="h-nav">Net worth</h2><span id="nav-stamp"></span></div>
+      <div id="nav-body"></div>
+    </section>
+
+    <section class="blk card" id="blk-action" aria-labelledby="h-action">
+      <div class="blk-h"><h2 id="h-action">The one action</h2><span id="action-stamp"></span></div>
+      <div id="action-body"></div>
+    </section>
+
+    <section class="blk card" id="blk-risk" aria-labelledby="h-risk">
+      <div class="blk-h"><h2 id="h-risk">Risk state</h2><span id="risk-stamp"></span></div>
+      <div id="risk-body"></div>
+    </section>
+
+    <section class="blk card" id="blk-changed" aria-labelledby="h-changed">
+      <div class="blk-h"><h2 id="h-changed">What changed</h2><span id="changed-stamp"></span></div>
+      <div id="changed-body"></div>
+    </section>
+
+    <section class="blk card" id="blk-movers" aria-labelledby="h-movers">
+      <div class="blk-h"><h2 id="h-movers">Movers</h2><span id="movers-stamp"></span></div>
+      <div id="movers-body"></div>
+    </section>
+
+    <section class="blk card" id="blk-news" aria-labelledby="h-news">
+      <div class="blk-h"><h2 id="h-news">News that matters to your book</h2><span id="news-stamp"></span></div>
+      <div id="news-body"></div>
+    </section>
+
+    <section class="blk card" id="blk-pipeline" aria-labelledby="h-pipeline">
+      <div class="blk-h"><h2 id="h-pipeline">Pipeline</h2><span id="pipe-stamp"></span></div>
+      <div id="pipe-body"></div>
+    </section>
+  </main>
+
+  <footer id="foot" class="stamp"></footer>
+  <noscript>
+    <p class="sub">This page renders the morning's data files in the browser, so it needs
+    JavaScript. The same content arrives by email at 08:15 SGT every morning.</p>
+  </noscript>
+</div>
+
+<script src="common.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  // ── the contract with common.js (spec §B) ──────────────────────────────────
+  // Everything this page draws goes through PCC. If Agent 2's build of common.js is missing a call
+  // we SAY SO at the top of the page and skip the block that needed it — we never inline a private
+  // copy, because a second implementation of money() or freshness() is exactly how the page and the
+  // email started disagreeing in the first place.
+  var P = window.PCC || {};
+  var NEED = ['load', 'loadAll', 'priv', 'locked', 'unlock', 'money', 'pct', 'num', 'dateShort',
+              'dateLong', 'ago', 'el', 'closesFor', 'retPct', 'spark', 'nav', 'asof', 'asofBanner',
+              'deepLink', 'hash', 'gateLabel', 'err', 'freshness', 'stampHTML', 'sgtToday', 'ageDays'];
+  var MISSING = NEED.filter(function (k) { return typeof P[k] !== 'function'; });
+  var has = function (k) { return MISSING.indexOf(k) === -1; };
+
+  // The ONLY DOM built without PCC.el: the line that reports PCC.el is missing. Diagnostic, not a
+  // renderer — it carries no data from a file.
+  function bootNotice(text, bad) {
+    var d = document.createElement('div');
+    d.className = 'notice' + (bad ? ' bad' : '');
+    d.textContent = text;
+    document.getElementById('boot-notice').appendChild(d);
+  }
+  if (MISSING.length) {
+    bootNotice('common.js is missing ' + MISSING.length + ' call(s) this page is built on: '
+      + MISSING.join(', ') + '. Blocks that need them are skipped rather than faked.', true);
+  }
+  if (!has('el') || !has('load')) return;   // nothing can be drawn honestly without these two
+
+  var el = P.el;
+  var $ = function (id) { return document.getElementById(id); };
+  var txt = function (t, c) { return el('span', { class: c || '', text: t }); };
+  var para = function (t, c) { return el('p', { class: c || 'sub', text: t }); };
+
+  // PCC.stampHTML is the one sanctioned markup helper: it renders a date and a cadence label, never
+  // a headline. Data text always goes through el()'s `text` (textContent).
+  function stamp(asOf, cadence, what) {
+    var s = el('span', { class: 'stamp' });
+    if (!has('stampHTML')) {
+      s.textContent = String(asOf || '—').slice(0, 10) + ' (PCC.stampHTML missing)';
+      return s;
+    }
+    // stampEl builds the span with textContent — a file's asOf is DATA and never becomes markup.
+    if (P.stampEl) return P.stampEl(asOf, cadence, what);
+    var t = P.stampText ? P.stampText(asOf, cadence, what) : { text: String(asOf || '—').slice(0, 10) };
+    s.textContent = t.text; if (t.state) s.className = 'stamp ' + (t.state === 'stale' ? 'stale' : t.state === 'amber' ? 'aging' : '');
+    return s;
+  }
+  function svgBox(markup, cls) {
+    var s = el('span', { class: cls || '' });
+    s.innerHTML = markup;                       // hand-drawn inline SVG from PCC.spark; no data text
+    return s;
+  }
+  function line(k, v, cls) {
+    return el('div', { class: 'ln' + (cls ? ' ' + cls : '') }, [
+      el('span', { class: 'ln-k', text: k }),
+      el('span', { class: 'ln-v', text: v })
+    ]);
+  }
+  function lineEls(k, kids, cls) {
+    return el('div', { class: 'ln' + (cls ? ' ' + cls : '') }, [
+      el('span', { class: 'ln-k', text: k }),
+      el('span', { class: 'ln-v' }, kids)
+    ]);
+  }
+  function fill(id, kids) {
+    var host = $(id); while (host.firstChild) host.removeChild(host.firstChild);
+    (kids || []).forEach(function (k) { if (k) host.appendChild(k); });
+  }
+  function unlockPanel(what) {
+    var b = el('button', { class: 'btn', type: 'button', text: 'Unlock' });
+    b.addEventListener('click', function () { doUnlock(); });
+    return el('div', { class: 'locked' }, [b, el('span', { class: 'sub muted', text: what })]);
+  }
+  var sgn = function (n) { return n == null ? '' : n < 0 ? 'down' : n > 0 ? 'up' : ''; };
+  var pct = function (n, dp) { return has('pct') ? P.pct(n, { dp: dp == null ? 2 : dp, sign: true }) : String(n); };
+  var money = function (n, o) { return has('money') ? P.money(n, o || { cur: 'SGD', dp: 0 }) : String(n); };
+  var dshort = function (d) { return has('dateShort') ? P.dateShort(d) : String(d || '').slice(0, 10); };
+
+  // ── state ─────────────────────────────────────────────────────────────────
+  // Written with the 'data/' prefix on purpose. PCC.load strips it, so runtime is unchanged — but
+  // scripts/validate-pages.js can only check "is every file this page fetches in publish.js ALLOW"
+  // against paths it can see in the source. Passed as a variable with bare names, all ten were
+  // invisible to that gate and it passed the page without checking anything.
+  var PUBLIC_FILES = ['data/manifest.json', 'data/.validation.json', 'data/technicals.json',
+                      'data/targets.json', 'data/alerts.json', 'data/brief.json', 'data/news.json',
+                      'data/policy.json', 'data/fx.json', 'data/closes.json', 'data/themes.json'];
+  var FX_HISTORY = 'data/fx-history.ndjson';
+  var D = {};          // public files, name -> obj|null
+  var V = null;        // valuation.enc
+  var OA = null;       // oneaction.enc
+  var BK = null;       // book.enc — needed ONLY for the ticker -> yf join; technicals.json and
+                       // closes.json are keyed by the Yahoo symbol and valuation lines carry none.
+  var LOCKED = true;
+  var FXH = [];        // fx-history.ndjson rows
+  var TODAY = has('sgtToday') ? P.sgtToday() : new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Singapore' });
+
+  // fx-history is NDJSON and PCC.load() is JSON-only, so this page reads it directly. Same-origin,
+  // relative, no parsing of anything but numbers — see the deviation note in the handover.
+  async function loadFxHistory() {
+    try {
+      var r = await fetch(FX_HISTORY + '?t=' + Date.now(), { cache: 'no-store' });
+      if (!r.ok) return [];
+      var body = await r.text();
+      return body.split('\n').filter(Boolean).map(function (l) {
+        try { return JSON.parse(l); } catch (_) { return null; }
+      }).filter(Boolean);
+    } catch (_) { return []; }
+  }
+
+  async function loadPrivate() {
+    LOCKED = has('locked') ? P.locked() : true;
+    V = OA = BK = null;
+    if (LOCKED || !has('priv')) return;
+    var got = await Promise.all([P.priv('valuation'), P.priv('oneaction'), P.priv('book')]);
+    V = got[0]; OA = got[1]; BK = got[2];
+    if (!V && !OA) LOCKED = true;   // refused or wrong passphrase — treat as locked, never as zero
+  }
+
+  async function doUnlock() {
+    if (!has('unlock')) return;
+    var ok = await P.unlock();
+    if (ok) { await loadPrivate(); renderAll(); }
+  }
+
+  // ── 1. blk-nav ────────────────────────────────────────────────────────────
+  function renderNav() {
+    var m = (D['manifest.json'] && D['manifest.json'].files) || {};
+    var vm = m['valuation.json'] || {};
+    fill('nav-stamp', [stamp(vm.asOf, 'daily', 'valuation')]);
+
+    if (!V) {
+      fill('nav-body', [
+        el('div', { class: 'big num muted', text: 'S$ ———' }),
+        para('Net worth, the day change and its drivers live in data/valuation.enc and are decrypted '
+           + 'in this browser. Nothing is published in the clear.'),
+        unlockPanel('once per device')
+      ]);
+      return;
+    }
+    var kids = [];
+    // The NAV itself is ink, never red: a −0.10% day is not an emergency and colouring the net
+    // worth makes every ordinary morning look like one. Only the change carries direction.
+    kids.push(el('div', { class: 'big num', text: money(V.navSGD) }));
+    kids.push(el('div', { class: 'sub' }, [
+      txt(pct(V.dayChgPct) + '  ', 'num ' + sgn(V.dayChgPct)),
+      txt('(' + (V.dayChgSGD >= 0 ? '+' : '') + money(V.dayChgSGD) + ') vs prev close', 'num muted')
+    ]));
+    kids.push(el('div', { class: 'sub muted' }, [
+      stamp(V.asOf, 'daily', 'prices'), txt(' · ', 'stamp'), stamp(V.fxAsOf, 'daily', 'fx')
+    ]));
+
+    // the three drivers — the email prints one NAV line; the phone gets the reason it moved
+    var drivers = (V.lines || []).filter(function (l) { return l.dayChgSGD; })
+      .sort(function (a, b) { return Math.abs(b.dayChgSGD) - Math.abs(a.dayChgSGD); }).slice(0, 3);
+    if (drivers.length) {
+      kids.push(el('div', { class: 'ln-k', style: 'margin:14px 0 2px' }, [txt('Day change came from')]));
+      drivers.forEach(function (l) {
+        kids.push(lineEls(l.t, [
+          txt(l.n),
+          el('span', { class: 'num ' + sgn(l.dayChgSGD),
+                       text: '  ' + (l.dayChgSGD >= 0 ? '+' : '') + money(l.dayChgSGD) })
+        ]));
+      });
+    }
+    if (V.stale && V.stale.length) {
+      kids.push(para(V.stale.length + ' stale mark(s) — '
+        + V.stale.slice(0, 5).map(function (x) { return x.t || x.id; }).join(', ')
+        + (V.stale.length > 5 ? ' and ' + (V.stale.length - 5) + ' more' : '')
+        + ' — manual marks over 90 days, valued at the last known book.', 'sub muted'));
+    }
+    kids.push(el('div', {}, [el('a', { class: 'tap', href: 'book.html', text: 'Open the book →' })]));
+    fill('nav-body', kids);
+  }
+
+  // ── 2. blk-action ─────────────────────────────────────────────────────────
+  // Same lines, same order, same words as scripts/daily-brief.js actionLines().
+  function renderAction() {
+    fill('action-stamp', [OA ? stamp(OA.date, 'daily', 'one-action') : el('span', { class: 'stamp', text: '' })]);
+
+    if (!OA) {
+      fill('action-body', LOCKED
+        ? [para('The one action is computed by code each morning into data/oneaction.enc and asked by '
+              + 'the 08:15 email. It is decrypted in this browser.'), unlockPanel('same passphrase')]
+        : [P.err ? P.err('oneaction.enc did not load — scripts/one-action.js may not have run this morning.')
+                 : para('oneaction.enc did not load.')]);
+      return;
+    }
+    var a = OA.action || {}, j = OA.journal || {}, kids = [];
+
+    if (OA.date !== TODAY) {
+      kids.push(el('div', { class: 'notice' }, [txt('This action is dated '
+        + (has('dateLong') ? P.dateLong(OA.date) : OA.date) + ' — today is '
+        + (has('dateLong') ? P.dateLong(TODAY) : TODAY)
+        + '. one-action.js has not run yet this morning, so it may already be cleared.')]));
+    }
+
+    var box = [];
+    if (a.kind === 'none') {
+      box.push(el('div', { class: 'act-text', text: a.text || 'No action.' }));
+    } else {
+      box.push(el('div', { class: 'act-tag', text: 'Action' }));
+      box.push(el('div', { class: 'act-text', text: a.text || '' }));
+    }
+    if (a.why && a.why.length) {
+      box.push(el('ul', { class: 'why' }, a.why.map(function (w) { return el('li', { text: w }); })));
+    }
+
+    // The ask. A static page has no write path (spec §3): it prints the reply and the grammar, and
+    // never a Done button it cannot honour.
+    var ask = [];
+    if (j.status === 'deferred' && j.lastReply) {
+      ask.push(el('div', { class: 'ask-do', text: 'Deferred until ' + dshort(j.deferredUntil)
+        + ' ("' + (j.lastReply.arg || 'no reason given') + '") — reply DONE to the morning email when done.' }));
+    } else if (a.ask) {
+      // split/join rather than a regex on the pipe: that regex literal ends in the two characters
+      // that CLOSE a block comment, and a tool stripping block comments across the whole file then
+      // eats everything back to the nearest stray open. It already cost us the ALLOW check once.
+      ask.push(el('div', { class: 'ask-do',
+        text: 'reply ' + String(a.ask).split('|').map(function (s) { return s.trim(); }).join(' / ')
+              + ' to the morning email' }));
+    }
+    if (j.status === 'reported-done' && j.lastReply) {
+      ask.push(el('div', { class: 'sub',
+        text: 'You replied DONE on ' + dshort(j.lastReply.receivedAt || j.lastReply.at)
+              + (j.note ? ' — ' + j.note : '') }));
+    }
+    if (ask.length) {
+      ask.push(el('div', { class: 'grammar',
+        text: 'DONE · DEFER <why> · WATCH <ticker> · NOTE <text> · DECIDE <n> <text>' }));
+      box.push(el('div', { class: 'ask' }, ask));
+    }
+    kids.push(el('div', { class: 'act' }, box));
+
+    (OA.candidates || []).forEach(function (c) {
+      kids.push(para('also open · ' + c.key + ': ' + c.text + ' — reply DONE ' + c.key + ' when done'));
+    });
+    if (a.clearsWhen) kids.push(para('Clears when: ' + a.clearsWhen, 'sub muted'));
+    if (a.policy) kids.push(para('Policy: ' + a.policy, 'sub muted'));
+    fill('action-body', kids);
+  }
+
+  // ── 3. blk-risk ───────────────────────────────────────────────────────────
+  // The email's riskLines(), line for line. The public half (gate, cluster, policy, fx) always
+  // renders; the levered half (call distance, survivability, leverage, carry) needs valuation.enc.
+  function renderRisk() {
+    var T = D['technicals.json'], TG = D['targets.json'], POL = D['policy.json'], FX = D['fx.json'];
+    fill('risk-stamp', [stamp(T && T.asOf, 'daily', 'technicals')]);
+    var kids = [], s = V && V.silver;
+    var slv = T && T.instruments && (T.instruments.SLV || T.instruments['SI=F']);
+
+    if (slv) {
+      var g = has('gateLabel') ? P.gateLabel(slv) : { text: slv.gate && slv.gate.on ? 'gate ON' : 'gate OFF' };
+      var pub = g.text + ' · ' + pct(slv.distPct200) + ' vs 200d (SLV proxy) · 12-1 mom '
+              + pct(slv.mom12_1Pct, 1);
+      if (s) {
+        // These four figures come from valuation.enc, not from technicals — so they carry their own
+        // provenance: the price date, its trust, and the age of the loan mark the leverage divides by.
+        var loanMark = null;
+        try { var lh = (BK && BK.holdings || []).filter(function (h) { return h.t === 'LOAN'; })[0]; loanMark = lh && lh.mark && lh.mark.asOf; } catch (_) {}
+        kids.push(line('silver', pub + ' · ' + s.distanceToCallPct + '% to margin call ('
+          + s.distanceToCallPctStressed + '% at 1.5x rate) · survivability '
+          + (s.survivability && s.survivability.pass ? 'PASS' : 'FAIL') + ' · leverage ' + s.leverage + 'x'
+          + ' · price ' + dshort(s.priceAsOf) + (s.priceTrust === 'low' ? ' (low-trust)' : '')
+          + (loanMark ? ' · loan mark ' + dshort(loanMark) : ''),
+          s.survivability && s.survivability.pass ? '' : 'bad'));
+        kids.push(line('carry', 'loan ' + s.carry.loanRatePct + '% vs silver 12m '
+          + (s.carry.silver12mPct == null ? 'n/a' : s.carry.silver12mPct + '%') + ' — ' + s.carry.note));
+        if (String(s.maintenanceRateSource || '').indexOf('ASSUMED') === 0) {
+          kids.push(para('Maintenance rate ' + Math.round(s.maintenanceRate * 100)
+            + '% is ASSUMED (as of ' + s.maintenanceRateAsOf
+            + ') — confirm on the IBKR account page and update data/book.json.', 'sub muted'));
+        }
+      } else {
+        kids.push(lineEls('silver', [
+          txt(pub + ' · '),
+          txt('call distance, survivability, leverage and carry are in valuation.enc', 'muted')
+        ]));
+      }
+    }
+
+    if (TG && TG.clusters && TG.clusters[0]) {
+      var c = TG.clusters[0];
+      kids.push(line('cluster', c.name + ' ' + Math.round(c.actualRiskShare * 100)
+        + '% of quoted-sleeve risk · cap 20%' + (c.overCapActual ? ' · OVER' : '')
+        + ' · portfolio vol ' + TG.portfolioVolActualPct + '% (target ' + TG.portfolioVolTargetPct
+        + '%) · targets in SHADOW', c.overCapActual ? 'bad' : ''));
+    }
+
+    // trend — n of m HELD names with the gate off needs the book's yf symbols; without them the
+    // honest answer is the tracked universe, said as such.
+    if (T && T.summary) {
+      var held = heldSymbols();
+      if (held.length) {
+        var on = held.filter(function (y) { return T.instruments[y]; });
+        var off = on.filter(function (y) { return T.instruments[y].gate.on === false; });
+        var below = (T.summary.crossedBelow5d || []).filter(function (y) { return held.indexOf(y) > -1; });
+        kids.push(line('trend', off.length + '/' + on.length + ' held names gate OFF · crossed below '
+          + '200d (5 closes): ' + (below.join(', ') || 'none')));
+      } else {
+        kids.push(line('trend', T.summary.gateOff + '/' + T.summary.instruments
+          + ' tracked instruments gate OFF · crossed below 200d (5 closes): '
+          + ((T.summary.crossedBelow5d || []).join(', ') || 'none')
+          + ' — which of them you hold needs book.enc'));
+      }
+    }
+
+    // fx MTD, exactly as the email computes it, and the same honest fallback when history is short.
+    if (FXH.length) {
+      var cur = FXH[FXH.length - 1];
+      var mo = FXH.filter(function (x) { return String(x.date).slice(0, 7) === String(cur.date).slice(0, 7); })[0];
+      if (mo && mo !== cur && mo.rates && cur.rates) {
+        var mv = (cur.rates.USD / mo.rates.USD - 1) * 100;
+        kids.push(line('fx', 'USD/SGD ' + pct(mv) + ' MTD' + (Math.abs(mv) > 3 ? ' — over 3%: FX cash review' : '')
+          + ' · ' + FXH.length + 'd of history'));
+      } else {
+        kids.push(line('fx', 'USD/SGD ' + (FX && has('num') ? P.num(FX.rates.USD, 4) : '—')
+          + ' · FX history starts ' + String(cur.date).slice(0, 10) + ' — MTD needs a second month-to-date row'));
+      }
+    } else {
+      kids.push(line('fx', 'data/fx-history.ndjson did not load — no MTD move to show'));
+    }
+
+    // NAV history is not published (spec §"Not published"): say so, never invent a drawdown.
+    kids.push(line('drawdown', 'not on this page — data/nav-history.ndjson is not published. '
+      + 'The 08:15 brief computes drawdown from the high on the Mac.'));
+
+    if (POL) {
+      kids.push(line('policy', 'regime ' + (POL.regime ? POL.regime.status : '—') + ' · silver '
+        + (POL.silverLeverage ? String(POL.silverLeverage.status).split(' — ')[0] : '—')
+        + (POL.silverLeverage && POL.silverLeverage.rule2InForce === false ? ' · Rule 2 struck' : '')));
+    }
+    if (!V) kids.push(unlockPanel('for the levered lines'));
+    fill('risk-body', kids.length ? kids : [para('No risk file loaded — technicals.json, targets.json and policy.json are all absent.')]);
+  }
+
+  function heldSymbols() {
+    if (!BK || !BK.holdings) return [];
+    return BK.holdings.map(function (h) { return h.yf; }).filter(Boolean);
+  }
+
+  // ── 4. blk-changed ────────────────────────────────────────────────────────
+  function renderChanged() {
+    var T = D['technicals.json'], A = D['alerts.json'], B = D['brief.json'];
+    var since = B && B.date ? String(B.date).slice(0, 10) : null;
+    fill('changed-stamp', [stamp(A && A.generatedAt, 'daily', 'alerts')]);
+    var kids = [], held = heldSymbols();
+
+    if (T && T.summary) {
+      var mark = function (y) { return held.length && held.indexOf(y) > -1 ? y + ' (held)' : y; };
+      var below = (T.summary.crossedBelow5d || []).map(mark).join(', ');
+      var above = (T.summary.crossedAbove5d || []).map(mark).join(', ');
+      kids.push(line('trend', 'crossed below the 200-day: ' + (below || 'none')
+        + ' · crossed above: ' + (above || 'none')));
+      if (T.summary.volSpike && T.summary.volSpike.length) {
+        kids.push(line('vol', 'vol spike: ' + T.summary.volSpike.map(mark).join(', ')));
+      }
+    }
+
+    var alerts = (A && A.alerts) || [];
+    // The window is INGEST time (a.at), not the filing date: EDGAR dates a trade 1-3 days before
+    // alerts.js ever sees it, so comparing filing date to the brief's date matched nothing at all.
+    var sinceTs = B && B.date ? Date.parse(B.date) : NaN;
+    // One day back: alerts.js ingests at 07:02 BEFORE the agent stamps brief.json, so this morning's rows
+    // are always older than the brief beside them. The window is "since yesterday's send", not "since
+    // this file was written" — which on a normal morning matched nothing at all.
+    var fresh = isNaN(sinceTs) ? alerts : alerts.filter(function (x) { return Date.parse(x.at) > sinceTs - 864e5; });
+    var rank = function (x) {
+      var t = x.tags || [];
+      return t.indexOf('in-book') > -1 ? 0 : t.indexOf('watchlist') > -1 ? 1 : 2;
+    };
+    var notable = fresh.filter(function (x) { return x.severity === 'Notable'; })
+      .sort(function (a, b) { return rank(a) - rank(b) || (b.usd || 0) - (a.usd || 0); }).slice(0, 6);
+
+    if (notable.length) {
+      kids.push(el('ul', { class: 'items' }, notable.map(function (x) {
+        return el('li', {}, [
+          el('div', { class: 'head', text: x.headline }),
+          el('div', { class: 'sub', text: x.detail || '' }),
+          el('div', { class: 'sub muted' }, alertLinks(x))
+        ]);
+      })));
+    } else {
+      kids.push(para('No Notable insider or ownership event since '
+        + (since ? 'the ' + dshort(since) + ' brief' : 'the last brief') + ' · '
+        + alerts.length + ' in the log.'));
+    }
+
+    var owner = fresh.filter(function (x) { return x.family === 'ownership'; });
+    // Phase 6: 13F filings join this line. They come from alerts.json's family 'fund' filing rows —
+    // alerts.js writes one per data/13f.json events[] row when it first sees it — so the window is the
+    // same ingest-time window as every alert above, and the phone never downloads the ~1 MB 13f.json
+    // to count a dozen rows. The first scan's backfill (tag 'backfill') is not news and is skipped.
+    var f13 = fresh.filter(function (x) { return x.family === 'fund' && x.what === 'filing' && (x.tags || []).indexOf('backfill') < 0; });
+    if (f13.length) {
+      kids.push(lineEls('13D/G', [
+        txt((owner.length ? owner.length + ' ownership filing(s) and ' : '') + f13.length + ' 13F filing(s) since the last brief: '
+          + f13.slice(0, 4).map(function (x) { return x.issuer + (x.quarter ? ' ' + x.quarter : ''); }).join(', ')
+          + (f13.length > 4 ? ' +' + (f13.length - 4) + ' more' : '') + ' — '),
+        el('a', { class: 'tap', href: deep('inbox', 'a-' + f13[0].id), text: 'see the Inbox' })
+      ]));
+    } else {
+      kids.push(line('13D/G', owner.length
+        ? owner.length + ' ownership filing(s) since the last brief — see the Inbox'
+        : 'no 13D/13G or 13F line since ' + (since ? 'the ' + dshort(since) + ' brief' : 'the last brief')));
+    }
+
+    // The theme radar (phase 8, 20 Sep 2026), MONDAYS ONLY — the same gate the email's THEME RADAR
+    // block uses, for the same reason: filing counts move on a quarterly clock, so a daily theme
+    // line would be the same sentence five mornings running. On a Monday it never silently
+    // disappears: a quiet week says "no stage change this week" and stamps the radar's own last
+    // check, because a block that vanishes reads exactly like a file that died. Two axes, never
+    // folded into one: `stage` is the discovery ladder and the rung is the HIGHEST EVER ATTAINED,
+    // `crowding` is separate, and a theme can be crowded having never been a Candidate.
+    var TH = D['themes.json'], isMon = false;
+    try { isMon = new Date(Date.parse(TODAY + 'T00:00:00Z')).getUTCDay() === 1; } catch (_) {}
+    if (isMon && !TH) {
+      kids.push(line('themes', 'data/themes.json did not load — no theme is counted on this page today. It is written weekly by scripts/themes.js.'));
+    } else if (isMon) {
+      var POLT = (D['policy.json'] && D['policy.json'].themes) || {};
+      var LAD = (POLT.ladder && POLT.ladder.length) ? POLT.ladder : ['Watching', 'Candidate', 'Evidenced', 'Priced'];
+      var onLad = function (s) { return LAD.indexOf(s) > -1; };
+      var wk = new Date(Date.parse(TODAY + 'T00:00:00Z') - 7 * 864e5).toISOString().slice(0, 10);
+      var ths = (TH.themes || []).filter(Boolean);
+      var tOf = function (term) { for (var i = 0; i < ths.length; i++) if (ths[i].term === term) return ths[i]; return null; };
+      var nOf = function (v) { return v == null ? '?' : String(v); };
+      var mv = (TH.history || []).filter(function (h) { return h && h.to && onLad(h.to) && String(h.at || '') >= wk; });
+      mv.sort(function (a, b) { return String(a.at) < String(b.at) ? -1 : String(a.at) > String(b.at) ? 1 : 0; });
+      mv.forEach(function (h) {
+        var t = tOf(h.term) || {}, qs = (t.quarters || []).filter(function (q) { return q && !q.partial && q.filers != null; });
+        var a = qs[qs.length - 2], b = qs[qs.length - 1];
+        kids.push(line('theme', h.term + ': ' + (!h.from || !onLad(h.from) ? 'first reading on the ladder — ' + h.to : h.from + ' → ' + h.to)
+          + ' on ' + dshort(h.at) + ' · ' + (a && b ? 'distinct filers ' + a.q + ' ' + nOf(a.filers) + ' → ' + b.q + ' ' + nOf(b.filers) : 'no complete quarter carries a filer count')
+          + ' · ' + (t.candidateOn ? 'first doubled from a base above ten on ' + dshort(t.candidateOn) : 'has never doubled from a base above ten')
+          + ' · ' + ((t.pricedNames || []).length) + ' of its names are in closes.json, and co-movement needs 3'));
+      });
+      if (!mv.length) {
+        kids.push(line('theme', 'no stage change this week — nothing moved on the ladder since ' + dshort(wk) + '. '
+          + (ths.length ? ths.map(function (t) { return t.term + ' ' + t.stage; }).join(' · ') : 'no term is seeded')
+          + '. The rung is the highest ever attained, so a quiet week leaves it where it was.'));
+      }
+      var openW = ths.filter(function (t) { return t.entryWindow; });
+      var crowd = ths.filter(function (t) { return t.crowding && t.crowding.level === 'crowded'; });
+      var noCand = crowd.filter(function (t) { return !t.candidateOn; });
+      kids.push(line('theme', openW.length
+        ? 'entry window OPEN: ' + openW.map(function (t) { return t.term + ' (' + t.stage + ', crowding ' + (t.crowding ? t.crowding.level : '?') + ')'; }).join(', ')
+          + ' — themes.json computes it as stage Priced AND crowding not crowded.'
+        : 'entry window: none open. ' + ths.map(function (t) {
+            return t.term + ' is ' + t.stage + ' with crowding ' + (t.crowding ? t.crowding.level : '?')
+              + ' (' + nOf(t.crowding && t.crowding.effectiveTrusts) + ' trust(s) with an effective 485BPOS prospectus)';
+          }).join('; ') + '.'
+          + (ths.length && crowd.length === ths.length ? ' Every term the radar carries is already packaged and sold.' : '')
+          + (noCand.length ? ' ' + noCand.map(function (t) { return t.term; }).join(' and ') + ' reached that state without ever being a Candidate — product without breadth: the prospectuses exist, the filer base never doubled.' : '')
+          + ' That is what has been filed, reported as a state; it is not a suggestion to do anything or to avoid anything.'));
+      var thAlert = alerts.filter(function (x) { return x.family === 'theme'; })[0] || null;
+      // scan.checkedAt is an instant, and dateShort reads the UTC date out of it: a 06:20 SGT run
+      // lands at 22:20 UTC the day BEFORE and the stamp would report yesterday. SGT first, always.
+      var sgtOf = function (iso) { var t = Date.parse(iso);
+        return isNaN(t) ? String(iso || '').slice(0, 10) : new Date(t).toLocaleDateString('en-CA', { timeZone: 'Asia/Singapore' }); };
+      kids.push(lineEls('radar', [
+        txt('checked ' + dshort(sgtOf((TH.scan && TH.scan.checkedAt) || TH.asOf)) + ' · weekly, because a daily run would spend requests watching a number that cannot move · '),
+        el('a', { class: 'tap', href: deep('inbox', thAlert ? 'a-' + thAlert.id : null), text: thAlert ? 'the theme rows in the Inbox' : 'Open the Inbox' })
+      ]));
+    }
+
+    // The coverage line (phase 7, 19 Sep 2026). It reads as boilerplate on a quiet morning, which is
+    // exactly why it is here: "no Notable event" above means nothing unless the reader knows which
+    // exchanges were actually looked at. HKEX is now read daily; SGX has no mechanical route at all
+    // and saying so every morning is cheaper than the owner assuming silence means nothing happened.
+    kids.push(line('coverage', 'US holdings are ETFs and file no Form 4 — market-wide and watchlist '
+      + 'coverage is where US exposure is seen. HKEX: covered since 19 Sep 2026 — 0700, 0981 and 1810 '
+      + 'are read daily from HKEX’s own disclosure-of-interests notices, and a week with no HK '
+      + 'notice is normal. SGX, 31 lines: no mechanical route. The exchange’s announcements API '
+      + 'has required authentication since Sep 2026, and a scraped key or a third-party mirror is not '
+      + 'acceptable here. Subscribe to SGXNet’s own email alerts and the reply reader can parse '
+      + 'them (decision 7).'));
+
+    kids.push(el('div', {}, [
+      el('a', { class: 'tap', href: deep('inbox', null), text: 'Open the Inbox →' })
+    ]));
+    fill('changed-body', kids);
+  }
+
+  function alertLinks(x) {
+    var out = [];
+    out.push(el('a', { class: 'tap', href: deep('inbox', 'a-' + x.id), text: 'in the Inbox' }));
+    if (x.ticker) out.push(el('a', { class: 'tap', href: deep('book', 'pos-' + x.ticker), text: x.ticker + ' in the book' }));
+    // Only sec.gov links leave this origin, and only as an href (spec §2).
+    if (x.url && /^https:\/\/www\.sec\.gov\//.test(x.url)) {
+      out.push(el('a', { class: 'tap', href: x.url, rel: 'noopener noreferrer', target: '_blank', text: 'filing' }));
+    }
+    return out;
+  }
+  function deep(surface, anchor) {
+    if (has('deepLink')) return P.deepLink(surface, anchor, has('asof') ? P.asof() : null);
+    return surface + '.html' + (anchor ? '#' + anchor : '');
+  }
+
+  // ── 5. blk-movers ─────────────────────────────────────────────────────────
+  function renderMovers() {
+    var CL = D['closes.json'];
+    fill('movers-stamp', [stamp(CL && CL.asOf, 'daily', 'closes')]);
+
+    if (!V) {
+      fill('movers-body', [
+        para('Which of your lines moved, 1-day and 1-week, with a two-year sparkline each. The names '
+           + 'and sizes come from valuation.enc.'),
+        unlockPanel('same passphrase')
+      ]);
+      return;
+    }
+    var byId = {};
+    ((BK && BK.holdings) || []).forEach(function (h) { byId[h.id] = h; });
+
+    var rows = (V.lines || []).filter(function (l) { return l.source === 'live'; }).map(function (l) {
+      var h = byId[l.id], sym = h && h.yf;
+      var ser = (CL && sym && has('closesFor')) ? P.closesFor(CL, sym) : [];
+      var prev = l.valueSGD - l.dayChgSGD;
+      var useSer = ser.length > 1 && has('retPct');
+      return {
+        t: l.t, n: l.n, ser: ser, chg: l.dayChgSGD, trust: l.trust, src: useSer ? 'closes' : 'valuation',
+        // each exchange closes on its own calendar, so a row's "1 day" is ITS last completed
+        // session — which is not always the session valuation.json priced the book on. The
+        // date travels with the row rather than being averaged away into one header.
+        asOf: useSer ? ser[ser.length - 1].d : l.priceAsOf,
+        d1: useSer ? P.retPct(ser, 1) : (prev ? l.dayChgSGD / prev * 100 : null),
+        d5: (ser.length > 5 && has('retPct')) ? P.retPct(ser, 5) : null
+      };
+    }).filter(function (r) { return r.d1 != null; })
+      .sort(function (a, b) { return Math.abs(b.d1) - Math.abs(a.d1); }).slice(0, 6);
+
+    var kids = [];
+    if (!CL) {
+      kids.push(el('div', { class: 'notice' }, [txt('data/closes.json is not published yet '
+        + '(scripts/closes.js, spec §A). The 1-day column below is the price move implied by '
+        + 'valuation.json; the 1-week column and the sparklines need that file.')]));
+    }
+    if (!BK && CL) {
+      kids.push(el('div', { class: 'notice' }, [txt('book.enc did not decrypt, so these lines cannot '
+        + 'be joined to closes.json by symbol. 1-day only, from valuation.json.')]));
+    }
+    if (!rows.length) {
+      kids.push(para('No live-priced line moved — every mark in the book is manual today.'));
+    }
+    kids.push(el('div', { class: 'mv' }, [
+      el('span', { class: 'ln-k', text: 'name' }), el('span', { class: 'ln-k', text: '1 day' }),
+      el('span', { class: 'ln-k', text: '1 week' }), el('span', { class: 'ln-k mv-spark', text: '2 years' })
+    ]));
+    rows.forEach(function (r) {
+      var cells = [
+        el('span', { class: 'mv-n' }, [
+          el('div', { text: r.n }),
+          el('div', { class: 'mv-t', text: r.t + ' · ' + dshort(r.asOf) })
+        ]),
+        el('span', { class: 'num ' + sgn(r.d1), text: pct(r.d1) }),
+        el('span', { class: 'num ' + sgn(r.d5), text: r.d5 == null ? '—' : pct(r.d5) })
+      ];
+      if (r.ser.length > 1 && has('spark')) {
+        cells.push(svgBox(P.spark(r.ser, { w: 88, h: 24, fill: false }), 'mv-spark muted'));
+      } else {
+        cells.push(el('span', { class: 'mv-spark stamp', text: '' }));
+      }
+      kids.push(el('div', { class: 'mv' }, cells));
+    });
+    // Name the disagreement rather than letting the reader find it. On 13 Sep the US tape had one
+    // more session in closes.json than valuation.json had priced the book on, so the day change
+    // above and the 1-day column here are genuinely different days for some rows.
+    // Count the rows that ACTUALLY used a price series. Claiming closes.json priced the table when
+    // the join produced nothing is the kind of quiet false provenance this system exists to stop.
+    var fromCloses = rows.filter(function (r) { return r && r.src === 'closes'; }).length;
+    kids.push(para(CL && fromCloses
+      ? fromCloses + ' of ' + rows.length + ' rows are priced from closes.json (last completed bar per '
+        + 'exchange, as of ' + dshort(CL.asOf) + ')' + (fromCloses < rows.length ? '; the rest are implied by valuation.json' : '')
+        + '. The day change under Net worth is valuation.json’s, as of ' + dshort(V.asOf)
+        + ' — the two differ wherever an exchange has printed since.'
+      : CL
+        ? 'closes.json loaded but no row joined to a price series, so every return here is implied by '
+          + 'valuation.json, as of ' + dshort(V.asOf) + '.'
+        : 'Returns are implied by valuation.json, as of ' + dshort(V.asOf) + '.', 'sub muted'));
+    kids.push(el('div', {}, [el('a', { class: 'tap', href: deep('book', null), text: 'Every holding →' })]));
+    fill('movers-body', kids);
+  }
+
+  // ── 6. blk-news ───────────────────────────────────────────────────────────
+  function renderNews() {
+    var B = D['brief.json'], N = D['news.json'];
+    fill('news-stamp', [stamp(B && B.date, 'daily', 'brief')]);
+    var top = (B && B.topNews) || [];
+    if (!top.length) {
+      fill('news-body', [para('brief.json carried no news this morning — the research run may not have completed.')]);
+      return;
+    }
+    var items = (N && N.items) || [];
+    var kids = [el('ul', { class: 'items' }, top.slice(0, 5).map(function (n) {
+      var match = items.filter(function (x) { return x.headline === n.headline; })[0];
+      var nSrc = match && match.sources ? match.sources.length : null;
+      var impact = String(n.impact || '').toLowerCase();
+      var cls = impact === 'bullish' ? 'good' : impact === 'bearish' ? 'bad' : 'warn';
+      return el('li', {}, [
+        el('span', { class: 'pill ' + cls, text: (n.impact || 'mixed').toUpperCase() }),
+        el('div', { class: 'head', text: n.headline }),
+        el('div', { class: 'sub', text: n.actionable || '' }),
+        el('div', { class: 'stamp', text: nSrc == null ? 'sources not linked to this line'
+          : nSrc + ' source' + (nSrc === 1 ? '' : 's') + (match.date ? ' · ' + dshort(match.date) : '') })
+      ]);
+    }))];
+    if (B && B.regime) {
+      kids.push(line('regime', B.regime.label + ' — risk-on '
+        + Math.round((B.regime.riskOn || 0) * 100) + '%'));
+      if (B.regime.oneLiner) kids.push(para(B.regime.oneLiner, 'sub muted'));
+    }
+    fill('news-body', kids);
+  }
+
+  // ── 7. blk-pipeline ───────────────────────────────────────────────────────
+  // Green: one quiet table at the foot. Stale or a failed validator: it turns red and jumps to the
+  // top, because a page that looks normal while its data is fourteen days old is the exact failure
+  // of Aug 2026 (fourteen briefs, one small red line each, nothing felt urgent enough to fix).
+  function renderPipeline() {
+    var M = D['manifest.json'], val = D['.validation.json'];
+    var files = (M && M.files) || {};
+    fill('pipe-stamp', [stamp(M && M.sgtDate, 'daily', 'manifest')]);
+
+    var names = Object.keys(files), stale = [], body = [];
+    var rows = names.map(function (name) {
+      var f = files[name] || {};
+      var fr = (f.asOf && has('freshness')) ? P.freshness(f.asOf, f.cadence || 'daily')
+             : { state: f.missing ? 'stale' : 'unknown', label: f.missing ? 'not produced' : 'no date' };
+      if (fr.state === 'stale') stale.push(name);
+      return { name: name, f: f, fr: fr };
+    });
+
+    var problems = (val && val.problems) || [];
+    var red = problems.length > 0 || !val || stale.length > 0;
+
+    if (problems.length) {
+      body.push(el('ul', { class: 'items' }, problems.map(function (p) {
+        return el('li', { class: 'head', text: p });
+      })));
+    } else if (!val) {
+      body.push(para('data/.validation.json did not load — no file check to report.'));
+    } else if (val.checkedOn !== TODAY) {
+      body.push(el('div', { class: 'notice' }, [txt('The universal file check has not run today — '
+        + 'it last passed on ' + dshort(val.checkedOn) + '. Treat the figures above with extra care.')]));
+      body.push(para('All ' + (val.passed || []).length + ' checks passed then'
+        + ((val.warnings || []).length ? ' · ' + val.warnings.length + ' minor warning(s)' : '') + '.'));
+    } else {
+      body.push(para('All ' + (val.passed || []).length + ' file checks passed'
+        + ((val.warnings || []).length ? ' · ' + val.warnings.length + ' minor warning(s)' : '') + '.'));
+    }
+    if (stale.length) {
+      body.push(para('Stale for its cadence: ' + stale.join(', ') + '.', 'sub'));
+    }
+
+    var head = el('tr', {}, [
+      el('th', { text: 'file' }), el('th', { text: 'as of' }),
+      el('th', { text: 'age' }), el('th', { text: 'cadence' }), el('th', { text: 'count' })
+    ]);
+    var fileRows = rows.map(function (r) {
+      return el('tr', {}, [
+        el('td', { text: r.name }),
+        el('td', { class: 'num', text: r.f.asOf ? String(r.f.asOf).slice(0, 10) : '—' }),
+        el('td', { class: 'num ' + (r.fr.state === 'stale' ? 'down' : ''), text: r.fr.label }),
+        el('td', { text: r.f.cadence || '—' }),
+        el('td', { class: 'num', text: r.f.count == null ? '—' : String(r.f.count) })
+      ]);
+    });
+    // The table is reference, not a headline. Folded away, this block is one line at the foot when
+    // it is green, and when it is red it leads with the failure instead of burying the One Action
+    // under twenty-two rows of as-of dates.
+    body.push(el('details', { class: 'pipe-more' }, [
+      el('summary', { class: 'tap', text: rows.length + ' files · as-of and age' }),
+      el('div', { class: 'scroll' }, [
+        el('table', { id: 'pipe-table' }, [el('thead', {}, [head]), el('tbody', {}, fileRows)])
+      ]),
+      para('Not published, so not on any page: .prices-2y, nav-history, .state-history, '
+        + '.publish-history, .cutover, .last-brief-at.', 'stamp')
+    ]));
+    fill('pipe-body', body);
+
+    var sec = $('blk-pipeline'), main = $('blocks');
+    sec.classList.toggle('alarm', red);
+    if (red && main.firstElementChild !== sec) main.insertBefore(sec, main.firstElementChild);
+    if (!red && main.lastElementChild !== sec) main.appendChild(sec);
+  }
+
+  // ── shell ─────────────────────────────────────────────────────────────────
+  function renderShell() {
+    if (has('nav')) fill('nav-slot', [P.nav('today')]);
+    if (has('asofBanner')) { var b = P.asofBanner(); if (b) fill('asof-slot', [b]); }
+    var lines = [
+      'Same document as the 08:15 email, same block order, same files — nothing here is recomputed in the browser.',
+      'Decision-support only, not financial advice. Nothing is ever traded automatically.'
+    ];
+    fill('foot', lines.map(function (t) { return el('div', { text: t }); }));
+  }
+
+  function renderAll() {
+    renderShell();
+    // Each block renders inside its own try. A page that loses one section to a bad field must still
+    // show the other six — a blank phone at 08:15 is worse than an honest gap.
+    [['nav', renderNav], ['action', renderAction], ['risk', renderRisk], ['changed', renderChanged],
+     ['movers', renderMovers], ['news', renderNews], ['pipe', renderPipeline]].forEach(function (r) {
+      try { r[1](); }
+      catch (e) {
+        try { fill(r[0], [el('div', { class: 'err', text: 'This block did not render: ' + (e && e.message ? e.message : String(e)) + ' — the others are unaffected.' })]); } catch (_) {}
+        if (g.console && console.error) console.error('today.html: ' + r[0] + ' failed', e);
+      }
+    });
+    if (has('hash')) { var h = P.hash(); if (h) { var t = document.getElementById(h.replace(/^#/, '')); if (t) t.scrollIntoView(); } }
+  }
+
+  (async function boot() {
+    var got = {};
+    if (has('loadAll')) got = (await P.loadAll(PUBLIC_FILES)) || {};
+    else {
+      var each = await Promise.all(PUBLIC_FILES.map(function (n) { return P.load(n); }));
+      PUBLIC_FILES.forEach(function (n, i) { got[n] = each[i]; });
+    }
+    // cache is keyed by bare filename; the prefix exists only so the gate can read the list
+    D = {}; PUBLIC_FILES.forEach(function (n) { D[n.replace(/^data\//, '')] = got[n]; });
+    FXH = await loadFxHistory();
+    await loadPrivate();
+    renderAll();
+    if (LOCKED) bootNotice('Locked: net worth, the one action and your holdings are decrypted in this '
+      + 'browser from .enc files. Every public block below is already rendered.', false);
+  })();
+})();
+</script>
+</body>
+</html>
