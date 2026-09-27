@@ -32,7 +32,9 @@ lines.forEach((ln, i) => {
   try { obj = new Function('return ' + lit)(); } catch (e) { throw new Error(`line ${i + 1}: cannot parse holding: ${e.message}`); }
   rows.push({ obj, line: i + 1 });
 });
-if (rows.length !== 59) throw new Error(`expected 59 holdings, parsed ${rows.length}`);
+// 60 as of 27 Sep 2026: id:60 added, AIA Invest Easy (AIA Global Equity Fund, Policy U081690688) —
+// a single-premium ILP, valued from its Fund Activity Statement, same manual-mark shape as ASTRAL.
+if (rows.length !== 60) throw new Error(`expected 60 holdings, parsed ${rows.length}`);
 
 // git blame → author date of the last change to that line (the honest as-of for a manual mark)
 function blameDate(lineNo) {
