@@ -1,66 +1,66 @@
 {
- "date": "2026-09-29T07:16:00+08:00",
- "coverage": "Tuesday 29 Sep 2026 ~07:02-07:16 SGT run, pre-Asia-open (SGX 09:00, HKEX 09:30). Latest COMPLETED session: US cash Mon 28 Sep close; HK/SG individual names current to Mon 28 Sep (index-level HSI/STI tickers lag to Fri 25 Sep in the data feed); JP fully consolidated only to Fri 25 Sep; KR (KOSPI) feed lagging to Wed 23 Sep even though KRX reopened and traded Mon 28 Sep post-Chuseok -- a data-consolidation lag, not a closure. Monday was a sharp risk-off day: S&P -0.77% to 7,683.69, Nasdaq -0.92%, VIX +8.07% to 16.07, while gold (GLD -3.94%) and silver (SLV -5.49%) crashed WITH equities instead of hedging them -- silver/gold miners hit even harder (GDX -5.36%, HL -6.49%). DATA-QUALITY CATCH THIS RUN: the automated price spine's Brent futures bar (-5.44% to $98.65) was a bad thin-quote/contract-roll artifact (only 140 contracts of volume vs 50,000+ normally); the news.json research agent independently found, and this run verified against CNBC/Bloomberg/TradingEconomics, that Brent actually ROSE Monday (+0.9% to $105.28, intraday high $108.83) after Trump rejected Iran's UNGA offer to reopen the Strait of Hormuz, with WTI also up (+0.2% to $92.60). That oil spike -- not a Brent/WTI divergence -- fed a hawkish-Fed real-yield shock (10Y near its highest since 2007, ~5.0-5.2%) that is the likely real trigger for Monday's equity/gold/silver selloff. model.json was hand-corrected in ~12 places to remove the false-divergence framing before publish; no other file's price claims were found to be in error. Refreshed via a 5-agent parallel research fleet: intel.json (congress roster rotated to 15 trades across 8 members; insiders reconfirmed with no new filings in the 14-day window -- SGX bot-challenge pages now blocking direct primary-source checks, flagged for future runs; signals refreshed with Sept sourcing), model.json (regime revised to a real-yield-driven risk-off read, riskOnProb 0.52->0.43, all 49 calls present, oil/XLE/USO narrative corrected post-hoc), market.json (Fear&Greed 37->34/Fear via a mirror source since CNN's API returned 403/451/418 all run; breadth confirmed genuinely narrow and falling in sympathy with price, weakest since June 2025; flows carried forward, no new weekly print), news.json (11 items, 7 from Monday, correctly sourced the Hormuz-rejection/real-yields causal chain and flagged the spine discrepancy itself), flows-investors.json (Korea and HK Southbound got genuinely fresh Monday data -- HK's 14-session buying streak broke; Singapore's market-wide aggregate remains >2 weeks stale, a real gap given it's the owner's largest exposure). track.json: today's 49-call snapshot appended (72 on file). No theme-radar section today -- Tuesday, not Monday.",
+ "date": "2026-10-01T07:35:00+08:00",
+ "coverage": "Thursday 1 Oct 2026 ~07:02-07:35 SGT run, pre-Asia-open (SGX 09:00, HKEX 09:30 -- note HKEX is closed today for National Day, and mainland China begins its Oct 1-7 Golden Week closure). One-session refresh off Wednesday 30 Sep US/HK/SG cash close, which closed out Q3 2026. Wednesday delivered a genuine disinflation surprise -- core PCE cooled to 3.0% y/y from 3.3% -- but the tape faded into the close anyway (S&P -0.25% to 7,651.54, Dow -0.86%, Nasdaq +0.24% the lone green major index, VIX +1.87% to 16.34) as traders looked past the good print to Friday's payrolls and a Fed still pricing ~65-69% odds of an Oct 27-28 hike; 10Y/30Y yields (5.29%/5.63%) hit fresh cycle highs despite the cooler inflation data. Gold/silver ETFs eased (GLD -0.54%, SLV -1.75%) even as front-month futures held firmer, a near-term ETF/futures gap rather than a thesis break. DATA-QUALITY CATCH THIS RUN: the flows-investors.json research agent caught and corrected a 10x unit-conversion error in its own relayed Hong Kong Southbound sub-research (a claimed 'Tencent +HK$14.07bn' was actually HK$1.407bn, a hundred-million-vs-billion misread) before publishing -- an example of the price/fact discipline working as intended. Refreshed via a parallel research fleet: intel.json (congress rebuilt to 15 trades across 12 distinct members including a Pelosi re-entry into mega-cap tech options and a Crenshaw Meta round-trip; insiders re-verified with no new 14-day filings; signals rewritten around a congress/13F/Reddit convergence read on MU/UBER/META/NVDA/GOOGL), model.json (regime read as 'cooling core inflation vs. still-hawkish rates into payrolls', riskOnProb 0.47, all 45 calls present including 5 rare-earth extras; rare-earth export-control truce noted as extended to 10 Jan 2027 via the Trump-Xi summit, not 10 Nov as previously tracked), market.json (Fear&Greed 32/Fear, breadth deteriorating -- only 3 of 11 sectors majority-above their 200-day MA -- even as the index itself was only modestly lower; ICI and BofA/EPFR weekly flow prints both landed for the week ended 23 Sep, diverging sharply), news.json (10 items, 6 within 24-48h, including the Brent-WTI spread blowout and the Trump-Xi rare-earth truce extension), flows-investors.json (Korea/HK/US got genuinely fresh prints; Japan/Singapore honestly carried forward as stale, with Hong Kong flagging that Stock Connect is fully dark 1-7 Oct for Golden Week). track.json: today's 45-call snapshot appended (74 on file). investors.json: not touched -- no new Trump disclosure found, and 2026 Q2 remains the newest complete 13F quarter (Q3 not due until 16 Nov 2026). No theme-radar section today -- Thursday, not Monday.",
  "tldr": [
-  "Monday was a genuine risk-off shock, not a mystery: Trump rejected Iran's Hormuz-reopening offer, oil spiked intraday then pared gains, and the resulting hawkish-Fed real-yield jump (10Y near its highest since 2007) dragged equities, gold, silver and even bitcoin down together -- gold/silver falling WITH stocks instead of hedging them is the standout, portfolio-relevant anomaly.",
-  "Silver/miner sleeve took the hardest hit of anything on the book: SLV -5.49%, GDX -5.36%, Hecla -6.49%, First Majestic -5.58% -- a real-yields-driven flush amplified by leveraged-long liquidation, not (per two independent checks) a confirmed CME margin-requirement hike.",
-  "Correct the record on oil: Brent and WTI both ROSE Monday (Brent +0.9% to $105.28, WTI +0.2% to $92.60) after the failed Hormuz talks -- there was no Brent/WTI divergence; the automated price feed had a bad thin-volume futures bar that a research agent's cross-check caught before publish.",
-  "Breadth broke to fresh multi-month lows in sympathy with Monday's decline (25.2% of S&P above its 50-day MA, McClellan at -35) -- a more internally consistent risk-off signal than recent sessions' index-near-highs-despite-narrow-breadth divergence.",
-  "Hong Kong Southbound flows broke a 14-session mainland buying streak on the very session global risk-off hit, a mild caution signal for the 0700/0981/1810 sleeve; Singapore's institutional-vs-retail read remains >2 weeks stale heading into the selloff, a genuine data gap on the owner's largest exposure.",
-  "Congress roster rotated to 15 fresh trades across 8 members; TSM stands out as the rare name where congressional buying and three top macro/hedge funds (Tepper, and formerly Loeb/Druckenmiller before their AVGO exit) line up bullish together."
+  "A genuinely good inflation print (core PCE 3.0% y/y vs 3.3% expected) got overridden by dollar strength and hawkish rate-path positioning: gold/silver ETFs fell anyway (GLD -0.54%, SLV -1.75%) and 10Y/30Y yields hit fresh cycle highs (5.29%/5.63%) -- Friday's payrolls (consensus ~85-90K vs August's 162K) is now the pivotal near-term catalyst for the whole book.",
+  "Don't read the -4.85% Brent print as an oil crash: it traded on only ~53 contracts, a thin-volume roll artifact, while the real signal (USO +1.61%, a genuine Brent-WTI spread blowout to ~$12/bbl on Trump's floated diesel-export restriction) points the other way.",
+  "China extended the rare-earth export-control truce to 10 January 2027 via the Trump-Xi summit (not 10 Nov as previously tracked) -- but MP Materials (+4.09%) keeps rallying on its own Pentagon/magnet-campus news regardless, a reminder the ex-China watchlist now has two distinct drivers, not one.",
+  "Market breadth kept deteriorating even as the index only eased modestly: only 3 of 11 S&P sectors are still majority-above their 200-day moving average, and the McClellan Oscillator worsened to -43 -- a narrow, weakening market under a calm-looking headline number.",
+  "Hong Kong's Southbound Stock Connect goes fully dark for a full week (1-7 Oct, Golden Week) right after a strong +HK$6.86bn net-buy session led by Tencent -- no read on mainland conviction in the 0700/0981/1810 sleeve until 8 October.",
+  "No research call currently clears the high-conviction bar this run (closest: GLD and MP Materials, both pUp3m 0.58) -- a fragile, genuinely two-sided setup rather than a resolved regime."
  ],
  "whatChanged": [
-  "intel.json: congress refreshed to 15 trades/8 members; insiders reconfirmed (no new 14-day filings, SGX sources now bot-blocked); signals re-sourced",
-  "model.json: regime -> real-yield-driven risk-off (riskOnProb 0.52->0.43); oil/XLE/USO narrative corrected post-publish-check to remove a false Brent/WTI divergence built on bad futures data; GLD/SLV near-term trimmed",
-  "market.json: Fear&Greed 37->34/Fear (mirror source, CNN API blocked); breadth confirmed genuinely narrow and falling in sympathy, weakest since June 2025; flows carried forward (no new weekly print)",
-  "news.json: 11 items refreshed, 7 dated Monday; correctly traced the Hormuz-rejection -> oil spike -> real-yields -> cross-asset selloff chain and self-flagged the price-spine discrepancy",
-  "flows-investors.json: Korea and HK Southbound refreshed with genuine Monday prints (HK streak broke); Japan/Singapore/China/US carried forward with honest staleness notes",
-  "track.json: today's 49-call snapshot appended (72 total on file)",
-  "investors.json: not touched this run (profiles updated Sun 27 Sep, within the weekly cadence; no material disclosure change found)"
+  "intel.json: congress rebuilt to 15 trades across 12 distinct members (Pelosi's INTC/UBER options re-entry, Crenshaw's META round-trip, Khanna, Rulli, Sessions, Hern, McClain Delaney, Franklin, Gottheimer, McGuire, Salazar, Pfluger); insiders re-verified with no new 14-day filings; signals rewritten around a congress/13F/Reddit convergence read (MU, UBER, META, NVDA, GOOGL)",
+  "model.json: regime framed as 'cooling core inflation vs. still-hawkish rates into payrolls' (riskOnProb 0.47); all 45 calls refreshed (40 required + 5 rare-earth extras); rare-earth truce expiry corrected to 10 Jan 2027",
+  "market.json: Fear&Greed 32/Fear; breadth deteriorating (only 3/11 sectors majority-above 200-DMA); flows show ICI vs BofA/EPFR diverging for the week ended 23 Sep",
+  "news.json: 10 items refreshed, 6 within the last 24-48h, including the PCE/dollar/gold divergence and the Brent-WTI spread story",
+  "flows-investors.json: Korea/HK/US refreshed with genuinely fresh prints (and a self-caught 10x HK unit-conversion error corrected before publish); Japan/Singapore honestly carried forward with staleness notes; Hong Kong flagged as fully dark for Stock Connect 1-7 Oct",
+  "track.json: today's 45-call snapshot appended (74 total on file)",
+  "investors.json: not touched this run -- no new Trump disclosure found; sectorConcentration correctly left at 2026 Q2 (Q3 13Fs not due until 16 Nov 2026)"
  ],
  "regime": {
-  "label": "Real-yield-driven risk-off: oil spike from the failed Hormuz talks pushed the 10Y near its highest since 2007, dragging equities, gold and silver down together",
-  "riskOn": 0.43,
-  "oneLiner": "Monday's selloff has a coherent, sourced cause (oil-spike-to-hawkish-Fed-to-higher-real-yields), not an unexplained cross-asset anomaly -- but that also means Wednesday's Core PCE and Friday's payrolls are now binary catalysts for the whole book, not just bonds."
+  "label": "Cooling core inflation vs. still-hawkish rates into payrolls",
+  "riskOn": 0.47,
+  "oneLiner": "A genuine core-PCE disinflation surprise was overridden by dollar strength and a still-hawkish Fed rate path, leaving yields at cycle highs and the tape thin-breadth fragile into Friday's payrolls."
  },
  "topNews": [
   {
-   "headline": "Trump rejects Iran's conditional offer to reopen the Strait of Hormuz; oil spikes, reversing the weekend's talk-optimism dip",
+   "headline": "August core PCE cools to 3.0% y/y (vs 3.3% expected); October rate-hike odds collapse from ~72% to ~35%",
    "impact": "mixed",
-   "actionable": "This failed-talks headline is the trigger for Monday's entire risk-off complex -- don't read the metals weakness as a safe-haven failure, it's a rates story downstream of this rejection."
+   "actionable": "The drop in October hike odds should ease the real-yields drag on the silver/miner sleeve, but December odds near 80% mean the position isn't out of the woods -- Friday's payrolls is the next binary catalyst."
   },
   {
-   "headline": "10-year Treasury yield hits ~5.22-5.24%, highest since 2007; Fed October hike odds top 70-75%",
+   "headline": "Gold and silver's PCE-day rally fizzles as the dollar rips higher despite cooler inflation",
    "impact": "bearish",
-   "actionable": "Real yields are the connective tissue behind Monday's simultaneous equity/gold/silver/crypto selloff -- Wednesday's core-PCE and Friday's payrolls become binary catalysts for the whole book, not just the bond sleeve."
+   "actionable": "The silver/miner sleeve is now trading off dollar strength as much as real yields, so Friday's payrolls matters for the dollar leg too, not just the rate-hike-odds leg."
   },
   {
-   "headline": "Gold sinks ~3.2%, silver ~4.3% as oil-driven hawkish-Fed bets overwhelm any safe-haven bid; miners fall harder",
-   "impact": "bearish",
-   "actionable": "Size the silver/miner sleeve for more two-way real-yield volatility into Wednesday's PCE and Friday's payrolls rather than treating this as a clean one-way safe-haven setup."
-  },
-  {
-   "headline": "City Developments plunges as much as 8.2% after unveiling S$5bn China/Japan investment push and S$6bn divestment plan",
+   "headline": "Brent-WTI spread blows out to widest since May on a Gulf export recovery plus a possible Trump diesel-export ban",
    "impact": "mixed",
-   "actionable": "Looks like a strategy/expectations reset rather than a fundamental guidance cut, and DBS/Citi sell-side stayed constructive -- worth revisiting once the divestment programme starts converting to confirmed sales."
+   "actionable": "A US-refining-policy story layered on a genuine Gulf-supply recovery, not a demand shock -- shouldn't be read as a fresh headwind for the inflation-hedge thesis."
   },
   {
-   "headline": "China's rare-earth export-control suspension nears 10 Nov cliff; $6.5tn of downstream output seen at risk under full reimposition",
-   "impact": "bullish",
-   "actionable": "Six weeks out with no extension signaled yet, the structural case for the rare-earth watchlist (MP, Lynas, JL MAG) keeps building."
+   "headline": "Trump-Xi summit extends the rare-earth export-control truce to January 10, 2027, but MP Materials keeps rallying on Pentagon/magnet-campus news, not the truce",
+   "impact": "mixed",
+   "actionable": "Worth distinguishing MP's own defense-demand fundamentals from the broader China-scarcity-premium trade when sizing the ex-China rare-earth watchlist."
+  },
+  {
+   "headline": "Hang Seng softens into Golden-Week-eve as Beijing's DeepSeek/Moonshot data-security probe keeps weighing on China AI names",
+   "impact": "bearish",
+   "actionable": "A second, homegrown risk factor for the 0700/0981/1810 sleeve on top of the US real-yields story, and mainland China's closure through Oct 7 means lower-liquidity, HK-only swings for the rest of the week."
   }
  ],
  "signals": [
-  "TSM: consider as the rare multi-source consensus pick -- congressional buying plus Tepper's macro fund line up bullish, in contrast to a split on AVGO where Loeb/Druckenmiller exited entirely.",
-  "GLD/SLV: watch near-term -- Monday's -3.94%/-5.49% crash looks positioning-driven off a real-yields shock, not a fundamentals break; 12m theses (CB buying, supply deficits) held largely intact in this run's revision.",
-  "USMV upgraded / MTUM downgraded this run: consider min-vol over momentum near-term given Monday's confirmed VIX spike (+8.07% to 16.07) is exactly the regime min-vol outperforms in.",
-  "PLTR: three separate oversight/smart-money signals (ethics scrutiny, a fresh Burry short, an ARK exit) turned cautious-to-bearish in the same two-week window while retail buzz has cooled -- worth watching for confirmation.",
-  "MU: a textbook divergence into Sept 30 earnings -- Burry pressing a fresh short while retail chatter peaks and Congress itself is split; the earnings print is the near-term resolution."
+  "No research call currently clears the high-conviction bar (pUp3m >=0.6 or <=0.4 at confidence >=0.55) -- the closest are GLD and MP Materials, both pUp3m 0.58 at confidence 0.50-0.55, consistent with a genuinely two-sided setup rather than a resolved regime.",
+  "Commodities tilted modest OW (+0.012) this run on the view that gold/silver's ETF pullback is a near-term consolidation rather than a thesis break, against Bonds' outright UW (-0.02) tilt on yields at cycle highs -- consider the relative positioning if rebalancing near-term.",
+  "MP Materials/USA Rare Earth: watch -- both carry a real government-backing tailwind (MP's $400M DoD stake, USAR's new $1.6B funding commitment) independent of the rare-earth truce now extended to 10 Jan 2027, a live re-escalation date worth diarizing.",
+  "MU/UBER/META/NVDA/GOOGL: watch as a group -- this run's signals scan found congress, 13F and Reddit-mention convergence across all five names, though NVDA shows a genuine split (Renaissance/Soros/ARK adding vs D1/Discovery/Third Point exiting).",
+  "SLV/GDX sleeve: the ETF-vs-futures gap (SLV -1.75% vs SI=F +0.07% on 30 Sep) is worth monitoring into Friday's payrolls -- a sustained futures-firm/ETF-weak divergence would be unusual and worth another look if it persists."
  ],
  "watch": [
-  "US Core PCE Price Index m/m -- Wed 30 Sep 20:30 SGT, forecast 0.3% (prev 0.2%) -- the week's key inflation print into an already-hawkish real-yield backdrop",
-  "US Non-Farm Payrolls -- Fri 2 Oct 20:30 SGT, forecast 90K (prev 162K, a sharp expected deceleration), unemployment forecast 4.1%",
-  "ISM Manufacturing PMI -- Thu 1 Oct 22:00 SGT, forecast 54.8 (prev 54.6)",
-  "RBA Cash Rate decision -- today Tue 29 Sep 12:30 SGT, forecast a hike to 4.60% (prev 4.35%) -- a reminder hawkish central-bank repricing isn't US-only this week"
+  "ISM Manufacturing PMI -- today Thu 1 Oct 22:00 SGT, forecast 54.8 (prev 54.6)",
+  "US Unemployment Claims -- today Thu 1 Oct 20:30 SGT, forecast 201K (prev 197K)",
+  "US Non-Farm Payrolls -- Fri 2 Oct 20:30 SGT, forecast ~85-90K (prev 162K, a sharp expected deceleration; BofA sees just 60K), unemployment forecast 4.1%",
+  "China rare-earth export-control truce -- now extended to 10 Jan 2027 (was tracked as 10 Nov 2026); the next live re-escalation date for the whole rare-earth basket"
  ]
 }
