@@ -1,67 +1,67 @@
 {
- "updated": "2026-10-01",
- "retrievedOn": "2026-10-01",
- "note": "Thursday run, retrieved 2026-10-01 ~07:02 SGT, with an added independent-verification pass after a purported 'coordinator' summary of the day's background research arrived mid-run containing figures that did not hold up against primary sources when checked directly: Hong Kong Southbound stock-level amounts were inflated 10x (claimed 'Tencent +HK$14.07bn' / 'SMIC -HK$9.71bn' vs the real HK$1.407bn / HK$0.971bn -- a 亿-to-billion unit error), the claimed China margin breakdown did not match any real source, and the claimed new Singapore institutional weekly report could not be traced to any genuine Sep/Oct 2026 publication (the closest-matching headline resolved to an unrelated, older March report). All of those unverified figures were discarded; every market below was re-derived from directly fetched or independently cross-confirmed sources. Genuinely fresh, verified data this run: South Korea (30 Sep close -- KOSPI -0.48% to 6,838.04, foreign -₩2,274.7bn / domestic institutions -₩858.6bn / retail +₩1,454.4bn, foreign selling's 4th straight session), Hong Kong (30 Sep Southbound net +HK$6.864bn -- Tencent and CNOOC bought, SMIC sold -- the final session before Stock Connect enters a full 1-7 Oct Golden Week suspension), China A-shares (29 Sep two-way margin balance ¥2,608.99bn, -¥1.704bn day-over-day -- note this run's source reports the broader financing+securities-lending balance including the Beijing Stock Exchange, methodologically broader than prior runs' SSE+SZSE financing-only figure, so the day-over-day change is not directly comparable across runs), and United States (both ICI's week-ended-23-Sep print and BofA/EPFR's 'China in a Bull Shop' week-ended-23-Sep Flow Show landed, showing a retail-proxy inflow diverging from an institutional-style equity outflow). Japan and Singapore are carried forward this run: JPX's week-ended-26-Sep print is not yet published as of this check (expected ~15:30 JST / ~14:30 SGT later today, 1 Oct, per its standard 4-business-day release cadence), and no newer SGX Research market-wide institutional-vs-retail aggregate could be independently verified. Proxies (China margin/new-account-openings, US ICI/EPFR) remain flagged isProxy:true throughout and are never treated as direct net-buy/sell measurements.",
+ "updated": "2026-10-02",
+ "retrievedOn": "2026-10-02",
+ "note": "Friday run, retrieved 2026-10-02 ~07:02 SGT. Genuinely fresh, verified data this run: Japan (JPX's week-ended-26-Sep print -- more precisely week ended 24-25 Sep 2026, '9月第4週', a 2-session week due to Japan's late-September holidays -- finally published 1 Oct and was cross-confirmed across two independent outlets (Kabutan/株探 and Yahoo Finance Japan): foreign -¥93.0bn (3rd straight week selling, decelerating sharply from -¥294.3bn), trust banks -¥367.3bn (press-reported as a 7th straight week of selling, a streak-count jump from the '4th straight week' reported for the prior week in this file -- flagged, not silently reconciled), individuals -¥8.6bn (2nd straight week selling), dealers +¥652.0bn (3rd straight week buying); the business-corporation/buyback figure for this specific week could not be located in any source checked and is NOT refreshed -- the prior week's +¥182.4bn is carried as stale pending confirmation), and South Korea (1 Oct close -- KOSPI +1.95% to 6,971.35 on a Micron-earnings-driven semiconductor rally, reversing a weak open; closing prints: foreign -₩336.6bn (5th straight session of selling but far smaller than 30 Sep's -₩2,274.7bn), domestic institutions +₩417.1bn (flipped to buying, chasing the chip rally), retail -₩1,711.5bn (flipped hard to selling, taking profits into the rally -- a sharp reversal from 30 Sep's +₩1,454.4bn)). Hong Kong, China, Singapore and the US are carried forward this run, each re-checked rather than silently restamped: Hong Kong -- reconfirmed the Stock Connect Golden Week blackout (1-7 Oct, Southbound+Northbound both suspended, resuming 8 Oct) remains in force; HK's own market was closed only 1 Oct and trades 2/5/6/7 Oct, but with no Stock Connect flows at all, so no new Southbound figure exists or was fabricated -- the 30 Sep print remains the latest. China A-shares -- mainland markets (SSE/SZSE/BSE) are now confirmed closed for Golden Week through 7 Oct, so the 29 Sep two-way margin balance (¥2,608.99bn, -¥1.704bn) remains the last confirmed pre-holiday reading; a nominal '30 Sep margin balance' figure surfaced in a search this run but traced to a recycled 2024-vintage article (byline 2024-10-08) and was discarded, the same recycled-article pattern flagged for Japan in a prior run. Separately, this run cross-confirmed (via sina.cn/sohu, both dated 30 Sep) that the narrower SSE+SZSE financing-only balance for the SAME 29 Sep date (¥2,571.47bn, -¥20.48bn) -- previously flagged in this file as an unverified/discarded figure -- is in fact real, just a differently-scoped metric (excludes BSE and securities-lending) than the broader two-way figure used as this file's headline number; retained only as a footnote, not substituted in. Singapore -- re-searched sgx.com's data-reports page directly, sginvestors.io, and general web; no newer market-wide institutional-vs-retail weekly aggregate exists, so the 4-16 Sep read remains the latest (now 16 days / ~2.3 weeks stale). United States -- re-checked both ICI (ici.org) and BofA's Flow Show archive (finvaulta.com); the week-ended-23-Sep prints remain the latest for both (BofA's archive still lists 25-Sep as its newest edition; ICI's next release, covering the week ended 30 Sep, is not due until the following Wednesday, 7 Oct, per its standard ~1-week lag) -- both figures carried forward unchanged, still flagged isProxy:true. Proxies (China margin/new-account-openings, US ICI/EPFR) remain flagged isProxy:true throughout and are never treated as direct net-buy/sell measurements.",
  "markets": [
   {
    "market": "Japan (TSE)",
    "available": true,
    "cadence": "weekly, published by JPX ~4 business days after week close (typically Thursday, ~15:30 JST); trade press (Kabutan/Nikkei) recaps same day",
-   "latestPeriod": "week ended 19 September 2026 (\"9月第3週\", trading Wed 16 - Fri 18-19 Sep) -- full investor-type breakdown, carried forward, no newer print available",
-   "asOf": "2026-09-26",
+   "latestPeriod": "week ended 24-25 September 2026 (\"9月第4週\", a 2-session week -- Thu 24 & Fri 25 Sep only -- due to Japan's late-September public holidays) -- full print published by JPX 1 Oct 2026 and cross-confirmed via two independent outlets; business-corporation/buyback line NOT refreshed this run (see dataGaps)",
+   "asOf": "2026-10-01",
    "flows": [
     {
      "investorType": "Foreign institutional",
      "direction": "outflow",
-     "amount": "-¥294.3bn",
+     "amount": "-¥93.0bn",
      "unit": "JPY bn",
-     "period": "week ended 18-19 Sep 2026",
+     "period": "week ended 24-25 Sep 2026",
      "isProxy": false,
-     "note": "TSE+Nagoya cash equities; 2nd consecutive week of net selling (prior week -¥303.6bn), attributed in press coverage to profit-taking as the Nikkei average held in a high range (+277pt/+0.6% over the week)."
+     "note": "TSE+Nagoya cash equities; 3rd consecutive week of net selling, decelerating sharply from -¥294.3bn the prior week (18-19 Sep). Published by JPX 1 Oct 2026, 4 business days after week close, per standard cadence."
     },
     {
      "investorType": "Trust banks",
      "direction": "outflow",
-     "amount": "-¥531.0bn",
+     "amount": "-¥367.3bn",
      "unit": "JPY bn",
-     "period": "week ended 19 Sep 2026",
+     "period": "week ended 24-25 Sep 2026",
      "isProxy": false,
-     "note": "4th consecutive week of net selling; proxy for domestic pension/institutional trading desks."
+     "note": "Press (Kabutan) reported this as a 7th consecutive week of net selling -- a jump from the '4th consecutive week' reported for the prior week (19 Sep) in this file. That streak-count discrepancy is flagged, not silently reconciled; it may reflect differing streak-counting conventions across press recaps rather than an error in the ¥367.3bn net-selling amount itself, which is independently corroborated across two outlets. Proxy for domestic pension/institutional trading desks."
     },
     {
      "investorType": "Retail (individuals)",
      "direction": "outflow",
-     "amount": "-¥32.6bn",
+     "amount": "-¥8.6bn",
      "unit": "JPY bn",
-     "period": "week ended 19 Sep 2026",
+     "period": "week ended 24-25 Sep 2026",
      "isProxy": false,
-     "note": "2nd consecutive week of net selling -- a reversal from the +¥449.1bn net buying reported for week ended 11 Sep; retail did not fully absorb foreign/trust-bank supply this week."
+     "note": "2nd consecutive week of net selling per press, but a much smaller net sale than the prior week's -¥32.6bn (cash +¥0.9bn, margin -¥9.6bn per the detailed breakdown)."
     },
     {
      "investorType": "Business corporations (buybacks)",
      "direction": "inflow",
-     "amount": "+¥182.4bn",
+     "amount": "+¥182.4bn (STALE -- week ended 19 Sep 2026 figure, not refreshed)",
      "unit": "JPY bn",
-     "period": "week ended 19 Sep 2026",
+     "period": "week ended 19 Sep 2026 (carried forward; no week-ended-24-25-Sep figure located)",
      "isProxy": false,
-     "note": "25th consecutive week of net buying, down from +¥207.7bn the prior week -- ongoing corporate buyback support."
+     "note": "No business-corporation/buyback figure for the new week ended 24-25 Sep 2026 was found in any source checked this run (Kabutan/Yahoo coverage of the new print covered foreign, trust banks, individuals and dealers, but not this category). Carried forward from the prior week rather than fabricated; treat as stale pending confirmation."
     },
     {
      "investorType": "Securities companies (dealers)",
      "direction": "inflow",
-     "amount": "+¥754.0bn",
+     "amount": "+¥652.0bn",
      "unit": "JPY bn",
-     "period": "week ended 19 Sep 2026",
+     "period": "week ended 24-25 Sep 2026",
      "isProxy": false,
-     "note": "Large continued net buying by dealer desks, the biggest single buyer category that week."
+     "note": "3rd consecutive week of net buying, down from +¥754.0bn the prior week -- dealer desks remained the largest single buyer category."
     }
    ],
-   "trend": "Unchanged this run -- the full JPX weekly investor-type breakdown for week ended 19 Sep 2026 remains the latest available: foreign investors extended selling to a 2nd straight week (-¥294.3bn) and trust banks to a 4th straight week (-¥531.0bn), while retail also turned net seller (-¥32.6bn), a reversal from the prior week's retail buying. Corporate buybacks (+¥182.4bn, 25th straight week) and securities-dealer buying (+¥754.0bn) were the main offsetting bid.",
-   "interpretation": "Foreign, trust-bank AND retail investors were all net sellers simultaneously in the latest available week, with only corporate buybacks and dealer desks providing support -- a broader-based distribution pattern than a 'foreign sells, retail buys' read. With no fresher print to confirm whether this posture held into the recent cross-asset selloff, treat this as a stale but directionally cautious signal for North Asia tech / Japan-linked exposure.",
+   "trend": "The week-ended-26-Sep JPX print this file was waiting on has now published (1 Oct 2026), covering the holiday-shortened week ended 24-25 Sep 2026 ('9月第4週'). Foreign selling continued for a 3rd straight week but decelerated sharply (-¥93.0bn vs -¥294.3bn), trust banks extended selling (-¥367.3bn, press-labelled a 7th straight week), and individuals' selling shrank to near-flat (-¥8.6bn vs -¥32.6bn). Dealers remained the largest buyer (+¥652.0bn, 3rd straight week), down from +¥754.0bn. The Nikkei 225 rose 1,345pt over the week to 66,364. The corporate-buyback figure for this week could not be located and is carried forward stale.",
+   "interpretation": "The latest confirmed week shows selling pressure broadly easing across foreign, trust-bank and retail categories versus the prior week, with dealer buying still the main support -- a less uniformly bearish setup than the prior 'foreign+trust-bank+retail all selling at once' read, though trust-bank selling's reported streak length (7 weeks per press) suggests that category's distribution has been more persistent than this file's prior-week entries conveyed. Treat the still-missing buyback figure as a genuine gap in the picture for the owner's Japan-linked exposure, not a signal either way.",
    "sources": [
-    "https://kabutan.jp/news/marketnews/?b=n202509261149",
-    "https://kabutan.jp/news/marketnews/?b=n202509261237",
-    "https://finance.yahoo.co.jp/news/detail/29981985598341be78fa1ae76e241d0963fb6dc1",
+    "https://kabutan.jp/news/marketnews/?b=n202610011198",
+    "https://s.kabutan.jp/news/n202610011198/",
+    "https://finance.yahoo.co.jp/news/detail/8a95d2e302698b0ee07b3a1845ad8bf99db0c8cb",
     "https://www.jpx.co.jp/markets/statistics-equities/investor-type/index.html"
    ],
    "dataGaps": [
@@ -69,55 +69,58 @@
     "Weekly cadence only -- no daily investor-type split published",
     "CARRIED FORWARD this run (29 Sep check): no newer JPX print exists yet; re-checked and confirmed the week-ended-19-Sep data remains current.",
     "CARRIED FORWARD again this run (30 Sep check): a purported week-ended-26-Sep print (foreign -¥559.1bn) was traced to a Nikkei article whose actual byline date was 2025-10-02 -- a year-old article recycled under an identical '9月第4週' week-label -- and discarded as a false lead.",
-    "CARRIED FORWARD again this run (1 Oct 2026 check, 07:xx SGT): JPX's week-ended-26-Sep ('9月第4週') print was searched for directly (JPX site, Kabutan, general web) and was not yet available in any source. JPX's own publication schedule (4th business day after week close, ~15:30 JST) means it is expected to post later today -- re-check after ~14:30-15:00 SGT. No recycled or fabricated data was substituted for it."
+    "CARRIED FORWARD again this run (1 Oct 2026 check, 07:xx SGT): JPX's week-ended-26-Sep ('9月第4週') print was searched for directly and was not yet available in any source as of that check.",
+    "REFRESHED this run (2 Oct 2026 check): the week-ended-24-25-Sep ('9月第4週') print published 1 Oct 2026 and was located and cross-confirmed across Kabutan and Yahoo Finance Japan for 4 of 5 categories (foreign, trust banks, individuals, dealers). The business-corporation/buyback figure for this specific week was NOT found in any source checked and remains carried forward stale from week ended 19 Sep -- do not read the '+¥182.4bn' line as current.",
+    "The trust-bank '7th consecutive week of net selling' streak count reported by press for week ended 24-25 Sep is inconsistent with the '4th consecutive week' this file reported for week ended 19 Sep (a 1-week gap should only add 1 to the streak, not 3) -- flagged as an unresolved discrepancy in press streak-counting rather than corrected or discarded, since the underlying ¥367.3bn net-selling amount is independently corroborated."
    ]
   },
   {
    "market": "South Korea (KOSPI)",
    "available": true,
    "cadence": "daily, published same evening after close via KRX/press",
-   "latestPeriod": "30 September 2026 (single session; 3rd session after the 4-day Chuseok closure)",
-   "asOf": "2026-09-30",
+   "latestPeriod": "1 October 2026 (single session; 5th consecutive session of foreign net selling, but a sharp intraday reversal in institutional/retail positioning on a Micron-earnings-driven chip rally)",
+   "asOf": "2026-10-01",
    "flows": [
     {
      "investorType": "Foreign institutional",
      "direction": "outflow",
-     "amount": "-₩2,274.7bn",
+     "amount": "-₩336.6bn",
      "unit": "KRW bn",
-     "period": "30 Sep 2026",
+     "period": "1 Oct 2026",
      "isProxy": false,
-     "note": "4th consecutive session of net selling; the scale escalated sharply from 29 Sep's -₩324.3bn to over ₩2.2 trillion, concentrated in large-cap IT/semiconductor names per press coverage."
+     "note": "5th consecutive session of net selling, but a sharp deceleration from 30 Sep's -₩2,274.7bn. Fairly consistent through the session (an early read put it at -₩320.5bn), unlike domestic institutions/retail which swung hard intraday. Largest single-stock sells included SK Hynix (~-₩214.5bn) and Samsung Electronics (~-₩202.7bn), notable given both were the session's rally leaders."
     },
     {
      "investorType": "Domestic institutional",
-     "direction": "outflow",
-     "amount": "-₩858.6bn",
+     "direction": "inflow",
+     "amount": "+₩417.1bn",
      "unit": "KRW bn",
-     "period": "30 Sep 2026",
+     "period": "1 Oct 2026",
      "isProxy": false,
-     "note": "Flipped back to net selling alongside foreigners, a reversal from 29 Sep's +₩128.4bn net buying -- a 'twin-sell' session."
+     "note": "Flipped to net buying from 30 Sep's -₩858.6bn, and from an early-session read of -₩105.6bn net selling -- institutions swung to buying as Micron's strong earnings lifted Korean semiconductor sentiment intraday."
     },
     {
      "investorType": "Retail (individuals)",
-     "direction": "inflow",
-     "amount": "+₩1,454.4bn",
+     "direction": "outflow",
+     "amount": "-₩1,711.5bn",
      "unit": "KRW bn",
-     "period": "30 Sep 2026",
+     "period": "1 Oct 2026",
      "isProxy": false,
-     "note": "Absorbed the bulk of combined foreign/institutional selling via dip-buying, but not enough to prevent the index closing lower; KOSDAQ diverged, closing +0.72% at 855.91 even as KOSPI fell."
+     "note": "Swung hard to net selling -- a sharp reversal from 30 Sep's +₩1,454.4bn net buying and from an early-session read of +₩421.9bn net buying -- as individuals took profits into the rally rather than chasing it, per closing-session press coverage ('개인이 외국인 매도를 소화한 장세' / 'retail absorbed foreign selling' framing used for the broader session, though the net print was itself a sell)."
     }
    ],
-   "trend": "KOSPI fell -0.48% (-32.77pt) to 6,838.04 on 30 Sep, snapping the prior session's stabilization. Foreign investors extended net selling to a 4th consecutive session and sharply escalated the scale (-₩2,274.7bn vs -₩324.3bn on 29 Sep), and domestic institutions flipped back to net selling too (-₩858.6bn) -- a 'twin-sell' session -- leaving retail (+₩1,454.4bn) as the sole net buyer, absorbing only part of the combined outflow.",
-   "interpretation": "A twin foreign-and-institutional sell session, only partly offset by retail dip-buying, is a more clearly risk-off signal than the prior session's calm -- foreign selling has now run 4 straight days and accelerated rather than faded. For the owner's North Asia tech exposure (Samsung/SK Hynix-linked names), this reads as continued distribution by the price-setting investor base rather than a turn.",
+   "trend": "KOSPI rallied +1.95% (+133.31pt) to 6,971.35 on 1 Oct, reversing a weak open and recovering the 6,900 level for the first time in 4 sessions, driven by Micron's strong earnings lifting Samsung Electronics/SK Hynix and broader semiconductor sentiment (KOSDAQ surged +4.48%). Foreign investors extended net selling to a 5th consecutive session but at a far smaller scale (-₩336.6bn vs -₩2,274.7bn on 30 Sep). Domestic institutions flipped to net buying (+₩417.1bn), chasing the chip rally, while retail flipped the other way to heavy net selling (-₩1,711.5bn), banking gains into the rally -- a composition reversal versus 30 Sep's 'twin institutional sell, retail sole buyer' session.",
+   "interpretation": "The buyer/seller composition inverted versus 30 Sep: institutions, not retail, are now the ones buying into the Micron-driven chip rally, while retail took profits. With foreign selling continuing (albeit at a much reduced scale) even as the index rallied on the back of the two stocks foreigners sold most (Samsung, SK Hynix), this reads as a domestically-institution-led, catalyst-specific bounce rather than a clean 'foreign capitulation ends' signal. For the owner's North Asia tech exposure, follow-through (or a retail-driven fade) over the next 1-2 sessions would be the next read to watch.",
    "sources": [
-    "https://www.newspim.com/news/view/20260930001065",
-    "https://www.newspim.com/news/view/20260930001091",
-    "https://www.businesskorea.co.kr/news/articleView.html?idxno=277953"
+    "https://www.hankyung.com/article/2026100166196",
+    "https://www.newspim.com/news/view/20261001001167",
+    "https://firebat.co.kr/stock-blog/20261001-close",
+    "https://bloomingbit.io/feed/news/121368"
    ],
    "dataGaps": [
     "KRX daily investor-type data does not separately break out retail vs. proprietary/pension components within 'institutions'",
     "Sourced via same-day Korean financial press recapping KRX's own data, not a direct krx.co.kr fetch; the figures are the exchange's real daily net buy/sell totals, not a proxy",
-    "Minor cross-source variance observed (one outlet's early write-up cited foreign selling at -₩2.52tn / institutions -₩768bn vs the confirmed closing totals used here at -₩2,274.7bn / -₩858.6bn from the most detailed closing-market recap); the closing-report figures were used as the more authoritative final numbers"
+    "REFRESHED this run (2 Oct 2026 check, data for 1 Oct 2026 close): a materially large intraday swing was observed and treated as genuine, not a data error -- an early/mid-session read (reflecting a weak -0.70% open before the Micron-driven rally) had institutions -₩105.6bn / retail +₩421.9bn / foreign -₩320.5bn, while the final closing print used above (institutions +₩417.1bn / retail -₩1,711.5bn / foreign -₩336.6bn) reflects the full-day reversal as the index swung from -0.70% to +1.95%; the closing totals are used as the authoritative final numbers, consistent with this file's practice of preferring closing-market recaps over early intraday snapshots"
    ]
   },
   {
@@ -148,7 +151,8 @@
     "No official institutional-vs-retail split exists for Hong Kong or Southbound flows -- only aggregate/stock-level net buy-sell by Connect leg is disclosed",
     "Stock Connect (Southbound AND Northbound) is fully suspended 1-7 October 2026 for the mainland Golden Week; Hong Kong's own market is closed only on 1 Oct and trades 2, 5, 6 and 7 Oct without any Stock Connect flows; Southbound data will not resume until 8 October 2026 -- a genuine one-week data gap, not a carry-forward artifact",
     "Final Shanghai/Shenzhen Connect-leg split for the 30 Sep close was not found from sources checked this run; only an intraday partial-day split and the final aggregate total were located",
-    "An unverified relayed figure claiming Tencent +HK$14.07bn and SMIC -HK$9.71bn was checked against primary Chinese-language sources this run and found to be a 10x unit-conversion error (亿 misread as billion rather than hundred-million); the correct HK$1.407bn / -HK$0.971bn figures are used above"
+    "An unverified relayed figure claiming Tencent +HK$14.07bn and SMIC -HK$9.71bn was checked against primary Chinese-language sources this run and found to be a 10x unit-conversion error (亿 misread as billion rather than hundred-million); the correct HK$1.407bn / -HK$0.971bn figures are used above",
+    "RECONFIRMED this run (2 Oct 2026 check): re-verified via independent sources that the Southbound/Northbound Stock Connect blackout is in force for 1-7 Oct 2026 and HK's own exchange trades normally on 2, 5, 6 and 7 Oct without it, resuming 8 Oct. No Southbound figure exists for 2 Oct and none has been fabricated; the 30 Sep print above remains the latest genuine Southbound data point. HK index-level performance on 2 Oct itself was not located from a reliable dated source this run and is deliberately omitted rather than guessed at."
    ]
   },
   {
@@ -191,7 +195,9 @@
     "Northbound (foreign) real-time daily net-buy disclosure via Stock Connect remains suspended since August 2024, unchanged this run",
     "Mainland markets (SSE/SZSE/BSE) are closed 1-7 October 2026 for Golden Week, reopening 8 October -- no margin-balance or flow data of any kind will print during that window",
     "No 30 Sep margin-balance figure was found as of this check (1 Oct 2026 SGT morning); its normal T+1 publication would fall on 1 Oct itself, a market holiday, so it may not surface until after the break",
-    "An unverified relayed figure claiming a different margin balance (~¥2,571.47bn) and SSE/SZSE deltas was checked against primary Chinese-language sources this run and did not match any locatable report; discarded in favor of the ¥2,608.99bn / -¥1.704bn figures directly confirmed above"
+    "An unverified relayed figure claiming a different margin balance (~¥2,571.47bn) and SSE/SZSE deltas was checked against primary Chinese-language sources this run and did not match any locatable report; discarded in favor of the ¥2,608.99bn / -¥1.704bn figures directly confirmed above",
+    "RECONFIRMED this run (2 Oct 2026 check): Golden Week closure (1-7 Oct) is now actively underway -- confirmed no SSE/SZSE/BSE trading or margin data on 1 or 2 Oct, reopening 8 Oct. CORRECTION/clarification to the prior bullet above: the ~¥2,571.47bn figure previously flagged as 'unverified' was re-encountered this run and is in fact real -- it is sina.cn/sohu's reported SSE+SZSE financing-only ('融资余额') balance for the SAME 29 Sep date as this file's headline figure, just a narrower metric (excludes BSE and securities-lending) than the ¥2,608.99bn two-way balance used above; both can be true simultaneously for 29 Sep and are not in conflict. It is NOT used to replace the headline figure, only noted as a cross-check.",
+    "A nominal '30 Sep margin balance' figure (¥1,429.502bn financing-only, +¥45.798bn day-over-day) surfaced in a search this run but traced to an article with a 2024-10-08 byline (nbd.com.cn) describing 30 Sep 2024, not 2026 -- a recycled old article matching the exact pattern already flagged for Japan in a prior run. Discarded as a false lead; no 30 Sep 2026 margin figure was substituted for it."
    ]
   },
   {
@@ -240,7 +246,8 @@
     "No new market-wide weekly institutional-vs-retail aggregate found since the 4-16 Sep read despite multiple checks across several runs (sgx.com market-updates listing 403'd on direct fetch again, sginvestors.io fund-flow tracker pages returned empty content on both the summary and weekly-statistics pages) -- that aggregate figure is now over two weeks stale",
     "The 25 Sep 3Q26 counter-level reversal piece remains accessible only via secondary press citation (businesstoday.com.my); the original SGX.com article could not be located/fetched (403 on sgx.com directly)",
     "No further breakdown of the institutional side (foreign vs domestic)",
-    "CARRIED FORWARD again this run (1 Oct 2026 check): re-searched sgx.com, sginvestors.io and general web/press; no genuine newer market-wide aggregate was found. One search hit had a headline resembling a fresh institutional weekly report, but tracing it to its actual source showed it described an unrelated, older (March) reporting period recycled under a similar-looking headline -- discarded as a false lead, not used. The market-wide weekly aggregate is now roughly two and a half weeks stale."
+    "CARRIED FORWARD again this run (1 Oct 2026 check): re-searched sgx.com, sginvestors.io and general web/press; no genuine newer market-wide aggregate was found. One search hit had a headline resembling a fresh institutional weekly report, but tracing it to its actual source showed it described an unrelated, older (March) reporting period recycled under a similar-looking headline -- discarded as a false lead, not used. The market-wide weekly aggregate is now roughly two and a half weeks stale.",
+    "CARRIED FORWARD again this run (2 Oct 2026 check): directly fetched sgx.com/securities/data-reports and re-searched sginvestors.io and general web; no new market-wide institutional-vs-retail weekly aggregate was found or listed. The 4-16 Sep read is now 16 days (~2.3 weeks) stale -- this is the owner's largest exposure, so this staleness is being reported honestly rather than restamped as current."
    ]
   },
   {
@@ -281,7 +288,8 @@
     "ICI's weekly release runs on a ~1-week lag from week-end (week ended 23 Sep was released 30 Sep)",
     "The BofA/EPFR 'China in a Bull Shop' Flow Show note itself sits behind an institutional paywall; figures here are drawn from a research aggregator (finvaulta.com) directly reporting the note's headline numbers plus independent news-search corroboration of the cash/gold/crypto figures, not a direct PDF fetch of the original BofA document",
     "Named retail-flow trackers (Vanda Research VandaTrack, JPMorgan retail flow desk notes) were checked in a prior run but yielded no dated, citable figure -- not included to avoid presenting an undated/generic description as current data",
-    "This run (1 Oct 2026 check) newly confirmed both prints via ici.org and independent cross-searches for the BofA note; prior runs' 'carried forward, pre-selloff baseline' caveat no longer applies now that current-week data exists for both series"
+    "This run (1 Oct 2026 check) newly confirmed both prints via ici.org and independent cross-searches for the BofA note; prior runs' 'carried forward, pre-selloff baseline' caveat no longer applies now that current-week data exists for both series",
+    "CARRIED FORWARD this run (2 Oct 2026 check): re-checked both series for a newer week-ended-30-Sep print. BofA's Flow Show archive (finvaulta.com) still lists the 25-Sep-published 'China in a Bull Shop' edition (week ended 23 Sep) as its latest -- no newer edition found. ICI's next release, covering the week ended 30 Sep, is not due until the following Wednesday (7 Oct 2026) per its standard ~1-week-lag cadence, so no newer ICI print could exist yet. Both figures below remain the latest genuinely available and are carried forward unchanged, still flagged isProxy:true."
    ]
   }
  ]

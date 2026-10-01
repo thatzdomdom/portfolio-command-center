@@ -1,132 +1,133 @@
 {
- "updated": "2026-10-01",
- "note": "Thursday 1 Oct 2026 07:1x SGT run. Latest completed US cash session = Wednesday 30 Sep close: S&P500 -0.25% to 7,651.54, VIX +1.87% to 16.34 (per data/.prices.json). Fear & Greed's headline stayed in the low-30s 'Fear' band: CNN's own site and production.dataviz.cnn.io remain blocked to direct fetch (HTTP 451/418); aistockselection.com's Sep-30-dated pull (self-averaging ~31.6, rounds to 32) was used as the internally-consistent source, corroborated by continued incremental deterioration in Momentum/Strength/Breadth sub-scores; a third mirror (thetradingrange.com) showed an inconsistent 68 with no date stamp and was discarded as unreliable. Breadth kept deteriorating even as the index itself was only modestly lower: %>200-day MA fell to 40.3% (from 42.9% Tuesday), %>50-day MA to 21.0% (from 24.6%), McClellan Oscillator worsened to -43 (11th percentile), and only 3 of 11 sectors (Technology, Energy, Healthcare) still have a majority of members above their 200-day MA -- a genuinely narrow, weakening market. Flows: the latest confirmed weekly print remains the BofA Flow Show for the week ended 23 Sep (published 25 Sep) and ICI for the week ended 23 Sep (published ~30 Sep, confirmed live from ici.org) -- both show a sharp reversal from risk-on: US equity funds -$21.1bn (BofA) / ICI combined long-term+ETF flows still positive overall (+$20.14bn, driven by a +$39.81bn ETF issuance offsetting a -$19.67bn long-term mutual fund outflow), while fixed income extended its inflow streak to 74 straight weeks. Next weekly prints (week ended 30 Sep) are due ~2 Oct (BofA) and ~7 Oct (ICI).",
+ "updated": "2026-10-02",
+ "note": "Friday 2 Oct 2026 ~07:02 SGT run. Latest completed US cash session = Thursday 1 Oct close: S&P500 +0.19% to 7,666.45, Nasdaq +0.04% to 26,871.60, Dow +0.04% to 50,926.56, Russell2000 +0.35% to 2,806.63, VIX +0.31% to 16.39 (per established price spine). Fear & Greed ticked down to the high-20s/low-30s 'Fear' band: CNN's own site and production.dataviz.cnn.io are STILL blocked to direct fetch (HTTP 451 and 418 respectively, re-checked this run). aistockselection.com's Oct-1-dated pull reads 31 'Fear', internally consistent with the prior day's methodology-matched 32 (Sep 30) and with continued incremental deterioration in Momentum/Strength/Breadth sub-scores despite the index itself being up on the day. Crypto F&G (alternative.me) fetched live this run: 74 'Greed', up from 71 the prior day. Breadth kept narrowing even as the index closed modestly higher on an afternoon Treasury-yield reprieve: %>200-day MA fell further to ~40.6% (from 43.1% Wed), %>50-day MA to ~20.9% (from 24.7%), McClellan Oscillator printed -41.4 (marginal improvement off Wednesday's -43 but still deeply oversold, single-source), NYSE decliners still led advancers ~1.55:1 despite the up day, and 52-week lows swamped highs (S&P 3 new highs vs 40 new lows; Nasdaq 24 vs 236). Sector-level >200dma breadth has no fresher Thursday-specific table and is carried forward from Wed 30 Sep. Flows: re-checked finvaulta.com's Flow Show series page and ici.org's combined_flows release -- no edition newer than the BofA Flow Show for week ended 23 Sep (published 25 Sep) or ICI for week ended 23 Sep (published 30 Sep) has landed yet; BofA's week-ended-30-Sep edition (expected ~2 Oct) and ICI's (expected ~7 Oct) are both still pending, so the flows block below is carried forward unchanged from the prior run with the lag explicitly labeled.",
  "fearGreed": {
-  "value": 32,
+  "value": 31,
   "rating": "Fear",
-  "asOf": "2026-09-30 (Wed US close). CNN's own site and production.dataviz.cnn.io remain blocked to direct fetch (HTTP 451 and 418 respectively). Headline and 7-component breakdown taken from aistockselection.com's Sep-30-dated pull, which self-averages to ~31.6 (rounds to 32) -- internally consistent with the prior day's methodology-matched 34 reading and with Wednesday's incremental deterioration (S&P -0.25%, VIX +1.87% to 16.34). A third mirror (thetradingrange.com) showed 68 'approaching extreme greed' with no date stamp and no internal consistency check possible -- discarded as stale/unreliable, consistent with this mirror's known caching issues.",
-  "prevClose": 34,
-  "prev1w": 35,
-  "prev1m": 54,
-  "prev1y": 51,
-  "cryptoValue": 71,
+  "asOf": "2026-10-01 (Thu US close). CNN's own site and production.dataviz.cnn.io remain blocked to direct fetch (HTTP 451 and 418 respectively, re-confirmed this run). Headline and 7-component breakdown taken from aistockselection.com's Oct-1-dated pull, which reads 31 'Fear' -- internally consistent with the prior day's methodology-matched 32 reading and with continued deterioration in Momentum/Strength/Breadth sub-scores even though the S&P closed +0.19% and VIX only +0.31% on the day. Crypto reading fetched live from alternative.me this run (no caching issue this time).",
+  "prevClose": 32,
+  "prev1w": 36,
+  "prev1m": 45,
+  "prev1y": 52,
+  "cryptoValue": 74,
   "cryptoRating": "Greed",
   "components": [
    {
     "name": "Market Momentum",
-    "reading": "S&P 500 vs its 125-day average; aistockselection.com dated 30 Sep reads 29 (down from 31 Tuesday)",
+    "reading": "S&P 500 vs its 125-day average; aistockselection.com dated 1 Oct reads 26 (down from 29 Wednesday)",
     "signal": "fear"
    },
    {
     "name": "Stock Price Strength",
-    "reading": "52-week highs still badly outnumbered by lows (S&P500 10 highs vs 20 lows, Nasdaq 44 vs 165 on Wed 30 Sep); aistockselection.com reads 0 (extreme fear)",
+    "reading": "52-week highs still badly outnumbered by lows (S&P500 3 highs vs 40 lows, Nasdaq 24 vs 236 on Thu 1 Oct, per Schwab market-update coverage) -- worse than Wednesday; aistockselection.com reads 0 (extreme fear)",
     "signal": "fear"
    },
    {
     "name": "Stock Price Breadth",
-    "reading": "McClellan Oscillator -43 (11th percentile, thetrading.tools) and NYSE decliners led advancers ~1.66:1 Wednesday; aistockselection.com reads 0 (extreme fear)",
+    "reading": "McClellan Oscillator -41.4 (thecantillonreport.substack.com daily brief, Thu 1 Oct; single-source, marginal improvement off Wednesday's -43) and NYSE decliners still led advancers ~1.55:1 Thursday despite the index closing higher; aistockselection.com reads 0 (extreme fear)",
     "signal": "fear"
    },
    {
     "name": "Put/Call Options",
-    "reading": "aistockselection.com dated 30 Sep reads 34 (down from 40 Tuesday), not independently observed this run",
+    "reading": "aistockselection.com dated 1 Oct reads 37 (up from 34 Wednesday), not independently observed this run",
     "signal": "fear"
    },
    {
     "name": "Market Volatility",
-    "reading": "VIX +1.87% d/d to 16.34, still a historically low absolute level; aistockselection.com reads 50 (neutral), unchanged",
+    "reading": "VIX +0.31% d/d to 16.39, still a historically low absolute level; aistockselection.com reads 50 (neutral), unchanged",
     "signal": "neutral"
    },
    {
     "name": "Safe-Haven Demand",
-    "reading": "Stocks vs bonds over 20 trading days; aistockselection.com reads 52 (neutral), unchanged from Tuesday",
+    "reading": "Stocks vs bonds over 20 trading days; aistockselection.com reads 46 (neutral), down from 52 Wednesday",
     "signal": "neutral"
    },
    {
     "name": "Junk Bond Demand",
-    "reading": "Spread between junk and investment-grade yields; aistockselection.com reads 56 (greed), down from 64 Tuesday, not independently observed this run",
-    "signal": "greed"
+    "reading": "Spread between junk and investment-grade yields; aistockselection.com reads 55 (neutral, right at the greed boundary), down from 56 Wednesday, not independently observed this run",
+    "signal": "neutral"
    }
   ],
   "sources": [
    "https://www.cnn.com/markets/fear-and-greed",
    "https://production.dataviz.cnn.io/index/fearandgreed/graphdata",
    "https://www.aistockselection.com/en/fear-greed-today/",
-   "https://www.thetradingrange.com/indicator/fear-greed",
    "https://alternative.me/crypto/fear-and-greed-index/",
-   "https://api.alternative.me/fng/"
+   "https://api.alternative.me/fng/",
+   "https://thecantillonreport.substack.com/p/daily-brief-october-1-2026"
   ]
  },
  "breadth": {
-  "asOf": "2026-09-30",
+  "asOf": "2026-10-01",
   "metrics": [
    {
     "label": "S&P 500 close",
-    "value": "7,651.54 (-0.25%)",
-    "signal": "bearish",
+    "value": "7,666.45 (+0.19%)",
+    "signal": "bullish",
     "pct": null
    },
    {
     "label": "VIX",
-    "value": "16.34 (+1.87% d/d)",
+    "value": "16.39 (+0.31% d/d)",
     "signal": "neutral",
     "pct": null
    },
    {
     "label": "% of S&P 500 above 200-day MA",
-    "value": "40.3% (thetrading.tools, dated 30 Sep) -- down from 42.9% Tuesday; a second aggregator put the same-day figure at ~43%, so treat as 40-43% range, still well below the ~67-71% seen in early Sep",
+    "value": "~40.6% (thecantillonreport.substack.com daily brief, dated 1 Oct) -- down from 43.1% Wednesday; a Yahoo Finance fragility piece independently put the 'now' figure at 40.55%, corroborating; still well below the ~73-75% seen in mid-August",
     "signal": "bearish",
-    "pct": 40
+    "pct": 41
    },
    {
     "label": "% of S&P 500 above 50-day MA",
-    "value": "21.0% (thetrading.tools, dated 30 Sep) -- down from 24.6% Tuesday, continued erosion",
+    "value": "~20.9% (thecantillonreport.substack.com, dated 1 Oct) -- down from 24.7% Wednesday, continued erosion despite the index closing higher",
     "signal": "bearish",
     "pct": 21
    },
    {
     "label": "NYSE advancing vs declining issues",
-    "value": "Decliners led advancers roughly 1.66:1 on Wednesday (951 advancing vs 1,234 declining, actively-traded issues) -- less extreme than Tuesday's 3.55:1 but still lopsided",
+    "value": "Decliners still led advancers roughly 1.55:1 on Thursday (per Schwab market-update coverage) -- a touch less extreme than Wednesday's 1.66:1 but still lopsided on a day the index rose",
     "signal": "bearish",
     "pct": null
    },
    {
     "label": "52-week new highs minus new lows",
-    "value": "Wednesday 30 Sep: S&P 500 10 new highs vs 20 new lows (net -10); Nasdaq 44 vs 165 (net -121); broader full-exchange counts showed NYSE new lows beating highs 262 to 23 and Nasdaq 294 to 84 -- smaller net deficit than Tuesday on the index-level count but still deeply negative on the full-exchange count",
+    "value": "Thursday 1 Oct: S&P 500 3 new highs vs 40 new lows (net -37); Nasdaq 24 vs 236 (net -212) -- a wider net deficit than Wednesday's index-level count, consistent with narrowing participation",
     "signal": "bearish",
     "pct": null
    },
    {
     "label": "McClellan Oscillator",
-    "value": "-43 (11th percentile, thetrading.tools) -- worse than -37 Tuesday, deeply oversold",
+    "value": "-41.4 (thecantillonreport.substack.com, dated 1 Oct; single-source read) -- a marginal improvement off Wednesday's -43 but still deeply oversold",
     "signal": "bearish",
     "pct": null
    },
    {
     "label": "Advance-decline line trend",
-    "value": "No fresher Wednesday-specific confirmation located; cumulative A-D line and %NYSE>200-day MA remain characterized (per prior Goldman Sachs commentary, carried forward) as at/near their lowest since June 2025",
+    "value": "No fresher Thursday-specific confirmation located; cumulative A-D line and %NYSE>200-day MA remain characterized (carried forward from prior commentary) as at/near their lowest since mid-2025",
     "signal": "bearish",
     "pct": null
    },
    {
     "label": "S&P sectors above 200-day MA / leadership breadth",
-    "value": "Only 3 of 11 sectors have a majority of members above their 200-day MA as of 30 Sep: Technology 67%, Energy 63%, Healthcare 61% above; Financials 45%, Industrials 41%, Utilities just 8% -- a sharp narrowing from August readings (e.g. Financials 89%, Energy 81%, Utilities 32%)",
+    "value": "No fresher Thursday-specific sector table located this run; carried forward from 30 Sep: only 3 of 11 sectors majority-above their 200-day MA -- Technology 67%, Energy 63%, Healthcare 61%; Financials 45%, Industrials 41%, Utilities just 8%",
     "signal": "bearish",
     "pct": null
    }
   ],
-  "note": "Breadth kept deteriorating on Wednesday even as the index itself was only modestly lower: %>200-day MA fell to 40.3% (from 42.9%), %>50-day MA to 21.0% (from 24.6%), and the McClellan Oscillator worsened to -43 -- with only 3 of 11 sectors still majority-above their 200-day MA, this looks like a genuinely narrow, weakening market rather than a healthy broad rally.",
+  "note": "Breadth kept narrowing on Thursday even as the index closed modestly higher (+0.19%) on an afternoon Treasury-yield reprieve: %>200-day MA fell further to ~40.6% (from 43.1%), %>50-day MA to ~20.9% (from 24.7%), decliners still outpaced advancers ~1.55:1, and 52-week lows swamped highs (S&P 40 vs 3; Nasdaq 236 vs 24) -- a continuation of the narrow, fragile-breadth regime flagged in Yahoo Finance's 'market concentration is creating fragility' piece (breadth down from ~73-75% in mid-August to ~40% now).",
   "sources": [
-   "https://www.thetrading.tools/market-breadth",
+   "https://thecantillonreport.substack.com/p/daily-brief-october-1-2026",
+   "https://finance.yahoo.com/markets/article/market-concentration-is-creating-fragility-only-60-of-sp-500-stocks-are-above-their-200-day-average-135336513.html",
+   "https://www.schwab.com/learn/story/stock-market-update-open",
+   "https://www.bbntimes.com/companies/s-p-500-rises-to-7-666-45-as-treasury-yields-retreat-from-2002-highs-and-accenture-soars",
    "https://en.macromicro.me/collections/20868/global-sentiment-indicator/98990/sp500-sectors-200ma-breadth",
-   "https://www.cnbc.com/2026/09/29/stock-market-today-live-updates.html",
-   "https://investrade.com/market-review-september-30-2026/",
    "https://www.barchart.com/stocks/quotes/$S5TH"
   ]
  },
  "flows": {
-  "asOf": "2026-10-01",
-  "period": "Week ended Wed 23 Sep 2026 (BofA Flow Show, published 25 Sep, and ICI, published ~30 Sep) -- still the most recent published weekly prints; next editions (week ended 30 Sep) due ~2 Oct (BofA) and ~7 Oct (ICI). Regional splits for Europe/EM/Japan below remain dated to the week ended 16 Sep as no newer country-level breakdown was located this run.",
+  "asOf": "2026-10-02",
+  "period": "Week ended Wed 23 Sep 2026 (BofA Flow Show, published 25 Sep, and ICI, published 30 Sep) -- re-checked this run (finvaulta.com's Flow Show series page and ici.org's combined_flows release) and confirmed still the most recent published weekly prints; no edition newer than 25 Sep (BofA) or 30 Sep (ICI) has landed. Next editions (week ended 30 Sep) remain due ~2 Oct (BofA, not yet out as of this check) and ~7 Oct (ICI). Regional splits for Europe/EM/Japan below remain dated to the week ended 16 Sep as no newer country-level breakdown was located this run either.",
   "narrative": "The latest confirmed BofA Flow Show (week ended 23 Sep) showed a sharp reversal from risk-on: US equity funds lost $21.1bn and global equity funds lost $10.2bn (vs +$63.8bn the week before), while fixed income extended its inflow streak to 74 straight weeks (+$17.3bn) and the Bull & Bear Indicator sat at 9.3, still deep in the contrarian 'Sell' zone. ICI's own weekly print for the same week (confirmed live from ici.org) tells a more nuanced story: combined long-term fund + ETF flows were actually +$20.14bn, as a +$39.81bn ETF net issuance more than offset a -$19.67bn long-term mutual fund outflow -- both trackers agree flows reversed sharply from the prior week, but ICI's ETF-inclusive combined figure is less negative than BofA's fund-flow-only read. Gold's picture is muddier: global gold ETFs are on an 8-week, ~$20bn inflow streak through August, but SPDR Gold Shares (GLD) itself saw a $603m weekly redemption around week ended 12 Sep that was largely a fee-driven rotation into lower-cost GLDM/IAU/IAUM rather than an exit from gold overall.",
   "regions": [
    {
