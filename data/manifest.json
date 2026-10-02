@@ -1,6 +1,6 @@
 {
   "sgtDate": "2026-10-02",
-  "generatedAt": "2026-10-01T23:19:55.620Z",
+  "generatedAt": "2026-10-02T07:51:23.434Z",
   "files": {
     "news.json": {
       "asOf": "2026-10-02",
@@ -110,7 +110,7 @@
       "source": "owner"
     },
     "policy.json": {
-      "asOf": "2026-09-20",
+      "asOf": "2026-10-02",
       "generatedAt": null,
       "cadence": "manual",
       "count": null,
@@ -146,7 +146,7 @@
     },
     "oneaction.json": {
       "asOf": "2026-10-02",
-      "generatedAt": "2026-10-01T23:02:32.248Z",
+      "generatedAt": "2026-10-02T00:15:17.196Z",
       "cadence": "daily",
       "count": 1,
       "source": "one-action.js (count = 1 when an action is open)",
@@ -187,6 +187,14 @@
       "cadence": "weekly",
       "count": 2,
       "source": "themes.js (SEC EDGAR full-text search, keyless; GitHub Actions, 06:20 SGT Monday; count = seeded terms)"
+    },
+    "drawdown.json": {
+      "asOf": "2026-10-02",
+      "generatedAt": "2026-10-02T07:34:48.836Z",
+      "cadence": "daily",
+      "count": 38,
+      "source": "drawdown.js (peak drawdown per line and per scope from completed closes on each instrument’s own exchange calendar; count = priced positions; asOf = the run date, because the newest bar differs per exchange and every figure carries its own inside the file)",
+      "published": "drawdown.enc"
     }
   }
 }

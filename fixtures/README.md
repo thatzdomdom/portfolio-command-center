@@ -71,3 +71,53 @@ Stored filings: `fixtures/data/13f/` holds five public EDGAR files for `19-13f` 
 Baupost 2026 Q2 cover pages and information tables, and Pershing Square's 13F-NT that names CIK 2026053.
 They were copied from what 13f-scan.js fetched on 13 Sep 2026; no fixture ever fetches. The runner loads
 only top-level `NN-*.js`, so the folder is never mistaken for a fixture.
+
+No stored input at all: `22-drawdown` (phase 9, 2 Oct 2026) needs none, and that is the point. The incident
+it replays is an email another assistant sent calling a 4.2% Xiaomi day a "BREACH" of a -3% rule this book
+does not have — a 1.42-sigma move worth 4.47bp of net worth. Those four figures (`vol60 46.8`, `-4.2%`,
+`106.34bp`, the fixed `-3%`) are **FROZEN as constants at the top of the fixture**, never read from
+`data/drawdown.json`, and the contrast case (`-3%` on VICOM's `vol60 11` = 4.33 sigma) with them. The
+arithmetic runs against `scripts/drawdown.js`'s exported pure helpers — `dailySigma`, `peakDrawdown`,
+`bandOf`, `lastTwoBars` — which touch no file and no network.
+
+Everything the fixture COUNTS, it counts over a **synthetic `data/drawdown.json` it writes itself**, whose
+two positions are named `FX22BIG` (106.34bp, -58.04% off peak → alerts) and `FX22TINY` (2.91bp, -54.2% off
+peak → silent, the materiality gate) so they can never be mistaken for a book line. It clears the sandbox's
+`family:'risk'` rows before each run, so every count is a count of THAT run and not of the log's history —
+**this is deliberately the opposite of what makes `20-hkex` and `21-themes` red**, which assert absolute
+counts over the sandbox's copy of the live, daily-drifting `data/alerts.json`. A fixture that goes red
+because a scheduled job ran on time is a fixture nobody trusts.
+
+Against the LIVE `data/drawdown.json` it asserts only **invariants and relationships**, never counts: every
+event has a unique id and a reason; every `thesis` event is at or above `policy.drawdown.thesis.minNavBp`;
+every `anomaly` event carries a sigma; no position has a `day` without a `bar.on`; `usedOfTolerancePct`
+reconciles to `drawdownPct / tolerancePct` for both scopes; and at least one line past the first thesis band
+but under the gate exists with **no** event, which is the only way to show the gate is doing work rather than
+sitting decoratively in `policy.json`. Whether the live file still matches the emailed figures is printed in
+the fixture's note line, never failed.
+
+The wiring it holds down, in order: the bootstrap cohort collapsing into ONE `Log` summary with no per-event
+rows; **the carried-bootstrap trap** — `drawdown.js` writes `bootstrap: !prev`, so the second run has
+`bootstrap:false` while the carried events still read `bootstrap:true`, and keying on the top-level flag alone
+would fire Notables about falls months old; per-event rows resuming with their documented severities (margin
+always Notable, thesis Notable at band ≥ 40, regime Notable only at band ≥ 80); a band NOT re-alerting on an
+unchanged second run; a band re-alerting when it WORSENS, with the shallower row left untouched because
+`alerts.json` is append-only; every `validate-all` PHASE 9 failure (a thesis event under the gate, an anomaly
+with no sigma, a `day` with no bar date, a scan 4 days stale → "DEAD, not quiet", `data/drawdown.json`
+tracked by git); the daily brief block leading with the three scopes, carrying net worth's short-window
+caveat, never disappearing on a quiet day, and never sitting above THE ONE ACTION; the manifest entry; and
+`'risk'` in `inbox.html`'s `FAM` array with its chip label (read from the repo, since the runner copies only
+`scripts/`, `common.js`, `index.html`, `data/` and `.gitignore` into the sandbox).
+
+It also writes a `git` stub into the sandbox's PATH that exits 69 with Apple's Xcode-licence message, to prove
+the phase-9 plaintext guard FAILS rather than reporting success from an empty stdout. The phase-1 guard beside
+it checks only `spawnSync`'s `error` and not the exit STATUS, so under the same failure it still passes — that
+is recorded as a **KNOWN GAP** row (`validate-all/plaintext-exit-status`), never silently accepted, and never
+"fixed" by this fixture loosening an unrelated assertion.
+
+Last, the governing constraint, scanned across every surface the phase writes: `policy.json`'s
+`regime.notRules` records P&L-triggered de-grossing (return/drawdown 0.67 vs 0.80) and a volatility ceiling as
+TESTED AND HARMFUL in this book, so no risk row and no brief line may ask for a position to be cut, reduced or
+de-risked because it fell. The only actions the family may request are REPAY (margin, sized by `one-action.js`)
+and a written NOTE (thesis), and `policy.drawdown.purpose` is quoted verbatim rather than paraphrased —
+a paraphrase is how "information" becomes "consider reducing" three edits later.

@@ -1,11 +1,10 @@
 {
  "checkedOn": "2026-10-02",
- "at": "2026-10-01T23:19:54.867Z",
+ "at": "2026-10-02T08:08:15.535Z",
  "problems": [],
  "warnings": [
   "prices: skipped reconciliation for low-trust series (BZ=F) — the spine flags these as rolled/thin; quote the ETF proxy instead",
-  "manifest.json: sgtDate 2026-10-01 ≠ today 2026-10-02 (publish has not run yet today)",
-  "book.html: 956 lines — the house rule is one file under ~900; split or trim"
+  "book.html: 983 lines — the house rule is one file under ~900; split or trim"
  ],
  "passed": [
   "news: 11 items, newest today (latest completed session 2026-10-01)",
@@ -20,22 +19,23 @@
   "prices: 1/1 asserted prices reconcile against the spine",
   "book: 60 holdings match index.html exactly",
   "git: no sensitive plaintext tracked",
+  "manifest: 27 files, sgtDate today",
   "signals: last scan 2026-09-30 · 683 Form 4 lines · 2669 facts retained",
-  "alerts: 623 in the log · 329 Notable",
+  "alerts: 624 in the log · 329 Notable",
   "technicals: 66 instruments · gate ON 17 / OFF 47 · as of 2026-10-01",
   "targets (shadow): 4/38 eligible · top cluster GDX+SILJ+SLVP+XAG 64% of risk",
-  "today.html: no off-origin fetch/script/style/font/image (872 lines)",
+  "today.html: no off-origin fetch/script/style/font/image (900 lines)",
   "today.html: 33 element id(s), all unique",
   "today.html: every class=\"big\" figure has a stamp near it",
   "today.html: innerHTML used, none of it near a data identifier",
-  "today.html: 15 data file(s) referenced, all published or .enc",
-  "today.html: 7 blocks, matching the email's 16 section heading(s) in order",
-  "book.html: no off-origin fetch/script/style/font/image (956 lines)",
+  "today.html: 16 data file(s) referenced, all published or .enc",
+  "today.html: 7 blocks, matching the email's 17 section heading(s) in order",
+  "book.html: no off-origin fetch/script/style/font/image (983 lines)",
   "book.html: 18 element id(s), all unique",
   "book.html: every class=\"big\" figure has a stamp near it",
   "book.html: innerHTML used, none of it near a data identifier",
-  "book.html: 10 data file(s) referenced, all published or .enc",
-  "inbox.html: no off-origin fetch/script/style/font/image (636 lines)",
+  "book.html: 11 data file(s) referenced, all published or .enc",
+  "inbox.html: no off-origin fetch/script/style/font/image (644 lines)",
   "inbox.html: 14 element id(s), all unique",
   "inbox.html: innerHTML used, none of it near a data identifier",
   "inbox.html: 5 data file(s) referenced, all published or .enc",
@@ -49,6 +49,8 @@
   "hkex: last scan 2026-10-01 (1d ago) · 3 code(s) · 17 notice(s) retained · newest filed 2026-09-25",
   "hkex: all 3 HK book line(s) covered (0700, 0981, 1810)",
   "themes: last checked 2026-09-28 (4d ago) · 2 term(s) · 2 history row(s) · 21 EFTS request(s)",
-  "themes: all 2 term(s) internally consistent — stage on the ladder, entry window only at Priced and not crowded, no Priced without 3 priced names, no quarter at the paging ceiling"
+  "themes: all 2 term(s) internally consistent — stage on the ladder, entry window only at Priced and not crowded, no Priced without 3 priced names, no quarter at the paging ceiling",
+  "drawdown: data/drawdown.json is not tracked by git (checked, exit 0) — only drawdown.enc ships",
+  "drawdown: checked 2026-10-02 (today) · net worth -0.63% off peak (4.64% of 13.5% tolerance, 21 session(s) only) · risk sleeve -17.7% off peak (70.82% of 25%) · levered silver -46.71% off peak, leverage 1.676x vs 1.4x, stressed call 26.7% away, survivability FAIL · 38 position(s), 13 retained state(s), all 25bp-gated and bar-stamped"
  ]
 }

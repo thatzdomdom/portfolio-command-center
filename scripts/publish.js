@@ -35,7 +35,7 @@ const LEDGER = path.join(ROOT, 'data', '.publish-history.ndjson');
 // Plaintext files that must NEVER be tracked or staged. Balances, replies, the action text, the
 // local ledgers and the cursor files. Only the .enc envelopes of book/valuation/journal/oneaction
 // may ship. Same list as validate-all.js's plaintext check and .gitignore.
-const PRIVATE = ['data/book.json', 'data/valuation.json', 'data/.prices-2y.json', 'data/.credentials.json',
+const PRIVATE = ['data/book.json', 'data/valuation.json', 'data/drawdown.json', 'data/.prices-2y.json', 'data/.credentials.json',
   'data/journal.json', 'data/journal.ndjson', 'data/oneaction.json', 'data/.oneaction-history.ndjson',
   'data/.state-history.ndjson', 'data/.publish-history.ndjson', 'data/.tickers.json', 'data/.cutover.json',
   'data/.last-brief-at', 'data/.last-brief-date'];
@@ -67,7 +67,12 @@ const ALLOW = ['data/news.json', 'data/model.json', 'data/market.json', 'data/br
   // (themes.yml, 06:20 SGT Monday) and only pulled here. today.html and book.html both fetch it, so
   // without this line the pages 404 on Pages and render as a quiet week while alerts.json ships the
   // theme rows built from it — a file that exists on this Mac and nowhere else.
-  'data/themes.json'];
+  'data/themes.json',
+  // 2 Oct 2026: the drawdown monitor. The PLAINTEXT is in PRIVATE above (navSGD + a valueSGD per
+  // position); only this envelope ships, and today.html/book.html decrypt it client-side like
+  // valuation.enc. Without this line the pages 404 and render as "no drawdown data" while the risk
+  // rows built from it ship inside alerts.json with nothing behind them.
+  'data/drawdown.enc'];
 
 // ── pure guard helpers (exported; unit-tested with node -e, never by running the pipeline) ──
 const HOLDING_LINE = /^[-+]\s*\{id:\s*\d+,/;

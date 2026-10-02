@@ -462,6 +462,162 @@ const out = []; const push = a => { if (existing.has(a.id)) return; if (a.event 
       + (nth.offLadder ? ` · ${nth.offLadder} history row(s) name a stage that is not on the ladder (${RUNG}) — the superseded shape of the file, not alerted` : '')
       + ` · ${(TH.themes || []).length} theme(s) (scan checked ${(TH.scan && TH.scan.checkedAt) || 'never'})`;
   }
+  // ── PHASE 9: the drawdown monitor (2 Oct 2026) ────────────────────────────
+  // data/drawdown.json is written by scripts/drawdown.js from COMPLETED closes — each instrument on
+  // its own exchange calendar — immediately before this file runs. It stores facts and band
+  // crossings and makes no judgment; this block only judges them, against policy.drawdown. Five
+  // decisions, each one a way this feed could have become the thing it was built to replace:
+  //
+  //  1. NO ROW HERE MAY ASK FOR A TRIM, EVER. policy.json regime.notRules records two things this
+  //     book TESTED AND REJECTED: "P&L-triggered de-grossing (tested: harmful, return/drawdown 0.67
+  //     vs 0.80)" and "volatility ceiling (tested: harmful)". Selling into a drawdown is the one
+  //     response the owner's own backtest measured as destructive, so the only actions a row may
+  //     request are REPAY (margin — and one-action.js, not this file, sizes it) or a written NOTE
+  //     (thesis). policy.drawdown.purpose is QUOTED on every row rather than paraphrased, because a
+  //     paraphrase is how "information" turns into "consider reducing" three edits from now.
+  //  2. A FIRST READING IS NOT NEWS, AND THE EVENT'S OWN FLAG IS WHAT SAYS SO. drawdown.js marks
+  //     every event of a bootstrap run `bootstrap: true`. Those states are months old — Xiaomi
+  //     passed 40% below its peak on a 2025 bar — so they collapse into ONE Log summary row and
+  //     produce no per-event rows at all. That is the rule the 13F backfill and the theme radar
+  //     both learned the hard way. The gate is the EVENT's flag and not only drawdown.json's
+  //     top-level `bootstrap`: that top-level field is `!prev`, so it is already false on the
+  //     second run while the carried events are still bootstrap readings. Keying on it alone would
+  //     fire thirteen Notables about nothing on the morning after the first one.
+  //  3. SEVERITY IS BY SCOPE, NOT BY SIZE OF FALL. margin is the only scope where a price move
+  //     compels a response, so it is always Notable. regime at band 80 and thesis at band 40 are
+  //     Notable; the shallower bands are Log. An anomaly carries drawdown.js's own tier, which
+  //     already required sigma AND materiality to BOTH bind (policy.drawdown.anomaly.bothMustBind).
+  //  4. THE ids ARE drawdown.json's. They are stable by construction and already deduped there —
+  //     the band is in the id, so re-crossing 40% after recovering to 30% is the same fact and
+  //     cannot alert twice. This block never invents one.
+  //  5. TAGS COME FROM THE BOOK, NOT FROM tagOf() — the phase-7 lesson. tagOf's map deliberately
+  //     drops .HK/.SI/.AX symbols, so asking it about 0700 would answer 'market-wide' about a name
+  //     that is 75bp of this NAV. Every drawdown position IS a book position by construction, so
+  //     the yf symbols are read from book.json and tagOf is the fallback for the US lines.
+  //
+  // Every figure in a row is one drawdown.json carries, and every one of them wears the bar date it
+  // came from. No drawdown.json (or no policy.drawdown) → nothing, silently.
+  const DD = J('drawdown.json'), PD = policy.drawdown;
+  const nrisk = { rows: 0, notable: 0, held: 0, boot: 0 };
+  let riskLog = null;
+  if (DD && PD) {
+    const ddHeld = new Map();
+    book.holdings.forEach(h => { if (h.yf) ddHeld.set(String(h.yf).toUpperCase(), 'in-book'); });
+    const riskTag = yf => (yf && ddHeld.get(String(yf).toUpperCase())) || tagOf(yf);
+    const PURPOSE = PD.purpose ? `policy.drawdown.purpose, quoted: “${PD.purpose}”` : null;
+    const r2 = x => x == null || !Number.isFinite(Number(x)) ? '?' : String(+Number(x).toFixed(2));
+    const asOf = String(DD.asOf || today).slice(0, 10);
+    const SC = DD.scopes || {};
+    const NW = SC.netWorth || null, RS = SC.riskSleeve || null, LV = SC.levered || null;
+    // The two portfolio-level sentences every risk row is read against. Both carry their own
+    // as-of, and the net-worth one carries its window: 21 sessions is not a max drawdown.
+    const sleeveLine = RS ? `risk sleeve ${r2(RS.drawdownPct)}% below its peak (${RS.peak && RS.peak.on}) — ${r2(RS.usedOfTolerancePct)}% of the ${r2(RS.tolerancePct)}% tolerance, on ${RS.historySessions} session(s) from ${RS.historyFrom}` : null;
+    const marginLine = LV ? `levered silver ${r2(LV.fromPeakPct)}% below its peak (${LV.peakOn}), leverage ${LV.leverage}x against a signed ceiling of ${LV.ceiling}x, stressed call ${r2(LV.distanceToCallPctStressed)}% away, survivability ${LV.survivability && LV.survivability.pass === false ? 'FAIL' : 'pass'} · price ${LV.priceAsOf}${LV.priceTrust === 'low' ? ' (low-trust)' : ''}` : null;
+    const nwLine = NW ? `net worth ${r2(NW.drawdownPct)}% below its peak (${NW.peak && NW.peak.on}) — ${r2(NW.usedOfTolerancePct)}% of the ${r2(NW.tolerancePct)}% tolerance, over ${NW.historySessions} session(s) from ${NW.historyFrom}, which is NOT a 1-year or max drawdown` : null;
+    const events = (DD.events || []).filter(e => e && e.id && e.reason);
+    const boot = events.filter(e => e.bootstrap === true);
+    const live = events.filter(e => e.bootstrap !== true);
+    // One summary row for the whole bootstrap cohort, keyed to the date it was FIRST recorded —
+    // not to today — so it dedupes for the rest of the retention window instead of reprinting
+    // every morning. On a genuine first run the two dates are the same day.
+    if (boot.length) {
+      const cohort = boot.map(e => String(e.firstSeen || '')).filter(Boolean).sort()[0] || asOf;
+      const id = `risk:bootstrap:${cohort}`;
+      const byReason = ['thesis', 'anomaly', 'regime', 'margin']
+        .map(k => ({ k, n: boot.filter(e => e.reason === k).length })).filter(x => x.n);
+      const worst = boot.filter(e => e.reason === 'thesis')
+        .sort((a, b) => (a.fromPeakPct || 0) - (b.fromPeakPct || 0)).slice(0, 3);
+      if (!existing.has(id)) {
+        push({ id, date: cohort, severity: 'Log', family: 'risk', ticker: null, issuer: 'drawdown monitor',
+          reason: 'bootstrap', bootstrap: true, scope: 'portfolio',
+          tags: ['in-book', 'risk', 'bootstrap', 'first-reading'],
+          headline: `drawdown monitor · first reading of ${boot.length} standing state(s) · nothing here crossed today`,
+          detail: [
+            `THESE ARE FIRST READINGS OF STATES THAT ALREADY EXISTED, NOT TODAY'S MOVES. ${boot.length} event(s) were recorded on the monitor's first run (${cohort}): ${byReason.map(x => `${x.n} ${x.k}`).join(', ')}. Every one of them had already crossed its band before the monitor existed — Xiaomi passed 40% below its peak on a 2025 bar — so none of them is news and none gets a line of its own.`,
+            sleeveLine, marginLine, nwLine,
+            worst.length ? `furthest below peak: ${worst.map(e => `${e.t} ${r2(e.fromPeakPct)}% (peak ${e.peakOn}, ${r2(e.navBp)}bp of NAV, close ${e.barOn})`).join('; ')}` : null,
+            DD.bootstrapNote ? `drawdown.json's own note, quoted: “${DD.bootstrapNote}”` : null,
+            `from here each of these bands is silent unless it WORSENS, and a recovery lowers it with no row at all (policy.drawdown.bandsNotStates). Per-event rows resume on the next run.`,
+            `every figure is a COMPLETED close on the instrument's own exchange calendar · drawdown.json asOf ${asOf}, scan checked ${(DD.scan && DD.scan.checkedAt) || 'never'}`,
+            PURPOSE,
+          ].filter(Boolean).join(' · '),
+          url: null, clearsWhen: 'read' });
+        nrisk.rows++; nrisk.boot = boot.length;
+      }
+    }
+    // Per-event rows. On a true bootstrap run there are none at all; otherwise only the events that
+    // are NOT bootstrap readings, because a carried bootstrap event is the same non-news tomorrow.
+    for (const e of (DD.bootstrap === true ? [] : live)) {
+      if (existing.has(e.id)) { nrisk.held++; continue; }
+      const band = e.band == null ? null : Number(e.band);
+      const sev = e.reason === 'margin' ? 'Notable'
+        : e.reason === 'regime' ? (band != null && band >= 80 ? 'Notable' : 'Log')
+        : e.reason === 'thesis' ? (band != null && band >= 40 ? 'Notable' : 'Log')
+        : e.reason === 'anomaly' ? (e.tier === 'notable' ? 'Notable' : 'Log')
+        : 'Log';
+      // The row's date is the COMPLETED BAR the figure came from, never the run time: a scope-level
+      // row has no single bar, so it carries drawdown.json's asOf and says which it is.
+      const date = String(e.barOn || asOf).slice(0, 10);
+      const tag = e.yf ? riskTag(e.yf) : 'in-book';
+      const stamp = e.barOn ? `close ${e.barOn}` : `drawdown.json asOf ${asOf}`;
+      // An anomaly carries no band at all — it is a single session, not a standing state — so it
+      // gets no band sentence. drawdown.js stores the MARGIN band negated (bands tighten as the
+      // distance to the call SHRINKS, so a smaller number is the worse state); printing it raw
+      // would read "band -40 → 30" about a band that got tighter, so it is said in distance.
+      const bandMove = e.reason === 'anomaly' || band == null ? null
+        : e.bandWas == null ? `band ${band}${e.reason === 'margin' ? '% of stressed distance remaining' : '%'} recorded for the first time`
+        : e.reason === 'margin' ? `the stressed-distance band tightened from ${Math.abs(Number(e.bandWas))}% remaining to ${band}% remaining — it WORSENED, which is the only thing that emits a row`
+        : `band ${e.bandWas}% → ${band}% — it WORSENED, which is the only thing that emits a row`;
+      let headline, numbers, ask;
+      if (e.reason === 'thesis') {
+        headline = `${e.t} · ${r2(e.fromPeakPct)}% below its 2-year peak · band ${band}% · ${r2(e.navBp)}bp of NAV`;
+        numbers = [`peak on ${e.peakOn}`, `${r2(e.navBp)}bp of NAV`,
+          `materiality gate: policy.drawdown.thesis.minNavBp is ${e.minNavBp}bp, and a fall on a position smaller than that is not a risk fact however deep it is`];
+        ask = `the ask is a NOTE reply naming the reason this is still held — it is NOT a request to trim, and trimming on drawdown tested harmful in this book`;
+      } else if (e.reason === 'anomaly') {
+        headline = `${e.t} · ${r2(e.dayPct)}% on ${e.barOn} · ${r2(e.sigma)} sigma · ${r2(e.navBp)}bp of NAV`;
+        numbers = [`vol60 ${r2(e.vol60)}% annualised, so one session is ${r2(e.vol60 == null ? null : e.vol60 / Math.sqrt(252))}%`,
+          `${r2(e.navBp)}bp of NAV${e.navSGD != null ? ` (S$${Math.round(Math.abs(e.navSGD)).toLocaleString()})` : ''}`,
+          `tier ${e.tier || '?'} — sigma AND materiality both had to bind (policy.drawdown.anomaly.bothMustBind)`];
+        ask = `${PD.anomaly && PD.anomaly.purposeOfTheLine ? `the purpose of this line, quoted: “${PD.anomaly.purposeOfTheLine}”` : 'this line asks whether news.json carried the story'} — it is not a reason to trade the move`;
+      } else if (e.reason === 'regime') {
+        headline = `${e.scope} · ${r2(e.drawdownPct)}% below peak · ${r2(e.usedPct)}% of the ${r2(e.tolerancePct)}% tolerance · band ${band}`;
+        numbers = [sleeveLine, nwLine].filter(Boolean);
+        ask = `this tests the ASSUMPTION the regime block states, not the holdings in it — calibration, the same logic as regime.killSwitch. Nothing here asks for a trade`;
+      } else if (e.reason === 'margin') {
+        headline = `silver · leverage ${e.leverage}x vs a ${e.ceiling}x signed ceiling · stressed call ${r2(e.distanceToCallPctStressed)}% away · survivability ${e.survivabilityPass === false ? 'FAIL' : 'pass'}`;
+        numbers = [marginLine, LV && LV.maintenanceRateSource ? `maintenance rate: ${LV.maintenanceRateSource}` : null].filter(Boolean);
+        ask = `the response under the signed Rule 1 is REPAY, never sell, and one-action.js — not this row — sizes it. Reply DONE or DEFER there`;
+      } else {
+        headline = `${e.scope || e.t || 'risk'} · ${e.reason}`;
+        numbers = [];
+        ask = null;
+      }
+      push({ id: e.id, date, severity: sev, family: 'risk', ticker: e.t || null,
+        issuer: e.n || e.scope || 'portfolio', reason: e.reason, scope: e.scope || null,
+        band: band, bandWas: e.bandWas == null ? null : Number(e.bandWas),
+        ...(e.navBp != null ? { navBp: e.navBp } : {}),
+        tags: [tag, 'risk', e.reason, ...(band == null ? [] : ['band-' + band])],
+        headline,
+        detail: [
+          e.why ? `drawdown.json's own sentence, quoted: “${e.why}”` : null,
+          ...numbers, bandMove, ask,
+          `COMPLETED BAR ONLY — ${stamp}; a session still trading has no close and no opinion here · first seen ${e.firstSeen || asOf}`,
+          PURPOSE,
+        ].filter(Boolean).join(' · '),
+        url: null,
+        clearsWhen: e.reason === 'thesis' ? 'you reply NOTE with the reason this is still held'
+          : e.reason === 'margin' ? 'the repay in The One Action is reported DONE, or deferred'
+          : 'read' });
+      nrisk.rows++;
+      if (sev === 'Notable') nrisk.notable++;
+    }
+    riskLog = `  risk: +${nrisk.rows} row(s) (${nrisk.notable} Notable) of ${events.length} retained event(s)`
+      + (nrisk.boot ? ` · ${nrisk.boot} bootstrap reading(s) collapsed into ONE Log summary, no per-event rows (a first reading is not news)` : '')
+      + (nrisk.held ? ` · ${nrisk.held} already in the log` : '')
+      + (DD.bootstrap === true ? ' · drawdown.json reports bootstrap: true, so every per-event row is suppressed this run' : '')
+      + ` · ${(DD.positions || []).length} priced position(s) (scan checked ${(DD.scan && DD.scan.checkedAt) || 'never'})`;
+  }
   // ── write, append-only ────────────────────────────────────────────────────
   const alerts = out.concat(prior.alerts).sort((a, b) => (b.date || '').localeCompare(a.date || '') || (b.at || '').localeCompare(a.at || '')).slice(0, policy.retention.alertsMax);
   fs.writeFileSync(D('alerts.json'), JSON.stringify({ generatedAt: new Date().toISOString(), policyVersion: policy.version, meta: { evaluated: [...evaluated].slice(-8000) }, alerts }, null, 1) + '\n');
@@ -470,5 +626,6 @@ const out = []; const push = a => { if (existing.has(a.id)) return; if (a.event 
   n.slice(0, 8).forEach(a => console.log(`  ! ${a.date} ${a.headline} [${a.tags.join(' ')}]`));
   if (F13 && PF) console.log(`  13F: +${n13.filing} filing · +${n13.hit} book/watch hit · +${n13.consensus} consensus (scan checked ${(F13.scan && F13.scan.checkedAt) || 'never'})`);
   if (thLog) console.log(thLog);
+  if (riskLog) console.log(riskLog);
   if (HK && PH) console.log(`  HKEX: +${nhk.rows} notice(s) (${nhk.notable} Notable) of ${(HK.filings || []).length} retained · ${(HK.universe || []).length} code(s) (scan checked ${(HK.scan && HK.scan.checkedAt) || 'never'})`);
 })();

@@ -357,6 +357,117 @@ try {
   const scanNote = (() => { try { const S = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'signals.json'), 'utf8')); const last = (S.scans || []).filter(x => !x.error).slice(-1)[0]; return last ? ` · Form 4 scan ${last.date}: ${last.form4Lines || 0} filings, ${last.kept || 0} with open-market trades` : ''; } catch (_) { return ' · signals.json absent'; } })();
   sections.unshift(['🔔 SIGNALS SINCE LAST BRIEF (insiders & ownership, market-wide)' + scanNote, lines]);
 } catch (e) { sections.unshift(['🔔 SIGNALS', ['alerts.json unavailable — scripts/alerts.js did not run (' + e.message + ')']]); }
+
+// Phase 9 (2 Oct 2026): THE DRAWDOWN MONITOR, DAILY. data/drawdown.json is written by
+// scripts/drawdown.js from COMPLETED closes (each instrument on its own exchange calendar)
+// immediately before alerts.js, every morning. Four things decide how this block reads, and the
+// first is the one that matters most:
+//
+//  - IT NEVER ASKS FOR A TRIM. policy.json regime.notRules records two things this book TESTED AND
+//    REJECTED — "P&L-triggered de-grossing (tested: harmful, return/drawdown 0.67 vs 0.80)" and
+//    "volatility ceiling (tested: harmful)". Selling into a drawdown is the one response the
+//    owner's own backtest measured as destructive. So the only actions anything here may request
+//    are REPAY (margin, and one-action.js sizes it, not this block) or a written NOTE (thesis), and
+//    policy.drawdown.purpose is quoted rather than paraphrased — a paraphrase is how "information"
+//    becomes "consider reducing" three edits from now.
+//  - DAILY, AND IT NEVER DISAPPEARS. Unlike the theme radar, drawdowns move every session, so there
+//    is no Monday gate. But a block that vanishes on a quiet day is indistinguishable from a block
+//    whose file died, so a quiet day says so out loud and stamps drawdown.json's own
+//    scan.checkedAt beside it. The heading starts with "🔔 SIGNALS" so the degraded (no-research)
+//    rebuild below keeps it: the drawdown numbers are computed in code and survive that outage.
+//  - THE THREE SCOPES LEAD, BECAUSE THEY ARE THE PORTFOLIO-LEVEL FACTS. A name 58% below its peak
+//    is a sentence about one line; "the risk sleeve has used 71% of the tolerance the regime block
+//    claims" is a sentence about the whole book. Net worth carries its window caveat EVERY time:
+//    nav-history.ndjson holds 21 sessions, so that figure is not a 1-year or a max drawdown and
+//    must never be read as one.
+//  - BANDS, NOT STATES. "Xiaomi is 58% off its high" is true every morning, and printing it every
+//    morning is wallpaper — the mistake the theme radar made with a standing stage. Only a band
+//    that WORSENED is a crossing; recovery lowers it silently. A bootstrap cohort is named once as
+//    first readings of states that already existed, never as today's moves.
+try {
+  const DD = readJson('drawdown.json'), PDB = (readJson('policy.json') || {}).drawdown || {};
+  const L = [];
+  if (!DD) {
+    L.push('data/drawdown.json is absent — scripts/drawdown.js did not run this morning (it runs immediately before alerts.js in research-headless.sh). No drawdown, no tolerance usage and no band crossing is known today, and nothing below stands in for them.');
+  } else {
+    const n2 = v => v == null || !Number.isFinite(Number(v)) ? '?' : String(+Number(v).toFixed(2));
+    const SC = DD.scopes || {}, NW = SC.netWorth, RS = SC.riskSleeve, LV = SC.levered;
+    // ── the three scopes, portfolio-level facts first ───────────────────────────────────────
+    if (RS) {
+      L.push(`risk sleeve: ${n2(RS.drawdownPct)}% below its peak of ${RS.peak ? dmy(RS.peak.on) : '?'} — ${n2(RS.usedOfTolerancePct)}% of the ${n2(RS.tolerancePct)}% tolerance`
+        + `\n   → S$${Math.round(RS.valueSGD || 0).toLocaleString()}, ${n2(RS.pctOfNav)}% of NAV, ${RS.members} member(s), excluding ${(RS.excludes || []).join(', ') || 'nothing'}`
+        + ` · ${RS.historySessions} session(s) from ${RS.historyFrom}`
+        + ` · ${RS.note || ''}`);
+    } else L.push('risk sleeve: drawdown.json carries no riskSleeve scope this run — the number that tests the regime is missing, and no substitute is shown.');
+    if (NW) {
+      L.push(`net worth: ${n2(NW.drawdownPct)}% below its peak of ${NW.peak ? dmy(NW.peak.on) : '?'} — ${n2(NW.usedOfTolerancePct)}% of the ${n2(NW.tolerancePct)}% tolerance`
+        + `\n   → ${NW.note || `only ${NW.historySessions} session(s) of nav history exist (from ${NW.historyFrom}), so this is the drawdown over THAT window and is NOT a 1-year or a max drawdown`}`);
+    } else L.push('net worth: drawdown.json carries no netWorth scope this run — nav-history.ndjson may be unreadable; no drawdown is claimed.');
+    if (LV) {
+      const sv = LV.survivability || {};
+      const failing = Object.entries(sv).filter(([, v]) => v && typeof v === 'object' && v.stressed === false).map(([k]) => k);
+      L.push(`levered (silver): ${n2(LV.fromPeakPct)}% below its peak of ${dmy(LV.peakOn)} · leverage ${LV.leverage}x against a signed ceiling of ${LV.ceiling}x`
+        + (LV.overCeilingBy ? ` (over by ${n2(LV.overCeilingBy)}x)` : '')
+        + ` · stressed call ${n2(LV.distanceToCallPctStressed)}% away (${n2(LV.distanceToCallPct)}% at the quoted rate) · survivability ${sv.pass === false ? 'FAIL' : 'pass'}`
+        + `\n   → ${sv.rule || 'the survivability rule is not stated in the file'}${failing.length ? `; ${failing.join(', ')} would be called` : ''}`
+        + ` · price ${LV.priceAsOf}${LV.priceTrust === 'low' ? ' (low-trust series)' : ''} · ${LV.maintenanceRateSource || ''}`
+        + `\n   → ${LV.note || 'the only scope where a price fall forces a response, and the response is REPAY, never sell'}`);
+    } else L.push('levered: drawdown.json carries no levered scope this run — call distance, leverage and the survivability test are unknown, not fine.');
+    // ── fresh band crossings. A bootstrap cohort is never one. ──────────────────────────────
+    const evs = (DD.events || []).filter(Boolean);
+    const boot = evs.filter(e => e.bootstrap === true);
+    const crossedToday = evs.filter(e => e.bootstrap !== true && String(e.firstSeen || '') === todaySGT);
+    if (crossedToday.length) {
+      crossedToday.forEach(e => {
+        L.push(`CROSSED TODAY · ${e.reason} · ${e.t || e.scope || '?'}${e.band == null ? '' : ` band ${e.band}`}${e.bandWas == null ? ' (first reading of this band)' : ` (was ${e.bandWas})`}`
+          + `\n   → ${e.why || 'drawdown.json recorded this crossing with no sentence of its own'}`
+          + `\n   → ${[e.navBp != null ? `${n2(e.navBp)}bp of NAV` : null, e.fromPeakPct != null ? `${n2(e.fromPeakPct)}% from peak${e.peakOn ? ' of ' + dmy(e.peakOn) : ''}` : null,
+              e.sigma != null ? `${n2(e.sigma)} sigma on vol60 ${n2(e.vol60)}%` : null, e.barOn ? `completed close ${dmy(e.barOn)}` : `drawdown.json asOf ${dmy(DD.asOf)}`,
+              e.ask ? `the ask is ${e.ask} — never a trim` : null].filter(Boolean).join(' · ')}`);
+      });
+    } else if (boot.length && !evs.some(e => e.bootstrap !== true)) {
+      L.push(`no band crossed today. The ${boot.length} state(s) the monitor holds are FIRST READINGS of states that already existed when it was built on ${dmy(boot.map(e => String(e.firstSeen || '')).filter(Boolean).sort()[0] || DD.asOf)} — Xiaomi passed 40% below its peak on a 2025 bar. They are not today's moves, and inbox.html carries them as one Log summary under family "risk" rather than as ${boot.length} separate lines.`);
+    } else {
+      L.push(`no band crossed today — nothing entered a worse band than the one already recorded. ${evs.length} state(s) are retained for ${DD.retainDays == null ? 45 : DD.retainDays} days; a recovery lowers a band silently, so a position oscillating around a threshold cannot alert twice for one fall.`);
+    }
+    // The standing thesis list, as a COUNT and not as one line each: the deep names are true every
+    // morning, and naming them individually every morning is the wallpaper this block avoids.
+    const th = evs.filter(e => e.reason === 'thesis');
+    if (th.length) {
+      // The materiality gate, shown by what it SUPPRESSED rather than asserted. A percentage move
+      // is not a risk fact until it is multiplied by position size (policy.drawdown.materialityFirst),
+      // and naming the lines the gate held back is the only way that claim is checkable.
+      const gate = (PDB.thesis && PDB.thesis.minNavBp) != null ? PDB.thesis.minNavBp : 25;
+      const bands = (PDB.thesis && PDB.thesis.bands) || [25, 40, 60];
+      const floor = Math.min.apply(null, bands);
+      const held = (DD.positions || []).filter(p => p && p.peak2y && p.peak2y.fromPct != null
+        && -p.peak2y.fromPct >= floor && p.navBp != null && p.navBp < gate)
+        .sort((a, b) => a.peak2y.fromPct - b.peak2y.fromPct);
+      L.push(`${th.length} position(s) stand below a thesis band and are awaiting a written NOTE: ${th.slice().sort((a, b) => (a.fromPeakPct || 0) - (b.fromPeakPct || 0)).map(e => `${e.t} ${n2(e.fromPeakPct)}% (${n2(e.navBp)}bp)`).join(', ')}.`
+        + ` The ask on every one of them is a NOTE naming why it is still held — never a trim.`
+        + ` The materiality gate is ${gate}bp of NAV, and it held back ${held.length} line(s) that are past the ${floor}% band on price alone`
+        + (held.length ? `: ${held.slice(0, 4).map(p => `${p.t} ${n2(p.peak2y.fromPct)}% but only ${n2(p.navBp)}bp`).join(', ')}${held.length > 4 ? `, +${held.length - 4} more` : ''} — a ${n2(held[0].peak2y.fromPct)}% fall on ${n2(held[0].navBp)}bp of NAV is S$${Math.round(Math.abs((held[0].navBp / 10000) * (NW ? NW.navSGD : 0) * (held[0].peak2y.fromPct / 100))).toLocaleString()} of net worth, which is a fact about one line and not a risk fact about this book` : '')
+        + `.`);
+    }
+    // ── errors, liveness, and the purpose, quoted ───────────────────────────────────────────
+    const errs = (DD.scan && DD.scan.errors) || [];
+    if (errs.length) L.push(`the last scan recorded ${errs.length} error(s): ${errs.slice(0, 3).map(x => `${x.t || x.stage || '?'} — ${String(x.why || x.message || '').slice(0, 90)}`).join('; ')}${errs.length > 3 ? ` (+${errs.length - 3} more)` : ''}. Those lines have no drawdown here and are not counted as flat.`);
+    const checked = DD.scan && DD.scan.checkedAt ? sgtDay(DD.scan.checkedAt) : null;
+    const age = checked ? Math.round((Date.parse(todaySGT) - Date.parse(checked)) / 864e5) : null;
+    L.push(age == null || age > 3
+      ? `the drawdown monitor is DEAD, not quiet — last checked ${checked ? dmy(checked) : 'never'}${age == null ? '' : ` (${age}d ago)`}; this is a DAILY feed, so every figure above is at least that old and the band states have not been tested since.`
+      : `monitor checked ${dmy(checked)} (${age === 0 ? 'today' : age + 'd ago'}) · ${(DD.positions || []).length} priced position(s), ${evs.length} retained state(s) · completed bars only, each name on its own exchange calendar · every risk row is in inbox.html under family "risk".`);
+    // The tolerances the percentages above are measured AGAINST are not ratified. Printing "70.82% of
+    // the tolerance" without saying whose number the denominator is would give a derived figure more
+    // standing than the assumption under it — the same failure regime.status has carried since 12 Sep.
+    if (DD.tolerance && /^PROPOSED/i.test(String(DD.tolerance.status || ''))) {
+      L.push(`the tolerances every percentage above is measured against are NOT ratified — drawdown.json tolerance.status, quoted: “${DD.tolerance.status}”. The drawdowns are measured; the denominators are an assumption, and the regime band exists to test that assumption rather than the holdings.`);
+    }
+    if (PDB.purpose) L.push(`policy.drawdown.purpose, quoted: “${PDB.purpose}”`);
+  }
+  sections.unshift(['🔔 SIGNALS — RISK (drawdown, tolerance & margin · daily)', L]);
+} catch (e) { sections.unshift(['🔔 SIGNALS — RISK', [`the risk block could not be composed (${String(e.message).slice(0, 100)}) — data/drawdown.json is there or it is not, but this line is not a drawdown`]]); }
+
 // Phase 4: the cutover clock — seven clean parallel days (code-fetched NAV beside the page's own)
 // before index.html loses its Yahoo path. Read from Agent C's outputs, data/.cutover.json
 // (scripts/cutover-check.js) and the local publish ledger data/.publish-history.ndjson; both may be

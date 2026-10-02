@@ -1,6 +1,6 @@
 {
- "generatedAt": "2026-10-01T23:02:32.175Z",
- "policyVersion": "2026-09-20",
+ "generatedAt": "2026-10-02T08:08:15.226Z",
+ "policyVersion": "2026-10-02",
  "meta": {
   "evaluated": [
    "0001193125-26-388251",
@@ -2675,6 +2675,28 @@
   ]
  },
  "alerts": [
+  {
+   "at": "2026-10-02T07:58:24.964Z",
+   "id": "risk:bootstrap:2026-10-02",
+   "date": "2026-10-02",
+   "severity": "Log",
+   "family": "risk",
+   "ticker": null,
+   "issuer": "drawdown monitor",
+   "reason": "bootstrap",
+   "bootstrap": true,
+   "scope": "portfolio",
+   "tags": [
+    "in-book",
+    "risk",
+    "bootstrap",
+    "first-reading"
+   ],
+   "headline": "drawdown monitor · first reading of 13 standing state(s) · nothing here crossed today",
+   "detail": "THESE ARE FIRST READINGS OF STATES THAT ALREADY EXISTED, NOT TODAY'S MOVES. 13 event(s) were recorded on the monitor's first run (2026-10-02): 11 thesis, 1 regime, 1 margin. Every one of them had already crossed its band before the monitor existed — Xiaomi passed 40% below its peak on a 2025 bar — so none of them is news and none gets a line of its own. · risk sleeve -17.7% below its peak (2026-01-28) — 70.82% of the 25% tolerance, on 518 session(s) from 2024-09-30 · levered silver -46.71% below its peak (2026-01-26), leverage 1.676x against a signed ceiling of 1.4x, stressed call 26.7% away, survivability FAIL · price 2026-10-01 (low-trust) · net worth -0.63% below its peak (2026-09-23) — 4.64% of the 13.5% tolerance, over 21 session(s) from 2026-09-12, which is NOT a 1-year or max drawdown · furthest below peak: 1810 -58.04% (peak 2025-07-02, 106.34bp of NAV, close 2026-09-30); XAG -46.71% (peak 2026-01-26, 135.15bp of NAV, close 2026-10-01); Z25 -37.06% (peak 2024-10-07, 41.47bp of NAV, close 2026-10-01) · from here each of these bands is silent unless it WORSENS, and a recovery lowers it with no row at all (policy.drawdown.bandsNotStates). Per-event rows resume on the next run. · every figure is a COMPLETED close on the instrument's own exchange calendar · drawdown.json asOf 2026-10-02, scan checked 2026-10-02T07:34:48.836Z · policy.drawdown.purpose, quoted: “INFORMATION, NEVER DE-GROSSING. regime.notRules records two things this book tested and rejected: P&L-triggered de-grossing (return/drawdown 0.67 vs 0.80) and a volatility ceiling. Selling into a drawdown is the one response the owner's own backtest measured as destructive, so no row produced from this block may ask for a position to be cut because it fell, and nothing here sizes or caps by volatility.”",
+   "url": null,
+   "clearsWhen": "read"
+  },
   {
    "at": "2026-10-01T23:02:32.165Z",
    "id": "cluster:0001533040:20260930",

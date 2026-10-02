@@ -231,6 +231,9 @@
   var OA = null;       // oneaction.enc
   var BK = null;       // book.enc — needed ONLY for the ticker -> yf join; technicals.json and
                        // closes.json are keyed by the Yahoo symbol and valuation lines carry none.
+  var DD = null;       // drawdown.enc — phase 9. PRIVATE, exactly like valuation.enc: the plaintext
+                       // carries navSGD and a valueSGD per position, so data/drawdown.json is
+                       // gitignored and only the envelope ships. Locked, the drawdown lines say so.
   var LOCKED = true;
   var FXH = [];        // fx-history.ndjson rows
   var TODAY = has('sgtToday') ? P.sgtToday() : new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Singapore' });
@@ -250,10 +253,10 @@
 
   async function loadPrivate() {
     LOCKED = has('locked') ? P.locked() : true;
-    V = OA = BK = null;
+    V = OA = BK = DD = null;
     if (LOCKED || !has('priv')) return;
-    var got = await Promise.all([P.priv('valuation'), P.priv('oneaction'), P.priv('book')]);
-    V = got[0]; OA = got[1]; BK = got[2];
+    var got = await Promise.all([P.priv('valuation'), P.priv('oneaction'), P.priv('book'), P.priv('drawdown')]);
+    V = got[0]; OA = got[1]; BK = got[2]; DD = got[3];
     if (!V && !OA) LOCKED = true;   // refused or wrong passphrase — treat as locked, never as zero
   }
 
@@ -385,7 +388,10 @@
   // renders; the levered half (call distance, survivability, leverage, carry) needs valuation.enc.
   function renderRisk() {
     var T = D['technicals.json'], TG = D['targets.json'], POL = D['policy.json'], FX = D['fx.json'];
-    fill('risk-stamp', [stamp(T && T.asOf, 'daily', 'technicals')]);
+    // Two stamps: technicals drives the gate/vol/trend lines, drawdown.enc drives the three scopes.
+    // One stamp over two feeds would let a dead drawdown monitor hide behind a fresh technicals file.
+    fill('risk-stamp', [stamp(T && T.asOf, 'daily', 'technicals')]
+      .concat(DD ? [txt(' · ', 'stamp'), stamp(DD.asOf, 'daily', 'drawdown')] : []));
     var kids = [], s = V && V.silver;
     var slv = T && T.instruments && (T.instruments.SLV || T.instruments['SI=F']);
 
@@ -461,9 +467,31 @@
       kids.push(line('fx', 'data/fx-history.ndjson did not load — no MTD move to show'));
     }
 
-    // NAV history is not published (spec §"Not published"): say so, never invent a drawdown.
-    kids.push(line('drawdown', 'not on this page — data/nav-history.ndjson is not published. '
-      + 'The 08:15 brief computes drawdown from the high on the Mac.'));
+    // ── drawdown (phase 9, 2 Oct 2026) ──────────────────────────────────────
+    // nav-history.ndjson is still not published; data/drawdown.enc is, written by scripts/drawdown.js and encrypted
+    // exactly like valuation.enc (its plaintext carries navSGD and a valueSGD per position, so the .json is gitignored
+    // and only the envelope ships). Locked, these lines name the file and show NO number — a half-locked row would read
+    // as a drawdown of zero. The three scopes lead because they are the portfolio-level facts, and only bands that
+    // WORSENED today are printed: a standing fall is true every morning and reprinting it is wallpaper. Nothing here
+    // asks for a trim — policy.json regime.notRules records P&L-triggered de-grossing as tested and HARMFUL in this
+    // book (return/drawdown 0.67 vs 0.80), so the only actions named are REPAY (margin) and a written NOTE (thesis).
+    if (!DD) {
+      kids.push(line('drawdown', V ? 'data/drawdown.enc did not load — scripts/drawdown.js may not have run. No drawdown, no tolerance usage and no band crossing is shown, and nothing stands in for them.'
+        : 'the three drawdown scopes (net worth, risk sleeve, levered silver) and their tolerance usage live in data/drawdown.enc, decrypted in this browser. Nothing is published in the clear.'));
+    } else {
+      var dn = function (v) { return v == null || !isFinite(Number(v)) ? '—' : P.num(Number(v), 2); };
+      var SC = DD.scopes || {}, RS = SC.riskSleeve, NW = SC.netWorth, LV = SC.levered, sv = (LV && LV.survivability) || {};
+      if (RS) kids.push(line('risk sleeve', dn(RS.drawdownPct) + '% below its ' + dshort(RS.peak && RS.peak.on) + ' peak · ' + dn(RS.usedOfTolerancePct) + '% of the ' + dn(RS.tolerancePct) + '% tolerance · ' + dn(RS.pctOfNav) + '% of NAV, ' + RS.members + ' members, ' + RS.historySessions + ' sessions from ' + RS.historyFrom, RS.usedOfTolerancePct >= 100 ? 'bad' : ''));
+      if (NW) kids.push(line('net worth dd', dn(NW.drawdownPct) + '% below its ' + dshort(NW.peak && NW.peak.on) + ' peak · ' + dn(NW.usedOfTolerancePct) + '% of the ' + dn(NW.tolerancePct) + '% tolerance — over ' + NW.historySessions + ' sessions from ' + NW.historyFrom + ' only, so NOT a 1-year or max drawdown'));
+      if (LV) kids.push(line('levered dd', dn(LV.fromPeakPct) + '% below its ' + dshort(LV.peakOn) + ' peak · leverage ' + LV.leverage + 'x vs a ' + LV.ceiling + 'x signed ceiling · stressed call ' + dn(LV.distanceToCallPctStressed) + '% away · survivability ' + (sv.pass === false ? 'FAIL' : 'pass') + ' — the response is REPAY, never sell', sv.pass === false ? 'bad' : ''));
+      var evs = (DD.events || []).filter(Boolean), live = evs.filter(function (e) { return e.bootstrap !== true; });
+      var bootN = evs.length - live.length, crossed = live.filter(function (e) { return e.firstSeen === TODAY; });
+      if (crossed.length) crossed.forEach(function (e) { kids.push(line('crossed', e.reason + ' · ' + (e.t || e.scope || '?') + (e.band == null ? '' : ' band ' + e.band) + (e.fromPeakPct == null ? '' : ' · ' + dn(e.fromPeakPct) + '% from peak') + (e.navBp == null ? '' : ' · ' + dn(e.navBp) + 'bp of NAV') + ' · ' + (e.barOn ? 'close ' + dshort(e.barOn) : 'as of ' + dshort(DD.asOf)) + (e.ask ? ' · ask ' + e.ask : ''), e.reason === 'margin' ? 'bad' : '')); });
+      else if (bootN && !live.length) kids.push(line('crossed', 'nothing today. The ' + bootN + ' state(s) held are FIRST READINGS of falls that already existed when the monitor was built — not today’s moves. inbox.html, family "risk".'));
+      else kids.push(line('crossed', 'nothing entered a worse band today · ' + evs.length + ' state(s) retained · a recovery lowers a band silently, so one fall cannot alert twice'));
+      kids.push(para('Drawdown scopes come from data/drawdown.enc, decrypted here, computed from COMPLETED closes on each name’s own exchange calendar. The only actions a risk row may ask for are REPAY (margin) or a written NOTE (thesis) — never a trim: P&L-triggered de-grossing was tested in this book and measured as harmful.'
+        + (DD.scan && (DD.scan.errors || []).length ? ' Last scan recorded ' + DD.scan.errors.length + ' error(s) — ' + DD.scan.errors.slice(0, 2).map(function (x) { return (x.t || x.stage || '?') + ': ' + String(x.why || ''); }).join('; ') + '; those lines have no drawdown here and are not counted as flat.' : ''), 'sub muted'));
+    }
 
     if (POL) {
       kids.push(line('policy', 'regime ' + (POL.regime ? POL.regime.status : '—') + ' · silver '

@@ -71,6 +71,23 @@ const SPEC = {
   'themes.json':      { as: j => j.asOf || (j.scan && j.scan.checkedAt ? new Date(Date.parse(j.scan.checkedAt)).toLocaleDateString('en-CA', { timeZone: 'Asia/Singapore' }) : null),
                         cadence: 'weekly', count: j => (j.themes || []).length,
                         source: 'themes.js (SEC EDGAR full-text search, keyless; GitHub Actions, 06:20 SGT Monday; count = seeded terms)' },
+  // Phase 9 (2 Oct 2026): the drawdown monitor. asOf is the SGT date of the RUN (drawdown.json.asOf),
+  // and the reason is NOT the same as themes.json's. The newest COMPLETED BAR here is a different
+  // date for every instrument — SGX and the US closed 1 Oct, HKEX closed 30 Sep — so there is no
+  // single bar date this file could honestly claim, and taking the newest of them would stamp the
+  // whole file with Singapore's calendar and make Hong Kong look a day fresher than it is. Every
+  // per-instrument bar date travels INSIDE the file instead (positions[].bar.on, events[].barOn),
+  // which is where a figure's as-of belongs. What refreshes daily is the computation over those
+  // bars, so the run date is what is stamped — the same choice .validation.json makes with
+  // checkedOn, and the opposite of 13f.json, where the PERIOD is the age and the scan is not.
+  // Cadence daily: drawdowns move every session, so freshness() turns this amber at 1 day and stale
+  // at 2, which is correct — a quiet drawdown monitor is a dead one. count is the priced positions
+  // it could build a series for; the lines it could NOT (scan.errors[]) are excluded by
+  // construction, and validate-all's PHASE 9 is what says so out loud.
+  // PRIVATE: the plaintext carries navSGD and a valueSGD per position, so only drawdown.enc ships.
+  'drawdown.json':    { as: j => j.asOf, cadence: 'daily', count: j => (j.positions || []).length,
+                        source: 'drawdown.js (peak drawdown per line and per scope from completed closes on each instrument’s own exchange calendar; count = priced positions; asOf = the run date, because the newest bar differs per exchange and every figure carries its own inside the file)',
+                        published: 'drawdown.enc' },
 };
 
 const files = {};

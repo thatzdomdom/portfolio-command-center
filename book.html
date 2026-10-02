@@ -341,7 +341,8 @@ window.BOOK = (function () {
     { key: 'cluster', label: 'cluster' }, { key: 'theme', label: 'theme' }
   ];
   var S = { rows: [], grp: 'none', sort: 'val', dir: -1, sortTouched: false, locked: true, open: {},
-    book: null, val: null, tech: null, tgt: null, closes: null, alerts: null, signals: null, man: null };
+    book: null, val: null, tech: null, tgt: null, closes: null, alerts: null, signals: null, man: null,
+    dd: null };   // drawdown.enc (phase 9) — PRIVATE like valuation.enc; its plaintext carries navSGD and a valueSGD per line
 
   function groupOf(row) {
     if (S.grp === 'none') return null;
@@ -583,6 +584,32 @@ window.BOOK = (function () {
         ? P.dateLong(row.tech.gate.lastCross.date) + ' · ' + row.tech.gate.lastCross.dir
         : 'none in the window');
       if ((row.tech.flags || []).length) kv(dl1, 'flags', row.tech.flags.join(', '));
+    }
+    // Phase 9 (2 Oct 2026): this line's own drawdown, from data/drawdown.enc — decrypted in this
+    // browser exactly like valuation.enc, because the plaintext carries navSGD and a valueSGD per
+    // position. The 52-week figures above come from technicals.json and are PUBLIC; these three are
+    // not, so when the page is locked they say which file they live in rather than showing a dash
+    // that reads like zero. peak2y is a 2-YEAR peak and the 52-week high above is a different
+    // number — Xiaomi is 58.04% below one and 57.86% below the other, and they are not interchangeable.
+    // sigma normalises the session against this name's OWN distribution; it is anomaly detection and
+    // NOT a volatility ceiling, which regime.notRules records as tested and harmful here. None of
+    // these three figures asks for anything: the ask on a deep thesis fall is a written NOTE.
+    var ddp = S.dd && row.yf ? (S.dd.positions || []).filter(function (p) { return p.yf === row.yf; })[0] : null;
+    if (ddp) {
+      kv(dl1, '2-year peak', (ddp.peak2y && ddp.peak2y.value != null ? P.num(ddp.peak2y.value, 2) : '—')
+        + (ddp.peak2y && ddp.peak2y.on ? ' on ' + P.dateLong(ddp.peak2y.on) : ''));
+      kv(dl1, 'from the 2y peak', ddp.peak2y && ddp.peak2y.fromPct != null ? P.pct(ddp.peak2y.fromPct, { dp: 2, sign: true }) : '—');
+      kv(dl1, 'last session, in sigma', ddp.day && ddp.day.sigma != null
+        ? P.num(ddp.day.sigma, 2) + ' sigma (' + P.pct(ddp.day.pct, { dp: 2, sign: true }) + ' on '
+          + (ddp.bar && ddp.bar.on ? P.dateLong(ddp.bar.on) : 'an unstamped bar') + ', 1 sigma = '
+          + P.num(ddp.day.sigmaPct, 2) + '% on vol60 ' + P.num(ddp.day.vol60, 1) + '%)'
+        : 'no completed bar pair, so no sigma');
+      kv(dl1, 'size of NAV', ddp.navBp == null ? '—' : P.num(ddp.navBp, 2) + 'bp'
+        + (ddp.day && ddp.day.navBp != null ? ' · the session moved net worth ' + P.num(ddp.day.navBp, 2) + 'bp' : ''));
+    } else if (S.dd) {
+      kv(dl1, 'drawdown', 'this line is not in drawdown.json — ' + (row.yf ? 'no completed close series for ' + row.yf : 'it carries no Yahoo symbol') + ', so it has no 2-year peak or sigma here');
+    } else {
+      kv(dl1, 'drawdown', 'the 2-year peak, the session in sigma and the bp of NAV are in data/drawdown.enc — unlock to see them');
     }
     right.appendChild(dl1);
 
@@ -884,11 +911,11 @@ window.BOOK = (function () {
         S.closes = pub['closes.json']; S.tech = pub['technicals.json']; S.tgt = pub['targets.json'];
         S.alerts = pub['alerts.json']; S.signals = pub['signals.json']; S.man = pub['manifest.json'];
         S.f13 = pub['13f.json']; S.themes = pub['themes.json'];
-        if (P.locked() && !afterUnlock) return [null, null];
-        return Promise.all([P.priv('book'), P.priv('valuation')]);
+        if (P.locked() && !afterUnlock) return [null, null, null];
+        return Promise.all([P.priv('book'), P.priv('valuation'), P.priv('drawdown')]);
       })
       .then(function (pr) {
-        S.book = pr[0]; S.val = pr[1];
+        S.book = pr[0]; S.val = pr[1]; S.dd = pr[2];
         S.locked = !(S.val && S.val.navSGD);
         S.rows = window.BOOK.joinRows(S.book, S.val, S.tech, S.tgt, S.closes, { asOf: P.asof() });
         S.rows.forEach(function (r) { r.filings = window.BOOK.filingsFor(r, S.alerts, S.signals); });

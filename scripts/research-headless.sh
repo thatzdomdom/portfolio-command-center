@@ -43,6 +43,10 @@ git pull --rebase --autostash -q origin main 2>/dev/null || echo "$(date '+%F %T
 /opt/homebrew/bin/node scripts/valuate.js || echo "$(date '+%F %T') valuate.js FAILED — no NAV this run"
 /opt/homebrew/bin/node scripts/technicals.js || echo "$(date '+%F %T') technicals.js FAILED — no trend gate this run"
 /opt/homebrew/bin/node scripts/targets.js || echo "$(date '+%F %T') targets.js FAILED — no shadow targets this run"
+# drawdown.js must run AFTER valuate.js (navSGD) and technicals.js (vol60) and IMMEDIATELY BEFORE
+# alerts.js, which turns its band crossings into family 'risk' rows. Its events are retained 45 days
+# with stable ids, so a failure here costs this morning's rows but never loses a crossing.
+/opt/homebrew/bin/node scripts/drawdown.js || echo "$(date '+%F %T') drawdown.js FAILED — no drawdown/regime/margin risk rows this run"
 /opt/homebrew/bin/node scripts/alerts.js || echo "$(date '+%F %T') alerts.js FAILED — no insider/ownership judgments this run"
 # THE ONE ACTION is computed here, in code, from the files above — never by the agent and never
 # by daily-brief.js (which only renders data/oneaction.json). Runs again at 08:15 (upsert by date).

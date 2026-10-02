@@ -377,15 +377,23 @@ else {
   const { spawnSync } = require('child_process');
   // Same list as publish.js PRIVATE and .gitignore (phase 4 added the write path's files).
   const PLAINTEXT = ['data/book.json', 'data/valuation.json', 'data/.prices-2y.json', 'data/.credentials.json',
-    'data/journal.json', 'data/journal.ndjson', 'data/oneaction.json', 'data/.oneaction-history.ndjson',
+    'data/journal.json', 'data/journal.ndjson', 'data/oneaction.json', 'data/drawdown.json', 'data/.oneaction-history.ndjson',
     'data/.state-history.ndjson', 'data/.publish-history.ndjson', 'data/.tickers.json', 'data/.cutover.json',
     'data/.last-brief-at', 'data/.last-brief-date'];
   let tracked = null;
   try {
     const g = spawnSync('git', ['ls-files', '--', ...PLAINTEXT], { cwd: path.join(__dirname, '..'), encoding: 'utf8' });
     if (g.error) throw g.error;
+    // A guard that cannot run must FAIL, never pass — and this must be tested BEFORE `tracked` is
+    // assigned, or the empty stdout of a failed git still satisfies `tracked === ''` below and prints
+    // the green line anyway. The original tested only g.error, a SPAWN failure, so a git that RAN and
+    // exited non-zero printed "no sensitive plaintext tracked" having checked nothing. On this Mac that
+    // is the default state of any shell without DEVELOPER_DIR: the Xcode licence gate makes git exit 69
+    // with empty stdout. The check protecting balances and private replies from a public repo was the
+    // one check passing blind.
+    if (g.status !== 0) throw new Error(`git ls-files exited ${g.status} — ${String(g.stderr || g.stdout || '').trim().split('\n')[0] || 'no output'}`);
     tracked = (g.stdout || '').trim();
-  } catch (e) { fail('git', `could not run git ls-files (${String(e.message || e).slice(0, 60)}) — the plaintext guard did not run`); }
+  } catch (e) { fail('git', `could not run git ls-files (${String(e.message || e).slice(0, 80)}) — the plaintext guard did NOT run, so it is reported as a failure rather than a pass`); }
   if (tracked) fail('git', `sensitive PLAINTEXT is tracked: ${tracked.replace(/\n/g, ', ')} — must be gitignored; only .enc envelopes may be committed`);
   else if (tracked === '') ok('git: no sensitive plaintext tracked');
   const man = J('manifest.json');
@@ -629,6 +637,95 @@ else {
       if (themes.length && clean === themes.length) ok(`themes: all ${themes.length} term(s) internally consistent — stage on the ladder, entry window only at Priced and not crowded, no Priced without 3 priced names, no quarter at the paging ceiling`);
     }
   } catch (e) { warn('themes.json', `PHASE 8 check did not run: ${String((e && e.message) || e).slice(0, 120)}`); }
+}
+
+// ── PHASE 9: the drawdown monitor ──────────────────────────────────────────
+// (added 2 Oct 2026) scripts/drawdown.js computes, from COMPLETED closes on each instrument's own
+// exchange calendar, how far every line and every scope is below its own peak, and which of those
+// falls entered a WORSE band than the one already recorded. alerts.js judges it against
+// policy.drawdown and the 08:15 brief leads its RISK block with it.
+//
+// LIVENESS IS JUDGED AT A DAILY CADENCE, WHICH IS THE OPPOSITE OF THE THEME RADAR. Theme counts move
+// on a quarterly clock and are SUPPOSED to sit still for weeks; drawdowns move every session. So
+// three days is already two sessions of silence from a feed that cannot legitimately be quiet, and
+// that is a FAIL, not a warning: a dead drawdown monitor reads exactly like a book that has stopped
+// falling, which is the most comfortable possible lie for this surface to tell.
+//
+// THE REST GUARDS THE FILE AGAINST ITSELF, on the three contradictions that would each let a number
+// through with no standing behind it:
+//   - a thesis event under policy.drawdown.thesis.minNavBp. The materiality gate is the whole reason
+//     this block is not the -3%-on-Xiaomi email it replaced: a percentage move is not a risk fact
+//     until it is multiplied by position size. An event below the gate means the gate did not bind,
+//     so the file is asking for a NOTE about 2.9bp of net worth.
+//   - an anomaly with no sigma. "Anomalous" here means anomalous FOR THIS SERIES' OWN
+//     DISTRIBUTION — that is the entire difference between anomaly detection and the volatility
+//     ceiling regime.notRules records as tested and harmful. Without a sigma the row is a fixed
+//     percentage threshold wearing a new name.
+//   - a position with a `day` and no `bar.on`. Every figure must wear its as-of. The alert that
+//     caused this file to exist read an INTRADAY quote on an unfinished session and called it "the
+//     day"; a day figure with no bar date is that failure with the evidence removed.
+//
+// drawdown.json is GITIGNORED (it carries navSGD and a valueSGD per position) and only
+// data/drawdown.enc ships. The guard below is the phase-1 plaintext pattern, with one difference
+// that matters: it checks git's EXIT STATUS and not only whether the spawn threw. `git ls-files`
+// exits non-zero with empty stdout when it cannot read the repo at all, and treating that as "no
+// plaintext tracked" is a guard that reports success precisely when it has checked nothing.
+// Wrapped: a bug in this block warns; it is never, on its own, the reason the 07:02 publish stops.
+{
+  try {
+    const DD = J('drawdown.json');
+    if (!DD) {
+      if (fs.existsSync(path.join(D, 'drawdown.json'))) fail('drawdown.json', 'unparseable — the risk rows, the brief’s RISK block and the drawdown lines on today.html and book.html are all broken this run');
+      else warn('drawdown.json', 'absent — scripts/drawdown.js has not run (daily, immediately before alerts.js in research-headless.sh)');
+    } else {
+      const POL = J('policy.json') || {};
+      const PDB = POL.drawdown || {};
+      const sgtOf = iso => { const t = Date.parse(iso); return isNaN(t) ? null : new Date(t).toLocaleDateString('en-CA', { timeZone: 'Asia/Singapore' }); };
+      const when = (DD.scan && sgtOf(DD.scan.checkedAt)) || null;
+      const age = when ? daysAgo(when) : null;
+      if (age == null) fail('drawdown.json', 'no scan time recorded — a live drawdown monitor cannot be told from a dead one, and a dead one reads as a book that has stopped falling');
+      else if (age > 3) fail('drawdown.json', `last checked ${age} days ago (${when}) — the drawdown monitor is DEAD, not quiet (it is a DAILY feed; drawdowns move every session, so silence is never the healthy state)`);
+
+      // ── the three contradictions ────────────────────────────────────────
+      const evs = (DD.events || []).filter(Boolean);
+      const GATE = (PDB.thesis && PDB.thesis.minNavBp) != null ? PDB.thesis.minNavBp : 25;
+      const under = evs.filter(e => e.reason === 'thesis' && e.navBp != null && Number(e.navBp) < GATE);
+      under.slice(0, 4).forEach(e => fail('drawdown.json',
+        `thesis event ${e.id || e.t} is ${e.navBp}bp of NAV, under the ${GATE}bp materiality gate (policy.drawdown.thesis.minNavBp) — the gate did NOT bind, so this row asks for a written NOTE about a position too small for its fall to be a risk fact`));
+      if (under.length > 4) fail('drawdown.json', `…and ${under.length - 4} more thesis event(s) under the ${GATE}bp gate`);
+
+      const noSigma = evs.filter(e => e.reason === 'anomaly' && (e.sigma == null || !Number.isFinite(Number(e.sigma))));
+      noSigma.slice(0, 4).forEach(e => fail('drawdown.json',
+        `anomaly event ${e.id || e.t} carries no sigma — "anomalous" means anomalous for THIS series' own distribution, and without a sigma the row is a fixed percentage threshold under a new name (-3% is 1.4 sigma on Xiaomi and 4.3 on VICOM)`));
+      if (noSigma.length > 4) fail('drawdown.json', `…and ${noSigma.length - 4} more anomaly event(s) with no sigma`);
+
+      const unstamped = (DD.positions || []).filter(p => p && p.day != null && !(p.bar && p.bar.on));
+      unstamped.slice(0, 4).forEach(p => fail('drawdown.json',
+        `${p.t || p.yf} carries a day figure (${p.day && p.day.pct}%) with no bar.on — every figure must wear its as-of, and a day with no bar date is the intraday-quote-called-"the day" failure with the evidence removed`));
+      if (unstamped.length > 4) fail('drawdown.json', `…and ${unstamped.length - 4} more position(s) with a day and no bar date`);
+
+      // ── the plaintext guard, with git's exit STATUS checked ──────────────
+      const { spawnSync } = require('child_process');
+      let g = null, spawnWhy = null;
+      try { g = spawnSync('git', ['ls-files', '--', 'data/drawdown.json'], { cwd: path.join(__dirname, '..'), encoding: 'utf8' }); } catch (e) { spawnWhy = String((e && e.message) || e); }
+      if (spawnWhy || (g && g.error)) fail('git', `could not run git ls-files for data/drawdown.json (${String(spawnWhy || g.error.message).slice(0, 70)}) — the drawdown plaintext guard did NOT run`);
+      else if (g.status !== 0) fail('git', `git ls-files exited ${g.status} for data/drawdown.json (${String(g.stderr || '').trim().slice(0, 70) || 'no stderr'}) — the drawdown plaintext guard did NOT run, and an empty answer from a failed git must never be read as "nothing is tracked"`);
+      else if ((g.stdout || '').trim()) fail('drawdown.json', 'TRACKED by git — it carries navSGD and a valueSGD for every position, the same class of balance data as valuation.json. It must stay gitignored; only data/drawdown.enc may be committed');
+      else ok('drawdown: data/drawdown.json is not tracked by git (checked, exit 0) — only drawdown.enc ships');
+
+      const errs = (DD.scan && DD.scan.errors) || [];
+      if (errs.length) warn('drawdown.json', `last scan recorded ${errs.length} error(s) — ${errs.slice(0, 3).map(e => `${e.t || e.stage || '?'}: ${String(e.why || e.message || '').slice(0, 70)}`).join('; ')}${errs.length > 3 ? ` (+${errs.length - 3} more)` : ''} — those lines carry no drawdown and are not counted as flat`);
+
+      const SC = DD.scopes || {}, NW = SC.netWorth, RS = SC.riskSleeve, LV = SC.levered;
+      const n2 = v => v == null || !Number.isFinite(Number(v)) ? '?' : String(+Number(v).toFixed(2));
+      if (!under.length && !noSigma.length && !unstamped.length && age != null && age <= 3) {
+        ok(`drawdown: checked ${when} (${age === 0 ? 'today' : age + 'd ago'}) · net worth ${n2(NW && NW.drawdownPct)}% off peak (${n2(NW && NW.usedOfTolerancePct)}% of ${n2(NW && NW.tolerancePct)}% tolerance, ${NW ? NW.historySessions : '?'} session(s) only)`
+          + ` · risk sleeve ${n2(RS && RS.drawdownPct)}% off peak (${n2(RS && RS.usedOfTolerancePct)}% of ${n2(RS && RS.tolerancePct)}%)`
+          + ` · levered silver ${n2(LV && LV.fromPeakPct)}% off peak, leverage ${LV ? LV.leverage : '?'}x vs ${LV ? LV.ceiling : '?'}x, stressed call ${n2(LV && LV.distanceToCallPctStressed)}% away, survivability ${LV && LV.survivability && LV.survivability.pass === false ? 'FAIL' : 'pass'}`
+          + ` · ${(DD.positions || []).length} position(s), ${evs.length} retained state(s), all ${GATE}bp-gated and bar-stamped`);
+      }
+    }
+  } catch (e) { warn('drawdown.json', `PHASE 9 check did not run: ${String((e && e.message) || e).slice(0, 120)}`); }
 }
 
 // ── report ─────────────────────────────────────────────────────────────────

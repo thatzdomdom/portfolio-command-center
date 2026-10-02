@@ -58,6 +58,12 @@ const EMAIL_TO_BLOCK = [
   [/^RISK STATE/, 'blk-risk'],
   [/^MACRO REGIME/, 'blk-risk'],
   [/^MACRO STANCES/, 'blk-risk'],
+  // Phase 9 (2 Oct 2026): the drawdown block is a SIGNALS heading by name — so the degraded
+  // (no-research) rebuild in daily-brief.js keeps it, since its numbers are computed in code — but
+  // today.html renders it inside blk-risk beside the gate, cluster and leverage lines, not in
+  // blk-changed. More specific than the generic rule below, so it must sit above it: the first
+  // matching entry wins.
+  [/^🔔 SIGNALS — RISK/, 'blk-risk'],
   [/^🔔 SIGNALS/, 'blk-changed'],
   [/^WHAT WAS UPDATED/, 'blk-changed'],
   [/^MODEL SIGNALS/, 'blk-changed'],

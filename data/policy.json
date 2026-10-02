@@ -1,5 +1,5 @@
 {
- "version": "2026-09-20",
+ "version": "2026-10-02",
  "note": "Severity is a function of EVIDENCE CLASS first and size second. Sells and congress never rise above Log. Push carries a prescribed action or it is not push; insider signals never push — a cluster buy's edge plays out over 6-12 months. Thresholds in USD unless stated. Edit here, not in code.",
  "insider": {
   "excludeCodes": [
@@ -190,6 +190,63 @@
   "neverInitiateAt": "crowded",
   "neverInitiateAtWhy": "'crowded' is a value of crowding.level, not a rung — themes.json computes entryWindow as stage === 'Priced' AND crowding.level !== 'crowded', and the pages and the brief report that boolean rather than deriving it again.",
   "note": "The radar counts filings. It never sizes a position and never enters The One Action."
+ },
+ "drawdown": {
+  "cadence": "daily",
+  "addedOn": "2026-10-02",
+  "purpose": "INFORMATION, NEVER DE-GROSSING. regime.notRules records two things this book tested and rejected: P&L-triggered de-grossing (return/drawdown 0.67 vs 0.80) and a volatility ceiling. Selling into a drawdown is the one response the owner's own backtest measured as destructive, so no row produced from this block may ask for a position to be cut because it fell, and nothing here sizes or caps by volatility.",
+  "whyItExists": "Added 2 Oct 2026. The pages already DISPLAYED that Xiaomi was 58% below its 52-week high and nothing had ever told the owner. The gap was real; what arrived to fill it was an assistant's email calling a 4.2% Xiaomi day a BREACH of a -3% rule that does not exist here. That move was 4.5bp of net worth and 1.4 sigma against the name's own volatility.",
+  "materialityFirst": "A percentage move on a position is not a risk fact until it is multiplied by position size. The priced sleeve is ~18% of NAV (cash 41% + property 34% cannot move), the largest priced line is 225bp of NAV, and a 1-sigma day on the biggest mover shifts NAV by under 4bp. Thresholds are set from THAT arithmetic: a 25bp single-day gate would need a ~12-sigma move and could never fire, which is how unanchored thresholds end up as decoration.",
+  "anomaly": {
+   "notableSigma": 3,
+   "notableNavBp": 10,
+   "logSigma": 2,
+   "logNavBp": 3,
+   "sigmaFrom": "technicals.json vol60, annualised, divided by sqrt(252)",
+   "bothMustBind": true,
+   "why": "a fixed percentage fires constantly on a 47-vol name and never on an 11-vol one: -3% is 1.4 sigma on Xiaomi and 4.3 sigma on VICOM. Sigma normalises the move against the series' OWN distribution, which is anomaly detection and NOT the volatility ceiling regime.notRules rejected — nothing is sized or capped by vol. Materiality and sigma must BOTH bind for a Notable, because a 6-sigma move on a 4bp position is a news item, not a risk event, and the news feed owns that.",
+   "purposeOfTheLine": "to ask whether news.json carried the story, never to trade the move"
+  },
+  "thesis": {
+   "bands": [
+    25,
+    40,
+    60
+   ],
+   "minNavBp": 25,
+   "ask": "NOTE",
+   "why": "a position far below its own peak is a question about the REASON for holding it, answerable in writing. Six lines are 26-58% below their 52-week highs today and none has ever prompted a line. The ask is a NOTE reply recording why it is still held; it is explicitly not a trim, because trimming on drawdown tested harmful here."
+  },
+  "margin": {
+   "stressedDistanceNotablePct": 30,
+   "stressedDistanceLogPct": 40,
+   "why": "the levered silver sleeve is the ONLY scope where a price fall compels a response, and the response is REPAY under the signed Rule 1, never sell. Bands tighten as the stressed call price approaches, so they are measured on distance REMAINING, not on the fall itself."
+  },
+  "regime": {
+   "fractions": [
+    0.5,
+    0.8,
+    1
+   ],
+   "why": "drawdown measured against the tolerance the regime block itself claims, so exceeding it indicts the ASSUMPTION rather than the holdings — the same logic as regime.killSwitch, which switches a signal off on a negative realised slope, not on P&L. regime.status has read 'default · CIO recommendation · unconfirmed' since 12 Sep; these bands are what would finally give decision 2 teeth."
+  },
+  "tolerance": {
+   "riskSleevePct": 25,
+   "netWorthPct": 13.5,
+   "source": "regime.expected, verbatim: '~13% CAGR at ~-25% max drawdown at the risk-sleeve level (post-mortem); roughly -12% to -15% at net-worth level once property, SSB, T-bill and cash ballast is counted'. 13.5 is the midpoint of that stated -12% to -15% band.",
+   "status": "PROPOSED — derived from the owner's own regime text, not separately ratified. Ratifying decision 2 ratifies these."
+  },
+  "riskSleeveExcludes": [
+   "Cash",
+   "Property",
+   "Private Equity"
+  ],
+  "bandsNotStates": "An event is emitted only when something enters a WORSE band than the one already recorded in drawdown.json. 'Xiaomi is 58% off its high' is true every morning and printing it every morning is wallpaper — the same mistake the theme radar made with a standing stage. Recovery lowers the band silently, so a position oscillating around a threshold cannot alert twice for one fall.",
+  "completedBarsOnly": "Every figure comes from a COMPLETED close on the instrument's own exchange calendar. A session still trading has no close and therefore no opinion here. The alert that prompted this block read an intraday quote on an unfinished session and called it 'the day'.",
+  "note": "This block measures and asks. It never sizes a position, never enters The One Action, and the only action any row may request is REPAY (margin) or a written NOTE (thesis).",
+  "retainDays": 45,
+  "retentionWhy": "events carry a stable id and are retained 45 days so a skipped or failed alerts.js cannot lose a band crossing — the same append-only discipline as the hkex and alerts feeds.",
+  "bandsLiveAt": "thesis.bands and regime.fractions are the ONLY copies. A duplicate aggregate (drawdown.bands) existed and drawdown.js read THAT, so editing the documented key changed nothing while looking like it had — the same two-copies-of-one-truth failure the book.json<->index.html parity gate exists to catch. drawdown.json still publishes a `bands` object; it is derived output, not a source."
  },
  "channels": {
   "Notable": [
