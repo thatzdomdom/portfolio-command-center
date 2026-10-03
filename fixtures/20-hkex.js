@@ -132,6 +132,13 @@ module.exports = {
       scans: [{ date: ctx.today, at: new Date().toISOString(), codes: 3, rows: all.length + 1, kept: all.length + 1 }],
     };
     ctx.write('hkex.json', hkex);
+    // ISOLATE FROM THE LIVE LOG BEFORE COUNTING. The sandbox copies the REAL data/alerts.json, which
+    // by now carries production HKEX rows from the daily 06:45 scan — so counting every `hk:` row
+    // counted this fixture's synthetic notices PLUS whatever production had already logged (48 became
+    // 52 on 2026-10-03) and swept a real BlackRock "sold HKD 172.1M" headline into the non-trade
+    // assertion as though this fixture had produced it. An absolute count is only meaningful over rows
+    // THIS run created, so the family is cleared first — the same isolation fixture 22 uses.
+    ctx.edit('alerts.json', a => { a.alerts = (a.alerts || []).filter(x => !/^hk:/.test((x && x.id) || '')); return a; });
     const before = (ctx.read('alerts.json').alerts || []).length;
     const r1 = ctx.run('alerts.js');
     const A1 = ctx.read('alerts.json') || { alerts: [] };
@@ -157,9 +164,18 @@ module.exports = {
       && !!nb && /why Notable: a director or chief executive buying their own listed company/.test(nb.detail || ''), js(nb && nb.detail));
     ctx.check('(c) the Inbox row is dated by the FILING date, not the relevant event: the buy reads 2026-09-03 and says "dealt 31 Aug, filed 3 Sep"',
       !!bkBuy && bkBuy.date === '2026-09-03' && /dealt 31 Aug, filed 3 Sep \(3d\)/.test(bkBuy.detail || ''), js(bkBuy && { date: bkBuy.date, detail: bkBuy.detail }));
-    ctx.check('money is quoted in HKD with the SGD equivalent, and usd is present only as a sort key',
-      !!bkBuy && /HKD 230\.3M/.test(bkBuy.headline || '') && /at HKD 27\.6247/.test(bkBuy.detail || '') && /≈ S\$37\.5M/.test(bkBuy.detail || '') && typeof bkBuy.usd === 'number',
-      js(bkBuy && { headline: bkBuy.headline, usd: bkBuy.usd }));
+    // The SGD equivalent is DERIVED from the sandbox's own fx.json, not frozen. It used to assert a
+    // literal "≈ S$37.5M", which was true on the day it was written and became false on 2026-10-03
+    // when HKD/SGD drifted to 0.163094 and the same trade rounded to S$37.6M. A hardcoded figure
+    // computed from live FX is a time bomb, not a test — but dropping the figure entirely would stop
+    // catching a wrong conversion, so the expectation is recomputed here from the same inputs and the
+    // exact string is still required. Same formatter as alerts.js: one decimal of millions.
+    const hkdSgd = (() => { const f = ctx.read('fx.json') || {}; return (f.rates && f.rates.HKD) || f.HKD || null; })();
+    const expSgd = hkdSgd == null ? null : `S$${(8338458 * 27.6247 * hkdSgd / 1e6).toFixed(1)}M`;
+    ctx.check('money is quoted in HKD with the SGD equivalent (recomputed from the sandbox fx, never frozen), and usd is present only as a sort key',
+      !!bkBuy && !!expSgd && /HKD 230\.3M/.test(bkBuy.headline || '') && /at HKD 27\.6247/.test(bkBuy.detail || '')
+      && bkBuy.detail.indexOf(`≈ ${expSgd}`) > -1 && typeof bkBuy.usd === 'number',
+      js(bkBuy && { headline: bkBuy.headline, usd: bkBuy.usd, expectedSgd: expSgd, hkdSgd }));
     const others = hk1.filter(a => !/^hk:1810:(CS20260903E00040|CS20260829E00026|DA20260918E09999)$/.test(a.id));
     ctx.check(`(a) all ${others.length} non-trade rows say NOT A TRADE and none claims a verb — no "bought"/"sold" anywhere in their headlines`,
       others.length === hkex.filings.length - 3 && others.every(a => / · NOT A TRADE · HKEX code /.test(a.headline || ''))

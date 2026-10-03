@@ -195,6 +195,7 @@ async function main() {
   });
   const selected = fixtures.filter(x => x.name === '00-baseline' || !filter.length || filter.some(s => x.name.includes(s)));
   if (selected.length < 2 && filter.length) die(`no fixture matches "${filter.join(' ')}"`);
+  const STARTED = Date.now();
   console.log(`test-fixtures — ${today} · ${selected.length} fixture(s) · sandbox ${TMP}${KEEP ? ' (kept)' : ''}\n`);
   let baselineGreen = null; const results = [];
   for (const fx of selected) {
@@ -235,6 +236,32 @@ async function main() {
   badNtfy.forEach(c => console.log(`  UNEXPECTED ntfy call in ${c.fx}: ${c.args.join(' ').slice(0, 200)}`));
   const failed = results.filter(r => r.status === 'FAIL' || r.status === 'RED');
   console.log(`${results.length} fixture(s) · ${results.filter(r => r.status === 'PASS' || r.status === 'GREEN').length} passed · ${failed.length} failed · ${results.filter(r => r.status === 'SKIPPED').length} skipped${KEEP ? `\nkept: ${TMP}` : ''}`);
+  // ── the ledger (3 Oct 2026) ──────────────────────────────────────────────────────────────────
+  // Until today NOTHING ran this suite: not validate-all, not publish, not research-headless, no
+  // workflow, no launchd job. It only ever ran when someone typed it. Fixtures 20 and 21 were red for
+  // 12 days and the only reason anyone found out was a manual run — the regression net had a hole in
+  // it the whole time and the net was the thing meant to report holes. So the result is now written
+  // where the daily validator can read it, and research-headless.sh runs the suite every morning
+  // AFTER publish, so a red suite reports loudly and can never take the 08:15 brief down with it.
+  try {
+    const ledger = {
+      at: new Date().toISOString(), today,
+      total: results.length,
+      passed: results.filter(r => r.status === 'PASS' || r.status === 'GREEN').length,
+      failed: failed.length, skipped: results.filter(r => r.status === 'SKIPPED').length,
+      failedNames: failed.map(r => r.name),
+      failedChecks: failed.flatMap(r => r.checks.filter(c => !c.ok).map(c => `${r.name}: ${c.label}`)).slice(0, 12),
+      knownGaps: results.flatMap(r => (r.gaps || []).map(g => `${r.name}: ${g}`)).length,
+      unexpectedNtfy: badNtfy.length,
+      // `fixtures` is the discovered array; FIXTURES is the DIRECTORY PATH, so comparing against its
+      // .length compared a count to the character length of a filesystem path and reported full:false
+      // on a complete run. validate-all gates on this, and a --only run must not satisfy it.
+      selected: selected.length, discovered: fixtures.length, full: selected.length === fixtures.length,
+      durationMs: Date.now() - STARTED,
+      note: 'written by scripts/test-fixtures.js; read by scripts/validate-all.js so a red suite surfaces in the morning integrity section. Gitignored: it is harness state, not portfolio data.',
+    };
+    fs.writeFileSync(path.join(__dirname, '..', 'data', '.fixtures.json'), JSON.stringify(ledger, null, 1) + '\n');
+  } catch (e) { console.log(`  (ledger not written: ${e.message} — the suite result above still stands)`); }
   process.exit(failed.length || badNtfy.length ? 1 : 0);
 }
 main().catch(e => die(e.stack || e));

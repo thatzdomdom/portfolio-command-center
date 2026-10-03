@@ -205,6 +205,12 @@ module.exports = {
     };
     ctx.write('themes.json', synth);
 
+    // ISOLATE FROM THE LIVE LOG BEFORE COUNTING. The sandbox copies the REAL data/alerts.json, which
+    // carries production theme rows (physical-ai, humanoid-robot) from the weekly Monday radar, so
+    // "3 stage rows" counted 5 and the failure was the live log, not the code under test. Cleared
+    // first so every count below is a count of THIS run — the isolation fixture 22 uses.
+    ctx.edit('alerts.json', a => { a.alerts = (a.alerts || []).filter(x => x && x.family !== 'theme'); return a; });
+
     const r1 = ctx.run('alerts.js');
     const A1 = ctx.read('alerts.json') || { alerts: [] };
     const th1 = A1.alerts.filter(a => a.family === 'theme');

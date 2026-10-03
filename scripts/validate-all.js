@@ -396,6 +396,28 @@ else {
   } catch (e) { fail('git', `could not run git ls-files (${String(e.message || e).slice(0, 80)}) — the plaintext guard did NOT run, so it is reported as a failure rather than a pass`); }
   if (tracked) fail('git', `sensitive PLAINTEXT is tracked: ${tracked.replace(/\n/g, ', ')} — must be gitignored; only .enc envelopes may be committed`);
   else if (tracked === '') ok('git: no sensitive plaintext tracked');
+  // ── THE REGRESSION SUITE (3 Oct 2026) ────────────────────────────────────────────────────────
+  // Nothing ran scripts/test-fixtures.js: not this file, not publish.js, not research-headless.sh,
+  // no workflow, no launchd job. It ran only when someone typed it, so fixtures 20 and 21 sat red for
+  // 12 days — the net meant to report holes had one. research-headless.sh now runs the suite every
+  // morning AFTER publish (so a red suite can never take the 08:15 brief down) and it leaves a ledger
+  // at data/.fixtures.json; this reads it. WARN, never FAIL: a code-regression test going red is not
+  // a reason to stop publishing today's prices, and the morning integrity section is where the owner
+  // will see it. A --only run does not count as the suite having run.
+  try {
+    const FX = J('.fixtures.json');
+    if (!FX) warn('.fixtures.json', 'absent — the regression suite has never written a ledger, so nothing here can tell you whether it passes. Run: node scripts/test-fixtures.js');
+    else {
+      const age = Math.round((Date.parse(today) - Date.parse(FX.today)) / 864e5);
+      if (!Number.isFinite(age)) warn('.fixtures.json', `has no readable date (today: ${FX.today})`);
+      else if (age > 2) warn('.fixtures.json', `the regression suite last ran ${age} days ago (${FX.today}) — it is wired into research-headless.sh after publish, so this means that step is failing or being skipped. The suite is the only thing that checks the CODE; stale here means unguarded.`);
+      else if (FX.failed > 0) warn('.fixtures.json', `the regression suite is RED: ${FX.failed} of ${FX.total} fixture(s) failing — ${(FX.failedNames || []).join(', ')}${(FX.failedChecks || []).length ? ` · first failure: ${FX.failedChecks[0]}` : ''}`);
+      else if (FX.unexpectedNtfy > 0) warn('.fixtures.json', `the suite passed but made ${FX.unexpectedNtfy} unexpected ntfy call(s) — a fixture reached the real alarm channel`);
+      else if (!FX.full) warn('.fixtures.json', `the last suite run was PARTIAL (${FX.selected} of ${FX.discovered} fixture(s), ${FX.today}) — a --only run does not clear this check`);
+      else ok(`fixtures: all ${FX.passed} fixture(s) green (ran ${FX.today}${age === 0 ? ', today' : `, ${age}d ago`}, ${Math.round((FX.durationMs || 0) / 1000)}s)${FX.knownGaps ? ` · ${FX.knownGaps} KNOWN GAP(s) still open` : ''}`);
+    }
+  } catch (e) { warn('.fixtures.json', `the regression-suite check did not run: ${String((e && e.message) || e).slice(0, 100)}`); }
+
   const man = J('manifest.json');
   if (!man) warn('manifest.json', 'absent — publish.js writes it');
   else if (man.sgtDate !== today) warn('manifest.json', `sgtDate ${man.sgtDate} ≠ today ${today} (publish has not run yet today)`);

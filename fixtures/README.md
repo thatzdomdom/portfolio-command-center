@@ -83,10 +83,19 @@ arithmetic runs against `scripts/drawdown.js`'s exported pure helpers — `daily
 Everything the fixture COUNTS, it counts over a **synthetic `data/drawdown.json` it writes itself**, whose
 two positions are named `FX22BIG` (106.34bp, -58.04% off peak → alerts) and `FX22TINY` (2.91bp, -54.2% off
 peak → silent, the materiality gate) so they can never be mistaken for a book line. It clears the sandbox's
-`family:'risk'` rows before each run, so every count is a count of THAT run and not of the log's history —
-**this is deliberately the opposite of what makes `20-hkex` and `21-themes` red**, which assert absolute
-counts over the sandbox's copy of the live, daily-drifting `data/alerts.json`. A fixture that goes red
-because a scheduled job ran on time is a fixture nobody trusts.
+`family:'risk'` rows before each run, so every count is a count of THAT run and not of the log's history.
+A fixture that goes red because a scheduled job ran on time is a fixture nobody trusts.
+
+**`20-hkex` and `21-themes` were exactly that, and were repaired on 3 Oct 2026.** Both counted every row of
+their family in the sandbox's copy of the live `data/alerts.json`, which by then carried production rows from
+the daily 06:45 HKEX scan and the weekly Monday theme radar — so `48 filings → 48 hk: rows` counted 52, and
+`3 stage rows` counted 5, and a real BlackRock "sold HKD 172.1M" headline was swept into an assertion about
+synthetic non-trade rows. `20-hkex` had a second, slower bomb: it asserted a literal `≈ S$37.5M` for a
+conversion computed from live FX, which became false when HKD/SGD drifted to 0.163094 and the same trade
+rounded to S$37.6M. Both now clear their family before counting (the isolation above), and the SGD figure is
+**recomputed from the sandbox's own `fx.json`** so the exact string is still required but cannot rot. The
+general rule: an absolute count is only meaningful over rows the run created, and any expectation derived
+from live data must be derived in the fixture too, never frozen.
 
 Against the LIVE `data/drawdown.json` it asserts only **invariants and relationships**, never counts: every
 event has a unique id and a reason; every `thesis` event is at or above `policy.drawdown.thesis.minNavBp`;
@@ -121,3 +130,22 @@ TESTED AND HARMFUL in this book, so no risk row and no brief line may ask for a 
 de-risked because it fell. The only actions the family may request are REPAY (margin, sized by `one-action.js`)
 and a written NOTE (thesis), and `policy.drawdown.purpose` is quoted verbatim rather than paraphrased —
 a paraphrase is how "information" becomes "consider reducing" three edits later.
+
+## `23-fixture-ledger` — the watchdog's own watchdog (3 Oct 2026)
+
+Until 3 Oct 2026 **nothing ran this suite**: not `validate-all.js`, not `publish.js`, not
+`research-headless.sh`, not a workflow, not a launchd job. It ran only when a human typed it, and
+`20-hkex` and `21-themes` sat red for twelve days before a manual run found them. The regression net had a
+hole in it and the net was the thing meant to report holes.
+
+`test-fixtures.js` now writes `data/.fixtures.json` (gitignored — harness state, not portfolio data);
+`research-headless.sh` runs the suite every morning **after publish**; and `validate-all.js` reads the
+ledger, so a red suite surfaces in the morning integrity section. `23-fixture-ledger` tests that check
+against eight synthetic ledgers it writes itself: green-and-full, RED, stale at 4 days, the 2-day boundary
+that must still pass (or a weekend turns the check into wallpaper), a `--only` partial run, a pass that
+leaked a real ntfy call, an absent ledger, and a truncated one.
+
+Its most important assertion is the last: **every one of those states is a WARNING and none exits 1.**
+`validate-all`'s `problems[]` turn the publish red and send the 08:15 brief as `[DEGRADED]`. By the time the
+suite runs, publish has already happened — and a stale assertion about a fixture is not a reason to take the
+owner's morning email down. If someone later "tightens" these to `fail()`, this fixture is what says no.

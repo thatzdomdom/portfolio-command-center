@@ -156,4 +156,17 @@ else echo "$(date '+%F %T') publish: BLOCKED — nothing reached the live site; 
 # ── CUTOVER CLOCK (phase 4) — reads the ledger publish.js just wrote; never gates anything.
 /opt/homebrew/bin/node scripts/cutover-check.js || echo "$(date '+%F %T') cutover-check: failed — data/.cutover.json not updated this run"
 
+# THE REGRESSION SUITE, DELIBERATELY AFTER PUBLISH. Nothing ran it until 3 Oct 2026 — not validate-all,
+# not publish.js, not this script, no workflow, no launchd job — so fixtures 20 and 21 were red for 12
+# days unnoticed. It runs here, last, and NON-FATALLY on purpose: a code-regression test going red is
+# not a reason to stop publishing today's prices or to degrade the 08:15 brief, and by this point the
+# publish has already happened. It writes data/.fixtures.json, which validate-all reads on the NEXT
+# run and reports in the morning integrity section. ~27s against an 18-minute pipeline.
+if /opt/homebrew/bin/node scripts/test-fixtures.js > /tmp/pcc-fixtures.out 2>&1; then
+  echo "$(date '+%F %T') fixtures: $(tail -1 /tmp/pcc-fixtures.out)"
+else
+  echo "$(date '+%F %T') fixtures: RED — $(tail -1 /tmp/pcc-fixtures.out)"
+  grep -E '^  ✗' /tmp/pcc-fixtures.out | head -6 | sed 's/^/    /'
+fi
+
 echo "=== $(date '+%F %T') research end (exit $EC) ==="
