@@ -1,0 +1,53 @@
+# 13F holdings scan — runs on GitHub, not on the Mac.
+#
+# Phase 6 of the 11 Sep 2026 redesign: 13F tables come from EDGAR primary data parsed by code, not
+# from the research agent's morning pass (whose every-run stamp bump put a fresh date over a
+# quarter-old table on 18 Aug). 13F is quarterly and 45 days late by law, so once a day is plenty:
+# 06:15 SGT, ahead of the Mac's 07:02 pull. Commits data/13f.json (facts) and data/.cusips.json (the
+# OpenFIGI ticker cache, so later runs map only CUSIPs never seen before). Actions and the Mac never
+# write the same file.
+#
+# timeout-minutes is sized for a cold cache: ~1,500 CUSIPs at OpenFIGI's keyless 25 requests/minute
+# (10 per request) is 6–12 minutes; a warm run is ~2 minutes of EDGAR reads.
+name: 13f-scan
+on:
+  schedule:
+    - cron: '15 22 * * *'     # 06:15 SGT daily
+  workflow_dispatch:
+    inputs:
+      fund:
+        description: 'one fund id from data/funds.json (blank = every tracked fund)'
+        default: ''
+permissions:
+  contents: write
+concurrency:
+  group: 13f-scan
+  cancel-in-progress: false
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Scan EDGAR 13F filings
+        env:
+          SEC_UA: ${{ secrets.SEC_UA }}
+          FUND: ${{ github.event.inputs.fund }}
+        run: |
+          set -e
+          test -n "$SEC_UA" || { echo "SEC_UA secret missing — SEC requires an identifying User-Agent"; exit 78; }
+          if [ -n "$FUND" ]; then node scripts/13f-scan.js --fund "$FUND"; else node scripts/13f-scan.js; fi
+      - name: Commit 13f.json and the CUSIP cache if changed
+        run: |
+          git config user.name "13f-scan (GitHub Actions)"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/13f.json data/.cusips.json
+          if git diff --cached --quiet; then echo "no change"; exit 0; fi
+          git commit -m "13f: EDGAR 13F scan $(TZ=Asia/Singapore date +'%F %H:%M') SGT"
+          git pull --rebase --autostash origin main
+          git push origin HEAD:main
