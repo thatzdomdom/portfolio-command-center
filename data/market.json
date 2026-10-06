@@ -1,51 +1,51 @@
 {
- "updated": "2026-10-05",
- "note": "Monday 5 Oct 2026 run, 07:02 SGT, before Asia's open. No new trading session anywhere since Friday 2 Oct's US close (Sat/Sun non-trading). fearGreed's equity components and breadth are honest carry-forwards from Friday's close (re-verified, not re-derived); the crypto Fear&Greed reading (65, Greed) is genuinely fresh since crypto trades continuously. Flows remain the latest published weekly editions (BofA/EPFR week ended 30 Sep, ICI week ended 23 Sep) -- both re-checked this run, neither has a newer edition yet.",
+ "updated": "2026-10-06",
+ "note": "Tuesday 6 Oct 2026 run, 07:02 SGT, before Asia's open. Latest completed US cash session is Monday 5 Oct close (S&P 500 7,773.95 +0.66% d/d; VIX 15.52 +1.37% d/d -- VIX ticked UP despite the equity rally, a risk-off divergence noted below). CNN's own Fear&Greed index already incorporates Monday's close (confirmed via its own 'previous close'/'a week ago' labels), so it is genuinely fresh; crypto Fear&Greed is continuously updated and also fresh. Breadth: the S&P/VIX headline levels below are updated to Monday, but granular internals (NYSE adv/decl, 52-wk highs/lows, McClellan Oscillator/Summation, sector %>200dma) could NOT be independently confirmed for Monday this run -- StockCharts/Barchart/WSJ/mcoscillator.com either blocked direct fetch or returned mutually conflicting figures on repeated checks -- so those remain honest carry-forwards from Friday 2 Oct, labeled as such. Flows: BofA/EPFR (week ended 30 Sep) and ICI (week ended 23 Sep) were both re-checked again this run -- neither has a newer edition yet (BofA/EPFR next due ~8-9 Oct; ICI next due ~7 Oct). Also checked: BOJ Gov Ueda's speech is scheduled for today (Tue 6 Oct, ~13:35-14:35 SGT) and had NOT happened yet as of this 07:02 SGT run -- no readout exists to report.",
  "fearGreed": {
-  "value": 31,
+  "value": 43,
   "rating": "Fear",
-  "asOf": "2026-10-02 (Fri US close; carried forward -- no new equity session since: Sat/Sun non-trading, and today Mon 5 Oct 07:02 SGT is before any exchange open)",
-  "prevClose": 28,
-  "prev1w": 37,
-  "prev1m": 46,
-  "prev1y": 54,
-  "cryptoValue": 65,
+  "asOf": "2026-10-05 (Mon US close -- CNN's own index already reflects Monday's session, confirmed via its own 'previous close' (31) and '1 week ago' (34) labels matching Friday/last-Monday's known readings)",
+  "prevClose": 31,
+  "prev1w": 34,
+  "prev1m": 45,
+  "prev1y": 52,
+  "cryptoValue": 70,
   "cryptoRating": "Greed",
   "components": [
    {
     "name": "Market Momentum",
-    "reading": "S&P 500 vs its 125-day average; unchanged since Friday's close, reads 37",
-    "signal": "fear"
+    "reading": "S&P 500 vs its 125-day average; CNN labels this Neutral as of Mon 5 Oct close (exact sub-index value not independently re-pulled this run)",
+    "signal": "neutral"
    },
    {
     "name": "Stock Price Strength",
-    "reading": "52-wk highs still badly outnumbered by lows (NYSE 13 highs vs 29 lows, 2 Oct); reads 1 (extreme fear)",
+    "reading": "52-wk highs still badly outnumbered by lows; CNN labels this Extreme Fear as of Mon 5 Oct close",
     "signal": "fear"
    },
    {
     "name": "Stock Price Breadth",
-    "reading": "McClellan Oscillator -39.3 (2 Oct); reads 1 (extreme fear)",
+    "reading": "CNN labels this Extreme Fear as of Mon 5 Oct close (consistent with still-negative McClellan Oscillator)",
     "signal": "fear"
    },
    {
     "name": "Put/Call Options",
-    "reading": "reads 33 (Fear), unchanged from Friday",
+    "reading": "CNN labels this Fear as of Mon 5 Oct close",
     "signal": "fear"
    },
    {
     "name": "Market Volatility",
-    "reading": "VIX 15.31 (-6.59% d/d 2 Oct); reads 50 (neutral)",
+    "reading": "VIX 15.52 (+1.37% d/d, 5 Oct) -- ticked UP despite the equity rally; CNN labels this Neutral (vs its own 50-day average)",
     "signal": "neutral"
    },
    {
     "name": "Safe-Haven Demand",
-    "reading": "stocks vs bonds, 20-day; reads 52 (neutral)",
-    "signal": "neutral"
+    "reading": "stocks vs bonds, 20-day; CNN labels this Greed as of Mon 5 Oct close",
+    "signal": "greed"
    },
    {
     "name": "Junk Bond Demand",
-    "reading": "junk-vs-IG spread; reads 44 (Fear)",
-    "signal": "fear"
+    "reading": "junk-vs-IG spread; CNN labels this Extreme Greed as of Mon 5 Oct close",
+    "signal": "greed"
    }
   ],
   "sources": [
@@ -56,18 +56,18 @@
   ]
  },
  "breadth": {
-  "asOf": "2026-10-02 (Fri close; last completed session -- no new session as of this Mon 5 Oct 07:02 SGT run, before any exchange open)",
+  "asOf": "2026-10-05 for S&P 500/VIX headline levels (Mon US close); 2026-10-02 (Fri close) for all other internals below -- Monday's adv/dec, highs/lows, McClellan and sector breadth could not be independently confirmed this run (sources blocked or conflicting), so those rows are honest carry-forwards, not Monday re-derivations",
   "metrics": [
    {
     "label": "S&P 500 close",
-    "value": "7,722.72 (+0.73% d/d, 2 Oct)",
+    "value": "7,773.95 (+0.66% d/d, 5 Oct)",
     "signal": "bullish",
     "pct": null
    },
    {
     "label": "VIX",
-    "value": "15.31 (-6.59% d/d, 2 Oct)",
-    "signal": "bullish",
+    "value": "15.52 (+1.37% d/d, 5 Oct) -- ticked UP despite the equity rally, a risk-off divergence",
+    "signal": "bearish",
     "pct": null
    },
    {
@@ -113,7 +113,7 @@
     "pct": null
    }
   ],
-  "note": "Unchanged from Friday's close -- a breadth-confirmed one-day rally (adv/dec 1.56:1, McClellan still negative) sitting on top of structurally narrow participation (45%/25% above 200/50-day, only 3/11 sectors majority-above 200dma); no new session exists to update this as of Mon 5 Oct 07:02 SGT.",
+  "note": "Monday 5 Oct's index-level move (S&P +0.66%, VIX actually UP +1.37%) is a genuine new data point and a notable divergence -- equities rallied while the VIX rose, unusual outside a defensive/rotation tape. But the internals that would confirm or deny whether Monday's rally was broad-based (adv/dec, highs/lows, McClellan, sector>200dma) could not be independently verified this run: StockCharts/mcoscillator.com/Barchart/WSJ either blocked direct fetch or gave mutually conflicting figures across repeated checks, so those rows below are carried forward from Friday 2 Oct's breadth-confirmed-but-narrow picture (45%/25% above 200/50-day, only 3/11 sectors majority-above 200dma) rather than re-derived for Monday.",
   "sources": [
    "https://www.mcoscillator.com/market_breadth_data/",
    "https://www.barchart.com/stocks/quotes/$S5TH/technical-analysis",
@@ -121,9 +121,9 @@
   ]
  },
  "flows": {
-  "asOf": "2026-10-05",
-  "period": "BofA/EPFR Flow Show: week ended Wed 30 Sep 2026 (published ~1-3 Oct, still the latest edition). ICI: week ended Wed 23 Sep 2026 (next release due ~7 Oct, not yet published)",
-  "narrative": "Bonds out-earned equities globally for the week ended 30 Sep ($18.8bn vs $15.8bn), with a $118bn quarter-end cash outflow dwarfing what landed in tracked risk buckets. US equities logged a 2nd straight weekly outflow (-$2.7bn) even as China (+$3.7bn, best in 9 weeks), Japan (+$1.8bn) and EM (+$3.2bn) drew fresh money, while long-duration bonds and munis both had standout weeks.",
+  "asOf": "2026-10-06",
+  "period": "BofA/EPFR Flow Show: week ended Wed 30 Sep 2026 ('A Tail of Two Cities', published ~1 Oct, still the latest edition -- re-confirmed 6 Oct via Flow Show mirrors; next due ~Thu/Fri 8-9 Oct). ICI: week ended Wed 23 Sep 2026 (next release due ~7 Oct, re-confirmed 6 Oct still not yet published on ici.org)",
+  "narrative": "Bonds out-earned equities globally for the week ended 30 Sep ($18.8bn vs $15.8bn), with a $118bn quarter-end cash outflow dwarfing what landed in tracked risk buckets. US equities logged a 2nd straight weekly outflow (-$2.7bn) even as China (+$3.7bn, best in 9 weeks), Japan (+$1.8bn) and EM (+$3.2bn) drew fresh money, while long-duration bonds and munis both had standout weeks. No newer edition of either series exists yet as of this Tue 6 Oct re-check.",
   "regions": [
    {
     "region": "US Equities",

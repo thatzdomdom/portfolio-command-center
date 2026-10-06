@@ -1,68 +1,47 @@
 {
- "date": "2026-10-05T07:30:00+08:00",
- "coverage": "Monday 5 Oct 2026 ~07:02-07:30 SGT run. Clock established from the shell first (date, Asia/Singapore, America/New_York), cross-checked against git log (last commit 2026-10-04 18:10 SGT) and the price spine's own latestByExchange: the latest completed session everywhere on the book -- US, HK, JP, KR, SG -- is still Friday 2 Oct (Sat/Sun are non-trading and today's Asia session hasn't opened yet at 07:02 SGT); FUT shows a legitimate Sunday 4 Oct reopen bar and crypto is correctly labelled a continuously-trading level, not a close, dated 3-4 Oct. The last brief (Sunday 4 Oct, 08:10 SGT) is one calendar day old with zero trading sessions in between, so this is a same-session continuation, not a catch-up. Six research agents ran in parallel: congress+signals (fully rebuilt), insiders (which itself fanned out into SEC EDGAR, SGXNet and HKEX sub-agents -- the SGXNet and HKEX sub-agents ran long and were explicitly prompted to finalize rather than keep waiting; HKEX came back empty of anything new, but SGXNet's late report surfaced two genuinely fresher SGX tranches -- DBS/BlackRock 28 Sep and Wing Tai 29 Sep -- that were folded into intel.json), a Monday weekend news sweep (explicitly covering Sat 3 Oct and Sun 4 Oct before anything else, per the standing Monday rule), a macro+46-call model refresh, and a combined market-overview+fund-flows refresh. One material catch: the macro agent's first draft claimed an active US government shutdown since 1 Oct forcing a CPI blackout -- this was independently verified false via web search (the 2 Sep continuing resolution remains in force, funding the government through 11 Dec 2026) and corrected in model.json before publishing; the absence of a CPI print in this week's calendar is simply the normal release schedule, not a shutdown. Monday's theme-radar check was run: themes.json's two history rows (physical AI to Evidenced, humanoid robot to Watching) are dated 17 and 20 Sep respectively, both well outside the 7-day lookback window, so there is no stage change to report and the brief's themes key is correctly omitted entirely. investors.json was explicitly checked and left untouched: no new Trump OGE/Forbes disclosure or non-13F Berkshire/Pershing/Soros news cleared the bar for a profile edit.",
+ "date": "2026-10-06T08:16:00+08:00",
+ "coverage": "Tuesday 6 Oct 2026, 07:02 SGT run, completed 08:16 SGT after an auth-credential retry (the 07:02 pass wrote intel/model/news/market/flows-investors/track but was killed by the run's 75-min timeout before writing this brief, and validate-all correctly held publish rather than ship a stale brief under today's date). Clock verified via shell (date, Asia/Singapore, America/New_York), cross-checked against git log and the price spine. Latest completed sessions on the book: US cash + HK + SG equities Monday 5 Oct close; Japan and Korea still show Friday 2 Oct as the latest spine bar (one-session data-vendor lag, not a holiday -- flagged, not assumed); crypto is a continuously-traded level last dated 4 Oct, never called a close.",
  "tldr": [
-  "Weekend escalation in the Gulf: explosions reported in the Strait of Hormuz and a Saudi-backed Yemeni offensive to retake the Bab al-Mandeb chokepoint both broke Sunday 4 Oct, reinforcing the safe-haven case for the gold/silver sleeve even though oil's own price reaction was muted (WTI ~$91, Brent ~$102, both roughly flat) -- much of the risk premium already looks priced in.",
-  "Correction, not a new risk: an earlier draft of this run wrongly flagged an active US government shutdown; verified false -- the September 2 stopgap funds the government through 11 Dec 2026, so there is no shutdown and no shutdown-driven data blackout this week.",
-  "Credit stress is starting to broaden beyond the distressed tail: CCC-and-below OAS pushed to ~1,215bps (highest since Jan 2023) and broad HY OAS widened from 2.93% to 3.24% over the past week -- still early, but worth watching alongside the silver sleeve's leverage.",
-  "Gold/silver miners are in a second straight losing week (GDX -5.48%, SILJ -6.81%, silver -5% wk) even as the macro/geopolitical case for holding them stays intact -- $4,143 gold and $58.04 silver are the near-term lines in the sand flagged by this run's news sweep, not a reason to add or trim yet.",
-  "HK tech reopens into a liquidity-light week: Hang Seng fell 2.60% to 23,972.29 on Friday's first session back from National Day, and Stock Connect stays dark until Thursday 8 Oct -- expect wider swings on the 0700/0981/1810 sleeve until mainland flow returns.",
-  "SGX cut board lot sizes (100 -> 10 shares) for DBS, UOB, OCBC and eight other blue chips effective today, 5 Oct -- a modest structural liquidity positive for the core SG banking holdings, not a fundamental signal."
+  "Biggest live risk unchanged: the 1.677x levered silver sleeve is in survivability FAIL -- a stressed call sits ~26.6% away and one-action.js is asking for a ≥S$16,500 paydown to the signed 1.4x ceiling.",
+  "Wall Street hit fresh records Monday (S&P +0.66%, Nasdaq +1.05% to an all-time high) on AI-capex mega-cap strength, even as the VIX ticked UP to 15.52 -- an unusual rally/fear divergence worth watching, not yet a reversal signal.",
+  "Fed pricing firmed hawkish rather than pivoting: December hike odds rose to ~68-84% across venues ahead of Wed/Thu's FOMC minutes, with dovish Bowman and hawkish Schmid both speaking today and tomorrow.",
+  "Silver bounced off golden-pocket support near $61.72 Monday (SI=F settled $61.26, +2.14%) while gold and most miner-complex ETFs stayed flat-to-red in the spine's lagging prints -- the metals divergence that matters most for this book.",
+  "Smart-money convergence (congress + 13F + retail) rotated hard this run toward MU (Coatue +1,794%, Soros 7.9x) and AMD (Citadel +155%, Tiger Global new position); HK tech/chips rebounded Monday reversing Thursday's selloff.",
+  "Mainland China and Stock Connect remain shut for Golden Week through Thursday 8 Oct -- no Southbound flow read until then."
  ],
  "whatChanged": [
-  "intel.json: congress fully rebuilt (14 trades across 11 distinct members, led by Pelosi's $4.25-14.5M Bloom Energy buy ahead of its S&P 500 inclusion); signals rotated to GOOG, INTC, BE, SPCX, MSFT, AMKR on fresh congress/13F/Reddit overlaps",
-  "intel.json insiders: two genuinely fresher SGX tranches folded in this run -- DBS/BlackRock (28 Sep, SGD 21.4M consideration, 4.99%->5.00%) and Wing Tai/Cheng Wai Keung via spouse (29 Sep, 300,000 shares, 63.61%->63.65%); HKEX (0700/0981/1810) re-confirmed zero new filings beyond what was already tracked",
-  "model.json: macro re-verified and re-stamped (asOf 2026-10-05); the false shutdown claim was caught and corrected before publishing; all 40 universe calls plus 6 rare-earth extras refreshed (46 total)",
-  "market.json: fearGreed/breadth honestly carried forward from Friday's close (no new US session yet); crypto Fear&Greed is genuinely fresh at 65 (Greed); flows unchanged -- no newer BofA/EPFR or ICI edition exists yet",
-  "flows-investors.json: all 6 markets re-checked individually (not silently restamped) -- Japan/Korea/China/Singapore/US each confirmed no newer print exists yet; Hong Kong's Stock Connect blackout (Golden Week) reconfirmed through 7 Oct",
-  "news.json: 14 fresh items, with the weekend Hormuz/Yemen escalation and Tencent's $7bn Oracle AI-chip lease as the lead stories; all three homepage-only source citations flagged by the validator were replaced with the specific article URLs",
-  "track.json: today's 46-call snapshot appended (78 total on file)",
-  "investors.json: not touched this run -- explicitly checked, no disclosure cleared the weekly-update bar",
-  "brief.json themes: omitted -- no theme stage change within the last 7 days (both themes.json history rows are 17+ days old)"
+  "Intel: congress roster rebuilt (15 trades/13 members, 5 fresh swaps), signals rotated to MU/AMD/GOOG/UBER/META/INTC on fresh 13F convergence data, insiders re-checked across all 17 tracked names with zero new filings found.",
+  "Model: macro re-stamped today; regime narrative updated for Monday's record close, firmer December hike odds, and HY credit tentatively stabilizing off its Oct 1 peak (3.24% -> ~3.10%).",
+  "Market: Fear&Greed at 43 (Fear) using CNN's own Monday-close read; breadth internals (adv/decl, McClellan, sector %>200dma) carried forward from Friday -- sources blocked/conflicting on direct Monday re-derivation, labeled honestly.",
+  "News: 12 fresh items, newest dated today/Monday (Yemen ceasefire-adjacent territorial claim, Wall St records, oil slide, silver/gold miner divergence, HK tech rebound, China Golden Week closure).",
+  "Flows-investors: all 6 markets re-checked; no newer edition anywhere this run (JPX/SGX weekly, KOSPI daily-but-unchanged, HK Stock Connect dark for Golden Week, China margin data pre-holiday, US proxies still on last week's BofA/EPFR and ICI prints).",
+  "Track: today's 46-call snapshot appended (79 total retained).",
+  "Investors.json: untouched beyond code's date bump -- no profile disclosure changed this week.",
+  "Brief: this file -- the one piece the 07:02 pass didn't reach before its timeout; written now from the already-published, already-gated files above rather than re-researched."
  ],
  "regime": {
-  "label": "Risk-on relief rally meets a hawkish-paused (not pivoted) Fed and early signs of credit stress broadening beyond the distressed CCC tail",
-  "riskOn": 0.54,
-  "oneLiner": "Fed-hold odds for Oct 28 stayed ~82-84% with December hike pricing firming to ~65-77%, while broad HY credit spreads (not just the CCC tail) began widening this week -- a pause that's starting to show cracks, not a pivot."
+  "label": "AI-led risk-on rally extends to fresh records against a hawkish-paused (not pivoted) Fed, with credit stress tentatively stabilizing rather than resolving",
+  "riskOn": 0.55,
+  "oneLiner": "Monday's record Nasdaq close and easing (not reversing) HY spreads keep the regime marginally constructive, but firmer December hike odds and a VIX that rose despite the rally argue against chasing it."
  },
  "topNews": [
-  {
-   "headline": "Explosions reported in the Strait of Hormuz and a Yemeni offensive on Bab al-Mandeb both break Sunday 4 Oct",
-   "impact": "bullish",
-   "actionable": "A second Gulf/Red Sea chokepoint escalating simultaneously reinforces the safe-haven case for GLD/SLV and the large cash pile's optionality, even though oil itself barely moved on the news."
-  },
-  {
-   "headline": "Gold/silver miner ETFs post a second straight losing week as the 10-year yield pushes toward a 24-year high",
-   "impact": "bearish",
-   "actionable": "GDX/SILJ/SLVP's two-week drawdown is a carry-cost story, not a thesis break -- treat $4,143 gold / $58.04 silver as the near-term lines in the sand before adding exposure."
-  },
-  {
-   "headline": "Hang Seng falls 2.60% to 23,972.29 on reopen; Stock Connect stays dark until Thursday 8 Oct",
-   "impact": "bearish",
-   "actionable": "The 0700/0981/1810 sleeve trades this week without mainland Southbound support -- expect wider swings and less dip-buying until Connect resumes."
-  },
-  {
-   "headline": "Tencent signs a $7bn deal to lease 100,000 Nvidia-class AI chips from Oracle, its largest-ever overseas lease",
-   "impact": "bullish",
-   "actionable": "Supports holding 0700.HK through the Friday selloff -- concrete evidence the AI-capex narrative and chip-export workarounds keep scaling for Tencent specifically."
-  },
-  {
-   "headline": "SGX cuts board lot sizes for DBS, UOB, OCBC and eight other blue chips from today, 5 Oct",
-   "impact": "bullish",
-   "actionable": "Lower minimum tickets (roughly S$7,760 -> S$776 for a DBS lot) should modestly improve retail liquidity in the core SG banking holdings starting today."
-  }
+  { "headline": "Wall Street closes at fresh records Monday as AI mega-caps shrug off 5.3% 10-year yield", "impact": "bullish", "actionable": "Supports the modest-OW equity tilt, but the 10Y near 24-year highs keeps discount-rate pressure on the SGX REIT/developer sleeve." },
+  { "headline": "Silver bounces off golden-pocket support to ~$61.72 while gold and miner ETFs stay in the red", "impact": "mixed", "actionable": "The core risk for the levered silver sleeve: SI=F's bounce is real, but GDX/SILJ/SLVP showing no fresh print means the miners leg of the hedge can't yet be confirmed to have followed." },
+  { "headline": "Oil slides despite Gulf escalation as G7's 100M-barrel diesel/crude release works through the market", "impact": "mixed", "actionable": "USO weakness even as XLE held up is a genuine divergence -- energy-sleeve exposure (if any) should watch the release's follow-through, not the headline escalation." },
+  { "headline": "HK tech and chip names rebound Monday, reversing Thursday's selloff; Hang Seng +0.28%", "impact": "bullish", "actionable": "Directly supportive of the 0700.HK/0981.HK/1810.HK sleeve after last week's pullback." },
+  { "headline": "Mainland China markets and Stock Connect remain shut for Golden Week until Thursday Oct 8", "impact": "mixed", "actionable": "No Southbound conviction read available for the HK book until Golden Week reopens -- treat this week's HK moves as thinner, offshore-only flow." }
  ],
  "signals": [
-  "Three calls clear the high-conviction bar this run (pUp3m >=0.6, confidence >=0.55): QQQ (0.60/0.60) and XLK (0.60/0.58) on continued AI-capex breadth, and SMH (0.61/0.55) as the sharpest single expression of that trade -- worth watching for follow-through, not a signal to act on alone.",
-  "SHY (0.60/0.55) is the cleanest fixed-income read this run: short duration is largely insulated from the 10-year's push to a 24-year high, while still earning the post-hike policy rate.",
-  "Rare-earths basket: Lynas' Oct 2 all-share bid for Brazil's Meteoric Resources is strategically bullish for the ex-China heavy-rare-earth thesis but pressured the stock near-term on dilution concerns (LYC.AX ev3m +3.5%, confidence 0.42) -- a name to watch through the Nov 10 China-truce deadline, not trade on this news alone.",
-  "Congress+institutional overlap in AMKR (Sen. Mullin's early-2026 buys plus a new Bank of America ~$22.9M Q2 position, shares +60% since) remains the cleanest smart-money convergence on the signals list this run.",
-  "Credit-spread broadening (broad HY OAS 2.93%->3.24% in a week, on top of CCC already past 1,200bps) is the one genuinely new macro texture this run -- worth watching HYG and the silver sleeve's leverage headroom if it continues."
+  "QQQ/XLK/SMH are the model's strongest reads (pUp3m 0.61-0.62, confidence 0.56-0.62) -- all direct expressions of the ~$725B 2026 hyperscaler AI-capex guide; consider whether existing tech/semis exposure already captures this rather than adding fresh.",
+  "SHY screens as the strongest short-duration bond call (pUp3m 0.60, confidence 0.55) -- a reminder that cash/short-duration carry stays attractive while the Fed holds its hawkish pause.",
+  "MU and AMD are this run's strongest congress+13F+retail convergence signals (Coatue +1,794% and Soros 7.9x on MU; Citadel +155%/Tiger Global new position on AMD) -- watch for follow-through into Q3 13F season.",
+  "Rare-earth basket: Lynas's ~A$968M Meteoric Resources buy (announced Oct 2) strengthens the ex-China dysprosium/terbium diversification thesis (LYC.AX pUp3m 0.55, low confidence 0.42); MP's China export-control listing is a genuine near-term feedstock headwind worth watching, not yet a reason to move either name's low-confidence prior.",
+  "No model call currently clears both the pUp3m and confidence bar on the bearish side -- nothing in the 40-ticker universe is flagged as a high-confidence short read this run."
  ],
  "watch": [
-  "ISM Services PMI tonight, Mon 5 Oct 22:00 SGT (consensus 55.1, prior 55.4) -- first real-economy data point of the week.",
-  "BOJ Gov Ueda speaks Tue 6 Oct 14:35 SGT (High impact) -- North Asia risk tone, direct read-across to the HK sleeve and EWJ.",
-  "FOMC Meeting Minutes Thu 8 Oct 02:00 SGT (High impact) -- first real color on how split the committee is heading into the Oct 28 decision; China/HK Stock Connect also resumes the same day after the Golden Week blackout.",
-  "China's suspended rare-earth export-control expansion is set to lapse 10 Nov 2026 -- the key catalyst date for the MP/Lynas/Energy Fuels watchlist this quarter, 52 days before a US DFARS defense-procurement ban takes effect."
+  "FOMC Meeting Minutes, Wed/Thu 7-8 Oct (02:00 SGT) -- the committee's internal hawkish/dovish split (Schmid vs Bowman, both speaking 6-7 Oct) is the week's key Fed catalyst for the margin cost of the 1.677x levered silver.",
+  "China/Stock Connect Golden Week reopens Thursday 8 Oct -- first Southbound flow read on the HK sleeve since 30 Sep.",
+  "Crude Oil Inventories, Wed 7 Oct ~22:30 SGT, and 10-Year Bond Auction, Thu 8 Oct ~01:01 SGT -- energy sleeve and long-end rate read respectively.",
+  "Silver loan: one-action.js is currently flagging a ≥S$16,500 paydown to bring leverage back to the signed 1.4x ceiling given the stressed-call distance has narrowed to ~26.6%."
  ]
 }
