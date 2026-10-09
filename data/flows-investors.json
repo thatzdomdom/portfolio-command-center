@@ -1,33 +1,33 @@
 {
-  "updated": "2026-10-08",
-  "retrievedOn": "2026-10-08 ~07:15 SGT",
-  "note": "Thursday 8 Oct 2026 run, 07:15 SGT. Genuinely new this run: South Korea -- Wed 7 Oct KRX close now in (foreigners -\u20a9350bn, institutions -\u20a9128.3bn, retail +\u20a9484bn, retail absorbing distribution); US ICI -- week ended 30 Sep now published (swing to -$55.34bn long-term fund outflow from the prior week's +$20.14bn inflow). Japan, Hong Kong and China could not be refreshed because their next prints (JPX weekly, Southbound Stock Connect post-Golden-Week, SSE/SZSE margin balance) had not yet posted at the time of this pre-Asia-open check -- carried forward honestly rather than guessed at. Singapore's SGX Research weekly split remains unconfirmed beyond the 25 Sep print; carried forward.",
+  "updated": "2026-10-09",
+  "retrievedOn": "2026-10-09 ~SGT",
+  "note": "Friday 9 Oct 2026 run. Genuinely new this run: Japan -- JPX weekly print for the week ended 2026-10-02 posted on schedule (Thursday publish, ~1-week lag), showing a sharp reversal to foreign net buying. South Korea -- Thu 8 Oct KRX close now in (foreigners -₩2,424.7bn, institutions -₩2,088.8bn, individuals +₩3,738.5bn), a larger distribution/absorption pattern than the prior session despite record Samsung Electronics prelim results. Hong Kong -- Southbound Stock Connect resumed 2026-10-08 after the Oct 1-7 Golden Week suspension, with mainland investors returning as net buyers (+HK$6.477bn combined SH+SZ). China -- margin balance re-sourced to a precise 2026-09-30 pre-holiday close (RMB2,532.42bn combined, -RMB39.05bn d/d), replacing the prior entry's vague 'broke through RMB3.0trn around June' approximation; the exchanges remained closed through Oct 7 and the Oct 8 reopening-day balance had not yet been published at check time, so this is a precision upgrade for the same pre-holiday period, not a calendar-fresher one. Singapore's SGX Research weekly institutional/retail split and the US ICI/BofA-EPFR prints could not be refreshed beyond the prior run -- no newer official print existed at check time -- and are carried forward honestly.",
   "markets": [
     {
       "market": "Japan (TSE)",
       "available": true,
       "cadence": "weekly, JPX \"Trading by Type of Investors\"; published Thursdays with ~1-week lag",
-      "latestPeriod": "week ended 2026-09-25 (holiday-shortened week)",
-      "asOf": "2026-10-01",
+      "latestPeriod": "week ended 2026-10-02",
+      "asOf": "2026-10-08",
       "flows": [
         {
           "investorType": "Foreign investors",
-          "direction": "outflow",
-          "amount": "-\u00a5362.0bn",
+          "direction": "inflow",
+          "amount": "+¥2,191.9bn",
           "unit": "JPY bn",
-          "period": "week ended 2026-09-26 (TE/Reuters proxy series, closest to JPX week)",
+          "period": "week ended 2026-10-02 (TE/Reuters proxy series; TE's own date label reads 'week ending Oct 3', ~1-day drift vs the Friday JPX week-end convention used in prior entries)",
           "isProxy": false,
-          "note": "Net sellers for the week, down sharply from the prior week's outlier -\u00a54,942.5bn (holiday-thinned volume)"
+          "note": "Sharp reversal from the prior week's -¥354.2bn net sell (TE-revised figure for the week ended 2026-09-25/26) to net buying"
         }
       ],
-      "trend": "No genuinely newer JPX print exists yet. The next weekly window (week ended 2026-10-02) is due today (2026-10-08) per JPX's cadence but had not posted as of this check (before the ~15:30 JST release time). Carried forward, not restamped.",
-      "interpretation": "Foreign flows into Japan equities have cooled sharply from the record H1 2026 buying pace; last confirmed week was a moderate net-sell. Not directly relevant to a HK/SG-weighted book, but sustained foreign selling would signal broader risk-off in Asia ex-China that could spill into HK tech sentiment.",
+      "trend": "Genuinely newer than the prior 2026-10-01 asOf. JPX's weekly cadence delivered the week-ended-Oct-2 print on schedule (Thursday 2026-10-08 publish), showing foreign investors swinging from net selling to a +¥2,191.9bn net buy.",
+      "interpretation": "Foreign flows into Japan equities snapped back hard after the holiday-thinned selling of the prior two weeks, suggesting the risk-off impulse was more about thin liquidity than a genuine derisking. Not directly relevant to a HK/SG-weighted book, but a reversion to foreign buying in Japan is a mild risk-on signal for Asia ex-China broadly.",
       "sources": [
         "https://tradingeconomics.com/japan/foreign-stock-investment",
         "https://www.jpx.co.jp/english/markets/statistics-equities/investor-type/07-04.html"
       ],
       "dataGaps": [
-        "JPX's own site returned HTTP 403 to automated fetch; relied on a secondary aggregator with ~1-day date-label drift",
+        "JPX's own site returned HTTP 403 to automated fetch; relied on a secondary aggregator (TradingEconomics/Reuters) with ~1-day date-label drift",
         "Trust bank and investment trust sub-splits not re-confirmed this cycle"
       ]
     },
@@ -35,90 +35,91 @@
       "market": "South Korea (KOSPI)",
       "available": true,
       "cadence": "daily, KRX net buy/sell by foreigners/institutions/individuals, published same trading day after close",
-      "latestPeriod": "2026-10-07 (Wed)",
-      "asOf": "2026-10-07",
+      "latestPeriod": "2026-10-08 (Thu)",
+      "asOf": "2026-10-08",
       "flows": [
         {
           "investorType": "Foreign investors",
           "direction": "outflow",
-          "amount": "-\u20a9350.0bn",
+          "amount": "-₩2,424.7bn",
           "unit": "KRW bn",
-          "period": "2026-10-07",
+          "period": "2026-10-08",
           "isProxy": false,
-          "note": "KOSPI main board (reported -\u20a9346.7bn to -\u20a9354bn across sources); KOSDAQ foreigners also net sold ~-\u20a969.5bn"
+          "note": "Net sellers as KOSPI fell 2.62% into the 6,600 range on surging US 10-year yields"
         },
         {
           "investorType": "Institutions",
           "direction": "outflow",
-          "amount": "-\u20a9128.3bn",
+          "amount": "-₩2,088.8bn",
           "unit": "KRW bn",
-          "period": "2026-10-07",
+          "period": "2026-10-08",
           "isProxy": false,
-          "note": "Net sellers alongside foreigners"
+          "note": "Net sellers alongside foreigners; combined foreign+institutional selling of roughly ₩4.5tn"
         },
         {
           "investorType": "Individuals (retail)",
           "direction": "inflow",
-          "amount": "+\u20a9484.0bn",
+          "amount": "+₩3,738.5bn",
           "unit": "KRW bn",
-          "period": "2026-10-07",
+          "period": "2026-10-08",
           "isProxy": false,
-          "note": "Retail bought the dip as KOSPI opened over 1% lower and slipped below the 6,900/8,000 psychological levels"
+          "note": "Retail again absorbed the bulk of foreign/institutional selling despite Samsung Electronics' record preliminary Q3 results (₩195tn revenue, ₩107.4tn operating profit) failing to support the index"
         }
       ],
-      "trend": "Genuinely newer than the prior 2026-10-06 asOf. Foreigners and institutions were net sellers amid rising US 10-year yields (~5.29%); retail individuals continued to absorb the selling.",
-      "interpretation": "Foreign and institutional distribution in Korean large-caps (Samsung Electronics, SK Hynix) with retail absorbing it is a classic late-cycle/semiconductor-fatigue pattern. For a book with HK tech exposure, this is a soft warning sign -- Korean chip-stock foreign outflows have historically led similar rotation out of HK/China tech on correlated AI-capex derating fears.",
+      "trend": "Genuinely newer than the prior 2026-10-07 asOf. Foreign and institutional distribution intensified versus the prior session even as Samsung Electronics beat on fundamentals, with retail individuals continuing to absorb the selling at a larger scale.",
+      "interpretation": "The late-cycle/semiconductor-fatigue pattern flagged in the prior run intensified: macro (rising UST yields) is now dominating stock-specific good news (Samsung's record beat), with foreign+institutional selling of ~₩4.5tn against retail's ~₩3.7tn absorption. For a book with HK tech exposure, this is a firmer warning sign than the prior session -- sustained Korean chip-stock foreign outflows alongside a fundamentally strong print have historically preceded correlated derating in HK/China AI-capex names.",
       "sources": [
-        "https://en.sedaily.com/finance/2026/10/01/foreign-investors-sell-korean-stocks-for-fifth-month-as-us",
-        "https://www.seoul.co.kr/news/economy/securities/2026/10/07/20261007500021"
+        "https://en.bloomingbit.io/feed/news/121814",
+        "https://www.koreajoongangdaily.com/business/kospi-closes-down-262-to-continue-slide-to-third-day-on-inflation-worries/12911756"
       ],
       "dataGaps": [
-        "Minor figure discrepancy (-\u20a9346.7bn vs -\u20a9354bn) between sources -- likely preliminary vs finalized KRX tape"
+        "A separate same-day secondary summary (BigGo Finance) cited lower rounded figures (~₩2.0tn foreign, ~₩1.7tn institutional, ~₩2.9tn retail); multiple same-day Korean outlets converged on the more precise figures used here (-₩2,424.7bn / -₩2,088.8bn / +₩3,738.5bn), which were preferred"
       ]
     },
     {
       "market": "Hong Kong",
       "available": true,
       "cadence": "daily, Southbound Stock Connect net buy/sell; NO official retail/institutional split exists for the HK cash market",
-      "latestPeriod": "2026-09-30 (last print before the Golden Week blackout)",
-      "asOf": "2026-09-30",
+      "latestPeriod": "2026-10-08 (first session after the Golden Week blackout)",
+      "asOf": "2026-10-08",
       "flows": [
         {
           "investorType": "Southbound Stock Connect (mainland investors, conviction proxy)",
-          "direction": "flat",
-          "amount": "+HK$15mn",
+          "direction": "inflow",
+          "amount": "+HK$6,477mn",
           "unit": "HKD mn",
-          "period": "2026-09-30 (last session before blackout)",
+          "period": "2026-10-08",
           "isProxy": false,
-          "note": "Net buy of only ~HK$15 million for the full session -- a sharp contraction, signaling caution ahead of the holiday"
+          "note": "Combined Shanghai (+HK$3,836mn) and Shenzhen (+HK$2,641mn) southbound legs; a sharp rebound from the pre-holiday HK$15mn trickle on 2026-09-30, as Stock Connect resumed after the 2026-10-01 to 2026-10-07 Golden Week suspension"
         }
       ],
-      "trend": "Still carry-forward. Stock Connect was suspended 2026-10-01 through 2026-10-07 for Golden Week and resumed today, 2026-10-08 -- but as of this check (before HK's 09:30 open) the mainland and HK markets had not yet opened, so no post-holiday Southbound print physically exists yet. Not restamped as current.",
-      "interpretation": "The book's HK tech exposure has been trading since Oct 2 without its main marginal buyer (Southbound flow) for a full week -- this week's Hang Seng swings were driven entirely by international/local investors, not mainland conviction money. Today's reopening of the Connect link is the key catalyst to watch for whether mainland buyers return to support HK tech/financials, or whether thin pre-holiday caution (HK$15m net buy) persists.",
+      "trend": "Genuinely newer than the prior 2026-09-30 asOf. Stock Connect resumed trading 2026-10-08 and mainland investors returned as net buyers at a healthy pace, ending the week-long gap in Southbound data.",
+      "interpretation": "Mainland conviction money returned on reopening with a meaningful net buy (+HK$6.477bn), suggesting Southbound support for HK tech/financials resumed rather than staying in the cautious, thin-volume mode seen just before the holiday. This is a modestly supportive signal for the book's HK tech exposure, in contrast to the more cautious Korean and mixed Japanese reads from the same session window.",
       "sources": [
-        "https://www.hkex.com.hk/Mutual-Market/Stock-Connect/Statistics/Historical-Daily?sc_lang=en",
-        "https://www.bbntimes.com/financial/hong-kong-stock-exchange-closed-for-national-day-on-1-october-2026-hang-seng-holds-at-24-613-27-ahead-of-friday-reopening-without-stock-connect"
+        "https://news.futunn.com/en/post/1000717774/southbound-capital-flow-southbound-capital-recorded-net-buying-of-hk",
+        "https://www.hkex.com.hk/Mutual-Market/Stock-Connect/Statistics/Historical-Daily?sc_lang=en"
       ],
       "dataGaps": [
         "No official HK retail-vs-institutional split exists at all -- only the Southbound mainland-conviction proxy and ad hoc EPFR/foreign-flow commentary, both labelled as such",
-        "HKEX's live statistics table is JS-rendered and could not be scraped directly; relied on news aggregators"
+        "HKEX's live statistics table is JS-rendered and could not be scraped directly; relied on news aggregators for the combined SH+SZ figure",
+        "Per-counter (e.g. Tencent, AIA) breakdown for the Oct 8 session not independently re-verified this cycle"
       ]
     },
     {
       "market": "China (A-shares)",
       "available": true,
       "cadence": "margin balance: published by SSE/SZSE after each trading day; new account openings: monthly via SD&C, published early the following month",
-      "latestPeriod": "margin balance: 2026-09-29 (last trading day before Golden Week); new account openings: August 2026",
-      "asOf": "2026-09-29 (margin) / August 2026 (accounts)",
+      "latestPeriod": "margin balance: 2026-09-30 (last trading day before Golden Week); new account openings: August 2026",
+      "asOf": "2026-09-30 (margin) / August 2026 (accounts)",
       "flows": [
         {
           "investorType": "Margin traders (retail proxy)",
-          "direction": "flat",
-          "amount": "n/a",
+          "direction": "outflow",
+          "amount": "RMB2,532.42bn combined (SSE RMB1,296.52bn + SZSE RMB1,235.90bn), -RMB39.05bn d/d",
           "unit": "RMB bn",
-          "period": "2026-09-29",
+          "period": "2026-09-30 (last trading day before Golden Week)",
           "isProxy": true,
-          "note": "Combined SSE+SZSE+BSE margin balance broke through RMB 3.0 trillion for the first time around 2026-06-23/24; no fresher print could be verified"
+          "note": "A precision upgrade over the prior entry's vague 'broke through RMB3.0trn around June' approximation -- the confirmed pre-holiday combined SSE+SZSE margin balance eased modestly into the break, a mild pre-holiday deleveraging rather than a fresh record high"
         },
         {
           "investorType": "New A-share account openings (retail proxy)",
@@ -130,15 +131,16 @@
           "note": "No September 2026 figure located"
         }
       ],
-      "trend": "Carry-forward, unchanged. China's exchanges were fully closed 2026-10-01 through 2026-10-07 for Golden Week, and as of this check the 2026-10-08 reopening session had not yet traded -- so a newer margin print is not just unfound, it cannot exist yet. The next genuinely new margin-balance data point will be for 2026-10-08, published this evening.",
-      "interpretation": "No change in retail-proxy risk appetite signal this cycle -- margin balance was near record highs heading into the holiday, implying elevated retail leverage/conviction in China onshore equities. Today's reopening (and the simultaneous resumption of Southbound Stock Connect) is the real test for whether margin buying and Southbound inflows resume aggressively, a risk-on signal supportive of the book's HK tech names.",
+      "trend": "Partially refreshed: margin balance is now sourced to a precise 2026-09-30 closing print, replacing a rough June approximation, but this is a precision upgrade for the same pre-holiday period rather than a calendar-fresher one -- exchanges were closed 2026-10-01 through 2026-10-07 and the Oct 8 reopening-day balance (to be published evening Oct 8/9) had not posted at time of this check. New account openings remain carried forward at August 2026.",
+      "interpretation": "Retail-proxy leverage cooled modestly heading into the holiday rather than sitting at a fresh record high as the prior rough estimate implied, though it remains elevated by historical standards. Today's reopening session and the simultaneous resumption of Southbound buying (+HK$6.477bn) are the real tests for whether margin buying and mainland conviction money re-accelerate together -- a risk-on combination that would be supportive of the book's HK tech names.",
       "sources": [
-        "https://chinastockcrowd.substack.com/p/when-do-chinas-stock-markets-reopen",
-        "https://finance.eastmoney.com/a/202606243781287141.html"
+        "https://www.sohu.com/a/1084919706_115433",
+        "https://finance.sina.cn/2026-10-08/detail-iniunmin5251478.d.html"
       ],
       "dataGaps": [
-        "Official SSE/SZSE margin balance pages not directly queried; relied on Chinese financial-media secondary reporting",
-        "September new-account-opening figures from SD&C not found"
+        "Official SSE/SZSE margin balance pages not directly queried; relied on Chinese financial-media secondary reporting (Sohu/Sina)",
+        "September new-account-opening figures from SD&C not found",
+        "Oct 8 reopening-day margin balance not yet published at time of this check -- carried forward at the Sep 30 pre-holiday print"
       ]
     },
     {
@@ -167,14 +169,14 @@
           "note": "No newer figure confirmed"
         }
       ],
-      "trend": "Carry-forward, unchanged -- could not confirm a newer SGX Research weekly fund-flow report. A separate, differently-cadenced data point (a monthly market-turnover update referencing ~S$380m of institutional net inflows, dated 2026-10-04) surfaced but its reference period was ambiguous and does not match this specific weekly series, so it was not substituted in.",
+      "trend": "Carry-forward, unchanged -- rechecked this run and still could not confirm a newer SGX Research weekly fund-flow report. sginvestors.io's tracker page returned empty (JS-rendered) content again; no dated SGX market-updates article newer than early October was located.",
       "interpretation": "No fresh signal this cycle. The last confirmed read (through late September) still frames the backdrop for the book's large SG/REIT/bank weighting; the FY2026 trend (retail SDAV +52% y/y, institutions net buying in most of the last 6 months) suggests broad-based local risk appetite remains constructive, but this is not newly re-verified data.",
       "sources": [
         "https://sginvestors.io/market/sgx-fund-flow-weekly-statistics",
         "https://thefinance.sg/2026/10/04/two-great-sgx-developments-in-october-2026/"
       ],
       "dataGaps": [
-        "sginvestors.io's fund-flow tracker pages are JS-rendered and returned empty content to automated fetch",
+        "sginvestors.io's fund-flow tracker pages are JS-rendered and returned empty content to automated fetch, again this cycle",
         "SGX's own official weekly PDF not directly retrieved"
       ]
     },
@@ -182,7 +184,7 @@
       "market": "United States",
       "available": true,
       "cadence": "ICI: weekly, published Wednesdays, ~4-5 day lag. BofA/EPFR Flow Show: weekly, published Fri/Mon-Tue",
-      "latestPeriod": "ICI: week ended 2026-09-30 (published 2026-10-07). BofA/EPFR Flow Show: week ended 2026-09-30 (published ~2026-10-01/03)",
+      "latestPeriod": "ICI: week ended 2026-09-30 (published 2026-10-07). BofA/EPFR Flow Show: week ended 2026-10-02 (published ~2026-10-02)",
       "asOf": "2026-10-07 (ICI update)",
       "flows": [
         {
@@ -192,7 +194,7 @@
           "unit": "USD bn",
           "period": "week ended 2026-09-30",
           "isProxy": true,
-          "note": "ICI total estimated long-term fund flows. Equity funds -$37.13bn (domestic -$31.56bn, world -$5.57bn); bond funds -$17.05bn (taxable -$10.38bn, muni -$6.67bn) -- a swing from the prior week's +$20.14bn inflow"
+          "note": "ICI total estimated long-term fund flows. Equity funds -$37.13bn (domestic -$31.56bn, world -$5.57bn); bond funds -$17.05bn (taxable -$10.38bn, muni -$6.67bn) -- a swing from the prior week's +$20.14bn inflow. Still the latest print: the next ICI release (week ended Oct 7) is due Wed 2026-10-14 and had not posted at time of this check"
         },
         {
           "investorType": "EPFR-tracked global/EM debt and HY/HG credit funds (institutional flow-show proxy)",
@@ -201,10 +203,10 @@
           "unit": "USD mn",
           "period": "week ended 2026-10-02 (BofA \"Follow the Flow\")",
           "isProxy": true,
-          "note": "European/global fixed-income funds had worst weekly outflow since April (-$2.67bn); HG -$1,925mn; HY -$448mn (4th straight week of outflows); money-market funds -$62.5bn (3rd straight week); EM debt +$2.28bn (9th straight week of inflows)"
+          "note": "European/global fixed-income funds had worst weekly outflow since April (-$2.67bn); HG -$1,925mn; HY -$448mn (4th straight week of outflows); money-market funds -$62.5bn (3rd straight week); EM debt +$2.28bn (9th straight week of inflows). Still the latest confirmed print; no BofA/EPFR release for the week ended Oct 9 was located at time of this check"
         }
       ],
-      "trend": "Genuinely newer ICI data confirmed: swung from a +$20.14bn inflow week (ended Sep 23) to a -$55.34bn outflow week (ended Sep 30), published Oct 7.",
+      "trend": "Carry-forward, unchanged this run -- rechecked both ICI and BofA/EPFR and confirmed no newer official print exists yet. The genuinely new ICI swing (+$20.14bn to -$55.34bn) was already captured in the prior run; next ICI print is due 2026-10-14.",
       "interpretation": "A sharp swing to large US long-term fund outflows, combined with a 4th straight week of HY outflows and a 3rd straight week of money-market outflows, reads as broad de-risking/rotation rather than a flight to cash. For a book with large HK tech and SG REIT/bank weighting, a US outflow impulse this size is a caution flag -- it has historically preceded reduced EM/Asia risk-taking with a 1-2 week lag.",
       "sources": [
         "https://www.ici.org/research/stats/flows",
@@ -212,7 +214,7 @@
       ],
       "dataGaps": [
         "US has no official retail/institutional split for equities at all -- ICI and EPFR/BofA are both industry-survey-based proxies",
-        "The equity-specific BofA/EPFR headline Flow Show for week ended Sep 30 was not independently re-confirmed this cycle"
+        "The equity-specific BofA/EPFR headline Flow Show for the week ended Oct 2/9 was not independently re-confirmed this cycle"
       ]
     }
   ]
