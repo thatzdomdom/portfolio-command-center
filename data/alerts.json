@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-09T09:09:31.294Z",
+ "generatedAt": "2026-10-09T23:02:20.546Z",
  "policyVersion": "2026-10-02",
  "meta": {
   "evaluated": [
@@ -3687,6 +3687,52 @@
   ]
  },
  "alerts": [
+  {
+   "at": "2026-10-09T23:02:20.546Z",
+   "id": "risk:anomaly:1810.HK:2026-10-09",
+   "date": "2026-10-09",
+   "severity": "Notable",
+   "family": "risk",
+   "ticker": "1810",
+   "issuer": "Xiaomi Corp",
+   "reason": "anomaly",
+   "scope": null,
+   "band": null,
+   "bandWas": null,
+   "navBp": 10.29,
+   "tags": [
+    "in-book",
+    "risk",
+    "anomaly"
+   ],
+   "headline": "1810 · 9.72% on 2026-10-09 · 3.12 sigma · 10.29bp of NAV",
+   "detail": "drawdown.json's own sentence, quoted: “1810 rose 9.72% on its 2026-10-09 close — 3.12 sigma against its own vol60 of 49.4% (1 sigma = 3.11%/day) and 10.29bp of NAV (S$10,978). Both gates bind: a move this far outside the series' own distribution usually means news exists, so the line is here to ask whether news.json carried it.” · vol60 49.4% annualised, so one session is 3.11% · 10.29bp of NAV (S$10,978) · tier notable — sigma AND materiality both had to bind (policy.drawdown.anomaly.bothMustBind) · the purpose of this line, quoted: “to ask whether news.json carried the story, never to trade the move” — it is not a reason to trade the move · COMPLETED BAR ONLY — close 2026-10-09; a session still trading has no close and no opinion here · first seen 2026-10-10 · policy.drawdown.purpose, quoted: “INFORMATION, NEVER DE-GROSSING. regime.notRules records two things this book tested and rejected: P&L-triggered de-grossing (return/drawdown 0.67 vs 0.80) and a volatility ceiling. Selling into a drawdown is the one response the owner's own backtest measured as destructive, so no row produced from this block may ask for a position to be cut because it fell, and nothing here sizes or caps by volatility.”",
+   "url": null,
+   "clearsWhen": "read"
+  },
+  {
+   "at": "2026-10-09T23:02:20.545Z",
+   "id": "risk:anomaly:F99.SI:2026-10-09",
+   "date": "2026-10-09",
+   "severity": "Log",
+   "family": "risk",
+   "ticker": "F99",
+   "issuer": "Fraser & Neave",
+   "reason": "anomaly",
+   "scope": null,
+   "band": null,
+   "bandWas": null,
+   "navBp": -4.51,
+   "tags": [
+    "in-book",
+    "risk",
+    "anomaly"
+   ],
+   "headline": "F99 · -3.65% on 2026-10-09 · -3.24 sigma · -4.51bp of NAV",
+   "detail": "drawdown.json's own sentence, quoted: “F99 fell 3.65% on its 2026-10-09 close — 3.24 sigma against its own vol60 of 17.9% (1 sigma = 1.13%/day) and 4.51bp of NAV (S$4,818). Both gates bind: a move this far outside the series' own distribution usually means news exists, so the line is here to ask whether news.json carried it.” · vol60 17.9% annualised, so one session is 1.13% · -4.51bp of NAV (S$4,818) · tier log — sigma AND materiality both had to bind (policy.drawdown.anomaly.bothMustBind) · the purpose of this line, quoted: “to ask whether news.json carried the story, never to trade the move” — it is not a reason to trade the move · COMPLETED BAR ONLY — close 2026-10-09; a session still trading has no close and no opinion here · first seen 2026-10-10 · policy.drawdown.purpose, quoted: “INFORMATION, NEVER DE-GROSSING. regime.notRules records two things this book tested and rejected: P&L-triggered de-grossing (return/drawdown 0.67 vs 0.80) and a volatility ceiling. Selling into a drawdown is the one response the owner's own backtest measured as destructive, so no row produced from this block may ask for a position to be cut because it fell, and nothing here sizes or caps by volatility.”",
+   "url": null,
+   "clearsWhen": "read"
+  },
   {
    "at": "2026-10-08T23:02:31.980Z",
    "id": "risk:regime:riskSleeve:80",
