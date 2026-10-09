@@ -535,9 +535,9 @@ const H = [
   {id:13,n:"Global Investments",      t:"B73",  yf:"B73.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:263877, book:34040},
   {id:14,n:"Singtel",                 t:"Z74",  yf:"Z74.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:7310,   book:33553},
   {id:15,n:"Metro Holdings",          t:"M01",  yf:"M01.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:34768,  book:17210},
-  {id:16,n:"Lum Chang Holdings",      t:"L46",  yf:"L46.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:28760,  book:17256},
+  {id:16,n:"Lum Chang Holdings",      t:"L19",  yf:"L19.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:28760,  book:16106},
   {id:17,n:"Tuan Sing Holdings",      t:"T24",  yf:"T24.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:50616,  book:16703},
-  {id:18,n:"Food Empire",             t:"F03",  yf:"F03.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:5000,   book:16300},
+  {id:18,n:"Food Empire",             t:"F03",  yf:"F03.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:6000,   book:16300},
   {id:19,n:"Tiong Woon",              t:"BQM",  yf:"BQM.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:12500,  book:13750},
   {id:20,n:"Keppel REIT",             t:"K71U", yf:"K71U.SI", ac:"Equity", region:"Singapore", cur:"SGD", qty:14000,  book:12530},
   {id:21,n:"Bonvests Holdings",       t:"B28",  yf:"B28.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:10000,  book:9750},
@@ -552,7 +552,7 @@ const H = [
   {id:30,n:"SingPost",                t:"S08",  yf:"S08.SI",  ac:"Equity", region:"Singapore", cur:"SGD", qty:10000,  book:3450},
   {id:31,n:"Asian Pay TV Trust",      t:"S7OU", yf:"S7OU.SI", ac:"Equity", region:"Asia",      cur:"SGD", qty:34573,  book:3008},
   // ── SGX/CDP LEGACY TAIL (penny, suspended & USD-quoted, ~60 names) ──
-  {id:32,n:"SGX/CDP Legacy Tail (penny/suspended, excl. Healthbank)", t:"TAIL", yf:null, ac:"Equity", region:"Singapore", cur:"SGD", manualNative:110672},
+  {id:32,n:"SGX/CDP Legacy Tail (penny/suspended, excl. Healthbank)", t:"TAIL", yf:null, ac:"Equity", region:"Singapore", cur:"SGD", manualNative:42446.58},
   // ── FOREIGN SECURITIES (POEMS custodian, live-priced) ──
   {id:33,n:"Tencent Holdings",        t:"0700", yf:"0700.HK", ac:"Equity", region:"China/HK", cur:"HKD", qty:1100,  book:83200},
   {id:34,n:"SMIC",                    t:"0981", yf:"0981.HK", ac:"Equity", region:"China/HK", cur:"HKD", qty:11000, book:144000},
@@ -600,7 +600,8 @@ const H = [
   {id:57,n:"Silver — unallocated (IBKR)",     t:"XAG",  yf:"SI=F", ac:"Commodity", region:"Global", cur:"USD", qty:1777, book:170797},
   {id:58,n:"IBKR Margin Loan (net)",          t:"LOAN", yf:null,   ac:"Cash",      region:"Global", cur:"SGD", manualNative:-56240},
   // ── CDP (a/c 8014) cash-equivalents — Singapore Savings Bond + SGS T-bills (Jun 2026 statement) ──
-  {id:59,n:"Singapore Savings Bond + T-bills (CDP)", t:"SSB", yf:null, ac:"Cash", region:"Singapore", cur:"SGD", manualNative:204000},
+  {id:59,n:"Singapore Savings Bond + T-bills (CDP)", t:"SSB", yf:null, ac:"Cash", region:"Singapore", cur:"SGD", manualNative:206000},
+  {id:61,n:"CDP USD-denominated lines (HPH Trust, Manulife US REIT, TJ Darentang)", t:"CDPUSD", yf:null, ac:"Equity", region:"Singapore", cur:"USD", manualNative:42865},
 ];
 
 // Sector tags (by holding id) for the sector heat map

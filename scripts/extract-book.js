@@ -34,7 +34,11 @@ lines.forEach((ln, i) => {
 });
 // 60 as of 27 Sep 2026: id:60 added, AIA Invest Easy (AIA Global Equity Fund, Policy U081690688) —
 // a single-premium ILP, valued from its Fund Activity Statement, same manual-mark shape as ASTRAL.
-if (rows.length !== 60) throw new Error(`expected 60 holdings, parsed ${rows.length}`);
+// 61 as of 9 Oct 2026: id:61 added, the CDP account's three USD-denominated lines (NS8U HPH Trust,
+// BTOU Manulife US REIT, T14 TJ Darentang). They sit OUTSIDE the statement's SGD total, none of them
+// is in the price spine, and no .SI line in this book had ever been non-SGD — so they are one manual
+// mark at the statement's own USD total rather than three new live-priced lines on untested ground.
+if (rows.length !== 61) throw new Error(`expected 61 holdings, parsed ${rows.length}`);
 
 // git blame → author date of the last change to that line (the honest as-of for a manual mark)
 function blameDate(lineNo) {

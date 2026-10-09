@@ -108,17 +108,27 @@ module.exports = {
       ['partial', mut(o => { o.full = false; })],
       ['ntfy', mut(o => { o.unexpectedNtfy = 4; })],
     ];
+    // MEASURE THE LEDGER'S OWN CONTRIBUTION, not validate-all's overall exit code. The first version
+    // of this asserted `r.exit !== 1`, which coupled the invariant to the whole of the sandbox's copy
+    // of live data: on 9 Oct 2026 news.json carried a fabricated O39.SI price, validate-all exited 1
+    // for that reason alone, and this check went red while the thing it tests was working perfectly.
+    // The guarantee that actually matters is DIFFERENTIAL — whatever else is wrong, a red ledger must
+    // not make it worse — so the baseline is a green ledger and every other state is compared to it.
+    set(green(T));
+    ctx.run('validate-all.js');
+    const baseRep = ctx.read('.validation.json') || {};
+    const baseProblems = (baseRep.problems || []).length;
     const leaked = [];
     for (const [name, led] of states) {
       set(led);
-      const r = ctx.run('validate-all.js');
+      ctx.run('validate-all.js');
       const rep = ctx.read('.validation.json') || {};
-      if (((rep.problems) || []).some(l => /fixtures/.test(l))) leaked.push(`${name} became a problem`);
-      // exit 1 is validate-all's "problems found", which is what blocks publish.js
-      if (r.exit === 1) leaked.push(`${name} exited 1 (would block publish)`);
+      const probs = rep.problems || [];
+      if (probs.some(l => /fixtures/.test(l))) leaked.push(`${name} put a fixtures line in problems[]`);
+      if (probs.length !== baseProblems) leaked.push(`${name} changed the problem count ${baseProblems} → ${probs.length}`);
     }
-    ctx.check('EVERY ledger state is a WARNING and none exits 1 — a red regression suite can never block the publish or degrade the 08:15 brief',
-      leaked.length === 0, leaked.join('; ') || 'none leaked into problems[] and none exited 1');
+    ctx.check('EVERY ledger state is a WARNING: none adds a problems[] entry and none changes the problem count against a green ledger — so a red regression suite can never block the publish or degrade the 08:15 brief, whatever else is wrong that morning',
+      leaked.length === 0, leaked.join('; ') || `no state altered problems[] (baseline ${baseProblems})`);
 
     // ── (9) the ledger is harness state and must never reach the public repo ──────────────────
     // Read the sandbox's own .gitignore: ctx.run only launches node scripts, and git in the sandbox
