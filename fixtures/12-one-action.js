@@ -42,7 +42,20 @@ module.exports = {
     ctx.check(rule1 ? '(a) survivability FAIL ≥25% from the stressed call → silver.rule1 with the data-derived repayment and a DONE|DEFER ask' : `(a) real data no longer in the 12 Sep state (survivability ${st.survivability}, ${st.distStressedPct}% from the call) — key is data-derived: ${j.action.key}`,
       !rule1 || (j.action.key === 'silver.rule1' && j.action.kind === 'action' && /^DONE \| DEFER/.test(j.action.ask || '') && /^repay at least S\$[\d,]+ of the silver loan \(loan ≤ S\$[\d,]+\) (so the account survives a two-week −35% at the 45% stressed maintenance rate|to bring leverage to the signed [\d.]+x ceiling; Rule 1's bare minimum is S\$[\d,]+)\.$/.test(j.action.text)), `${j.action.key} · ${j.action.text}`);
     ctx.check('(a) short ≤ 80 chars with one number', String(j.action.short || '').length <= 80, j.action.short);
-    ctx.check('(a) push only on a crossing: first day ⇔ pushNote "first day — no crossing history"', (st.prevStateDate == null) === /first day/.test(j.action.pushNote || '') && j.action.push === false, `prevStateDate ${st.prevStateDate} · push ${j.action.push} · ${j.action.pushNote}`);
+    // The biconditional is the real rule: pushNote exists ONLY to mark a first day, and one-action.js
+    // sets it as `prev ? null : 'first day — no crossing history'`. The `&& push === false` this used
+    // to carry was never an invariant — it was true on the day it was written and became false on
+    // 2026-10-09, when the leading action was silver.margin-distance, which one-action.js:113 defines
+    // with push:true UNCONDITIONALLY because 24.7% from a stressed call is not a crossing, it is an
+    // emergency. Asserting a blanket push===false made the fixture red for doing its job correctly.
+    ctx.check('(a) pushNote marks a first day and nothing else: prevStateDate == null ⇔ pushNote says "first day"',
+      (st.prevStateDate == null) === /first day/.test(j.action.pushNote || ''),
+      `prevStateDate ${st.prevStateDate} · push ${j.action.push} · pushNote ${j.action.pushNote}`);
+    // What must never happen: a push with nothing to do. Some keys push unconditionally by design, so
+    // the guarantee worth pinning is that silence never pushes, not that action never does.
+    ctx.check('(a) nothing to do never pushes: kind "none" ⇒ push false, and push is always a boolean',
+      typeof j.action.push === 'boolean' && (j.action.kind !== 'none' || j.action.push === false),
+      `kind ${j.action.kind} · push ${j.action.push}`);
     ctx.check('(a) every silver why-line names its series/as-of; assumed rates get their line', (j.action.why || []).some(w => /\(SI=F, \d{4}-\d{2}-\d{2}(, low-trust)?\)/.test(w)) && (j.action.why || []).some(w => /are assumed — confirm on IBKR/.test(w)), (j.action.why || []).join(' ‖ '));
     ctx.check('(a) nav drawdown is null with the row-count note until 20 rows exist', st.navDrawdownPct === null ? /nav-history has \d+ rows \(needs 20\)/.test(st.navNote || '') : typeof st.navDrawdownPct === 'number', `${st.navDrawdownPct} · ${st.navNote}`);
     // --dry-run writes nothing
