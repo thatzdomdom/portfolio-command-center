@@ -190,13 +190,26 @@ function main() {
   // ── scope 1: net worth, over the only history that exists ─────────────────────────────────────
   let netWorth = null;
   try {
-    const nh = fs.readFileSync(D('nav-history.ndjson'), 'utf8').trim().split('\n').filter(Boolean).map(JSON.parse);
+    const nhAll = fs.readFileSync(D('nav-history.ndjson'), 'utf8').trim().split('\n').filter(Boolean).map(JSON.parse);
+    // A RESTATEMENT IS NOT A RETURN. On 2026-10-09 the CDP bond line was corrected from S$206,000 to
+    // S$800,000 (SGS BS-series bills are quoted per 100, so 2,000 units is S$200,000 of face value) —
+    // a +5.68% step in the series that no one earned. Left alone it would have set a false NAV peak
+    // and every future net-worth drawdown would have been measured from a number that never existed
+    // as a market value. So the comparable window starts at the LATEST restated row: rows before it
+    // were computed on the old, wrong basis and cannot be compared with rows after it. The window
+    // shortens to one session and then grows back, which is the honest cost of the correction. The
+    // risk sleeve below is unaffected — it is reconstructed from closes.json, not from this file.
+    let restatedAt = null;
+    for (const r of nhAll) if (r && r.restated) restatedAt = r.date;
+    const nh = restatedAt ? nhAll.filter(r => String(r.date) >= restatedAt) : nhAll;
     const pk = peakDrawdown(nh.map(r => r.date), nh.map(r => r.nav));
     netWorth = { navSGD: Math.round(nav), peak: { value: pk.peak == null ? null : Math.round(pk.peak), on: pk.peakOn },
       drawdownPct: r2(pk.fromPeakPct), tolerancePct: TOL.netWorthPct,
       usedOfTolerancePct: r2(pk.fromPeakPct == null ? null : (-pk.fromPeakPct) / TOL.netWorthPct * 100),
       historyFrom: nh[0] && nh[0].date, historySessions: nh.length,
-      note: `nav-history.ndjson starts ${nh[0] && nh[0].date} and holds ${nh.length} session(s), so this is the drawdown over that window and is NOT a 1-year or max drawdown — it is not presented as one. It is also structurally damped: cash and property are ${r2(((val.byClass && ((val.byClass.Cash || 0) + (val.byClass.Property || 0))) || 0) / nav * 100)}% of NAV and cannot move, so the risk sleeve below is the number that tests the regime.` };
+      restatedAt, restatedSessionsDropped: restatedAt ? nhAll.length - nh.length : 0,
+      restatedWhy: restatedAt ? ((nhAll.find(r => r.date === restatedAt) || {}).restatedWhy || null) : null,
+      note: `nav-history.ndjson starts ${nh[0] && nh[0].date} and holds ${nh.length} session(s), so this is the drawdown over that window and is NOT a 1-year or max drawdown — it is not presented as one.${restatedAt ? ` The window begins at a RESTATEMENT on ${restatedAt}: ${nhAll.length - nh.length} earlier session(s) were computed on a basis since corrected and are NOT comparable, so they are excluded rather than allowed to set a peak nobody earned.` : ''} It is also structurally damped: cash and property are ${r2(((val.byClass && ((val.byClass.Cash || 0) + (val.byClass.Property || 0))) || 0) / nav * 100)}% of NAV and cannot move, so the risk sleeve below is the number that tests the regime.` };
   } catch (e) { errors.push({ stage: 'netWorth', why: `nav-history.ndjson unreadable (${e.message}) — no net-worth drawdown computed, and none is guessed` }); }
 
   // ── scope 2: the risk sleeve, reconstructed at CURRENT quantities over 2y of real closes ───────
