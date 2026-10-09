@@ -1,12 +1,10 @@
 {
  "checkedOn": "2026-10-09",
- "at": "2026-10-09T09:01:09.443Z",
+ "at": "2026-10-09T09:10:20.928Z",
  "problems": [],
  "warnings": [
   "brief.json: regime label \"Confirmed hawkish Fed meets a live Hormuz oil shock\" differs from model.json's \"Confirmed hawkish Fed meets a live Hormuz oil shock -- tech cracks, value/defensives hold, vol stays low\"",
   "prices: skipped reconciliation for low-trust series (BZ=F) — the spine flags these as rolled/thin; quote the ETF proxy instead",
-  ".fixtures.json: the regression suite is RED: 2 of 24 fixture(s) failing — 12-one-action, 18-last-brief-at · first failure: 12-one-action: (a) push only on a crossing: first day ⇔ pushNote \"first day — no crossing history\"",
-  "manifest.json: sgtDate 2026-10-08 ≠ today 2026-10-09 (publish has not run yet today)",
   "book.html: 983 lines — the house rule is one file under ~900; split or trim"
  ],
  "passed": [
@@ -22,6 +20,8 @@
   "prices: 2/2 asserted prices reconcile against the spine",
   "book: 61 holdings match index.html exactly",
   "git: no sensitive plaintext tracked",
+  "fixtures: all 24 fixture(s) green (ran 2026-10-09, today, 28s) · 2 KNOWN GAP(s) still open",
+  "manifest: 27 files, sgtDate today",
   "signals: last scan 2026-10-08 · 673 Form 4 lines · 3681 facts retained",
   "alerts: 805 in the log · 433 Notable",
   "technicals: 66 instruments · gate ON 17 / OFF 49 · as of 2026-10-08",
@@ -53,6 +53,6 @@
   "themes: last checked 2026-10-05 (4d ago) · 2 term(s) · 2 history row(s) · 21 EFTS request(s)",
   "themes: all 2 term(s) internally consistent — stage on the ladder, entry window only at Priced and not crowded, no Priced without 3 priced names, no quarter at the paging ceiling",
   "drawdown: data/drawdown.json is not tracked by git (checked, exit 0) — only drawdown.enc ships",
-  "drawdown: checked 2026-10-09 (today) · net worth -1.07% off peak (7.93% of 13.5% tolerance, 28 session(s) only) · risk sleeve -20.01% off peak (80.03% of 25%) · levered silver -48.18% off peak, leverage 1.706x vs 1.4x, stressed call 24.7% away, survivability FAIL · 38 position(s), 17 retained state(s), all 25bp-gated and bar-stamped"
+  "drawdown: checked 2026-10-09 (today) · net worth 0% off peak (0% of 13.5% tolerance, 1 session(s) only) · risk sleeve -20.01% off peak (80.03% of 25%) · levered silver -48.18% off peak, leverage 1.706x vs 1.4x, stressed call 24.7% away, survivability FAIL · 38 position(s), 17 retained state(s), all 25bp-gated and bar-stamped"
  ]
 }
