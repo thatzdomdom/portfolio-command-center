@@ -1,0 +1,208 @@
+{
+  "updated": "2026-10-10",
+  "note": "Saturday 10 Oct 2026, 07:02 SGT. Weekend, markets closed -- this is a one-session increment over Friday's run, covering Friday 9 Oct's US close. Wall Street staged a broad risk-on rebound from Thursday's fear-driven selloff: S&P 500 7,811.54 (+0.59%), Nasdaq Composite 27,366.17 (+0.64%), Dow 51,654.95 (+0.83%), Russell 2000 2,806.98 (+0.46%), as VIX fell 3.70% to 14.84 from Thursday's 15.41 on easing oil prices and a tech-stock rebound ahead of next week's bank earnings; Real Estate (+1.85%) and Healthcare (+1.48%) led S&P sectors. Gold $4,220.30 (+1.52%) and Silver $61.11 (+3.46%) also rallied -- more a broad everything-rally than a fear signal. CNN's own Fear&Greed page remained hard to scrape directly; cross-checked mirrors (fearandgreedgraph.com, macromicro) put Friday's close at ~45, right at the Fear/Neutral boundary, up from Thursday's 38 (Fear) -- consistent with the VIX drop and index rebound. Crypto Fear&Greed eased further to 59 (Greed, per alternative.me) from Thursday's 64 as crypto consolidated. Breadth improved but stayed shallow: per TheStreet/StreetStats tracking, 52-week new lows still outnumber new highs (41 highs vs 120 lows, net -79, less negative than Thursday's roughly -300), only 291 of 503 S&P constituents (~58%) advanced on the day, and the % of S&P stocks above their 50-DMA jumped to ~36% from ~25% as the rally lifted laggards, while the % above the 200-DMA ticked up only slightly to ~46-47% -- the mega-cap/AI-concentration divergence hasn't closed. The weekly BofA Flow Show/EPFR print firmed up into a fuller, now-confirmed report for the week ended Wed 7 Oct (superseding Friday's preliminary approximations): a record $166.4B flooded into money-market funds (largest since April 2020; Hartnett: 'no rate cuts, no reduction in cash'), bonds added $33.8B, and global equities took in a net $12.4B as US equities (+$3.3B, first inflow in three weeks) and EM (+$2.1B, aided by China funds rebounding post-Golden-Week) attracted capital, Europe barely held an inflow (+$0.2B) and Japan logged its biggest outflow since May (-$3.3B); gold funds added another steady +$2.0B. CNN component-level detail below is reasoned forward from the headline index move, VIX and breadth (flagged as estimates) since a fresh official component breakdown for Friday could not be independently reproduced at filing time.",
+  "fearGreed": {
+    "value": 45,
+    "rating": "Neutral (right at the Fear/Neutral boundary)",
+    "asOf": "2026-10-09 (Fri US close)",
+    "prevClose": 38,
+    "prev1w": 28,
+    "prev1m": 64,
+    "prev1y": 35,
+    "cryptoValue": 59,
+    "cryptoRating": "Greed",
+    "components": [
+      {
+        "name": "Market Momentum",
+        "reading": "~56 (estimated -- S&P 500 extending further above its 125-day average as Friday's rebound added to the week's gains)",
+        "signal": "greed"
+      },
+      {
+        "name": "Stock Price Strength",
+        "reading": "~20 (estimated -- 52-week new lows still swamping new highs: 41 highs vs 120 lows per Friday's tracking, though the gap narrowed from Thursday's roughly -300)",
+        "signal": "fear"
+      },
+      {
+        "name": "Stock Price Breadth",
+        "reading": "~40 (estimated -- advancing issues broadened to 291 of 503 S&P names, but cap-weighted gains stayed concentrated in large-cap tech/Real Estate/Healthcare)",
+        "signal": "fear"
+      },
+      {
+        "name": "Put/Call Options",
+        "reading": "~45 (estimated -- put buying likely eased as the VIX fell and the rally broadened)",
+        "signal": "neutral"
+      },
+      {
+        "name": "Market Volatility",
+        "reading": "62 (VIX at 14.84, down 3.70%, further below its 50-day average -- low-vol reads as greed on CNN's methodology)",
+        "signal": "greed"
+      },
+      {
+        "name": "Safe-Haven Demand",
+        "reading": "~35 (estimated -- bonds likely still outperforming stocks over the past 20 trading days, little changed despite Friday's equity rally)",
+        "signal": "fear"
+      },
+      {
+        "name": "Junk Bond Demand",
+        "reading": "50 (spread between junk and IG yields roughly in line with recent norms, carried forward)",
+        "signal": "neutral"
+      }
+    ],
+    "sources": [
+      "https://edition.cnn.com/markets/fear-and-greed",
+      "https://fearandgreedgraph.com/",
+      "https://www.benzinga.com/markets/market-summary/26/10/62265206/nasdaq-falls-over-300-points-as-oil-prices-surge-investor-sentiment-weakens-fear-greed-index-remains-in-fear-zone",
+      "https://alternative.me/crypto/fear-and-greed-index/"
+    ]
+  },
+  "breadth": {
+    "asOf": "2026-10-09",
+    "metrics": [
+      {
+        "label": "% S&P 500 stocks above 200-DMA",
+        "value": "~46-47% (up slightly from ~45% on Oct 8; range 40-50% across trackers)",
+        "signal": "bearish",
+        "pct": 46
+      },
+      {
+        "label": "% S&P 500 stocks above 50-DMA",
+        "value": "~36% (182 of ~500 names per StreetStats, up sharply from ~25% on Oct 8 as the rally lifted laggards)",
+        "signal": "neutral",
+        "pct": 36
+      },
+      {
+        "label": "S&P 500 advancers vs decliners",
+        "value": "291 advancing, ~210 declining, 2 unchanged of 503 names (~58% advanced) -- broader than Thursday but still a mega-cap/Real-Estate/Healthcare-led rally more than a universal one",
+        "signal": "neutral",
+        "pct": null
+      },
+      {
+        "label": "52-week New Highs minus New Lows",
+        "value": "41 highs vs 120 lows = roughly -79, less negative than Thursday's ~-300 but still net bearish",
+        "signal": "bearish",
+        "pct": null
+      },
+      {
+        "label": "McClellan Oscillator / Summation Index",
+        "value": "No fresh confirmed print found; reasoned forward from Friday's positive breadth day off Thursday's Oscillator -54.9 / Summation -1,183 -- Oscillator likely flipped modestly positive, Summation ticking up slightly but still deeply negative (estimate, not a sourced figure)",
+        "signal": "bearish",
+        "pct": null
+      },
+      {
+        "label": "Advance-Decline line trend",
+        "value": "Stabilizing/turning up on Friday's broad rebound as new-low count shrank, but still below its recent highs after the Hormuz/yield/chip-stock risk-off",
+        "signal": "bearish",
+        "pct": null
+      },
+      {
+        "label": "% of GICS sectors with majority of stocks above 200-DMA",
+        "value": "~3-4 of 11 sectors still healthily above trend (Info Tech, Energy, Health Care, Real Estate on Friday's move); rest below 50%",
+        "signal": "bearish",
+        "pct": 32
+      }
+    ],
+    "note": "Friday's rebound broadened participation (advancers, % above 50-DMA, new-low count all improved) but the deeper internals -- % above 200-DMA near 46-47%, 52-week lows still outnumbering highs -- show the mega-cap/AI-concentration divergence hasn't closed, just paused. McClellan figures above are carried-forward estimates, not a freshly sourced Friday print.",
+    "sources": [
+      "https://finance.yahoo.com/markets/live/stock-market-today-friday-october-9-dow-sp-500-nasdaq-080148117.html",
+      "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-oct-09-2026",
+      "https://en.macromicro.me/collections/20868/global-sentiment-indicator/98990/sp500-sectors-200ma-breadth",
+      "https://www.mcoscillator.com/market_breadth_data/",
+      "https://www.barchart.com/stocks/highs-lows/summary"
+    ]
+  },
+  "flows": {
+    "asOf": "2026-10-09",
+    "period": "week ending Wed Oct 7, 2026 (BofA Flow Show / EPFR Global, now confirmed -- a fuller report than Friday's preliminary approximations, superseding that file's guessed figures)",
+    "narrative": "The full BofA/EPFR weekly print landed with a much clearer and, in several cases, quite different picture than Friday's preliminary approximations. Headline: a record $166.4B flooded into money-market funds -- the largest weekly inflow since April 2020 -- with Hartnett framing it as structural cash-hoarding ('no rate cuts, no reduction in cash') rather than a classic flight-to-safety, since money funds already offer attractive yields. Bonds added $33.8B. Global equity funds still took in a net $12.4B even so: US equities swung back to a modest inflow (+$3.3B, first in three weeks), EM funds logged a second straight week of inflows (+$2.1B), helped by China-dedicated funds rebounding sharply as domestic investors returned from Golden Week, and Europe barely held positive (+$0.2B, second straight week). Japan was the standout loser, flipping to its biggest outflow since May (-$3.3B). Gold ETFs added a steady +$2.0B, continuing the record-setting 2026 run even as spot gold hit fresh highs Friday. Within US sectors, Technology funds took in $3.5B (largest in six weeks) while Financials saw their biggest outflow since March (-$3.0B).",
+    "regions": [
+      {
+        "region": "US Equities",
+        "direction": "inflow",
+        "amount": "+$3.3B",
+        "amountUSD": 3300000000,
+        "note": "First inflow in three weeks, confirmed BofA/EPFR figure for the week ended Oct 7 -- revises down Friday's preliminary -$2.7B outflow guess"
+      },
+      {
+        "region": "Europe/Intl DM",
+        "direction": "inflow",
+        "amount": "+$0.2B",
+        "amountUSD": 200000000,
+        "note": "Second consecutive week of inflows but only barely positive; revises down Friday's preliminary +$1.3B estimate"
+      },
+      {
+        "region": "EM",
+        "direction": "inflow",
+        "amount": "+$2.1B",
+        "amountUSD": 2100000000,
+        "note": "Second consecutive week of inflows, confirmed BofA/EPFR figure; revises down Friday's preliminary +$3.2B estimate"
+      },
+      {
+        "region": "China",
+        "direction": "inflow",
+        "amount": "n/a (folded into EM above)",
+        "amountUSD": null,
+        "note": "No clean standalone weekly dollar figure available at filing time, but EPFR/ISI commentary describes China-dedicated and Greater China/Taiwan equity funds rebounding sharply as domestic investors returned from the Golden Week holiday -- qualitatively a strong week, folded into the EM inflow figure above"
+      },
+      {
+        "region": "Japan",
+        "direction": "outflow",
+        "amount": "-$3.3B",
+        "amountUSD": -3300000000,
+        "note": "Biggest Japan equity-fund outflow since May, confirmed BofA/EPFR figure -- a reversal from Friday's preliminary +$1.8B inflow guess"
+      },
+      {
+        "region": "Money-market/Cash",
+        "direction": "inflow",
+        "amount": "+$166.4B",
+        "amountUSD": 166400000000,
+        "note": "Largest weekly money-market inflow since April 2020, confirmed BofA/EPFR figure -- far bigger than Friday's rough +$8B approximation; assets now ~$8 trillion generating ~$330B/yr in interest at ~4.2% T-bill yields"
+      },
+      {
+        "region": "Bonds/Credit",
+        "direction": "inflow",
+        "amount": "+$33.8B",
+        "amountUSD": 33800000000,
+        "note": "Confirmed BofA/EPFR figure, well above Friday's rough +$12B approximation"
+      },
+      {
+        "region": "Gold",
+        "direction": "inflow",
+        "amount": "+$2.0B",
+        "amountUSD": 2000000000,
+        "note": "Steady weekly inflow confirming Friday's approximation; continues the record-setting 2026 run (Q3 alone was $31B, the strongest quarter on record) even as spot gold hit fresh highs this week"
+      }
+    ],
+    "movements": [
+      {
+        "from": "Risk assets broadly",
+        "to": "Money-market/Cash",
+        "amount": "+$166.4B (largest since April 2020)",
+        "note": "Hartnett: 'no rate cuts, no reduction in cash' -- a structural cash-hoarding dynamic for yield rather than a classic panic flight-to-safety, since it continued even as equities rebounded"
+      },
+      {
+        "from": "Japan Equities",
+        "to": "US / EM Equities",
+        "amount": "-$3.3B out of Japan vs +$3.3B into US, +$2.1B into EM",
+        "note": "Japan's biggest outflow since May contrasted with US funds' first inflow in three weeks and EM's second straight inflow week, aided by China funds rebounding post-Golden-Week"
+      },
+      {
+        "from": "Financials",
+        "to": "Technology",
+        "amount": "-$3.0B out of Financials vs +$3.5B into Tech",
+        "note": "Within US sector funds: Financials' biggest outflow since March vs Tech's largest inflow in six weeks"
+      },
+      {
+        "from": "Cash/Credit",
+        "to": "Gold ETFs",
+        "amount": "~$2B/week, $31B for Q3 2026",
+        "note": "Record quarterly gold ETF inflow pace continues even as the broader cash/bond bid also strengthened"
+      }
+    ],
+    "sources": [
+      "https://www.investing.com/news/stock-market-news/investors-need-sustained-fed-cuts-to-move-cash-off-sidelines-bofas-hartnett-4940583",
+      "https://www.kucoin.com/news/flash/over-160b-flows-into-money-market-funds-as-bofa-warns-of-cash-hoarding-until-fed-eases",
+      "https://www.asiafinancial.com/china-equity-funds-see-biggest-weekly-inflow-in-years-bofa",
+      "https://www.gold.org/goldhub/research/etf-flows"
+    ]
+  }
+}

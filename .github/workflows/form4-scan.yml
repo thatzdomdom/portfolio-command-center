@@ -1,0 +1,52 @@
+# Market-wide insider scan — runs on GitHub, not on the Mac.
+#
+# Phase 2 of the 11 Sep 2026 redesign (decision 5: keyless fetchers move to Actions). Two passes:
+# 06:30 SGT catches what EDGAR posted through the US evening; 11:00 SGT (= 23:00 ET) catches the
+# rest, since EDGAR accepts filings until 22:00 ET. Commits data/signals.json (facts only); the Mac
+# pulls it before the 07:02 research run and alerts.js applies policy there. Actions and the Mac
+# never write the same file.
+#
+# If EDGAR rate-limits cloud runners the same script moves to launchd unchanged; the design does
+# not depend on where it runs.
+name: form4-scan
+on:
+  schedule:
+    - cron: '30 22 * * 0-4'   # 06:30 SGT Mon–Fri
+    - cron: '0 3 * * 1-5'     # 11:00 SGT Mon–Fri
+  workflow_dispatch:
+    inputs:
+      days:
+        description: 'business days to scan (default 2)'
+        default: '2'
+permissions:
+  contents: write
+concurrency:
+  group: form4-scan
+  cancel-in-progress: false
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Scan EDGAR daily index
+        env:
+          SEC_UA: ${{ secrets.SEC_UA }}
+        run: |
+          set -e
+          test -n "$SEC_UA" || { echo "SEC_UA secret missing — SEC requires an identifying User-Agent"; exit 78; }
+          node scripts/form4-scan.js --days "${{ github.event.inputs.days || '2' }}"
+      - name: Commit signals.json if changed
+        run: |
+          git config user.name "form4-scan (GitHub Actions)"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/signals.json
+          if git diff --cached --quiet; then echo "no change"; exit 0; fi
+          git commit -m "signals: EDGAR Form 4 / 13D scan $(TZ=Asia/Singapore date +'%F %H:%M') SGT"
+          git pull --rebase origin main
+          git push origin HEAD:main
