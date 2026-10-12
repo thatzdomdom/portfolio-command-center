@@ -1,9 +1,9 @@
 {
- "asOf": "2026-10-05",
- "generatedAt": "2026-10-05T01:02:39.408Z",
+ "asOf": "2026-10-12",
+ "generatedAt": "2026-10-12T01:25:10.028Z",
  "source": "SEC EDGAR full-text search (efts.sec.gov, keyless); distinct filers counted by paging hits, never from the entity_filter aggregation; insider link on filer CIK identity against data/signals.json",
  "scan": {
-  "checkedAt": "2026-10-05T01:02:39.408Z",
+  "checkedAt": "2026-10-12T01:25:10.028Z",
   "ok": true,
   "requests": 21,
   "errors": []
@@ -18,20 +18,35 @@
    "stagePrev": null,
    "changedOn": "2026-09-17",
    "why": [
-    "2026 Q4 is still open (counted through 2026-10-05) — reported but never scored, because a part-quarter count reads as a collapse",
+    "2026 Q4 is still open (counted through 2026-10-12) — reported but never scored, because a part-quarter count reads as a collapse",
     "Candidate since 2026 Q1: distinct filers went 15 → 34 between 2025 Q4 and 2026 Q1, at least 2× from a base above 10",
     "Evidenced by insiders: BENF (3 insiders bought by 2026-09-17) — a cluster among the theme's own filers",
     "only 1 of the theme's names are priced here (MP), so co-movement cannot be measured — the rung stays Evidenced and the price leg is not invented",
-    "Crowded: 7 distinct trusts have an EFFECTIVE (485BPOS) filing naming the theme, across 18 filings — Tidal Trust V 2026-10-02; Krane Shares Trust 2026-09-21; Tidal Trust II 2026-09-15; Tidal Trust IV 2026-07-30"
+    "Crowded: 9 distinct trusts have an EFFECTIVE (485BPOS) filing naming the theme, across 22 filings — Managed Portfolio Series 2026-10-07; WisdomTree Trust 2026-10-06; Tema ETF Trust 2026-10-05; Tidal Trust V 2026-10-02"
    ],
    "candidateOn": "2026-03-31",
    "crowding": {
     "level": "crowded",
-    "effectiveTrusts": 7,
-    "effectiveFilings": 18,
+    "effectiveTrusts": 9,
+    "effectiveFilings": 22,
     "proposedFilings": 24,
     "initiations": 0,
     "trusts": [
+     {
+      "trust": "Managed Portfolio Series",
+      "date": "2026-10-07",
+      "form": "485BPOS"
+     },
+     {
+      "trust": "WisdomTree Trust",
+      "date": "2026-10-06",
+      "form": "485BPOS"
+     },
+     {
+      "trust": "Tema ETF Trust",
+      "date": "2026-10-05",
+      "form": "485BPOS"
+     },
      {
       "trust": "Tidal Trust V",
       "date": "2026-10-02",
@@ -45,21 +60,6 @@
      {
       "trust": "Tidal Trust II",
       "date": "2026-09-15",
-      "form": "485BPOS"
-     },
-     {
-      "trust": "Tidal Trust IV",
-      "date": "2026-07-30",
-      "form": "485BPOS"
-     },
-     {
-      "trust": "WisdomTree Trust",
-      "date": "2026-07-29",
-      "form": "485BPOS"
-     },
-     {
-      "trust": "Exchange Listed Funds Trust",
-      "date": "2026-04-16",
       "form": "485BPOS"
      }
     ]
@@ -165,17 +165,35 @@
     {
      "q": "2026 Q4",
      "from": "2026-10-01",
-     "to": "2026-10-05",
-     "filings": 3,
-     "filingsDistinct": 3,
-     "filers": 3,
-     "filersAgg": 3,
-     "pagedDocs": 3,
+     "to": "2026-10-12",
+     "filings": 11,
+     "filingsDistinct": 10,
+     "filers": 10,
+     "filersAgg": 10,
+     "pagedDocs": 11,
      "truncated": false,
      "partial": true
     }
    ],
    "filersNewest": [
+    {
+     "cik": "746210",
+     "name": "TaoWeave, Inc.",
+     "ticker": "TWAV",
+     "filings": 2
+    },
+    {
+     "cik": "1818274",
+     "name": "Arrive AI Inc.",
+     "ticker": "ARAI",
+     "filings": 1
+    },
+    {
+     "cik": "1832483",
+     "name": "Serve Robotics Inc. /DE/",
+     "ticker": "SERV",
+     "filings": 1
+    },
     {
      "cik": "1854445",
      "name": "Brightline Interactive, Inc./NV",
@@ -189,6 +207,30 @@
      "filings": 1
     },
     {
+     "cik": "2024459",
+     "name": "Charlton Aria Acquisition Corp",
+     "ticker": "CHAR",
+     "filings": 1
+    },
+    {
+     "cik": "2074973",
+     "name": "Churchill Capital Corp XI",
+     "ticker": "CCXI",
+     "filings": 1
+    },
+    {
+     "cik": "4127",
+     "name": "SKYWORKS SOLUTIONS, INC.",
+     "ticker": "SWKS",
+     "filings": 1
+    },
+    {
+     "cik": "723125",
+     "name": "MICRON TECHNOLOGY INC",
+     "ticker": "MU",
+     "filings": 1
+    },
+    {
      "cik": "817720",
      "name": "SYNAPTICS Inc",
      "ticker": "SYNA",
@@ -196,6 +238,42 @@
     }
    ],
    "etfs": [
+    {
+     "trust": "Managed Portfolio Series",
+     "cik": "1511699",
+     "form": "485BPOS",
+     "date": "2026-10-07",
+     "adsh": "0000894189-26-029261",
+     "url": "https://www.sec.gov/Archives/edgar/data/1511699/000089418926029261/0000894189-26-029261-index.htm",
+     "effective": true
+    },
+    {
+     "trust": "WisdomTree Trust",
+     "cik": "1350487",
+     "form": "485BPOS",
+     "date": "2026-10-06",
+     "adsh": "0001214659-26-012574",
+     "url": "https://www.sec.gov/Archives/edgar/data/1350487/000121465926012574/0001214659-26-012574-index.htm",
+     "effective": true
+    },
+    {
+     "trust": "WisdomTree Trust",
+     "cik": "1350487",
+     "form": "485BPOS",
+     "date": "2026-10-05",
+     "adsh": "0001214659-26-012559",
+     "url": "https://www.sec.gov/Archives/edgar/data/1350487/000121465926012559/0001214659-26-012559-index.htm",
+     "effective": true
+    },
+    {
+     "trust": "Tema ETF Trust",
+     "cik": "1944285",
+     "form": "485BPOS",
+     "date": "2026-10-05",
+     "adsh": "0001829126-26-010758",
+     "url": "https://www.sec.gov/Archives/edgar/data/1944285/000182912626010758/0001829126-26-010758-index.htm",
+     "effective": true
+    },
     {
      "trust": "Tidal Trust V",
      "cik": "2081107",
@@ -577,11 +655,27 @@
    ],
    "sic": [
     {
+     "code": "3674",
+     "count": 3
+    },
+    {
+     "code": "3569",
+     "count": 2
+    },
+    {
+     "code": "7370",
+     "count": 2
+    },
+    {
      "code": "1000",
      "count": 1
     },
     {
-     "code": "3674",
+     "code": "6770",
+     "count": 1
+    },
+    {
+     "code": "7340",
      "count": 1
     },
     {
@@ -607,10 +701,34 @@
      "cik": "1769628",
      "ticker": "CRWV",
      "name": "CoreWeave, Inc.",
-     "filings": 8,
+     "filings": 17,
      "buys": 0,
-     "sells": 8,
-     "latest": "2026-10-01",
+     "sells": 17,
+     "latest": "2026-10-08",
+     "side": "sell",
+     "cluster": false,
+     "clusterOn": null
+    },
+    {
+     "cik": "1070235",
+     "ticker": "BB",
+     "name": "BLACKBERRY Ltd",
+     "filings": 7,
+     "buys": 0,
+     "sells": 7,
+     "latest": "2026-10-05",
+     "side": "sell",
+     "cluster": false,
+     "clusterOn": null
+    },
+    {
+     "cik": "1667011",
+     "ticker": "AIP",
+     "name": "Arteris, Inc.",
+     "filings": 7,
+     "buys": 0,
+     "sells": 7,
+     "latest": "2026-10-06",
      "side": "sell",
      "cluster": false,
      "clusterOn": null
@@ -640,6 +758,18 @@
      "clusterOn": null
     },
     {
+     "cik": "2023554",
+     "ticker": "SNDK",
+     "name": "Sandisk Corp",
+     "filings": 4,
+     "buys": 0,
+     "sells": 4,
+     "latest": "2026-10-02",
+     "side": "sell",
+     "cluster": false,
+     "clusterOn": null
+    },
+    {
      "cik": "817720",
      "ticker": "SYNA",
      "name": "SYNAPTICS Inc",
@@ -664,13 +794,49 @@
      "clusterOn": null
     },
     {
-     "cik": "2023554",
-     "ticker": "SNDK",
-     "name": "Sandisk Corp",
+     "cik": "883241",
+     "ticker": "SNPS",
+     "name": "SYNOPSYS INC",
      "filings": 3,
      "buys": 0,
      "sells": 3,
-     "latest": "2026-09-21",
+     "latest": "2026-10-07",
+     "side": "sell",
+     "cluster": false,
+     "clusterOn": null
+    },
+    {
+     "cik": "1058290",
+     "ticker": "CTSH",
+     "name": "COGNIZANT TECHNOLOGY SOLUTIONS CORP",
+     "filings": 2,
+     "buys": 0,
+     "sells": 2,
+     "latest": "2026-10-02",
+     "side": "sell",
+     "cluster": false,
+     "clusterOn": null
+    },
+    {
+     "cik": "1413447",
+     "ticker": "NXPI",
+     "name": "NXP Semiconductors N.V.",
+     "filings": 2,
+     "buys": 0,
+     "sells": 2,
+     "latest": "2026-10-05",
+     "side": "sell",
+     "cluster": false,
+     "clusterOn": null
+    },
+    {
+     "cik": "1743725",
+     "ticker": "GDYN",
+     "name": "GRID DYNAMICS HOLDINGS, INC.",
+     "filings": 2,
+     "buys": 0,
+     "sells": 2,
+     "latest": "2026-10-08",
      "side": "sell",
      "cluster": false,
      "clusterOn": null
@@ -724,18 +890,6 @@
      "clusterOn": null
     },
     {
-     "cik": "1058290",
-     "ticker": "CTSH",
-     "name": "COGNIZANT TECHNOLOGY SOLUTIONS CORP",
-     "filings": 1,
-     "buys": 0,
-     "sells": 1,
-     "latest": "2026-09-16",
-     "side": "sell",
-     "cluster": false,
-     "clusterOn": null
-    },
-    {
      "cik": "1283699",
      "ticker": "TMUS",
      "name": "T-Mobile US, Inc.",
@@ -743,30 +897,6 @@
      "buys": 0,
      "sells": 1,
      "latest": "2026-09-14",
-     "side": "sell",
-     "cluster": false,
-     "clusterOn": null
-    },
-    {
-     "cik": "1413447",
-     "ticker": "NXPI",
-     "name": "NXP Semiconductors N.V.",
-     "filings": 1,
-     "buys": 0,
-     "sells": 1,
-     "latest": "2026-09-17",
-     "side": "sell",
-     "cluster": false,
-     "clusterOn": null
-    },
-    {
-     "cik": "1667011",
-     "ticker": "AIP",
-     "name": "Arteris, Inc.",
-     "filings": 1,
-     "buys": 0,
-     "sells": 1,
-     "latest": "2026-09-15",
      "side": "sell",
      "cluster": false,
      "clusterOn": null
@@ -808,6 +938,18 @@
      "clusterOn": null
     },
     {
+     "cik": "1970622",
+     "ticker": "USAR",
+     "name": "USA Rare Earth, Inc.",
+     "filings": 1,
+     "buys": 0,
+     "sells": 1,
+     "latest": "2026-10-05",
+     "side": "sell",
+     "cluster": false,
+     "clusterOn": null
+    },
+    {
      "cik": "880631",
      "ticker": "WT",
      "name": "WisdomTree, Inc.",
@@ -815,18 +957,6 @@
      "buys": 0,
      "sells": 1,
      "latest": "2026-09-10",
-     "side": "sell",
-     "cluster": false,
-     "clusterOn": null
-    },
-    {
-     "cik": "883241",
-     "ticker": "SNPS",
-     "name": "SYNOPSYS INC",
-     "filings": 1,
-     "buys": 0,
-     "sells": 1,
-     "latest": "2026-09-16",
      "side": "sell",
      "cluster": false,
      "clusterOn": null
@@ -871,7 +1001,7 @@
    "stagePrev": null,
    "changedOn": "2026-09-20",
    "why": [
-    "2026 Q4 is still open (counted through 2026-10-05) — reported but never scored, because a part-quarter count reads as a collapse",
+    "2026 Q4 is still open (counted through 2026-10-12) — reported but never scored, because a part-quarter count reads as a collapse",
     "not a Candidate: no complete quarter has doubled its distinct filers from a base above 10 (latest 2026 Q2 8 → 2026 Q3 9)",
     "Crowded: 4 distinct trusts have an EFFECTIVE (485BPOS) filing naming the theme, across 6 filings — Collaborative Investment Series Trust 2026-08-28; Krane Shares Trust 2026-07-29; Roundhill ETF Trust 2026-04-30; Morgan Stanley Portfolios, Series 81 2025-04-30"
    ],
@@ -1006,17 +1136,24 @@
     {
      "q": "2026 Q4",
      "from": "2026-10-01",
-     "to": "2026-10-05",
-     "filings": 0,
-     "filingsDistinct": 0,
-     "filers": 0,
-     "filersAgg": null,
-     "pagedDocs": 0,
+     "to": "2026-10-12",
+     "filings": 1,
+     "filingsDistinct": 1,
+     "filers": 1,
+     "filersAgg": 1,
+     "pagedDocs": 1,
      "truncated": false,
      "partial": true
     }
    ],
-   "filersNewest": [],
+   "filersNewest": [
+    {
+     "cik": "2074973",
+     "name": "Churchill Capital Corp XI",
+     "ticker": "CCXI",
+     "filings": 1
+    }
+   ],
    "etfs": [
     {
      "trust": "Collaborative Investment Series Trust",
@@ -1127,7 +1264,12 @@
      "effective": true
     }
    ],
-   "sic": [],
+   "sic": [
+    {
+     "code": "3569",
+     "count": 1
+    }
+   ],
    "insiderOverlap": [
     {
      "cik": "1045810",
