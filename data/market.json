@@ -1,15 +1,15 @@
 {
-  "updated": "2026-10-10",
-  "note": "Saturday 10 Oct 2026, 07:02 SGT. Weekend, markets closed -- this is a one-session increment over Friday's run, covering Friday 9 Oct's US close. Wall Street staged a broad risk-on rebound from Thursday's fear-driven selloff: S&P 500 7,811.54 (+0.59%), Nasdaq Composite 27,366.17 (+0.64%), Dow 51,654.95 (+0.83%), Russell 2000 2,806.98 (+0.46%), as VIX fell 3.70% to 14.84 from Thursday's 15.41 on easing oil prices and a tech-stock rebound ahead of next week's bank earnings; Real Estate (+1.85%) and Healthcare (+1.48%) led S&P sectors. Gold $4,220.30 (+1.52%) and Silver $61.11 (+3.46%) also rallied -- more a broad everything-rally than a fear signal. CNN's own Fear&Greed page remained hard to scrape directly; cross-checked mirrors (fearandgreedgraph.com, macromicro) put Friday's close at ~45, right at the Fear/Neutral boundary, up from Thursday's 38 (Fear) -- consistent with the VIX drop and index rebound. Crypto Fear&Greed eased further to 59 (Greed, per alternative.me) from Thursday's 64 as crypto consolidated. Breadth improved but stayed shallow: per TheStreet/StreetStats tracking, 52-week new lows still outnumber new highs (41 highs vs 120 lows, net -79, less negative than Thursday's roughly -300), only 291 of 503 S&P constituents (~58%) advanced on the day, and the % of S&P stocks above their 50-DMA jumped to ~36% from ~25% as the rally lifted laggards, while the % above the 200-DMA ticked up only slightly to ~46-47% -- the mega-cap/AI-concentration divergence hasn't closed. The weekly BofA Flow Show/EPFR print firmed up into a fuller, now-confirmed report for the week ended Wed 7 Oct (superseding Friday's preliminary approximations): a record $166.4B flooded into money-market funds (largest since April 2020; Hartnett: 'no rate cuts, no reduction in cash'), bonds added $33.8B, and global equities took in a net $12.4B as US equities (+$3.3B, first inflow in three weeks) and EM (+$2.1B, aided by China funds rebounding post-Golden-Week) attracted capital, Europe barely held an inflow (+$0.2B) and Japan logged its biggest outflow since May (-$3.3B); gold funds added another steady +$2.0B. CNN component-level detail below is reasoned forward from the headline index move, VIX and breadth (flagged as estimates) since a fresh official component breakdown for Friday could not be independently reproduced at filing time.",
+  "updated": "2026-10-12",
+  "note": "Monday 12 Oct 2026, 07:02 SGT -- before Asia's open (SGX 09:00, HKEX 09:30 SGT), US Columbus Day (bond market closed, equities open normally later today). No new equity session has closed since Friday 9 Oct's US close, so equity-based metrics below (CNN fearGreed value/components, breadth, flows) remain Friday's confirmed figures, re-verified against fresh search this run rather than re-stamped blind. Crypto Fear&Greed was checked directly via alternative.me's API (not just the cached webpage): the latest posted daily reading is for Oct 11 00:00 UTC = 61 (Greed), identical to Sunday's run -- the next daily refresh (due ~08:00 SGT, i.e. shortly after this filing) had not posted yet, so despite crypto trading 24/7 there genuinely is no fresher number to report yet. CNN's own Fear&Greed API returned HTTP 418 to automated fetch; cross-checked mirrors (fearandgreedgraph.com, Benzinga) independently reconfirm Friday's close at 45, Neutral. Breadth: searched for anything newer than Friday's 41-highs-vs-120-lows read; found Trefis daily new-high/new-low counts (e.g. 13 highs vs 7 lows on Oct 9) that conflict with it, traced this to a methodology/universe mismatch (Trefis samples a restricted subset rather than the full S&P 500 count the baseline source uses) and rejected it rather than swapping it in blind -- no genuine fresher full-index print exists, so Friday's figures are carried forward unchanged. Flows: the week-ended-Wed-Oct-7 BofA Flow Show/EPFR print remains the latest published edition; the next weekly edition is still not due until ~Oct 15-16, confirmed via fresh search (no new edition found). What is genuinely new since Sunday: geopolitical rhetoric escalated further Sunday/Monday -- Trump posted that 'every shot fired by the Houthis' will now be treated as fired 'from the weapons and leadership of Iran' and that Iran will face 'dire' consequences (CNBC/Fox News, 11 Oct), building on Saturday's Riyadh airport strike already captured in the prior run; early-Monday-Asia wire color has oil holding above $100/bbl on the escalation and a broad gold/silver/platinum-group rally continuing into the Asia session (marketindex.com.au ASX preview), but no verified index or asset price levels were available to me this run, so none are stated as hard figures in the structured fields above what was already sourced Friday.",
   "fearGreed": {
     "value": 45,
     "rating": "Neutral (right at the Fear/Neutral boundary)",
-    "asOf": "2026-10-09 (Fri US close)",
+    "asOf": "2026-10-09 (Fri US close, re-verified 12 Oct -- no new equity session has closed since; next US close is tonight SGT, Columbus Day equities trading as normal)",
     "prevClose": 38,
     "prev1w": 28,
     "prev1m": 64,
     "prev1y": 35,
-    "cryptoValue": 59,
+    "cryptoValue": 61,
     "cryptoRating": "Greed",
     "components": [
       {
@@ -52,11 +52,13 @@
       "https://edition.cnn.com/markets/fear-and-greed",
       "https://fearandgreedgraph.com/",
       "https://www.benzinga.com/markets/market-summary/26/10/62265206/nasdaq-falls-over-300-points-as-oil-prices-surge-investor-sentiment-weakens-fear-greed-index-remains-in-fear-zone",
-      "https://alternative.me/crypto/fear-and-greed-index/"
+      "https://alternative.me/crypto/fear-and-greed-index/",
+      "https://api.alternative.me/fng/?limit=5",
+      "https://www.finhacker.cz/en/fear-and-greed-index-historical-data-and-chart/"
     ]
   },
   "breadth": {
-    "asOf": "2026-10-09",
+    "asOf": "2026-10-09 (re-verified 12 Oct -- no new session since; a conflicting Trefis new-high/new-low count was found in search and excluded as a methodology/universe mismatch, not a genuine update)",
     "metrics": [
       {
         "label": "% S&P 500 stocks above 200-DMA",
@@ -101,7 +103,7 @@
         "pct": 32
       }
     ],
-    "note": "Friday's rebound broadened participation (advancers, % above 50-DMA, new-low count all improved) but the deeper internals -- % above 200-DMA near 46-47%, 52-week lows still outnumbering highs -- show the mega-cap/AI-concentration divergence hasn't closed, just paused. McClellan figures above are carried-forward estimates, not a freshly sourced Friday print.",
+    "note": "Friday's rebound broadened participation (advancers, % above 50-DMA, new-low count all improved) but the deeper internals -- % above 200-DMA near 46-47%, 52-week lows still outnumbering highs -- show the mega-cap/AI-concentration divergence hasn't closed, just paused. McClellan figures above are carried-forward estimates, not a freshly sourced Friday print. No trading session has occurred since, so this remains the latest real data as of Monday pre-open.",
     "sources": [
       "https://finance.yahoo.com/markets/live/stock-market-today-friday-october-9-dow-sp-500-nasdaq-080148117.html",
       "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-oct-09-2026",
@@ -111,9 +113,9 @@
     ]
   },
   "flows": {
-    "asOf": "2026-10-09",
+    "asOf": "2026-10-09 (re-verified 12 Oct -- this remains the latest published weekly edition; the next EPFR/BofA print isn't due until ~Oct 15-16)",
     "period": "week ending Wed Oct 7, 2026 (BofA Flow Show / EPFR Global, now confirmed -- a fuller report than Friday's preliminary approximations, superseding that file's guessed figures)",
-    "narrative": "The full BofA/EPFR weekly print landed with a much clearer and, in several cases, quite different picture than Friday's preliminary approximations. Headline: a record $166.4B flooded into money-market funds -- the largest weekly inflow since April 2020 -- with Hartnett framing it as structural cash-hoarding ('no rate cuts, no reduction in cash') rather than a classic flight-to-safety, since money funds already offer attractive yields. Bonds added $33.8B. Global equity funds still took in a net $12.4B even so: US equities swung back to a modest inflow (+$3.3B, first in three weeks), EM funds logged a second straight week of inflows (+$2.1B), helped by China-dedicated funds rebounding sharply as domestic investors returned from Golden Week, and Europe barely held positive (+$0.2B, second straight week). Japan was the standout loser, flipping to its biggest outflow since May (-$3.3B). Gold ETFs added a steady +$2.0B, continuing the record-setting 2026 run even as spot gold hit fresh highs Friday. Within US sectors, Technology funds took in $3.5B (largest in six weeks) while Financials saw their biggest outflow since March (-$3.0B).",
+    "narrative": "The full BofA/EPFR weekly print landed with a much clearer and, in several cases, quite different picture than Friday's preliminary approximations. Headline: a record $166.4B flooded into money-market funds -- the largest weekly inflow since April 2020 -- with Hartnett framing it as structural cash-hoarding ('no rate cuts, no reduction in cash') rather than a classic flight-to-safety, since money funds already offer attractive yields. Bonds added $33.8B. Global equity funds still took in a net $12.4B even so: US equities swung back to a modest inflow (+$3.3B, first in three weeks), EM funds logged a second straight week of inflows (+$2.1B), helped by China-dedicated funds rebounding sharply as domestic investors returned from Golden Week, and Europe barely held positive (+$0.2B, second straight week). Japan was the standout loser, flipping to its biggest outflow since May (-$3.3B). Gold ETFs added a steady +$2.0B, continuing the record-setting 2026 run even as spot gold hit fresh highs Friday. Within US sectors, Technology funds took in $3.5B (largest in six weeks) while Financials saw their biggest outflow since March (-$3.0B). No newer weekly edition has been published as of Monday pre-open; the next one is expected ~Oct 15-16.",
     "regions": [
       {
         "region": "US Equities",

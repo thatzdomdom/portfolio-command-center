@@ -1,42 +1,67 @@
 {
- "date": "2026-10-10T07:02:00+08:00",
- "coverage": "Saturday 10 Oct 2026, 07:02 SGT run. Clock verified via shell (date, Asia/Singapore, America/New_York -- all agree 2026-10-10 07:02 SGT / 2026-10-09 19:02 EDT), cross-checked against git log (last commit 2026-10-10 00:15 SGT) and the price spine (generated 2026-10-09T23:02 UTC = 2026-10-10 07:02 SGT) -- all three agree, no drift. Markets are closed for the weekend; the last brief (Friday 9 Oct, 07:02 SGT) was written BEFORE Friday's session happened, so this is a ONE-SESSION increment covering Friday's close, not a multi-day catch-up. Latest completed sessions on the book: US cash, and HK/SG single-name stocks, through Friday 9 Oct close; the Hang Seng/STI/Nikkei/KOSPI INDEX-level bars in the price spine still lag to Thursday 8 Oct (a feed-consolidation lag measured directly, not assumed -- individual HK/SG stocks already carry Friday bars). Korea's flows data for Friday could not be independently verified (conflicting/stale search results), so Thursday remains the last confirmed KRX print. One material correction surfaced and propagated across model.json, news.json and this file: China's rare-earth export-control truce was NOT heading toward a Nov 10, 2026 cliff as this book's prior files assumed -- Treasury Secretary Bessent announced 23 Sep 2026 a two-month extension to 10 Jan 2027 (shorter than the 6-12 months many importers had hoped for). Nine stale 'Nov 10' references in model.json were corrected in place once verified against two independent sources (SupplyChainDive, The Hill).",
+ "date": "2026-10-12T08:30:00+08:00",
+ "coverage": "Monday 12 Oct 2026, 08:30 SGT run. Clock verified via shell (date, Asia/Singapore, America/New_York -- all agree 2026-10-12 08:11 SGT / 2026-10-11 20:11 EDT Sunday evening), cross-checked against git log (last commit 2026-10-11 18:10 SGT, 'Flow history 2026-10-11') and the freshly-generated price spine (2026-10-12T00:10 UTC = 08:10 SGT) -- all agree, no drift. Latest completed sessions remain Fri 9 Oct for US/HK/SG/Japan cash and Thu 8 Oct for Korea (SGX opens 09:00, HKEX 09:30 SGT -- both still pre-open at run time). NOTE ON THIS RUN: an earlier 07:0x SGT attempt ran the full research pass but was killed by the 75-minute watchdog before writing this file, and left validate-all RED on two problems -- a future-dated item in news.json (a Wed 14 Oct CPI calendar reminder published as if it were news) and this file one day stale. That run's underlying research (model.json macro, market.json sentiment/breadth/flows, flows-investors.json, track.json) was independently verified sound and is NOT redone here. This retry fixed the news.json bug (item dropped, its CPI content moved to watch[] below), re-swept congress trades and all 20 tracked insider names for anything filed in the last 14 days, and writes this brief.",
  "tldr": [
-  "Biggest live risk, slightly eased: the levered silver sleeve is still in survivability FAIL territory -- leverage 1.679x vs the signed 1.4x ceiling, and one-action.js is still asking for a >=S$16,600 paydown -- but Friday's silver rally to $61.11 (+3.46%) pushed the stressed margin call ($44.94) to roughly 26.5% away, versus 24.7% on Thursday.",
-  "Friday was a genuine broad risk-on rebound, not just a tech bounce: all four major US indices rose together (S&P +0.59%, Nasdaq +0.64%, Dow +0.83%, Russell +0.46%) and VIX fell to 14.84; CNN Fear & Greed snapped back to 45 (Neutral) from Thursday's 38 (Fear) -- but a weak prelim UMich consumer-sentiment print (46.3, a five-month low, current conditions at an all-time low) means the soft-landing story is still two-sided.",
-  "Correction to a standing fact that had been feeding this book's rare-earth-basket thesis: the China export-control truce was extended 23 Sep 2026 (Bessent) to 10 Jan 2027, not expiring 10 Nov 2026 as every prior file here assumed -- this removes a near-dated bullish catalyst for MP/Lynas but leaves their DoD-backed, price-floored offtakes untouched.",
-  "Gold and silver melted up ALONGSIDE equities Friday (gold +1.52% to $4,220.30, silver +3.46% to $61.11, GDX +2.95%) rather than acting as a hedge -- a repricing toward a less-hawkish Fed path, not classic risk-off demand; Barrick was the lone laggard (-2.33%) on a company-specific 2026 production-guidance cut.",
-  "Friday's HK tech rebound (Tencent +3.26%, SMIC +1.50%, Xiaomi +9.72% on a SkyNomad EV order-book beat) was NOT mainland-conviction-driven: Southbound Stock Connect was actually a net SELLER of Xiaomi (-HK$925mn) and SMIC (-HK$261mn) that day, with AIA and Alibaba the real Southbound favorites -- worth knowing before reading the rebound as a China-sentiment signal.",
-  "Congress/WSB consensus signals added SpaceX (SPCX, bipartisan post-IPO buying + #2 WSB mention rank) as an 8th name; GOOGL stays in on Berkshire's build despite a split congressional read; the confirmed BofA/EPFR weekly flow print (replacing Friday's preliminary guesses) shows US equities actually had a +$3.3B inflow, not the outflow previously assumed, alongside a record $166.4B into money-market funds."
+  "New overnight: a second Houthi strike hit Riyadh's airport (Sun 11 Oct, after Saturday's attack killed 12 and wounded ~300); Saudi Arabia called it a 'war crime' and vowed a 'decisive' response while Trump repeated the US 'may' join Saudi strikes on the Houthis -- the Gulf conflict's second front stays live alongside the unresolved Hormuz blockade.",
+  "The book's single biggest standing risk is unchanged and still breached: the GDX+SILJ+SLVP+XAG cluster carries 61% of risk-sleeve risk against a signed 20% cap, levered silver sits at 1.678x vs the 1.4x ceiling with a stressed margin call 26.5% away, and survivability still reads FAIL -- the weekend's Gulf escalation argues for keeping the hedge, not for the leverage breach.",
+  "Directly hits the book: Singapore passed a bail-in bond mandate for its 7 systemic banks (DBS's estimated capital gap ~S$4.3B), a multi-year regulatory overhang, even as DBS/BofA/UOB all reiterated Buy on Singtel after its 27% y/y profit beat.",
+  "HK tech sleeve (0700/0981/1810) saw Tencent, Xiaomi and SMIC lead southbound Stock Connect volumes into the weekend plus fresh buybacks from Tencent and Xiaomi -- institutional and corporate support looks intact heading into Monday's reopen.",
+  "Wednesday's Sept CPI (Oct 14) is the week's dominant catalyst: consensus has headline accelerating to 3.6% y/y (from 3.4%) on base effects while core cools to ~0.2% m/m (from 0.3%) -- a genuinely two-sided print against an 81.6%-priced October hold and an 83%-priced December hike.",
+  "Congress list gained two newly-verified Salazar legs (a larger CSCO sell, a small META buy) rather than a new member or ticker; a full 14-day sweep of all 20 tracked SEC/SGXNet/HKEX insider names found zero new filings -- every aged entry already carried the correct 'latest available' justification."
  ],
  "whatChanged": [
-  "Intel: congress roster refreshed to 10 distinct members (6 new trades, incl. Rep. Khanna's COIN buy/HD sell and Rep. Salazar's OKTA buy); insiders held at 7 -- a targeted 14-day sweep for a fresh Xiaomi filing around Friday's +9.72% move found none, the move traces to EV order-book news instead; signals grew 7 to 8 with SpaceX (SPCX) added.",
-  "Model: macro regime upgraded (riskOnProb 0.45 to 0.54) on Friday's broad four-index rebound; all 40 required calls plus 6 rare-earth extras refreshed off Friday's closes; corrected the rare-earth-truce date in 9 places (10 Jan 2027, not 10 Nov 2026) after independent verification.",
-  "Market: CNN Fear & Greed back to 45 (Neutral) from Thursday's 38 (Fear); crypto F&G eased to 59 (Greed) from 64; breadth improved but stayed shallow (58% of S&P names advanced, only ~46-47% above the 200-DMA); flows revised materially once the confirmed BofA/EPFR print (week ended Wed 7 Oct) replaced Friday's preliminary approximations.",
-  "News: rebuilt around Friday's close (8 of 10 items dated 8-10 Oct); added the rare-earth-truce correction as its own flagged item; dropped the stale government-shutdown, standalone OCBC-downgrade and uranium-selloff items.",
-  "Flows-investors: Hong Kong advanced to Friday (the reopening Southbound buying surge did not hold -- net seller of Xiaomi/SMIC); China margin balance advanced to the Oct 8 reopening print (RMB2,536.47bn, +RMB4.05bn d/d); Japan/Singapore/US carried forward honestly (no newer official print exists yet); Korea also carried forward after a Friday print could not be independently verified.",
-  "Investors: no change -- nothing new since Friday's Trump profile update (Forbes $7.0B, August PTR); sectorConcentration untouched, next 13F due 16 Nov 2026.",
-  "Track: today's 46-call model snapshot appended (83 total, within the 120-snapshot cap)."
+  "Intel: congress array gained 2 verified Salazar trades found this run (CSCO sell $47,033-$530,000, META buy $1,001-$15,000, both filed Oct 9) -- 17 trades total, still 9 distinct members; insiders re-swept across SEC Form 4 (GDX/SILJ/SLVP/VNM -- zero hits, consistent with ETFs having no Section-16 filers), 14 SGXNet names and 3 HKEX names for the last 14 days -- zero new filings found, file carried forward unchanged; signals list (7 tickers) unchanged.",
+  "Model: carried forward from the 07:0x run, already restamped today -- macro.asOf 2026-10-12, riskOnProb 0.50, regimeScore -0.20, narrative folds in the second Riyadh strike and Fed Chair Warsh's Thursday IMF fireside chat; all 46 calls (40 universe + MP/LYC.AX/UUUU/USAR/6680.HK/REMX) present and internally consistent -- not re-run again this retry.",
+  "Market: carried forward from the 07:0x run -- Fear&Greed 45 (Neutral, re-verified no new equity session since Friday), crypto F&G 61 (Greed), breadth and the weekly BofA/EPFR flow print (week ending Wed 7 Oct) all re-confirmed as still the latest published data, not re-stamped blind.",
+  "News: fixed the bug that broke the prior run's validate-all -- dropped the future-dated 'CPI due Wed Oct 14' item that had been published as a news entry (it was a calendar reminder, not something that happened); its substance (consensus figures, Waller/Williams quotes) is preserved in watch[] below instead. 12 items remain, led by the second Riyadh strike, oil's Monday-Asia bid, and the SGX bail-in bond story.",
+  "Flows-investors: carried forward from the 07:0x run -- all 6 markets re-checked (Japan/Korea to 8 Oct, Hong Kong to 9 Oct, China margin to 8 Oct, Singapore institutional to 25 Sep / retail to 16 Sep, US ICI to 7 Oct), each asOf honestly labelled rather than re-stamped.",
+  "Investors: no change -- profiles and sectorConcentration last touched 2026-10-11 (no new disclosure since); convictionPlays/notableTrades/superInvestors are code-owned via the 13F scan, unchanged at 2026 Q2.",
+  "Track: today's 46-call snapshot already appended by the 07:0x run (85 snapshots total, within the 120 cap) -- verified intact, not duplicated."
  ],
- "regime": { "label": "Friday's broad risk-on rebound (VIX down to 14.84) offsets a weak UMich sentiment print, with the hawkish Fed and a live Hormuz oil shock still the key standing risks", "riskOn": 0.54, "oneLiner": "The week's hawkish-Fed/Hormuz-oil tension was reversed, not resolved, by Friday's broad rebound, and a five-month-low consumer-sentiment print keeps the soft-landing story genuinely two-sided." },
+ "regime": {
+  "label": "Pause-then-hike Fed meets a widening two-front Gulf conflict and newly cracking credit",
+  "riskOn": 0.5,
+  "oneLiner": "A second Houthi strike on Riyadh keeps the Gulf conflict's new front live on top of the unresolved Hormuz blockade, pulling riskOnProb back to a dead-even 0.50 even as Fed pricing (81.6% October hold, 83% December hike) offers no near-term rate-decision uncertainty of its own."
+ },
  "topNews": [
-  { "headline": "Gold and silver rip higher into Friday's close even as equities rally", "impact": "bullish", "actionable": "Silver and miners rallying alongside, not against, Friday's risk-on session is constructive for the levered silver/miner book -- a continuation signal, not a hedge-driven move." },
-  { "headline": "Correction: the rare-earth truce was already extended to Jan 10, 2027, not expiring Nov 10", "impact": "mixed", "actionable": "The near-term Nov 10 supply-shock scenario is off the table, removing a near-dated bullish catalyst for the rare-earth watchlist -- reset the calendar alert to 10 Jan 2027, though the structural MP/Lynas thesis is unaffected." },
-  { "headline": "Xiaomi jumps ~9.7% to HK$25.96 after SkyNomad SUV racks up 70,000 orders in its first month", "impact": "bullish", "actionable": "A company-specific EV catalyst, not a mainland-conviction move -- Southbound Stock Connect was actually a net seller of Xiaomi that day, so don't read this as a broader China-sentiment signal for the HK tech sleeve." },
-  { "headline": "Hormuz tanker attacks hit a 'wartime high' even as Trump pursues Iran diplomacy and rules out strikes before midterms", "impact": "mixed", "actionable": "Oil staying elevated despite de-escalation rhetoric keeps inflation/Fed-path risk live, a mild headwind for gold/silver real-yield math even as safe-haven demand partly offsets it." },
-  { "headline": "US stocks close out a volatile week with a broad Friday rebound", "impact": "bullish", "actionable": "Confirms Thursday's Fear & Greed dip to 38 was a sentiment air-pocket rather than a trend break, but the weak UMich print means the rebound's durability is not yet confirmed." }
+  {
+   "headline": "Riyadh airport hit a second time Sunday; Saudi vows to \"respond decisively,\" Trump repeats US \"may\" join the fight",
+   "impact": "bearish",
+   "actionable": "Back-to-back strikes plus an explicit Saudi retaliation pledge raise the odds of a wider Yemen war with direct US involvement -- keep the silver/gold-miner hedge in place and avoid adding equity risk into Monday's open given the live escalation risk."
+  },
+  {
+   "headline": "Gold holds near $4,190-4,210, silver near $60-61 as Gulf risk stays bid through the weekend",
+   "impact": "bullish",
+   "actionable": "Directly validates the book's core long-vol precious-metals thesis; watch for follow-through (or fade) once Asia/SGX trading opens and reacts to the weekend's escalation."
+  },
+  {
+   "headline": "Singapore mandates bail-in bonds for 7 systemic banks; DBS faces an estimated S$4.3B capital gap, while Singtel keeps its Buy rating after a 3Q beat",
+   "impact": "mixed",
+   "actionable": "The bail-in mandate is a multi-year regulatory overhang on DBS's capital-return capacity, while Singtel's reiterated Buy ratings and the pending Optus stake sale remain a clear positive catalyst for the book's SGX telecom exposure."
+  },
+  {
+   "headline": "Tencent, Xiaomi and SMIC lead Stock Connect volumes and buybacks into the weekend",
+   "impact": "bullish",
+   "actionable": "Heavy southbound buying plus active buybacks across all three of the book's HK tech holdings signal continued institutional and corporate support into the new week."
+  },
+  {
+   "headline": "Lynas agrees to acquire Meteoric Resources for ~A$968M, deepening its ex-China heavy-rare-earth pipeline",
+   "impact": "bullish",
+   "actionable": "Strengthens the ex-China heavy-rare-earth supply story underpinning the watchlist thesis; the Jan 10, 2027 China export-truce expiry is the next date to flag."
+  }
  ],
  "signals": [
-  "SHY (pUp3m 0.85, confidence 0.60) remains the cleanest high-conviction call in the universe -- short-duration Treasury carry benefits from the Fed staying higher-for-longer without TLT/IEF's price risk.",
-  "GLD/SLV calls were nudged up materially after Friday's melt-up (silver ev1m moved from -0.005 to +0.02) -- the gold/silver complex is rallying WITH risk appetite right now, not against it, which changes the near-term hedge read on the levered miner book.",
-  "Congress/WSB consensus added SpaceX (SPCX) on a bipartisan post-IPO buying pattern plus #2 WSB mention rank -- worth watching for continuation, though no 13F confirmation exists yet (next filing window mid-November).",
-  "Rare-earth basket (MP pUp3m 0.55, LYC.AX pUp3m 0.57, both ev3m >3%) still carries a real edge, but the binary catalyst just moved out two months to 10 Jan 2027 -- a watch, not a near-dated trade.",
-  "Bonds remain the model's most lopsided tilt (UW, pUp12m 0.40) on the weak 30-year auction tail -- worth watching duration exposure generally even as Friday's equity rebound eased near-term risk appetite."
+  "SHY (pUp3m 0.85, confidence 0.60) remains the cleanest high-conviction call in the universe -- short-duration Treasury carry benefits from the Fed staying higher-for-longer without TLT/IEF's duration risk.",
+  "The gold/silver/GDX complex stays the model's top-conviction Commodities OW (tilt +0.02, pUp12m 0.59) -- the weekend's second Gulf front reinforces rather than undercuts that read.",
+  "Consider watching the rare-earth basket (MP pUp3m 0.55/conf 0.45, LYC.AX pUp3m 0.57/conf 0.48) -- Lynas's Meteoric acquisition is a fresh structural data point, though confidence stays capped with the binary China-truce catalyst now two months out (10 Jan 2027).",
+  "Conviction plays (code-owned) are unchanged at 2026 Q2 -- no new 13F data moved this run; next scheduled read is after the Q3 deadline.",
+  "Bonds remain the model's most lopsided tilt (UW, pUp12m 0.43, tilt -0.02) heading into Wednesday's two-sided CPI print and an 83%-priced December hike -- worth watching duration exposure generally."
  ],
  "watch": [
-  "China's rare-earth truce now expires Fri 10 Jan 2027 (extended from the original 10 Nov 2026 by Bessent's 23 Sep announcement) -- reset the calendar alert for MP/LYC.AX/UUUU/6680.HK.",
-  "Q3 2026 13F filing deadline -- Mon 16 Nov 2026 -- next scheduled refresh for investors.json's code-owned conviction/sector data.",
-  "Next ICI weekly fund-flow print -- Wed 14 Oct 2026 -- will show whether Friday's confirmed +$3.3B US-equity inflow continues or reverses.",
-  "Silver loan paydown ask remains open (one-action.js): repay >=S$16,600 to bring leverage to the signed 1.4x ceiling -- still unresolved as of this run."
+  "Sept CPI, Wed 14 Oct 2026 20:30 SGT -- consensus headline 3.6% y/y (vs 3.4% prior) / 0.6% m/m, core 2.5% y/y / 0.2% m/m (vs 0.3%) -- the week's key print against an 81.6%-priced October hold and 83%-priced December hike; PPI and Retail Sales follow Thu 15 Oct.",
+  "FOMC meeting, 27-28 Oct 2026 -- the next live test of the Fed's pause-then-hike path.",
+  "China rare-earth export-control truce expires 10 Jan 2027 (extended from the original 10 Nov 2026) -- calendar alert for MP/LYC.AX/UUUU/6680.HK.",
+  "Q3 2026 13F filing deadline, Mon 16 Nov 2026 -- next scheduled refresh for investors.json's code-owned conviction/sector data.",
+  "Levered silver sleeve: leverage 1.678x vs the signed 1.4x ceiling, stressed call 26.5% away, survivability FAIL -- the standing paydown ask (one-action.js) remains open and unresolved as of this run."
  ]
 }
