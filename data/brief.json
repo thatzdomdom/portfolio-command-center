@@ -1,66 +1,65 @@
 {
-  "date": "2026-10-15T07:40:00+08:00",
-  "coverage": "Thursday 15 Oct 2026, 07:02 SGT run. Clock verified via shell (date, Asia/Singapore both agree 2026-10-15 07:02 SGT; America/New_York read 2026-10-14 19:02 Wednesday evening, i.e. after the US cash close), cross-checked against git log (last commit 2026-10-14, flow-history update) and the freshly-generated price spine (latest completed bars: US/HK/SG single-stocks 2026-10-14, Korea/Japan/HSI-STI index bars lagging to 2026-10-13 in bar consolidation, crypto level 2026-10-14) -- all agree, no drift. This is a normal one-session daily refresh, not a catch-up. Wednesday's 20:30 SGT US CPI print released hot (headline 3.7% y/y vs 3.6% consensus, core 2.6% y/y vs 2.5% consensus) and triggered a sharp, broad risk-off session -- the dominant story of this run.",
+  "date": "2026-10-16T07:40:00+08:00",
+  "coverage": "Friday 16 Oct 2026, 07:02 SGT run. Clock verified via shell (date, Asia/Singapore both agree 2026-10-16 07:02 SGT; America/New_York read 2026-10-15 19:02 Thursday evening, i.e. after the US cash close), cross-checked against git log (last commit 2026-10-15, flow-history update) and the freshly-generated price spine (latest completed bars: US/HK/SG single-stocks 2026-10-15, Japan/Korea/HSI/STI index bars lagging to 2026-10-14 in bar consolidation, crypto level 2026-10-14) -- all agree, no drift. This is a normal one-session daily refresh, not a catch-up. Thursday's session was a sharp reversal/relief rally after Wednesday's hot-CPI selloff, with equities AND gold/silver/miners all rallying together -- the dominant story of this run.",
   "tldr": [
-    "Hot September CPI (3.7% y/y headline, 2.6% y/y core, both above consensus) repriced Fed hike odds for the Oct 27-28 FOMC from ~22% to 40-55%, driving a sharp Wed 14 Oct selloff: S&P -1.11%, Nasdaq -1.88%, VIX +10.48% to 16.87.",
-    "Biggest risk to the book: silver and gold fell WITH equities (SLV -6.11%, GLD -1.49%, silver miners GDX/SILJ/SLVP -4.4% to -5.9%) as spiking real yields hit the levered silver/miner sleeve directly -- not a flight-to-safety day for precious metals.",
-    "Oil held up (+0.17% to +0.92%) on an unrelated, widening Gulf War supply shock (near-daily Hormuz tanker strikes, an Aramco HQ strike, Riyadh airport shut through Oct 17) -- a genuinely separate story from the rate-driven equity/metals selloff.",
-    "HK tech was a mixed bag: Xiaomi +5.35% on genuine SkyNomad EV order strength, while SMIC -2.25% and Tencent -0.42% tracked the broader risk-off tone and a fresh Korea chip-sector shock (KOSPI -5.46% on China's CXMT DRAM-competition fears).",
-    "Rare-earth watchlist got hit hard but on a financing catalyst, not a thesis change: Energy Fuels -10% on a $500M dilutive ATM filing (Strong Buy ratings unmoved), MP -5.84% on sector sympathy, Lynas only -0.86% helped by its new Brazil separation-plant news.",
-    "Model regime shifts more cautious: riskOnProb 0.45->0.40, regimeScore -0.28->-0.38 -- a genuine hawkish-repricing shock layered on an already-narrow-breadth tape, not merely a one-day blip."
+    "Thursday 15 Oct was a sharp relief rally: S&P +0.33%, Dow +1.08%, VIX -2.43% to 16.46, as Fed officials (Daly, Bowman, Williams) pushed back on an Oct 27-28 hike despite hot CPI/PPI, pulling the 10Y yield off its ~5.3% peak to ~5.08-5.09%.",
+    "Gold and silver snapped back hard on the same yield/dollar relief -- SLV +3.39%, GDX +4.34%, GLD +1.79% -- directly easing pressure on the book's 1.75x levered silver position after Wednesday's selloff pushed it close to its stressed margin call.",
+    "A global AI/chip-financing scare (CoreWeave bond yields near 15%, >$1tn wiped off AI/semi names, Korea's Kospi -7.6%) hit SMIC (-3.96%) before Nvidia's Huang publicly defended CoreWeave's balance sheet and helped stem the rout.",
+    "Ho Bee Land (-7.50%) and Seatrium (-4.64%) both fell sharply Thursday with no company announcement or insider filing found to explain either move -- most likely yield/oil-driven sector spillover rather than idiosyncratic risk; flagged for a filing check at SGX open.",
+    "Fed Chair Warsh (11:30 SGT) and BOE Governor Bailey (10:00 SGT) both speak today in Bangkok -- the first public Fed commentary since the hot CPI print, watched closely for any Oct 27-28 hike-urgency signal.",
+    "Smart-money signal: trader John Feneck is explicitly 'backing up the truck' on the GDX/SILJ/SLVP miners basket, arguing miners still lag the metals rally -- directly relevant to the book's levered silver/miner sleeve."
   ],
   "whatChanged": [
-    "Intel: congress roster rebuilt to 15 trades across 9 members (headline: Sen. Wyden's 465-day-late Amcor/Berry Global disclosure, a STOCK Act enforcement story); signals rotated to a rare-earth/silver-miner/Micron set (MU, MP, UUUU, HL, AG, PAAS) reflecting this run's dominant selloff story; insiders gained a genuine new UOL (U14.SI) entry -- UOB trimmed its substantial-shareholder stake 7.001%->6.996% on 8 Oct -- with Wing Tai's 13 Oct tranche re-confirmed as still the freshest item on the full 21-name list.",
-    "Model: macro regime re-labeled to a hot-CPI hike-shock meeting a widening Gulf War supply premium (riskOnProb 0.45->0.40, regimeScore -0.28->-0.38); all 46 calls (40 universe + 6 rare-earth extras) refreshed against Wednesday's close and the specific catalysts behind it (CPI, Gulf War, KOSPI/CXMT, UUUU's ATM filing, CCC credit stress).",
-    "Market: CNN Fear&Greed fell to 32 (Fear) from 45, consistent with the VIX spike; crypto Fear&Greed shows 62 (Greed), a genuine divergence from BTC's own price action flagged rather than resolved; breadth stayed narrow and deteriorating; fund flows still the week-ended-Oct-7 BofA/EPFR edition, though a fresher ICI combined-flow print (+$12.35bn, turning positive) was found as a secondary US corroboration.",
-    "News: 12 items, led by the hot CPI print, the gold/silver selloff, Korea's CXMT-driven chip crash, and the Energy Fuels ATM dilution scare -- 5 of 12 items dated within the last 24-36 hours.",
-    "Flows-investors: Korea, Hong Kong Southbound and China's margin balance all genuinely advanced to Oct 13-14 prints (Korea's foreign-selling streak decelerating in pace but persisting, HK Southbound's SMIC outflow streak now 12 sessions, China's margin decline accelerating to a 5th straight session); Japan surfaced a newly-flagged cross-source magnitude discrepancy between two official-ish series; Singapore and the BofA/EPFR US edition remain carried forward, honestly labeled as stale.",
-    "Investors: no change -- profiles/sectorConcentration not due this run; convictionPlays/notableTrades/superInvestors remain code-owned via the 13F scan.",
-    "Track: today's 46-call snapshot appended (88 snapshots total, within the 120 cap)."
+    "Intel: congress roster rebuilt to 16 trades across 11 members (fresh Oct 12-14 filings incl. Larsen's same-day ADI/FDX/WSM rebalance, Hern's DVN+CVX exit, Pelosi's non-equity $500K-$1M real-estate disclosure); signals fully rotated to 7 names (GDX-miners basket, AVGO, PLTR, IREN, MP, MU, RDDT); insiders carried forward unchanged -- zero new verifiable filings found across a full 14-day sweep.",
+    "Model: macro regime updated to 'Hawkish-pause relief rally inside an energy-driven stagflation scare' (riskOnProb 0.55, up from 0.40) as Fed officials tempered hike bets; all 40 universe calls plus an 8-name rare-earth basket refreshed for Thursday's reversal.",
+    "Market: Fear&Greed softened further to 32 (Fear) on the equity side even as crypto cooled to 53 (Neutral, from 62 Greed); breadth shows a tentative bounce (50/200-DMA % improved) but intermediate indicators (McClellan Summation) stay deeply negative; flows still carry the week-ended-Oct-7 EPFR/ICI print -- no fresher edition published yet.",
+    "News: 14 fresh items, led by the Hormuz/Iran-war energy shock, today's Warsh/Bailey Bangkok speeches, Thursday's mixed US data (hot PPI/retail sales, soft Philly Fed), and the unexplained Ho Bee Land/Seatrium selloffs.",
+    "Flows-investors: Korea's foreign-selling streak extended to an 8th session (-W3.63tn); HK Southbound flipped to a single-day net sell (-HK$5.08bn) inside a still-constructive 4-month build (+HK$134.1bn Q3); China's margin balance and new-account openings both continue cooling; Japan/Singapore/US carried forward (no fresher official release located).",
+    "Track: today's model.json call snapshot appended (89 snapshots on file)."
   ],
   "regime": {
-    "label": "Hot-CPI hike-shock meets a widening Gulf War supply premium",
-    "riskOn": 0.4,
-    "oneLiner": "A genuinely hotter-than-expected September CPI repriced Fed hike odds sharply higher, hitting equities and precious metals together while an unrelated, widening Gulf War keeps a separate premium under oil."
+    "label": "Hawkish-pause relief rally inside an energy-driven stagflation scare",
+    "riskOn": 0.55,
+    "oneLiner": "Fed officials talking down an October hike, not a change in the underlying inflation picture, is doing most of the work behind Thursday's simultaneous equity and gold/silver rally."
   },
   "topNews": [
     {
-      "headline": "September US CPI runs hot (3.7% y/y, core 2.6% y/y), reviving Fed hike odds",
-      "impact": "bearish",
-      "actionable": "The direct cause of Wednesday's selloff across the book's equity, gold and silver legs at once -- the single biggest near-term risk to the levered silver/miners sleeve."
+      "headline": "Fed Chair Warsh speaks in Bangkok today (11:30 SGT) -- first public remarks since hot CPI",
+      "impact": "mixed",
+      "actionable": "Watch Warsh's tone live -- a hawkish signal pressures the SGX bank/REIT sleeve further, while dovish/neutral framing would extend Thursday's precious-metals relief rally."
     },
     {
-      "headline": "Gold and silver tumble as hot CPI boosts rate-hike bets",
-      "impact": "bearish",
-      "actionable": "Direct hit to the book's core levered-silver thesis -- re-check the survivability/margin-call distance on the levered silver leg against today's close before adding exposure."
-    },
-    {
-      "headline": "KOSPI crashes 5.46% on 'Black Tuesday' as Chinese memory maker CXMT stokes competition fears",
-      "impact": "bearish",
-      "actionable": "A genuine competitive catalyst for the book's SMIC (0981.HK) exposure -- watch whether it spreads to HK-listed semis specifically rather than assuming broad contagion."
-    },
-    {
-      "headline": "Energy Fuels drops ~10% on $500M ATM share-sale filing, drags uranium/nuclear peers",
-      "impact": "bearish",
-      "actionable": "A financing-structure catalyst, not a thesis change -- Strong Buy ratings were unmoved, arguing against reflexively cutting the rare-earth watchlist on today's price action alone."
-    },
-    {
-      "headline": "Xiaomi shares jump on SkyNomad EV order strength, extending gains into Oct 14",
+      "headline": "Gold and silver snap back as bond-yield/dollar reversal drives a sharp precious-metals rebound",
       "impact": "bullish",
-      "actionable": "The one bright spot in the HK tech sleeve today -- a genuine company-specific catalyst that diverges from Tencent/SMIC's declines the same session."
+      "actionable": "The rally's durability now hinges on today's Warsh/Bailey remarks -- directly relevant to the levered silver position's margin-call distance."
+    },
+    {
+      "headline": "Global AI/chip-stock rout deepens before partial reversal -- Kospi -7.6%, SMIC -3.96%",
+      "impact": "bearish",
+      "actionable": "A global AI-financing scare, not an SMIC-specific issue -- caution on any near-term bounce until the broader AI-capex de-rating stabilizes."
+    },
+    {
+      "headline": "Ho Bee Land -7.50% and Seatrium -4.64% -- no company-specific catalyst found",
+      "impact": "bearish",
+      "actionable": "Flag both for a filing check at SGX open; absent one, read as yield/oil-driven sector moves, not idiosyncratic risk."
+    },
+    {
+      "headline": "Strait of Hormuz tanker attacks hit wartime high; Brent holds near $106",
+      "impact": "mixed",
+      "actionable": "Sustained Hormuz risk premium supports the safe-haven bid under the gold/silver miner longs even as it raises broader tail risk."
     }
   ],
   "signals": [
-    "MU is a crowded consensus trade (retail+Congress+funds+analysts all bullish) that just took its first real hit from China's CXMT DRAM-competition fears -- watch whether sell-side target hikes continue or stall.",
-    "MP and UUUU: consider watching for a split between headline Strong-Buy ratings and quietly-trimmed price targets (MP) or dilution-driven technical selling (UUUU) -- neither looks like a fundamental thesis break yet.",
-    "HL vs PAAS: a genuine intra-silver-miner divergence -- shorts are rebuilding against Hecla (short interest +6% on the week) while covering Pan American (-9.16%) -- worth watching into Hecla's Nov 6 earnings.",
-    "SLV/GDX/SILJ/SLVP priors all cut this run (pUp1m and ev1m lowered across the board) given the rate-shock catalyst is distinct from, and currently overriding, the physical-demand thesis underneath the book's core position.",
-    "XLE/USO priors nudged higher -- the Gulf War supply premium is a genuinely separate, currently resilient catalyst from the hawkish-Fed story hitting the rest of the risk complex."
+    "Consider watching GDX/SILJ/SLVP: a smart-money 'hub and spoke' miners thesis (Feneck) argues miners still lag Thursday's metals rebound.",
+    "MU is a crowded consensus trade (top WSB mention, congress interest, fund buying) sitting on the same China-CXMT competitive risk that crashed Korea's chip sector this week -- worth watching for whether sentiment holds.",
+    "MP Materials: sell-side stays Moderate Buy/Overweight through target cuts and a ~53% pullback -- a genuine institutional-vs-price divergence heading into Nov 5 earnings.",
+    "Model calls lean modest-OW Commodities (pUp12m 0.60, tilt +0.02) and modest-UW Bonds/Crypto -- consistent with today's Fed-relief-but-not-dovish-pivot framing; GLD/SLV carry the highest confidence (0.5/0.45) and highest 12m EV (0.18/0.20) in the universe.",
+    "Rare-earth basket: watch China's Nov 10, 2026 export-control-wave expiry as the next hard catalyst -- a renewal/tightening would be bullish for MP/Lynas, a quiet lapse would remove near-term urgency."
   ],
   "watch": [
-    "Core PPI, Retail Sales, Philly Fed Manufacturing and jobless claims, Thu 15 Oct 2026 20:30 SGT -- the next read on whether the inflation scare broadens or fades.",
-    "Fed Chairman Warsh speaks, Fri 16 Oct 2026 11:30 SGT -- first public remarks since the hot CPI print; markets will parse tone closely given he has dropped explicit forward guidance.",
-    "BofA/EPFR Flow Show edition for the week ended Oct 14 (capturing this week's selloff), due ~Oct 16-17 -- will be the first fresh read on whether the record cash-hoarding trend persisted through the CPI shock.",
-    "Riyadh airport closure through Oct 17 and the ongoing Hormuz tanker-attack campaign -- calendar risk for the oil geopolitical premium underneath the book's energy-adjacent exposure."
+    "Today, Fri 16 Oct: BOE's Bailey (10:00 SGT) and Fed Chair Warsh (11:30 SGT) both speak at the IMF/IIF Bangkok meetings -- first Fed commentary since the hot CPI.",
+    "FOMC meeting Oct 27-28, 2026 -- hold is base case (~66-81% per CME/Kalshi/Polymarket) after Fed officials pushed back on hiking, but hike risk isn't zero.",
+    "China's rare-earth export-control wave is due to expire/renew around Nov 10, 2026 -- the next hard catalyst for the MP/Lynas/Energy Fuels watchlist.",
+    "Earnings: Energy Fuels (UUUU) Oct 30, MP Materials Nov 5, Hecla Mining (HL) Nov 6 -- all clarify capex/dilution and margin trajectory for the silver/rare-earth sleeve."
   ]
 }
