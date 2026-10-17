@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-17",
-  "note": "Saturday 17 Oct 2026, markets closed (weekend). Latest completed session is Friday 16 Oct 2026 US close: S&P500 -1.09%, Nasdaq -2.15%, Dow -0.34%, Russell2000 -1.66%, VIX +21.45% to 19.99 -- a sharp vol spike that erased Thursday's relief bounce. Gold +0.40%, Silver +0.52%, WTI +1.09%, Brent +3.56%; Bitcoin -0.61% to $81,637. This followed Thursday 15 Oct's brutal Asia session (Nikkei -4.9%, KOSPI -7.57%, AI/chip-financing rout) and an intervening Friday Asia rebound (KOSPI +2.05% to ~5,668, foreigners ending an 8-session selling streak) that was then overtaken by Friday's US reversal. CNN's own Fear&Greed endpoints remain effectively unverifiable directly (historical 451/418 blocking pattern); cross-source mirrors for the Oct 16 close disagree materially (readings cited from 18 to 31 across Benzinga/X/247WallSt/macromicro snapshots taken at different points in the session), so the headline value below is a best-estimate midpoint flagged low-confidence, not a single authoritative read. Breadth: no fully fresh Friday-close count of advancers/decliners or McClellan levels could be located this run; the %-above-200/50-DMA figures are a blend of an Oct 13 baseline (pre-Friday-selloff) and later-week composite reads, with the clear expectation (not independently confirmed figure-by-figure) that Friday's broad decline pushed breadth lower again. Flows: a genuinely fresher BofA/EPFR Flow Show edition (week ended Wed Oct 14, published ~Oct 16) was located and is used below -- but note its cutoff is BEFORE Thursday's Asia rout and Friday's US reversal, so it still shows risk-on cash deployment into equities moments before the storm.",
+  "updated": "2026-10-18",
+  "note": "Sunday 18 Oct 2026, markets closed all weekend. Cross-checked against data/.prices.json (authoritative OHLC through 2026-10-16): latestByExchange confirms US/HK/JP/KR/SG/futures/crypto all still read 2026-10-16 as the latest completed session -- i.e. NOTHING new has traded since Friday's close, so this run is a re-verification/refinement pass on Friday's data plus a crypto-sentiment refresh (crypto trades through the weekend), not a new trading-day update. Friday 16 Oct US close (confirmed via .prices.json): S&P500 7659.44 (-1.09%), Nasdaq 26140.03 (-2.15%), Dow 52002.41 (-0.34%), Russell2000 2721.37 (-1.66%), VIX 19.99 (+21.45%) -- a sharp vol spike that erased Thursday's relief bounce. Gold futures (GC=F) +0.26%, Silver futures (SI=F) +0.28%, WTI (CL=F) +3.51%, Brent (BZ=F) +3.72%; Bitcoin -0.78% to $81,501 (a further -0.28% weekend drift to ~$81,274 as of the live/partial Sat 17 Oct bar, not a close). This followed Thursday 15 Oct's brutal Asia session (Nikkei -4.90%, KOSPI -7.57%, AI/chip-financing rout) and Friday's Asia rebound (Nikkei +1.39% to 65,324; KOSPI +2.05% to 5,668.05, foreigners ending an 8-session, -₩18.131tn selling streak with a confirmed net buy of +₩343.0bn) that was then overtaken by Friday's US reversal. CNN's own Fear&Greed endpoints remain directly unverifiable (451/blocking); cross-source mirrors for the Oct 16 close still disagree (18 to 44 cited across Benzinga/247WallSt snapshots taken at different points in the week, not all dated to the Friday close specifically), so the headline value below stays an unchanged best-estimate carried from Friday's close rather than a freshly re-derived number -- there is no new session to re-derive it from. Crypto Fear&Greed was genuinely re-checked (it updates daily including weekends): sources disagree between ~45/Neutral (bitdegree mirror, Oct 17 15:36 UTC) and 55/Greed (alternative.me's own live page); given Bitcoin's continued weekend drift lower, 45/Neutral is used as the more price-consistent read, with the 55 figure flagged as unreconciled. Breadth: McClellan Oscillator/Summation were re-searched and remain dispersed across sources (Oscillator cited anywhere from -12 to -46; Summation from -991 to -1,115, all negative) for the same Oct 16 close -- still no single authoritative print located, but all signs point the same bearish direction. NYSE advancers/decliners for Oct 16 close are now better sourced (~1,152 advancing vs ~1,569 declining), consistent with Friday's broad decline; a divergent 3.1:1-advancer claim found in one source was not corroborated and looks like a mismatched/stale snippet. The %-above-200/50-DMA figures remain an Oct 13-14 blend; no fresher count exists because no new session has occurred. Flows: no BofA/EPFR Flow Show edition newer than week-ended-Oct-14 has been published (next due ~Oct 21-23); that print's cutoff is still BEFORE Thursday's Asia rout and Friday's US reversal, so it is carried forward unchanged, honestly labelled as pre-storm positioning data.",
   "fearGreed": {
     "value": 23,
     "rating": "Extreme Fear",
@@ -9,8 +9,8 @@
     "prev1w": 46,
     "prev1m": 28,
     "prev1y": 27,
-    "cryptoValue": 48,
-    "cryptoRating": "Neutral (carried forward/estimated -- not independently re-verified this run; Bitcoin -0.61% to $81,637 Friday suggests only a mild softening from the prior 53/Neutral read, not a sharp crypto-specific risk-off move)",
+    "cryptoValue": 45,
+    "cryptoRating": "Neutral -- genuinely re-checked this run (crypto Fear&Greed updates daily including weekends); sources disagree between ~45/Neutral (bitdegree mirror of alternative.me, as of Oct 17 15:36 UTC) and 55/Greed (alternative.me's own live page); 45 is used as the more price-consistent read given Bitcoin's continued drift lower (-0.78% Fri close, -0.28% further over the weekend to ~$81,274 per a live/partial crypto bar), with the 55 figure flagged as unreconciled rather than discarded",
     "components": [
       {
         "name": "Market Momentum",
@@ -73,7 +73,7 @@
       },
       {
         "label": "NYSE advancers vs decliners",
-        "value": "Not independently reconfirmed for the Friday Oct 16 session this run; a broad-based decline is the reasonable inference given S&P -1.09% / Nasdaq -2.15% / Russell2000 -1.66% weakness across caps",
+        "value": "~1,152 advancing vs ~1,569 declining (Oct 16 close) -- decliners led, consistent with the broad Friday selloff (S&P -1.09%, Nasdaq -2.15%, Russell2000 -1.66%); a divergent 3.1-to-1 advancer-led claim found in one source this run was not corroborated elsewhere and looks like a mismatched/stale snippet, not used",
         "signal": "bearish",
         "pct": null
       },
@@ -85,13 +85,13 @@
       },
       {
         "label": "McClellan Oscillator",
-        "value": "Carried forward from the prior oversold-bounce read (+2.24 on Oct 15); Friday's reversal plausibly rolled this back toward/through zero, not independently reconfirmed",
+        "value": "Re-searched this run for the Oct 16 close; sources disagree materially (readings cited from -12 to -46 across different trackers/mirrors) but all are negative, a reversal from the prior oversold-bounce read (+2.24 on Oct 15) -- consistent with Friday's reversal rolling the breadth-momentum signal back into negative territory, exact magnitude unresolved",
         "signal": "bearish",
         "pct": null
       },
       {
         "label": "McClellan Summation Index",
-        "value": "Carried forward, still deeply negative (~-2,100 all-stock / ~-1,600 S&P subset on last confirmed read)",
+        "value": "Re-searched this run; sources cite -991 to -1,115 for the NYSE Summation Index as of Oct 16 (a narrower, more specific range than the prior ~-2,100/-1,600 estimate), still deeply negative and consistent with multi-week breadth deterioration",
         "signal": "bearish",
         "pct": null
       },
@@ -108,19 +108,21 @@
         "pct": 9
       }
     ],
-    "note": "Thursday's oversold relief bounce was overtaken by Friday's sharp US reversal (S&P -1.09%, Nasdaq -2.15%, VIX +21.45%), which plausibly erased much of the short-term breadth improvement seen mid-week. A fully reconfirmed Friday-close breadth count (advancers/decliners, McClellan levels, exact %-above-DMA) could not be located this run given time constraints; the %-above-200/50-DMA figures above are the most recent precise counts available (Oct 13) and are flagged as a pre-Friday baseline rather than a same-day read.",
+    "note": "Thursday's oversold relief bounce was overtaken by Friday's sharp US reversal (S&P -1.09%, Nasdaq -2.15%, VIX +21.45%), which plausibly erased much of the short-term breadth improvement seen mid-week. No new session has occurred since Friday (weekend, confirmed via .prices.json), so there is no fresher breadth count to find; this run re-searched and tightened the McClellan Oscillator/Summation and NYSE advance/decline figures for the Oct 16 close (still somewhat dispersed across sources) but the %-above-200/50-DMA figures remain the Oct 13-14 precise counts, flagged as a pre-Friday baseline rather than a same-day read. Broad-vs-narrow read: breadth remains weak and narrowing even as headline indices chopped sideways -- a cautionary divergence, not a confirmation of the mid-week bounce.",
     "sources": [
       "https://en.macromicro.me/collections/20868/global-sentiment-indicator/98990/sp500-sectors-200ma-breadth",
       "https://www.thetrading.tools/market-breadth",
       "https://finance.yahoo.com/markets/stocks/articles/p-500-looks-fine-going-110000461.html",
       "https://www.tradingview.com/symbols/INDEX-S5TH/ideas/",
-      "https://chartrow.com/sp500/market-breadth"
+      "https://chartrow.com/sp500/market-breadth",
+      "https://www.mcoscillator.com/market_breadth_data/",
+      "https://sentimentrader.com/indicators/mcclellan-summation"
     ]
   },
   "flows": {
-    "asOf": "2026-10-17 (re-verified this run)",
-    "period": "week ending Wed Oct 14, 2026 (BofA Flow Show / EPFR Global, published ~Oct 16) -- a genuinely fresher edition than the prior week-ended-Oct-7 print",
-    "narrative": "Through Wednesday Oct 14's cutoff, investors were deploying the prior week's record cash buildup into risk: a record-pace $53.1B left money-market funds while global equity funds took in roughly $64.5B (US large-cap +$32.5B, tech +$10.7B, while financials -$1.4B and consumer -$0.6B saw outflows) and bonds added $11.8B, including a 16th straight weekly Treasury inflow ($3.6B, the longest streak since Aug 2024). Separately, US equity ETFs alone drew $39B for the week. Crucially, this print's cutoff falls BEFORE Thursday's brutal Asia chip-sector rout (Nikkei -4.9%, KOSPI -7.57%) and Friday's sharp US reversal (S&P -1.09%, VIX +21.45%) -- so it captures a risk-on posture that was abruptly reversed within 48 hours of the data window closing. No fresher regional (Europe/EM/Japan/Gold) breakout for this specific week was located this run; those lines are carried forward from the week ended Oct 7.",
+    "asOf": "2026-10-18 (re-checked this run; data vintage unchanged -- no newer edition exists yet)",
+    "period": "week ending Wed Oct 14, 2026 (BofA Flow Show / EPFR Global, published ~Oct 16) -- still the latest edition; the next (week ended Oct 21) is not due to publish until ~Oct 23, so this print is carried forward honestly rather than re-derived",
+    "narrative": "Through Wednesday Oct 14's cutoff, investors were deploying the prior week's record cash buildup into risk: a record-pace $53.1B left money-market funds while global equity funds took in roughly $64.5B (US large-cap +$32.5B, tech +$10.7B, while financials -$1.4B and consumer -$0.6B saw outflows) and bonds added $11.8B, including a 16th straight weekly Treasury inflow ($3.6B, the longest streak since Aug 2024). Separately, US equity ETFs alone drew $39B for the week. Crucially, this print's cutoff falls BEFORE Thursday's brutal Asia chip-sector rout (Nikkei -4.9%, KOSPI -7.57%) and Friday's sharp US reversal (S&P -1.09%, VIX +21.45%) -- so it captures a risk-on posture that was abruptly reversed within 48 hours of the data window closing. No fresher regional (Europe/EM/Japan/Gold) breakout for this specific week was located this run; those lines are carried forward from the week ended Oct 7. Re-checked this run (Sunday, weekend) and confirmed no newer edition has published -- the next BofA/EPFR print (due ~Oct 21-23) will be the first to capture Thursday/Friday's reversal.",
     "regions": [
       {
         "region": "US Equities",
