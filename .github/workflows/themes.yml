@@ -1,0 +1,59 @@
+# Theme radar — runs on GitHub, not on the Mac.
+#
+# Phase 8 of the 11 Sep 2026 redesign, and the objective the audit found missing entirely: "trade
+# ideas or new trend identification, e.g. Physical AI". scripts/themes.js counts what companies
+# actually filed with the SEC about each term in data/watchlist.json themes[], and writes the facts
+# to data/themes.json. The brief and alerts.js apply policy to those facts; this workflow makes no
+# judgment and sends nothing.
+#
+# WEEKLY, not daily. Filing counts move on a quarterly clock — 10-K, 10-Q and 8-K arrive in bursts
+# around quarter ends, and an ETF prospectus goes effective once. A daily run would spend ~21 EDGAR
+# requests every morning to watch a number that cannot move, and would turn a slow structural read
+# into daily noise. 06:20 SGT Monday puts a fresh file in place before the Mac's 07:02 pull, and the
+# Monday-only THEMES block in the brief is the only consumer that needs it.
+#
+# Actions WRITES data/themes.json; the Mac only READS it. If both wrote, an Actions commit and a
+# local edit of the same tracked file would make the 07:02 `git pull` refuse and turn the publish
+# red — themes.js enforces the same rule by running as a dry run off Actions unless --local.
+name: themes
+on:
+  schedule:
+    - cron: '20 22 * * 0'     # 06:20 SGT Monday, ahead of the 07:02 Mac run
+  workflow_dispatch:
+    inputs:
+      term:
+        description: 'one term from data/watchlist.json themes[] (blank = every seeded theme)'
+        default: ''
+permissions:
+  contents: write
+concurrency:
+  group: themes
+  cancel-in-progress: false
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Count EDGAR full-text filings per theme
+        env:
+          SEC_UA: ${{ secrets.SEC_UA }}
+          TERM: ${{ github.event.inputs.term }}
+        run: |
+          set -e
+          test -n "$SEC_UA" || { echo "SEC_UA secret missing — SEC requires an identifying User-Agent"; exit 78; }
+          if [ -n "$TERM" ]; then node scripts/themes.js --term "$TERM"; else node scripts/themes.js; fi
+      - name: Commit themes.json if changed
+        run: |
+          git config user.name "themes (GitHub Actions)"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/themes.json
+          if git diff --cached --quiet; then echo "no change"; exit 0; fi
+          git commit -m "themes: EDGAR theme radar $(TZ=Asia/Singapore date +'%F %H:%M') SGT"
+          git pull --rebase --autostash origin main
+          git push origin HEAD:main
