@@ -1,213 +1,230 @@
 {
-  "updated": "2026-10-23",
-  "note": "Friday 23 Oct 2026, 07:0x SGT run, before Asia's open (Thursday 22 Oct US close). VIX spiked +9.94% to 19.03 and the 10-year yield fell sharply to ~4.96-4.97% as an oil-driven inflation scare (Houthi attacks on Saudi energy infrastructure) and a re-ignited AI-capex-financing doubt (CoreWeave debt, Tesla capex cut, Meta non-voting shares) hit sentiment together. Fear&Greed reads Extreme Fear (20) despite NYSE breadth actually holding up (~1.45:1 advancers) -- a narrow, mega-cap-AI-concentrated selloff rather than a broad one. CNN's own Fear&Greed page returned an access error this run; the headline value was cross-checked against a mirror explicitly dated 2026-10-22. BofA/EPFR global fund-flow data has not rolled forward past week-ended-Oct-14 as of this run.",
+  "updated": "2026-10-26",
+  "note": "Monday 26 Oct 2026 07:02 SGT run. No new equity session exists anywhere yet: US has been closed since Friday 23 Oct's close, and HKEX/SGX/JPX have not opened today (they open 09:00-09:30 SGT, ~2 hours after this run). This is therefore a pre-Asia-open verification pass. Re-verified and UNCHANGED: CNN equity Fear & Greed is still genuinely Extreme Fear 20 as of Friday 23 Oct's close -- CNN's own index does not recompute over a weekend/non-trading period, so there is no real new print; one mirror site (aiStockSelection) is showing a '21 as of Oct 25' figure, but Oct 25 was a Saturday with no session, so that +1 is almost certainly mirror-site noise/relabeling, not a genuine move, and has NOT been used to overwrite the real 20. US breadth (54.67% of S&P 500 above 200-DMA, 52-wk lows outnumbering highs) and BofA/EPFR weekly flows (still week-ended-Oct-21, published Oct23) are confirmed unchanged -- no fresher weekly edition exists. GENUINE moves found this run: (1) crypto Fear & Greed (alternative.me, updates daily incl. weekends) rose from 51 to 54, still Neutral, continuing its recovery off Thursday's 68 spike -- BTC itself is little-changed around $80,100-125, still below its 50-day MA after the weekend's $800M+ liquidation event; (2) Monday pre-market: S&P 500 futures were indicated +0.4% in early trade on easing Mideast oil-supply fear (crude pulling back) ahead of this week's Oct 27-28 FOMC meeting and a heavy Big Tech earnings slate, while Asia pre-open indications were roughly flat-to-slightly-lower (HSI indicated ~23,086, -7pts; Nikkei ~62,550, -143pts) -- these are pre-open indications only, not completed sessions, since Asia has not opened; (3) the weekend Mideast escalation flagged Saturday deepened further: IRGC-claimed mines reportedly hit two more supertankers (combined 4.5mn+ bbl) off the southern Strait of Hormuz route Tehran disputes, and Houthi strikes widened to Riyadh's King Khalid International Airport plus Dammam and Najran airports in addition to the east-west pipeline -- this is forward-looking geopolitical news, not yet reflected in the backward-looking breadth/flow figures below; see data/news.json for detail. Additionally confirmed via fresh research this run: BofA's underlying client-flow detail for the week-ended-Oct-21 (same week as the EPFR fund-flow print already in this file) shows institutional clients' -$9.1B sell was their 10th-largest since 2008 on October tax-loss harvesting, that hedge funds sold for the first time in 5 weeks, and that retail/private clients also sold (reversing 2 prior weeks of buying) for a record -$14.8B total client single-stock outflow partially offset by +$2.8B of equity-ETF inflows -- this detail has been folded into the US Equities region note and a new movement below.",
   "fearGreed": {
     "value": 20,
     "rating": "Extreme Fear",
-    "asOf": "2026-10-22",
-    "prevClose": 27,
-    "prev1w": 30,
+    "asOf": "2026-10-23",
+    "prevClose": 20,
+    "prev1w": 18,
     "prev1m": 35,
     "prev1y": 26,
-    "cryptoValue": 68,
-    "cryptoRating": "Greed",
+    "cryptoValue": 54,
+    "cryptoRating": "Neutral",
     "components": [
       {
         "name": "Market Momentum",
-        "reading": "S&P 500 broke a 3-session rally, -0.64% Thu as revived AI-capex-financing doubts hit megacap tech (Nasdaq -1.57%); Dow +0.71% and Russell 2000 +0.38% held up, so the cap-weighted momentum signal weakened even though breadth did not",
+        "reading": "S&P 500 fell further into Friday's close with the composite reading near 23 — momentum stayed weak as the two-day Thu-Fri drawdown deepened even as Dow/Russell held up better than the Nasdaq",
         "signal": "fear"
       },
       {
         "name": "Stock Price Strength",
-        "reading": "NYSE 52-week new highs ~173 vs new lows ~366 (net approx. -193) -- lows continue to outnumber highs",
+        "reading": "Reading near 18 — new lows continue to badly outnumber new highs (170 highs vs 666 lows Oct 23, net -496)",
         "signal": "fear"
       },
       {
         "name": "Stock Price Breadth",
-        "reading": "NYSE advancers beat decliners roughly 2,319 to 1,596 (~1.45:1) despite the Nasdaq-led index decline -- participation outside megacap tech stayed constructive",
-        "signal": "neutral"
+        "reading": "Reading near 21 — NYSE decliners led advancers roughly 2-to-1 on Friday",
+        "signal": "fear"
       },
       {
         "name": "Put/Call Options",
-        "reading": "CBOE total put/call ~0.87, equity put/call ~0.52 -- little incremental hedging demand despite the VIX spike, a mixed/non-extreme options read",
-        "signal": "neutral"
+        "reading": "Reading near 18 — options positioning stayed defensively skewed into the weekend",
+        "signal": "fear"
       },
       {
         "name": "Market Volatility",
-        "reading": "VIX spiked +9.9% to 19.03 Thu, its sharpest one-day jump since the mid-October swing, as AI-capex-financing concerns resurfaced",
+        "reading": "Reading near 18 — VIX held elevated at 19.45 after Thursday's +9.94% spike to 19.03",
         "signal": "fear"
       },
       {
         "name": "Safe-Haven Demand",
-        "reading": "10-year Treasury yield tumbled over 17bp to just under 5% (~4.97%), its biggest one-day drop since March 2026 and lowest level in about a month, as the tech selloff and Middle East tension drove a flight to duration",
+        "reading": "Reading near 10, the weakest component — bonds strongly outperformed stocks as the 10yr fell ~18bps to ~4.95% on a genuine flight-to-safety bid",
         "signal": "fear"
       },
       {
         "name": "Junk Bond Demand",
-        "reading": "ICE BofA US HY OAS roughly 3.15-3.33% this week -- historically tight/stable, no clear same-day broad widening confirmed, though CCC-and-lower tier spreads sit at a 100th-percentile record",
-        "signal": "neutral"
+        "reading": "Reading near 32 — high-yield spreads widened modestly but remain far from stressed levels",
+        "signal": "fear"
       }
     ],
     "sources": [
-      "https://www.cnn.com/markets/fear-and-greed",
+      "https://www.aistockselection.com/en/fear-greed-today/",
       "https://feargreedflow.com/",
+      "https://fearandgreedgraph.com/",
+      "https://www.benzinga.com/markets/market-summary/26/10/62550969/nasdaq-records-worst-session-since-june-investor-sentiment-weakens-greed-index-moves-to-extreme-fear-zone",
       "https://alternative.me/crypto/fear-and-greed-index/",
-      "https://www.benzinga.com/markets/market-summary/26/10/62517652/nasdaq-surges-over-1-as-spacex-shares-gain-investor-sentiment-improves-but-greed-index-remains-in-fear-zone",
-      "https://www.cnbc.com/2026/10/22/treasurys-bonds-ai-yields.html"
+      "https://milkroad.com/fear-greed/",
+      "https://www.tokenpost.com/news/investing/39151"
     ]
   },
   "breadth": {
-    "asOf": "2026-10-22",
+    "asOf": "2026-10-23",
     "metrics": [
       {
         "label": "% S&P 500 stocks above 200-day MA",
-        "value": "approx. 54-55% (exact same-day Oct 22 close figure could not be independently pinned down; mirrors show 54.67-54.7% for the surrounding sessions)",
+        "value": "~55% (54.67% as of Oct 21)",
         "signal": "neutral",
-        "pct": 54.7
+        "pct": 55
       },
       {
         "label": "% S&P 500 stocks above 50-day MA",
-        "value": "approx. 55% (one tracker showed 55.3%, up from 52.1% the prior session)",
-        "signal": "neutral",
-        "pct": 55.3
+        "value": "~35% approx. (44.13% on Oct 15, before the Thu/Fri risk-off legs; directional estimate, not an exact Oct 23 print)",
+        "signal": "bearish",
+        "pct": 35
       },
       {
-        "label": "NYSE advancers vs decliners (Oct 22 close)",
-        "value": "~2,319 advancers vs ~1,596 decliners (~1.45:1) -- broad participation held up even as the Nasdaq sold off on AI-capex worries",
-        "signal": "bullish",
+        "label": "NYSE advancers vs decliners (Oct 23 close)",
+        "value": "Decliners led advancers ~1.97-to-1",
+        "signal": "bearish",
         "pct": null
       },
       {
-        "label": "52-week new highs minus new lows",
-        "value": "approx. 173 highs vs 366 lows (net approx. -193) -- lows still outnumber highs",
+        "label": "52-week New Highs minus New Lows (Oct 23)",
+        "value": "170 new highs vs 666 new lows (net -496)",
         "signal": "bearish",
         "pct": null
       },
       {
         "label": "McClellan Oscillator",
-        "value": "not independently confirmed for Oct 22 close; last confirmed print +41.9 (Oct 21), carried forward",
+        "value": "+21.4 (as of Oct 22 close) — mildly positive, 19-day EMA of net advances above the 39-day EMA",
+        "signal": "bullish",
+        "pct": null
+      },
+      {
+        "label": "Advance-Decline line trend",
+        "value": "Holding up relatively well versus the index-level drawdown; Thursday's Nasdaq-led selloff (semis -6.7%) was concentrated in mega-cap/AI names while the Dow was flat and small caps edged higher",
         "signal": "neutral",
         "pct": null
       },
       {
-        "label": "McClellan Summation Index",
-        "value": "-915 (last confirmed, Oct 20) -- no fresher print found this run",
-        "signal": "bearish",
-        "pct": null
-      },
-      {
-        "label": "Advance-decline line trend",
-        "value": "Breadth actually held/improved on Oct 22 (~1.45:1 NYSE advancers, % above key MAs ticking higher) even as megacap AI/tech names dragged the cap-weighted Nasdaq/S&P lower -- a 'broad market fine, narrow mega-cap wobble' day -- but new lows still outnumber new highs and the Summation Index remains negative, so a durable breadth recovery isn't confirmed over the longer horizon",
+        "label": "Sectors above 200-day MA (dispersion)",
+        "value": "Health Care ~82%, Energy ~67%, Info Tech ~65%, Financials ~63% vs. Real Estate ~23% and Utilities ~16%",
         "signal": "neutral",
         "pct": null
-      },
-      {
-        "label": "% of 11 GICS sectors with majority of members above 200-DMA",
-        "value": "6 of 11 (~54.5%): Healthcare 81.7%, Energy 66.7%, Info Tech 64.9%, Financials 63.2%, Materials 61.5%, Consumer Staples 60.6% above the threshold; Real Estate 23.3%, Utilities 16.1%, Communication Services 38.1% below -- dated to the latest available sector breakdown, not independently re-confirmed for Oct 22 specifically",
-        "signal": "neutral",
-        "pct": 54.5
       }
     ],
-    "note": "Breadth is actually the more constructive story on Oct 22: NYSE advancers beat decliners ~1.45:1 and the % of stocks above key moving averages ticked up, even as a reignited AI-capex-financing scare hit megacap tech and dragged the cap-weighted Nasdaq/S&P lower. But cumulative/trailing gauges -- net new lows still negative, McClellan Summation Index still negative -- show the broader recovery is not yet durable, and several exact same-day prints (McClellan Oscillator, precise 200/50-DMA %) could not be independently pinned to the Oct 22 close this run.",
+    "note": "Breadth is narrower than the index tape implies — barely half of S&P 500 names hold above their 200-day average and only a minority sit above the 50-day, with 52-week lows outnumbering highs nearly 4-to-1, even as a positive McClellan Oscillator points to short-term internal stabilization beneath the broader risk-off trend. Re-verified this run (Mon 26 Oct pre-Asia-open): no fresher print than Oct 21-23 exists anywhere, as expected with no new session since Friday's close.",
     "sources": [
+      "https://www.investing.com/indices/sp-500-stocks-above-200-day-average-historical-data",
       "https://en.macromicro.me/series/22718/sp-500-200ma-breadth",
       "https://en.macromicro.me/collections/20868/global-sentiment-indicator/98990/sp500-sectors-200ma-breadth",
+      "https://www.investing.com/indices/s-p-500-stocks-above-50-day-average-historical-data",
+      "https://www.newstribune.com/news/2026/oct/23/sp-500-nasdaq-end-sharply-lower-as-revived-ai/",
       "https://www.mcoscillator.com/market_breadth_data/",
-      "https://www.cnbc.com/2026/10/22/treasurys-bonds-ai-yields.html"
+      "https://dn12448583.substack.com/p/the-daily-macro-brief-october-23"
     ]
   },
   "flows": {
-    "asOf": "2026-10-22",
-    "period": "week ending Wed Oct 14, 2026 (BofA/EPFR); week ending Wed Oct 7, 2026 (ICI)",
-    "narrative": "No newer BofA Flow Show/EPFR edition had published as of this run (week-ending-Oct-21 report typically releases Friday and had not appeared in any source checked), so regional figures are unchanged from the week-ended-Oct-14 edition: a broad risk-on rotation with $53.1B out of cash and ~$64.5B into global equities (US +$39.1B, EM +$17.7B led by China +$8.6B), while Europe/Intl DM lagged (-$1.5B) and bonds/credit drew +$11.8B. A separate, narrower BofA equity-client-flow series (US brokerage positioning, not global EPFR fund flows) showed a record $14.8B single-stock outflow for the week ended Oct 21 -- flagged here but not conflated with the regional figures below, which still predate Thursday's metals rout and VIX spike.",
+    "asOf": "2026-10-23",
+    "period": "week ending Wed Oct 21, 2026 (BofA/EPFR Flow Show, published Fri Oct 23)",
+    "narrative": "In the week ending Oct 21, emerging-market and China equity funds drew their strongest inflows in months even as BofA's institutional clients logged their 10th-largest weekly US equity selling week since 2008. Cash and Treasuries both gathered fresh money ahead of the Oct 27-28 FOMC meeting, Europe booked a second straight week of outflows, and gold kept its safe-haven bid despite miners' rough October on the tape. Re-verified Monday 26 Oct pre-Asia-open: this remains the latest published BofA/EPFR edition -- the week-ended-Oct-28 edition is not due until early next week, so none of the figures below have moved. Newly incorporated this run: fuller detail on BofA's underlying client-flow book shows the headline institutional selling was accompanied by hedge funds turning net sellers (first time in 5 weeks) and retail/private clients also selling (reversing the prior 2 weeks' buying) -- a broader-based single-stock de-risking across all BofA client types than the institutional-only figure alone implies, even as fund-level (EPFR) flows stayed net positive.",
     "regions": [
       {
         "region": "US Equities",
         "direction": "inflow",
-        "amount": "+$39.1B",
-        "amountUSD": 39100000000,
-        "note": "Week ended Oct 14; tech led sector inflows within this figure (+$10.7B). No fresher EPFR edition published yet; separately, BofA's own equity-client-flow series showed a record $14.8B single-stock outflow for the week ended Oct 21."
+        "amount": "+$6.7B",
+        "amountUSD": 6700000000,
+        "note": "Third straight week of fund inflows (EPFR) even as BofA-tracked institutional clients were net sellers (-$9.1B), their 10th-largest weekly sell-down since 2008, driven by October mutual-fund tax-loss harvesting ahead of the Oct 31 fiscal year-end. Confirmed this run: hedge funds sold for the first time in 5 weeks and retail/private clients also sold (reversing the prior 2 weeks' buying), leaving BofA's total client book at a record -$14.8B single-stock net outflow, partially offset by +$2.8B of equity-ETF inflows across styles/cap segments"
       },
       {
         "region": "Europe/Intl DM",
         "direction": "outflow",
-        "amount": "-$1.5B",
-        "amountUSD": -1500000000,
-        "note": "Week ended Oct 14; lagged the broader DM equity rally"
+        "amount": "-$1.0B",
+        "amountUSD": -1000000000,
+        "note": "Second consecutive week of outflows as capital rotated toward EM and Japan"
       },
       {
         "region": "EM",
         "direction": "inflow",
-        "amount": "+$17.7B",
-        "amountUSD": 17700000000,
-        "note": "Week ended Oct 14; highest EM equity inflow since July 2026"
+        "amount": "+$33.5B",
+        "amountUSD": 33500000000,
+        "note": "Fourth straight week of inflows, one of the largest EM equity weeks of the year, led by China and Korea"
       },
       {
         "region": "China",
         "direction": "inflow",
-        "amount": "+$8.6B",
-        "amountUSD": 8600000000,
-        "note": "Week ended Oct 14, largest single contributor within the EM bucket; HK Southbound has since turned to deeper net selling per flows-investors.json"
+        "amount": "+$17.0B",
+        "amountUSD": 17000000000,
+        "note": "Largest weekly inflow since July, the biggest single driver of the broader EM surge"
       },
       {
         "region": "Japan",
         "direction": "inflow",
-        "amount": "+$0.4B",
-        "amountUSD": 400000000,
-        "note": "Week ended Oct 14, modest, steady inflow"
+        "amount": "+$6.0B",
+        "amountUSD": 6000000000,
+        "note": "Second straight week of inflows"
       },
       {
         "region": "Money-market/Cash",
-        "direction": "outflow",
-        "amount": "-$53.1B",
-        "amountUSD": -53100000000,
-        "note": "Week ended Oct 14, reversed roughly a third of the prior week's record $166.4B cash inflow"
+        "direction": "inflow",
+        "amount": "+$28.8B",
+        "amountUSD": 28800000000,
+        "note": "Large cash build ahead of the FOMC decision"
       },
       {
         "region": "Bonds/Credit",
         "direction": "inflow",
-        "amount": "+$11.8B",
-        "amountUSD": 11800000000,
-        "note": "Week ended Oct 14, extended a multi-week streak of fixed income inflows"
+        "amount": "+$12.1B",
+        "amountUSD": 12100000000,
+        "note": "Treasuries drew a 17th straight weekly inflow (+$5.4B); EM debt a 12th straight week (+$4.0B); high-yield saw modest outflows"
       },
       {
         "region": "Gold",
-        "direction": "mixed",
-        "amount": "+$0.1B",
-        "amountUSD": 100000000,
-        "note": "Week ended Oct 14, roughly flat per EPFR"
+        "direction": "inflow",
+        "amount": "+$2.6B",
+        "amountUSD": 2600000000,
+        "note": "Continued safe-haven demand even as physical silver/gold-miner equities (SLV, GDX) kept bleeding on the equity tape"
       }
     ],
     "movements": [
       {
-        "from": "Money-market/Cash",
-        "to": "Global Equities",
-        "amount": "$53.1B out of cash vs ~$64.5B into equities",
-        "note": "Week ended Oct 14 -- primary rotation of that week, de-cashing into risk assets"
+        "from": "US mega-cap/AI equities",
+        "to": "China & broader EM equities",
+        "amount": "~$33.5B into EM vs modest $6.7B into US",
+        "note": "Fastest EM equity inflow pace in months as AI-capex financing doubts (Tesla/Meta/CoreWeave) and SAMR-related HK tech jitters ironically coincided with record China buying on the rebound"
       },
       {
-        "from": "Europe/Intl DM",
-        "to": "EM (led by China)",
-        "amount": "-$1.5B vs +$17.7B",
-        "note": "Week ended Oct 14 -- DM-ex-US equities lagged sharply behind EM"
+        "from": "Europe",
+        "to": "Japan",
+        "amount": "-$1.0B vs +$6.0B",
+        "note": "Second week of Europe outflows against a second week of Japan inflows"
       },
       {
-        "from": "Cash",
-        "to": "Bonds/Credit",
-        "amount": "part of the $53.1B cash outflow",
-        "note": "Week ended Oct 14 -- +$11.8B into bonds/credit alongside the equity inflow"
+        "from": "Risk assets (sold by institutions)",
+        "to": "Cash & Treasuries",
+        "amount": "-$9.1B institutional equity selling vs +$28.8B cash and +$5.4B Treasury inflows",
+        "note": "Classic pre-FOMC de-risking barbell: institutions trimmed US equities while cash and duration both gathered inflows"
       },
       {
-        "from": "Financials/Consumer sectors",
-        "to": "Technology",
-        "amount": "-$1.4B/-$0.6B vs +$10.7B",
-        "note": "Week ended Oct 14, within the US equity inflow -- tech absorbed the bulk of sector-level flows"
+        "from": "High-yield credit",
+        "to": "Investment-grade/Treasuries",
+        "amount": "modest HY outflow vs continued IG/UST inflows",
+        "note": "Credit quality bid widened as junk-bond demand component of sentiment gauges stayed in 'fear' territory"
+      },
+      {
+        "from": "Broad equities",
+        "to": "Gold",
+        "amount": "+$2.6B into gold funds",
+        "note": "Safe-haven flows persisted even as gold/silver miner equities (GDX, SLV) continued to underperform spot metals"
+      },
+      {
+        "from": "Tech single-stock holdings (BofA institutional client book)",
+        "to": "Tech sector funds/ETFs (EPFR fund-level flows)",
+        "amount": "Tech stocks' largest-ever single-stock outflow from BofA's institutional clients vs +$18.8B into tech funds, EPFR's strongest tech print since July",
+        "note": "A genuine divergence within the same week and the same sector: institutional tax-loss selling of individual tech names coincided with continued broad-based buying of tech funds/ETFs -- confirmed via fresh research this run, not previously captured in this file"
       }
     ],
     "sources": [
-      "https://www.newsquawk.com/headlines/bofa-weekly-flow-show-we-14th-oct-",
       "https://www.kucoin.com/news/flash/us-equity-funds-see-39b-inflows-as-bofa-strategists-remain-risk-averse",
-      "https://www.ici.org/research/stats/combined_flows"
+      "https://finance.yahoo.com/news/investors-sell-u-shares-past-081421378.html",
+      "https://www.investing.com/news/stock-market-news/bofa-says-china-fueled-the-secondlargest-weekly-inflow-into-em-equities-4811406",
+      "https://www.investing.com/news/stock-market-news/bofa-flags-further-downside-risk-for-stocks-yields-and-dollar-4968691",
+      "https://www.newsquawk.com/headlines/bofa-weekly-flow-show-we-14th-oct-",
+      "https://cardanocapital.substack.com/p/record-13-trillion-flows-into-global",
+      "https://www.investing.com/news/stock-market-news/bofa-clients-log-biggest-outflows-in-six-weeks-led-by-hedge-funds-4412501",
+      "https://finvaulta.com/research/bank-of-america/equity-client-flow-trends-extreme-outflows-week-2026-10-20",
+      "https://www.tickmill.com/blog/institutional-insights-bofa-extreme-outflows-week"
     ]
   }
 }
