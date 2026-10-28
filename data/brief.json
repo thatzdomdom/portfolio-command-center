@@ -1,66 +1,65 @@
 {
-  "date": "2026-10-26T07:40:00+08:00",
+  "date": "2026-10-29T07:35:00+08:00",
   "tldr": [
-    "Levered silver remains the dominant book risk: SLV/GDX/SILJ down 11-15% over two weeks, leverage 1.84x vs a 1.4x target, margin stress-call only ~17% away -- no new deleveraging event over the weekend, but Thursday's FOMC is the next real swing factor.",
-    "This was a deleveraging, not a flight to safety: gold, silver, Bitcoin AND Asian equities (Nikkei -10.5%, KOSPI -18% over two weeks) all fell together last week -- a margin-call signature across leveraged commodity, crypto and APAC-tech positions.",
-    "FOMC decision Thu 29 Oct 02:00 SGT: ~94% priced to hold at 3.75-4.00%, hawkish tilt (hot Sept CPI, firmer Core PCE/GDP forecasts this week) -- limited room for the dovish pivot risk assets want.",
-    "Oil is genuinely two-sided this week: confirmed Houthi strikes hit Aramco's Shaybah field and the East-West pipeline (Brent >$110), but Sunday's -5.3% Brent gap came on UNCONFIRMED Yanbu/Rabigh damage claims -- watch for a Riyadh confirmation to settle direction.",
-    "HK tech sleeve has a fresh, idiosyncratic hit distinct from the macro story: Nvidia may fill only a fraction of ~$35B in China AI-chip orders, hitting Tencent/Alibaba even as the Hang Seng bounced +0.69% Friday.",
-    "Data-quality catch this run: the 0700.HK Yang Siu Shun filing, carried for weeks as a BUY, was corrected to a SELL (HKD 425.24, read directly from the primary HKEX filing) -- flagged in intel.json's audit trail."
+    "Biggest surprise this run: the Fed Chair is Kevin Warsh, not Jerome Powell -- Warsh was Senate-confirmed 54-45 in May 2026 and ran Wednesday's FOMC press conference; every prior 'Powell' reference in this dashboard was stale.",
+    "FOMC held at 3.75-4.00% but on a 10-2 vote, with two governors (Cook, Hammack) dissenting IN FAVOR OF A HIKE -- an unusual hawkish dissent that pushed December-hike odds to ~82-86%, and a reported (news, not price-spine-verified) same-day reversal of the 10-year yield back above 5%.",
+    "Mega-cap earnings split sharply: Microsoft beat decisively (Azure +48%, EPS beat) and rose ~4-5% after-hours, while Alphabet missed on EPS/free cash flow -- partly an $8.2B unrealized markdown on its SpaceX stake -- and fell ~10-11% after-hours despite Google Cloud revenue nearly tripling.",
+    "Levered silver sleeve risk: gold and silver both eased into the hawkish FOMC decision and the gold-silver ratio widened to 75.1 (from ~60 in January) -- the real-yield relief that drove Tuesday's miner rally is now in question.",
+    "Regional flows are diverging hard: Korea's foreign/institutional buying extended to a second straight day (the largest foreign net buy in 51 days) even as Hong Kong Southbound hit an 11th straight net-sell day and China's margin balance fell to a year-to-date low.",
+    "Rare-earth truce risk is reduced but not resolved: China's Commerce Ministry confirmed the broader US-China trade truce extends to Jan 10, 2027, but never explicitly named rare-earth export controls, so the Nov 10, 2026 deadline remains a live, if lower-probability, risk for the MP/Lynas/Energy Fuels watchlist."
   ],
   "whatChanged": [
-    "Congress: fully refreshed to 15 trades across 13 members (fresh finds include McClain's Transocean buy -- the first congressional RIG trade since 2020, one day ahead of a positive contract-news run -- plus Salazar/MRK, Whitehouse/JPM, Doggett/IBM).",
-    "Insiders: corrected a standing error (0700.HK buy -> sell) and extended Wing Tai's (W05.SI) accumulation to a seven-session, 1,030,000-share total.",
-    "Signals: rotated to a precious-metals/rare-earth set (MP, AEM, CDE, WPM, USAR, PAAS) built off real Q2 2026 13F cross-references -- several tracked funds took opposite directions on the same ticker.",
-    "News: 12 fresh items led by the unresolved Sunday Brent plunge, the confirmed Aramco Shaybah strike, Bitcoin's weekend break below $80K, and a new China-tech AI-chip-supply-doubt catalyst.",
-    "Macro regime restamped to 'Deleveraging risk-off into a hawkish Fed hold; Mideast war premium on oil' (riskOnProb 0.35), with all 40 required tickers plus 8 rare-earth extras re-primed off the price spine.",
-    "Market sentiment: CNN Fear & Greed held at Extreme Fear (20, as of Fri close, unchanged -- no new session); crypto Fear & Greed ticked 51 -> 54 (still Neutral).",
-    "Flows-investors: US BofA/EPFR rolled forward to the week-ended-Oct-21 edition; Japan/Singapore/China carried forward with honestly-flagged staleness (no newer official release exists yet).",
-    "Track record: appended the 2026-10-26 snapshot (48 calls) to track.json."
+    "intel.json: Congress trades refreshed (12 fresh disclosures across 8 members, both parties); Signals refreshed (6 new tickers -- GOOGL, NFLX, PLTR, HOOD, SLS, SPCX); Insiders updated with a confirmed 9th Wing Tai spousal-purchase tranche (Oct 27) and re-confirmed no genuine new HKEX/SGXNet/Form-4 filings elsewhere this cycle.",
+    "model.json: macro regime downgraded (riskOnProb 0.48 -> 0.46) on the hawkish FOMC dissent; Fed Chair attribution corrected to Kevin Warsh across the file; FOMC outcome, mega-cap earnings split, reported yield reversal, and fresh Houthi/Iran oil escalation applied across the bonds complex, SPY/QQQ/XLK/SMH, GLD/SLV, BTC-USD, and the 8-ticker rare-earth basket.",
+    "market.json: Fear & Greed moved to 34/Fear (from 27) as Wednesday's close extended the equity bounce; breadth and global-flow sections re-verified, no newer BofA/EPFR edition yet (due Fri 30 Oct).",
+    "flows-investors.json: Korea and Hong Kong refreshed with Wednesday's session (Korea's foreign buying streak extended; HK Southbound hit an 11th straight sell day but decelerating); China margin balance refreshed to a year-to-date low; US ICI combined long-term flows refreshed with a genuinely new weekly print.",
+    "news.json: fully refreshed with 13 items, 5+ from the last 24-48h covering the FOMC outcome, MSFT/GOOGL earnings, precious metals, Mideast escalation, rare earths, SGX banks, and crypto.",
+    "track.json: today's 40+8-ticker model snapshot appended for forward hit-rate scoring."
   ],
   "regime": {
-    "label": "Deleveraging risk-off into a hawkish Fed hold; Mideast war premium on oil",
-    "riskOn": 0.35,
-    "oneLiner": "Precious metals, Bitcoin and Asian equities fell together last week in what looks like a margin-call-driven deleveraging event rather than a safe-haven rotation, with Thursday's hawkish-leaning FOMC hold the next major catalyst."
+    "label": "Calm index-level surface over a hawkish policy undercurrent",
+    "riskOn": 0.46,
+    "oneLiner": "Equities closed higher through a hawkish FOMC dissent and a split mega-cap earnings verdict, but December-hike odds near 82-86% and a reported yield reversal above 5% are genuine new headwinds."
   },
   "topNews": [
     {
-      "headline": "Houthi damage claims on Aramco's Yanbu/Rabigh/pipeline go unconfirmed; Riyadh intercepts reported",
+      "headline": "Fed holds rates at 3.75%-4.00% in 10-2 split vote; two governors dissent for a hike",
+      "impact": "bearish",
+      "actionable": "A hawkish hold with rising December-hike odds is a near-term headwind for the levered silver/miners sleeve -- watch for real-yield pressure into the next data prints."
+    },
+    {
+      "headline": "Microsoft beats on Q1 FY27 earnings; Alphabet drops on miss and negative cash flow",
       "impact": "mixed",
-      "actionable": "Lack of confirmed physical damage is the key bearish swing factor for the oil risk premium squeezing gold/silver miners -- watch for a Riyadh confirmation as the trigger for a reversal."
+      "actionable": "Confirms AI-capex demand is intact at the infrastructure layer (Azure +48%, Cloud +103%) even as single-name earnings quality diverges sharply -- a read-through risk for Tencent's own AI-capex ramp."
     },
     {
-      "headline": "Silver/gold miner ETFs post a brutal week: GDX -8.56%, SILJ -9.78%",
-      "impact": "bearish",
-      "actionable": "Directly confirms the drawdown already hitting the levered silver/gold-miner sleeve; rising put-skew and CTA selling argue against adding exposure before the Fed decision clarifies the rate path."
-    },
-    {
-      "headline": "China tech selloff deepens: CSI 300 enters bear market on Nvidia chip-supply doubts",
-      "impact": "bearish",
-      "actionable": "A fresh, idiosyncratic bear catalyst for the HK tech sleeve -- watch whether Friday's +0.69% HSI bounce holds against this Nvidia-order story."
-    },
-    {
-      "headline": "Bitcoin sinks below $80,000 in weekend liquidation cascade",
-      "impact": "bearish",
-      "actionable": "No direct holding, but confirms the broad risk-off/deleveraging also hitting silver and China tech -- a useful read-through on cross-asset leverage stress into Fed week."
-    },
-    {
-      "headline": "FOMC decision and Core PCE/GDP this week are the key macro catalysts for rates, USD and gold",
+      "headline": "Gold slips to ~$4,049-4,055/oz, silver falls toward ~$53.91 ahead of the Fed; gold-silver ratio hits 75.1",
       "impact": "mixed",
-      "actionable": "A hawkish hold-plus-hike-bias outcome Thursday would pressure the gold/silver miner sleeve further; a dovish surprise is the most likely near-term catalyst for a bounce."
+      "actionable": "Silver's widening underperformance versus gold is both the near-term risk and a possible mean-reversion setup for the miners book if the ratio rolls over."
+    },
+    {
+      "headline": "Brent tops $114.87, WTI $101.49 as Houthis strike Saudi targets and US weighs renewed Iran campaign",
+      "impact": "bullish",
+      "actionable": "Fresh Mideast escalation keeps a tail-risk bid under gold/silver even as the Fed stays hawkish -- a geopolitical offset worth tracking against the rate-driven headwind."
+    },
+    {
+      "headline": "DBS to report Nov 5, OCBC Nov 6; October bank selloff judged not a fundamental breakdown",
+      "impact": "bullish",
+      "actionable": "H1 2026 fundamentals (DBS ROE 17.5%, OCBC net profit +13% to a record) look intact into the prints -- supports holding through earnings rather than reacting to the October de-rating."
     }
   ],
   "signals": [
-    "Consider watching MP Materials: Bridgewater nearly quadrupled its stake (+313%) in its Q2 13F even as Soros exited and the CEO kept selling through his trust -- a genuine smart-money split worth tracking.",
-    "The model's SLV call sits near a coin-flip (pUp3m 0.50, confidence 0.34 -- deliberately low) rather than taking a strong view into a deleveraging cascade that fell alongside equities rather than hedging them.",
-    "XLE/USO calls skew bullish (pUp1m 0.58/0.52) on the confirmed Aramco Shaybah strike, even as spot Brent gapped -5.3% Sunday on unconfirmed damage claims -- a genuinely volatile, two-sided setup to watch rather than chase.",
-    "SMH/semis stays cautious (pUp1m 0.40) given the direct read-through from Japan and Korea's AI-capex-doubt crash -- worth monitoring if that narrative spreads to US mega-cap tech.",
-    "Nearly every asset-class call this week hinges on one thing: watch for Thursday's FOMC hold-plus-tone confirmation, the swing factor behind the model's cautious equity and bullish USD/cash tilts."
+    "Consider watching SLV/GDX/SILJ for real-yield pressure -- the hawkish FOMC dissent and a reported yield reversal above 5% have removed the rate-relief tailwind that drove Tuesday's rally (model confidence 0.36-0.46, below the 0.55 conviction bar).",
+    "XLK/SMH sit near a coin-flip (pUp3m ~0.50-0.51, confidence 0.44-0.48) after Wednesday's AI-capex earnings bifurcation -- Microsoft's beat and Alphabet's miss point in opposite directions on the same theme.",
+    "Watch the rare-earth basket (MP, LYC.AX, UUUU) into MP's Nov 5 earnings -- the China truce-deadline risk is reduced (broader trade truce extended to Jan 2027) but not eliminated, so confidence stays capped in the 0.3-0.4 range.",
+    "BTC-USD's ETF-flow stabilization (second straight inflow day) is tentative, not confirmed -- Glassnode flags a possible retest of $78K, consistent with the model's modest-underweight crypto stance and 0.44 confidence.",
+    "The GOOGL signal is worth a second look: Congress (Rep. Cleo Fields) and Druckenmiller both bought into strength before Wednesday's earnings miss, while Ackman reportedly exited -- a genuine smart-money split on the dip."
   ],
   "watch": [
-    "FOMC rate decision + press conference, Thu 29 Oct 02:00-02:30 SGT (consensus: hold at 3.75-4.00%, ~94% priced).",
-    "Core PCE Price Index + Advance Q3 GDP, Thu 29 Oct 20:30 SGT (forecast 0.3% m/m PCE, 3.2% GDP).",
-    "ECB rate decision Thu 29 Oct 21:15 SGT (forecast hold 2.65%); BOJ policy rate Fri 30 Oct 10:30 SGT.",
-    "Agnico Eagle Q3 earnings, Wed 28 Oct -- a real-world test of whether Paulson's full AEM exit was a one-off rotation or a read on peak gold-miner valuations."
+    "Amazon Q3 2026 earnings, Thu 29 Oct after US close -- the last of the mega-cap AI-capex prints this cycle.",
+    "BOJ policy decision, Fri 30 Oct 10:30 SGT (forecast: hold below 1.25%).",
+    "MP Materials Q3 earnings, Thu 5 Nov -- first post-shipping-ramp quarter for the rare-earth watchlist's largest name.",
+    "DBS Q3 earnings Thu 5 Nov; OCBC Q3 earnings Fri 6 Nov -- the next real catalyst for the SGX bank sleeve.",
+    "China's rare-earth-specific export-control deadline, around 10 Nov 2026 -- risk reduced by the broader trade-truce extension to Jan 2027 but not formally resolved for rare earths specifically."
   ]
 }
