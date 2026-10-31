@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-31",
+  "updated": "2026-11-01",
   "note": "Friday 30 Oct 2026 07:02 SGT run. Korea/Hong Kong genuinely updated with fresher sessions (2026-10-29). Japan genuinely updated to the week-ended-2026-10-23 JPX edition. China margin balance updated to 2026-10-28 (ended a 13-session decline) plus a new fund-issuance data point. Singapore institutional aggregate remains stale at week-ended-2026-10-09 (~3 weeks, a persistent multi-run gap) and retail at ~6.3 weeks; both carried forward honestly. US ICI mutual-fund-only series updated to week-ended-2026-10-21 (published Oct 28); BofA/EPFR Flow Show still at week-ended-2026-10-21, with the week-ended-Oct-28 edition (which would capture the FOMC) not yet published. US flagged available:false since no official institutional/retail split exists there (all figures are proxies).",
   "markets": [
     {
@@ -61,51 +61,44 @@
       "market": "South Korea (KOSPI)",
       "available": true,
       "cadence": "daily, KRX net buy/sell by foreigners/institutions/individuals, published same trading day after close",
-      "latestPeriod": "2026-10-29",
-      "asOf": "2026-10-29",
+      "latestPeriod": "2026-10-30",
+      "asOf": "2026-10-30",
       "flows": [
         {
-          "investorType": "Foreign investors",
-          "direction": "inflow",
-          "amount": "+₩72-122bn (cross-source variance)",
-          "unit": "KRW bn",
-          "period": "2026-10-29",
-          "isProxy": false,
-          "note": "4th consecutive day of foreign net buying (since Oct 27), even as KOSPI fell -1.24% to 5,937.66 on Samsung's 4% drop on shareholder-return disappointment despite record Q3 earnings."
-        },
-        {
-          "investorType": "Institutions",
+          "investorType": "Foreign institutional",
           "direction": "outflow",
-          "amount": "-₩413-445bn",
+          "amount": "-₩1,825.4bn",
           "unit": "KRW bn",
-          "period": "2026-10-29",
+          "period": "2026-10-30",
           "isProxy": false,
-          "note": "Institutions sold heavily -- the swing factor behind the day's decline after Tue-Wed's institutional buying."
+          "note": "KOSPI net sell as the index fell 3.48% on the global AI-capex/chip selloff."
         },
         {
-          "investorType": "Foreign investors",
+          "investorType": "Domestic institutional",
           "direction": "inflow",
-          "amount": "+₩1,150.4bn",
+          "amount": "+₩716.8bn",
           "unit": "KRW bn",
-          "period": "2026-10-28",
+          "period": "2026-10-30",
           "isProxy": false,
-          "note": "Largest foreign net buy in 51 days, as KOSPI surged +6.63% to a record 6,012.44 on SK Hynix's record Q3 earnings and a ~₩60tn shareholder-return announcement. Samsung (+₩385.9bn) and SK Hynix (+₩374.8bn) were the top foreign buys."
+          "note": "KOSPI net buy -- institutions bought the dip foreigners sold into."
         },
         {
-          "investorType": "Individuals",
-          "direction": "outflow",
-          "amount": "-₩2,321.5bn",
+          "investorType": "Retail (individuals)",
+          "direction": "inflow",
+          "amount": "+₩871.3bn",
           "unit": "KRW bn",
-          "period": "2026-10-28",
+          "period": "2026-10-30",
           "isProxy": false,
-          "note": "Heaviest net-sell figure in this tracked series, as retail took profit into the rally."
+          "note": "KOSPI net buy; KOSDAQ showed the opposite pattern (foreigners -₩30.7bn, institutions -₩136.1bn, individuals +₩167.8bn)."
         }
       ],
-      "trend": "Foreigners bought on 4 straight sessions (Oct 27-29), but Wednesday's record +6.63% semiconductor-driven spike reversed Thursday (-1.24%) once Samsung's earnings call disappointed on capital returns. Foreigners sold a net ~₩19tn across Oct 1-26 before this buying streak and remain net sellers of ~₩12tn for October overall -- the recent buying is a partial retracement, not a clean trend change. Friday 2026-10-30's global risk-off (S&P -1.82%) is a fresh headwind for the streak continuing into month-end, but settled same-day KRX figures for Oct 30 could not be confirmed this run.",
+      "trend": "Foreigners bought on 4 straight sessions (Oct 27-29), but Wednesday's record +6.63% semiconductor-driven spike reversed Thursday (-1.24%) once Samsung's earnings call disappointed on capital returns. Foreigners sold a net ~₩19tn across Oct 1-26 before this buying streak and remain net sellers of ~₩12tn for October overall -- the recent buying is a partial retracement, not a clean trend change. Friday 2026-10-30's global risk-off (S&P -1.82%) is a fresh headwind for the streak continuing into month-end, but settled same-day KRX figures for Oct 30 could not be confirmed this run. Friday 2026-10-30: foreigners turned sharp net sellers (-₩1.83tn) into the global selloff while domestic institutions and retail both bought the dip -- a classic foreign-led risk-off / domestic-absorption pattern.",
       "interpretation": "Korea's AI/semiconductor-driven foreign buying is real but fragile: a 4-day streak sits inside a much larger October net-sell month, and institutions (not foreigners) are the marginal seller when single-stock catalysts disappoint. Whether foreigners held the line through Friday's global risk-off is the key open question for the book's Korea semiconductor exposure, but confirmed Oct 30 KRX data is not yet in hand.",
       "sources": [
+        "https://en.fnnews.com/news/202610301540505038",
+        "https://www.fnnews.com/news/202610291010314090",
         "https://www.hankyung.com/article/2026102814461",
-        "https://www.fnnews.com/news/202610291010314090"
+        "https://www.mt.co.kr/en/stock/2026/10/30/2026103015481417672"
       ],
       "dataGaps": [
         "Same-day Korean press figures for Oct 29 diverge materially by outlet (likely intraday-estimate vs settled-figure timing) -- treat as directional, not final",
@@ -116,26 +109,26 @@
       "market": "Hong Kong",
       "available": true,
       "cadence": "daily, Southbound Stock Connect net buy/sell (official); NO official retail/institutional split exists for the HK cash market",
-      "latestPeriod": "Southbound: 2026-10-29",
-      "asOf": "2026-10-29",
+      "latestPeriod": "Southbound: 2026-10-30",
+      "asOf": "2026-10-30",
       "flows": [
         {
           "investorType": "Southbound Stock Connect (mainland conviction proxy)",
           "direction": "outflow",
-          "amount": "-HK$3.359bn",
+          "amount": "-HK$3.56bn",
           "unit": "HKD bn",
-          "period": "2026-10-29",
+          "period": "2026-10-30",
           "isProxy": true,
-          "note": "12th consecutive net-sell day, cumulative ~HK$33.76bn over the streak -- the outflow RE-ACCELERATED versus Wednesday's smaller -HK$804m. Largest net sell: SMIC (0981) -HK$963m; largest net buy: Ping An +HK$285m. Hang Seng fell -0.59% to 22,958.65."
+          "note": "Net outflow (Shanghai leg -HK$2.261bn, Shenzhen leg -HK$1.299bn); part of October's cumulative ~HK$27.95bn net outflow, the largest monthly Southbound selloff since Aug 2021."
         },
         {
           "investorType": "Southbound Stock Connect (mainland conviction proxy)",
           "direction": "outflow",
-          "amount": "-HK$804m",
+          "amount": "-HK$3.56bn",
           "unit": "HKD bn",
-          "period": "2026-10-28",
+          "period": "2026-10-30",
           "isProxy": true,
-          "note": "11th consecutive net-sell day, smallest single-day outflow of the streak at the time -- the deceleration did not hold into Thursday."
+          "note": "Net outflow (Shanghai leg -HK$2.261bn, Shenzhen leg -HK$1.299bn); part of October's cumulative ~HK$27.95bn net outflow, the largest monthly Southbound selloff since Aug 2021."
         },
         {
           "investorType": "China/EM equity funds (EPFR via BofA, NOT HK-specific)",
@@ -147,17 +140,19 @@
           "note": "Largest weekly China equity-fund inflow since July 2026 -- a China-wide, not HK-specific, figure; cannot be read as foreign buyers offsetting mainland Southbound selling in HK specifically."
         }
       ],
-      "trend": "Southbound selling re-accelerated to -HK$3.36bn on the 12th straight sell day after briefly decelerating on the 11th -- the tentative stabilization flagged previously did not hold. SMIC was the largest single-name outflow two sessions running. Oct 30 Southbound data (which would show whether mainland conviction extended the streak into Friday's global risk-off) could not be confirmed this run.",
+      "trend": "Southbound selling re-accelerated to -HK$3.36bn on the 12th straight sell day after briefly decelerating on the 11th -- the tentative stabilization flagged previously did not hold. SMIC was the largest single-name outflow two sessions running. Oct 30 Southbound data (which would show whether mainland conviction extended the streak into Friday's global risk-off) could not be confirmed this run. Southbound stayed a net seller through Friday 2026-10-30 (-HK$3.56bn), extending October's ~HK$27.95bn cumulative outflow -- the weakest month since Aug 2021.",
       "interpretation": "Mainland conviction on Hong Kong sold for 12 straight sessions through Oct 29 (~HK$33.8bn cumulative), re-accelerating rather than stabilizing -- a genuinely negative signal for a book long 0700/0981/1810, especially since 0981 (SMIC) was the largest net-sell name two days running. Friday's global risk-off raises the odds the streak extended further, but this is not yet confirmed.",
       "sources": [
         "http://stock.10jqka.com.cn/20261029/c681260879.shtml",
+        "https://finance.biggo.com/news/2d3fcc4b-28b5-487a-bd8b-d63091a12a0f",
         "https://www.asiafinancial.com/china-equity-funds-see-biggest-weekly-inflow-in-years-bofa"
       ],
       "dataGaps": [
         "No official HK retail-vs-institutional split exists at all; Southbound is a mainland-conviction proxy only",
         "No dated, document-level HK-specific (as opposed to broader China) EPFR/BofA figure newer than week-ended-2026-10-21 could be confirmed this run",
         "Southbound net-flow figure for 2026-10-30 (Friday, the global risk-off day) could not be confirmed this run and is not included -- carried forward from Oct 29 unchanged; this is the top-priority gap for next refresh",
-        "There is no official daily 'foreign flow into HK' series -- Stock Connect only has Northbound into A-shares and Southbound into HK"
+        "There is no official daily 'foreign flow into HK' series -- Stock Connect only has Northbound into A-shares and Southbound into HK",
+        "Oct 30 single-stock Southbound detail (Tencent/Alibaba specifically) wasn't available this run -- only Oct 29 per-stock figures were found (SMIC -HK$825m, Alibaba -HK$778m, Tencent +HK$146m); the aggregate Oct 30 figure above is sourced from a secondary aggregator of HKEX data, not HKEX's own page directly."
       ]
     },
     {
