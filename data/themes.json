@@ -1,11 +1,11 @@
 {
- "asOf": "2026-10-26",
- "generatedAt": "2026-10-26T00:28:04.061Z",
+ "asOf": "2026-11-02",
+ "generatedAt": "2026-11-02T01:35:32.963Z",
  "source": "SEC EDGAR full-text search (efts.sec.gov, keyless); distinct filers counted by paging hits, never from the entity_filter aggregation; insider link on filer CIK identity against data/signals.json",
  "scan": {
-  "checkedAt": "2026-10-26T00:28:04.061Z",
+  "checkedAt": "2026-11-02T01:35:32.963Z",
   "ok": true,
-  "requests": 21,
+  "requests": 22,
   "errors": []
  },
  "guidance": "Consider entry only at the Evidenced→Priced transition, and never initiate at Crowded. The radar counts filings; it does not size or recommend.",
@@ -18,28 +18,33 @@
    "stagePrev": null,
    "changedOn": "2026-09-17",
    "why": [
-    "2026 Q4 is still open (counted through 2026-10-26) — reported but never scored, because a part-quarter count reads as a collapse",
+    "2026 Q4 is still open (counted through 2026-11-02) — reported but never scored, because a part-quarter count reads as a collapse",
     "Candidate since 2026 Q1: distinct filers went 15 → 34 between 2025 Q4 and 2026 Q1, at least 2× from a base above 10",
     "Evidenced by insiders: BENF (3 insiders bought by 2026-09-17) — a cluster among the theme's own filers",
     "only 1 of the theme's names are priced here (MP), so co-movement cannot be measured — the rung stays Evidenced and the price leg is not invented",
-    "Crowded: 9 distinct trusts have an EFFECTIVE (485BPOS) filing naming the theme, across 22 filings — Managed Portfolio Series 2026-10-07; WisdomTree Trust 2026-10-06; Tema ETF Trust 2026-10-05; Tidal Trust V 2026-10-02"
+    "Crowded: 10 distinct trusts have an EFFECTIVE (485BPOS) filing naming the theme, across 25 filings — WisdomTree Trust 2026-10-28; ETF Opportunities Trust 2026-10-28; Managed Portfolio Series 2026-10-07; Tema ETF Trust 2026-10-05"
    ],
    "candidateOn": "2026-03-31",
    "crowding": {
     "level": "crowded",
-    "effectiveTrusts": 9,
-    "effectiveFilings": 22,
-    "proposedFilings": 26,
+    "effectiveTrusts": 10,
+    "effectiveFilings": 25,
+    "proposedFilings": 27,
     "initiations": 0,
     "trusts": [
      {
-      "trust": "Managed Portfolio Series",
-      "date": "2026-10-07",
+      "trust": "WisdomTree Trust",
+      "date": "2026-10-28",
       "form": "485BPOS"
      },
      {
-      "trust": "WisdomTree Trust",
-      "date": "2026-10-06",
+      "trust": "ETF Opportunities Trust",
+      "date": "2026-10-28",
+      "form": "485BPOS"
+     },
+     {
+      "trust": "Managed Portfolio Series",
+      "date": "2026-10-07",
       "form": "485BPOS"
      },
      {
@@ -55,11 +60,6 @@
      {
       "trust": "Krane Shares Trust",
       "date": "2026-09-21",
-      "form": "485BPOS"
-     },
-     {
-      "trust": "Tidal Trust II",
-      "date": "2026-09-15",
       "form": "485BPOS"
      }
     ]
@@ -165,12 +165,12 @@
     {
      "q": "2026 Q4",
      "from": "2026-10-01",
-     "to": "2026-10-26",
-     "filings": 26,
-     "filingsDistinct": 23,
-     "filers": 18,
-     "filersAgg": 18,
-     "pagedDocs": 26,
+     "to": "2026-11-02",
+     "filings": 46,
+     "filingsDistinct": 42,
+     "filers": 27,
+     "filersAgg": 28,
+     "pagedDocs": 46,
      "truncated": false,
      "partial": true
     }
@@ -180,7 +180,31 @@
      "cik": "1805521",
      "name": "FARADAY FUTURE INTELLIGENT ELECTRIC INC.",
      "ticker": "FFAI",
-     "filings": 4
+     "filings": 7
+    },
+    {
+     "cik": "1460702",
+     "name": "FF EAI Robotics Ecosystem Inc.",
+     "ticker": "FFR",
+     "filings": 3
+    },
+    {
+     "cik": "1667313",
+     "name": "Zedge, Inc.",
+     "ticker": "ZDGE",
+     "filings": 3
+    },
+    {
+     "cik": "1892704",
+     "name": "First Breach, Inc.",
+     "ticker": "FBDT",
+     "filings": 3
+    },
+    {
+     "cik": "2074973",
+     "name": "Churchill Capital Corp XI",
+     "ticker": "CCXI",
+     "filings": 3
     },
     {
      "cik": "1818274",
@@ -195,15 +219,15 @@
      "filings": 2
     },
     {
-     "cik": "1892704",
-     "name": "First Breach, Inc.",
-     "ticker": "FBDT",
+     "cik": "1910139",
+     "name": "Mobileye Global Inc.",
+     "ticker": "MBLY",
      "filings": 2
     },
     {
-     "cik": "2074973",
-     "name": "Churchill Capital Corp XI",
-     "ticker": "CCXI",
+     "cik": "50863",
+     "name": "INTEL CORP",
+     "ticker": "INTC",
      "filings": 2
     },
     {
@@ -219,9 +243,15 @@
      "filings": 1
     },
     {
-     "cik": "1460702",
-     "name": "FF EAI Robotics Ecosystem Inc.",
-     "ticker": "FFR",
+     "cik": "1297989",
+     "name": "ExlService Holdings, Inc.",
+     "ticker": "EXLS",
+     "filings": 1
+    },
+    {
+     "cik": "1413447",
+     "name": "NXP Semiconductors N.V.",
+     "ticker": "NXPI",
      "filings": 1
     },
     {
@@ -231,9 +261,21 @@
      "filings": 1
     },
     {
-     "cik": "1667313",
-     "name": "Zedge, Inc.",
-     "ticker": "ZDGE",
+     "cik": "1701605",
+     "name": "Baker Hughes Co",
+     "ticker": "BKR",
+     "filings": 1
+    },
+    {
+     "cik": "1743725",
+     "name": "GRID DYNAMICS HOLDINGS, INC.",
+     "ticker": "GDYN",
+     "filings": 1
+    },
+    {
+     "cik": "1804176",
+     "name": "Butterfly Network, Inc.",
+     "ticker": "BFLY",
      "filings": 1
     },
     {
@@ -246,6 +288,12 @@
      "cik": "1970622",
      "name": "USA Rare Earth, Inc.",
      "ticker": "USAR",
+     "filings": 1
+    },
+    {
+     "cik": "2023554",
+     "name": "Sandisk Corp",
+     "ticker": "SNDK",
      "filings": 1
     },
     {
@@ -283,9 +331,51 @@
      "name": "SYNAPTICS Inc",
      "ticker": "SYNA",
      "filings": 1
+    },
+    {
+     "cik": "913142",
+     "name": "BELDEN INC.",
+     "ticker": "BDC",
+     "filings": 1
     }
    ],
    "etfs": [
+    {
+     "trust": "WisdomTree Trust",
+     "cik": "1350487",
+     "form": "485BPOS",
+     "date": "2026-10-28",
+     "adsh": "0001214659-26-013346",
+     "url": "https://www.sec.gov/Archives/edgar/data/1350487/000121465926013346/0001214659-26-013346-index.htm",
+     "effective": true
+    },
+    {
+     "trust": "ETF Opportunities Trust",
+     "cik": "1771146",
+     "form": "485BPOS",
+     "date": "2026-10-28",
+     "adsh": "0001771146-26-002146",
+     "url": "https://www.sec.gov/Archives/edgar/data/1771146/000177114626002146/0001771146-26-002146-index.htm",
+     "effective": true
+    },
+    {
+     "trust": "WisdomTree Trust",
+     "cik": "1350487",
+     "form": "485BPOS",
+     "date": "2026-10-27",
+     "adsh": "0001214659-26-013295",
+     "url": "https://www.sec.gov/Archives/edgar/data/1350487/000121465926013295/0001214659-26-013295-index.htm",
+     "effective": true
+    },
+    {
+     "trust": "ETF Opportunities Trust",
+     "cik": "1771146",
+     "form": "485APOS",
+     "date": "2026-10-26",
+     "adsh": "0001771146-26-002126",
+     "url": "https://www.sec.gov/Archives/edgar/data/1771146/000177114626002126/0001771146-26-002126-index.htm",
+     "effective": false
+    },
     {
      "trust": "ETF Opportunities Trust",
      "cik": "1771146",
@@ -722,19 +812,31 @@
    "sic": [
     {
      "code": "3711",
-     "count": 4
-    },
-    {
-     "code": "3569",
-     "count": 3
+     "count": 7
     },
     {
      "code": "3674",
-     "count": 3
+     "count": 6
+    },
+    {
+     "code": "7372",
+     "count": 6
+    },
+    {
+     "code": "3569",
+     "count": 4
     },
     {
      "code": "3480",
-     "count": 2
+     "count": 3
+    },
+    {
+     "code": "6199",
+     "count": 3
+    },
+    {
+     "code": "7389",
+     "count": 3
     },
     {
      "code": "7340",
@@ -749,11 +851,19 @@
      "count": 2
     },
     {
-     "code": "7389",
-     "count": 2
+     "code": "1000",
+     "count": 1
     },
     {
-     "code": "1000",
+     "code": "3357",
+     "count": 1
+    },
+    {
+     "code": "3533",
+     "count": 1
+    },
+    {
+     "code": "3572",
      "count": 1
     },
     {
@@ -765,15 +875,11 @@
      "count": 1
     },
     {
-     "code": "6199",
+     "code": "3844",
      "count": 1
     },
     {
      "code": "6770",
-     "count": 1
-    },
-    {
-     "code": "7372",
      "count": 1
     }
    ],
@@ -795,9 +901,9 @@
      "cik": "1769628",
      "ticker": "CRWV",
      "name": "CoreWeave, Inc.",
-     "filings": 19,
+     "filings": 16,
      "buys": 0,
-     "sells": 19,
+     "sells": 16,
      "latest": "2026-10-14",
      "side": "sell",
      "cluster": false,
@@ -840,6 +946,18 @@
      "clusterOn": null
     },
     {
+     "cik": "1467373",
+     "ticker": "ACN",
+     "name": "Accenture plc",
+     "filings": 6,
+     "buys": 2,
+     "sells": 4,
+     "latest": "2026-10-28",
+     "side": "both",
+     "cluster": false,
+     "clusterOn": null
+    },
+    {
      "cik": "1816581",
      "ticker": "OUST",
      "name": "Ouster, Inc.",
@@ -859,18 +977,6 @@
      "buys": 0,
      "sells": 5,
      "latest": "2026-10-21",
-     "side": "sell",
-     "cluster": false,
-     "clusterOn": null
-    },
-    {
-     "cik": "1467373",
-     "ticker": "ACN",
-     "name": "Accenture plc",
-     "filings": 4,
-     "buys": 0,
-     "sells": 4,
-     "latest": "2026-10-22",
      "side": "sell",
      "cluster": false,
      "clusterOn": null
@@ -912,13 +1018,13 @@
      "clusterOn": null
     },
     {
-     "cik": "2488",
-     "ticker": "AMD",
-     "name": "ADVANCED MICRO DEVICES INC",
+     "cik": "1804176",
+     "ticker": "BFLY",
+     "name": "Butterfly Network, Inc.",
      "filings": 3,
      "buys": 0,
      "sells": 3,
-     "latest": "2026-10-19",
+     "latest": "2026-10-08",
      "side": "sell",
      "cluster": false,
      "clusterOn": null
@@ -996,14 +1102,14 @@
      "clusterOn": null
     },
     {
-     "cik": "1892704",
-     "ticker": "FBDT",
-     "name": "First Breach, Inc.",
+     "cik": "2488",
+     "ticker": "AMD",
+     "name": "ADVANCED MICRO DEVICES INC",
      "filings": 2,
-     "buys": 2,
-     "sells": 0,
-     "latest": "2026-09-21",
-     "side": "buy",
+     "buys": 0,
+     "sells": 2,
+     "latest": "2026-10-19",
+     "side": "sell",
      "cluster": false,
      "clusterOn": null
     },
@@ -1020,25 +1126,13 @@
      "clusterOn": null
     },
     {
-     "cik": "1283699",
-     "ticker": "TMUS",
-     "name": "T-Mobile US, Inc.",
+     "cik": "1297989",
+     "ticker": "EXLS",
+     "name": "ExlService Holdings, Inc.",
      "filings": 1,
      "buys": 0,
      "sells": 1,
-     "latest": "2026-09-14",
-     "side": "sell",
-     "cluster": false,
-     "clusterOn": null
-    },
-    {
-     "cik": "1818644",
-     "ticker": "LIDR",
-     "name": "AEye, Inc.",
-     "filings": 1,
-     "buys": 0,
-     "sells": 1,
-     "latest": "2026-09-14",
+     "latest": "2026-10-02",
      "side": "sell",
      "cluster": false,
      "clusterOn": null
@@ -1068,6 +1162,18 @@
      "clusterOn": null
     },
     {
+     "cik": "1892704",
+     "ticker": "FBDT",
+     "name": "First Breach, Inc.",
+     "filings": 1,
+     "buys": 1,
+     "sells": 0,
+     "latest": "2026-09-21",
+     "side": "buy",
+     "cluster": false,
+     "clusterOn": null
+    },
+    {
      "cik": "1970622",
      "ticker": "USAR",
      "name": "USA Rare Earth, Inc.",
@@ -1075,18 +1181,6 @@
      "buys": 0,
      "sells": 1,
      "latest": "2026-10-05",
-     "side": "sell",
-     "cluster": false,
-     "clusterOn": null
-    },
-    {
-     "cik": "880631",
-     "ticker": "WT",
-     "name": "WisdomTree, Inc.",
-     "filings": 1,
-     "buys": 0,
-     "sells": 1,
-     "latest": "2026-09-10",
      "side": "sell",
      "cluster": false,
      "clusterOn": null
@@ -1131,7 +1225,7 @@
    "stagePrev": null,
    "changedOn": "2026-09-20",
    "why": [
-    "2026 Q4 is still open (counted through 2026-10-26) — reported but never scored, because a part-quarter count reads as a collapse",
+    "2026 Q4 is still open (counted through 2026-11-02) — reported but never scored, because a part-quarter count reads as a collapse",
     "not a Candidate: no complete quarter has doubled its distinct filers from a base above 10 (latest 2026 Q2 8 → 2026 Q3 9)",
     "Crowded: 4 distinct trusts have an EFFECTIVE (485BPOS) filing naming the theme, across 6 filings — Collaborative Investment Series Trust 2026-08-28; Krane Shares Trust 2026-07-29; Roundhill ETF Trust 2026-04-30; Morgan Stanley Portfolios, Series 81 2025-04-30"
    ],
@@ -1266,27 +1360,27 @@
     {
      "q": "2026 Q4",
      "from": "2026-10-01",
-     "to": "2026-10-26",
-     "filings": 4,
-     "filingsDistinct": 4,
+     "to": "2026-11-02",
+     "filings": 5,
+     "filingsDistinct": 5,
      "filers": 2,
      "filersAgg": 2,
-     "pagedDocs": 4,
+     "pagedDocs": 5,
      "truncated": false,
      "partial": true
     }
    ],
    "filersNewest": [
     {
-     "cik": "1318605",
-     "name": "Tesla, Inc.",
-     "ticker": "TSLA",
-     "filings": 2
-    },
-    {
      "cik": "2074973",
      "name": "Churchill Capital Corp XI",
      "ticker": "CCXI",
+     "filings": 3
+    },
+    {
+     "cik": "1318605",
+     "name": "Tesla, Inc.",
+     "ticker": "TSLA",
      "filings": 2
     }
    ],
@@ -1403,7 +1497,7 @@
    "sic": [
     {
      "code": "3569",
-     "count": 2
+     "count": 3
     },
     {
      "code": "3711",
