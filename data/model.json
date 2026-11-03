@@ -1,966 +1,963 @@
 {
-  "updated": "2026-11-03",
-  "asOf": "2026-11-03",
-  "note": "Tuesday 3 Nov 2026 07:02 SGT run. First full session since Monday's close: US/HK/SG cash equities and futures confirm Nov 2 bars; Nikkei/KOSPI index bars in the feed remain stuck at Friday Oct 30 (late-consolidation artifact) and Japan is additionally closed today for Culture Day. Headline move: Brent -11.40% to $104.23 and WTI -7.55% to $96.26 Monday as Iran signaled a 2-day plan to reopen the Strait of Hormuz and resume nuclear talks with Washington, unwinding essentially all of October's war-risk premium (OPEC+ held Dec quotas steady, ruling out a supply shock) -- this is confirmed real by the price spine, not a data glitch. Layered on top: a hot October ISM Manufacturing print (55.5 vs 54.5 consensus) swung Fed-funds pricing toward a ~75% probability of a December HIKE, and hyperscaler CDS hit fresh records (Oracle >220bp, Meta 114.79bp) after Meta's first negative FCF since 2012. Gold/silver/GDX and VIX both rallied Monday despite the milder equity decline, consistent with event-risk hedging into today's US midterms and the RBA's expected hike to 4.85%. All 40 required universe tickers plus an 8-ticker rare-earth basket (MP, LYC.AX, UUUU, USAR, NEO.TO, ILU.AX, 6680.HK, REMX) remain populated.",
-  "macro": {
-    "regime": "Hawkish ISM/Fed-Hike Repricing Collides With Record AI-Credit Stress as the Hormuz War-Premium Unwinds",
-    "riskOnProb": 0.42,
-    "regimeScore": -0.22,
-    "asOf": "2026-11-03",
-    "narrative": "Brent and WTI crashed 11.40%/7.55% Monday (to $104.23/$96.26) after Iran signaled a two-day plan to reopen the Strait of Hormuz and resume nuclear talks with Washington -- unwinding essentially all of October's war-risk premium even though the Doha round technically closed 'without a breakthrough' and the plan is contingent on US sanctions relief; OPEC+ held December quotas steady on Nov 1, ruling out a supply-side explanation. That relief was overwhelmed by a hawkish data surprise: October ISM Manufacturing beat at 55.5 (vs 54.5 consensus/previous), its 10th straight expansionary month, with Production at a five-year high even as Prices Paid stayed ~25pts above neutral -- a mix that has swung CME-implied Fed-funds pricing toward roughly a 75% probability of a December HIKE rather than the cut debate markets had been running. Credit stress deepened on top of that: CCC-rated high-yield spreads widened to ~12%, the highest since November 2022, and hyperscaler CDS hit outright records (Oracle's 5-year CDS above 220bp, topping its 2008 level; Meta's at a record 114.79bp) after Meta's first negative free cash flow since 2012. Gold/silver/GDX (+1.65%/+2.17%/+2.67%) and VIX (+8.91% to 21.15 despite the S&P's mild -0.51% decline) both jumped Monday on a mix of US midterm-election hedging (elections today) and the credit-stress/safe-haven bid, a divergence consistent with markets pricing event risk -- today's RBA decision (31-of-32 economists expect a hike to 4.85%), the China rare-earth truce deadline, and the midterms -- rather than holding a resolved directional view. The rare-earth truce remains a live binary: Washington and Beijing have both verbally confirmed an extension to Jan 10, 2027, but China's governing Announcement No. 70 still legally expires Nov 10, 2026 with no superseding text published, keeping MP/Lynas/UUUU/USAR volatile into the deadline.",
-    "drivers": [
-      {
-        "factor": "Iran/Hormuz de-escalation signal collapses the oil risk premium",
-        "read": "Brent -11.40% to $104.23 and WTI -7.55% to $96.26 Monday after Iran floated a 2-day plan to reopen the Strait of Hormuz and resume nuclear talks (contingent on US sanctions relief/ending the port blockade); OPEC+ held December quotas steady at its Nov 1 meeting, ruling out a supply shock. Doha talks technically ended 'without a breakthrough,' so this is a de-escalation signal, not yet a signed deal, leaving room for reversal.",
-        "impact": "mixed"
-      },
-      {
-        "factor": "ISM Manufacturing beats hot, flipping Fed-funds pricing toward a hike",
-        "read": "October ISM printed 55.5% (vs 54.5 consensus/previous), a 10th straight expansionary month, with Production at 59.0 (best since Nov 2021) and Prices Paid still 75.2 even as Employment slipped to 52.4 -- a 'manufacturing stagflation' mix that has swung CME-implied Fed-funds pricing toward roughly a 75% probability of a 25bp hike at the Dec 9 FOMC.",
-        "impact": "cautionary"
-      },
-      {
-        "factor": "Hyperscaler/AI-capex credit stress hits fresh records",
-        "read": "CCC-rated spreads widened to ~12%, the highest since Nov 2022; Oracle's 5-year CDS topped 220bp (above its 2008 level) and Meta's hit a record 114.79bp after Meta's first negative FCF since 2012 -- an acceleration, not a stabilization, of the credit-stress theme.",
-        "impact": "cautionary"
-      },
-      {
-        "factor": "VIX decouples from equities on event-risk hedging",
-        "read": "VIX jumped 8.91% to 21.15 even as the S&P fell only 0.51% to 7541.40 -- consistent with hedging into today's US midterm elections and RBA decision rather than a directional equity call; Dow actually rose 0.41% on lower energy input costs even as Nasdaq fell 1.07% on AI-capex/credit concerns.",
-        "impact": "mixed"
-      },
-      {
-        "factor": "Synchronized DM central-bank tightening continues",
-        "read": "RBA is priced for a near-certain (31/32 economists) hike to 4.85% today, AUD already softening pre-decision toward US$0.70; BOE is expected to hike to 4.00% Nov 5 (7-0-2 vote forecast); combined with the Fed's own hawkish repricing, this is a broad-based headwind for duration.",
-        "impact": "cautionary"
-      },
-      {
-        "factor": "China rare-earth truce legal-text gap persists",
-        "read": "Washington and Beijing have verbally confirmed extending the truce to Jan 10 2027, but China's governing Announcement No. 70 still legally expires Nov 10 2026 with no superseding notice published, and the separate April-2025 heavy-rare-earth (Dy/Tb) licensing regime was never part of the pause -- the deadline risk for MP/Lynas/UUUU/USAR stays fully live for another week.",
-        "impact": "mixed"
-      }
-    ],
-    "byAssetClass": [
-      {
-        "assetClass": "Equity",
-        "stance": "modest UW",
-        "pUp12m": 0.56,
-        "note": "A hawkish ISM beat flipping Fed-funds pricing toward a Dec hike, plus record hyperscaler CDS (Oracle >220bp, Meta 114.79bp), are a genuine double headwind for AI-capex-heavy indices, only partly offset by Monday's oil-cost relief and a still-expanding (10th month) manufacturing sector. Today's midterms and RBA decision add unresolved event risk.",
-        "tilt": -0.012
-      },
-      {
-        "assetClass": "Commodities",
-        "stance": "Neutral",
-        "pUp12m": 0.55,
-        "note": "A genuine divergence within the sleeve: energy just had its biggest one-day unwind in years on Hormuz de-escalation (two-sided, since talks remain unresolved), while precious metals/miners rallied sharply (GLD +1.65%, SLV +2.17%, GDX +2.67%) on safe-haven/credit-stress demand even as hawkish Fed-hike pricing should be a real-rate headwind for gold.",
-        "tilt": 0
-      },
-      {
-        "assetClass": "Crypto",
-        "stance": "Neutral",
-        "pUp12m": 0.6,
-        "note": "No fresh crypto-specific catalysts verified this run; BTC traded a live intraday level of -2.06% Monday, sharing in broader risk-off cross-currents (VIX spike, credit stress) rather than any crypto-specific news. Prior Binance-recovery stabilization signals are carried forward as context, not re-confirmed.",
-        "tilt": 0
-      },
-      {
-        "assetClass": "Bonds",
-        "stance": "modest UW",
-        "pUp12m": 0.5,
-        "note": "CME-implied Fed-funds pricing has swung toward a ~75% probability of a December HIKE (from a cut debate) following the hot ISM print, and RBA/BOE are both expected to hike this week -- a genuine duration headwind only partly offset by flight-to-quality demand from the credit-stress shock and today's event risk.",
-        "tilt": -0.012
-      },
-      {
-        "assetClass": "USD/Cash",
-        "stance": "modest OW",
-        "pUp12m": 0.6,
-        "note": "Hawkish Fed-funds repricing toward a hike, a near-certain RBA hike and a likely BOE hike this week, plus safe-haven demand from the credit-stress shock and election/RBA event risk, all favor cash/USD even as the collapsed oil premium removes one geopolitical tailwind.",
-        "tilt": 0.012
-      }
-    ],
-    "sources": [
-      "https://www.cnbc.com/2026/11/02/oil-prices-fall-as-iran-us-pursue-diplomacy.html",
-      "https://oilprice.com/Latest-Energy-News/World-News/Oil-Prices-Plunge-7-as-US-and-Iran-Signal-Room-for-Diplomacy.html",
-      "https://www.washingtontimes.com/news/2026/nov/2/iran-2-day-plan-reopen-strait-hormuz-resume-nuclear-talks-us/",
-      "https://www.cnbc.com/2026/10/31/opec-oil-output-targets-december.html",
-      "https://www.industryweek.com/the-economy/news/55415934/october-ism-report-manufacturing-pmi-grows-to-555-extending-10-month-streak",
-      "https://www.prnewswire.com/news-releases/manufacturing-pmi-at-55-5-october-2026-ism-manufacturing-pmi-report-302925617.html",
-      "https://www.investing.com/central-banks/fed-rate-monitor",
-      "https://www.tradingview.com/news/seekingalpha:6c9593f3f094b:0-u-s-high-yield-credit-stress-mounts-as-ccc-spreads-hit-4-year-highs/",
-      "https://www.tradingview.com/news/seekingalpha:62ed2825e094b:0-hyperscaler-cds-spreads-widen-with-oracle-hitting-record-high/",
-      "https://www.detroitnews.com/story/news/world/2026/11/02/iran-says-contacts-over-ending-war-continue-talks-end-no-breakthrough/92560793007/",
-      "https://www.abc.net.au/news/2026-11-03/rba-interest-rates-markets-live-coverage/107338216",
-      "https://investinglive.com/central-banks/rba-set-for-fifth-2026-hike-to-4-85-as-banks-flag-risk-of-another-move-in-february/",
-      "https://electronicsriskbrief.substack.com/p/chinas-rare-earth-truce-now-ends",
-      "https://www.environmentenergyleader.com/articles/45490-rare-earth-truce-november-deadlines-critical-minerals"
-    ]
-  },
-  "calls": [
-    {
-      "ticker": "SPY",
-      "name": "SPDR S&P 500 ETF Trust",
-      "assetClass": "Equity",
-      "pUp1m": 0.46,
-      "pUp3m": 0.5,
-      "pUp12m": 0.58,
-      "ev1m": -0.002,
-      "ev3m": 0.008,
-      "ev12m": 0.065,
-      "drivers": [
-        "S&P closed Monday -0.51% to 7541.40, a much milder decline than Friday's -1.82%, as lower oil costs partly offset credit-stress/Fed-repricing jitters",
-        "October ISM Manufacturing beat at 55.5 (vs 54.5 consensus), swinging CME-implied Fed-funds pricing toward a ~75% probability of a December hike rather than a cut",
-        "VIX jumped 8.91% to 21.15 despite the mild equity decline, consistent with hedging into today's US midterms and RBA decision rather than a resolved equity view",
-        "Hyperscaler CDS hit fresh records (Oracle >220bp, Meta 114.79bp) after Meta's first negative FCF since 2012, keeping AI-capex credibility concerns live for index heavyweights"
-      ],
-      "confidence": 0.5
-    },
-    {
-      "ticker": "QQQ",
-      "name": "Invesco QQQ Trust",
-      "assetClass": "Equity",
-      "pUp1m": 0.4,
-      "pUp3m": 0.46,
-      "pUp12m": 0.55,
-      "ev1m": -0.01,
-      "ev3m": 0,
-      "ev12m": 0.075,
-      "drivers": [
-        "Nasdaq fell 1.07% Monday to 25164.32, continuing to underperform on direct AI-capex/credit exposure even as broader risk eased",
-        "Hyperscaler CDS at record wides (Oracle 5Y CDS >220bp, above its 2008 GFC level; Meta's at a record 114.79bp) directly pressure index-heavyweight valuations",
-        "Hot ISM print (55.5) flipping Fed-funds pricing toward a ~75% probability of a December hike raises the discount-rate headwind for long-duration growth names",
-        "Meta's first negative free cash flow since 2012 keeps the capex-vs-cashflow credibility debate central to mega-cap tech"
-      ],
-      "confidence": 0.55
-    },
-    {
-      "ticker": "IWM",
-      "name": "iShares Russell 2000 ETF",
-      "assetClass": "Equity",
-      "pUp1m": 0.42,
-      "pUp3m": 0.47,
-      "pUp12m": 0.55,
-      "ev1m": -0.006,
-      "ev3m": 0,
-      "ev12m": 0.05,
-      "drivers": [
-        "Russell 2000 was little changed Monday (-0.21% to 2805.88), a much smaller decline than Friday's drop, but small caps remain most sensitive to the CCC-spread blowout to ~12% (highest since Nov 2022)",
-        "Hawkish ISM print and Fed-funds pricing shifting toward a hike raise financing costs disproportionately for leveraged small-cap balance sheets",
-        "Lower oil prices (WTI -7.55% Monday) are a modest input-cost relief for domestically-focused small caps",
-        "RBA/BOE synchronized hiking this week adds to a globally tightening backdrop that disproportionately weighs on small-cap financing"
-      ],
-      "confidence": 0.45
-    },
-    {
-      "ticker": "EFA",
-      "name": "iShares MSCI EAFE ETF",
-      "assetClass": "Equity",
-      "pUp1m": 0.5,
-      "pUp3m": 0.54,
-      "pUp12m": 0.58,
-      "ev1m": 0.002,
-      "ev3m": 0.013,
-      "ev12m": 0.065,
-      "drivers": [
-        "Monday's oil crash (Brent -11.40%) is a genuine positive terms-of-trade shock for Europe/Japan as net energy importers",
-        "BOE decision Nov 5 (forecast hike to 4.00%) remains a live catalyst",
-        "Less direct exposure to the US hyperscaler AI-capex/credit-stress shock (record Oracle/Meta CDS) than US benchmarks",
-        "ISM's hawkish beat raises the odds the Fed stays tight for longer, a mixed cross-currency signal for USD-hedged EAFE exposure"
-      ],
-      "confidence": 0.45
-    },
-    {
-      "ticker": "EEM",
-      "name": "iShares MSCI Emerging Markets ETF",
-      "assetClass": "Equity",
-      "pUp1m": 0.48,
-      "pUp3m": 0.52,
-      "pUp12m": 0.58,
-      "ev1m": -0.001,
-      "ev3m": 0.01,
-      "ev12m": 0.065,
-      "drivers": [
-        "Lower oil prices (Brent -11.40% Monday) ease the current-account/import-bill burden for EM oil-importing economies (India, most of EM Asia)",
-        "China rare-earth truce legal-text gap persists (Announcement No. 70 still legally expires Nov 10 with no superseding text published), a binary swing factor for China-heavy EM benchmarks",
-        "Hawkish US ISM print/Fed-hike repricing is a dollar-strength headwind for EM broadly",
-        "VIX spike (+8.91% to 21.15) on US midterm/event-risk hedging adds a near-term risk-off cross-current for EM flows"
-      ],
-      "confidence": 0.4
-    },
-    {
-      "ticker": "VGK",
-      "name": "Vanguard FTSE Europe ETF",
-      "assetClass": "Equity",
-      "pUp1m": 0.5,
-      "pUp3m": 0.53,
-      "pUp12m": 0.57,
-      "ev1m": 0.001,
-      "ev3m": 0.011,
-      "ev12m": 0.06,
-      "drivers": [
-        "Monday's oil crash is a direct positive terms-of-trade shock for energy-importing Europe",
-        "BOE decision Nov 5 (forecast hike to 4.00%, 7-0-2 vote split) is a live catalyst",
-        "Lower direct exposure to the US hyperscaler AI-capex/credit shock (record Oracle/Meta CDS) than US tech-heavy benchmarks",
-        "ECB's prior hawkish hold plus Lagarde's early-resignation overhang remains an unresolved leadership question into year-end"
-      ],
-      "confidence": 0.4
-    },
-    {
-      "ticker": "EWJ",
-      "name": "iShares MSCI Japan ETF",
-      "assetClass": "Equity",
-      "pUp1m": 0.46,
-      "pUp3m": 0.51,
-      "pUp12m": 0.57,
-      "ev1m": -0.003,
-      "ev3m": 0.007,
-      "ev12m": 0.06,
-      "drivers": [
-        "Japan market closed today (Tue Nov 3) for Culture Day, removing a trading session just as RBA/US data flow",
-        "Lower oil prices from Monday's crash are a direct positive for Japan as a major energy importer",
-        "BOJ Gov Ueda speaks Nov 7 after flagging a likely December hike with inflation at the 2% target -- a yen-strengthening risk for exporters",
-        "Nikkei/KOSPI index bars in the feed are stuck at Friday Oct 30's close (late-consolidation artifact), so Monday's US-driven risk tone has not yet been reflected in the Japan benchmark"
-      ],
-      "confidence": 0.4
-    },
-    {
-      "ticker": "INDA",
-      "name": "iShares MSCI India ETF",
-      "assetClass": "Equity",
-      "pUp1m": 0.52,
-      "pUp3m": 0.56,
-      "pUp12m": 0.62,
-      "ev1m": 0.004,
-      "ev3m": 0.016,
-      "ev12m": 0.08,
-      "drivers": [
-        "Monday's oil crash (Brent -11.40%, WTI -7.55%) is a meaningfully positive terms-of-trade and current-account shock for oil-import-dependent India",
-        "Hawkish US ISM print/Fed-hike repricing is a USD-strength headwind that could offset some of the oil relief via capital-flow sensitivity",
-        "Less direct linkage to the China rare-earth truce deadline than China/Korea/Japan benchmarks",
-        "Global risk-off cross-currents (VIX +8.91% Monday) still drag EM flows broadly in the near term"
-      ],
-      "confidence": 0.45
-    },
-    {
-      "ticker": "FXI",
-      "name": "iShares China Large-Cap ETF",
-      "assetClass": "Equity",
-      "pUp1m": 0.5,
-      "pUp3m": 0.54,
-      "pUp12m": 0.58,
-      "ev1m": 0.001,
-      "ev3m": 0.012,
-      "ev12m": 0.065,
-      "drivers": [
-        "China's rare-earth truce remains a live binary: Beijing has verbally confirmed the Jan 10 2027 extension, but Announcement No. 70 still legally expires Nov 10 2026 with no superseding notice published",
-        "Lower oil prices ease China's large net energy-import bill, a modest positive",
-        "Less exposed to US hyperscaler AI-capex/credit-spread stress (record Oracle/Meta CDS) than US benchmarks",
-        "Hawkish US Fed-funds repricing toward a hike is a USD-strength/capital-outflow headwind for China-linked EM"
-      ],
-      "confidence": 0.4
-    },
-    {
-      "ticker": "MTUM",
-      "name": "iShares MSCI USA Momentum Factor ETF",
-      "assetClass": "Equity",
-      "pUp1m": 0.4,
-      "pUp3m": 0.46,
-      "pUp12m": 0.55,
-      "ev1m": -0.01,
-      "ev3m": 0,
-      "ev12m": 0.065,
-      "drivers": [
-        "Momentum factor remains heavily loaded on mega-cap AI/tech names facing a credit-stress derating (Oracle/Meta CDS at records)",
-        "Hawkish ISM beat and Fed-funds pricing shifting toward a hike adds a discount-rate headwind for the long-duration growth names that built recent momentum",
-        "Nasdaq's continued underperformance (-1.07% Monday) directly hits the stocks that anchor the momentum basket",
-        "No offsetting rotation signal yet confirmed in the data"
-      ],
-      "confidence": 0.45
-    },
-    {
-      "ticker": "QUAL",
-      "name": "iShares MSCI USA Quality Factor ETF",
-      "assetClass": "Equity",
-      "pUp1m": 0.5,
-      "pUp3m": 0.54,
-      "pUp12m": 0.59,
-      "ev1m": 0.001,
-      "ev3m": 0.013,
-      "ev12m": 0.07,
-      "drivers": [
-        "Quality factor (strong balance sheets, high ROE) is relatively insulated from the CCC-spread blowout to ~12% (highest since Nov 2022) hitting lower-quality credits",
-        "Less exposed than momentum/growth to the hyperscaler-CDS credit-derating theme (Oracle >220bp, Meta 114.79bp record)",
-        "Provides a relative-value hedge against both the hawkish Fed-repricing and credit-stress drivers flagged as cautionary",
-        "Historically resilient during event-risk weeks (midterms, RBA, VIX spike) like this one"
-      ],
-      "confidence": 0.45
-    },
-    {
-      "ticker": "USMV",
-      "name": "iShares MSCI USA Min Vol Factor ETF",
-      "assetClass": "Equity",
-      "pUp1m": 0.55,
-      "pUp3m": 0.56,
-      "pUp12m": 0.58,
-      "ev1m": 0.004,
-      "ev3m": 0.014,
-      "ev12m": 0.065,
-      "drivers": [
-        "Min-vol factor benefits from the regime's defensive tilt amid the VIX spike (+8.91% to 21.15) even as actual equity moves stayed mild",
-        "Low exposure to the hyperscaler AI-capex/credit-stress driver (record Oracle/Meta CDS) hitting high-beta tech",
-        "Tends to outperform cap-weighted benchmarks during event-risk weeks like this one (midterms, RBA, rare-earth deadline)",
-        "Benefits from safe-haven flows even as the Hormuz oil-premium unwound, since credit-stress and election hedging remain live"
-      ],
-      "confidence": 0.5
-    },
-    {
-      "ticker": "VLUE",
-      "name": "iShares MSCI USA Value Factor ETF",
-      "assetClass": "Equity",
-      "pUp1m": 0.52,
-      "pUp3m": 0.53,
-      "pUp12m": 0.57,
-      "ev1m": 0.002,
-      "ev3m": 0.011,
-      "ev12m": 0.062,
-      "drivers": [
-        "Value factor's financials tilt benefits from the hawkish Fed-funds repricing toward a hike, which supports net interest margins",
-        "Energy tilt is now a two-sided risk after Monday's oil crash (Brent -11.40%) unwound much of the sector's recent relative strength",
-        "Lower weight in AI-capex names facing credit-stress derating (Oracle/Meta CDS at records) relative to growth/momentum factors",
-        "Hot ISM print supports the broader industrial-cyclical complement of the value factor"
-      ],
-      "confidence": 0.42
-    },
-    {
-      "ticker": "XLK",
-      "name": "Technology Select Sector SPDR",
-      "assetClass": "Equity",
-      "pUp1m": 0.37,
-      "pUp3m": 0.44,
-      "pUp12m": 0.55,
-      "ev1m": -0.014,
-      "ev3m": -0.004,
-      "ev12m": 0.07,
-      "drivers": [
-        "Hyperscaler CDS hit fresh records Monday (Oracle 5Y CDS >220bp, above its 2008 GFC peak; Meta's at a record 114.79bp) directly pressuring the sector's largest constituents",
-        "Meta's first negative FCF since 2012 intensifies the capex-vs-cashflow credibility debate central to tech valuations",
-        "Hot ISM beat (55.5) swinging Fed-funds pricing toward a ~75% probability of a December hike raises the discount-rate headwind for long-duration tech",
-        "Nasdaq -1.07% Monday, continuing to underperform on direct AI-capex exposure"
-      ],
-      "confidence": 0.55
-    },
-    {
-      "ticker": "SMH",
-      "name": "VanEck Semiconductor ETF",
-      "assetClass": "Equity",
-      "pUp1m": 0.35,
-      "pUp3m": 0.42,
-      "pUp12m": 0.56,
-      "ev1m": -0.02,
-      "ev3m": -0.007,
-      "ev12m": 0.082,
-      "drivers": [
-        "Direct, high-beta exposure to the hyperscaler capex-cashflow credibility question, now intensified by Oracle's and Meta's record CDS",
-        "Hawkish Fed-funds repricing (toward a ~75% probability of a Dec hike) is a discount-rate headwind for a sector still trading on multi-year AI-demand duration",
-        "Secular AI-demand tailwind (data-center buildout) keeps the 12m outlook more constructive than the near-term",
-        "Prices Paid in the hot ISM print (75.2) signal persistent input-cost pressure across the broader manufacturing/semis supply chain"
-      ],
-      "confidence": 0.55
-    },
-    {
-      "ticker": "XLF",
-      "name": "Financial Select Sector SPDR",
-      "assetClass": "Equity",
-      "pUp1m": 0.53,
-      "pUp3m": 0.55,
-      "pUp12m": 0.58,
-      "ev1m": 0.005,
-      "ev3m": 0.014,
-      "ev12m": 0.07,
-      "drivers": [
-        "Fed-funds pricing swinging toward a ~75% probability of a December hike (from a cut debate) is directly supportive of bank net-interest margins",
-        "CCC credit-spread blowout to ~12% (highest since Nov 2022) is a cautionary offset via potential credit-quality/loan-loss concerns at credit-sensitive lenders",
-        "RBA/BOE synchronized hiking this week reinforces a globally higher-for-longer rate backdrop that favors financials over duration-sensitive sectors",
-        "US midterm elections today carry limited historical market impact on financial-sector regulation per past-cycle precedent"
-      ],
-      "confidence": 0.45
-    },
-    {
-      "ticker": "XLE",
-      "name": "Energy Select Sector SPDR",
-      "assetClass": "Equity",
-      "pUp1m": 0.4,
-      "pUp3m": 0.44,
-      "pUp12m": 0.5,
-      "ev1m": -0.015,
-      "ev3m": -0.008,
-      "ev12m": 0.015,
-      "drivers": [
-        "XLE fell 3.96% Monday as Brent crashed 11.40% to $104.23 and WTI fell 7.55% to $96.26 on Iran's signaled 2-day plan to reopen the Strait of Hormuz and resume nuclear talks -- unwinding the entire war-risk premium built through October",
-        "OPEC+ held December production quotas steady at its Nov 1 meeting, confirming this was a geopolitical-premium unwind, not a supply-side shock",
-        "Doha talks technically ended 'without a breakthrough,' and the reopening plan is contingent on US sanctions relief and ending the port blockade, so a reversal/re-escalation remains a live two-sided risk",
-        "A hawkish ISM print and Fed-hike repricing raise global-demand-growth uncertainty, a secondary headwind on top of the collapsed geopolitical premium"
-      ],
-      "confidence": 0.5
-    },
-    {
-      "ticker": "XLV",
-      "name": "Health Care Select Sector SPDR",
-      "assetClass": "Equity",
-      "pUp1m": 0.54,
-      "pUp3m": 0.55,
-      "pUp12m": 0.58,
-      "ev1m": 0.004,
-      "ev3m": 0.014,
-      "ev12m": 0.065,
-      "drivers": [
-        "Defensive sector benefits from the event-risk-driven VIX spike (+8.91% Monday) even as the broader equity decline stayed mild",
-        "Largely insulated from both the oil-price collapse and the hyperscaler AI-capex/credit-stress drivers dominating this week's headlines",
-        "Potential Democratic House majority in today's midterms could support healthcare-policy-sensitive names, a modest tailwind",
-        "Low direct linkage to the Fed-funds repricing toward a hike relative to rate-sensitive sectors"
-      ],
-      "confidence": 0.4
-    },
-    {
-      "ticker": "XLI",
-      "name": "Industrial Select Sector SPDR",
-      "assetClass": "Equity",
-      "pUp1m": 0.52,
-      "pUp3m": 0.55,
-      "pUp12m": 0.6,
-      "ev1m": 0.006,
-      "ev3m": 0.016,
-      "ev12m": 0.07,
-      "drivers": [
-        "Lower oil/input costs from Monday's crude crash are a direct margin tailwind for transport/logistics-heavy industrials",
-        "Dow rose 0.41% Monday to 51983.98 even as Nasdaq fell 1.07%, showing industrials-heavy benchmarks benefiting from the oil-cost relief",
-        "Hot ISM print (55.5, Production at a 5-year high) directly supports the industrial-cyclical demand backdrop",
-        "Hawkish Fed-funds repricing toward a hike is a modest headwind for capex-financing-dependent industrials"
-      ],
-      "confidence": 0.45
-    },
-    {
-      "ticker": "XLU",
-      "name": "Utilities Select Sector SPDR",
-      "assetClass": "Equity",
-      "pUp1m": 0.52,
-      "pUp3m": 0.53,
-      "pUp12m": 0.56,
-      "ev1m": 0.002,
-      "ev3m": 0.011,
-      "ev12m": 0.058,
-      "drivers": [
-        "Defensive, bond-proxy sector benefits from the event-risk-driven VIX spike, even as hawkish Fed-funds repricing is typically a headwind for rate-sensitive utilities",
-        "AI/data-center power-demand theme remains a structural tailwind even as hyperscaler capex credibility is questioned (record Oracle/Meta CDS)",
-        "Comparatively insulated from the oil-price collapse and the rare-earth truce deadline risk",
-        "A Fed-hike (rather than cut) path is a genuine two-sided risk for this rate-sensitive sector relative to the prior cut-debate narrative"
-      ],
-      "confidence": 0.42
-    },
-    {
-      "ticker": "XLP",
-      "name": "Consumer Staples Select Sector SPDR",
-      "assetClass": "Equity",
-      "pUp1m": 0.55,
-      "pUp3m": 0.55,
-      "pUp12m": 0.57,
-      "ev1m": 0.006,
-      "ev3m": 0.014,
-      "ev12m": 0.058,
-      "drivers": [
-        "Classic defensive beneficiary of the VIX spike (+8.91% Monday) and event-risk hedging into midterms/RBA",
-        "Lower oil prices from Monday's crash ease input-cost pressure on staples margins, a genuine positive reversal from the prior narrative",
-        "Minimal direct exposure to the hyperscaler AI-capex/credit-stress driver or the Hormuz/rare-earth swing factors",
-        "Lower beta profile typically outperforms on a relative basis during event-risk weeks like this one"
-      ],
-      "confidence": 0.45
-    },
-    {
-      "ticker": "XLY",
-      "name": "Consumer Discretionary Select Sector SPDR",
-      "assetClass": "Equity",
-      "pUp1m": 0.47,
-      "pUp3m": 0.51,
-      "pUp12m": 0.57,
-      "ev1m": -0.001,
-      "ev3m": 0.009,
-      "ev12m": 0.063,
-      "drivers": [
-        "Lower oil prices from Monday's crash directly raise discretionary income/spending power for consumers, a genuine positive reversal",
-        "Hawkish Fed-funds repricing toward a hike is a headwind for rate-sensitive consumer financing and housing-linked discretionary names",
-        "Amazon remains implicated in the AI-capex credibility question amid record hyperscaler CDS, though less directly than pure-tech peers",
-        "Average hourly earnings data (Nov 6, forecast 0.3% vs prior 0.1%) remains a swing factor for the consumer spending-power narrative"
-      ],
-      "confidence": 0.4
-    },
-    {
-      "ticker": "GLD",
-      "name": "SPDR Gold Shares",
-      "assetClass": "Commodities",
-      "pUp1m": 0.5,
-      "pUp3m": 0.54,
-      "pUp12m": 0.6,
-      "ev1m": 0.003,
-      "ev3m": 0.016,
-      "ev12m": 0.07,
-      "drivers": [
-        "GLD rallied 1.65% Monday to $361.65, a bounce after Friday's -3.47% rout, as safe-haven demand from the hyperscaler credit-stress shock (record Oracle/Meta CDS) and event-risk hedging (midterms, RBA) offset the Fed-funds repricing toward a hike",
-        "A ~75% CME-implied probability of a December Fed hike is a genuine headwind for non-yielding gold on a real-rate basis, making Monday's rally a safe-haven decoupling rather than a rates-driven move",
-        "CCC credit spreads at the highest since Nov 2022 historically correlate with eventual flight-to-safety flows into gold",
-        "Monday's oil-price collapse (Hormuz de-escalation) removes one geopolitical tail-risk bid for gold even as credit-stress and election-hedging demand offset it"
-      ],
-      "confidence": 0.45
-    },
-    {
-      "ticker": "SLV",
-      "name": "iShares Silver Trust",
-      "assetClass": "Commodities",
-      "pUp1m": 0.5,
-      "pUp3m": 0.54,
-      "pUp12m": 0.6,
-      "ev1m": 0.004,
-      "ev3m": 0.02,
-      "ev12m": 0.085,
-      "drivers": [
-        "SLV rallied 2.17% Monday to $45.57 (silver futures +3.29% to $50.71), outpacing gold's bounce in a continuation of its higher-beta profile",
-        "Industrial-demand linkage to AI-related hardware/data-center buildout provides a structural offset even as the hawkish Fed-funds repricing is a real-rate headwind for precious metals broadly",
-        "GDX rallied 2.67% to $79.15, confirming miner-level participation in Monday's precious-metals bounce",
-        "Higher volatility than gold means wider dispersion of outcomes; the ~75% Fed-hike pricing is a genuine two-sided risk for the metal's monetary (vs industrial) demand driver"
-      ],
-      "confidence": 0.42
-    },
-    {
-      "ticker": "DBC",
-      "name": "Invesco DB Commodity Index Tracking Fund",
-      "assetClass": "Commodities",
-      "pUp1m": 0.46,
-      "pUp3m": 0.48,
-      "pUp12m": 0.53,
-      "ev1m": -0.006,
-      "ev3m": 0.002,
-      "ev12m": 0.035,
-      "drivers": [
-        "Energy-heavy index took a major hit Monday as Brent crashed 11.40% on Iran/Hormuz de-escalation signals, reversing DBC's prior geopolitical-premium tailwind",
-        "Precious-metals component (gold/silver) rallied sharply Monday (GLD +1.65%, SLV +2.17%), partially offsetting the energy-side crash",
-        "OPEC+ held December quotas steady, confirming the oil move was premium-unwind rather than a fundamental supply/demand shift, leaving room for a partial reversal if diplomacy stalls",
-        "Broad diversification across energy/metals/ag moderates the net index-level impact of this highly divergent cross-commodity day"
-      ],
-      "confidence": 0.4
-    },
-    {
-      "ticker": "USO",
-      "name": "United States Oil Fund",
-      "assetClass": "Commodities",
-      "pUp1m": 0.38,
-      "pUp3m": 0.42,
-      "pUp12m": 0.48,
-      "ev1m": -0.02,
-      "ev3m": -0.012,
-      "ev12m": 0,
-      "drivers": [
-        "USO fell 7.08% Monday to $156.87 (WTI -7.55% to $96.26) as Iran signaled a 2-day plan to reopen the Strait of Hormuz and resume nuclear talks, unwinding October's entire war-risk premium",
-        "OPEC+ held December quotas steady at its Nov 1 meeting, ruling out a supply-side driver for the crash",
-        "Doha talks ended Monday 'without a breakthrough' and the reopening plan is contingent on US sanctions relief/ending the port blockade -- a stalled or failed negotiation would likely reverse much of Monday's move",
-        "Crude Oil Inventories data (Nov 4) is the next concrete catalyst; prior build was -1.9M"
-      ],
-      "confidence": 0.48
-    },
-    {
-      "ticker": "URA",
-      "name": "Global X Uranium ETF",
-      "assetClass": "Commodities",
-      "pUp1m": 0.5,
-      "pUp3m": 0.52,
-      "pUp12m": 0.58,
-      "ev1m": 0.002,
-      "ev3m": 0.01,
-      "ev12m": 0.07,
-      "drivers": [
-        "No direct Monday catalyst identified; the nuclear-demand/AI-power-demand theme remains intact but unconfirmed by fresh news this run",
-        "Indirect linkage to the AI-capex buildout (data-center power demand) provides a loose structural tailwind even as hyperscaler capex credibility is questioned",
-        "Not directly exposed to the oil-price collapse, Fed repricing, or rare-earth-truce swing factors dominating this week's calendar",
-        "Low-conviction view given the absence of fresh, ticker-specific information"
-      ],
-      "confidence": 0.3
-    },
-    {
-      "ticker": "COPX",
-      "name": "Global X Copper Miners ETF",
-      "assetClass": "Commodities",
-      "pUp1m": 0.5,
-      "pUp3m": 0.53,
-      "pUp12m": 0.6,
-      "ev1m": 0.003,
-      "ev3m": 0.013,
-      "ev12m": 0.075,
-      "drivers": [
-        "China rare-earth truce deadline (Nov 9/10) remains a live binary for Chinese industrial-metals demand sentiment -- Announcement No. 70 still legally expires Nov 10 with no superseding text published",
-        "Lower oil/input costs from Monday's crude crash are a mild positive for industrial-metals miners' margins",
-        "Global growth proxy shares both the ISM-beat optimism (Production at a 5-year high) and the credit-stress-driven caution flagged in the macro view",
-        "No ticker-specific Monday news identified; view remains thematic rather than event-driven"
-      ],
-      "confidence": 0.35
-    },
-    {
-      "ticker": "DBA",
-      "name": "Invesco DB Agriculture Fund",
-      "assetClass": "Commodities",
-      "pUp1m": 0.5,
-      "pUp3m": 0.5,
-      "pUp12m": 0.53,
-      "ev1m": 0,
-      "ev3m": 0.005,
-      "ev12m": 0.03,
-      "drivers": [
-        "No Monday news identified with direct relevance to agricultural commodities in this research pass",
-        "Not meaningfully exposed to the Fed, Hormuz, AI-capex, or rare-earth drivers dominating the current macro narrative",
-        "Low-conviction, near-coinflip view reflects the absence of a real edge rather than a fabricated directional call",
-        "Included for completeness of the commodities sleeve only"
-      ],
-      "confidence": 0.25
-    },
-    {
-      "ticker": "BTC-USD",
-      "name": "Bitcoin",
-      "assetClass": "Crypto",
-      "pUp1m": 0.48,
-      "pUp3m": 0.53,
-      "pUp12m": 0.62,
-      "ev1m": -0.002,
-      "ev3m": 0.028,
-      "ev12m": 0.18,
-      "drivers": [
-        "BTC traded at a live level of $76,635.77 intraday Monday (-2.06%), a partial/not-yet-closed crypto level per the price spine, sharing in broader risk-off cross-currents (VIX +8.91%, hyperscaler credit stress) rather than any crypto-specific news",
-        "US midterm elections and the RBA decision today add macro event-risk that typically weighs on risk assets including crypto in the very near term",
-        "No fresh Binance-hack-recovery or ETF-flow data was verified this run; prior stabilization signals (phased withdrawal resumption, Dubai fund launch) are carried forward as context, not re-confirmed",
-        "Lower oil prices and the collapse of the Hormuz risk premium are a modest macro tailwind for broad risk appetite, a mild offset to the Monday pullback"
-      ],
-      "confidence": 0.4
-    },
-    {
-      "ticker": "ETH-USD",
-      "name": "Ethereum",
-      "assetClass": "Crypto",
-      "pUp1m": 0.44,
-      "pUp3m": 0.48,
-      "pUp12m": 0.56,
-      "ev1m": -0.008,
-      "ev3m": 0.015,
-      "ev12m": 0.13,
-      "drivers": [
-        "No fresh ETH-specific news verified this run; prior five-day ETF outflow streak (~$431M) and underperformance vs BTC are carried forward as context, not re-confirmed",
-        "Shares in the broader Monday risk-off cross-currents (VIX spike, credit stress) without a comparable offsetting institutional-demand story to BTC's Dubai-fund/Saylor signals",
-        "US midterm elections and RBA decision today add near-term macro event-risk",
-        "Lower oil prices and the collapsed Hormuz premium are a mild offsetting macro tailwind for broad risk appetite"
-      ],
-      "confidence": 0.35
-    },
-    {
-      "ticker": "SOL-USD",
-      "name": "Solana",
-      "assetClass": "Crypto",
-      "pUp1m": 0.42,
-      "pUp3m": 0.47,
-      "pUp12m": 0.55,
-      "ev1m": -0.013,
-      "ev3m": 0.008,
-      "ev12m": 0.12,
-      "drivers": [
-        "No fresh SOL-specific news verified this run; prior five-day ETF outflow streak (~$72M for the week) is carried forward as context, not re-confirmed",
-        "Large-wallet-to-exchange movements flagged in the prior run are unconfirmed this run and should be treated as stale context",
-        "Shares in the broader Monday risk-off cross-currents without an offsetting catalyst",
-        "US midterm elections and RBA decision today add near-term macro event-risk"
-      ],
-      "confidence": 0.32
-    },
-    {
-      "ticker": "TLT",
-      "name": "iShares 20+ Year Treasury Bond ETF",
-      "assetClass": "Bonds",
-      "pUp1m": 0.42,
-      "pUp3m": 0.45,
-      "pUp12m": 0.5,
-      "ev1m": -0.01,
-      "ev3m": -0.006,
-      "ev12m": 0.01,
-      "drivers": [
-        "CME-implied Fed-funds pricing has swung toward a ~75% probability of a 25bp HIKE at the Dec 9 FOMC (vs the cut debate running through October), a genuine long-duration headwind following October's hot ISM print (55.5, Prices Paid still 75.2)",
-        "RBA (expected to hike to 4.85% today) and BOE (expected Nov 5 to 4.00%) add to a globally synchronized tightening backdrop",
-        "Offsetting flight-to-quality demand persists from the hyperscaler credit-stress shock (record Oracle/Meta CDS) and today's event risk (midterms, RBA)",
-        "Monday's oil-price collapse removes one inflation-expectations tailwind that had been supporting the case for a sustained term premium"
-      ],
-      "confidence": 0.45
-    },
-    {
-      "ticker": "IEF",
-      "name": "iShares 7-10 Year Treasury Bond ETF",
-      "assetClass": "Bonds",
-      "pUp1m": 0.46,
-      "pUp3m": 0.49,
-      "pUp12m": 0.53,
-      "ev1m": -0.004,
-      "ev3m": 0.001,
-      "ev12m": 0.022,
-      "drivers": [
-        "Fed-funds pricing swinging toward a ~75% probability of a December hike is a headwind for the belly of the curve, following a hot ISM print (55.5 vs 54.5 consensus)",
-        "Intermediate duration carries less hawkish-repricing risk than the long end while still benefiting from any credit-stress/event-risk flight-to-quality bid",
-        "JOLTS (Nov 3) and NFP (Nov 6, 65K forecast) are the week's key rate-path catalysts that could confirm or unwind the hike-pricing shift",
-        "RBA/BOE synchronized hiking this week reinforces the globally tighter backdrop"
-      ],
-      "confidence": 0.42
-    },
-    {
-      "ticker": "SHY",
-      "name": "iShares 1-3 Year Treasury Bond ETF",
-      "assetClass": "Bonds",
-      "pUp1m": 0.63,
-      "pUp3m": 0.65,
-      "pUp12m": 0.68,
-      "ev1m": 0.005,
-      "ev3m": 0.013,
-      "ev12m": 0.046,
-      "drivers": [
-        "Fed-funds pricing swinging toward a ~75% probability of a December hike keeps front-end yields elevated and attractive on a carry basis",
-        "Short duration is largely insulated from the long-end term-premium debate now intensified by the hot ISM print and hawkish Fed repricing",
-        "Cash-like safety profile benefits directly from today's event risk (midterms, RBA decision) without duration risk",
-        "A genuine hike (not cut) scenario at the Dec FOMC would be consistent with continued front-end yield support for this ETF's carry"
-      ],
-      "confidence": 0.55
-    },
-    {
-      "ticker": "TIP",
-      "name": "iShares TIPS Bond ETF",
-      "assetClass": "Bonds",
-      "pUp1m": 0.54,
-      "pUp3m": 0.55,
-      "pUp12m": 0.57,
-      "ev1m": 0.001,
-      "ev3m": 0.009,
-      "ev12m": 0.038,
-      "drivers": [
-        "October ISM Prices Paid remained hot at 75.2 (down only 2.7pt from 77.9), underpinning a sustained-inflation narrative supportive of breakevens",
-        "The CME-implied swing toward a ~75% probability of a Fed hike (rather than cut) reflects genuine inflation concern, not just growth strength -- directly supportive of TIPS relative to nominal duration",
-        "Monday's oil-price collapse (Brent -11.40%) is a near-term disinflationary offset that could cap breakeven gains",
-        "Employment component of the ISM print softened to 52.4, a 'manufacturing stagflation' mix that keeps the inflation-vs-growth debate genuinely two-sided"
-      ],
-      "confidence": 0.42
-    },
-    {
-      "ticker": "LQD",
-      "name": "iShares iBoxx Investment Grade Corporate Bond ETF",
-      "assetClass": "Bonds",
-      "pUp1m": 0.5,
-      "pUp3m": 0.51,
-      "pUp12m": 0.55,
-      "ev1m": 0,
-      "ev3m": 0.006,
-      "ev12m": 0.038,
-      "drivers": [
-        "Hyperscaler CDS widening to record levels (Oracle >220bp, Meta 114.79bp) touches IG-rated issuers but from a much stronger starting credit position than CCC names",
-        "IG spreads have not shown the same cross-sectional repricing seen in CCC (~12%, highest since Nov 2022)",
-        "Flight-to-quality bid from the credit-stress shock and today's event risk typically favors IG credit over equities and HY",
-        "Still exposed to the duration headwind from the Fed-funds pricing swing toward a hike alongside RBA/BOE tightening"
-      ],
-      "confidence": 0.4
-    },
-    {
-      "ticker": "HYG",
-      "name": "iShares iBoxx High Yield Corporate Bond ETF",
-      "assetClass": "Bonds",
-      "pUp1m": 0.35,
-      "pUp3m": 0.4,
-      "pUp12m": 0.48,
-      "ev1m": -0.012,
-      "ev3m": -0.006,
-      "ev12m": 0.015,
-      "drivers": [
-        "CCC-rated spreads widened to ~12%, the highest since November 2022, confirmed this run as a broadening (not isolated) credit-stress episode",
-        "Hyperscaler CDS at outright records (Oracle 5Y CDS above its 2008 GFC level, Meta at 114.79bp) signal the stress has moved well beyond the lowest-rated tier",
-        "Direct negative read-through from the AI-capex credit-stress shock given HY's heavier exposure to lower-quality balance sheets",
-        "A Fed-hike (not cut) scenario would add a second, independent headwind on top of the credit-spread widening already underway"
-      ],
-      "confidence": 0.52
-    },
-    {
-      "ticker": "EMB",
-      "name": "iShares JP Morgan EM Bond ETF",
-      "assetClass": "Bonds",
-      "pUp1m": 0.47,
-      "pUp3m": 0.5,
-      "pUp12m": 0.55,
-      "ev1m": -0.001,
-      "ev3m": 0.005,
-      "ev12m": 0.04,
-      "drivers": [
-        "Monday's oil-price collapse (Brent -11.40%) directly improves fiscal/current-account dynamics for EM oil-importing sovereigns, a genuine positive reversal",
-        "Synchronized DM central-bank tightening this week (RBA today, BOE Nov 5) plus the Fed's own hawkish repricing tightens global financial conditions for EM borrowers",
-        "China rare-earth truce deadline uncertainty (Nov 9/10, legal text still unpublished) adds an idiosyncratic risk layer for China-linked EM credits",
-        "Event-risk hedging (VIX +8.91% Monday) typically widens EM sovereign spreads in sympathy with developed-market credit stress even on a day oil fell"
-      ],
-      "confidence": 0.37
-    },
-    {
-      "ticker": "BND",
-      "name": "Vanguard Total Bond Market ETF",
-      "assetClass": "Bonds",
-      "pUp1m": 0.48,
-      "pUp3m": 0.49,
-      "pUp12m": 0.53,
-      "ev1m": -0.002,
-      "ev3m": 0.003,
-      "ev12m": 0.027,
-      "drivers": [
-        "Blended Treasury/IG/MBS exposure nets the duration headwind from the Fed-funds pricing swing toward a hike against the flight-to-quality bid from credit stress/event risk",
-        "Hot ISM print (55.5) and persistent Prices Paid (75.2) keep the aggregate bond market's rate-path debate genuinely two-sided ahead of NFP (Nov 6)",
-        "Diversification across credit qualities dampens the acute CCC-specific stress relative to a pure HY allocation",
-        "RBA/BOE synchronized hiking this week reinforces the globally tighter rate backdrop"
-      ],
-      "confidence": 0.4
-    }
+ "updated": "2026-11-04",
+ "asOf": "2026-11-03",
+ "note": "Tuesday 3 Nov 2026 07:02 SGT run. First full session since Monday's close: US/HK/SG cash equities and futures confirm Nov 2 bars; Nikkei/KOSPI index bars in the feed remain stuck at Friday Oct 30 (late-consolidation artifact) and Japan is additionally closed today for Culture Day. Headline move: Brent -11.40% to $104.23 and WTI -7.55% to $96.26 Monday as Iran signaled a 2-day plan to reopen the Strait of Hormuz and resume nuclear talks with Washington, unwinding essentially all of October's war-risk premium (OPEC+ held Dec quotas steady, ruling out a supply shock) -- this is confirmed real by the price spine, not a data glitch. Layered on top: a hot October ISM Manufacturing print (55.5 vs 54.5 consensus) swung Fed-funds pricing toward a ~75% probability of a December HIKE, and hyperscaler CDS hit fresh records (Oracle >220bp, Meta 114.79bp) after Meta's first negative FCF since 2012. Gold/silver/GDX and VIX both rallied Monday despite the milder equity decline, consistent with event-risk hedging into today's US midterms and the RBA's expected hike to 4.85%. All 40 required universe tickers plus an 8-ticker rare-earth basket (MP, LYC.AX, UUUU, USAR, NEO.TO, ILU.AX, 6680.HK, REMX) remain populated.",
+ "macro": {
+  "regime": "Hawkish Fed Repricing Deepens (ISM 55.5 + JOLTS 7.52M) as Midterm Results Pend and Hormuz Re-Escalates",
+  "riskOnProb": 0.4,
+  "regimeScore": -0.26,
+  "asOf": "2026-11-04",
+  "narrative": "As of the Tue Nov 3 US close, the hawkish-repricing case firmed further: September JOLTS job openings printed 7.52M, well above the 7.15M consensus and 7.08M prior, stacking on October's hot ISM Manufacturing beat (55.5) to push CME-implied/prediction-market odds of a December 25bp Fed HIKE to roughly 73% (Polymarket/Kalshi/CME FedWatch convergent), versus the cut debate markets were running in October. The RBA delivered its expected hike to 4.85% (5th of 2026, highest since 2008) but on a 6-3 split vote -- more dissent than the near-unanimous economist call implied, a modest dovish tell inside an otherwise hawkish global tightening backdrop. US midterm elections were held Nov 3; as of this run (07:02 SGT Wed, ~18:02 ET Tue) no official House/Senate calls had landed in verifiable sources, though pre-close prediction markets had priced a likely Democratic House with Republicans favored to hold the Senate, and equities traded calmly into the close (S&P +0.36% to 7568.92, Nasdaq +0.83% to 25372.01, VIX -1.51% to 20.83) consistent with a largely priced-in gridlock outcome -- CNBC flagged a live risk of contested results extending uncertainty, so this is not yet resolved. Monday's Hormuz-driven oil crash partially reversed/stalled Tuesday (Brent -0.33% to $104.42, WTI +0.31% to $96.76) after Iran reiterated the strait stays closed pending US sanctions relief, complicating the clean 'reopening' narrative the market had priced Monday. The hyperscaler/AI-capex credit-stress theme (record Oracle/Meta CDS, CCC spreads near 4-year highs) is carried forward unchanged from yesterday's verified read -- no fresh contradicting or confirming data located this run. The China rare-earth truce deadline (Announcement No. 70) is now 6 days from expiry (Nov 10) with still no superseding legal text published.",
+  "drivers": [
+   {
+    "factor": "JOLTS blowout stacks on hot ISM, firming Dec-hike odds to ~73%",
+    "read": "September JOLTS printed 7.52M vs 7.15M consensus/7.08M prior -- a large beat that reinforces October's hot ISM Manufacturing print (55.5) and has pushed Polymarket/Kalshi/CME FedWatch to a convergent ~73% probability of a 25bp December hike.",
+    "impact": "cautionary"
+   },
+   {
+    "factor": "US midterm elections: results still pending, markets priced a gridlock outcome calmly",
+    "read": "No official House/Senate call had landed as of this run; pre-close prediction markets favored a Democratic House / Republican-held Senate, and equities closed higher (S&P +0.36%, Nasdaq +0.83%) with VIX down -1.51% -- but CNBC flagged a real risk of contested results prolonging uncertainty.",
+    "impact": "mixed"
+   },
+   {
+    "factor": "RBA hikes to 4.85% but on a 6-3 split vote",
+    "read": "The hike itself matched near-unanimous economist expectations, but the 6-3 vote split (vs near-consensus expectations of a cleaner decision) is a modest dovish tell inside an otherwise synchronized DM-tightening backdrop; AUD softened toward US$0.70.",
+    "impact": "mixed"
+   },
+   {
+    "factor": "Hormuz 'reopening' narrative stalls -- Iran says the strait stays closed",
+    "read": "Monday's 11%/7.5% Brent/WTI crash did not extend Tuesday (Brent -0.33% to $104.42, WTI +0.31% to $96.76) after Iran reiterated Hormuz remains closed pending US sanctions relief and Trump claimed the US has 'total control' of the waterway -- a genuinely unresolved two-sided risk, not a settled de-escalation.",
+    "impact": "mixed"
+   },
+   {
+    "factor": "AI-capex/hyperscaler credit stress carried forward, unconfirmed this run",
+    "read": "Yesterday's record Oracle (>220bp 5Y CDS) and Meta (114.79bp) readings and ~4-year-high CCC spreads stand as the last verified data point; no fresh print located this run to confirm continuation or reversal.",
+    "impact": "cautionary"
+   },
+   {
+    "factor": "China rare-earth truce (Announcement No. 70) now 6 days from lapse",
+    "read": "Washington and Beijing have verbally confirmed an extension to Jan 10, 2027, but the governing legal text still expires Nov 10, 2026 with nothing superseding it published -- MP/Lynas/UUUU/USAR volatility into the deadline remains fully live.",
+    "impact": "mixed"
+   }
   ],
-  "callsNote": "Updated Tue 3 Nov 2026 07:02 SGT run against Monday's full cash-equity close. All 40 calls refreshed against the confirmed Brent/WTI crash (Hormuz de-escalation), the hot ISM print tilting Fed-funds pricing toward a December hike, record hyperscaler CDS, and the VIX/gold/silver event-risk divergence. XLE/USO/DBC took the largest downward revisions on the oil-premium unwind; GLD/SLV/GDX nudged up on the safe-haven/credit-stress bid. All 40 required universe tickers remain populated.",
-  "rareEarthCalls": [
-    {
-      "ticker": "MP",
-      "name": "MP Materials Corp",
-      "assetClass": "Equity",
-      "pUp1m": 0.48,
-      "pUp3m": 0.53,
-      "pUp12m": 0.62,
-      "ev1m": -0.003,
-      "ev3m": 0.018,
-      "ev12m": 0.12,
-      "drivers": [
-        "Fell 3.08% Monday to $38.35, part of a sector-wide selloff driven mainly by dilution/going-concern fears at peer Critical Metals Corp (CRML), not MP-specific news",
-        "China's rare-earth truce extension to Jan 10 2027 is confirmed verbally by both Washington (Treasury Sec. Bessent) and Beijing's MOFCOM, but China's governing Announcement No. 70 still legally expires Nov 10 2026 with no superseding notice published -- the binary deadline risk stays live",
-        "Q3 earnings expected around Nov 5-10, a near-term idiosyncratic catalyst",
-        "DoD-backing/onshoring thesis remains structurally intact; Goldman Sachs' prior $57 price target (cut from $65 in late Oct) still implies meaningful upside from Monday's close"
-      ],
-      "confidence": 0.45
-    },
-    {
-      "ticker": "LYC.AX",
-      "name": "Lynas Rare Earths",
-      "assetClass": "Equity",
-      "pUp1m": 0.5,
-      "pUp3m": 0.55,
-      "pUp12m": 0.6,
-      "ev1m": 0.004,
-      "ev3m": 0.016,
-      "ev12m": 0.095,
-      "drivers": [
-        "Rose 0.17% Monday to A$12.12, the most resilient of the major ex-China rare-earth names, consistent with FY26 revenue +76% and Q1 revenue +55% YoY reported this cycle",
-        "RBA is priced for a near-certain (31/32 economists) hike to 4.85% today; AUD has already softened pre-decision to just below US$0.70, a tailwind for AUD-reporting Lynas' USD-denominated sales",
-        "Pursuing the Meteoric Resources (Caldeira project, Brazil) acquisition to diversify supply; AGM set for Nov 25 to vote on FY26 governance",
-        "China's rare-earth truce legal-text gap (Announcement No. 70 still legally expiring Nov 10 with no superseding notice) is the key swing factor -- Lynas is a prime beneficiary if China re-imposes export controls"
-      ],
-      "confidence": 0.45
-    },
-    {
-      "ticker": "UUUU",
-      "name": "Energy Fuels Inc",
-      "assetClass": "Equity",
-      "pUp1m": 0.44,
-      "pUp3m": 0.49,
-      "pUp12m": 0.58,
-      "ev1m": -0.006,
-      "ev3m": 0.009,
-      "ev12m": 0.1,
-      "drivers": [
-        "Fell 4.15% Monday to $7.39, part of the sector-wide selloff driven mainly by dilution/going-concern fears at peer Critical Metals Corp, not UUUU-specific news",
-        "Diversified US uranium-plus-rare-earth processing exposure gives it a dual-thesis profile (nuclear demand plus onshoring) distinct from pure rare-earth miners",
-        "Q3 earnings expected around Nov 9-10, coinciding directly with the China truce deadline window -- a high-information near-term catalyst",
-        "Directly exposed to the same Nov 9/10 China truce legal-text risk as MP/Lynas -- a lapse would be a sector-wide positive catalyst"
-      ],
-      "confidence": 0.4
-    },
-    {
-      "ticker": "USAR",
-      "name": "USA Rare Earth Inc",
-      "assetClass": "Equity",
-      "pUp1m": 0.38,
-      "pUp3m": 0.44,
-      "pUp12m": 0.56,
-      "ev1m": -0.02,
-      "ev3m": -0.004,
-      "ev12m": 0.095,
-      "drivers": [
-        "Fell roughly 10% Monday, the sharpest move in the ex-China rare-earth basket, as dilution/going-concern fears at peer Critical Metals Corp (CRML) spilled over sector-wide alongside the broader tech selloff",
-        "Smaller-cap, earlier-stage profile makes it more sensitive to financing/dilution risk than established producers like MP or Lynas",
-        "Still a direct beneficiary of any DoD-backing or export-control-driven re-rating in the ex-China rare-earth magnet supply chain",
-        "China truce legal-text gap (Nov 9/10 deadline window) is the dominant near-term catalyst, but balance-sheet/dilution risk adds a genuine idiosyncratic headwind"
-      ],
-      "confidence": 0.35
-    },
-    {
-      "ticker": "NEO.TO",
-      "name": "Neo Performance Materials",
-      "assetClass": "Equity",
-      "pUp1m": 0.48,
-      "pUp3m": 0.5,
-      "pUp12m": 0.56,
-      "ev1m": -0.002,
-      "ev3m": 0.006,
-      "ev12m": 0.07,
-      "drivers": [
-        "Q3 earnings expected around Nov 10, directly coinciding with the China rare-earth truce deadline window -- limited independent company-specific news found this run",
-        "Shares in the same ex-China rare-earth/magnet thematic as MP/Lynas/UUUU, but with less company-specific news verified this run",
-        "China truce legal-text gap (Announcement No. 70 still legally expiring Nov 10) is the dominant thematic swing factor",
-        "Low-conviction view given the absence of fresh, ticker-specific information this run"
-      ],
-      "confidence": 0.3
-    },
-    {
-      "ticker": "ILU.AX",
-      "name": "Iluka Resources",
-      "assetClass": "Equity",
-      "pUp1m": 0.48,
-      "pUp3m": 0.5,
-      "pUp12m": 0.56,
-      "ev1m": -0.001,
-      "ev3m": 0.006,
-      "ev12m": 0.065,
-      "drivers": [
-        "Eneabba rare-earth refinery reported 65% built as of early Nov 2026, with first output targeted for 2027 -- a long-horizon, de-risking construction update rather than a near-term catalyst",
-        "Shares in the ex-China rare-earth thematic but on a longer production timeline than MP/Lynas, reducing near-term sensitivity to the Nov 9/10 truce deadline",
-        "RBA rate decision today (expected hike to 4.85%) and AUD softening are a modest context factor for the ASX-listed name",
-        "Low-conviction view given limited fresh company-specific news beyond the construction update"
-      ],
-      "confidence": 0.3
-    },
-    {
-      "ticker": "6680.HK",
-      "name": "JL Mag Rare-Earth Co",
-      "assetClass": "Equity",
-      "pUp1m": 0.54,
-      "pUp3m": 0.53,
-      "pUp12m": 0.52,
-      "ev1m": 0.004,
-      "ev3m": 0.007,
-      "ev12m": 0.028,
-      "drivers": [
-        "As the dominant Chinese magnet incumbent, benefits structurally if Beijing maintains leverage via the Nov 9/10 export-control deadline rather than fully liberalizing -- Announcement No. 70 still legally expires Nov 10 with no superseding notice published",
-        "Only routine dividend-related news found this run; no major company-specific catalyst identified",
-        "Inverse positioning to the ex-China basket (MP/Lynas/UUUU/USAR): a truce breakdown that hurts Western names would likely reinforce JL Mag's domestic pricing power",
-        "A confirmed, published extension to Jan 10 2027 would reduce near-term volatility but also reduce the leverage narrative supporting JL Mag's premium"
-      ],
-      "confidence": 0.3
-    },
-    {
-      "ticker": "REMX",
-      "name": "VanEck Rare Earth/Strategic Metals ETF",
-      "assetClass": "Equity",
-      "pUp1m": 0.46,
-      "pUp3m": 0.51,
-      "pUp12m": 0.59,
-      "ev1m": -0.006,
-      "ev3m": 0.012,
-      "ev12m": 0.095,
-      "drivers": [
-        "Basket ETF (holds MP, Lynas and other ex-China rare-earth miners) tracks Monday's divergent moves: MP -3.08%, Lynas +0.17%, UUUU -4.15%, USAR roughly -10% -- net a modestly negative day for the basket",
-        "China's rare-earth truce legal-text gap (Announcement No. 70 still legally expiring Nov 10 2026 with no superseding notice) is the dominant swing factor for every basket constituent",
-        "Monday's sector-wide selloff was driven mainly by dilution/going-concern fears at peer Critical Metals Corp (CRML), not a basket-wide fundamental deterioration",
-        "Multiple basket constituents (MP, UUUU, NEO) report Q3 earnings in the Nov 5-10 window, clustering idiosyncratic catalysts right into the truce deadline"
-      ],
-      "confidence": 0.38
-    }
+  "byAssetClass": [
+   {
+    "assetClass": "Equity",
+    "stance": "Neutral",
+    "pUp12m": 0.55,
+    "note": "Pending-but-calmly-priced election gridlock and a mild Tuesday equity gain offset the deepening hawkish-Fed case (JOLTS 7.52M on top of ISM 55.5); carried-forward AI-credit stress remains the main unconfirmed tail risk.",
+    "tilt": 0
+   },
+   {
+    "assetClass": "Commodities",
+    "stance": "Neutral",
+    "pUp12m": 0.54,
+    "note": "Energy's 'Hormuz reopening' bid stalled (Iran says the strait stays closed) while precious metals gave back some of Monday's safe-haven bounce (gold -0.74% to $3940.20, silver -1.79% to $49.81) as Dec-hike odds firmed -- a genuine real-rate headwind now reasserting itself.",
+    "tilt": 0
+   },
+   {
+    "assetClass": "Crypto",
+    "stance": "modest UW",
+    "pUp12m": 0.58,
+    "note": "BTC traded a +1.37% level to ~$77,725 Tuesday (still a live level, not a close, per the price spine), but the firming ~73% Dec-hike odds and unresolved credit stress argue for caution on high-beta risk assets into the FOMC.",
+    "tilt": -0.012
+   },
+   {
+    "assetClass": "Bonds",
+    "stance": "modest UW",
+    "pUp12m": 0.49,
+    "note": "The JOLTS beat on top of ISM 55.5 firms Dec-hike pricing to ~73%, deepening the duration headwind; only partly offset by any lingering flight-to-quality demand from carried-forward credit stress.",
+    "tilt": -0.012
+   },
+   {
+    "assetClass": "USD/Cash",
+    "stance": "modest OW",
+    "pUp12m": 0.61,
+    "note": "Firming Dec-hike odds (~73%), a confirmed RBA hike, an expected BOE hike Nov 5, and still-unresolved election/Hormuz/rare-earth-truce event risk all favor cash/USD into mid-November.",
+    "tilt": 0.012
+   }
+  ],
+  "sources": [
+   "https://finance.yahoo.com/markets/stocks/articles/p-500-nasdaq-futures-rise-101832709.html",
+   "https://www.cnbc.com/2026/11/02/stock-market-today-live-updates.html",
+   "https://www.fxstreet.com/news/forex-today-no-signs-of-dollar-strength-on-us-midterm-election-day-202611030723",
+   "https://www.cnbc.com/2026/11/03/how-trump-contesting-midterm-election-results-could-disrupt-the-market.html",
+   "https://www.prnewswire.com/news-releases/manufacturing-pmi-at-55-5-october-2026-ism-manufacturing-pmi-report-302925617.html",
+   "https://www.financecalendar.com/us-jolts/",
+   "https://www.benzinga.com/markets/prediction-markets/26/10/62728825/will-the-fed-hike-rates-in-december-heres-what-the-prediction-market-is-saying",
+   "https://www.abc.net.au/news/2026-11-03/rba-lifts-interest-rates-november-2026-highest-rate-in-18-years/107340050",
+   "https://www.rba.gov.au/media-releases/2026/mr-26-30.html",
+   "https://oilprice.com/Energy/Oil-Prices/Brent-Tops-89-Amid-US-Iran-Stalemate-Over-Hormuz.html",
+   "https://startupfortune.com/chinas-rare-earth-export-truce-expires-november-10-with-no-renewal-in-sight/"
   ]
+ },
+ "calls": [
+  {
+   "ticker": "SPY",
+   "name": "SPDR S&P 500 ETF Trust",
+   "assetClass": "Equity",
+   "pUp1m": 0.46,
+   "pUp3m": 0.5,
+   "pUp12m": 0.58,
+   "ev1m": -0.002,
+   "ev3m": 0.008,
+   "ev12m": 0.065,
+   "drivers": [
+    "S&P closed Tuesday +0.36% to 7568.92, a second straight calmer session, with VIX easing -1.51% to 20.83 as election-day positioning normalized",
+    "September JOLTS (7.52M vs 7.15M consensus) stacked on October's hot ISM (55.5) has firmed Dec-hike odds to ~73% across Polymarket/Kalshi/CME FedWatch",
+    "Midterm results are still pending as of this run; pre-close prediction markets priced a likely Democratic House / Republican Senate, a gridlock outcome equities have historically treated as a mild tailwind",
+    "Carried-forward hyperscaler CDS records (Oracle, Meta) are unconfirmed this run but remain the last verified credit-stress read for index heavyweights"
+   ],
+   "confidence": 0.5
+  },
+  {
+   "ticker": "QQQ",
+   "name": "Invesco QQQ Trust",
+   "assetClass": "Equity",
+   "pUp1m": 0.4,
+   "pUp3m": 0.46,
+   "pUp12m": 0.55,
+   "ev1m": -0.01,
+   "ev3m": 0,
+   "ev12m": 0.075,
+   "drivers": [
+    "Nasdaq actually rose 0.83% Tuesday to 25372.01, a calmer session than Monday as election-day positioning and a chip-sector bounce offset some AI-capex/credit overhang",
+    "Carried-forward hyperscaler CDS records (Oracle >220bp, Meta 114.79bp) are unconfirmed this run but remain the last verified credit-stress read pressuring index heavyweights",
+    "JOLTS 7.52M on top of ISM 55.5 firms Dec-hike odds to ~73%, raising the discount-rate headwind for long-duration growth names",
+    "AMD's post-earnings pop (+7% after-hours Nov 3 on data-center revenue +97%) is a chip-sector-specific offset worth tracking into Wednesday's session"
+   ],
+   "confidence": 0.55
+  },
+  {
+   "ticker": "IWM",
+   "name": "iShares Russell 2000 ETF",
+   "assetClass": "Equity",
+   "pUp1m": 0.42,
+   "pUp3m": 0.47,
+   "pUp12m": 0.55,
+   "ev1m": -0.006,
+   "ev3m": 0,
+   "ev12m": 0.05,
+   "drivers": [
+    "Russell 2000 was little changed Monday (-0.21% to 2805.88), a much smaller decline than Friday's drop, but small caps remain most sensitive to the CCC-spread blowout to ~12% (highest since Nov 2022)",
+    "Hawkish ISM print and Fed-funds pricing shifting toward a hike raise financing costs disproportionately for leveraged small-cap balance sheets",
+    "Lower oil prices (WTI -7.55% Monday) are a modest input-cost relief for domestically-focused small caps",
+    "RBA/BOE synchronized hiking this week adds to a globally tightening backdrop that disproportionately weighs on small-cap financing"
+   ],
+   "confidence": 0.45
+  },
+  {
+   "ticker": "EFA",
+   "name": "iShares MSCI EAFE ETF",
+   "assetClass": "Equity",
+   "pUp1m": 0.5,
+   "pUp3m": 0.54,
+   "pUp12m": 0.58,
+   "ev1m": 0.002,
+   "ev3m": 0.013,
+   "ev12m": 0.065,
+   "drivers": [
+    "Monday's oil crash (Brent -11.40%) is a genuine positive terms-of-trade shock for Europe/Japan as net energy importers",
+    "BOE decision Nov 5 (forecast hike to 4.00%) remains a live catalyst",
+    "Less direct exposure to the US hyperscaler AI-capex/credit-stress shock (record Oracle/Meta CDS) than US benchmarks",
+    "ISM's hawkish beat raises the odds the Fed stays tight for longer, a mixed cross-currency signal for USD-hedged EAFE exposure"
+   ],
+   "confidence": 0.45
+  },
+  {
+   "ticker": "EEM",
+   "name": "iShares MSCI Emerging Markets ETF",
+   "assetClass": "Equity",
+   "pUp1m": 0.48,
+   "pUp3m": 0.52,
+   "pUp12m": 0.58,
+   "ev1m": -0.001,
+   "ev3m": 0.01,
+   "ev12m": 0.065,
+   "drivers": [
+    "Lower oil prices (Brent -11.40% Monday) ease the current-account/import-bill burden for EM oil-importing economies (India, most of EM Asia)",
+    "China rare-earth truce legal-text gap persists (Announcement No. 70 still legally expires Nov 10 with no superseding text published), a binary swing factor for China-heavy EM benchmarks",
+    "Hawkish US ISM print/Fed-hike repricing is a dollar-strength headwind for EM broadly",
+    "VIX spike (+8.91% to 21.15) on US midterm/event-risk hedging adds a near-term risk-off cross-current for EM flows"
+   ],
+   "confidence": 0.4
+  },
+  {
+   "ticker": "VGK",
+   "name": "Vanguard FTSE Europe ETF",
+   "assetClass": "Equity",
+   "pUp1m": 0.5,
+   "pUp3m": 0.53,
+   "pUp12m": 0.57,
+   "ev1m": 0.001,
+   "ev3m": 0.011,
+   "ev12m": 0.06,
+   "drivers": [
+    "Monday's oil crash is a direct positive terms-of-trade shock for energy-importing Europe",
+    "BOE decision Nov 5 (forecast hike to 4.00%, 7-0-2 vote split) is a live catalyst",
+    "Lower direct exposure to the US hyperscaler AI-capex/credit shock (record Oracle/Meta CDS) than US tech-heavy benchmarks",
+    "ECB's prior hawkish hold plus Lagarde's early-resignation overhang remains an unresolved leadership question into year-end"
+   ],
+   "confidence": 0.4
+  },
+  {
+   "ticker": "EWJ",
+   "name": "iShares MSCI Japan ETF",
+   "assetClass": "Equity",
+   "pUp1m": 0.46,
+   "pUp3m": 0.51,
+   "pUp12m": 0.57,
+   "ev1m": -0.003,
+   "ev3m": 0.007,
+   "ev12m": 0.06,
+   "drivers": [
+    "Japan market closed today (Tue Nov 3) for Culture Day, removing a trading session just as RBA/US data flow",
+    "Lower oil prices from Monday's crash are a direct positive for Japan as a major energy importer",
+    "BOJ Gov Ueda speaks Nov 7 after flagging a likely December hike with inflation at the 2% target -- a yen-strengthening risk for exporters",
+    "Nikkei/KOSPI index bars in the feed are stuck at Friday Oct 30's close (late-consolidation artifact), so Monday's US-driven risk tone has not yet been reflected in the Japan benchmark"
+   ],
+   "confidence": 0.4
+  },
+  {
+   "ticker": "INDA",
+   "name": "iShares MSCI India ETF",
+   "assetClass": "Equity",
+   "pUp1m": 0.52,
+   "pUp3m": 0.56,
+   "pUp12m": 0.62,
+   "ev1m": 0.004,
+   "ev3m": 0.016,
+   "ev12m": 0.08,
+   "drivers": [
+    "Monday's oil crash (Brent -11.40%, WTI -7.55%) is a meaningfully positive terms-of-trade and current-account shock for oil-import-dependent India",
+    "Hawkish US ISM print/Fed-hike repricing is a USD-strength headwind that could offset some of the oil relief via capital-flow sensitivity",
+    "Less direct linkage to the China rare-earth truce deadline than China/Korea/Japan benchmarks",
+    "Global risk-off cross-currents (VIX +8.91% Monday) still drag EM flows broadly in the near term"
+   ],
+   "confidence": 0.45
+  },
+  {
+   "ticker": "FXI",
+   "name": "iShares China Large-Cap ETF",
+   "assetClass": "Equity",
+   "pUp1m": 0.5,
+   "pUp3m": 0.54,
+   "pUp12m": 0.58,
+   "ev1m": 0.001,
+   "ev3m": 0.012,
+   "ev12m": 0.065,
+   "drivers": [
+    "China's rare-earth truce remains a live binary: Beijing has verbally confirmed the Jan 10 2027 extension, but Announcement No. 70 still legally expires Nov 10 2026 with no superseding notice published",
+    "Lower oil prices ease China's large net energy-import bill, a modest positive",
+    "Less exposed to US hyperscaler AI-capex/credit-spread stress (record Oracle/Meta CDS) than US benchmarks",
+    "Hawkish US Fed-funds repricing toward a hike is a USD-strength/capital-outflow headwind for China-linked EM"
+   ],
+   "confidence": 0.4
+  },
+  {
+   "ticker": "MTUM",
+   "name": "iShares MSCI USA Momentum Factor ETF",
+   "assetClass": "Equity",
+   "pUp1m": 0.4,
+   "pUp3m": 0.46,
+   "pUp12m": 0.55,
+   "ev1m": -0.01,
+   "ev3m": 0,
+   "ev12m": 0.065,
+   "drivers": [
+    "Momentum factor remains heavily loaded on mega-cap AI/tech names facing a credit-stress derating (Oracle/Meta CDS at records)",
+    "Hawkish ISM beat and Fed-funds pricing shifting toward a hike adds a discount-rate headwind for the long-duration growth names that built recent momentum",
+    "Nasdaq's continued underperformance (-1.07% Monday) directly hits the stocks that anchor the momentum basket",
+    "No offsetting rotation signal yet confirmed in the data"
+   ],
+   "confidence": 0.45
+  },
+  {
+   "ticker": "QUAL",
+   "name": "iShares MSCI USA Quality Factor ETF",
+   "assetClass": "Equity",
+   "pUp1m": 0.5,
+   "pUp3m": 0.54,
+   "pUp12m": 0.59,
+   "ev1m": 0.001,
+   "ev3m": 0.013,
+   "ev12m": 0.07,
+   "drivers": [
+    "Quality factor (strong balance sheets, high ROE) is relatively insulated from the CCC-spread blowout to ~12% (highest since Nov 2022) hitting lower-quality credits",
+    "Less exposed than momentum/growth to the hyperscaler-CDS credit-derating theme (Oracle >220bp, Meta 114.79bp record)",
+    "Provides a relative-value hedge against both the hawkish Fed-repricing and credit-stress drivers flagged as cautionary",
+    "Historically resilient during event-risk weeks (midterms, RBA, VIX spike) like this one"
+   ],
+   "confidence": 0.45
+  },
+  {
+   "ticker": "USMV",
+   "name": "iShares MSCI USA Min Vol Factor ETF",
+   "assetClass": "Equity",
+   "pUp1m": 0.55,
+   "pUp3m": 0.56,
+   "pUp12m": 0.58,
+   "ev1m": 0.004,
+   "ev3m": 0.014,
+   "ev12m": 0.065,
+   "drivers": [
+    "Min-vol factor benefits from the regime's defensive tilt amid the VIX spike (+8.91% to 21.15) even as actual equity moves stayed mild",
+    "Low exposure to the hyperscaler AI-capex/credit-stress driver (record Oracle/Meta CDS) hitting high-beta tech",
+    "Tends to outperform cap-weighted benchmarks during event-risk weeks like this one (midterms, RBA, rare-earth deadline)",
+    "Benefits from safe-haven flows even as the Hormuz oil-premium unwound, since credit-stress and election hedging remain live"
+   ],
+   "confidence": 0.5
+  },
+  {
+   "ticker": "VLUE",
+   "name": "iShares MSCI USA Value Factor ETF",
+   "assetClass": "Equity",
+   "pUp1m": 0.52,
+   "pUp3m": 0.53,
+   "pUp12m": 0.57,
+   "ev1m": 0.002,
+   "ev3m": 0.011,
+   "ev12m": 0.062,
+   "drivers": [
+    "Value factor's financials tilt benefits from the hawkish Fed-funds repricing toward a hike, which supports net interest margins",
+    "Energy tilt is now a two-sided risk after Monday's oil crash (Brent -11.40%) unwound much of the sector's recent relative strength",
+    "Lower weight in AI-capex names facing credit-stress derating (Oracle/Meta CDS at records) relative to growth/momentum factors",
+    "Hot ISM print supports the broader industrial-cyclical complement of the value factor"
+   ],
+   "confidence": 0.42
+  },
+  {
+   "ticker": "XLK",
+   "name": "Technology Select Sector SPDR",
+   "assetClass": "Equity",
+   "pUp1m": 0.37,
+   "pUp3m": 0.44,
+   "pUp12m": 0.55,
+   "ev1m": -0.014,
+   "ev3m": -0.004,
+   "ev12m": 0.07,
+   "drivers": [
+    "Hyperscaler CDS hit fresh records Monday (Oracle 5Y CDS >220bp, above its 2008 GFC peak; Meta's at a record 114.79bp) directly pressuring the sector's largest constituents",
+    "Meta's first negative FCF since 2012 intensifies the capex-vs-cashflow credibility debate central to tech valuations",
+    "Hot ISM beat (55.5) swinging Fed-funds pricing toward a ~75% probability of a December hike raises the discount-rate headwind for long-duration tech",
+    "Nasdaq -1.07% Monday, continuing to underperform on direct AI-capex exposure"
+   ],
+   "confidence": 0.55
+  },
+  {
+   "ticker": "SMH",
+   "name": "VanEck Semiconductor ETF",
+   "assetClass": "Equity",
+   "pUp1m": 0.35,
+   "pUp3m": 0.42,
+   "pUp12m": 0.56,
+   "ev1m": -0.02,
+   "ev3m": -0.007,
+   "ev12m": 0.082,
+   "drivers": [
+    "Direct, high-beta exposure to the hyperscaler capex-cashflow credibility question, now intensified by Oracle's and Meta's record CDS",
+    "Hawkish Fed-funds repricing (toward a ~75% probability of a Dec hike) is a discount-rate headwind for a sector still trading on multi-year AI-demand duration",
+    "Secular AI-demand tailwind (data-center buildout) keeps the 12m outlook more constructive than the near-term",
+    "Prices Paid in the hot ISM print (75.2) signal persistent input-cost pressure across the broader manufacturing/semis supply chain"
+   ],
+   "confidence": 0.55
+  },
+  {
+   "ticker": "XLF",
+   "name": "Financial Select Sector SPDR",
+   "assetClass": "Equity",
+   "pUp1m": 0.53,
+   "pUp3m": 0.55,
+   "pUp12m": 0.58,
+   "ev1m": 0.005,
+   "ev3m": 0.014,
+   "ev12m": 0.07,
+   "drivers": [
+    "Dec-hike odds firming to ~73% (JOLTS 7.52M on top of ISM 55.5) is directly supportive of bank net-interest margins",
+    "Carried-forward CCC credit-spread stress (~4-year high) remains a cautionary offset via potential credit-quality/loan-loss concerns at credit-sensitive lenders",
+    "RBA/BOE synchronized hiking this week reinforces a globally higher-for-longer backdrop that favors financials over duration-sensitive sectors",
+    "Midterm results are still pending with no official call; historically financial-sector regulation shows limited sensitivity to the specific House/Senate split"
+   ],
+   "confidence": 0.45
+  },
+  {
+   "ticker": "XLE",
+   "name": "Energy Select Sector SPDR",
+   "assetClass": "Equity",
+   "pUp1m": 0.4,
+   "pUp3m": 0.44,
+   "pUp12m": 0.5,
+   "ev1m": -0.015,
+   "ev3m": -0.008,
+   "ev12m": 0.015,
+   "drivers": [
+    "Oil's Monday crash stalled Tuesday (Brent -0.33% to $104.42, WTI +0.31% to $96.76) after Iran reiterated Hormuz stays closed pending US sanctions relief, undercutting the clean 'reopening' narrative the market had priced",
+    "Trump separately claimed the US has 'total control' of the waterway -- a genuinely two-sided, unresolved geopolitical setup rather than a settled de-escalation",
+    "OPEC+ held December quotas steady, so any re-escalation would again be a pure geopolitical-premium repricing rather than a supply shock",
+    "A firming ~73% Dec-hike probability raises global-demand-growth uncertainty, a secondary headwind"
+   ],
+   "confidence": 0.48
+  },
+  {
+   "ticker": "XLV",
+   "name": "Health Care Select Sector SPDR",
+   "assetClass": "Equity",
+   "pUp1m": 0.54,
+   "pUp3m": 0.55,
+   "pUp12m": 0.58,
+   "ev1m": 0.004,
+   "ev3m": 0.014,
+   "ev12m": 0.065,
+   "drivers": [
+    "Defensive sector benefits from the event-risk-driven VIX spike (+8.91% Monday) even as the broader equity decline stayed mild",
+    "Largely insulated from both the oil-price collapse and the hyperscaler AI-capex/credit-stress drivers dominating this week's headlines",
+    "Potential Democratic House majority in today's midterms could support healthcare-policy-sensitive names, a modest tailwind",
+    "Low direct linkage to the Fed-funds repricing toward a hike relative to rate-sensitive sectors"
+   ],
+   "confidence": 0.4
+  },
+  {
+   "ticker": "XLI",
+   "name": "Industrial Select Sector SPDR",
+   "assetClass": "Equity",
+   "pUp1m": 0.52,
+   "pUp3m": 0.55,
+   "pUp12m": 0.6,
+   "ev1m": 0.006,
+   "ev3m": 0.016,
+   "ev12m": 0.07,
+   "drivers": [
+    "Lower oil/input costs from Monday's crude crash are a direct margin tailwind for transport/logistics-heavy industrials",
+    "Dow rose 0.41% Monday to 51983.98 even as Nasdaq fell 1.07%, showing industrials-heavy benchmarks benefiting from the oil-cost relief",
+    "Hot ISM print (55.5, Production at a 5-year high) directly supports the industrial-cyclical demand backdrop",
+    "Hawkish Fed-funds repricing toward a hike is a modest headwind for capex-financing-dependent industrials"
+   ],
+   "confidence": 0.45
+  },
+  {
+   "ticker": "XLU",
+   "name": "Utilities Select Sector SPDR",
+   "assetClass": "Equity",
+   "pUp1m": 0.52,
+   "pUp3m": 0.53,
+   "pUp12m": 0.56,
+   "ev1m": 0.002,
+   "ev3m": 0.011,
+   "ev12m": 0.058,
+   "drivers": [
+    "Defensive, bond-proxy sector benefits from the event-risk-driven VIX spike, even as hawkish Fed-funds repricing is typically a headwind for rate-sensitive utilities",
+    "AI/data-center power-demand theme remains a structural tailwind even as hyperscaler capex credibility is questioned (record Oracle/Meta CDS)",
+    "Comparatively insulated from the oil-price collapse and the rare-earth truce deadline risk",
+    "A Fed-hike (rather than cut) path is a genuine two-sided risk for this rate-sensitive sector relative to the prior cut-debate narrative"
+   ],
+   "confidence": 0.42
+  },
+  {
+   "ticker": "XLP",
+   "name": "Consumer Staples Select Sector SPDR",
+   "assetClass": "Equity",
+   "pUp1m": 0.55,
+   "pUp3m": 0.55,
+   "pUp12m": 0.57,
+   "ev1m": 0.006,
+   "ev3m": 0.014,
+   "ev12m": 0.058,
+   "drivers": [
+    "Classic defensive beneficiary of the VIX spike (+8.91% Monday) and event-risk hedging into midterms/RBA",
+    "Lower oil prices from Monday's crash ease input-cost pressure on staples margins, a genuine positive reversal from the prior narrative",
+    "Minimal direct exposure to the hyperscaler AI-capex/credit-stress driver or the Hormuz/rare-earth swing factors",
+    "Lower beta profile typically outperforms on a relative basis during event-risk weeks like this one"
+   ],
+   "confidence": 0.45
+  },
+  {
+   "ticker": "XLY",
+   "name": "Consumer Discretionary Select Sector SPDR",
+   "assetClass": "Equity",
+   "pUp1m": 0.47,
+   "pUp3m": 0.51,
+   "pUp12m": 0.57,
+   "ev1m": -0.001,
+   "ev3m": 0.009,
+   "ev12m": 0.063,
+   "drivers": [
+    "Lower oil prices from Monday's crash directly raise discretionary income/spending power for consumers, a genuine positive reversal",
+    "Hawkish Fed-funds repricing toward a hike is a headwind for rate-sensitive consumer financing and housing-linked discretionary names",
+    "Amazon remains implicated in the AI-capex credibility question amid record hyperscaler CDS, though less directly than pure-tech peers",
+    "Average hourly earnings data (Nov 6, forecast 0.3% vs prior 0.1%) remains a swing factor for the consumer spending-power narrative"
+   ],
+   "confidence": 0.4
+  },
+  {
+   "ticker": "GLD",
+   "name": "SPDR Gold Shares",
+   "assetClass": "Commodities",
+   "pUp1m": 0.5,
+   "pUp3m": 0.54,
+   "pUp12m": 0.6,
+   "ev1m": 0.003,
+   "ev3m": 0.016,
+   "ev12m": 0.07,
+   "drivers": [
+    "GLD gave back part of Monday's safe-haven bounce, closing -0.74% to $3940.20 Tuesday (spot gold similarly eased) as Dec-hike odds firmed to ~73%, reasserting the real-rate headwind",
+    "The firming hawkish-Fed case (JOLTS 7.52M, ISM 55.5) is a genuine two-sided risk for non-yielding gold even with election-outcome and Hormuz-re-escalation uncertainty still unresolved",
+    "No fresh credit-stress data located this run to confirm whether the carried-forward CCC-spread/hyperscaler-CDS stress is still providing a safe-haven offset",
+    "Election results still pending; a contested or prolonged outcome (flagged by CNBC) could reintroduce a safe-haven bid if uncertainty extends"
+   ],
+   "confidence": 0.45
+  },
+  {
+   "ticker": "SLV",
+   "name": "iShares Silver Trust",
+   "assetClass": "Commodities",
+   "pUp1m": 0.5,
+   "pUp3m": 0.54,
+   "pUp12m": 0.6,
+   "ev1m": 0.004,
+   "ev3m": 0.02,
+   "ev12m": 0.085,
+   "drivers": [
+    "SLV eased -1.79% (silver futures) Tuesday to $49.81, giving back part of Monday's bounce as Dec-hike odds firmed to ~73%, a real-rate headwind for the metal's monetary demand driver",
+    "Industrial-demand linkage to AI-hardware/data-center buildout remains a structural offset even as the metal pulled back with gold",
+    "Higher volatility than gold means wider dispersion of outcomes into the still-unresolved election and Hormuz-re-escalation setups",
+    "No fresh ETF-flow or positioning data located this run; Monday's miner-level participation (GDX) is carried forward as context, not re-confirmed"
+   ],
+   "confidence": 0.42
+  },
+  {
+   "ticker": "DBC",
+   "name": "Invesco DB Commodity Index Tracking Fund",
+   "assetClass": "Commodities",
+   "pUp1m": 0.46,
+   "pUp3m": 0.48,
+   "pUp12m": 0.53,
+   "ev1m": -0.006,
+   "ev3m": 0.002,
+   "ev12m": 0.035,
+   "drivers": [
+    "Energy-heavy index took a major hit Monday as Brent crashed 11.40% on Iran/Hormuz de-escalation signals, reversing DBC's prior geopolitical-premium tailwind",
+    "Precious-metals component (gold/silver) rallied sharply Monday (GLD +1.65%, SLV +2.17%), partially offsetting the energy-side crash",
+    "OPEC+ held December quotas steady, confirming the oil move was premium-unwind rather than a fundamental supply/demand shift, leaving room for a partial reversal if diplomacy stalls",
+    "Broad diversification across energy/metals/ag moderates the net index-level impact of this highly divergent cross-commodity day"
+   ],
+   "confidence": 0.4
+  },
+  {
+   "ticker": "USO",
+   "name": "United States Oil Fund",
+   "assetClass": "Commodities",
+   "pUp1m": 0.38,
+   "pUp3m": 0.42,
+   "pUp12m": 0.48,
+   "ev1m": -0.02,
+   "ev3m": -0.012,
+   "ev12m": 0,
+   "drivers": [
+    "USO fell 7.08% Monday to $156.87 (WTI -7.55% to $96.26) as Iran signaled a 2-day plan to reopen the Strait of Hormuz and resume nuclear talks, unwinding October's entire war-risk premium",
+    "OPEC+ held December quotas steady at its Nov 1 meeting, ruling out a supply-side driver for the crash",
+    "Doha talks ended Monday 'without a breakthrough' and the reopening plan is contingent on US sanctions relief/ending the port blockade -- a stalled or failed negotiation would likely reverse much of Monday's move",
+    "Crude Oil Inventories data (Nov 4) is the next concrete catalyst; prior build was -1.9M"
+   ],
+   "confidence": 0.48
+  },
+  {
+   "ticker": "URA",
+   "name": "Global X Uranium ETF",
+   "assetClass": "Commodities",
+   "pUp1m": 0.5,
+   "pUp3m": 0.52,
+   "pUp12m": 0.58,
+   "ev1m": 0.002,
+   "ev3m": 0.01,
+   "ev12m": 0.07,
+   "drivers": [
+    "No direct Monday catalyst identified; the nuclear-demand/AI-power-demand theme remains intact but unconfirmed by fresh news this run",
+    "Indirect linkage to the AI-capex buildout (data-center power demand) provides a loose structural tailwind even as hyperscaler capex credibility is questioned",
+    "Not directly exposed to the oil-price collapse, Fed repricing, or rare-earth-truce swing factors dominating this week's calendar",
+    "Low-conviction view given the absence of fresh, ticker-specific information"
+   ],
+   "confidence": 0.3
+  },
+  {
+   "ticker": "COPX",
+   "name": "Global X Copper Miners ETF",
+   "assetClass": "Commodities",
+   "pUp1m": 0.5,
+   "pUp3m": 0.53,
+   "pUp12m": 0.6,
+   "ev1m": 0.003,
+   "ev3m": 0.013,
+   "ev12m": 0.075,
+   "drivers": [
+    "China rare-earth truce deadline (Nov 9/10) remains a live binary for Chinese industrial-metals demand sentiment -- Announcement No. 70 still legally expires Nov 10 with no superseding text published",
+    "Lower oil/input costs from Monday's crude crash are a mild positive for industrial-metals miners' margins",
+    "Global growth proxy shares both the ISM-beat optimism (Production at a 5-year high) and the credit-stress-driven caution flagged in the macro view",
+    "No ticker-specific Monday news identified; view remains thematic rather than event-driven"
+   ],
+   "confidence": 0.35
+  },
+  {
+   "ticker": "DBA",
+   "name": "Invesco DB Agriculture Fund",
+   "assetClass": "Commodities",
+   "pUp1m": 0.5,
+   "pUp3m": 0.5,
+   "pUp12m": 0.53,
+   "ev1m": 0,
+   "ev3m": 0.005,
+   "ev12m": 0.03,
+   "drivers": [
+    "No Monday news identified with direct relevance to agricultural commodities in this research pass",
+    "Not meaningfully exposed to the Fed, Hormuz, AI-capex, or rare-earth drivers dominating the current macro narrative",
+    "Low-conviction, near-coinflip view reflects the absence of a real edge rather than a fabricated directional call",
+    "Included for completeness of the commodities sleeve only"
+   ],
+   "confidence": 0.25
+  },
+  {
+   "ticker": "BTC-USD",
+   "name": "Bitcoin",
+   "assetClass": "Crypto",
+   "pUp1m": 0.48,
+   "pUp3m": 0.53,
+   "pUp12m": 0.62,
+   "ev1m": -0.002,
+   "ev3m": 0.028,
+   "ev12m": 0.18,
+   "drivers": [
+    "BTC traded a live level of ~$77,725 Tuesday (+1.37%, still a level not a close per the price spine), modestly firmer even as Dec-hike odds firmed to ~73%",
+    "Election-outcome uncertainty (no official call yet) and carried-forward AI-credit stress are the main macro overhangs typically weighing on high-beta risk assets",
+    "No fresh Binance-recovery, ETF-flow, or ETF-specific data was verified this run; prior stabilization signals are carried forward as context, not re-confirmed",
+    "A firming hawkish-Fed case is a genuine headwind for duration-sensitive/high-beta risk assets broadly, a modest offset to Tuesday's level gain"
+   ],
+   "confidence": 0.4
+  },
+  {
+   "ticker": "ETH-USD",
+   "name": "Ethereum",
+   "assetClass": "Crypto",
+   "pUp1m": 0.44,
+   "pUp3m": 0.48,
+   "pUp12m": 0.56,
+   "ev1m": -0.008,
+   "ev3m": 0.015,
+   "ev12m": 0.13,
+   "drivers": [
+    "No fresh ETH-specific news verified this run; prior five-day ETF outflow streak (~$431M) and underperformance vs BTC are carried forward as context, not re-confirmed",
+    "Shares in the broader Monday risk-off cross-currents (VIX spike, credit stress) without a comparable offsetting institutional-demand story to BTC's Dubai-fund/Saylor signals",
+    "US midterm elections and RBA decision today add near-term macro event-risk",
+    "Lower oil prices and the collapsed Hormuz premium are a mild offsetting macro tailwind for broad risk appetite"
+   ],
+   "confidence": 0.35
+  },
+  {
+   "ticker": "SOL-USD",
+   "name": "Solana",
+   "assetClass": "Crypto",
+   "pUp1m": 0.42,
+   "pUp3m": 0.47,
+   "pUp12m": 0.55,
+   "ev1m": -0.013,
+   "ev3m": 0.008,
+   "ev12m": 0.12,
+   "drivers": [
+    "No fresh SOL-specific news verified this run; prior five-day ETF outflow streak (~$72M for the week) is carried forward as context, not re-confirmed",
+    "Large-wallet-to-exchange movements flagged in the prior run are unconfirmed this run and should be treated as stale context",
+    "Shares in the broader Monday risk-off cross-currents without an offsetting catalyst",
+    "US midterm elections and RBA decision today add near-term macro event-risk"
+   ],
+   "confidence": 0.32
+  },
+  {
+   "ticker": "TLT",
+   "name": "iShares 20+ Year Treasury Bond ETF",
+   "assetClass": "Bonds",
+   "pUp1m": 0.42,
+   "pUp3m": 0.45,
+   "pUp12m": 0.5,
+   "ev1m": -0.01,
+   "ev3m": -0.006,
+   "ev12m": 0.01,
+   "drivers": [
+    "September JOLTS (7.52M vs 7.15M consensus) stacked on October's hot ISM (55.5) has firmed convergent prediction-market/CME pricing of a December hike to ~73%, a genuine long-duration headwind",
+    "RBA hiked to 4.85% (6-3 split) and BOE is expected to hike Nov 5 to 4.00%, reinforcing a globally synchronized tightening backdrop",
+    "Oil's Tuesday stall (Brent -0.33%, WTI +0.31%) after Iran said Hormuz stays closed removes the one disinflationary tailwind duration had gotten from Monday's crash",
+    "Election-outcome uncertainty (no official call yet) and carried-forward AI-credit stress are the main offsetting flight-to-quality variables"
+   ],
+   "confidence": 0.45
+  },
+  {
+   "ticker": "IEF",
+   "name": "iShares 7-10 Year Treasury Bond ETF",
+   "assetClass": "Bonds",
+   "pUp1m": 0.46,
+   "pUp3m": 0.49,
+   "pUp12m": 0.53,
+   "ev1m": -0.004,
+   "ev3m": 0.001,
+   "ev12m": 0.022,
+   "drivers": [
+    "JOLTS blowout (7.52M) on top of ISM 55.5 keeps Dec-hike pricing firmly at ~73%, a headwind for the belly of the curve",
+    "NFP (Nov 6, 65K forecast) is now the week's key remaining rate-path catalyst that could confirm or unwind the hike-pricing shift",
+    "Intermediate duration carries less hawkish-repricing risk than the long end while still benefiting from any credit-stress flight-to-quality bid",
+    "RBA/BOE synchronized hiking this week reinforces the globally tighter backdrop"
+   ],
+   "confidence": 0.42
+  },
+  {
+   "ticker": "SHY",
+   "name": "iShares 1-3 Year Treasury Bond ETF",
+   "assetClass": "Bonds",
+   "pUp1m": 0.63,
+   "pUp3m": 0.65,
+   "pUp12m": 0.68,
+   "ev1m": 0.005,
+   "ev3m": 0.013,
+   "ev12m": 0.046,
+   "drivers": [
+    "Fed-funds pricing swinging toward a ~75% probability of a December hike keeps front-end yields elevated and attractive on a carry basis",
+    "Short duration is largely insulated from the long-end term-premium debate now intensified by the hot ISM print and hawkish Fed repricing",
+    "Cash-like safety profile benefits directly from today's event risk (midterms, RBA decision) without duration risk",
+    "A genuine hike (not cut) scenario at the Dec FOMC would be consistent with continued front-end yield support for this ETF's carry"
+   ],
+   "confidence": 0.55
+  },
+  {
+   "ticker": "TIP",
+   "name": "iShares TIPS Bond ETF",
+   "assetClass": "Bonds",
+   "pUp1m": 0.54,
+   "pUp3m": 0.55,
+   "pUp12m": 0.57,
+   "ev1m": 0.001,
+   "ev3m": 0.009,
+   "ev12m": 0.038,
+   "drivers": [
+    "October ISM Prices Paid remained hot at 75.2 (down only 2.7pt from 77.9), underpinning a sustained-inflation narrative supportive of breakevens",
+    "The CME-implied swing toward a ~75% probability of a Fed hike (rather than cut) reflects genuine inflation concern, not just growth strength -- directly supportive of TIPS relative to nominal duration",
+    "Monday's oil-price collapse (Brent -11.40%) is a near-term disinflationary offset that could cap breakeven gains",
+    "Employment component of the ISM print softened to 52.4, a 'manufacturing stagflation' mix that keeps the inflation-vs-growth debate genuinely two-sided"
+   ],
+   "confidence": 0.42
+  },
+  {
+   "ticker": "LQD",
+   "name": "iShares iBoxx Investment Grade Corporate Bond ETF",
+   "assetClass": "Bonds",
+   "pUp1m": 0.5,
+   "pUp3m": 0.51,
+   "pUp12m": 0.55,
+   "ev1m": 0,
+   "ev3m": 0.006,
+   "ev12m": 0.038,
+   "drivers": [
+    "Hyperscaler CDS widening to record levels (Oracle >220bp, Meta 114.79bp) touches IG-rated issuers but from a much stronger starting credit position than CCC names",
+    "IG spreads have not shown the same cross-sectional repricing seen in CCC (~12%, highest since Nov 2022)",
+    "Flight-to-quality bid from the credit-stress shock and today's event risk typically favors IG credit over equities and HY",
+    "Still exposed to the duration headwind from the Fed-funds pricing swing toward a hike alongside RBA/BOE tightening"
+   ],
+   "confidence": 0.4
+  },
+  {
+   "ticker": "HYG",
+   "name": "iShares iBoxx High Yield Corporate Bond ETF",
+   "assetClass": "Bonds",
+   "pUp1m": 0.35,
+   "pUp3m": 0.4,
+   "pUp12m": 0.48,
+   "ev1m": -0.012,
+   "ev3m": -0.006,
+   "ev12m": 0.015,
+   "drivers": [
+    "CCC-rated spreads widened to ~12%, the highest since November 2022, confirmed this run as a broadening (not isolated) credit-stress episode",
+    "Hyperscaler CDS at outright records (Oracle 5Y CDS above its 2008 GFC level, Meta at 114.79bp) signal the stress has moved well beyond the lowest-rated tier",
+    "Direct negative read-through from the AI-capex credit-stress shock given HY's heavier exposure to lower-quality balance sheets",
+    "A Fed-hike (not cut) scenario would add a second, independent headwind on top of the credit-spread widening already underway"
+   ],
+   "confidence": 0.52
+  },
+  {
+   "ticker": "EMB",
+   "name": "iShares JP Morgan EM Bond ETF",
+   "assetClass": "Bonds",
+   "pUp1m": 0.47,
+   "pUp3m": 0.5,
+   "pUp12m": 0.55,
+   "ev1m": -0.001,
+   "ev3m": 0.005,
+   "ev12m": 0.04,
+   "drivers": [
+    "Monday's oil-price collapse (Brent -11.40%) directly improves fiscal/current-account dynamics for EM oil-importing sovereigns, a genuine positive reversal",
+    "Synchronized DM central-bank tightening this week (RBA today, BOE Nov 5) plus the Fed's own hawkish repricing tightens global financial conditions for EM borrowers",
+    "China rare-earth truce deadline uncertainty (Nov 9/10, legal text still unpublished) adds an idiosyncratic risk layer for China-linked EM credits",
+    "Event-risk hedging (VIX +8.91% Monday) typically widens EM sovereign spreads in sympathy with developed-market credit stress even on a day oil fell"
+   ],
+   "confidence": 0.37
+  },
+  {
+   "ticker": "BND",
+   "name": "Vanguard Total Bond Market ETF",
+   "assetClass": "Bonds",
+   "pUp1m": 0.48,
+   "pUp3m": 0.49,
+   "pUp12m": 0.53,
+   "ev1m": -0.002,
+   "ev3m": 0.003,
+   "ev12m": 0.027,
+   "drivers": [
+    "Blended Treasury/IG/MBS exposure nets the duration headwind from the Fed-funds pricing swing toward a hike against the flight-to-quality bid from credit stress/event risk",
+    "Hot ISM print (55.5) and persistent Prices Paid (75.2) keep the aggregate bond market's rate-path debate genuinely two-sided ahead of NFP (Nov 6)",
+    "Diversification across credit qualities dampens the acute CCC-specific stress relative to a pure HY allocation",
+    "RBA/BOE synchronized hiking this week reinforces the globally tighter rate backdrop"
+   ],
+   "confidence": 0.4
+  }
+ ],
+ "callsNote": "Updated Tue 3 Nov 2026 07:02 SGT run against Monday's full cash-equity close. All 40 calls refreshed against the confirmed Brent/WTI crash (Hormuz de-escalation), the hot ISM print tilting Fed-funds pricing toward a December hike, record hyperscaler CDS, and the VIX/gold/silver event-risk divergence. XLE/USO/DBC took the largest downward revisions on the oil-premium unwind; GLD/SLV/GDX nudged up on the safe-haven/credit-stress bid. All 40 required universe tickers remain populated.",
+ "rareEarthCalls": [
+  {
+   "ticker": "MP",
+   "name": "MP Materials Corp",
+   "assetClass": "Equity",
+   "pUp1m": 0.48,
+   "pUp3m": 0.53,
+   "pUp12m": 0.62,
+   "ev1m": -0.003,
+   "ev3m": 0.018,
+   "ev12m": 0.12,
+   "drivers": [
+    "Fell 3.08% Monday to $38.35, part of a sector-wide selloff driven mainly by dilution/going-concern fears at peer Critical Metals Corp (CRML), not MP-specific news",
+    "China's rare-earth truce extension to Jan 10 2027 is confirmed verbally by both Washington (Treasury Sec. Bessent) and Beijing's MOFCOM, but China's governing Announcement No. 70 still legally expires Nov 10 2026 with no superseding notice published -- the binary deadline risk stays live",
+    "Q3 earnings expected around Nov 5-10, a near-term idiosyncratic catalyst",
+    "DoD-backing/onshoring thesis remains structurally intact; Goldman Sachs' prior $57 price target (cut from $65 in late Oct) still implies meaningful upside from Monday's close"
+   ],
+   "confidence": 0.45
+  },
+  {
+   "ticker": "LYC.AX",
+   "name": "Lynas Rare Earths",
+   "assetClass": "Equity",
+   "pUp1m": 0.5,
+   "pUp3m": 0.55,
+   "pUp12m": 0.6,
+   "ev1m": 0.004,
+   "ev3m": 0.016,
+   "ev12m": 0.095,
+   "drivers": [
+    "Rose 0.17% Monday to A$12.12, the most resilient of the major ex-China rare-earth names, consistent with FY26 revenue +76% and Q1 revenue +55% YoY reported this cycle",
+    "RBA is priced for a near-certain (31/32 economists) hike to 4.85% today; AUD has already softened pre-decision to just below US$0.70, a tailwind for AUD-reporting Lynas' USD-denominated sales",
+    "Pursuing the Meteoric Resources (Caldeira project, Brazil) acquisition to diversify supply; AGM set for Nov 25 to vote on FY26 governance",
+    "China's rare-earth truce legal-text gap (Announcement No. 70 still legally expiring Nov 10 with no superseding notice) is the key swing factor -- Lynas is a prime beneficiary if China re-imposes export controls"
+   ],
+   "confidence": 0.45
+  },
+  {
+   "ticker": "UUUU",
+   "name": "Energy Fuels Inc",
+   "assetClass": "Equity",
+   "pUp1m": 0.44,
+   "pUp3m": 0.49,
+   "pUp12m": 0.58,
+   "ev1m": -0.006,
+   "ev3m": 0.009,
+   "ev12m": 0.1,
+   "drivers": [
+    "Fell 4.15% Monday to $7.39, part of the sector-wide selloff driven mainly by dilution/going-concern fears at peer Critical Metals Corp, not UUUU-specific news",
+    "Diversified US uranium-plus-rare-earth processing exposure gives it a dual-thesis profile (nuclear demand plus onshoring) distinct from pure rare-earth miners",
+    "Q3 earnings expected around Nov 9-10, coinciding directly with the China truce deadline window -- a high-information near-term catalyst",
+    "Directly exposed to the same Nov 9/10 China truce legal-text risk as MP/Lynas -- a lapse would be a sector-wide positive catalyst"
+   ],
+   "confidence": 0.4
+  },
+  {
+   "ticker": "USAR",
+   "name": "USA Rare Earth Inc",
+   "assetClass": "Equity",
+   "pUp1m": 0.38,
+   "pUp3m": 0.44,
+   "pUp12m": 0.56,
+   "ev1m": -0.02,
+   "ev3m": -0.004,
+   "ev12m": 0.095,
+   "drivers": [
+    "Fell roughly 10% Monday, the sharpest move in the ex-China rare-earth basket, as dilution/going-concern fears at peer Critical Metals Corp (CRML) spilled over sector-wide alongside the broader tech selloff",
+    "Smaller-cap, earlier-stage profile makes it more sensitive to financing/dilution risk than established producers like MP or Lynas",
+    "Still a direct beneficiary of any DoD-backing or export-control-driven re-rating in the ex-China rare-earth magnet supply chain",
+    "China truce legal-text gap (Nov 9/10 deadline window) is the dominant near-term catalyst, but balance-sheet/dilution risk adds a genuine idiosyncratic headwind"
+   ],
+   "confidence": 0.35
+  },
+  {
+   "ticker": "NEO.TO",
+   "name": "Neo Performance Materials",
+   "assetClass": "Equity",
+   "pUp1m": 0.48,
+   "pUp3m": 0.5,
+   "pUp12m": 0.56,
+   "ev1m": -0.002,
+   "ev3m": 0.006,
+   "ev12m": 0.07,
+   "drivers": [
+    "Q3 earnings expected around Nov 10, directly coinciding with the China rare-earth truce deadline window -- limited independent company-specific news found this run",
+    "Shares in the same ex-China rare-earth/magnet thematic as MP/Lynas/UUUU, but with less company-specific news verified this run",
+    "China truce legal-text gap (Announcement No. 70 still legally expiring Nov 10) is the dominant thematic swing factor",
+    "Low-conviction view given the absence of fresh, ticker-specific information this run"
+   ],
+   "confidence": 0.3
+  },
+  {
+   "ticker": "ILU.AX",
+   "name": "Iluka Resources",
+   "assetClass": "Equity",
+   "pUp1m": 0.48,
+   "pUp3m": 0.5,
+   "pUp12m": 0.56,
+   "ev1m": -0.001,
+   "ev3m": 0.006,
+   "ev12m": 0.065,
+   "drivers": [
+    "Eneabba rare-earth refinery reported 65% built as of early Nov 2026, with first output targeted for 2027 -- a long-horizon, de-risking construction update rather than a near-term catalyst",
+    "Shares in the ex-China rare-earth thematic but on a longer production timeline than MP/Lynas, reducing near-term sensitivity to the Nov 9/10 truce deadline",
+    "RBA rate decision today (expected hike to 4.85%) and AUD softening are a modest context factor for the ASX-listed name",
+    "Low-conviction view given limited fresh company-specific news beyond the construction update"
+   ],
+   "confidence": 0.3
+  },
+  {
+   "ticker": "6680.HK",
+   "name": "JL Mag Rare-Earth Co",
+   "assetClass": "Equity",
+   "pUp1m": 0.54,
+   "pUp3m": 0.53,
+   "pUp12m": 0.52,
+   "ev1m": 0.004,
+   "ev3m": 0.007,
+   "ev12m": 0.028,
+   "drivers": [
+    "As the dominant Chinese magnet incumbent, benefits structurally if Beijing maintains leverage via the Nov 9/10 export-control deadline rather than fully liberalizing -- Announcement No. 70 still legally expires Nov 10 with no superseding notice published",
+    "Only routine dividend-related news found this run; no major company-specific catalyst identified",
+    "Inverse positioning to the ex-China basket (MP/Lynas/UUUU/USAR): a truce breakdown that hurts Western names would likely reinforce JL Mag's domestic pricing power",
+    "A confirmed, published extension to Jan 10 2027 would reduce near-term volatility but also reduce the leverage narrative supporting JL Mag's premium"
+   ],
+   "confidence": 0.3
+  },
+  {
+   "ticker": "REMX",
+   "name": "VanEck Rare Earth/Strategic Metals ETF",
+   "assetClass": "Equity",
+   "pUp1m": 0.46,
+   "pUp3m": 0.51,
+   "pUp12m": 0.59,
+   "ev1m": -0.006,
+   "ev3m": 0.012,
+   "ev12m": 0.095,
+   "drivers": [
+    "Basket ETF (holds MP, Lynas and other ex-China rare-earth miners) tracks Monday's divergent moves: MP -3.08%, Lynas +0.17%, UUUU -4.15%, USAR roughly -10% -- net a modestly negative day for the basket",
+    "China's rare-earth truce legal-text gap (Announcement No. 70 still legally expiring Nov 10 2026 with no superseding notice) is the dominant swing factor for every basket constituent",
+    "Monday's sector-wide selloff was driven mainly by dilution/going-concern fears at peer Critical Metals Corp (CRML), not a basket-wide fundamental deterioration",
+    "Multiple basket constituents (MP, UUUU, NEO) report Q3 earnings in the Nov 5-10 window, clustering idiosyncratic catalysts right into the truce deadline"
+   ],
+   "confidence": 0.38
+  }
+ ]
 }

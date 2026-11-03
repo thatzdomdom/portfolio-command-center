@@ -1,36 +1,54 @@
 {
-  "generated": "2026-11-02T23:02:23.373Z",
+  "generated": "2026-11-03T23:02:30.494Z",
   "source": "ForexFactory public weekly calendar JSON (keyless)",
   "note": "Times converted to Asia/Singapore. `released` is computed from the event TIMESTAMP, so nothing is ever described as upcoming once its moment has passed. WHAT THIS GIVES: the schedule, the CONSENSUS (`forecast`) and the PREVIOUS, exactly — take consensus figures from here rather than asking an agent to hunt one, which is how two finders once returned 54.5 and 55.0 for the same UMich print. WHAT IT DOES NOT GIVE: the ACTUAL released number. This feed has no such field. An agent must still fetch what a print came in at.",
   "released": [
     {
-      "title": "ISM Manufacturing PMI",
-      "country": "USD",
-      "impact": "Medium",
-      "whenSGT": "2026-11-02 23:00",
-      "whenISO": "2026-11-02T10:00:00-05:00",
-      "forecast": "54.5",
-      "previous": "54.5",
+      "title": "Employment Change q/q",
+      "country": "NZD",
+      "impact": "High",
+      "whenSGT": "2026-11-04 05:45",
+      "whenISO": "2026-11-03T16:45:00-05:00",
+      "forecast": "0.4%",
+      "previous": "0.5%",
       "relevance": null
     },
     {
-      "title": "Daylight Saving Time Shift",
+      "title": "Unemployment Rate",
+      "country": "NZD",
+      "impact": "High",
+      "whenSGT": "2026-11-04 05:45",
+      "whenISO": "2026-11-03T16:45:00-05:00",
+      "forecast": "5.5%",
+      "previous": "5.6%",
+      "relevance": null
+    },
+    {
+      "title": "Congressional Elections",
       "country": "USD",
-      "impact": "Holiday",
-      "whenSGT": "2026-11-01 15:00",
-      "whenISO": "2026-11-01T02:00:00-05:00",
+      "impact": "High",
+      "whenSGT": "2026-11-03 23:16",
+      "whenISO": "2026-11-03T10:16:00-05:00",
       "forecast": null,
       "previous": null,
       "relevance": null
-    }
-  ],
-  "upcoming": [
+    },
     {
-      "title": "Bank Holiday",
-      "country": "JPY",
-      "impact": "Holiday",
-      "whenSGT": "2026-11-03 08:00",
-      "whenISO": "2026-11-02T19:00:00-05:00",
+      "title": "JOLTS Job Openings",
+      "country": "USD",
+      "impact": "Medium",
+      "whenSGT": "2026-11-03 23:00",
+      "whenISO": "2026-11-03T10:00:00-05:00",
+      "forecast": "7.15M",
+      "previous": "7.08M",
+      "relevance": null
+    },
+    {
+      "title": "RBA Press Conference",
+      "country": "AUD",
+      "impact": "High",
+      "whenSGT": "2026-11-03 12:30",
+      "whenISO": "2026-11-02T23:30:00-05:00",
       "forecast": null,
       "previous": null,
       "relevance": null
@@ -66,55 +84,37 @@
       "relevance": null
     },
     {
-      "title": "RBA Press Conference",
-      "country": "AUD",
-      "impact": "High",
-      "whenSGT": "2026-11-03 12:30",
-      "whenISO": "2026-11-02T23:30:00-05:00",
+      "title": "Bank Holiday",
+      "country": "JPY",
+      "impact": "Holiday",
+      "whenSGT": "2026-11-03 08:00",
+      "whenISO": "2026-11-02T19:00:00-05:00",
       "forecast": null,
       "previous": null,
       "relevance": null
     },
     {
-      "title": "JOLTS Job Openings",
+      "title": "ISM Manufacturing PMI",
       "country": "USD",
       "impact": "Medium",
-      "whenSGT": "2026-11-03 23:00",
-      "whenISO": "2026-11-03T10:00:00-05:00",
-      "forecast": "7.15M",
-      "previous": "7.08M",
+      "whenSGT": "2026-11-02 23:00",
+      "whenISO": "2026-11-02T10:00:00-05:00",
+      "forecast": "54.5",
+      "previous": "54.5",
       "relevance": null
     },
     {
-      "title": "Congressional Elections",
+      "title": "Daylight Saving Time Shift",
       "country": "USD",
-      "impact": "High",
-      "whenSGT": "2026-11-03 23:16",
-      "whenISO": "2026-11-03T10:16:00-05:00",
+      "impact": "Holiday",
+      "whenSGT": "2026-11-01 15:00",
+      "whenISO": "2026-11-01T02:00:00-05:00",
       "forecast": null,
       "previous": null,
       "relevance": null
-    },
-    {
-      "title": "Employment Change q/q",
-      "country": "NZD",
-      "impact": "High",
-      "whenSGT": "2026-11-04 05:45",
-      "whenISO": "2026-11-03T16:45:00-05:00",
-      "forecast": "0.4%",
-      "previous": "0.5%",
-      "relevance": null
-    },
-    {
-      "title": "Unemployment Rate",
-      "country": "NZD",
-      "impact": "High",
-      "whenSGT": "2026-11-04 05:45",
-      "whenISO": "2026-11-03T16:45:00-05:00",
-      "forecast": "5.5%",
-      "previous": "5.6%",
-      "relevance": null
-    },
+    }
+  ],
+  "upcoming": [
     {
       "title": "ADP Non-Farm Employment Change",
       "country": "USD",
@@ -141,7 +141,7 @@
       "impact": "Low",
       "whenSGT": "2026-11-04 23:30",
       "whenISO": "2026-11-04T10:30:00-05:00",
-      "forecast": null,
+      "forecast": "-0.1M",
       "previous": "-1.9M",
       "relevance": "energy sleeve (USO/XLE)"
     },
