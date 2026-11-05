@@ -1,93 +1,92 @@
 {
- "updated": "2026-11-05",
- "asOf": "2026-11-05",
- "note": "Thu 5 Nov 2026 07:02 SGT run against Wednesday's full cash-equity close. The key update vs. the prior (Tue-dated) regime read: the US midterms were actually called overnight -- Democrats swept the House and Senate -- confirmed as the proximate cause of Wednesday's VIX crush (-20.3% to 16.61), equity surge (S&P +1.58%, Dow +3.03%, best post-midterm day since 1982) and oil collapse (Brent -8.66%, WTI -8.38% on Iran-de-escalation bets), while gold/silver's parallel rally (+3.34%/+5.52%) is tied to dollar weakness and fiscal-hedging. ISM Services/ADP prints, a hawkish ~81% CME FedWatch December-hike repricing, record Oracle/Meta CDS levels, and the China rare-earth truce's confirmed two-month extension to Jan 10 2027 (not a Nov10 cliff) were folded into the calls. All 40 required universe tickers plus the 8-ticker rare-earth basket remain populated.",
+ "updated": "2026-11-06",
+ "asOf": "2026-11-06",
+ "note": "Fri 6 Nov 2026 07:02 SGT run, re-verified against Thursday Nov 5's full cash-equity close -- a violent reversal of Wednesday's post-midterm relief rally. S&P500 -4.36% to 7353.73, Dow -3.44% to 51523.06, Nasdaq -5.52% to 24315.00 (correction territory), Russell2000 -4.45%, VIX +69.7% to 28.18 (biggest one-day VIX spike this year) as Texas's governor-elect campaigned on pausing AI data-center construction (Texas = largest US data-center market; UBS estimates up to a third of projected 2028 capacity could be delayed), hitting debt-financed 'neocloud' names (CoreWeave -14.3%) atop global credit spreads already at a 17-month high on AI-debt-binge fears. Hawkish Fed speak (Hammack: rates need to go restrictive; Musalem: hike needed soon) compounded the move. Oil reversed again (Brent proxy +4.9% to ~$99.25) on fresh Hormuz tanker-incident risk even as equities sold off. Today's Oct NFP (21:30 SGT, consensus 65K vs 29K prior) is the swing catalyst. All 40 required universe tickers plus the 8-ticker rare-earth basket remain populated. DATA-QUALITY FLAG: the price feed's \"GOLD\" instrument is NOT Barrick (Barrick re-ticked to NYSE:B in May 2025); GOLD is now an unrelated company, Gold.com Inc, whose Nov5 -9.46% move (a sequential growth deceleration in its Q1 FY27 print) must not be read as a Barrick/mining-sector signal -- flagging for the price-spine owner to fix the instrument mapping.",
  "macro": {
-  "regime": "Election-clarity relief rally vs. sticky-inflation hike risk",
-  "riskOnProb": 0.58,
-  "regimeScore": 0.16,
-  "asOf": "2026-11-05",
-  "narrative": "Wednesday Nov 4 had a clean catalyst: Democrats swept both the House and Senate in the Nov 3 midterms, and markets priced the resulting divided government as a check on fiscal/tariff overreach, collapsing the VIX -20.3% to 16.61 and sending the Dow +3.03% (its best post-midterm-election day since 1982), the S&P +1.58% and the Russell 2000 +1.58%. The same outcome was read as accelerating pressure to end the Iran war, crushing Brent -8.66% and WTI -8.38% even though the Nov 4 EIA report showed a surprise crude draw; Treasury Secretary Bessent's Nov 4 comment that \"the world can live without Iranian oil\" reinforced the bearish repricing. Gold (+3.34% to 4072.20) and silver (+5.52% to 52.33) rallied in parallel on a weaker dollar (DXY -0.58% to 101.27), a modest 10Y yield dip (~4.92%, -5bp), and fiscal-restraint/debasement hedging, corroborated by a reported single-day ~211-tonne gold-ETF inflow and broad miner strength (NEM +9.9%, HL +13.2%). Underneath the relief rally two hawkish-skeptic threads persist: ISM Services cooled to 54.5 (vs 54.8 consensus, 54.9 prior) with sticky prices-paid, pushing CME FedWatch's December hike probability to roughly 81%; and AI-capex credit stress remains acute, with Oracle's 5-year CDS near record levels (S&P downgrade to BBB-) and Meta's CDS at a record 114.79bp, leaving tech/credit markets vulnerable to a reversal even as equities rallied.",
+  "regime": "Hawkish-Fed AI-capex de-rating / two-way whipsaw",
+  "riskOnProb": 0.35,
+  "regimeScore": -0.1,
+  "asOf": "2026-11-06",
+  "narrative": "Thursday's violent reversal was a political-risk shock to AI capex, not fresh macro data: markets re-read Tuesday's Democratic sweep overnight as a threat to the AI data-center buildout after Texas's governor-elect campaigned on pausing new construction in the largest US data-center market, with UBS flagging up to a third of projected 2028 capacity at risk. That hit debt-financed GPU buyers (CoreWeave -14.3%) atop credit spreads already at a 17-month high on AI-debt-binge fears (HY yields +~90bp to ~7%, spreads +94bp to 354bp); crucially, AMD beat and raised guidance yet still fell ~15%, confirming sentiment/policy rather than fundamentals drove the move. Hawkish Fed speak (Hammack: rates need to go restrictive; Musalem: a hike is needed soon) removed the rate-cut cushion, and CME-implied odds now sit near 68-73% for a December hike. $2.5T was erased from the Nasdaq in one session; NYSE breadth was roughly 6:1 negative. Oil, meanwhile, round-tripped the other way: Wednesday's Iran-de-escalation-driven crash reversed Thursday (Brent proxy +4.9% to ~$99.25) as Iran's IRGC reportedly set tankers/a tug ablaze in the Strait of Hormuz (five incidents since Sunday, matching October's record pace) and Saudi Arabia warned of fresh Houthi threats to the Yanbu Red Sea hub. Gold held its post-election bid (GLD +0.8%) while silver and the miners sold off harder (SLV -0.5%, SILJ -1.6%, HL -3.3%, PAAS -2.2%) -- Kitco's PM wrap attributes this to silver's dual industrial-metal exposure amplifying beta to the tech-led equity rout, not a silver-specific catalyst (no COMEX margin change, no SLV outflow). Today's Oct NFP (consensus 65K vs Sept's 29K miss, unemployment steady at 4.2%) is the swing variable: a soft print could revive rate-cut hope and lift riskOnProb back toward 0.5; a hot print into an already-hawkish Fed could push it toward 0.2. A fourth possible government shutdown looms too, with the CR expiring Dec 11 and Congress returning Nov 9 for a lame-duck session with no appropriations progress.",
   "drivers": [
    {
-    "factor": "Democratic sweep of House and Senate (Nov 3 midterms, called by Nov 4)",
-    "read": "Divided government priced as a check on fiscal/tariff overreach; Dow's +3.03%/+1569pt move was its best post-midterm-election day since 1982",
-    "impact": "supportive"
-   },
-   {
-    "factor": "VIX collapse (20.83 -> 16.61, -20.26%)",
-    "read": "Election-uncertainty hedge unwind plus short-vol flows amplified the equity rally; tail-risk premium evaporated in one session",
-    "impact": "supportive"
-   },
-   {
-    "factor": "Iran war de-escalation bets (draft proposal, Bessent comments)",
-    "read": "Brent -8.66% to 94.63, WTI -8.38% to 88.04 on bets a Dem Congress speeds pressure to end the war, overwhelming a bullish EIA crude draw",
-    "impact": "mixed"
-   },
-   {
-    "factor": "Hawkish Fed repricing - CME FedWatch ~81% probability of a December hike",
-    "read": "ISM Services cooled to 54.5 (vs 54.8 consensus, 54.9 prior) but prices-paid stayed sticky; ADP +86K kept inflation persistence as the dominant Fed risk even as growth softens",
+    "factor": "AI-capex political-risk shock (Texas data-center-pause campaign, UBS 2028-capacity-delay estimate)",
+    "read": "Re-reading of the Dem sweep from Wednesday's 'clarity' tailwind into Thursday's AI-policy threat; hit debt-financed neocloud names hardest (CoreWeave -14.3%) even where earnings beat (AMD +guidance, still -15%)",
     "impact": "cautionary"
    },
    {
-    "factor": "AI-capex credit stress (Oracle CDS at record levels, S&P downgrade to BBB-; Meta CDS record 114.79bp)",
-    "read": "Hyperscaler debt-protection costs at their highest since 2021; Oracle raising ~$20bn in stock+debt; a latent credit-market risk sitting underneath the election-relief equity rally",
+    "factor": "Credit spreads at a 17-month high on AI-debt-binge fears (HY +~90bp to ~7%, spreads +94bp to 354bp)",
+    "read": "AI-related debt issuance up 81% y/y (>$250B); removes a cushion that let equities shrug off AI-capex doubts earlier in the year",
     "impact": "cautionary"
    },
    {
-    "factor": "Dollar weakness + fiscal-concern-driven gold/silver surge",
-    "read": "DXY -0.58% to 101.27 and a ~5bp 10Y dip to 4.92% drove gold +3.34% and silver +5.52%, with a reported single-day 211t gold-ETF inflow and broad miner confirmation (NEM +9.9%, PAAS +8.4%, AG +9.2%, HL +13.2%)",
+    "factor": "Hawkish Fed speak (Hammack: restrictive; Musalem: hike needed soon) -- ~68-73% Dec-hike odds",
+    "read": "Removes the 'Fed put' investors leaned on after Wednesday's VIX crush; today's NFP (consensus 65K vs 29K prior) is the next test of whether the Fed can justify staying hawkish into a cooling labor market",
+    "impact": "cautionary"
+   },
+   {
+    "factor": "Government funding cliff (CR expires Dec 11, lame-duck Congress returns Nov 9, no appropriations progress)",
+    "read": "A 4th possible shutdown of the term sits unresolved behind the AI/Fed story and could compound volatility into year-end",
+    "impact": "cautionary"
+   },
+   {
+    "factor": "Strait of Hormuz tanker incidents (5 since Sunday, record pace) reversing Wednesday's Iran-de-escalation oil crash",
+    "read": "Brent/WTI proxies +~4-5% Thu after Wed's -8%+ crash; a geopolitical tail risk that didn't actually resolve, just got mispriced for one session",
+    "impact": "cautionary"
+   },
+   {
+    "factor": "Gold/silver dispersion (GLD +0.8% vs SLV -0.5%, miners down harder) on silver's industrial-metal beta to the tech selloff",
+    "read": "Gold held its safe-haven bid while silver and the miners (SILJ, SLVP, HL, PAAS) took the broader equity-correlated hit -- a beta story, not a precious-metals-specific reversal",
     "impact": "mixed"
    }
   ],
   "byAssetClass": [
    {
     "assetClass": "Equity",
-    "stance": "modest OW",
-    "pUp12m": 0.57,
-    "note": "Election-clarity and VIX-crush tailwinds offset by hawkish Fed repricing (~81% Dec hike odds per CME FedWatch) and AI-capex credit stress; cyclicals/industrials/financials favored over long-duration-sensitive defensives.",
-    "tilt": 0.012
+    "stance": "modest UW",
+    "pUp12m": 0.5,
+    "note": "AI-capex political-risk shock plus a hawkish Fed removing the rate-cut cushion argues for trimming risk into today's NFP; the Wednesday rally's breadth gains were erased in a single 6:1-negative session.",
+    "tilt": -0.012
    },
    {
     "assetClass": "Commodities",
-    "stance": "OW",
-    "pUp12m": 0.59,
-    "note": "Precious metals (gold/silver) carry the bucket on dollar weakness, fiscal-hedging and debasement-trade flows; energy is the clear drag post Iran-de-escalation (Brent -8.66%, WTI -8.38%), so the OW is concentrated in metals, not energy.",
-    "tilt": 0.02
+    "stance": "Neutral",
+    "pUp12m": 0.52,
+    "note": "Gold holds its safe-haven bid but silver/miners are now trading with equity-correlated beta; oil whipsawed both directions on Iran-war headlines in 48 hours, netting the bucket to roughly neutral rather than a clean OW.",
+    "tilt": 0.0
    },
    {
     "assetClass": "Crypto",
-    "stance": "modest OW",
-    "pUp12m": 0.56,
-    "note": "BTC +4.0% and ETH's larger bounce Nov4 rode the same election-hedge-unwind/risk-on wave as equities; regulatory-hope narrative under a new Congress adds a speculative tailwind but also headline risk.",
-    "tilt": 0.012
+    "stance": "Neutral",
+    "pUp12m": 0.5,
+    "note": "Crypto Fear & Greed round-tripped from 26 (low) to 50 (Neutral) inside 48 hours, tracking the equity whipsaw rather than showing an independent signal.",
+    "tilt": 0.0
    },
    {
     "assetClass": "Bonds",
     "stance": "modest UW",
     "pUp12m": 0.46,
-    "note": "Nov4's ~5bp 10Y yield dip to 4.92% was a safe-haven/gridlock-driven bounce, but CME FedWatch pricing ~81% odds of a December hike on sticky ISM prices-paid, plus AI-debt-driven IG/HY spread risk (Oracle downgrade, record CDS), skews duration and credit cautious into year-end.",
+    "note": "Hawkish Fed speak and ~68-73% December-hike odds keep duration and credit (AI-debt-exposed IG/HY) cautious into today's NFP and the Dec 11 funding deadline.",
     "tilt": -0.012
    },
    {
     "assetClass": "USD/Cash",
-    "stance": "Neutral",
-    "pUp12m": 0.5,
-    "note": "DXY fell 0.58% to 101.27 on Nov4 (election-driven positioning unwind) even as hawkish Fed repricing would normally support the dollar; these crosscurrents net to roughly neutral pending the Dec FOMC and Nov6 NFP.",
-    "tilt": 0.0
+    "stance": "modest OW",
+    "pUp12m": 0.55,
+    "note": "Best tactical ballast heading into today's NFP print and the unresolved government-funding cliff; cash is the position that benefits from being wrong about neither direction of the whipsaw.",
+    "tilt": 0.012
    }
   ],
   "sources": [
-   "https://www.cnn.com/2026/11/04/investing/us-markets-midterm-elections",
-   "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-nov-04-2026",
-   "https://www.prnewswire.com/news-releases/services-pmi-at-54-5-october-2026-ism-services-pmi-report-302928112.html",
-   "https://mediacenter.adp.com/2026-11-04-ADP-National-Employment-Report-Private-Sector-Employment-Increased-by-86,000-Jobs-in-October",
-   "https://www.rigzone.com/news/oil_plunges_as_election_shifts_iran_outlook-04-nov-2026-185012-article",
-   "https://247wallst.com/investing/2026/11/04/treasury-secretary-bessent-says-the-world-can-live-without-iranian-oil-as-trump-weighs-further-strikes/",
-   "https://www.usagold.com/daily-precious-metals-market-report-november-4-2026/",
-   "https://www.gurufocus.com/news/9124975/credit-default-swaps-surge-for-us-tech-firms-amid-ai-sector-strain-oracle-orcl-spreads-hit-record-high",
-   "https://startupfortune.com/us-and-china-extend-their-rare-earth-truce-by-just-two-months-to-january/",
-   "https://www.fool.com/coverage/stock-market-today/2026/11/04/crypto-market-today-nov-4-bitcoin-stages-sharp-recovery-as-wall-street-rallies-and-regulatory-hopes-return/"
+   "https://www.cnbc.com/2026/11/05/stock-market-selloff-ai-fears.html",
+   "https://www.cnn.com/2026/11/05/investing/tech-heavy-nasdaq-plunges",
+   "https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-5-dow-sp-500-nasdaq-plunge-chip-stocks-melt-down-193726491.html",
+   "https://www.bloomberg.com/news/articles/2026-10-23/ai-tech-fears-push-global-credit-spreads-to-17-month-high",
+   "https://www.cnbc.com/2026/11/05/oil-falls-for-a-fourth-day-on-expectations-for-lower-risk-of-iran-war-escalation.html",
+   "https://oilprice.com/Latest-Energy-News/World-News/Oil-Crashes-9-as-Trump-and-Vance-Blame-Iran-War-for-Midterm-Rout.html",
+   "https://www.kitco.com/news/article/2026-11-05/gold-holds-gains-silver-slips-wall-street-plunges-fed-hike-bets-ease-kitco",
+   "https://www.hngn.com/articles/273714/20261105/lame-duck-congress-returns-funding-deadline-democrats-waiting.htm",
+   "https://windailysports.com/fed-rate-decision-odds-december-2026/"
   ]
  },
  "calls": [
@@ -95,55 +94,55 @@
    "ticker": "SPY",
    "name": "SPDR S&P 500 ETF Trust",
    "assetClass": "Equity",
-   "pUp1m": 0.56,
-   "pUp3m": 0.58,
-   "pUp12m": 0.6,
-   "ev1m": 0.01,
-   "ev3m": 0.03,
-   "ev12m": 0.09,
+   "pUp1m": 0.47,
+   "pUp3m": 0.52,
+   "pUp12m": 0.56,
+   "ev1m": -0.01,
+   "ev3m": 0.015,
+   "ev12m": 0.07,
    "drivers": [
-    "S&P 500 +1.58% Nov4 to 7688.62 as the Dem sweep cleared election uncertainty",
-    "VIX crush -20.3% to 16.61 signals a sharp normalization in tail-risk pricing",
-    "ISM Services cooled to 54.5 (vs 54.8 consensus, 54.9 prior) - a growth-momentum headwind to watch",
-    "CME FedWatch ~81% odds of a Dec hike plus Nov6 NFP (consensus 65K, prior 29K) are the next swing factors"
+    "S&P 500 -4.36% Nov5 to 7353.73 erased all of Wednesday's +1.58% relief rally and more, on an AI-capex political-risk shock (Texas data-center-pause campaign) and hawkish Fed speak",
+    "VIX spiked +69.7% to 28.18 Nov5, its biggest one-day jump this year, confirming a genuine risk-off shock rather than a one-session wobble",
+    "Today's Oct NFP (consensus 65K vs Sept's 29K miss) is the swing catalyst -- a soft print could revive rate-cut hope, a hot print into an already-hawkish Fed could extend the selloff",
+    "NYSE breadth was ~6:1 negative on Nov5, confirming the selloff was broad rather than concentrated in a handful of names"
    ],
-   "confidence": 0.6
+   "confidence": 0.55
   },
   {
    "ticker": "QQQ",
    "name": "Invesco QQQ Trust",
    "assetClass": "Equity",
-   "pUp1m": 0.54,
-   "pUp3m": 0.55,
-   "pUp12m": 0.56,
-   "ev1m": 0.01,
-   "ev3m": 0.028,
-   "ev12m": 0.08,
+   "pUp1m": 0.42,
+   "pUp3m": 0.48,
+   "pUp12m": 0.53,
+   "ev1m": -0.025,
+   "ev3m": 0.0,
+   "ev12m": 0.06,
    "drivers": [
-    "Nasdaq Composite +1.44% Nov4 to 25736.51 on election-relief risk-on",
-    "Reporting flagged AI-capex policy risk from a Dem Congress on the ~$900B hyperscaler capex cycle",
-    "Oracle CDS near record levels and Meta CDS at record 114.79bp keep AI-financing stress in focus",
-    "Mega-cap dispersion reported: Amazon/Alphabet/Meta higher, Nvidia/Broadcom/Micron softer on the same day"
+    "Nasdaq -5.52% Nov5 to 24315.00 (correction territory), erasing ~$2.5T in one session as Texas's governor-elect campaign to pause AI data-center construction (largest US data-center market) spooked AI-capex sentiment",
+    "AMD beat and raised guidance yet still fell roughly 15% -- confirms the selloff is a sentiment/policy repricing, not an earnings problem, which argues against chasing it mechanically",
+    "Credit spreads at a 17-month high on AI-debt-binge fears (AI-linked debt issuance +81% y/y) removes the credit-market cushion that supported AI-capex names through 2026",
+    "CoreWeave -14.3% highlights the acute risk concentrated in debt-financed 'neocloud' GPU buyers specifically, more than mega-cap tech broadly"
    ],
-   "confidence": 0.55
+   "confidence": 0.5
   },
   {
    "ticker": "IWM",
    "name": "iShares Russell 2000 ETF",
    "assetClass": "Equity",
-   "pUp1m": 0.58,
-   "pUp3m": 0.6,
-   "pUp12m": 0.6,
-   "ev1m": 0.018,
-   "ev3m": 0.045,
-   "ev12m": 0.1,
+   "pUp1m": 0.45,
+   "pUp3m": 0.5,
+   "pUp12m": 0.55,
+   "ev1m": -0.015,
+   "ev3m": 0.01,
+   "ev12m": 0.08,
    "drivers": [
-    "Russell 2000 +1.58% Nov4 to 2856.95, matching the S&P's pace on policy-gridlock relief",
-    "Small caps are the most rate/policy-uncertainty sensitive segment, benefiting most from the VIX crush",
-    "10Y yield eased ~5bp to 4.92% on Nov4, easing financing-cost pressure",
-    "CME FedWatch ~81% Dec hike odds is a medium-term headwind for rate-sensitive small caps"
+    "Russell 2000 -4.45% Nov5 to 2729.89, giving back Wednesday's full policy-gridlock relief rally as small caps proved just as exposed to the AI-capex-led risk-off as large caps",
+    "Small caps remain the most rate-sensitive segment -- today's NFP and the ~68-73% December-hike odds are the dominant near-term swing factor",
+    "A 4th possible government shutdown (CR expires Dec 11, lame-duck Congress returns Nov9 with no appropriations progress) is an added small-cap-relevant policy risk into year-end",
+    "No small-cap-specific catalyst found this run; the move tracked the broad-market whipsaw"
    ],
-   "confidence": 0.5
+   "confidence": 0.45
   },
   {
    "ticker": "EFA",
@@ -383,19 +382,19 @@
    "ticker": "XLE",
    "name": "Energy Select Sector SPDR",
    "assetClass": "Equity",
-   "pUp1m": 0.38,
-   "pUp3m": 0.4,
-   "pUp12m": 0.45,
-   "ev1m": -0.025,
-   "ev3m": -0.03,
-   "ev12m": -0.01,
+   "pUp1m": 0.48,
+   "pUp3m": 0.48,
+   "pUp12m": 0.48,
+   "ev1m": 0.0,
+   "ev3m": 0.0,
+   "ev12m": 0.0,
    "drivers": [
-    "XLE -4.74% Nov4 as Brent crashed -8.66% to 94.63 and WTI -8.38% to 88.04 on bets a Dem Congress speeds pressure to end the Iran war",
-    "Nov4 EIA data showed a crude draw overwhelmed by the geopolitical de-escalation narrative",
-    "Bessent's Nov4 \"the world can live without Iranian oil\" comments reinforced the lower-for-longer repricing even as Trump weighs further strikes",
-    "USO -8.07% Nov4 confirms broad energy-complex repricing lower"
+    "XLE -2.98% Nov5 even as oil bounced (Brent proxy +4.9%), reflecting the broad equity-market selloff outweighing the commodity move for the equities in the sector",
+    "Oil round-tripped Wednesday's -8%+ Iran-de-escalation crash as Iran's IRGC reportedly set tankers/a tug ablaze in the Strait of Hormuz (5 incidents since Sunday, matching October's record pace) and Saudi Arabia flagged fresh Houthi threats to the Yanbu Red Sea hub",
+    "Citi flagged risk of executive-branch Iran-strike escalation regardless of Congress, reframing the 'de-escalation' narrative that drove Wednesday's crash as premature",
+    "Oil's within-48-hour double reversal (down ~8%, up ~5%) argues for low-confidence, near-coin-flip positioning until the Hormuz risk genuinely resolves one way or the other"
    ],
-   "confidence": 0.55
+   "confidence": 0.35
   },
   {
    "ticker": "XLV",
@@ -491,37 +490,37 @@
    "ticker": "GLD",
    "name": "SPDR Gold Shares",
    "assetClass": "Commodities",
-   "pUp1m": 0.62,
-   "pUp3m": 0.63,
+   "pUp1m": 0.6,
+   "pUp3m": 0.62,
    "pUp12m": 0.6,
-   "ev1m": 0.03,
-   "ev3m": 0.06,
-   "ev12m": 0.12,
+   "ev1m": 0.025,
+   "ev3m": 0.05,
+   "ev12m": 0.11,
    "drivers": [
-    "GLD +3.68% Nov4 to 372.49, tracking gold's surge to 4072.20 (+3.34%) on fiscal-uncertainty hedging post Dem sweep",
-    "DXY -0.58% to 101.27 and a ~5bp 10Y yield dip to 4.92% are classic gold tailwinds",
-    "A reported single-day ~211-tonne gold-ETF inflow lifted holdings to a record, per Nov4 precious-metals market reporting",
-    "Medium-term risk: CME FedWatch's ~81% Dec hike odds, which historically pressures gold via higher real rates"
+    "GLD +0.81% Nov5 held its safe-haven bid even as the S&P fell -4.36% and VIX spiked +69.7% -- gold decoupled from the broader risk-off rather than selling off alongside it",
+    "Kitco's Nov5 PM wrap attributes gold's resilience (vs. silver's slip) to gold's cleaner safe-haven profile relative to silver's industrial-metal exposure during the tech-led selloff",
+    "Hawkish Fed speak (Hammack, Musalem) and ~68-73% December-hike odds are the medium-term headwind via higher real rates",
+    "Today's NFP is the next swing factor -- a soft print would be a tailwind for gold via renewed rate-cut hope"
    ],
-   "confidence": 0.55
+   "confidence": 0.5
   },
   {
    "ticker": "SLV",
    "name": "iShares Silver Trust",
    "assetClass": "Commodities",
-   "pUp1m": 0.63,
-   "pUp3m": 0.63,
-   "pUp12m": 0.6,
-   "ev1m": 0.045,
-   "ev3m": 0.08,
-   "ev12m": 0.14,
+   "pUp1m": 0.52,
+   "pUp3m": 0.56,
+   "pUp12m": 0.57,
+   "ev1m": -0.005,
+   "ev3m": 0.025,
+   "ev12m": 0.1,
    "drivers": [
-    "SLV +5.17% Nov4 to 47.16, outpacing gold as silver spot rose to 52.33 (+5.52%) on the same dollar-weakness/fiscal-hedge drivers",
-    "Mining-equity confirmation: PAAS +8.36%, AG +9.15%, HL +13.17% Nov4 shows broad-based precious-metals-complex strength",
-    "Industrial-demand linkage to AI/data-center electrification remains a structural narrative support",
-    "Risk of reversal if the CME-implied ~81% Dec Fed hike materializes and real yields rise"
+    "SLV -0.49% Nov5, underperforming gold as silver's dual industrial-metal exposure amplified beta to the Nasdaq-led tech/semiconductor rout -- Kitco confirms no silver-specific catalyst (no COMEX margin change, no SLV outflow; SLV actually saw net weekly inflows)",
+    "Mining-equity confirmation that this was a beta, not a metals, story: SILJ -1.64%, SLVP -1.23%, HL -3.34%, PAAS -2.19% Nov5 -- miners are structurally higher-beta than bullion (per Ted Oakley's 2008 comparison: gold -20%, miners -60% in that cycle)",
+    "Industrial-demand linkage to AI/data-center electrification is a double-edged sword right now -- a long-term support but the proximate reason silver fell alongside AI-capex-sensitive equities this week",
+    "Today's NFP and the ~68-73% December-hike odds are the next swing factor for the metals complex broadly"
    ],
-   "confidence": 0.5
+   "confidence": 0.45
   },
   {
    "ticker": "DBC",
@@ -545,19 +544,19 @@
    "ticker": "USO",
    "name": "United States Oil Fund",
    "assetClass": "Commodities",
-   "pUp1m": 0.35,
-   "pUp3m": 0.38,
-   "pUp12m": 0.42,
-   "ev1m": -0.04,
-   "ev3m": -0.05,
-   "ev12m": -0.03,
+   "pUp1m": 0.52,
+   "pUp3m": 0.5,
+   "pUp12m": 0.48,
+   "ev1m": 0.01,
+   "ev3m": 0.0,
+   "ev12m": -0.01,
    "drivers": [
-    "USO -8.07% Nov4 (145.41) tracking WTI's -8.38% crash to 88.04, its biggest drop since May, on bets a Dem Congress speeds pressure to end the Iran war",
-    "Bessent's Nov4 \"the world can live without Iranian oil\" comments reinforced the bearish repricing even as Trump weighs further strikes",
-    "Nov4 EIA's crude draw was a bullish surprise completely overridden by the geopolitical de-escalation bet",
-    "Reporting notes Hormuz flows have been holding near pre-war levels, reducing the embedded geopolitical risk premium"
+    "USO +1.93% Nov5 to 148.21, reversing part of Wednesday's crash as traders reassessed the Iran-de-escalation narrative after fresh Strait of Hormuz tanker incidents (5 since Sunday) and a Saudi warning over Houthi threats to the Yanbu hub",
+    "Citi flagged executive-branch escalation risk toward Iran independent of Congress, undercutting the 'divided-government cools the war' thesis that drove Wednesday's -8%+ crash",
+    "Within 48 hours oil has moved roughly -8% then +5% -- a genuinely two-sided, headline-driven market rather than a clean directional trend",
+    "Nov4 EIA crude draw (-865k bbl) and flat December OPEC+ quotas were non-events relative to the geopolitical headline flow"
    ],
-   "confidence": 0.5
+   "confidence": 0.35
   },
   {
    "ticker": "URA",
@@ -617,37 +616,37 @@
    "ticker": "BTC-USD",
    "name": "Bitcoin",
    "assetClass": "Crypto",
-   "pUp1m": 0.56,
-   "pUp3m": 0.58,
-   "pUp12m": 0.58,
-   "ev1m": 0.03,
-   "ev3m": 0.08,
-   "ev12m": 0.2,
+   "pUp1m": 0.48,
+   "pUp3m": 0.52,
+   "pUp12m": 0.56,
+   "ev1m": -0.01,
+   "ev3m": 0.03,
+   "ev12m": 0.15,
    "drivers": [
-    "BTC +4.00% Nov4 to 80438, extending a recovery attributed by market commentary to the unwind of election-related hedges and reduced political-risk premium",
-    "Broad crypto complex rallied alongside equities/VIX crush as a cross-asset risk-on move rather than a crypto-specific catalyst",
-    "Narrative risk flagged over uncertainty of a Dem-controlled Congress's stance on a possible Bitcoin reserve",
-    "Weaker dollar (DXY -0.58%) is a generic BTC tailwind"
+    "BTC fell roughly 6% Nov5 (to the mid-$75,000s, a live level not a close) as crypto sold off alongside the broader AI-capex-led equity risk-off",
+    "Crypto Fear & Greed round-tripped from 26 (Fear) to 50 (Neutral) within 48 hours -- tracking the equity whipsaw rather than showing an independent crypto-specific signal",
+    "Narrative risk remains over a Dem-controlled Congress's stance on a possible Bitcoin reserve, now compounded by the AI-capex-regulation overhang weighing on risk assets broadly",
+    "Today's NFP is the next cross-asset catalyst; a soft print reviving rate-cut hope would likely be a crypto tailwind given its high beta to risk sentiment"
    ],
-   "confidence": 0.45
+   "confidence": 0.35
   },
   {
    "ticker": "ETH-USD",
    "name": "Ethereum",
    "assetClass": "Crypto",
-   "pUp1m": 0.55,
-   "pUp3m": 0.57,
-   "pUp12m": 0.56,
-   "ev1m": 0.032,
-   "ev3m": 0.085,
-   "ev12m": 0.18,
+   "pUp1m": 0.46,
+   "pUp3m": 0.5,
+   "pUp12m": 0.54,
+   "ev1m": -0.012,
+   "ev3m": 0.03,
+   "ev12m": 0.13,
    "drivers": [
-    "ETH led the Nov4 crypto rally, rising roughly 6.6% per multiple market reports, outperforming BTC's +4.0%",
-    "Rally attributed to the same election-hedge-unwind/reduced-political-risk dynamic as the broader crypto complex",
-    "Reporting cited a specific regulatory-hope narrative for ETH/altcoins distinct from pure beta-to-BTC",
-    "Carries higher-beta risk if the equity/VIX-crush unwind reverses"
+    "ETH fell alongside BTC and the broader crypto complex Nov5 as the AI-capex-led equity selloff spread into risk assets generally",
+    "Higher beta than BTC means ETH typically round-trips further in both directions during a 48-hour whipsaw like this one",
+    "No ETH-specific catalyst (regulatory or otherwise) was found this run distinct from the broad risk-off move",
+    "Today's NFP and the broader equity/VIX path are the dominant near-term driver rather than anything crypto-specific"
    ],
-   "confidence": 0.4
+   "confidence": 0.3
   },
   {
    "ticker": "SOL-USD",
@@ -812,23 +811,23 @@
    "confidence": 0.4
   }
  ],
- "callsNote": "Thu 5 Nov 2026 07:02 SGT run against Wednesday's full cash-equity close. The key update vs. the prior (Tue-dated) regime read: the US midterms were actually called overnight -- Democrats swept the House and Senate -- confirmed as the proximate cause of Wednesday's VIX crush (-20.3% to 16.61), equity surge (S&P +1.58%, Dow +3.03%, best post-midterm day since 1982) and oil collapse (Brent -8.66%, WTI -8.38% on Iran-de-escalation bets), while gold/silver's parallel rally (+3.34%/+5.52%) is tied to dollar weakness and fiscal-hedging. ISM Services/ADP prints, a hawkish ~81% CME FedWatch December-hike repricing, record Oracle/Meta CDS levels, and the China rare-earth truce's confirmed two-month extension to Jan 10 2027 (not a Nov10 cliff) were folded into the calls. All 40 required universe tickers plus the 8-ticker rare-earth basket remain populated.",
+ "callsNote": "Fri 6 Nov 2026 07:02 SGT run against Thursday's full cash-equity close -- a violent reversal of Wednesday's post-midterm relief rally. S&P -4.36%, Nasdaq -5.52% (correction), VIX +69.7% to 28.18 on an AI-capex political-risk shock (Texas data-center-pause campaign) and hawkish Fed speak, not fresh macro data (AMD beat/raised guidance and still fell ~15%). SPY/QQQ/IWM, the rare-earth basket (MP/LYC.AX/UUUU), GLD/SLV, XLE/USO, and BTC-USD/ETH-USD were refreshed with Thursday's actual prints and sourced causation; remaining calls (unchanged tickers) still carry Wednesday's drivers text with Thursday's reversal noted at the macro level -- treat their driver bullets as one session stale pending next run. Today's Oct NFP (21:30 SGT, consensus 65K vs 29K prior) is the key swing catalyst. All 40 required universe tickers plus the 8-ticker rare-earth basket remain populated.",
  "rareEarthCalls": [
   {
    "ticker": "MP",
    "name": "MP Materials Corp",
    "assetClass": "Equity",
    "pUp1m": 0.45,
-   "pUp3m": 0.48,
-   "pUp12m": 0.55,
-   "ev1m": -0.01,
+   "pUp3m": 0.5,
+   "pUp12m": 0.57,
+   "ev1m": -0.015,
    "ev3m": 0.0,
    "ev12m": 0.1,
    "drivers": [
-    "MP -5.08% Nov4 to 35.91, continuing a multi-day slide even as the broader market and metals complex rallied, suggesting idiosyncratic profit-taking rather than a sector-wide signal",
-    "China's rare-earth truce was extended to Jan 10 2027 (two months, shorter than the ~6 months many expected), somewhat easing the acute supply-disruption narrative that had been a bull case for ex-China suppliers like MP",
-    "The Pentagon's rule banning Chinese-origin magnets from US weapons systems takes effect just after the new Jan 10 2027 truce deadline - a structural medium-term tailwind for MP's downstream magnet business",
-    "REMX (sector ETF) was roughly flat on Nov3 but down ~20% over the trailing week, indicating the whole rare-earth equity complex has de-rated sharply even before MP's Nov4-specific slide"
+    "MP -6.04% Nov5 to 33.74 ahead of its own after-close Q3 print (which actually beat estimates), as the extended US-China trade truce suspending rare-earth export controls removed the near-term supply-crunch premium baked into the stock, compounded by reports the US government may step back from planned critical-minerals price floors",
+    "China's Nov2025 expanded export-control suspension (0.1% de-minimis rule) is due to expire Nov10 2026 with no formal MOFCOM renewal notice as of Nov5 -- the Apr2025 heavy-REE licensing regime stays in force regardless, so the headline 'truce' only ever covered part of the restriction",
+    "The Pentagon's rule banning Chinese-origin magnets from US weapons systems remains a structural medium-term tailwind for MP's downstream magnet business independent of the truce's on/off status",
+    "REMX (sector ETF) remains down sharply over the trailing month, indicating the whole rare-earth equity complex has de-rated even as the fundamental Western-supply-chain buildout continues"
    ],
    "confidence": 0.45
   },
@@ -836,37 +835,37 @@
    "ticker": "LYC.AX",
    "name": "Lynas Rare Earths Ltd",
    "assetClass": "Equity",
-   "pUp1m": 0.5,
-   "pUp3m": 0.52,
-   "pUp12m": 0.56,
-   "ev1m": 0.0,
-   "ev3m": 0.01,
+   "pUp1m": 0.56,
+   "pUp3m": 0.56,
+   "pUp12m": 0.58,
+   "ev1m": 0.02,
+   "ev3m": 0.025,
    "ev12m": 0.09,
    "drivers": [
-    "LYC.AX +0.17% Nov4 to 11.99, essentially flat, a muted reaction versus MP's -5.08% slide, suggesting less idiosyncratic de-risking pressure on the Australian producer",
-    "As the largest rare-earth producer outside China, Lynas is the clearest 'China+1' diversification-policy beneficiary, though the Jan 10 2027 truce extension (vs. the feared Nov10 cliff) softens near-term urgency for that trade",
-    "No Lynas-specific news (production, offtake, government funding) surfaced this run; the flat Nov4 print looks like a sector-wide pause rather than a company catalyst",
-    "Broader REMX sector weakness over the trailing week frames Lynas's flat Nov4 print as relative resilience rather than genuine strength"
+    "LYC.AX +8.01% Nov5 to A$12.95 on its own ASX quarterly update (gross sales revenue +55% q/q to A$310.1m, record average selling price A$102.1/kg) -- a company-specific beat, diverging sharply from MP/UUUU's US-truce-driven declines the same day",
+    "As the largest rare-earth producer outside China, Lynas is the clearest 'China+1' diversification-policy beneficiary and was not exposed to the same US price-floor-rollback headline that hit MP",
+    "Record ASP signals pricing power holding up even as the China export-truce status remains genuinely unresolved (MOFCOM has issued no formal renewal notice ahead of the Nov10 deadline)",
+    "Broader REMX sector weakness over the trailing month frames Lynas's Nov5 pop as idiosyncratic strength rather than a sector-wide re-rating"
    ],
-   "confidence": 0.35
+   "confidence": 0.5
   },
   {
    "ticker": "UUUU",
    "name": "Energy Fuels Inc",
    "assetClass": "Equity",
-   "pUp1m": 0.46,
-   "pUp3m": 0.48,
-   "pUp12m": 0.54,
-   "ev1m": -0.008,
-   "ev3m": 0.0,
-   "ev12m": 0.08,
+   "pUp1m": 0.4,
+   "pUp3m": 0.45,
+   "pUp12m": 0.53,
+   "ev1m": -0.025,
+   "ev3m": -0.005,
+   "ev12m": 0.07,
    "drivers": [
-    "UUUU -0.83% Nov4 to 7.18, a mild decline broadly in line with the weaker tape for US-listed rare-earth names that day",
-    "Energy Fuels' dual rare-earth/uranium exposure means it is also hit by uranium's sharp pullback (URA -17.9% over the trailing week), compounding sector de-risking",
-    "Energy Fuels announced Q3 2026 results and board approval to begin construction of commercial-scale heavy rare earth oxide separation circuits at its White Mesa Mill Nov4 -- concrete capacity-expansion news, not just policy talk",
-    "The same China-truce-extension dynamic as MP applies: the softer Nov10 cliff risk (now Jan 10 2027) reduces near-term urgency for the 'US alternative supply' trade"
+    "UUUU -8.22% Nov5 to 6.59 after missing Q3 2026 estimates on Nov4 (a $52.4m net loss driven by non-cash investment losses) and an HC Wainwright price-target cut from $29.25 to $22.50 on Nov5 -- the sharpest fall among the ex-China basket",
+    "Also hit by the same US-China-truce-extension dynamic as MP (reduced near-term supply-crunch premium) plus continued uranium-side weakness given its dual rare-earth/uranium exposure",
+    "Energy Fuels has board-approved construction of commercial-scale heavy rare earth oxide separation circuits at White Mesa Mill, confirmed Q3 heavy-REE qualification with a major magnet maker, and a conditional A$180m Australian financing package for the Donald JV -- concrete capacity-expansion offsets to the earnings miss",
+    "Highest-confidence-of-decline name in the basket this run given the combination of a real earnings miss, an analyst downgrade and sector-wide truce-driven de-risking"
    ],
-   "confidence": 0.4
+   "confidence": 0.45
   },
   {
    "ticker": "USAR",

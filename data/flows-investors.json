@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-05",
+  "updated": "2026-11-06",
   "note": "Each market's investor-type split differs in official-ness, frequency and coverage: Japan (JPX weekly, cash/physical market only, official), Korea (KRX daily, official), Hong Kong Southbound (HKEX T+0, official but a geographic/channel split not retail/institutional), China (Northbound real-time discontinued since Aug 2024; margin balance and new-account-openings are retail-side PROXIES only), Singapore (SGX Research weekly, official where published) and the United States (NO official split exists; ICI/EPFR/Vanda are all PROXIES, isProxy:true always). Figures should not be summed across markets or treated as comparable in magnitude.",
   "markets": [
     {
@@ -55,7 +55,7 @@
       "dataGaps": [
         "JPX's standard weekly release covers only the cash/physical equity market; futures/margin positions are reported separately",
         "No daily investor-type split exists for TSE -- weekly is the highest frequency",
-        "The 'October Week 4' (Oct26-30) edition is due 15:30 JST later on Nov 5, after this run's 07:02 SGT check, so it genuinely had not posted yet -- not a search failure",
+        "The 'October Week 4' (Oct26-30) edition was due 15:30 JST on Nov 5; re-checked again this run (Nov 6 07:02 SGT, after publication time) and still not found -- JPX's own statistics page returned HTTP 403 on direct fetch, with only the prior week indexed on secondary sources",
         "This run's search surfaced kabutan.jp articles with tempting large foreign-net-buy figures that, on verification, were dated November 2025 (a year-old false match) and were discarded",
         "JPX's own statistics-equities/investor-type page returned HTTP 403 on direct fetch; conclusion rests on kabutan.jp secondary coverage"
       ]
@@ -64,9 +64,36 @@
       "market": "South Korea (KOSPI)",
       "available": true,
       "cadence": "daily, published same trading day after market close (T+0)",
-      "latestPeriod": "day: Nov 4, 2026 (Wed); week: Oct 26-30, 2026 (last completed week)",
-      "asOf": "2026-11-04",
+      "latestPeriod": "day: Nov 5, 2026 (Thu); week: Oct 26-30, 2026 (last completed week)",
+      "asOf": "2026-11-05",
       "flows": [
+        {
+          "investorType": "Foreign institutional",
+          "direction": "outflow",
+          "amount": "-₩3,400bn",
+          "unit": "KRW bn",
+          "period": "2026-11-05 (daily)",
+          "isProxy": false,
+          "note": "KOSPI fell -5.28% to 5,383.80 (a circuit-trigger-level drop intraday) as the same US AI-capex-regulation fears that hit the Nasdaq spilled hard into Samsung Electronics and SK hynix; foreigners sold ~US$2.53bn-equivalent"
+        },
+        {
+          "investorType": "Retail (individuals)",
+          "direction": "inflow",
+          "amount": "+₩2,280bn",
+          "unit": "KRW bn",
+          "period": "2026-11-05 (daily)",
+          "isProxy": false,
+          "note": "bought the dip again, extending the pattern from Nov 3-4 of retail absorbing foreign selling"
+        },
+        {
+          "investorType": "Domestic institutional",
+          "direction": "inflow",
+          "amount": "+₩848.5bn",
+          "unit": "KRW bn",
+          "period": "2026-11-05 (daily)",
+          "isProxy": false,
+          "note": "joined retail in buying the selloff, though at a smaller scale than Nov 4's institutional buy"
+        },
         {
           "investorType": "Foreign institutional",
           "direction": "outflow",
@@ -122,12 +149,12 @@
           "note": "weekly net sell despite KOSPI rising 3.25% over the week"
         }
       ],
-      "trend": "Nov 3 saw a sharp -3.59% KOSPI selloff with both foreign AND domestic institutions selling while retail bought the dip. Nov 4 reversed into a V-shape: KOSPI swung ~400 points intraday before closing +0.62%, with foreigners extending heavy selling (-₩2.51tn, the largest single-day foreign outflow in this window) while BOTH domestic institutions and retail turned net buyers, absorbing the foreign selling.",
-      "interpretation": "The Nov 4 pattern -- domestic institutions returning to the buy side alongside retail against persistent, even larger, foreign selling -- is a more constructive configuration than Nov 3's all-cohorts-sell-except-retail setup, since institutional dip-buying tends to be more durable support than retail alone.",
+      "trend": "Nov 3: sharp -3.59% selloff, both foreign AND domestic institutions sold while retail bought. Nov 4: V-shaped reversal to +0.62% as domestic institutions and retail both turned net buyers against continued foreign selling. Nov 5: foreign selling intensified to -₩3.4tn (the largest print in this window) as the Nasdaq-correction/AI-capex-regulation story spread directly into Samsung and SK hynix, dragging KOSPI down -5.28% despite retail and domestic institutions again buying the dip.",
+      "interpretation": "Three straight sessions of foreign selling that retail and domestic institutions have absorbed rather than offset -- each 'buy the dip' round has been smaller than the preceding foreign sell, and Nov 5's -5.28% print shows that domestic demand could not fully cushion a US-driven semiconductor-sector shock. For a book with HK/SG tech-adjacent exposure, this is a reminder that Korea's chip-sector selloff is the regional read-through of the same AI-capex-policy fear that hit the Nasdaq, not an isolated Korea story.",
       "sources": [
-        "https://www.sedaily.com/article/13514397",
-        "https://www.ajunews.com/view/20261104155547584",
-        "https://www.fnnews.com/news/202611041120598034"
+        "https://www.asiae.co.kr/en/article/2026110510232252905",
+        "https://www.mt.co.kr/en/stock/2026/11/05/2026110517110160047",
+        "https://www.koreajoongangdaily.com/business/kospi-sinks-below-the-waves-as-us-blue-tsunami-soaks-korean-tech-shares/12958434"
       ],
       "dataGaps": [
         "KRX's headline daily release does not sub-split 'institutions' into pension/insurance/securities-firm categories",
@@ -139,26 +166,26 @@
       "market": "Hong Kong",
       "available": true,
       "cadence": "Southbound Stock Connect: official HKEX data, same-day/T+0; EPFR/BofA fund flows: weekly, ~2-6 day lag",
-      "latestPeriod": "Southbound: Nov 4, 2026 (daily); October 2026 full month (final): -HK$27.95bn; EPFR HK SAR equity funds: week ended ~Oct 15, 2026 (no newer print located, re-checked again this run)",
-      "asOf": "2026-11-04",
+      "latestPeriod": "Southbound: Nov 5, 2026 (daily); October 2026 full month (final): -HK$27.95bn; EPFR HK SAR equity funds: week ended ~Oct 15, 2026 (no newer print located, re-checked again this run)",
+      "asOf": "2026-11-05",
       "flows": [
         {
           "investorType": "Southbound (mainland China conviction money)",
           "direction": "outflow",
-          "amount": "-HK$32.77bn",
+          "amount": "-HK$21.33bn",
           "unit": "HKD bn",
-          "period": "2026-11-04 (daily)",
+          "period": "2026-11-05 (daily)",
           "isProxy": false,
-          "note": "SH leg -HK$31.63bn, SZ leg -HK$1.15bn; sharp reversal from Nov 3's six-month-high net buy; largest sell Tracker Fund of Hong Kong (2800.HK); largest buys SMIC (0981.HK) and Hua Hong Semiconductor; HSI still rose ~1.67% that day"
+          "note": "SH leg -HK$13.34bn, SZ leg -HK$7.99bn; largest single-day Southbound outflow in ~7 months (since Apr 8); Xiaomi (1810.HK) alone saw the largest single-stock net outflow (HK$3.17bn), with Tencent, Alibaba and Meituan also trimmed; ETFs (Tracker Fund, CSOP Hang Seng TECH, HSCEI) bore ~HK$13.7bn of the selling -- mainland investors took profit into the same-day HK tech rally (Tencent +7.17%, Xiaomi +8.83%, SMIC +2.28%) rather than chasing it"
         },
         {
           "investorType": "Southbound (mainland China conviction money)",
-          "direction": "inflow",
-          "amount": "+HK$23.4bn",
+          "direction": "outflow",
+          "amount": "-HK$3.28bn",
           "unit": "HKD bn",
-          "period": "2026-11-03 (daily)",
+          "period": "2026-11-04 (daily)",
           "isProxy": false,
-          "note": "largest single-day net buy in ~6 months; broad index-ETF driven rather than single-stock conviction, and reversed completely the next session"
+          "note": "a prior source for this same date had reported -HK$32.77bn with a different stock-level breakdown (largest sell Tracker Fund, largest buys SMIC/Hua Hong) -- the two figures are NOT reconciled this run; flagged rather than silently picking one"
         },
         {
           "investorType": "Southbound (mainland China conviction money)",
@@ -176,19 +203,21 @@
           "unit": "USD mn (undisclosed)",
           "period": "week ended ~2026-10-15",
           "isProxy": true,
-          "note": "no newer weekly print located this run either (re-checked again); carried forward for a 3rd straight run"
+          "note": "no newer weekly print located this run either (re-checked again); carried forward for a 4th straight run"
         }
       ],
-      "trend": "Southbound has whipsawed violently over four straight sessions: -HK$4.47bn (Nov 2), +HK$23.4bn, a 6-month high (Nov 3), then -HK$32.77bn (Nov 4), a bigger single-day reversal than the preceding buy. The Nov 3 buying was concentrated in broad index ETFs; the Nov 4 selling hit that same ETF hardest while rotating into chip names (SMIC, Hua Hong).",
-      "interpretation": "Four sessions of alternating large daily swings, with no net multi-day trend and the EPFR/BofA weekly foreign-fund proxy still stale, argue against reading any single day's Southbound print as a stock-specific or market-wide signal for HK tech (0700/0981/1810) right now -- the week overall looks closer to flat-to-negative than the Nov 3 headline alone would suggest.",
+      "trend": "Southbound has now whipsawed across five straight sessions: -HK$4.47bn (Nov 2), +HK$23.4bn 6-month-high buy (Nov 3), a Nov 4 print this run cannot reconcile against the prior run's figure (see note), then -HK$21.33bn (Nov 5) -- the largest single-day outflow since April. Nov 5's selling came DURING a strong HK tech rally, a profit-taking pattern rather than chasing strength.",
+      "interpretation": "Mainland investors sold into Thursday's HK tech rally rather than extending it -- a sign the rally (driven by a US AI-regulation rotation trade, not a China-specific catalyst) is not yet backed by fresh mainland conviction money; for the owner's 0700/0981/1810 exposure this argues for some caution on the rally's durability rather than reading the Nov 5 price strength as confirmed by flow.",
       "sources": [
-        "https://news.futunn.com/post/1003389146/southbound-capital-flows-southbound-capital-recorded-net-sales-of-hkd",
+        "https://finance.biggo.com/news/3e1fa29e-536c-41db-aff1-6afb051fc229",
+        "https://news.futunn.com/en/post/1003554582/capital-flows-southbound-capital-sells-off-over-hkd-21-3",
         "https://www.bloomberg.com/news/articles/2026-10-30/hk-stocks-lose-a-key-backer-as-chinese-investors-head-for-exit"
       ],
       "dataGaps": [
         "No official retail-vs-institutional split exists for HK-listed stocks",
         "Southbound measures mainland-domiciled money against the rest of the market -- a geographic/channel split, not retail/institutional",
-        "EPFR/BofA fund-flow data has no edition newer than week-ended-~Oct-15 located across three consecutive runs now"
+        "EPFR/BofA fund-flow data has no edition newer than week-ended-~Oct-15 located across four consecutive runs now",
+        "Nov 4's daily Southbound figure is unreconciled between two runs' sources (-HK$3.28bn vs -HK$32.77bn) -- treat that single day's number as unresolved"
       ]
     },
     {
