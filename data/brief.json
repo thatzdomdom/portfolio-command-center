@@ -1,65 +1,64 @@
 {
-  "date": "2026-11-11T07:02:00+08:00",
+  "date": "2026-11-12T07:02:00+08:00",
   "tldr": [
-    "A hot October CPI (core +0.3% vs +0.2% consensus, headline +0.4% vs +0.3%) pushed Fed December hike odds to 100% (from 84%), with Waller and Logan both opening the door to a bigger/faster path -- the 10Y jumped toward 5% and the dollar strengthened.",
-    "Biggest portfolio risk today: gold/silver fell 2.7-3.4% on the repricing but the miners fell 4-7% on operating leverage (GDX -5.4%, HL -7.3%) -- COMEX vaults kept draining into backwardation and silver ETF holdings hit a post-March high even as price fell, so this reads as a leveraged flush on rates, not a thesis break.",
-    "Nvidia's board confirmed its probe concerns CEO Jensen Huang's admitted affair with a woman US intelligence believes was feeding information to Beijing; Congress summoned him for a Nov 18 closed-door briefing, one day after Nvidia's Nov 17 earnings; NVDA is down more than 10% since Monday.",
-    "The index-level pullback (S&P -0.38%) badly understated the damage underneath: NYSE decliners led advancers roughly 2.3-2.5:1 and new-highs-minus-lows worsened sharply on both the S&P and Nasdaq -- mega-cap concentration is masking a rougher broad tape.",
-    "China's October trade surplus missed consensus but semiconductor export value surged +137% y/y and the Hang Seng/HS Tech rallied anyway, ahead of SMIC's Nov 12 earnings.",
-    "Crypto confirmed it is trading as a rate-sensitive risk asset, not a hedge: BTC fell to a near 3-month low (~$73,874) in lockstep with the hawkish repricing, with ~$1.5B of ETF outflows since Nov 2."
+    "Markets flipped from pricing a possible December Fed CUT to a near-certain HIKE (CME odds ~88-96%, Waller/Logan both floating 50bp) after hot October CPI -- yet equities ripped higher Wed (S&P +1.31%, Nasdaq +1.60%, VIX -10.1%) as CoreWeave's blowout earnings/$132.5B backlog reignited the AI-capex trade.",
+    "Gold/silver diverged from the equity rally on real yields, not risk-off: GLD -1.13%, miners -1 to -1.5% (GDX, SILJ, SLVP, NEM, PAAS, AG, HL) even as SLV held up (+0.37%) on industrial/AI-power demand; intraday Thu-Asia quotes show gold briefly under $4,000 and silver under $52 -- levels to watch at the SGX/HKEX-adjacent open, not confirmed closes.",
+    "China's rare-earth export-control truce expired Nov 10 with no formal renewal confirmed -- the live catalyst behind this week's rare-earth-basket strength (MP, Lynas, Energy Fuels, USAR all firm); watch for a MOFCOM notice in the coming days.",
+    "HK tech mixed: Tencent -1.96%, Xiaomi -1.63%, but SMIC +3.73% on a chip-self-sufficiency read-through as the Nvidia 'spy scandal' accelerates new congressional chip-export-control bills.",
+    "Singapore banks split (OCBC beat, DBS/UOB missed) even as the STI firmed; Korea's foreign-buying streak extended to 2 days (Nov 10-11) but retail flipped to selling Nov 11 -- the first session foreign buying and retail selling have coincided, a tentative stabilization tell.",
+    "Separate from this run's research: the model's own risk calc (data/oneaction.json, code-owned) flags the silver loan's stressed margin-call distance at 13.2% -- a live number worth keeping in view, not a new finding from today's work."
   ],
   "whatChanged": [
-    "Intel: congress trades fully refreshed (15 entries, new names incl. Pelosi's WBD merger-related sale, the Gottheimer/Cisneros BHE cluster corroborated); insiders refreshed (8 entries, incl. a new Newmont EVP Rule 10b5-1 sale and an independently re-verified Tencent director sale); signals rewritten around the CPI-driven miners flush, the Nvidia scandal, and the MP/Lynas rare-earth divergence. A self-referential, prompt-injection-style artifact found embedded in a prior insiders entry was removed -- see note below.",
-    "Investors: no changes this run -- 13F/profile/sector-concentration keys are code-owned or not due for a weekly refresh.",
-    "Model: macro restamped risk-off-tilted (riskOnProb 0.47 -> 0.43) on the hot-CPI repricing; 15 of 40 calls plus 2 of 9 rare-earth calls refreshed (SPY, QQQ, SMH, XLE, USO, GLD, SLV, TLT, IEF, FXI, BTC-USD, ETH-USD, SOL-USD, MP, LYC.AX); remaining calls carry Monday's narrative one session stale.",
-    "Market: Fear & Greed ticked up to 33 (Fear) even as breadth deteriorated sharply underneath -- a notable calm-index/rough-breadth divergence; flows still week-ending-Nov-4 (no newer cut yet) but supplemented with BofA Flow Show figures for that week.",
-    "News: 13 fresh items, led by the miners flush, the hot CPI print, and the Nvidia scandal escalation.",
-    "Flows-investors: Korea's 7-session foreign-selling streak broke (net buy Nov 10); Hong Kong's Southbound 7-week inflow streak broke the other way (net outflow this week) -- two offsetting regional risk-appetite signals.",
+    "Intel: congress trades fully refreshed (15 entries across 10 distinct members, incl. a 3-member WBD merger-cashout cluster and a Ro Khanna bank-stock basket); insiders refreshed with a genuine new catch -- two further Wing Tai (W05.SI) chairman-spouse accumulation filings (6 and 10 Nov) extending the ongoing buy program, confirmed via direct PDF read after SGX links returned 403/429; signals rewritten to 6 new consensus tickers (NVDA, PLTR, AMAT, MU, NBIS, BHE).",
+    "Investors: no changes -- Trump's PTR is still dated 8 Oct (independently re-confirmed twice this run, no newer filing found), and the Q3 2026 13F deadline isn't until ~14 Nov so sectorConcentration's Q2 reading remains the latest available.",
+    "Model: macro flipped from a risk-off tilt (riskOnProb 0.43) to a modest risk-on tilt (0.60) as the CoreWeave-driven AI-capex melt-up offset the hawkish Fed turn; ALL 40 universe calls plus the full 9-ticker rare-earth basket were individually refreshed this run (last run only covered 13 of 40).",
+    "Market: Fear & Greed ticked up to 37 (still Fear, corrected from a scraped source that mislabeled it 'Extreme Greed'); breadth looks broad on short-term gauges (69% of S&P names above the 50-DMA) but narrower on a longer horizon (only ~55-58% above the 200-DMA, Nasdaq new-lows well outpacing new-highs); flows still reflect the week ending 4 Nov (no newer Lipper/EPFR cut exists yet).",
+    "News: 14 fresh items, led by the Fed's hawkish pivot to a hike, the rare-earth truce expiry, and the CoreWeave-driven AI rally.",
+    "Flows-investors: Korea's foreign-buying streak extended to 2 days but retail flipped to selling Nov 11 (first such coincidence); Hong Kong's Southbound outflow looks like a 1-session pause, not a trend break, after a solid Nov 11 buy-back concentrated in Alibaba/SMIC; an unresolved Korea Nov-10 data discrepancy (₩650bn vs a secondary ₩3.586tn claim) was flagged rather than guessed at.",
     "Track: today's snapshot appended for all 40 model calls."
   ],
   "regime": {
-    "label": "Hawkish CPI repricing caps risk-on; mega-cap-led equity resilience and intact physical-metals tightness argue it's a repricing, not a regime change",
-    "riskOn": 0.43,
-    "oneLiner": "A hot October CPI print pulled the Fed's December path hawkish and hit precious metals, miners and crypto hard, while equities absorbed it with a deceptively calm headline over a much weaker breadth tape."
+    "label": "AI-capex melt-up colliding with a hawkish Fed hike cycle",
+    "riskOn": 0.60,
+    "oneLiner": "Markets repriced from a possible December cut to a near-certain hike after hot CPI, yet equities melted up on a CoreWeave-driven AI-capex reacceleration -- a fragile, capex-subsidized risk-on sitting on top of a genuinely hawkish rate path."
   },
   "topNews": [
     {
-      "headline": "Gold/silver miners crushed far harder than metals after hot CPI repricing (GDX -5.4%, SILJ -5.7 to -6.4%)",
+      "headline": "Fed's Waller floats a half-point December hike after hot CPI confirms his trigger condition",
       "impact": "bearish",
-      "actionable": "Levered silver/miner positions took the day's biggest drawdown on operating-leverage amplification of a modest metals pullback; physical tightness (backwardation, vault drain) argues against reading this as a thesis break."
+      "actionable": "A hawkish December hike (not a cut) is the single biggest headwind to the silver/gold miners book -- rallies should be treated as sell-into-strength until the Dec FOMC removes the 50bp tail risk."
     },
     {
-      "headline": "October CPI runs hot, Fed December hike odds hit 100%",
-      "impact": "bearish",
-      "actionable": "Higher real yields are the direct headwind hitting gold/silver miners and crypto hardest, while a stronger case for a higher-for-longer USD complicates HK/SG asset translation."
-    },
-    {
-      "headline": "Nvidia board probe confirmed: CEO Huang's affair with alleged Chinese intelligence asset; Congress summons him Nov 18",
-      "impact": "bearish",
-      "actionable": "A concrete governance/national-security event sitting directly ahead of Nvidia's Nov 17 earnings and SMIC's Nov 12 print -- genuine idiosyncratic risk for anything SMH/XLK-adjacent and a sentiment headwind for the broader China-chip complex."
-    },
-    {
-      "headline": "Singapore banks' Q3 split (OCBC beats, DBS/UOB miss) but STI still rallies 1.53%",
+      "headline": "China's rare-earth export-control truce expires with no renewal confirmed",
       "impact": "mixed",
-      "actionable": "OCBC's margin discipline looks relatively better-positioned than DBS/UOB into a higher-for-longer Fed; industrial/logistics REITs are the weak spot versus firmer retail/commercial names."
+      "actionable": "The single most important near-term catalyst for the rare-earth watchlist -- any explicit Chinese reinstatement of export curbs would be bullish for MP/Lynas/Energy Fuels pricing power."
     },
     {
-      "headline": "SMIC heads into Nov 12 earnings with ~31% revenue growth expected amid Nvidia-linked chip scrutiny",
+      "headline": "Nvidia 'spy scandal' and new congressional bills accelerate push toward a China chip export ban",
       "impact": "mixed",
-      "actionable": "A beat-and-raise would be a genuine positive for the HK tech sleeve independent of the Nvidia overhang; any guidance miss would compound an already-cautious China-chip mood."
+      "actionable": "Structurally bullish for SMIC as China's primary onshore foundry alternative, consistent with its Wednesday outperformance even as Tencent/Xiaomi sold off."
+    },
+    {
+      "headline": "Singapore bank Q3 split: OCBC beats, DBS and UOB miss",
+      "impact": "bearish",
+      "actionable": "Argues for trimming/hedging the SGX bank exposure (DBS, OCBC) into results-week weakness, with OCBC the relative-strength pick of the three."
+    },
+    {
+      "headline": "Barrick files IPO for new North American entity American Barrick Gold Corp (NYSE: ABGC)",
+      "impact": "mixed",
+      "actionable": "A direct corporate-action catalyst for the GOLD/Barrick position -- could unlock value but adds near-term execution/overhang risk worth tracking as details firm up."
     }
   ],
   "signals": [
-    "Consider watching INDA (pUp3m 0.62, confidence 0.55) -- still the strongest research call on the board as capital keeps rotating out of US AI/tech concentration into India.",
-    "Within the rare-earth basket, consider favoring Lynas (LYC.AX, a fresh bullish analyst initiation) over MP Materials (MP, hit with an analyst target cut) for now, despite MP's own execution progress.",
-    "Watch SLV/GDX for confirmation that today's flush was positioning, not thesis -- COMEX backwardation and rising silver-ETF holdings into the price drop are the tells to monitor rather than the price move alone.",
-    "Crypto (BTC-USD) was downgraded to UW this run on confirmed rate-sensitivity -- consider watching for stabilization once the December decision is delivered or more fully priced, rather than treating the current ETF-outflow trend as structural.",
-    "No conviction-play changes this run -- the code-owned 13F/notableTrades keys in investors.json are unchanged pending the next EDGAR scan."
+    "Consider watching SPY/QQQ (pUp3m 0.60/0.63, confidence 0.55) -- the clearest research calls on the board right now, both underpinned by the CoreWeave-driven AI-capex reacceleration.",
+    "Rare-earth basket: the Nov 10 China export-control-truce expiry is a live, unresolved catalyst -- consider watching for a MOFCOM notice that would clarify scarcity pricing power across MP/Lynas/Energy Fuels/USAR.",
+    "GLD carries the model's most negative near-term call this run (ev3m -0.02, confidence 0.45) on real-yield pressure from the hawkish Fed turn -- a direct read-through risk for the silver/miners sleeve.",
+    "No conviction-play changes this run -- the code-owned 13F/notableTrades keys in investors.json are unchanged pending the next EDGAR scan (Q3 2026 13Fs due ~14 Nov)."
   ],
   "watch": [
-    "SMIC and Applied Materials (AMAT) earnings -- Nov 12, 2026",
-    "China October M2 / new bank loans -- now due Nov 13, 2026 (moved from the previously flagged Nov 11)",
-    "Q3 2026 13F filing deadline -- ~Nov 14, 2026 (code's EDGAR scan will pick up fresh filings after this)",
-    "Nvidia earnings (Nov 17) + the congressional Huang briefing (Nov 18) + Tencent earnings (Nov 18) -- a three-event cluster"
+    "China October M2 / New Loans -- Thu 12 Nov 2026 17:03 SGT (forecast M2 7.2%, New Loans 80B)",
+    "US Unemployment Claims -- Thu 12 Nov 2026 21:30 SGT (forecast 194K vs previous 189K)",
+    "US Core PPI / PPI -- Fri 13 Nov 2026 21:30 SGT (forecast 0.3%/0.4%)",
+    "Q3 2026 13F filing deadline -- ~14 Nov 2026 (code's EDGAR scan will pick up fresh filings after this); FOMC decision 8-9 Dec 2026, now priced ~88-96% for a hike with a non-trivial 50bp tail"
   ]
 }

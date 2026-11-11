@@ -1,210 +1,79 @@
 {
-  "updated": "2026-11-11",
-  "note": "Wed 11 Nov 2026 07:02 SGT run. Tuesday Nov 10 US close: a hot October CPI print (core +0.3% vs +0.2% consensus) pushed December Fed hike odds to 100% (from 84%), hitting gold/silver/miners and crypto hard while the S&P eased only 0.38% (VIX little-changed at 19.46) -- but breadth deteriorated sharply underneath: NYSE decliners led advancers roughly 2.3-2.5:1 (secondary-sourced, two close but non-identical figures), a sharp reversal from Monday's ~81% advancing, and both S&P and Nasdaq new-highs-minus-lows worsened. CNN's own Fear & Greed page remains geo-blocked (HTTP 451); the headline value (33, Fear) is corroborated by two independent mirrors (worldmonitor.app, feargreedmeter.com) ticking up marginally from 31/32 the prior day, but the 7-component numeric breakdown could not be refreshed for a second straight run and is carried forward -- treat components as unavailable, not merely stale. Crypto Fear & Greed rose to 32 (Fear) from 29, narrowing but not closing the divergence versus equity sentiment. Breadth sourcing is unusually messy this run: %S&P500>200DMA readings from different secondary aggregators range from 37% to 67% and do not reconcile, and the McClellan Oscillator has two directly conflicting readings (+117 vs -185.1) from different vendor families -- both are flagged as unresolved rather than picking one. Flows: no newer Lipper/EPFR/BofA weekly cut exists yet (still week ending Nov 4); supplementary BofA Flow Show figures for that same week were added (global equity funds +$89.2B, a 20-week high). Next cut expected Thu/Fri Nov 12-13, covering the week that includes today's CPI shock.",
+  "updated": "2026-11-12",
+  "note": "Thu 12 Nov 2026 07:02 SGT run, against Wed 11 Nov US close. CNN Fear & Greed ticked up to 37 (Fear) from 33 the prior session -- a scraped secondary source mislabeled the overall rating 'Extreme Greed,' which is inconsistent with both the 0-100 banding and the component mix (3 Extreme Fear + 4 Neutral, no Greed), so it was corrected to 'Fear.' Despite Wed's sharp risk-on/vol-crush session (VIX -10.1% to 17.49), the Market Volatility component reads only Neutral, not yet Greed -- 17.49 is roughly in line with its recent trailing average rather than unusually low, and Put/Call plus Safe-Haven Demand are still deep in Extreme Fear from the preceding multi-week AI-led drawdown, so the composite has not flipped on a one-day bounce. Breadth looks broad on short/medium-term gauges (69% of S&P names above the 50-DMA, 1.48:1 advancers, a positive McClellan Summation Index) but narrower on a longer horizon -- only ~55-58% of names/sectors clear their 200-DMA and the Nasdaq racked up far more new lows (125) than new highs (65) even as the S&P made fresh highs. Flows are from the week ended 4 Nov 2026 (Lipper) with EM/Japan figures one reporting week further behind (week ended ~28 Oct) where no fresher region-specific breakout was found -- flagged per-region rather than blended silently.",
   "fearGreed": {
-    "value": 33,
+    "value": 37,
     "rating": "Fear",
-    "asOf": "2026-11-10",
-    "prevClose": 31,
-    "prev1w": 26,
-    "prev1m": 47,
-    "prev1y": 24,
-    "cryptoValue": 32,
+    "asOf": "2026-11-11",
+    "prevClose": 33,
+    "prev1w": 34,
+    "prev1m": 34,
+    "prev1y": 43,
+    "cryptoValue": 29,
     "cryptoRating": "Fear",
     "components": [
-      {
-        "name": "Market Momentum",
-        "reading": 8,
-        "signal": "fear"
-      },
-      {
-        "name": "Stock Price Strength",
-        "reading": 42,
-        "signal": "fear"
-      },
-      {
-        "name": "Stock Price Breadth",
-        "reading": 45,
-        "signal": "neutral"
-      },
-      {
-        "name": "Put/Call Options",
-        "reading": 13,
-        "signal": "fear"
-      },
-      {
-        "name": "Market Volatility",
-        "reading": 9,
-        "signal": "fear"
-      },
-      {
-        "name": "Safe-Haven Demand",
-        "reading": 1,
-        "signal": "fear"
-      },
-      {
-        "name": "Junk Bond Demand",
-        "reading": 36,
-        "signal": "fear"
-      }
+      { "name": "Market Momentum", "reading": "Extreme Fear", "signal": "fear" },
+      { "name": "Stock Price Strength", "reading": "Neutral", "signal": "neutral" },
+      { "name": "Stock Price Breadth", "reading": "Neutral", "signal": "neutral" },
+      { "name": "Put/Call Options", "reading": "Extreme Fear", "signal": "fear" },
+      { "name": "Market Volatility", "reading": "Neutral", "signal": "neutral" },
+      { "name": "Safe-Haven Demand", "reading": "Extreme Fear", "signal": "fear" },
+      { "name": "Junk Bond Demand", "reading": "Neutral", "signal": "neutral" }
     ],
     "sources": [
-      "https://www.worldmonitor.app/tools/fear-and-greed-index/",
-      "https://feargreedmeter.com/",
+      "https://www.cnn.com/markets/fear-and-greed",
       "https://alternative.me/crypto/fear-and-greed-index/",
-      "https://www.benzinga.com/markets/market-summary/26/11/63078351/"
+      "https://www.tokenpost.com/news/investing/54500",
+      "https://www.benzinga.com/markets/market-summary/26/11/63130061/dow-falls-over-150-points-following-inflation-report-greed-index-remains-in-fear-zone"
     ]
   },
   "breadth": {
-    "asOf": "2026-11-10",
+    "asOf": "2026-11-11",
     "metrics": [
-      {
-        "label": "NYSE advance-decline (Tue Nov 10, hot-CPI pullback day)",
-        "value": "Decliners led advancers roughly 2.27-to-1 to 2.53-to-1 (two close but non-identical secondary snippets), ~60.9% of issues (3,414) declining -- a sharp reversal from Monday's ~81% advancing. The narrower S&P-500-only diary was closer to even (246 adv/250 dec), implying mega-caps held up better than the broader tape.",
-        "signal": "bearish",
-        "pct": 39
-      },
-      {
-        "label": "S&P 500 52-week new highs minus new lows",
-        "value": "7 new highs / 3 new lows (Nov 10) vs 16 highs / 3 lows (Nov 9) -- deteriorating net breadth day over day",
-        "signal": "bearish",
-        "pct": null
-      },
-      {
-        "label": "Nasdaq 52-week new highs minus new lows",
-        "value": "59 new highs / 238 new lows (Nov 10) vs 103 highs / 164 lows (Nov 9) -- a much sharper deterioration than the S&P, concentrated in smaller/growth names",
-        "signal": "bearish",
-        "pct": null
-      },
-      {
-        "label": "% S&P 500 > 200-day MA",
-        "value": "Secondary aggregators disagree sharply and do not reconcile this run: 66.80% (historyofmarket.com, Nov 9) vs 54.67% (macromicro.me, dated Oct 21 -- stale) vs a blended 50/150/200-DMA composite of 37.25% (Nov 6, different methodology). No primary StockCharts $S5TH read obtained. Flagging the dispersion rather than picking one.",
-        "signal": "neutral",
-        "pct": null
-      },
-      {
-        "label": "McClellan Oscillator",
-        "value": "Two directly conflicting readings found this run: -185.1 (Cantillon Report, from -158.4, with Summation -532 as of Fri Nov 6) vs +117 (same figure carried from the prior run's source, dated Nov 9). Different vendor universes likely explain the gap; genuinely unresolved, not averaged.",
-        "signal": "bearish",
-        "pct": null
-      },
-      {
-        "label": "Sector % > 200-day MA (October data, stale)",
-        "value": "Health Care 81.7%, Info Tech 64.9%, Financials 63.2%, Materials 61.5%, Consumer Staples 60.6% strongest; Utilities 16.1%, Real Estate 23.3%, Communication Services 38.1% weakest -- no fresher sector-level breadth found this run",
-        "signal": "neutral",
-        "pct": null
-      }
+      { "label": "% S&P 500 > 200-day MA", "value": "~55-58% (approximated, no clean Nov-11 primary read)", "signal": "neutral", "pct": 57 },
+      { "label": "% S&P 500 > 50-day MA", "value": "69%", "signal": "bullish", "pct": 69 },
+      { "label": "NYSE advancers vs decliners (11 Nov)", "value": "1.48-to-1 advancers", "signal": "bullish", "pct": 60 },
+      { "label": "52-week New Highs minus New Lows", "value": "S&P 500 net +17 (17H/0L); Nasdaq net -60 (65H/125L) -- diverging by index", "signal": "neutral", "pct": null },
+      { "label": "McClellan Summation Index", "value": "+213.7 (10 Nov reading; daily Oscillator not located)", "signal": "bullish", "pct": null },
+      { "label": "Advance-Decline line trend", "value": "Tracking with price, off its recent high but no confirmed bearish divergence; extended by the 11 Nov rally", "signal": "neutral", "pct": null },
+      { "label": "% of S&P 500 sectors above their 200-day MA", "value": "~55% (approx -- 6 of 11 sectors: Health Care 82%, Energy 67%, Info Tech 65%, Financials 63%, Materials 62%, Cons Staples 61% above; Industrials 41%, Cons Disc 38%, Comm Svcs 38%, Real Estate 23%, Utilities 16% below)", "signal": "neutral", "pct": 55 }
     ],
-    "note": "The CPI-driven pullback was far more damaging to breadth than to the headline index: decliners swamped advancers ~2.3-2.5:1 and both the S&P and (especially) Nasdaq new-highs/lows deteriorated sharply, even though the S&P itself fell only 0.38%. That gap -- a calm index, a rough breadth tape -- is itself the signal this run: participation is narrowing under the hawkish-Fed repricing even where the headline hasn't shown it yet. %>200DMA and the McClellan Oscillator both have unreconciled, conflicting secondary readings and should be treated as directional color only until a primary source is checked.",
+    "note": "Wednesday's rally was broad in the moment (69% above the 50-DMA, 1.48:1 advancers, a positive Summation Index) but breadth is not yet fully confirmed underneath: only ~55-58% of names/sectors clear their 200-DMA and the Nasdaq logged far more new lows (125) than new highs (65) even as the S&P made fresh highs.",
     "sources": [
-      "https://historyofmarket.com/sp500/sp500-breadth/",
-      "https://en.macromicro.me/series/22718/sp-500-200ma-breadth",
-      "https://gvwire.com/2026/11/10/wall-st-ends-lower-as-hot-inflation-data-fed-comments-heighten-rate-worries/",
-      "https://cappnotes.substack.com/p/closing-look-tuesday-november-10",
-      "https://thecantillonreport.substack.com/p/daily-brief-november-9-2026"
+      "https://chartschool.stockcharts.com/table-of-contents/market-indicators/percent-above-moving-average",
+      "https://www.barchart.com/stocks/quotes/$S5TH/technical-analysis",
+      "https://en.macromicro.me/collections/20868/global-sentiment-indicator/98990/sp500-sectors-200ma-breadth",
+      "https://www.mcoscillator.com/market_breadth_data/",
+      "https://cappnotes.substack.com/p/closing-look-wednesday-november-11",
+      "https://thecantillonreport.substack.com/p/daily-brief-november-11-2026"
     ]
   },
   "flows": {
-    "asOf": "2026-11-10",
-    "period": "week ending Wed Nov 4 2026 (Lipper/EPFR/BofA Flow Show cut, confirmed no newer cut exists yet); gold uses WGC's October 2026 monthly cut",
-    "narrative": "Re-verified Wed 11 Nov: still no newer Lipper/EPFR/BofA Flow Show cut -- the next one (due Thu/Fri Nov 12-13) will be the first to capture today's hot-CPI shock. The week-ending-Nov-4 cut already on file (7th straight week of global equity inflows, record money-market inflow) is corroborated this run by BofA's own Flow Show figures for the same week: global equity funds +$89.2B (a 20-week high), money-market funds +$140.4B, bond funds +$11.6B, and tech funds specifically +$9.8B ($44.6B over the trailing 4 weeks, the most since July) -- while crypto funds saw a -$1.8B outflow for the week, consistent with this run's broader crypto-decoupling-to-the-downside finding. Gold ETFs logged a 4th straight monthly inflow in October per the World Gold Council (unchanged, no fresher cut).",
+    "asOf": "2026-11-12",
+    "period": "week ending 4 Nov 2026 (LSEG Lipper/EPFR primary; EM and Japan figures are the latest available but from the adjacent week ending ~28 Oct 2026, flagged individually)",
+    "narrative": "The most recent complete weekly tally (week ended Wed 4 Nov 2026) showed a seventh straight week of global equity inflows (+$38.6B, led by the US and a resurgent Europe) alongside the biggest weekly money-market inflow since April 2020 (+$172.7B) -- a barbell of continued risk-taking plus defensive cash-parking after the early-November AI-led growth-stock selloff. China equities extended a 10-week, ~$21B cumulative inflow streak even as China bonds kept bleeding, while gold ETFs logged their first net monthly inflow since July as the post-selloff safe-haven bid moderated into early November.",
     "regions": [
-      {
-        "region": "US Equities",
-        "direction": "inflow",
-        "amount": "+$14.81B",
-        "amountUSD": 14810000000,
-        "note": "Week ending Nov 4; reversed the prior week's outflow. Small-cap +$0.42B, mid-cap -$0.07B; large-/multi-cap split not reliably reconstructable from source formatting this run."
-      },
-      {
-        "region": "Europe/Intl DM",
-        "direction": "inflow",
-        "amount": "+$13.25B",
-        "amountUSD": 13250000000,
-        "note": "Week ending Nov 4; largest since Aug 12."
-      },
-      {
-        "region": "EM",
-        "direction": "inflow",
-        "amount": "+$1.91B",
-        "amountUSD": 1910000000,
-        "note": "5th straight weekly inflow, week ending Nov 4."
-      },
-      {
-        "region": "China",
-        "direction": "inflow",
-        "amount": "included within Asia equity funds' aggregate",
-        "amountUSD": null,
-        "note": "Lipper's Nov-4 cut does not break out China separately this week; no China-specific figure to report."
-      },
-      {
-        "region": "Japan",
-        "direction": "inflow",
-        "amount": "included within Asia equity funds' aggregate",
-        "amountUSD": null,
-        "note": "Same report; no Japan-specific breakout this week."
-      },
-      {
-        "region": "Money-market/Cash",
-        "direction": "inflow",
-        "amount": "+$117.97B",
-        "amountUSD": 117970000000,
-        "note": "Largest since May 6 2026 -- attributed to midterm-election caution and AI-capex/cash-burn worries, concurrent with still-positive equity flows."
-      },
-      {
-        "region": "Bonds/Credit",
-        "direction": "inflow",
-        "amount": "+$7.31B",
-        "amountUSD": 7310000000,
-        "note": "US bond funds, highest in 4 weeks; govt/Treasury long-duration and general taxable the largest contributors."
-      },
-      {
-        "region": "Gold",
-        "direction": "inflow",
-        "amount": "+$2.70B (+19 tonnes)",
-        "amountUSD": 2700000000,
-        "note": "World Gold Council, OCTOBER 2026 MONTHLY figure (not weekly) -- 4th straight monthly inflow; Europe +$1.8B, Asia +$1.3B, North America -$512M (only outflow region); holdings 4,275t (record), YTD inflows globally."
-      },
-      {
-        "region": "Technology funds (supplementary, same Nov-4 week, not additive to the US Equities row above)",
-        "direction": "inflow",
-        "amount": "+$9.8B ($44.6B over the trailing 4 weeks, most since July)",
-        "amountUSD": 9800000000,
-        "note": "BofA Flow Show sector-fund cut for the week ending Nov 4; narrower scope than the broad US Equities regional figure, shown separately rather than summed."
-      },
-      {
-        "region": "Crypto funds (supplementary, same Nov-4 week)",
-        "direction": "outflow",
-        "amount": "-$1.8B",
-        "amountUSD": -1800000000,
-        "note": "BofA Flow Show figure for dedicated crypto funds; consistent with the spot BTC/ETH ETF outflows (~$1.5B since Nov 2) flagged elsewhere this run."
-      }
+      { "region": "US Equities", "direction": "inflow", "amount": "+$14.8B", "amountUSD": 14800000000, "note": "LSEG Lipper, week ended 4 Nov 2026." },
+      { "region": "Europe/Intl DM", "direction": "inflow", "amount": "+$13.25B", "amountUSD": 13250000000, "note": "Largest weekly European equity inflow since 12 Aug 2026 (Lipper); had been a 3rd straight weekly outflow (-$2.3B) the prior reported week per BofA data -- a sharp flip." },
+      { "region": "EM", "direction": "inflow", "amount": "+$30.6B", "amountUSD": 30600000000, "note": "5th straight weekly EM equity inflow; BofA/EPFR figure for the week ended ~28 Oct 2026 -- the latest EM-specific figure found, one week behind the Lipper cut above." },
+      { "region": "China", "direction": "inflow", "amount": "+$21B (10-week cumulative)", "amountUSD": null, "note": "Dedicated China equity funds extended a 10-straight-week inflow streak (EPFR) even as China bond funds logged a 17th straight week of outflows (-$7.6B cumulative)." },
+      { "region": "Japan", "direction": "inflow", "amount": "+$6.8B", "amountUSD": 6800000000, "note": "Largest weekly Japan equity inflow since May 2013 (BofA); week ended ~28 Oct 2026 -- the most recent Japan-specific figure found, one week behind the Lipper cut above." },
+      { "region": "Money-market/Cash", "direction": "inflow", "amount": "+$172.7B", "amountUSD": 172700000000, "note": "Biggest global weekly money-market inflow since April 2020 (LSEG Lipper, week ended 4 Nov); US funds alone took in +$118.0B." },
+      { "region": "Bonds/Credit", "direction": "inflow", "amount": "+$15.4B", "amountUSD": 15400000000, "note": "BofA weekly flow data, week ended ~28 Oct 2026; masks a 17-week, -$7.6B China bond outflow streak running underneath." },
+      { "region": "Gold", "direction": "inflow", "amount": "+13.6t (~$838M, Nov MTD)", "amountUSD": 838000000, "note": "First net monthly inflow into gold ETFs since July 2026 (World Gold Council); weekly pace +5.5 tonnes for the week ended 6 Nov, with Asia posting its first outflow since May." }
     ],
     "movements": [
-      {
-        "from": "Cash (pre-positioning)",
-        "to": "US + Europe + Asia equities",
-        "amount": "+$117.97B money-market vs +$38.63B global equities",
-        "note": "Investors added to both stocks and cash simultaneously the week before Thursday's crash -- a barbell/hedge pattern, not a clean rotation."
-      },
-      {
-        "from": "Prior week's US equity outflow",
-        "to": "US equities",
-        "amount": "prior-week outflow (exact magnitude lost to a source-formatting issue, direction confirmed negative) -> +$14.81B (week ending Nov 4)",
-        "note": "Sharp reversal into the midterm-relief rally, just before Thursday's AI-capex reversal which this cut does not yet capture."
-      },
-      {
-        "from": "North America",
-        "to": "Europe & Asia gold demand",
-        "amount": "-$512M N.America vs +$1.8B Europe / +$1.3B Asia (October, WGC)",
-        "note": "Gold ETF demand is increasingly ex-US; North America was the only outflow region in October."
-      }
+      { "from": "Europe/Intl DM (outflow week)", "to": "Europe/Intl DM (inflow week)", "amount": "-$2.3B -> +$13.25B swing", "note": "European equity funds flipped from a 3rd straight weekly outflow to their biggest inflow since 12 Aug as the AI-growth selloff eased." },
+      { "from": "Risk equities", "to": "Money-market/Cash", "amount": "+$172.7B into cash", "note": "Record-pace cash build ran alongside continued equity inflows -- a post-selloff barbell of staying invested while raising dry powder." },
+      { "from": "China bonds", "to": "China equities", "amount": "-$7.6B (17-wk) vs +$21B (10-wk)", "note": "Clear domestic China rotation from fixed income into equities." },
+      { "from": "Gold/safe-havens", "to": "DM equities", "amount": "gold inflow decelerating as DM equity inflows accelerate", "note": "Gold's first positive month since July moderated as risk appetite returned into early November." }
     ],
     "sources": [
       "https://www.investing.com/news/economy-news/global-equity-funds-post-seventh-straight-week-of-inflows-5006882",
-      "https://gold.org/goldhub/research/gold-etfs-holdings-and-flows/2026/11",
-      "https://rallies.ai/news/global-equity-funds-post-seventh-straight-week-of-inflows-2de924b78021e110",
-      "https://www.indexbox.io/blog/global-equity-funds-log-seventh-straight-week-of-inflows-as-central-banks-hold-rates/"
+      "https://www.newsquawk.com/headlines/bofa-weekly-flow-data-shows-usd-562bln-into-stocks-usd-154bln-into-bonds-usd-34bln-into-cash-usd-05bln-out-of-crypto-usd-17bln-out-of-gold",
+      "https://epfr.com/insights/global-navigator/falling-knives-aplenty-in-early-november/",
+      "https://www.gold.org/download/file/21327/WMM_2_Nov_2026_Leveraged_Repricers.pdf",
+      "https://thegoldinvestor.substack.com/p/the-gold-weekly-2-november-7th-2026"
     ]
   }
 }

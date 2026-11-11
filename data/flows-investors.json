@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-11",
-  "note": "Wed 11 Nov 2026 07:02 SGT run. Korea: added Nov 9-10 daily prints -- foreigners' 7-session selling streak broke with a net BUY on Nov 10. Hong Kong: Southbound's 7-week inflow streak broke this week (net outflow ~HK$6.6bn, 6-10 Nov) after Nov 9's buy was followed by a Nov 10 net sell. China: added the Q3 2026 northbound shareholding disclosure (14 Oct) as quarterly context alongside the daily margin-balance series already on file; no fresher margin print found. US: added Goldman Prime Brokerage's net-leverage figure (largest weekly drop since Apr-2025) alongside the unchanged ICI week-ended-Oct-28 cut. Japan: a secondary-sourced 'week ended Oct 31' foreign-buy figure (+Y1,129.3bn) surfaced this run but does not reconcile with JPX's own confirmed week-ended-Oct-30 report already on file (-Y217.6bn outflow) -- discarded as unreliable rather than used; JPX's November-Week-1 report remains unpublished. Singapore: no fresher discrete weekly S$ figure found beyond the October full-month cut already on file; a secondary 'week ended Oct 9' figure surfaced this run is older than what's already on file and was not used.",
+  "updated": "2026-11-12",
+  "note": "Thu 12 Nov 2026 07:02 SGT run. Korea: added a Nov 11 daily print -- foreign institutions bought for a 2nd straight day (+₩449.1bn) while retail flipped to selling (-₩634.0bn) and domestic institutions also sold (-₩355.7bn), the first session where foreign buying and retail selling coincide. An unresolved discrepancy surfaced on Nov 10: a secondary source (fnnews) claims foreign net buying of ~₩3.586tn/~₩7tn (incl. NextTrade) that day, an order of magnitude above the ₩650.2bn already on file -- flagged, not used, pending KRX reconciliation. Hong Kong: Southbound's one-week outflow (6-10 Nov, ~-HK$6.6bn) looks like a pause, not a trend break -- Nov 11 printed a solid net buy (+HK$4.572bn) concentrated in Alibaba/SMIC. China: added two fresh margin-balance prints (Nov 9 +RMB12.07bn d/d; Nov 10 ≈RMB2,258.15bn total, -RMB1.38bn d/d) -- roughly flat/marginal, no releveraging signal. Japan: re-confirmed (via a Nikkei-level cross-check) that the recurring 'week ended Nov 7, -¥355.9bn/+¥555.7bn' figure is a mis-dated 2025 article, not 2026 data -- discarded again; JPX's November-Week-1 report remains unpublished. Singapore: a weekly institutional/retail figure (-S$141.8M/-S$32.5M) surfaced via AI-search synthesis but the primary sginvestors.io page would not render for independent verification -- NOT entered given SG is the owner's largest exposure; October full-month figure remains the latest confirmed discrete figure.",
   "markets": [
     {
       "market": "Japan (TSE)",
@@ -47,16 +47,44 @@
       "dataGaps": [
         "This is JPX's preliminary 'speed report' (52 major securities firms, TSE+Nagoya combined, cash stocks only) sourced via secondary Japanese media -- direct jpx.co.jp access returned HTTP 403.",
         "Week ended Nov 6, 2026 ('November Week 1') not yet published (re-checked Mon 9 Nov, still expected ~Nov 12); carried forward unchanged. A promising-looking 'Nov 1st week -¥355.9bn foreign sell' search hit was run down and confirmed to be a Nikkei article dated Nov 13 2025 (prior year) -- discarded as a false lead.",
-        "Re-checked 11 Nov: a secondary-sourced figure (Reuters/MOF-linked reporting) claimed foreigners net BOUGHT +Y1,129.3bn in the 'week ended Oct 31' -- this does not reconcile with JPX's own confirmed week-ended-Oct-30 report already on file (-Y217.6bn net foreign outflow) and could not be corroborated against JPX's own site (403 on fetch). Discarded as unreliable; week-ended-Nov-6 ('November Week 1') report still not published."
+        "Re-checked 11 Nov: a secondary-sourced figure (Reuters/MOF-linked reporting) claimed foreigners net BOUGHT +Y1,129.3bn in the 'week ended Oct 31' -- this does not reconcile with JPX's own confirmed week-ended-Oct-30 report already on file (-Y217.6bn net foreign outflow) and could not be corroborated against JPX's own site (403 on fetch). Discarded as unreliable; week-ended-Nov-6 ('November Week 1') report still not published.",
+        "Re-checked 12 Nov: the same '-¥355.9bn foreign sell / +¥555.7bn individual buy, week ended Nov 7' figure resurfaced again and was definitively confirmed as a mis-dated 2025 article this time -- cross-checked the cited Nikkei 225 close (50,276) against the actual 2026-11-06 close (57,434.77, -5.96% that day) and the two do not match, proving the source is from the prior year. Discarded again; flagging in case the same false lead keeps recurring from an un-dated cache."
       ]
     },
     {
       "market": "South Korea (KOSPI)",
       "available": true,
       "cadence": "daily, published same trading day after market close (T+0)",
-      "latestPeriod": "day: Nov 10, 2026 (Tue); week: Oct 26-30, 2026 (last fully completed week)",
-      "asOf": "2026-11-10",
+      "latestPeriod": "day: Nov 11, 2026 (Wed); week: Oct 26-30, 2026 (last fully completed week)",
+      "asOf": "2026-11-11",
       "flows": [
+        {
+          "investorType": "Foreign institutional",
+          "direction": "inflow",
+          "amount": "+₩449.1bn",
+          "unit": "KRW bn",
+          "period": "2026-11-11 (daily)",
+          "isProxy": false,
+          "note": "2nd straight day of foreign net buying; KOSPI closed 5,375.36 (+2.60%, +₩136.23) with Samsung Electronics and SK Hynix leading the buying."
+        },
+        {
+          "investorType": "Retail (individuals)",
+          "direction": "outflow",
+          "amount": "-₩634.0bn",
+          "unit": "KRW bn",
+          "period": "2026-11-11 (daily)",
+          "isProxy": false,
+          "note": "Flipped to net selling (profit-taking) after days of buying the dip -- the first session where foreign buying and retail selling coincide, a possible stabilization/rotation signal."
+        },
+        {
+          "investorType": "Domestic institutional",
+          "direction": "outflow",
+          "amount": "-₩355.7bn",
+          "unit": "KRW bn",
+          "period": "2026-11-11 (daily)",
+          "isProxy": false,
+          "note": "Also net sold alongside retail (profit-taking/risk management) even as foreigners bought."
+        },
         {
           "investorType": "Foreign institutional",
           "direction": "inflow",
@@ -64,7 +92,7 @@
           "unit": "KRW bn",
           "period": "2026-11-10 (daily)",
           "isProxy": false,
-          "note": "First net foreign BUY after 7 consecutive sessions of net selling (~₩30.35tn cumulative sold since Oct 6)."
+          "note": "First net foreign BUY after 7 consecutive sessions of net selling (~₩30.35tn cumulative sold since Oct 6). UNRESOLVED: a separate fnnews report claims foreign net buying of ~₩3.586tn (regular market) / ~₩7tn (incl. NextTrade) this same day -- an order of magnitude larger; not used pending reconciliation against KRX's own data."
         },
         {
           "investorType": "Foreign institutional",
@@ -211,31 +239,42 @@
           "note": "weekly net sell despite KOSPI rising 3.25% over the week"
         }
       ],
-      "trend": "Foreigners' selling streak snapped on Nov 10 with a net +₩650.2bn buy, after 7 straight sessions of selling (~₩30.35tn cumulative since Oct 6, including Nov 9's -₩256.3bn). Retail and domestic institutions continued to absorb the selling through Nov 9.",
-      "interpretation": "The break in foreign selling on Nov 10 is a tentative, not confirmed, stabilization signal for Korea -- still the clearest regional read-through for the owner's HK/SG tech-adjacent exposure to the broader AI-capex/rate-repricing shock. Retail's buy-the-dip conviction has held through the entire episode so far.",
+      "trend": "Foreigners extended a buying streak to 2 days (Nov 10-11) after the 7-session selling streak; retail flipped to selling on Nov 11 after days of buy-the-dip -- an inversion of the Nov 3-10 pattern (retail absorbing foreign selling), now foreign buying and retail selling coincide.",
+      "interpretation": "Nov 11 is the first session where foreign buying and retail selling coincide -- consistent with a stabilization/rotation signal rather than continued panic, semiconductor-led (Samsung Electronics, SK Hynix). Still the clearest regional read-through for the owner's HK/SG tech-adjacent exposure to the broader AI-capex/rate-repricing shock.",
       "sources": [
         "https://en.sedaily.com/news/2026/11/06/foreign-selling-of-28-trillion-won-pushes-kospi-to-brink-of",
         "https://www.mt.co.kr/en/stock/2026/11/06/2026110609505081990",
         "https://www.fnnews.com/news/202611051448316164",
         "https://www.koreaherald.com/article/10928857",
         "https://www.junggi.co.kr/news/articleView.html?idxno=38411",
-        "https://www.mt.co.kr/en/stock/2026/11/10/2026111015500922822"
+        "https://www.mt.co.kr/en/stock/2026/11/10/2026111015500922822",
+        "https://businesskorea.co.kr/news/articleView.html?idxno=281048",
+        "https://fnnews.com/news/202611110601477697"
       ],
       "dataGaps": [
         "KRX's headline daily release does not sub-split institutions into pension/insurance/securities-firm categories beyond what's reported.",
         "The confirmed Nov 6 retail figure (+₩601-605bn) varies slightly (₩6,010-6,046 billion) across the two sources that reported it -- treated as a range, not exact to the won.",
         "KOSDAQ breakdown not retrieved.",
-        "Re-checked Mon 9 Nov: KRX not yet open (Asia pre-open); no Nov 9 daily figure exists yet.",
-        "Re-checked 11 Nov: KOSDAQ breakdown still not retrieved; pension-fund sub-split not available for Nov 9-10."
+        "Re-checked 11 Nov: KOSDAQ breakdown still not retrieved; pension-fund sub-split not available for Nov 9-10.",
+        "Re-checked 12 Nov: the Nov 10 foreign-buy figure has two irreconcilable versions (₩650.2bn already on file vs fnnews's ~₩3.586tn/~₩7tn) -- kept the originally-filed figure and flagged the discrepancy rather than guessing which is right; needs reconciliation against KRX's own release next run."
       ]
     },
     {
       "market": "Hong Kong",
       "available": true,
       "cadence": "Southbound Stock Connect: official HKEX data, same-day/T+0; EPFR/BofA fund flows: weekly, ~2-6 day lag",
-      "latestPeriod": "Southbound: week of 6-10 Nov 2026 (daily); EPFR HK SAR equity funds: week ended ~Oct 15, 2026 (no newer print located)",
-      "asOf": "2026-11-10",
+      "latestPeriod": "Southbound: week of 6-11 Nov 2026 (daily); EPFR HK SAR equity funds: week ended ~Oct 15, 2026 (no newer print located)",
+      "asOf": "2026-11-11",
       "flows": [
+        {
+          "investorType": "Southbound (mainland China conviction money)",
+          "direction": "inflow",
+          "amount": "+HK$4.572bn",
+          "unit": "HKD bn",
+          "period": "2026-11-11 (daily)",
+          "isProxy": false,
+          "note": "Continues the Nov 9 buy, reversing the Nov 6-10 weekly outflow streak-break. Top buys: Alibaba +HK$1.204bn, SMIC +HK$935m, Yingfu Fund +HK$926m."
+        },
         {
           "investorType": "Southbound (mainland China conviction money)",
           "direction": "outflow",
@@ -243,7 +282,7 @@
           "unit": "HKD bn",
           "period": "week of 2026-11-06 to 2026-11-10",
           "isProxy": true,
-          "note": "Snaps a 7-week Southbound inflow streak. Within the week: Nov 9 net buy +HK$1.86bn, Nov 10 net sell ~-HK$2.7bn -- a tentative reversal rather than a clean trend break."
+          "note": "Snapped a 7-week Southbound inflow streak. Within the week: Nov 9 net buy +HK$1.86bn, Nov 10 net sell ~-HK$2.7bn -- followed by Nov 11's +HK$4.572bn buy, making this one-week outflow look like a pause rather than a trend break."
         },
         {
           "investorType": "Foreign institutional (sovereign wealth funds, supplementary/different cadence)",
@@ -291,32 +330,50 @@
           "note": "no newer weekly print located this run either (re-checked again); carried forward for a 4th straight run"
         }
       ],
-      "trend": "The 7-week Southbound inflow streak broke this week (net outflow ~HK$6.6bn, 6-10 Nov), with a one-day reversal from Monday's buying -- a fragile, not confirmed, change in mainland conviction after the recent rebound.",
-      "interpretation": "For the owner's 0700/0981/1810 exposure, the break in Southbound's inflow streak is the first genuine soft signal from mainland money in 7 weeks, though it is only one week old and the Nov 9 daily figure was still a buy -- worth watching rather than treating as confirmed distribution.",
+      "trend": "The 7-week Southbound inflow streak broke mid-week (net outflow ~HK$6.6bn, 6-10 Nov) but Nov 11 printed a solid net buy continuing the Nov 9 pattern, concentrated in Alibaba/SMIC (semiconductor/AI-adjacent names) -- looking more like a brief pause than a trend break.",
+      "interpretation": "For the owner's 0700/0981/1810 exposure, mainland conviction money came back in size on Nov 11 -- tentatively bullish, but the week itself is only one session past the outflow streak-break; EPFR's foreign-flow blind spot persists (no read on offshore institutional positioning for ~4 weeks now).",
       "sources": [
         "https://shishixinwen.news/news/jin10/20261106161535062800",
         "https://news.futunn.com/post/1003714219/zhitong-stock-connect-active-trades-november-6",
         "https://www.stcn.com/article/detail/3482905.html",
         "https://www.bloomberg.com/news/articles/2026-10-30/hk-stocks-lose-a-key-backer-as-chinese-investors-head-for-exit",
         "https://finance.biggo.com/news/0025c552-68f5-4461-8ef0-e20ae3e0c798",
-        "https://www.cnbc.com/2026/10/22/sovereign-wealth-funds-china-hong-kong.html"
+        "https://www.cnbc.com/2026/10/22/sovereign-wealth-funds-china-hong-kong.html",
+        "https://news.futunn.com/en/post/1004170519/zhitong-stock-connect-active-trades-november-11"
       ],
       "dataGaps": [
         "No official retail-vs-institutional split exists for HK-listed stocks.",
         "Southbound measures mainland-domiciled money against the rest of the market -- a geographic/channel split, not retail/institutional.",
         "EPFR/BofA HK SAR fund-flow data has no edition newer than week-ended-~Oct-15 located across six consecutive runs now (re-checked Nov 8); carried forward stale.",
-        "No Southbound data beyond Nov 6 exists yet (Nov 7-8 were Sat/Sun, no trading).",
-        "Re-checked Mon 9 Nov: no Nov 7-9 Southbound prints exist (weekend + HKEX not yet open); older Nov3/Nov4 prints that surfaced in search are already superseded by/consistent with the Nov5/Nov6 figures on file.",
-        "Re-checked 11 Nov: EPFR/BofA HK SAR fund-flow data still has no edition newer than week-ended-~Oct-15 across seven consecutive runs now; carried forward stale."
+        "Re-checked 11 Nov: EPFR/BofA HK SAR fund-flow data still has no edition newer than week-ended-~Oct-15 across seven consecutive runs now; carried forward stale.",
+        "Re-checked 12 Nov: still no fresher EPFR/BofA HK SAR print (8th consecutive run); carried forward stale."
       ]
     },
     {
       "market": "China (A-shares)",
       "available": true,
       "cadence": "Northbound: no longer disclosed daily (ended Aug 19, 2024; now only a quota-remaining alert plus quarterly shareholding); margin balance: daily, ~1-2 day lag; new account openings: monthly, ~10-day lag",
-      "latestPeriod": "Margin balance: Nov 5, 2026 (published Nov 6); new accounts: October 2026; Northbound shareholding: Q3 2026",
-      "asOf": "2026-11-06",
+      "latestPeriod": "Margin balance: Nov 10, 2026 (published Nov 11); new accounts: October 2026; Northbound shareholding: Q3 2026",
+      "asOf": "2026-11-10",
       "flows": [
+        {
+          "investorType": "Margin balance (SSE+SZSE combined)",
+          "direction": "decrease",
+          "amount": "≈RMB2,258.15bn",
+          "unit": "RMB bn",
+          "period": "2026-11-10",
+          "isProxy": true,
+          "note": "Down RMB1.38bn d/d ('减少13.84亿元'). Net effect over Nov 9-10 is roughly flat/marginal -- no dramatic re- or de-leveraging, still well off the late-June 2026 peak above RMB3tn."
+        },
+        {
+          "investorType": "Margin balance (SSE+SZSE combined)",
+          "direction": "increase",
+          "amount": "+RMB12.07bn d/d",
+          "unit": "RMB bn",
+          "period": "2026-11-09",
+          "isProxy": true,
+          "note": "Published Nov 10 ('增加120.69亿元' = RMB12.069bn, not a 120bn-scale move -- a direct-translation trap). Precedes the Nov 10 figure above."
+        },
         {
           "investorType": "Margin balance (SSE+SZSE combined)",
           "direction": "increase",
@@ -354,20 +411,21 @@
           "note": "The only northbound disclosure that still exists post-Aug-2024 reform -- a quarterly aggregate shareholding snapshot, not a flow figure; roughly 2-week lag after quarter-end. Next due at Q4-end / early 2027."
         }
       ],
-      "trend": "Margin balance ticked up marginally (one more trading day of data) but remains well off its late-June 2026 peak amid regulatory tightening -- modest, not dramatic, retail releveraging. New account openings continue to decelerate sharply y/y.",
-      "interpretation": "Retail proxies show a mixed, generally cautious picture: existing leveraged retail investors are nudging exposure up slightly, but new retail participation is falling off a cliff y/y, consistent with post-AI-frenzy cooling.",
+      "trend": "Margin balance moved marginally over Nov 9-10 (+RMB12.07bn then -RMB1.38bn), net roughly flat, remaining well off its late-June 2026 peak amid regulatory tightening -- no dramatic re- or de-leveraging. New account openings continue to decelerate sharply y/y.",
+      "interpretation": "Retail proxies show a mixed, generally cautious picture: existing leveraged retail investors are holding exposure flat rather than adding, while new retail participation is falling off a cliff y/y, consistent with post-AI-frenzy cooling and a cautious, not re-risking, posture into the hawkish Fed repricing.",
       "sources": [
         "https://finance.sina.cn/2026-11-04/detail-inixprpa6172127.d.html",
         "http://stock.10jqka.com.cn/20261104/c681431902.shtml",
-        "https://www.caixinglobal.com/2024-07-30/china-to-stop-releasing-daily-global-stock-flows-in-mid-august-102221407.html"
+        "https://www.caixinglobal.com/2024-07-30/china-to-stop-releasing-daily-global-stock-flows-in-mid-august-102221407.html",
+        "http://stock.10jqka.com.cn/20261110/c681634834.shtml",
+        "https://finance.sina.cn/2026-11-11/detail-iniyiiai2066248.d.html"
       ],
       "dataGaps": [
-        "Northbound real-time daily flow disclosure remains curtailed/quarterly-only since the Aug 30 2024 HKEX reform -- confirmed unchanged as of Nov 2026.",
+        "Northbound real-time daily flow disclosure remains curtailed/quarterly-only since the Aug 30 2024 HKEX reform -- re-confirmed unchanged as of Nov 2026.",
         "No newer northbound shareholding disclosure beyond Q3 2026 (next due at year-end/Q4).",
         "No November account-opening data yet (too early).",
-        "Re-checked Nov 8: margin balance still only published through Nov 5, 2026 (checked legulegu.com live table, 10jqka, 21jingji, sina, eastmoney); no Nov 6 figure found despite the normal ~1-2 day lag -- carried forward.",
-        "Re-checked Mon 9 Nov: Nov 6 margin balance still not found (now 1 day further overdue). A second search returned a conflicting figure (RMB24,725.92bn) that does not arithmetically reconcile with the Nov5 base (RMB22,709.77bn) given the stated d/d change -- judged a likely scraping artifact and discarded rather than used.",
-        "Re-checked 11 Nov: no fresher margin-balance print found beyond the Nov 5 figure already on file; the Q3 northbound shareholding figure added this run is a stock (holdings level), not a flow, and should not be read as a weekly net-buy/sell signal."
+        "Re-checked 11 Nov: no fresher margin-balance print found beyond the Nov 5 figure then on file; the Q3 northbound shareholding figure added that run is a stock (holdings level), not a flow.",
+        "Re-checked 12 Nov: Nov 6-8 margin-balance prints were never located (weekend plus an unexplained gap) -- the Nov 9/10 figures above are the next confirmed points after Nov 5, so the d/d deltas quoted are versus the immediately preceding trading day, not a continuous daily series."
       ]
     },
     {
@@ -416,7 +474,8 @@
         "Exact discrete S$ institutional/retail weekly net-flow figure for the most recent single week (~Oct 30 or Nov 6) could not be retrieved -- sgx.com fund-flow pages returned 403/empty.",
         "The \"retail net buyer every week for 4 weeks\" claim is secondary synthesis, not a primary SGX table -- lower confidence until verified directly.",
         "Re-checked Nov 8: no fresher weekly cut found at Business Times / theedgesingapore; the October full-month figure (-S$1.55bn institutional) remains the latest confirmed discrete figure. Carried forward.",
-        "Re-checked Mon 9 Nov: no week-ended-Nov6 SGX weekly figure found (and SGX itself is closed today for Deepavali); October full-month figure remains the latest confirmed discrete figure."
+        "Re-checked Mon 9 Nov: no week-ended-Nov6 SGX weekly figure found (and SGX itself is closed today for Deepavali); October full-month figure remains the latest confirmed discrete figure.",
+        "Re-checked 12 Nov: a week-ended-6-Nov figure (Institutional -S$141.8M, Retail -S$32.5M) surfaced via AI-search synthesis citing sginvestors.io, but the primary page returned empty/JS-blocked content on direct fetch and could not be independently confirmed against a primary table -- NOT entered into the dashboard given this is the owner's largest exposure; October full-month figure remains the latest confirmed discrete figure."
       ]
     },
     {
@@ -520,7 +579,8 @@
         "No explicit retail-vs-institutional split exists within ICI or EPFR data -- both are fund-type proxies; Vanda/JPM remains the only true retail-specific proxy.",
         "No Nov 7 Vanda/JPM figure exists (Saturday, no trading); sources report inconsistent Nov-5 single-day totals (-$257mn to -$358mn across outlets depending on methodology) -- treated as approximate, direction (large outflow) is the reliable part.",
         "Re-checked Mon 9 Nov: no newer weekly cut; US market not yet open.",
-        "Re-checked 11 Nov: no newer Vanda/JPM daily retail print found beyond Nov 5-6 already on file; today's hot CPI reaction is not yet reflected in any investor-type US flow data."
+        "Re-checked 11 Nov: no newer Vanda/JPM daily retail print found beyond Nov 5-6 already on file; today's hot CPI reaction is not yet reflected in any investor-type US flow data.",
+        "Re-checked 12 Nov: no newer ICI weekly print or Vanda/JPM daily figure found beyond what's on file; the Goldman Prime Brokerage -3.7pts/43.3% net-leverage figure was re-corroborated by a fresh search (same figure, same 'fastest deleveraging since March 2020' context) -- a broader October prime-book metric (net leverage -4.2pts to 73.4%) also surfaced as supplementary color but is older than what's on file, so not added as a new row."
       ]
     }
   ]
