@@ -1,64 +1,59 @@
 {
-  "date": "2026-11-12T07:02:00+08:00",
+  "date": "2026-11-13T07:02:00+08:00",
   "tldr": [
-    "Markets flipped from pricing a possible December Fed CUT to a near-certain HIKE (CME odds ~88-96%, Waller/Logan both floating 50bp) after hot October CPI -- yet equities ripped higher Wed (S&P +1.31%, Nasdaq +1.60%, VIX -10.1%) as CoreWeave's blowout earnings/$132.5B backlog reignited the AI-capex trade.",
-    "Gold/silver diverged from the equity rally on real yields, not risk-off: GLD -1.13%, miners -1 to -1.5% (GDX, SILJ, SLVP, NEM, PAAS, AG, HL) even as SLV held up (+0.37%) on industrial/AI-power demand; intraday Thu-Asia quotes show gold briefly under $4,000 and silver under $52 -- levels to watch at the SGX/HKEX-adjacent open, not confirmed closes.",
-    "China's rare-earth export-control truce expired Nov 10 with no formal renewal confirmed -- the live catalyst behind this week's rare-earth-basket strength (MP, Lynas, Energy Fuels, USAR all firm); watch for a MOFCOM notice in the coming days.",
-    "HK tech mixed: Tencent -1.96%, Xiaomi -1.63%, but SMIC +3.73% on a chip-self-sufficiency read-through as the Nvidia 'spy scandal' accelerates new congressional chip-export-control bills.",
-    "Singapore banks split (OCBC beat, DBS/UOB missed) even as the STI firmed; Korea's foreign-buying streak extended to 2 days (Nov 10-11) but retail flipped to selling Nov 11 -- the first session foreign buying and retail selling have coincided, a tentative stabilization tell.",
-    "Separate from this run's research: the model's own risk calc (data/oneaction.json, code-owned) flags the silver loan's stressed margin-call distance at 13.2% -- a live number worth keeping in view, not a new finding from today's work."
+    "Nvidia CEO Jensen Huang resigned effective immediately on 12 Nov amid a scandal involving an alleged affair with a suspected Chinese intelligence operative -- NVDA fell ~4-10% intraday, dragging SMH/XLK, even as AMD and Broadcom rallied on rotation; CFO Colette Kress is interim CEO, and Nvidia's 17 Nov earnings call is now a binary catalyst for the whole AI-capex trade.",
+    "The Fed's hawkish pivot is now confirmed by data, not just Fed-speak: October core CPI printed +0.3% m/m for a third straight month (vs +0.2% forecast), pushing CME-implied odds of a December hike to 100% (~87% 25bp / ~13% 50bp); the 10Y yield spiked to 5.107% and DXY hit a ~19-month high (~103.17).",
+    "Gold/silver/miners extended their real-yield-driven rout into a third straight session (GLD -2.8% to $354.89, gold cracking below $3,900-equivalent) -- separately, the code-owned risk calc shows the silver loan's stressed margin-call distance has compressed to 10.4% (from 13.2% yesterday), context worth keeping in view, not a new finding from today's research.",
+    "China's MOFCOM confirmed on 9 Nov it extended -- not let lapse -- the rare-earth/battery export-control suspension through 10 Jan 2027, correcting yesterday's 'truce expired' read and cooling the near-term scarcity catalyst for the ex-China rare-earth basket (MP, Lynas, Energy Fuels, USAR all pulled back on the news).",
+    "Cross-market flows are narrow rather than broad risk-on: Hong Kong's Southbound mainland money bought for a 4th straight session (Alibaba, Zhipu AI, SMIC) even through Thursday's down close, and Korean foreign institutions bought for a 3rd straight day against retail and now domestic-institutional selling -- a stock/theme-specific bid, not a uniform regional one.",
+    "Wing Tai's (W05.SI) chairman-spouse accumulation program continues with two further SGXNet filings dated 11 and 12 Nov, verified directly against the primary filing PDFs."
   ],
   "whatChanged": [
-    "Intel: congress trades fully refreshed (15 entries across 10 distinct members, incl. a 3-member WBD merger-cashout cluster and a Ro Khanna bank-stock basket); insiders refreshed with a genuine new catch -- two further Wing Tai (W05.SI) chairman-spouse accumulation filings (6 and 10 Nov) extending the ongoing buy program, confirmed via direct PDF read after SGX links returned 403/429; signals rewritten to 6 new consensus tickers (NVDA, PLTR, AMAT, MU, NBIS, BHE).",
-    "Investors: no changes -- Trump's PTR is still dated 8 Oct (independently re-confirmed twice this run, no newer filing found), and the Q3 2026 13F deadline isn't until ~14 Nov so sectorConcentration's Q2 reading remains the latest available.",
-    "Model: macro flipped from a risk-off tilt (riskOnProb 0.43) to a modest risk-on tilt (0.60) as the CoreWeave-driven AI-capex melt-up offset the hawkish Fed turn; ALL 40 universe calls plus the full 9-ticker rare-earth basket were individually refreshed this run (last run only covered 13 of 40).",
-    "Market: Fear & Greed ticked up to 37 (still Fear, corrected from a scraped source that mislabeled it 'Extreme Greed'); breadth looks broad on short-term gauges (69% of S&P names above the 50-DMA) but narrower on a longer horizon (only ~55-58% above the 200-DMA, Nasdaq new-lows well outpacing new-highs); flows still reflect the week ending 4 Nov (no newer Lipper/EPFR cut exists yet).",
-    "News: 14 fresh items, led by the Fed's hawkish pivot to a hike, the rare-earth truce expiry, and the CoreWeave-driven AI rally.",
-    "Flows-investors: Korea's foreign-buying streak extended to 2 days but retail flipped to selling Nov 11 (first such coincidence); Hong Kong's Southbound outflow looks like a 1-session pause, not a trend break, after a solid Nov 11 buy-back concentrated in Alibaba/SMIC; an unresolved Korea Nov-10 data discrepancy (₩650bn vs a secondary ₩3.586tn claim) was flagged rather than guessed at.",
+    "Intel: congress trades fully refreshed (15 entries across 13 distinct members); insiders refreshed with a genuine new catch -- two further Wing Tai (W05.SI) accumulation filings (11, 12 Nov); signals rewritten around the Nvidia scandal's congress/retail convergence, plus a new MRVL congress+13F-accumulation signal.",
+    "Investors: no changes -- Trump's PTR is still dated 8 Oct (re-confirmed, no newer filing), and Berkshire's next 13F isn't due until 16 Nov, so profiles/sectorConcentration are untouched this run.",
+    "Model: macro regime flipped from a 0.60 modest-risk-on 'AI-capex melt-up' to a 0.55 'hawkish Fed hike cycle colliding with an AI-bellwether's leadership shock' after confirmed hot core CPI and Jensen Huang's resignation; all 40 universe calls plus the 9-ticker rare-earth basket were individually refreshed.",
+    "Market: Fear & Greed ticked up to 43 (still Fear) from 37, but breadth deteriorated under the hood -- NYSE/Nasdaq decliners outpaced advancers ~2.8-to-1 Thursday and only ~41-44% of S&P names sit above their 200-DMA; flows still reflect the week ending 4 Nov (no newer Lipper/EPFR cut exists yet).",
+    "News: 12 items, led by the Nvidia CEO resignation, the rare-earth truce-extension correction, and the gold/silver/miner rout extending into a third session.",
+    "Flows-investors: Hong Kong's Southbound buying streak extended to 4 sessions; Japan's week-ended-6-Nov JPX data finally published (a narrow trust-bank/corporate bid against broadening foreign and retail selling); Korea's foreign-buying streak extended to 3 days; Singapore remains stale -- no verifiable weekly institutional figure found, carried forward with an honest dataGaps note.",
     "Track: today's snapshot appended for all 40 model calls."
   ],
   "regime": {
-    "label": "AI-capex melt-up colliding with a hawkish Fed hike cycle",
-    "riskOn": 0.60,
-    "oneLiner": "Markets repriced from a possible December cut to a near-certain hike after hot CPI, yet equities melted up on a CoreWeave-driven AI-capex reacceleration -- a fragile, capex-subsidized risk-on sitting on top of a genuinely hawkish rate path."
+    "label": "Hawkish Fed hike cycle colliding with an AI-capex bellwether's leadership shock",
+    "riskOn": 0.55,
+    "oneLiner": "A now data-confirmed hawkish Fed (100% odds of a December hike) is compounding a fresh idiosyncratic shock to the AI trade -- Nvidia CEO Jensen Huang's abrupt resignation -- making this a genuinely more fragile, two-sided regime than yesterday's AI-capex melt-up read."
   },
   "topNews": [
     {
-      "headline": "Fed's Waller floats a half-point December hike after hot CPI confirms his trigger condition",
+      "headline": "Nvidia CEO Jensen Huang resigns effective immediately amid spy-affair scandal; CFO Colette Kress interim CEO",
+      "impact": "mixed",
+      "actionable": "A leadership vacuum at the company most central to the US-China chip-export fight raises the odds of a harder US export-policy line -- structurally bullish for SMIC (0981.HK) as the onshore foundry alternative, and a reason to keep the broader HK tech book (Tencent, Xiaomi) hedged against fresh chip-policy headline risk rather than adding into any bounce."
+    },
+    {
+      "headline": "China extends rare-earth export-control suspension to January 10, 2027 -- resolves the Nov 10 cliff-edge",
+      "impact": "bullish",
+      "actionable": "Removes the near-term tail risk flagged on the rare-earth watchlist -- modestly bearish for the urgency of the MP Materials/Lynas re-shoring narrative over the next two months but reduces downside volatility risk into year-end; Jan 10, 2027 is the next hard deadline to watch."
+    },
+    {
+      "headline": "Gold closes below $4,000-equivalent, silver and miners extend Fed-hike-driven rout into Thursday close",
       "impact": "bearish",
-      "actionable": "A hawkish December hike (not a cut) is the single biggest headwind to the silver/gold miners book -- rallies should be treated as sell-into-strength until the Dec FOMC removes the 50bp tail risk."
+      "actionable": "Two consecutive down closes confirm the gold/silver/miner leg is in a genuine drawdown tied to the Dec FOMC repricing, not a one-session wobble -- the 1.6x levered silver position is the most exposed line item and should be sized for further downside until the Dec 8-9 FOMC resolves the 50bp-hike tail risk."
     },
     {
-      "headline": "China's rare-earth export-control truce expires with no renewal confirmed",
+      "headline": "Alibaba HK shares fall 6.8% (~$17.3B market-cap loss) as T-Head chip spin-off advances; Hang Seng closes -1.26%",
       "impact": "mixed",
-      "actionable": "The single most important near-term catalyst for the rare-earth watchlist -- any explicit Chinese reinstatement of export curbs would be bullish for MP/Lynas/Energy Fuels pricing power."
-    },
-    {
-      "headline": "Nvidia 'spy scandal' and new congressional bills accelerate push toward a China chip export ban",
-      "impact": "mixed",
-      "actionable": "Structurally bullish for SMIC as China's primary onshore foundry alternative, consistent with its Wednesday outperformance even as Tencent/Xiaomi sold off."
-    },
-    {
-      "headline": "Singapore bank Q3 split: OCBC beats, DBS and UOB miss",
-      "impact": "bearish",
-      "actionable": "Argues for trimming/hedging the SGX bank exposure (DBS, OCBC) into results-week weakness, with OCBC the relative-strength pick of the three."
-    },
-    {
-      "headline": "Barrick files IPO for new North American entity American Barrick Gold Corp (NYSE: ABGC)",
-      "impact": "mixed",
-      "actionable": "A direct corporate-action catalyst for the GOLD/Barrick position -- could unlock value but adds near-term execution/overhang risk worth tracking as details firm up."
+      "actionable": "The T-Head spin-off is a structurally bullish, multi-quarter catalyst for China's domestic AI-chip ambitions, but the near-term HK tech tape is digesting both this overhang and the Nvidia CEO shock simultaneously -- expect continued volatility into SGX/HKEX's open rather than a clean read-through either way."
     }
   ],
   "signals": [
-    "Consider watching SPY/QQQ (pUp3m 0.60/0.63, confidence 0.55) -- the clearest research calls on the board right now, both underpinned by the CoreWeave-driven AI-capex reacceleration.",
-    "Rare-earth basket: the Nov 10 China export-control-truce expiry is a live, unresolved catalyst -- consider watching for a MOFCOM notice that would clarify scarcity pricing power across MP/Lynas/Energy Fuels/USAR.",
-    "GLD carries the model's most negative near-term call this run (ev3m -0.02, confidence 0.45) on real-yield pressure from the hawkish Fed turn -- a direct read-through risk for the silver/miners sleeve.",
-    "No conviction-play changes this run -- the code-owned 13F/notableTrades keys in investors.json are unchanged pending the next EDGAR scan (Q3 2026 13Fs due ~14 Nov)."
+    "No model call currently clears the pUp3m >=0.6/<=0.4 with confidence >=0.55 bar this run -- the clearest directional reads are GLD (pUp3m 0.40, ev3m -0.03) and TLT (pUp3m 0.37, ev3m -0.042), both only moderate-confidence (0.50), reflecting a regime that's directionally hawkish but not high-conviction on any single asset.",
+    "NVDA is this run's strongest multi-source convergence signal: congress buyers and sellers are trading both sides of the same unfolding CEO scandal while retail remains the most engaged counterparty -- consider watching the 17 Nov earnings call (interim CEO Colette Kress) as the next hard catalyst.",
+    "Rare-earth basket: the confirmed MOFCOM truce extension to 10 Jan 2027 cools the near-term scarcity catalyst -- MP/REMX/USAR calls were trimmed accordingly (pUp3m clustered 0.53-0.59, confidence 0.27-0.45); 6680.HK (the China-incumbent counter-bet) nudged up slightly since the extension favors the status quo.",
+    "No conviction-play changes this run -- the code-owned 13F/notableTrades keys in investors.json are unchanged pending the next EDGAR scan; Berkshire's next 13F isn't due until 16 Nov."
   ],
   "watch": [
-    "China October M2 / New Loans -- Thu 12 Nov 2026 17:03 SGT (forecast M2 7.2%, New Loans 80B)",
-    "US Unemployment Claims -- Thu 12 Nov 2026 21:30 SGT (forecast 194K vs previous 189K)",
-    "US Core PPI / PPI -- Fri 13 Nov 2026 21:30 SGT (forecast 0.3%/0.4%)",
-    "Q3 2026 13F filing deadline -- ~14 Nov 2026 (code's EDGAR scan will pick up fresh filings after this); FOMC decision 8-9 Dec 2026, now priced ~88-96% for a hike with a non-trivial 50bp tail"
+    "US Core PPI / PPI -- Fri 13 Nov 2026 21:30 SGT (forecast 0.3%/0.4%, previous 0.7%/1.3%)",
+    "China October M2 / New Loans -- Fri 13 Nov 2026 18:03 SGT (forecast M2 7.2%, New Loans 80B)",
+    "Nvidia Q3 earnings call -- 17 Nov 2026, now a binary catalyst for the AI-capex thesis under interim CEO Colette Kress",
+    "FOMC decision -- 8-9 Dec 2026, now priced at 100% odds of a hike (~87% 25bp / ~13% 50bp); Berkshire's next 13F due ~16 Nov 2026"
   ]
 }
