@@ -1,0 +1,82 @@
+{
+  "updated": "2026-11-14",
+  "note": "Sat 14 Nov 2026 run, against Fri 13 Nov US close. Fri was a mixed/narrow session -- Dow +0.10% (52,347.55), S&P 500 -0.4% (7,561.67), Nasdaq -0.9% (25,136.27) -- as Nvidia's post-Huang-resignation slide deepened (NVDA -2.0% on the day, ~13% below its Nov 6 close) and Treasury yields pushed toward 5%; VIX closed 19.30, +3.2% on the day. CNN Fear & Greed mirrors converged well this run (38-40 across three independent sources) vs the prior run's wide scatter -- 39/Fear is used (stockstobuynow.ai and feargreedmeter.com both show current=39, prevClose=40, prev1w=24). Crypto F&G fell sharply to 20/Extreme Fear (from 28/Fear) per alternative.me direct read -- a 4-month low. Under the hood, Friday's breadth was actually calmer than Thursday's rout: NYSE advancing/declining issues were ~44.6%/51.8% (a mild ~1.16-to-1 decliner tilt, vs Thursday's near-3-to-1 decliner day), though new lows still swamped new highs broad-market (~445 lows vs 79 highs per StockCharts/247wallst) and the McClellan Oscillator flipped to -35 (from +1.77 Thu), suggesting momentum is fading even as the headline indices held up. Flows got a genuine refresh this run: both LSEG Lipper and BofA/EPFR published fresh week-ended-11-Nov cuts (vs the prior run's stale 4-Nov vintage) -- global equity funds extended their inflow streak (Lipper: +$50.99B, 7-week high; BofA/EPFR: +$98.3B, most since June, on a broader fund universe), led by Europe (+$35.13B, largest since Jun 2021) and with fresh China (+$2.1B, extending a record 5-week/$88B streak) and Japan (+$4.2B, 5th week) prints from BofA/EPFR. Money-market funds swung sharply from the prior week's +$118.0B inflow to a -$37.5B outflow (Lipper) -- a cash-into-risk rotation that sits awkwardly next to the weakening breadth signal above.",
+  "fearGreed": {
+    "value": 39,
+    "rating": "Fear",
+    "asOf": "2026-11-13",
+    "prevClose": 40,
+    "prev1w": 24,
+    "prev1m": 29,
+    "prev1y": 25,
+    "cryptoValue": 20,
+    "cryptoRating": "Extreme Fear",
+    "components": [
+      { "name": "Market Momentum", "reading": "16", "signal": "fear" },
+      { "name": "Stock Price Strength", "reading": "48", "signal": "neutral" },
+      { "name": "Stock Price Breadth", "reading": "48", "signal": "neutral" },
+      { "name": "Put/Call Options", "reading": "25", "signal": "fear" },
+      { "name": "Market Volatility", "reading": "50", "signal": "neutral" },
+      { "name": "Safe-Haven Demand", "reading": "29", "signal": "fear" },
+      { "name": "Junk Bond Demand", "reading": "57", "signal": "greed" }
+    ],
+    "sources": [
+      "https://www.stockstobuynow.ai/fear-and-greed-index/",
+      "https://feargreedmeter.com/",
+      "https://www.worldmonitor.app/tools/fear-and-greed-index/",
+      "https://alternative.me/crypto/fear-and-greed-index/",
+      "https://www.tokenpost.com/news/investing/56114",
+      "https://www.benzinga.com/markets/market-summary/26/11/63172450/nasdaq-jumps-400-points-as-coreweave-shares-jump-greed-index-remains-in-fear-zone"
+    ]
+  },
+  "breadth": {
+    "asOf": "2026-11-13",
+    "metrics": [
+      { "label": "% S&P 500 > 200-day MA", "value": "~58-65% (sources diverge: StockCharts/247wallst 65% with 8-of-11 sectors above; MacroMicro/Barchart-style trackers ~58.45% as of 11 Nov; approximation)", "signal": "neutral", "pct": 61 },
+      { "label": "% S&P 500 > 50-day MA", "value": "~69.6% (11 Nov reading, up from 60.8% on 6 Nov; no cleaner Fri print located)", "signal": "bullish", "pct": 70 },
+      { "label": "NYSE advancers vs decliners (13 Nov)", "value": "Advancing ~44.6% vs declining ~51.8% of issues (~1.16-to-1 decliner tilt) -- a notable calming from Thursday's near-3-to-1 decliner rout, even as the index closed mixed", "signal": "neutral", "pct": 46 },
+      { "label": "52-week New Highs minus New Lows", "value": "Broad-market (NYSE-wide, StockCharts/247wallst): ~79 new highs vs ~445 new lows (~5.6-to-1 lows) on 13 Nov -- a narrow, lows-dominated tape; index-level prints for S&P 500/Nasdaq specifically point the same direction but with less precise same-day sourcing this run", "signal": "bearish", "pct": null },
+      { "label": "McClellan Oscillator / Summation Index", "value": "Oscillator flipped to -35 on 13 Nov (from +1.77 on 12 Nov); Summation Index last clean print +260.6 (12 Nov, down from +279.0) -- still net-positive but momentum clearly fading", "signal": "neutral", "pct": null },
+      { "label": "Advance-Decline line trend", "value": "StockCharts' high-low line \"turned up in mid-October\" (new highs outpacing new lows on a trend basis) and remains intact, but Friday's day-level breadth (lows >> highs, Oscillator negative) is a short-term wobble against that longer uptrend", "signal": "neutral", "pct": null },
+      { "label": "% of S&P 500 sectors above their 200-day MA", "value": "8 of 11 sectors (~73%) above 200-DMA per StockCharts (13 Nov) -- Consumer Staples, Communication Services, Energy and Financials led Friday's gainers", "signal": "bullish", "pct": 73 }
+    ],
+    "note": "Friday's tape looked calmer than Thursday's under the index hood -- the brutal ~3-to-1 decliner day eased to a milder ~1.16-to-1 tilt and 8-of-11 sectors still sit above their 200-DMA -- but new lows still swamped new highs by roughly 5.6-to-1 and the McClellan Oscillator turned negative, so this reads as stabilizing-but-still-fragile rather than a clean all-clear.",
+    "sources": [
+      "https://articles.stockcharts.com/article/tech-stumbles-other-sectors-pick-up-the-slack-weight-of-the-evidence-remains-bullish/",
+      "https://chartschool.stockcharts.com/table-of-contents/market-indicators/percent-above-moving-average",
+      "https://www.barchart.com/stocks/quotes/$S5TH/technical-analysis",
+      "https://en.macromicro.me/series/22718/sp-500-200ma-breadth",
+      "https://www.mcoscillator.com/market_breadth_data/",
+      "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-nov-13-2026",
+      "https://deanfi.com/insights/marketpulse/2026-11-12/"
+    ]
+  },
+  "flows": {
+    "asOf": "2026-11-13",
+    "period": "week ending 11 Nov 2026 (LSEG Lipper and BofA/EPFR both published fresh cuts this run, replacing the prior run's stale 4-Nov vintage)",
+    "narrative": "The freshest weekly fund-flow cuts (week ended 11 Nov) show global equity inflows extending for a seventh-plus straight week, led by a surge into European funds (largest since June 2021) alongside continuing, broader-universe BofA/EPFR support for China (record 5-week/$88B streak) and Japan (5th straight week). The one sharp reversal was cash: money-market funds swung from the prior week's +$118.0B inflow to a -$37.5B outflow (Lipper), a rotation out of cash that sits oddly next to Friday's fading breadth signals -- bonds and gold were roughly flat-to-modestly-positive across both trackers.",
+    "regions": [
+      { "region": "US Equities", "direction": "inflow", "amount": "+$6.6B (Lipper) / +$63.6B (BofA/EPFR, broader fund+ETF universe, most since June, 6th straight week)", "amountUSD": 6600000000, "note": "LSEG Lipper and BofA/EPFR, week ended 11 Nov 2026; the two trackers differ sharply in scale due to differing fund universes (Lipper mutual-fund-centric vs BofA/EPFR's broader mutual+ETF base)." },
+      { "region": "Europe/Intl DM", "direction": "inflow", "amount": "+$35.13B", "amountUSD": 35130000000, "note": "LSEG Lipper, week ended 11 Nov 2026 -- largest weekly European equity inflow since June 2021." },
+      { "region": "EM", "direction": "inflow", "amount": "+$4.65B (Lipper, largest in 3 weeks) / +$14.7B (BofA/EPFR, 7th straight week)", "amountUSD": 4650000000, "note": "Two independent trackers, both for week ended 11 Nov 2026; direction and streak length agree, absolute levels differ by universe." },
+      { "region": "China", "direction": "inflow", "amount": "+$2.1B (week), extending a record 5-week/$88B cumulative streak", "amountUSD": 2100000000, "note": "BofA/EPFR, week ended 11 Nov 2026." },
+      { "region": "Japan", "direction": "inflow", "amount": "+$4.2B", "amountUSD": 4200000000, "note": "BofA/EPFR, week ended 11 Nov 2026 -- 5th straight weekly inflow." },
+      { "region": "Money-market/Cash", "direction": "outflow", "amount": "-$37.5B", "amountUSD": -37500000000, "note": "LSEG Lipper, week ended 11 Nov 2026 -- a sharp reversal from the prior week's +$118.0B inflow (week ended 4 Nov)." },
+      { "region": "Bonds/Credit", "direction": "outflow", "amount": "-$507.89M (Lipper, global bond funds) vs +$300M (BofA/EPFR, broader universe)", "amountUSD": -507890000, "note": "Lipper's global bond funds figure ends a 7-week inflow streak; within it, corporate bond funds were +$2.07B while government bond funds were -$488.8M and EM bond funds -$657.44M. BofA/EPFR's broader universe stayed marginally positive." },
+      { "region": "Gold", "direction": "inflow", "amount": "+$614M (Lipper) / +$49M (BofA/EPFR)", "amountUSD": 614000000, "note": "Both trackers, week ended 11 Nov 2026 -- modest continued inflow, second straight week per Lipper. Separately, WGC's monthly monitor showed global gold ETFs +$2.7B / +19t in October 2026 (one month lagged), led by Europe and Asia." }
+    ],
+    "movements": [
+      { "from": "Money-market/Cash", "to": "Equities (Europe especially)", "amount": "+$118.0B inflow (wk 4 Nov) -> -$37.5B outflow (wk 11 Nov)", "note": "A sharp cash-to-risk rotation: the biggest money-market swing of the past several weeks coincided with Europe's largest equity inflow since mid-2021." },
+      { "from": "EM ex-China (prior weeks)", "to": "China specifically", "amount": "+$2.1B (wk) / $88B (5-wk cumulative)", "note": "China's inflow streak is now a full five weeks old per BofA/EPFR, suggesting the EM inflow is increasingly China-concentrated rather than broad-EM." },
+      { "from": "Government/Treasury bond funds", "to": "Corporate bond funds", "amount": "-$488.8M vs +$2.07B", "note": "Within Lipper's bond universe, investors rotated from governments into corporates even as the aggregate bond line printed a small net outflow." },
+      { "from": "Industrials (sector funds)", "to": "Technology / Healthcare / Financials", "amount": "-$1.07B vs +$2.62B / +$833M / +$820M", "note": "Lipper sector data, week ended 11 Nov 2026 -- a classic rotation out of cyclicals into growth/defensive-growth sectors even as Nvidia-led tech names wobbled on the index level." }
+    ],
+    "sources": [
+      "https://www.globalbankingandfinance.com/demand-european-funds-boosts-global-equity-fund-inflows/",
+      "https://www.indexbox.io/blog/us-money-market-funds-see-largest-weekly-inflow-in-six-months-as-midterm-caution-lifts-safe-haven-demand/",
+      "https://www.bloomberg.com/news/articles/2026-11-13/global-equity-funds-draw-record-inflows-bofa-strategists-say",
+      "https://1027wbow.com/2026/11/13/demand-for-european-funds-boosts-global-equity-fund-inflows-to-seven-week-high/",
+      "https://www.gold.org/goldhub/research/gold-etfs-holdings-and-flows/2026/11"
+    ]
+  }
+}

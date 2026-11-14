@@ -1,0 +1,2341 @@
+{
+ "asOf": "2026-11-13",
+ "generatedAt": "2026-11-13T23:02:50.294Z",
+ "source": ".prices-2y.json (Yahoo chart, ETF-proxied for metals/energy)",
+ "gate": {
+  "rule": "ON = close > SMA200 AND 12-1 month momentum > 0; OFF after 5 consecutive closes below SMA200",
+  "hysteresis": 5
+ },
+ "instruments": {
+  "^GSPC": {
+   "name": "S&P 500",
+   "exchange": "US",
+   "trust": "ok",
+   "proxy": null,
+   "close": 7561.669921875,
+   "asOf": "2026-11-13",
+   "sma200": 7340.3175,
+   "sma50": 7667.4602,
+   "distPct200": 3.02,
+   "sma200SlopePct20d": 0.95,
+   "mom12_1Pct": 13.04,
+   "vol20": 22.1,
+   "vol60": 14.9,
+   "volMedian1y": 13.2,
+   "volRegime": "high",
+   "atr14": 123.39,
+   "high52w": 7844.52,
+   "low52w": 6316.9102,
+   "dd52wPct": -3.61,
+   "ddAllPct": -3.61,
+   "gate": {
+    "on": true,
+    "belowStreak": 0,
+    "aboveStreak": 154,
+    "lastCross": {
+     "date": "2026-04-08",
+     "dir": "above"
+    },
+    "slopeRising": true
+   },
+   "flags": [
+    "vol-spike"
+   ]
+  },
+  "^IXIC": {
+   "name": "Nasdaq Composite",
+   "exchange": "US",
+   "trust": "ok",
+   "proxy": null,
+   "close": 25136.2734375,
+   "asOf": "2026-11-13",
+   "sma200": 25137.4112,
+   "sma50": 26350.071,
+   "distPct200": 0,
+   "sma200SlopePct20d": 0.87,
+   "mom12_1Pct": 14.13,
+   "vol20": 30.4,
+   "vol60": 21.1,
+   "volMedian1y": 19.2,
+   "volRegime": "high",
+   "atr14": 613.0384,
+   "high52w": 27722.75,
+   "low52w": 20690.25,
+   "dd52wPct": -9.33,
+   "ddAllPct": -9.33,
+   "gate": {
+    "on": "pending-off",
+    "belowStreak": 1,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-11-13",
+     "dir": "below"
+    },
+    "slopeRising": true
+   },
+   "flags": [
+    "crossed-below-200d-5s",
+    "vol-spike"
+   ]
+  },
+  "^DJI": {
+   "name": "Dow Jones",
+   "exchange": "US",
+   "trust": "ok",
+   "proxy": null,
+   "close": 52347.55078125,
+   "asOf": "2026-11-13",
+   "sma200": 50757.1139,
+   "sma50": 51973.8697,
+   "distPct200": 3.13,
+   "sma200SlopePct20d": 0.63,
+   "mom12_1Pct": 8.13,
+   "vol20": 20.3,
+   "vol60": 14.2,
+   "volMedian1y": 12.1,
+   "volRegime": "high",
+   "atr14": 752.9395,
+   "high52w": 54744.3281,
+   "low52w": 45057.2813,
+   "dd52wPct": -4.38,
+   "ddAllPct": -4.38,
+   "gate": {
+    "on": true,
+    "belowStreak": 0,
+    "aboveStreak": 154,
+    "lastCross": {
+     "date": "2026-04-08",
+     "dir": "above"
+    },
+    "slopeRising": true
+   },
+   "flags": [
+    "vol-spike"
+   ]
+  },
+  "^RUT": {
+   "name": "Russell 2000",
+   "exchange": "US",
+   "trust": "ok",
+   "proxy": null,
+   "close": 2790.489501953125,
+   "asOf": "2026-11-13",
+   "sma200": 2811.8521,
+   "sma50": 2824.4442,
+   "distPct200": -0.76,
+   "sma200SlopePct20d": 0.62,
+   "mom12_1Pct": 12.91,
+   "vol20": 24.7,
+   "vol60": 17.8,
+   "volMedian1y": 19.9,
+   "volRegime": "normal",
+   "atr14": 52.509,
+   "high52w": 3069.71,
+   "low52w": 2303.46,
+   "dd52wPct": -9.1,
+   "ddAllPct": -9.1,
+   "gate": {
+    "on": "pending-off",
+    "belowStreak": 2,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-11-12",
+     "dir": "below"
+    },
+    "slopeRising": true
+   },
+   "flags": [
+    "crossed-below-200d-5s"
+   ]
+  },
+  "^VIX": {
+   "name": "VIX",
+   "exchange": "US",
+   "trust": "ok",
+   "proxy": null,
+   "close": 19.299999237060547,
+   "asOf": "2026-11-13",
+   "sma200": 18.4535,
+   "sma50": 17.3132,
+   "distPct200": 4.59,
+   "sma200SlopePct20d": 1.79,
+   "mom12_1Pct": -16.99,
+   "vol20": 252.2,
+   "vol60": 163.9,
+   "volMedian1y": 119.8,
+   "volRegime": "high",
+   "atr14": 3.7379,
+   "high52w": 35.3,
+   "low52w": 13.38,
+   "dd52wPct": -45.33,
+   "ddAllPct": -67.9,
+   "gate": {
+    "on": false,
+    "belowStreak": 0,
+    "aboveStreak": 2,
+    "lastCross": {
+     "date": "2026-11-12",
+     "dir": "above"
+    },
+    "slopeRising": true
+   },
+   "flags": [
+    "crossed-above-200d-5s",
+    "vol-spike"
+   ]
+  },
+  "^HSI": {
+   "name": "Hang Seng",
+   "exchange": "HK",
+   "trust": "ok",
+   "proxy": null,
+   "close": 24008.55078125,
+   "asOf": "2026-11-12",
+   "sma200": 25235.6114,
+   "sma50": 24316.1468,
+   "distPct200": -4.86,
+   "sma200SlopePct20d": -1,
+   "mom12_1Pct": -6.19,
+   "vol20": 22.4,
+   "vol60": 17.3,
+   "volMedian1y": 18.5,
+   "volRegime": "normal",
+   "atr14": 359.6967,
+   "high52w": 28056.0996,
+   "low52w": 22518,
+   "dd52wPct": -14.43,
+   "ddAllPct": -14.43,
+   "gate": {
+    "on": false,
+    "belowStreak": 57,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-08-24",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "^N225": {
+   "name": "Nikkei 225",
+   "exchange": "JP",
+   "trust": "ok",
+   "proxy": null,
+   "close": 60819.359375,
+   "asOf": "2026-11-12",
+   "sma200": 62090.9741,
+   "sma50": 64831.4873,
+   "distPct200": -2.05,
+   "sma200SlopePct20d": 1.85,
+   "mom12_1Pct": 34.96,
+   "vol20": 36.6,
+   "vol60": 27.8,
+   "volMedian1y": 17.3,
+   "volRegime": "high",
+   "atr14": 1727.7327,
+   "high52w": 72831.7266,
+   "low52w": 48235.3008,
+   "dd52wPct": -16.49,
+   "ddAllPct": -16.49,
+   "gate": {
+    "on": false,
+    "belowStreak": 6,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-11-05",
+     "dir": "below"
+    },
+    "slopeRising": true
+   },
+   "flags": [
+    "vol-spike"
+   ]
+  },
+  "^KS11": {
+   "name": "KOSPI",
+   "exchange": "KR",
+   "trust": "ok",
+   "proxy": null,
+   "close": 5342.72998046875,
+   "asOf": "2026-11-12",
+   "sma200": 6520.698,
+   "sma50": 6266.2466,
+   "distPct200": -18.07,
+   "sma200SlopePct20d": 1.84,
+   "mom12_1Pct": 46.29,
+   "vol20": 54.5,
+   "vol60": 46.7,
+   "volMedian1y": 18.3,
+   "volRegime": "high",
+   "atr14": 282.6586,
+   "high52w": 9385.5898,
+   "low52w": 3833.3501,
+   "dd52wPct": -43.08,
+   "ddAllPct": -43.08,
+   "gate": {
+    "on": false,
+    "belowStreak": 23,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-10-13",
+     "dir": "below"
+    },
+    "slopeRising": true
+   },
+   "flags": [
+    "vol-spike"
+   ]
+  },
+  "^STI": {
+   "name": "Straits Times",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 5282.7001953125,
+   "asOf": "2026-11-12",
+   "sma200": 5256.4434,
+   "sma50": 5531.1916,
+   "distPct200": 0.5,
+   "sma200SlopePct20d": 1.12,
+   "mom12_1Pct": 19.56,
+   "vol20": 12.1,
+   "vol60": 12.6,
+   "volMedian1y": 8.8,
+   "volRegime": "normal",
+   "atr14": 69.1,
+   "high52w": 5828.5,
+   "low52w": 4459.8301,
+   "dd52wPct": -9.36,
+   "ddAllPct": -9.36,
+   "gate": {
+    "on": true,
+    "belowStreak": 0,
+    "aboveStreak": 3,
+    "lastCross": {
+     "date": "2026-11-10",
+     "dir": "above"
+    },
+    "slopeRising": true
+   },
+   "flags": [
+    "crossed-above-200d-5s"
+   ]
+  },
+  "SLV": {
+   "name": "iShares Silver",
+   "exchange": "US",
+   "trust": "ok",
+   "proxy": null,
+   "close": 44.130001068115234,
+   "asOf": "2026-11-13",
+   "sma200": 61.9172,
+   "sma50": 52.8716,
+   "distPct200": -28.73,
+   "sma200SlopePct20d": -5.33,
+   "mom12_1Pct": 7.45,
+   "vol20": 43.3,
+   "vol60": 40.2,
+   "volMedian1y": 23.4,
+   "volRegime": "high",
+   "atr14": 1.5525,
+   "high52w": 109.83,
+   "low52w": 43.97,
+   "dd52wPct": -59.82,
+   "ddAllPct": -59.82,
+   "gate": {
+    "on": false,
+    "belowStreak": 105,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-06-17",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": [
+    "vol-spike"
+   ]
+  },
+  "GLD": {
+   "name": "SPDR Gold",
+   "exchange": "US",
+   "trust": "ok",
+   "proxy": null,
+   "close": 355.45001220703125,
+   "asOf": "2026-11-13",
+   "sma200": 408.4167,
+   "sma50": 380.906,
+   "distPct200": -12.97,
+   "sma200SlopePct20d": -1.58,
+   "mom12_1Pct": -0.85,
+   "vol20": 28.1,
+   "vol60": 24.4,
+   "volMedian1y": 14.9,
+   "volRegime": "high",
+   "atr14": 7.597,
+   "high52w": 509.7,
+   "low52w": 352.91,
+   "dd52wPct": -30.26,
+   "ddAllPct": -30.26,
+   "gate": {
+    "on": false,
+    "belowStreak": 55,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-08-28",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": [
+    "vol-spike"
+   ]
+  },
+  "SI=F": {
+   "name": "Silver front-month",
+   "exchange": "FUT",
+   "trust": "low",
+   "proxy": "SLV",
+   "close": 48.650001525878906,
+   "asOf": "2026-11-13",
+   "sma200": 68.3798,
+   "sma50": 58.4685,
+   "distPct200": -28.85,
+   "sma200SlopePct20d": -5.17,
+   "mom12_1Pct": 6.57,
+   "vol20": 42.6,
+   "vol60": 37.4,
+   "volMedian1y": 25.6,
+   "volRegime": "high",
+   "atr14": 1.6319,
+   "high52w": 121.3,
+   "low52w": 48.125,
+   "dd52wPct": -59.89,
+   "ddAllPct": -59.89,
+   "gate": {
+    "on": false,
+    "belowStreak": 104,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-06-18",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": [
+    "vol-spike"
+   ]
+  },
+  "GC=F": {
+   "name": "Gold front-month",
+   "exchange": "FUT",
+   "trust": "ok",
+   "proxy": "GLD",
+   "close": 3887.60009765625,
+   "asOf": "2026-11-13",
+   "sma200": 4472.252,
+   "sma50": 4181.538,
+   "distPct200": -13.07,
+   "sma200SlopePct20d": -1.51,
+   "mom12_1Pct": -1.03,
+   "vol20": 25.3,
+   "vol60": 21.6,
+   "volMedian1y": 16.7,
+   "volRegime": "high",
+   "atr14": 98.2643,
+   "high52w": 5586.2002,
+   "low52w": 3856.7,
+   "dd52wPct": -30.41,
+   "ddAllPct": -30.41,
+   "gate": {
+    "on": false,
+    "belowStreak": 50,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-09-04",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": [
+    "vol-spike"
+   ]
+  },
+  "GDX": {
+   "name": "Gold Miners ETF",
+   "exchange": "US",
+   "trust": "ok",
+   "proxy": null,
+   "close": 81.63999938964844,
+   "asOf": "2026-11-13",
+   "sma200": 89.581,
+   "sma50": 88.263,
+   "distPct200": -8.86,
+   "sma200SlopePct20d": -1.62,
+   "mom12_1Pct": 9.8,
+   "vol20": 57.2,
+   "vol60": 46.3,
+   "volMedian1y": 31.9,
+   "volRegime": "high",
+   "atr14": 3.6779,
+   "high52w": 117.18,
+   "low52w": 69.74,
+   "dd52wPct": -30.33,
+   "ddAllPct": -30.33,
+   "gate": {
+    "on": "pending-off",
+    "belowStreak": 4,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-11-10",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": [
+    "crossed-below-200d-5s",
+    "vol-spike"
+   ]
+  },
+  "SILJ": {
+   "name": "Junior Silver",
+   "exchange": "US",
+   "trust": "ok",
+   "proxy": null,
+   "close": 22.899999618530273,
+   "asOf": "2026-11-13",
+   "sma200": 29.1522,
+   "sma50": 26.6898,
+   "distPct200": -21.45,
+   "sma200SlopePct20d": -3.09,
+   "mom12_1Pct": 7.42,
+   "vol20": 62.6,
+   "vol60": 51.3,
+   "volMedian1y": 41.4,
+   "volRegime": "high",
+   "atr14": 1.2668,
+   "high52w": 41.1,
+   "low52w": 21.02,
+   "dd52wPct": -44.28,
+   "ddAllPct": -44.28,
+   "gate": {
+    "on": false,
+    "belowStreak": 38,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-09-23",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": [
+    "vol-spike"
+   ]
+  },
+  "SLVP": {
+   "name": "Silver Miners",
+   "exchange": "US",
+   "trust": "ok",
+   "proxy": null,
+   "close": 29.520000457763672,
+   "asOf": "2026-11-13",
+   "sma200": 35.843,
+   "sma50": 34.3838,
+   "distPct200": -17.64,
+   "sma200SlopePct20d": -2.63,
+   "mom12_1Pct": 17.41,
+   "vol20": 62.2,
+   "vol60": 50.5,
+   "volMedian1y": 40.7,
+   "volRegime": "high",
+   "atr14": 1.5164,
+   "high52w": 50.15,
+   "low52w": 25.46,
+   "dd52wPct": -41.14,
+   "ddAllPct": -41.14,
+   "gate": {
+    "on": false,
+    "belowStreak": 35,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-09-28",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": [
+    "vol-spike"
+   ]
+  },
+  "NEM": {
+   "name": "Newmont",
+   "exchange": "US",
+   "trust": "ok",
+   "proxy": null,
+   "close": 113.13999938964844,
+   "asOf": "2026-11-13",
+   "sma200": 112.1463,
+   "sma50": 118.0358,
+   "distPct200": 0.89,
+   "sma200SlopePct20d": -0.04,
+   "mom12_1Pct": 24.41,
+   "vol20": 53.9,
+   "vol60": 41.7,
+   "volMedian1y": 37.1,
+   "volRegime": "normal",
+   "atr14": 4.95,
+   "high52w": 135.29,
+   "low52w": 81.34,
+   "dd52wPct": -16.37,
+   "ddAllPct": -16.37,
+   "gate": {
+    "on": true,
+    "belowStreak": 0,
+    "aboveStreak": 8,
+    "lastCross": {
+     "date": "2026-11-04",
+     "dir": "above"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "GOLD": {
+   "name": "Barrick",
+   "exchange": "US",
+   "trust": "ok",
+   "proxy": null,
+   "close": 36.220001220703125,
+   "asOf": "2026-11-13",
+   "sma200": 44.3587,
+   "sma50": 41.4952,
+   "distPct200": -18.35,
+   "sma200SlopePct20d": -0.8,
+   "mom12_1Pct": 50.74,
+   "vol20": 51.7,
+   "vol60": 49.6,
+   "volMedian1y": 40.2,
+   "volRegime": "normal",
+   "atr14": 1.7057,
+   "high52w": 66.7,
+   "low52w": 24.5,
+   "dd52wPct": -45.7,
+   "ddAllPct": -45.7,
+   "gate": {
+    "on": false,
+    "belowStreak": 38,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-09-23",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "PAAS": {
+   "name": "Pan American Silver",
+   "exchange": "US",
+   "trust": "ok",
+   "proxy": null,
+   "close": 37.5,
+   "asOf": "2026-11-13",
+   "sma200": 50.7182,
+   "sma50": 44.6572,
+   "distPct200": -26.06,
+   "sma200SlopePct20d": -3.22,
+   "mom12_1Pct": 14.07,
+   "vol20": 57,
+   "vol60": 48.3,
+   "volMedian1y": 43.7,
+   "volRegime": "normal",
+   "atr14": 1.96,
+   "high52w": 69.99,
+   "low52w": 35.82,
+   "dd52wPct": -46.42,
+   "ddAllPct": -46.42,
+   "gate": {
+    "on": false,
+    "belowStreak": 47,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-09-10",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "AG": {
+   "name": "First Majestic",
+   "exchange": "US",
+   "trust": "ok",
+   "proxy": null,
+   "close": 13.649999618530273,
+   "asOf": "2026-11-13",
+   "sma200": 19.5529,
+   "sma50": 17.0144,
+   "distPct200": -30.19,
+   "sma200SlopePct20d": -3.01,
+   "mom12_1Pct": 28,
+   "vol20": 64.1,
+   "vol60": 56.1,
+   "volMedian1y": 65.9,
+   "volRegime": "normal",
+   "atr14": 0.8629,
+   "high52w": 32.04,
+   "low52w": 10.72,
+   "dd52wPct": -57.4,
+   "ddAllPct": -57.4,
+   "gate": {
+    "on": false,
+    "belowStreak": 38,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-09-23",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "HL": {
+   "name": "Hecla",
+   "exchange": "US",
+   "trust": "ok",
+   "proxy": null,
+   "close": 13.100000381469727,
+   "asOf": "2026-11-13",
+   "sma200": 17.939,
+   "sma50": 16.4248,
+   "distPct200": -26.97,
+   "sma200SlopePct20d": -5.66,
+   "mom12_1Pct": 0.19,
+   "vol20": 73.8,
+   "vol60": 60.4,
+   "volMedian1y": 60.1,
+   "volRegime": "normal",
+   "atr14": 0.8739,
+   "high52w": 34.17,
+   "low52w": 12.8,
+   "dd52wPct": -61.66,
+   "ddAllPct": -61.66,
+   "gate": {
+    "on": false,
+    "belowStreak": 45,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-09-14",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "BZ=F": {
+   "name": "Brent front-month",
+   "exchange": "FUT",
+   "trust": "low",
+   "proxy": "USO",
+   "close": 96.08000183105469,
+   "asOf": "2026-11-13",
+   "sma200": 93.9959,
+   "sma50": 104.2666,
+   "distPct200": 2.22,
+   "sma200SlopePct20d": 4.55,
+   "mom12_1Pct": 68.9,
+   "vol20": 64.1,
+   "vol60": 47.9,
+   "volMedian1y": 24.3,
+   "volRegime": "high",
+   "atr14": 5.5164,
+   "high52w": 126.1,
+   "low52w": 58.72,
+   "dd52wPct": -23.81,
+   "ddAllPct": -23.81,
+   "gate": {
+    "on": true,
+    "belowStreak": 0,
+    "aboveStreak": 2,
+    "lastCross": {
+     "date": "2026-11-12",
+     "dir": "above"
+    },
+    "slopeRising": true
+   },
+   "flags": [
+    "crossed-above-200d-5s",
+    "vol-spike"
+   ]
+  },
+  "CL=F": {
+   "name": "WTI front-month",
+   "exchange": "FUT",
+   "trust": "ok",
+   "proxy": "USO",
+   "close": 88.91999816894531,
+   "asOf": "2026-11-13",
+   "sma200": 87.7791,
+   "sma50": 95.3744,
+   "distPct200": 1.3,
+   "sma200SlopePct20d": 4.26,
+   "mom12_1Pct": 67.5,
+   "vol20": 55,
+   "vol60": 46,
+   "volMedian1y": 26.5,
+   "volRegime": "high",
+   "atr14": 4.5693,
+   "high52w": 119.48,
+   "low52w": 54.98,
+   "dd52wPct": -25.58,
+   "ddAllPct": -25.58,
+   "gate": {
+    "on": true,
+    "belowStreak": 0,
+    "aboveStreak": 2,
+    "lastCross": {
+     "date": "2026-11-12",
+     "dir": "above"
+    },
+    "slopeRising": true
+   },
+   "flags": [
+    "crossed-above-200d-5s",
+    "vol-spike"
+   ]
+  },
+  "USO": {
+   "name": "US Oil Fund",
+   "exchange": "US",
+   "trust": "ok",
+   "proxy": null,
+   "close": 145.5800018310547,
+   "asOf": "2026-11-13",
+   "sma200": 127.6569,
+   "sma50": 152.8112,
+   "distPct200": 14.04,
+   "sma200SlopePct20d": 7.04,
+   "mom12_1Pct": 125.4,
+   "vol20": 49,
+   "vol60": 43.8,
+   "volMedian1y": 25.7,
+   "volRegime": "high",
+   "atr14": 5.6727,
+   "high52w": 171.82,
+   "low52w": 65.99,
+   "dd52wPct": -15.27,
+   "ddAllPct": -15.27,
+   "gate": {
+    "on": true,
+    "belowStreak": 0,
+    "aboveStreak": 208,
+    "lastCross": {
+     "date": "2026-01-20",
+     "dir": "above"
+    },
+    "slopeRising": true
+   },
+   "flags": [
+    "vol-spike"
+   ]
+  },
+  "XLE": {
+   "name": "Energy Select",
+   "exchange": "US",
+   "trust": "ok",
+   "proxy": null,
+   "close": 64.95999908447266,
+   "asOf": "2026-11-13",
+   "sma200": 59.4742,
+   "sma50": 64.9858,
+   "distPct200": 9.22,
+   "sma200SlopePct20d": 3.22,
+   "mom12_1Pct": 47.5,
+   "vol20": 30.9,
+   "vol60": 24.7,
+   "volMedian1y": 18.6,
+   "volRegime": "high",
+   "atr14": 1.7096,
+   "high52w": 70.15,
+   "low52w": 43.77,
+   "dd52wPct": -7.4,
+   "ddAllPct": -7.4,
+   "gate": {
+    "on": true,
+    "belowStreak": 0,
+    "aboveStreak": 268,
+    "lastCross": {
+     "date": "2025-10-22",
+     "dir": "above"
+    },
+    "slopeRising": true
+   },
+   "flags": [
+    "vol-spike"
+   ]
+  },
+  "0700.HK": {
+   "name": "Tencent",
+   "exchange": "HK",
+   "trust": "ok",
+   "proxy": null,
+   "close": 386.6000061035156,
+   "asOf": "2026-11-13",
+   "sma200": 469.1525,
+   "sma50": 417.808,
+   "distPct200": -17.6,
+   "sma200SlopePct20d": -4.38,
+   "mom12_1Pct": -32.69,
+   "vol20": 39.8,
+   "vol60": 31.9,
+   "volMedian1y": 27,
+   "volRegime": "normal",
+   "atr14": 12.5857,
+   "high52w": 662,
+   "low52w": 375.2,
+   "dd52wPct": -41.6,
+   "ddAllPct": -43.4,
+   "gate": {
+    "on": false,
+    "belowStreak": 191,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-02-04",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "1810.HK": {
+   "name": "Xiaomi",
+   "exchange": "HK",
+   "trust": "ok",
+   "proxy": null,
+   "close": 28.860000610351562,
+   "asOf": "2026-11-13",
+   "sma200": 29.2387,
+   "sma50": 26.8056,
+   "distPct200": -1.3,
+   "sma200SlopePct20d": -3.38,
+   "mom12_1Pct": -39.1,
+   "vol20": 52.1,
+   "vol60": 49,
+   "volMedian1y": 38.1,
+   "volRegime": "normal",
+   "atr14": 1.2986,
+   "high52w": 44.62,
+   "low52w": 21.3,
+   "dd52wPct": -35.32,
+   "ddAllPct": -53.03,
+   "gate": {
+    "on": false,
+    "belowStreak": 1,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-11-13",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": [
+    "crossed-below-200d-5s"
+   ]
+  },
+  "0981.HK": {
+   "name": "SMIC",
+   "exchange": "HK",
+   "trust": "ok",
+   "proxy": null,
+   "close": 48.52000045776367,
+   "asOf": "2026-11-13",
+   "sma200": 66.2778,
+   "sma50": 55.8752,
+   "distPct200": -26.79,
+   "sma200SlopePct20d": -3.95,
+   "mom12_1Pct": -24.27,
+   "vol20": 59.7,
+   "vol60": 47.5,
+   "volMedian1y": 60.6,
+   "volRegime": "normal",
+   "atr14": 2.9236,
+   "high52w": 93,
+   "low52w": 41.06,
+   "dd52wPct": -47.83,
+   "ddAllPct": -48.11,
+   "gate": {
+    "on": false,
+    "belowStreak": 52,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-09-01",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "D05.SI": {
+   "name": "DBS",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 69.9000015258789,
+   "asOf": "2026-11-13",
+   "sma200": 66.5955,
+   "sma50": 75.1646,
+   "distPct200": 4.96,
+   "sma200SlopePct20d": 2.25,
+   "mom12_1Pct": 35.04,
+   "vol20": 13.8,
+   "vol60": 15.7,
+   "volMedian1y": 15.8,
+   "volRegime": "normal",
+   "atr14": 1.2893,
+   "high52w": 79.05,
+   "low52w": 52.85,
+   "dd52wPct": -11.57,
+   "ddAllPct": -11.57,
+   "gate": {
+    "on": true,
+    "belowStreak": 0,
+    "aboveStreak": 504,
+    "lastCross": null,
+    "slopeRising": true
+   },
+   "flags": []
+  },
+  "O39.SI": {
+   "name": "OCBC",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 28.530000686645508,
+   "asOf": "2026-11-13",
+   "sma200": 25.9175,
+   "sma50": 30.1598,
+   "distPct200": 10.08,
+   "sma200SlopePct20d": 3.35,
+   "mom12_1Pct": 55,
+   "vol20": 19.1,
+   "vol60": 22.7,
+   "volMedian1y": 11.3,
+   "volRegime": "high",
+   "atr14": 0.6914,
+   "high52w": 32.57,
+   "low52w": 18,
+   "dd52wPct": -12.4,
+   "ddAllPct": -12.4,
+   "gate": {
+    "on": true,
+    "belowStreak": 0,
+    "aboveStreak": 281,
+    "lastCross": {
+     "date": "2025-10-02",
+     "dir": "above"
+    },
+    "slopeRising": true
+   },
+   "flags": [
+    "vol-spike"
+   ]
+  },
+  "Z74.SI": {
+   "name": "Singtel",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 4.110000133514404,
+   "asOf": "2026-11-13",
+   "sma200": 4.552,
+   "sma50": 4.2576,
+   "distPct200": -9.71,
+   "sma200SlopePct20d": -0.79,
+   "mom12_1Pct": -12.29,
+   "vol20": 16.8,
+   "vol60": 14.1,
+   "volMedian1y": 19.3,
+   "volRegime": "normal",
+   "atr14": 0.0836,
+   "high52w": 5.27,
+   "low52w": 3.99,
+   "dd52wPct": -22.01,
+   "ddAllPct": -22.01,
+   "gate": {
+    "on": false,
+    "belowStreak": 122,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-05-22",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "C09.SI": {
+   "name": "City Developments",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 6.639999866485596,
+   "asOf": "2026-11-13",
+   "sma200": 8.2089,
+   "sma50": 7.491,
+   "distPct200": -19.11,
+   "sma200SlopePct20d": -2.02,
+   "mom12_1Pct": -4.86,
+   "vol20": 31.9,
+   "vol60": 30.8,
+   "volMedian1y": 19.1,
+   "volRegime": "high",
+   "atr14": 0.1879,
+   "high52w": 10.09,
+   "low52w": 6.4,
+   "dd52wPct": -34.19,
+   "ddAllPct": -34.19,
+   "gate": {
+    "on": false,
+    "belowStreak": 36,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-09-24",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": [
+    "vol-spike"
+   ]
+  },
+  "U14.SI": {
+   "name": "UOL",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 7.800000190734863,
+   "asOf": "2026-11-13",
+   "sma200": 9.6157,
+   "sma50": 8.1484,
+   "distPct200": -18.88,
+   "sma200SlopePct20d": -1.85,
+   "mom12_1Pct": -11.24,
+   "vol20": 23.5,
+   "vol60": 20.2,
+   "volMedian1y": 18.7,
+   "volRegime": "normal",
+   "atr14": 0.19,
+   "high52w": 11.48,
+   "low52w": 7.58,
+   "dd52wPct": -32.06,
+   "ddAllPct": -32.06,
+   "gate": {
+    "on": false,
+    "belowStreak": 66,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-08-13",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "W05.SI": {
+   "name": "Wing Tai",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 1.4299999475479126,
+   "asOf": "2026-11-13",
+   "sma200": 1.567,
+   "sma50": 1.4814,
+   "distPct200": -8.74,
+   "sma200SlopePct20d": -0.64,
+   "mom12_1Pct": 1.39,
+   "vol20": 18.1,
+   "vol60": 15.3,
+   "volMedian1y": 19.6,
+   "volRegime": "normal",
+   "atr14": 0.0264,
+   "high52w": 1.76,
+   "low52w": 1.39,
+   "dd52wPct": -18.75,
+   "ddAllPct": -18.75,
+   "gate": {
+    "on": false,
+    "belowStreak": 56,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-08-27",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "K71U.SI": {
+   "name": "Keppel REIT",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 0.8299999833106995,
+   "asOf": "2026-11-13",
+   "sma200": 0.884,
+   "sma50": 0.837,
+   "distPct200": -6.11,
+   "sma200SlopePct20d": -1.81,
+   "mom12_1Pct": -20.75,
+   "vol20": 25.5,
+   "vol60": 17.2,
+   "volMedian1y": 15.5,
+   "volRegime": "high",
+   "atr14": 0.0164,
+   "high52w": 1.08,
+   "low52w": 0.78,
+   "dd52wPct": -23.15,
+   "ddAllPct": -23.15,
+   "gate": {
+    "on": false,
+    "belowStreak": 179,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-03-02",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": [
+    "vol-spike"
+   ]
+  },
+  "M44U.SI": {
+   "name": "Mapletree Logistics",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 1.100000023841858,
+   "asOf": "2026-11-13",
+   "sma200": 1.189,
+   "sma50": 1.0994,
+   "distPct200": -7.48,
+   "sma200SlopePct20d": -2.1,
+   "mom12_1Pct": -17.56,
+   "vol20": 18,
+   "vol60": 15.4,
+   "volMedian1y": 15.6,
+   "volRegime": "normal",
+   "atr14": 0.0243,
+   "high52w": 1.37,
+   "low52w": 1.06,
+   "dd52wPct": -19.71,
+   "ddAllPct": -19.71,
+   "gate": {
+    "on": false,
+    "belowStreak": 140,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-04-27",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "ME8U.SI": {
+   "name": "Mapletree Industrial",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 1.7100000381469727,
+   "asOf": "2026-11-13",
+   "sma200": 1.9332,
+   "sma50": 1.8258,
+   "distPct200": -11.55,
+   "sma200SlopePct20d": -1.75,
+   "mom12_1Pct": -11.27,
+   "vol20": 19.9,
+   "vol60": 14.3,
+   "volMedian1y": 12.3,
+   "volRegime": "high",
+   "atr14": 0.0364,
+   "high52w": 2.13,
+   "low52w": 1.7,
+   "dd52wPct": -19.72,
+   "ddAllPct": -27.23,
+   "gate": {
+    "on": false,
+    "belowStreak": 138,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-04-29",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": [
+    "vol-spike"
+   ]
+  },
+  "N2IU.SI": {
+   "name": "Mapletree Pan Asia Comm",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 1.159999966621399,
+   "asOf": "2026-11-13",
+   "sma200": 1.2951,
+   "sma50": 1.185,
+   "distPct200": -10.44,
+   "sma200SlopePct20d": -2.34,
+   "mom12_1Pct": -19.86,
+   "vol20": 24.1,
+   "vol60": 18.5,
+   "volMedian1y": 14.6,
+   "volRegime": "high",
+   "atr14": 0.0329,
+   "high52w": 1.49,
+   "low52w": 1.12,
+   "dd52wPct": -22.15,
+   "ddAllPct": -22.67,
+   "gate": {
+    "on": false,
+    "belowStreak": 141,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-04-24",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": [
+    "vol-spike"
+   ]
+  },
+  "MP": {
+   "name": "MP Materials",
+   "exchange": "US",
+   "trust": "ok",
+   "proxy": null,
+   "close": 38.7599983215332,
+   "asOf": "2026-11-13",
+   "sma200": 53.7199,
+   "sma50": 43.9328,
+   "distPct200": -27.85,
+   "sma200SlopePct20d": -4.54,
+   "mom12_1Pct": -30.32,
+   "vol20": 62.6,
+   "vol60": 57.1,
+   "volMedian1y": 76.8,
+   "volRegime": "normal",
+   "atr14": 2.6993,
+   "high52w": 76.8,
+   "low52w": 31.9,
+   "dd52wPct": -49.53,
+   "ddAllPct": -61.34,
+   "gate": {
+    "on": false,
+    "belowStreak": 55,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-08-28",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "LYC.AX": {
+   "name": "Lynas",
+   "exchange": "US",
+   "trust": "ok",
+   "proxy": null,
+   "close": 13.1899995803833,
+   "asOf": "2026-11-13",
+   "sma200": 16.5854,
+   "sma50": 12.9592,
+   "distPct200": -20.47,
+   "sma200SlopePct20d": -1.85,
+   "mom12_1Pct": -24.28,
+   "vol20": 68.9,
+   "vol60": 55.5,
+   "volMedian1y": 44.1,
+   "volRegime": "high",
+   "atr14": 0.7596,
+   "high52w": 22.37,
+   "low52w": 10.69,
+   "dd52wPct": -41.04,
+   "ddAllPct": -41.04,
+   "gate": {
+    "on": false,
+    "belowStreak": 68,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-08-13",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": [
+    "vol-spike"
+   ]
+  },
+  "UUUU": {
+   "name": "Energy Fuels",
+   "exchange": "US",
+   "trust": "ok",
+   "proxy": null,
+   "close": 6.590000152587891,
+   "asOf": "2026-11-13",
+   "sma200": 15.5137,
+   "sma50": 9.7758,
+   "distPct200": -57.52,
+   "sma200SlopePct20d": -8.09,
+   "mom12_1Pct": -45.83,
+   "vol20": 75,
+   "vol60": 65.6,
+   "volMedian1y": 79.7,
+   "volRegime": "normal",
+   "atr14": 0.585,
+   "high52w": 27.9,
+   "low52w": 6.21,
+   "dd52wPct": -76.38,
+   "ddAllPct": -76.38,
+   "gate": {
+    "on": false,
+    "belowStreak": 115,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-06-03",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "BTC-USD": {
+   "name": "Bitcoin",
+   "exchange": "CRYPTO",
+   "trust": "ok",
+   "proxy": null,
+   "close": 71342.96875,
+   "asOf": "2026-11-12",
+   "sma200": 73080.9722,
+   "sma50": 80857.8227,
+   "distPct200": -2.38,
+   "sma200SlopePct20d": 0.31,
+   "mom12_1Pct": 14.78,
+   "vol20": 34.2,
+   "vol60": 32,
+   "volMedian1y": 33.9,
+   "volRegime": "normal",
+   "atr14": 2332.3504,
+   "high52w": 87363.7578,
+   "low52w": 57747.7656,
+   "dd52wPct": -18.34,
+   "ddAllPct": -43.47,
+   "gate": {
+    "on": "pending-off",
+    "belowStreak": 1,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-11-12",
+     "dir": "below"
+    },
+    "slopeRising": true
+   },
+   "flags": [
+    "crossed-below-200d-5s"
+   ]
+  },
+  "F99.SI": {
+   "name": "Fraser & Neave",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 1.340000033378601,
+   "asOf": "2026-11-13",
+   "sma200": 1.4245,
+   "sma50": 1.3668,
+   "distPct200": -5.93,
+   "sma200SlopePct20d": -1.12,
+   "mom12_1Pct": -10.14,
+   "vol20": 15.2,
+   "vol60": 19.1,
+   "volMedian1y": 17.1,
+   "volRegime": "normal",
+   "atr14": 0.0129,
+   "high52w": 1.6,
+   "low52w": 1.32,
+   "dd52wPct": -16.25,
+   "ddAllPct": -16.25,
+   "gate": {
+    "on": false,
+    "belowStreak": 129,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-05-13",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "WJP.SI": {
+   "name": "VICOM",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 1.75,
+   "asOf": "2026-11-13",
+   "sma200": 1.7845,
+   "sma50": 1.7848,
+   "distPct200": -1.94,
+   "sma200SlopePct20d": 0.54,
+   "mom12_1Pct": 5.45,
+   "vol20": 14.4,
+   "vol60": 11.6,
+   "volMedian1y": 15.1,
+   "volRegime": "normal",
+   "atr14": 0.0157,
+   "high52w": 1.88,
+   "low52w": 1.58,
+   "dd52wPct": -6.91,
+   "ddAllPct": -6.91,
+   "gate": {
+    "on": false,
+    "belowStreak": 24,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-10-12",
+     "dir": "below"
+    },
+    "slopeRising": true
+   },
+   "flags": []
+  },
+  "S20.SI": {
+   "name": "Straits Trading",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 1.440000057220459,
+   "asOf": "2026-11-13",
+   "sma200": 1.6253,
+   "sma50": 1.5044,
+   "distPct200": -11.4,
+   "sma200SlopePct20d": -1.39,
+   "mom12_1Pct": -9.7,
+   "vol20": 19.2,
+   "vol60": 16,
+   "volMedian1y": 18.8,
+   "volRegime": "normal",
+   "atr14": 0.0207,
+   "high52w": 1.9,
+   "low52w": 1.41,
+   "dd52wPct": -24.21,
+   "ddAllPct": -24.21,
+   "gate": {
+    "on": false,
+    "belowStreak": 104,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-06-19",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "Z25.SI": {
+   "name": "Yanlord Land",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 0.46000000834465027,
+   "asOf": "2026-11-13",
+   "sma200": 0.6213,
+   "sma50": 0.4975,
+   "distPct200": -25.97,
+   "sma200SlopePct20d": -3.85,
+   "mom12_1Pct": -32.17,
+   "vol20": 48.5,
+   "vol60": 39.5,
+   "volMedian1y": 40.4,
+   "volRegime": "normal",
+   "atr14": 0.0193,
+   "high52w": 0.815,
+   "low52w": 0.45,
+   "dd52wPct": -43.56,
+   "ddAllPct": -44.24,
+   "gate": {
+    "on": false,
+    "belowStreak": 70,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-08-06",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "H13.SI": {
+   "name": "Ho Bee Land",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 1.8200000524520874,
+   "asOf": "2026-11-13",
+   "sma200": 2.0925,
+   "sma50": 1.9478,
+   "distPct200": -13.02,
+   "sma200SlopePct20d": -1.77,
+   "mom12_1Pct": -10.31,
+   "vol20": 29,
+   "vol60": 26.6,
+   "volMedian1y": 16.3,
+   "volRegime": "high",
+   "atr14": 0.0393,
+   "high52w": 2.53,
+   "low52w": 1.76,
+   "dd52wPct": -28.06,
+   "ddAllPct": -28.06,
+   "gate": {
+    "on": false,
+    "belowStreak": 166,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-03-19",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": [
+    "vol-spike"
+   ]
+  },
+  "5E2.SI": {
+   "name": "Seatrium",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 1.7999999523162842,
+   "asOf": "2026-11-13",
+   "sma200": 2.1401,
+   "sma50": 1.975,
+   "distPct200": -15.89,
+   "sma200SlopePct20d": -1.59,
+   "mom12_1Pct": -10.19,
+   "vol20": 33.1,
+   "vol60": 30,
+   "volMedian1y": 25.5,
+   "volRegime": "normal",
+   "atr14": 0.0607,
+   "high52w": 2.51,
+   "low52w": 1.77,
+   "dd52wPct": -28.29,
+   "ddAllPct": -30.77,
+   "gate": {
+    "on": false,
+    "belowStreak": 47,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-09-09",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "AU8U.SI": {
+   "name": "CapLand China Trust",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 0.6100000143051147,
+   "asOf": "2026-11-13",
+   "sma200": 0.6553,
+   "sma50": 0.6159,
+   "distPct200": -6.91,
+   "sma200SlopePct20d": -2.8,
+   "mom12_1Pct": -24.22,
+   "vol20": 18.3,
+   "vol60": 16,
+   "volMedian1y": 19.4,
+   "volRegime": "normal",
+   "atr14": 0.0125,
+   "high52w": 0.81,
+   "low52w": 0.59,
+   "dd52wPct": -24.69,
+   "ddAllPct": -26.06,
+   "gate": {
+    "on": false,
+    "belowStreak": 189,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-02-12",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "BS6.SI": {
+   "name": "YZJ Shipbuilding",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 4.320000171661377,
+   "asOf": "2026-11-13",
+   "sma200": 4.179,
+   "sma50": 4.9528,
+   "distPct200": 3.37,
+   "sma200SlopePct20d": 3.01,
+   "mom12_1Pct": 51.47,
+   "vol20": 45.1,
+   "vol60": 33.8,
+   "volMedian1y": 33.4,
+   "volRegime": "normal",
+   "atr14": 0.2157,
+   "high52w": 5.41,
+   "low52w": 3.16,
+   "dd52wPct": -20.15,
+   "ddAllPct": -20.15,
+   "gate": {
+    "on": true,
+    "belowStreak": 0,
+    "aboveStreak": 82,
+    "lastCross": {
+     "date": "2026-07-21",
+     "dir": "above"
+    },
+    "slopeRising": true
+   },
+   "flags": []
+  },
+  "B73.SI": {
+   "name": "Global Investments",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 0.12700000405311584,
+   "asOf": "2026-11-13",
+   "sma200": 0.1275,
+   "sma50": 0.1276,
+   "distPct200": -0.41,
+   "sma200SlopePct20d": -0.03,
+   "mom12_1Pct": -2.31,
+   "vol20": 9,
+   "vol60": 13.3,
+   "volMedian1y": 15.2,
+   "volRegime": "low",
+   "atr14": 0.0006,
+   "high52w": 0.131,
+   "low52w": 0.123,
+   "dd52wPct": -3.05,
+   "ddAllPct": -6.62,
+   "gate": {
+    "on": false,
+    "belowStreak": 1,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-11-13",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": [
+    "crossed-below-200d-5s"
+   ]
+  },
+  "M01.SI": {
+   "name": "Metro Holdings",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 0.33000001311302185,
+   "asOf": "2026-11-13",
+   "sma200": 0.4485,
+   "sma50": 0.3659,
+   "distPct200": -26.42,
+   "sma200SlopePct20d": -3.81,
+   "mom12_1Pct": -36.7,
+   "vol20": 45,
+   "vol60": 39.5,
+   "volMedian1y": 31.1,
+   "volRegime": "normal",
+   "atr14": 0.0071,
+   "high52w": 0.585,
+   "low52w": 0.32,
+   "dd52wPct": -43.59,
+   "ddAllPct": -44.54,
+   "gate": {
+    "on": false,
+    "belowStreak": 132,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-05-08",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "L19.SI": {
+   "name": "Lum Chang Holdings",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 0.4699999988079071,
+   "asOf": "2026-11-13",
+   "sma200": 0.5521,
+   "sma50": 0.5443,
+   "distPct200": -14.86,
+   "sma200SlopePct20d": -0.8,
+   "mom12_1Pct": 21.98,
+   "vol20": 53.1,
+   "vol60": 35.2,
+   "volMedian1y": 34,
+   "volRegime": "high",
+   "atr14": 0.0179,
+   "high52w": 0.735,
+   "low52w": 0.43,
+   "dd52wPct": -36.05,
+   "ddAllPct": -36.05,
+   "gate": {
+    "on": false,
+    "belowStreak": 6,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-11-05",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": [
+    "vol-spike"
+   ]
+  },
+  "T24.SI": {
+   "name": "Tuan Sing Holdings",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 0.26499998569488525,
+   "asOf": "2026-11-13",
+   "sma200": 0.3062,
+   "sma50": 0.2716,
+   "distPct200": -13.47,
+   "sma200SlopePct20d": -2.16,
+   "mom12_1Pct": -15.15,
+   "vol20": 49.9,
+   "vol60": 40.4,
+   "volMedian1y": 38,
+   "volRegime": "normal",
+   "atr14": 0.0082,
+   "high52w": 0.375,
+   "low52w": 0.255,
+   "dd52wPct": -29.33,
+   "ddAllPct": -29.33,
+   "gate": {
+    "on": false,
+    "belowStreak": 115,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-06-04",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "F03.SI": {
+   "name": "Food Empire",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 1.659999966621399,
+   "asOf": "2026-11-13",
+   "sma200": 2.3523,
+   "sma50": 1.9692,
+   "distPct200": -29.43,
+   "sma200SlopePct20d": -0.97,
+   "mom12_1Pct": -2.98,
+   "vol20": 50.5,
+   "vol60": 40.3,
+   "volMedian1y": 35.7,
+   "volRegime": "normal",
+   "atr14": 0.085,
+   "high52w": 2.8583,
+   "low52w": 1.63,
+   "dd52wPct": -41.92,
+   "ddAllPct": -41.92,
+   "gate": {
+    "on": false,
+    "belowStreak": 61,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-08-20",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "BQM.SI": {
+   "name": "Tiong Woon",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 0.8799999952316284,
+   "asOf": "2026-11-13",
+   "sma200": 0.9903,
+   "sma50": 0.894,
+   "distPct200": -11.14,
+   "sma200SlopePct20d": 0.16,
+   "mom12_1Pct": 11.25,
+   "vol20": 21.3,
+   "vol60": 24,
+   "volMedian1y": 24.4,
+   "volRegime": "normal",
+   "atr14": 0.0129,
+   "high52w": 1.13,
+   "low52w": 0.76,
+   "dd52wPct": -22.12,
+   "ddAllPct": -22.12,
+   "gate": {
+    "on": false,
+    "belowStreak": 49,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-09-07",
+     "dir": "below"
+    },
+    "slopeRising": true
+   },
+   "flags": []
+  },
+  "B28.SI": {
+   "name": "Bonvests Holdings",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 0.8899999856948853,
+   "asOf": "2026-11-13",
+   "sma200": 0.957,
+   "sma50": 0.9251,
+   "distPct200": -7.01,
+   "sma200SlopePct20d": -0.69,
+   "mom12_1Pct": -2.09,
+   "vol20": 25.6,
+   "vol60": 15.2,
+   "volMedian1y": 19.6,
+   "volRegime": "normal",
+   "atr14": 0.0054,
+   "high52w": 1.01,
+   "low52w": 0.865,
+   "dd52wPct": -11.88,
+   "ddAllPct": -15.24,
+   "gate": {
+    "on": false,
+    "belowStreak": 67,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-08-12",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "H07.SI": {
+   "name": "Stamford Land",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 0.46000000834465027,
+   "asOf": "2026-11-13",
+   "sma200": 0.4753,
+   "sma50": 0.4627,
+   "distPct200": -3.21,
+   "sma200SlopePct20d": -0.99,
+   "mom12_1Pct": -6.06,
+   "vol20": 26.6,
+   "vol60": 20.2,
+   "volMedian1y": 17.8,
+   "volRegime": "normal",
+   "atr14": 0.0071,
+   "high52w": 0.51,
+   "low52w": 0.44,
+   "dd52wPct": -9.8,
+   "ddAllPct": -12.38,
+   "gate": {
+    "on": false,
+    "belowStreak": 74,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-07-31",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "O5RU.SI": {
+   "name": "AIMS APAC REIT",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 1.3700000047683716,
+   "asOf": "2026-11-13",
+   "sma200": 1.4995,
+   "sma50": 1.4066,
+   "distPct200": -8.64,
+   "sma200SlopePct20d": -0.95,
+   "mom12_1Pct": -2.11,
+   "vol20": 23.1,
+   "vol60": 18.4,
+   "volMedian1y": 13,
+   "volRegime": "high",
+   "atr14": 0.03,
+   "high52w": 1.67,
+   "low52w": 1.34,
+   "dd52wPct": -17.96,
+   "ddAllPct": -17.96,
+   "gate": {
+    "on": false,
+    "belowStreak": 68,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-08-11",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": [
+    "vol-spike"
+   ]
+  },
+  "H18.SI": {
+   "name": "Hotel Grand Central",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 0.6899999976158142,
+   "asOf": "2026-11-13",
+   "sma200": 0.7205,
+   "sma50": 0.702,
+   "distPct200": -4.23,
+   "sma200SlopePct20d": -0.12,
+   "mom12_1Pct": -2.82,
+   "vol20": 19.1,
+   "vol60": 19.8,
+   "volMedian1y": 14.2,
+   "volRegime": "normal",
+   "atr14": 0.0121,
+   "high52w": 0.795,
+   "low52w": 0.655,
+   "dd52wPct": -13.21,
+   "ddAllPct": -13.21,
+   "gate": {
+    "on": false,
+    "belowStreak": 55,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-08-28",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "A7RU.SI": {
+   "name": "Keppel Infra Trust",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 0.49000000953674316,
+   "asOf": "2026-11-13",
+   "sma200": 0.5208,
+   "sma50": 0.5022,
+   "distPct200": -5.92,
+   "sma200SlopePct20d": -0.33,
+   "mom12_1Pct": 6.45,
+   "vol20": 13.9,
+   "vol60": 12.9,
+   "volMedian1y": 16,
+   "volRegime": "normal",
+   "atr14": 0.0068,
+   "high52w": 0.565,
+   "low52w": 0.46,
+   "dd52wPct": -13.27,
+   "ddAllPct": -13.27,
+   "gate": {
+    "on": false,
+    "belowStreak": 40,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-09-18",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "E5H.SI": {
+   "name": "Golden Agri-Resources",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 0.27000001072883606,
+   "asOf": "2026-11-13",
+   "sma200": 0.2958,
+   "sma50": 0.3032,
+   "distPct200": -8.71,
+   "sma200SlopePct20d": -0.35,
+   "mom12_1Pct": 7.14,
+   "vol20": 33.3,
+   "vol60": 32,
+   "volMedian1y": 25.7,
+   "volRegime": "normal",
+   "atr14": 0.0093,
+   "high52w": 0.35,
+   "low52w": 0.26,
+   "dd52wPct": -22.86,
+   "ddAllPct": -22.86,
+   "gate": {
+    "on": false,
+    "belowStreak": 21,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-10-15",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "G92.SI": {
+   "name": "China Aviation Oil",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 1.2300000190734863,
+   "asOf": "2026-11-13",
+   "sma200": 1.7307,
+   "sma50": 1.2994,
+   "distPct200": -28.93,
+   "sma200SlopePct20d": -2.74,
+   "mom12_1Pct": -19.48,
+   "vol20": 41.8,
+   "vol60": 34,
+   "volMedian1y": 22.1,
+   "volRegime": "high",
+   "atr14": 0.0514,
+   "high52w": 2.34,
+   "low52w": 1.18,
+   "dd52wPct": -47.44,
+   "ddAllPct": -47.44,
+   "gate": {
+    "on": false,
+    "belowStreak": 89,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-07-10",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": [
+    "vol-spike"
+   ]
+  },
+  "C38U.SI": {
+   "name": "CapLand Integrated Comm",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 2.3299999237060547,
+   "asOf": "2026-11-13",
+   "sma200": 2.3551,
+   "sma50": 2.2734,
+   "distPct200": -1.07,
+   "sma200SlopePct20d": -0.44,
+   "mom12_1Pct": -6.36,
+   "vol20": 16.4,
+   "vol60": 13.3,
+   "volMedian1y": 13.3,
+   "volRegime": "normal",
+   "atr14": 0.05,
+   "high52w": 2.57,
+   "low52w": 2.2,
+   "dd52wPct": -9.34,
+   "ddAllPct": -9.34,
+   "gate": {
+    "on": false,
+    "belowStreak": 3,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-11-11",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": [
+    "crossed-below-200d-5s"
+   ]
+  },
+  "S08.SI": {
+   "name": "SingPost",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 0.30000001192092896,
+   "asOf": "2026-11-13",
+   "sma200": 0.3377,
+   "sma50": 0.2994,
+   "distPct200": -11.17,
+   "sma200SlopePct20d": -3.2,
+   "mom12_1Pct": -30.95,
+   "vol20": 38.4,
+   "vol60": 33.4,
+   "volMedian1y": 23.2,
+   "volRegime": "high",
+   "atr14": 0.0096,
+   "high52w": 0.425,
+   "low52w": 0.275,
+   "dd52wPct": -29.41,
+   "ddAllPct": -54.55,
+   "gate": {
+    "on": false,
+    "belowStreak": 504,
+    "aboveStreak": 0,
+    "lastCross": null,
+    "slopeRising": false
+   },
+   "flags": [
+    "vol-spike"
+   ]
+  },
+  "S7OU.SI": {
+   "name": "Asian Pay TV Trust",
+   "exchange": "SG",
+   "trust": "ok",
+   "proxy": null,
+   "close": 0.07000000029802322,
+   "asOf": "2026-11-13",
+   "sma200": 0.0857,
+   "sma50": 0.0757,
+   "distPct200": -18.33,
+   "sma200SlopePct20d": -3.78,
+   "mom12_1Pct": -28.16,
+   "vol20": 18.5,
+   "vol60": 26.4,
+   "volMedian1y": 18.7,
+   "volRegime": "normal",
+   "atr14": 0.0018,
+   "high52w": 0.11,
+   "low52w": 0.069,
+   "dd52wPct": -36.36,
+   "ddAllPct": -36.36,
+   "gate": {
+    "on": false,
+    "belowStreak": 180,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-02-27",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  },
+  "VNM": {
+   "name": "VanEck Vietnam (VNM)",
+   "exchange": "US",
+   "trust": "ok",
+   "proxy": null,
+   "close": 16.93000030517578,
+   "asOf": "2026-11-13",
+   "sma200": 17.8201,
+   "sma50": 17.055,
+   "distPct200": -4.99,
+   "sma200SlopePct20d": -1.33,
+   "mom12_1Pct": -5.99,
+   "vol20": 22.4,
+   "vol60": 19.2,
+   "volMedian1y": 22.7,
+   "volRegime": "normal",
+   "atr14": 0.2321,
+   "high52w": 19.85,
+   "low52w": 16.22,
+   "dd52wPct": -14.71,
+   "ddAllPct": -14.71,
+   "gate": {
+    "on": false,
+    "belowStreak": 55,
+    "aboveStreak": 0,
+    "lastCross": {
+     "date": "2026-08-28",
+     "dir": "below"
+    },
+    "slopeRising": false
+   },
+   "flags": []
+  }
+ },
+ "summary": {
+  "instruments": 67,
+  "gateOn": 11,
+  "gateOff": 52,
+  "crossedBelow5d": [
+   "^IXIC",
+   "^RUT",
+   "GDX",
+   "1810.HK",
+   "BTC-USD",
+   "B73.SI",
+   "C38U.SI"
+  ],
+  "crossedAbove5d": [
+   "^VIX",
+   "^STI",
+   "BZ=F",
+   "CL=F"
+  ],
+  "newHigh52w": [],
+  "newLow52w": [],
+  "volSpike": [
+   "^GSPC",
+   "^IXIC",
+   "^DJI",
+   "^VIX",
+   "^N225",
+   "^KS11",
+   "SLV",
+   "GLD",
+   "SI=F",
+   "GC=F",
+   "GDX",
+   "SILJ",
+   "SLVP",
+   "BZ=F",
+   "CL=F",
+   "USO",
+   "XLE",
+   "O39.SI",
+   "C09.SI",
+   "K71U.SI",
+   "ME8U.SI",
+   "N2IU.SI",
+   "LYC.AX",
+   "H13.SI",
+   "L19.SI",
+   "O5RU.SI",
+   "G92.SI",
+   "S08.SI"
+  ]
+ }
+}
