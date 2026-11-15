@@ -1,15 +1,15 @@
 {
-  "updated": "2026-11-15",
-  "note": "Sun 15 Nov 2026 SGT run: weekend check against Fri 13 Nov US close (no new trading session since). CNN Fear & Greed held flat at 39/Fear (markets closed, unchanged from Friday), but crypto Fear & Greed deepened sharply to 13/Extreme Fear (from Fri's 20) per a direct alternative.me read as the weekend Bitcoin selloff intensified -- BTC fell from Friday's $68,249 close toward roughly $63,400 by Sunday morning SGT on $1.6B+ in liquidations, confirming this is a genuine deleveraging event rather than noise. Breadth metrics (McClellan Oscillator, NYSE advance/decline, new highs-lows) came back with meaningfully different point estimates than Saturday's run for the SAME Nov 12-13 sessions (e.g. McClellan +1.77 today's read vs -35 Saturday's read) -- both are approximations sourced from secondary aggregators rather than a single primary feed, so the data is presented as directionally consistent (fraying-but-still-broadly-bullish breadth) rather than point-precise; treat any single breadth number here as an approximation, not a clean tape read. Flows: no fresher weekly cut exists than the week-ended-11-Nov BofA/EPFR print already on file (next edition due ~Nov 19-20); the regional split below is a refreshed read of that same week's data rather than a new period.",
+  "updated": "2026-11-16",
+  "note": "Mon 16 Nov 2026 07:02 SGT run: incremental refresh of the same post-Friday picture -- US markets closed all weekend and the next session has not opened yet, so Fri 13 Nov (S&P500 7561.67, -0.40%; Nasdaq 25136.27, -0.91%; VIX 19.30, +3.21%) remains the latest completed close. CNN Fear & Greed is confirmed still 39/Fear via a fresh live read (unchanged from Friday/Sunday), but crypto Fear & Greed deepened further to 10/Extreme Fear (from Sunday's 13) per a direct alternative.me read as the weekend Bitcoin/altcoin selloff kept extending. Breadth got a more precise correction this run: actual NYSE advancing/declining issue counts for 13 Nov (1,385 advancers vs 1,327 decliners, via mcoscillator-sourced data) show a roughly even, slightly advancer-led tape -- not the decliner-led skew assumed in the prior approximation -- while the McClellan Oscillator read -9.17 (mildly negative, improved from -18.44 the prior session) and new 52-week highs/lows stayed narrow and index-dependent (S&P500 itself: 18 highs vs 2 lows; Nasdaq-heavy names: 55 highs vs 267 lows). Flows: no fresher weekly cut exists than the week-ended-11-Nov BofA/EPFR print already on file (next edition due ~Nov 19-20); the regional split below is unchanged from that same period.",
   "fearGreed": {
     "value": 39,
     "rating": "Fear",
-    "asOf": "2026-11-13 (NYSE close, unchanged over the weekend)",
+    "asOf": "2026-11-13 (NYSE close; unchanged Mon AM SGT, no new US session yet)",
     "prevClose": 40,
     "prev1w": 24,
     "prev1m": 29,
     "prev1y": 25,
-    "cryptoValue": 13,
+    "cryptoValue": 10,
     "cryptoRating": "Extreme Fear",
     "components": [
       {
@@ -57,41 +57,41 @@
     ]
   },
   "breadth": {
-    "asOf": "2026-11-12/13 (latest available before the weekend)",
+    "asOf": "2026-11-13 (latest available; no new US session as of Mon 16 Nov AM SGT)",
     "metrics": [
       {
         "label": "% S&P 500 > 200-day MA",
-        "value": "~58-65% (sources diverge week to week; approximation)",
+        "value": "~55-60% (approximate; last precise read was 54.67% on 21 Oct per MacroMicro, index has pulled back modestly since)",
         "signal": "bullish",
-        "pct": 60
+        "pct": 57
       },
       {
         "label": "% S&P 500 > 50-day MA",
-        "value": "~69.6% (11 Nov reading)",
+        "value": "~69.6% (11 Nov reading, approximate)",
         "signal": "bullish",
         "pct": 70
       },
       {
         "label": "NYSE advancers vs decliners (Fri 13 Nov)",
-        "value": "decliners led, roughly 1.2-1.3-to-1 -- a mild tilt, not a rout",
-        "signal": "bearish",
+        "value": "roughly even: 1,385 advancers vs 1,327 decliners (near 51/49 split, slightly advancer-led) -- a mild tilt, not a rout",
+        "signal": "neutral",
         "pct": null
       },
       {
-        "label": "52-week New Highs minus New Lows (NYSE, 13 Nov)",
-        "value": "new lows swamped new highs (estimates range 26-79 highs vs 303-445 lows depending on source) -- a narrow, lows-dominated tape either way",
+        "label": "52-week New Highs minus New Lows (13 Nov)",
+        "value": "narrow and index-dependent: S&P500 itself saw 18 new highs vs only 2 new lows, but Nasdaq-heavy names saw 55 new highs swamped by 267 new lows -- a lows-dominated tape outside large-cap leaders",
         "signal": "bearish",
         "pct": null
       },
       {
         "label": "McClellan Oscillator",
-        "value": "near flat to mildly negative on 12-13 Nov (estimates range +1.77 to -35 across sources this run -- flagged as an approximation, not point-precise)",
+        "value": "-9.17 on 13 Nov (mildly negative, improved from -18.44 the prior session)",
         "signal": "neutral",
         "pct": null
       },
       {
         "label": "McClellan Summation Index",
-        "value": "diverging by universe: S&P500-member measure negative (~-466), NYSE-wide measure still positive (~+260.6)",
+        "value": "diverging by universe: S&P500-member measure negative (~-466), NYSE-wide measure still positive (~+260.6), approximation",
         "signal": "neutral",
         "pct": null
       },
@@ -108,20 +108,21 @@
         "pct": 73
       }
     ],
-    "note": "Breadth reads as broad-but-fraying: roughly 60-70% of S&P 500 names still sit above their 200/50-day averages and the longer A-D trend remains up, but Friday's session saw decliners outpace advancers and new lows swamp new highs -- a stabilizing-but-still-fragile picture rather than a clean all-clear. Exact oscillator/new-high-low point estimates vary noticeably by data source this run; treat the direction (fraying under a still-broad surface) as the reliable signal, not any single number.",
+    "note": "Breadth reads as broad-but-narrowing: roughly 55-70% of S&P 500 names still sit above their 200/50-day averages and the longer A-D trend remains up, but the 13 Nov session was closer to flat (advancers edged decliners) while new-highs/lows stayed lows-dominated outside large-cap leaders -- a stabilizing-but-still-fragile picture rather than a clean all-clear. Treat the direction (broad surface, narrowing underneath) as the reliable signal; several point estimates here are sourced approximations, not a single clean tape read.",
     "sources": [
       "https://www.investing.com/indices/sp-500-stocks-above-200-day-average",
       "https://en.macromicro.me/series/22718/sp-500-200ma-breadth",
       "https://www.barchart.com/stocks/quotes/$S5TH/technical-analysis",
-      "https://www.mcoscillator.com/market_breadth_data/",
+      "https://www.thetrading.tools/mcclellan-oscillator",
+      "https://finance.yahoo.com/markets/stocks/articles/stock-market-news-nov-13-081500049.html",
       "https://articles.stockcharts.com/article/tech-stumbles-other-sectors-pick-up-the-slack-weight-of-the-evidence-remains-bullish/",
       "https://www.marketscreener.com/news/wall-st-slides-as-nvidia-uncertainty-drags-tech-shares-lower-ce785eded98af723"
     ]
   },
   "flows": {
-    "asOf": "2026-11-13",
-    "period": "week ending Wed 11 Nov 2026 (BofA/EPFR; no newer weekly cut exists yet, next due ~19-20 Nov)",
-    "narrative": "Global equity funds drew ~$98.3B the week ended Nov 11, the largest weekly haul since June 2026, led by a sixth-straight-week $63.6B US inflow even as money-market funds saw a ~$17.9B net outflow -- a rotation from cash into risk that sits oddly next to the Fear & Greed index still reading 'Fear'. EM flows stayed selective (China/Korea/Taiwan funds combined ~$6B) even as foreign-domiciled China equity funds saw 8-week-high redemptions, a split between resilient domestic-mandated and more cautious offshore China exposure. Investment-grade credit extended an 8th weekly inflow; gold flows were flat-to-mixed on the week despite a positive November month-to-date.",
+    "asOf": "2026-11-16",
+    "period": "week ending Wed 11 Nov 2026 (BofA/EPFR; no newer weekly cut has been published yet, next due ~19-20 Nov)",
+    "narrative": "Global equity funds drew ~$98.3B the week ended Nov 11, the largest weekly haul since June 2026, led by a sixth-straight-week $63.6B US inflow even as money-market funds saw a ~$17.9B net outflow -- a rotation from cash into risk that sits oddly next to the Fear & Greed index still reading 'Fear'. EM flows stayed selective (China/Korea/Taiwan funds combined ~$6B) even as foreign-domiciled China equity funds saw 8-week-high redemptions, a split between resilient domestic-mandated and more cautious offshore China exposure. Investment-grade credit extended an 8th weekly inflow; gold flows were flat-to-mixed on the week despite a positive November month-to-date. This regional split is unchanged from the prior run since no fresher EPFR cut exists yet.",
     "regions": [
       {
         "region": "US Equities",

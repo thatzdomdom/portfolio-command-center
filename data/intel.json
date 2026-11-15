@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-15",
+  "updated": "2026-11-16",
   "signals": [
     {
       "ticker": "WBD",
@@ -173,15 +173,15 @@
       ]
     },
     {
-      "ticker": "LLY",
-      "representative": "David Taylor (R-OH)",
-      "date": "2026-11-03",
-      "type": "sell",
-      "amount": "$1,001-$15,000",
-      "rationale": "Sold Eli Lilly in the same rebalance batch.",
-      "deepDive": "Third leg of the same Nov 3 portfolio reshuffle; no pharma-committee nexus for Taylor, reinforcing the basket-rebalance interpretation over any GLP-1/pharma-specific signal.",
+      "ticker": "US T-Bill",
+      "representative": "Tom Suozzi (D-NY)",
+      "date": "2026-10-13",
+      "type": "buy",
+      "amount": "$15,001-$50,000",
+      "rationale": "Bought US Treasury bills through his personal IRA (Thomas Suozzi IRA FBO Thomas Suozzi) in two tranches on Oct 13 and Oct 15, 2026, each $15,001-$50,000.",
+      "deepDive": "Report filed Nov 1 and digitally signed Nov 9 -- a retirement-account T-bill purchase, not an operating-company equity bet; included here for member variety rather than any thesis signal. Suozzi sits on no committee with a direct rates/Treasury nexus.",
       "sources": [
-        "https://www.marketbeat.com/instant-alerts/congress-rep-david-taylor-sells-off-shares-of-eli-lilly-and-company-nyse-lly-2026-11-14/"
+        "https://www.investing.com/news/company-news/thomas-suozzi-buys-us-treasury-bills-in-ira-93CH-5017286"
       ]
     },
     {
@@ -539,30 +539,16 @@
     },
     {
       "ticker": "SSRM",
-      "insider": "William K. MacNevin",
-      "role": "EVP, Operations & Sustainability",
-      "type": "sell",
-      "shares": 7389,
-      "value": "~$249,699 (7,389 sh @ $33.79, tax-withholding on RSU vesting)",
+      "insider": "Thomas R. Bates Jr.",
+      "role": "Director",
+      "type": "grant (deferred share units, board compensation)",
+      "shares": 798,
+      "value": "$0 (798 deferred share units credited as board-fee compensation, no cash consideration; settles in cash value of common shares on retirement from the Board)",
       "date": "2026-10-01",
-      "rationale": "Mechanical tax-withholding disposition (Form 4 code F) tied to RSU vesting, not an open-market discretionary sale -- SSR Mining is a gold/silver producer held within GDX/SILJ.",
-      "deepDive": "Filed same day, same price, as an identical transaction by fellow EVP John Ebbett, confirming this is a routine payroll-tax event rather than a signal of insider sentiment. No SSR Mining Form 4 filed since this date through 2026-11-14. (latest available)",
+      "rationale": "Routine quarterly director-compensation DSU grant, not a market purchase -- superseded the prior run's Oct 1 MacNevin/Ebbett tax-withholding entries as the single most-recent SSR Mining Form 4 on file (filed 2026-10-05). (latest available)",
+      "deepDive": "Confirmed directly from the Form 4 XML: transaction code A (acquisition), $0 price, lifting Bates' DSU-equivalent holding to 127,097 common-share equivalents. No SSR Mining Form 4 found filed after this through 2026-11-16 despite a fresh search -- this is a board-fee mechanic, carrying no insider-sentiment signal, included only because it is the latest available filing for this GDX/SILJ holding.",
       "sources": [
-        "https://www.sec.gov/Archives/edgar/data/0000921638/000196180726000011/wk-form4_1791233479.xml"
-      ]
-    },
-    {
-      "ticker": "SSRM",
-      "insider": "John Ebbett",
-      "role": "EVP, Growth and Innovation",
-      "type": "sell",
-      "shares": 6158,
-      "value": "~$208,077 (6,158 sh @ $33.79, tax-withholding on RSU vesting)",
-      "date": "2026-10-01",
-      "rationale": "Same tax-withholding mechanism as MacNevin's concurrent filing -- both tied to vesting of restricted stock units, not discretionary selling.",
-      "deepDive": "(latest available) -- no more recent SSR Mining Form 4 activity found through 2026-11-14; pairs with MacNevin's filing as the most recent verifiable insider data point for this GDX/SILJ holding.",
-      "sources": [
-        "https://www.sec.gov/Archives/edgar/data/0000921638/000193484826000011/wk-form4_1789509855.xml"
+        "https://www.sec.gov/Archives/edgar/data/921638/000123011726000006/wk-form4_1791233731.xml"
       ]
     },
     {
@@ -747,7 +733,7 @@
       }
     ],
     "flaggedCitations": 0,
-    "checkedOn": "2026-11-15",
+    "checkedOn": "2026-11-16",
     "runNotes": [
       "Monday 19 Oct 2026 ~07:02-07:20 SGT run. Clock verified via shell (SGT/NY agree) and cross-checked against the price spine (US/HK/JP/KR/SG consolidated through Fri 16 Oct, futures Sun 18 Oct reopen, crypto 17 Oct) and git log. Zero new completed sessions since the prior (Sun 18 Oct) brief -- a normal pre-Asia-open Monday refresh, not a catch-up. Congress: swapped 6 stale/weak entries (Pelosi non-equity, Salazar/CSCO, Allen/AZO single-leg, Hern/DVN+CVX under-described, Cisneros/BHE+NXPI) for fresher, more fully-sourced Sept 17-30 filings (Rulli/GS pairs-trade NEW member, Salazar/UNH, Allen/COST+AZO cluster, Hern 4-stock energy/consumer liquidation, McClain/MSFT second ticker, Cisneros/ZTS+PTC) -- all verified against MarketBeat/Benzinga/defenseworld with real transaction+filing dates. Process note: the first research pass on this file stalled mid-run waiting on its own sub-agents instead of writing; it was resumed and told to write directly, then two of its already-finished sub-agent streams (signals, congress) reported back after the parent had already written a thinner version -- their richer, already-verified findings were folded in by the coordinator rather than discarded a second time. Insiders: no new filings found across all 17 tracked names this run; carried forward unchanged. Signals: refreshed GDX-basket/MU/CRWV/IREN/MP with newer sourcing, dropped AVGO (congress thesis evaporated to a single trivial sale, no WSB presence), added NBIS (clean AI-infra-debt-sympathy name without CRWV's insider-selling red flag).",
       "Saturday 17 Oct 2026 ~10:10 SGT weekend run (real 'now' per shell clock; latest completed sessions everywhere remain Friday 16 Oct's close -- a sharp AI-credit-stress/CoreWeave-driven risk-off day: S&P -1.09%, Nasdaq -2.15%, VIX +21.45% to 19.99, gold/silver/miners firm, Brent +3.56% on Hormuz fears -- taken as established fact from data/.prices.json, not re-researched; news.json/market.json/flows-investors.json were refreshed by an earlier process this run and left untouched). Congress: rebuilt to 15 trades across 12 distinct members. Dropped Rep. Maria Elvira Salazar's MRK sell (growing stale, filed Oct 7) and Rep. Rick Larsen's FDX sell (trimmed one leg of his 3-stock rebalance to free a roster slot while keeping ADI+WSM for the narrative). Swapped Rep. Lisa McClain's MSFT buy for her fresher CACI International buy (same Sept 14 Schwab-401k batch as her Olin/Novagold/Transocean buys, filed Oct 12) and Rep. Cisneros's small AVGO sell for his fresher NXPI buy (part of a much larger Oct 14-disclosed batch also selling Revvity/Microchip/PTC/RBC and buying Globus Medical). Added two new members for variety: Rep. David Taylor's AT&T buy (traded Oct 9, filed within about a week -- an unusually prompt disclosure) and Sen. Sheldon Whitehouse's Visa sell (10b5-1 plan, traded Sep 4/filed Oct 1, notable for sitting opposite Ackman's already-tracked Pershing Square Visa stake). Enriched Rep. Kevin Hern's DVN entry with the much larger Oct 15-disclosed sell list (LMT, NEE, ROK, LIN, LOW, EMR, CB, UNH, HD, MRSH, SBUX) now confirmed via MarketBeat's congressional-trades topic page -- underscoring this is wholesale de-risking, not a sector call. Signals: swapped out RDDT (attention-only, never corroborated) for CRWV, built on a genuine three-way convergence found this run -- CoreWeave is the literal epicenter of Friday's AI-credit-stress selloff (its 2030 bonds sold off toward ~16% yield on ~$50B debt-load concerns), CRO Jonathan Jones's Form 4 shows real sell-to-cover prices read directly from the SEC filing ($80.365, then $77.18-78.74 across Oct 12-13), and Quiver Quant shows 6 congressional CRWV trades since the 2025 IPO (Khanna, Hoyle, Fields) -- though explicitly flagged as stale/2025-only on the congress leg and routine-10b5-1 on the insider leg, so attention/narrative convergence rather than aligned conviction. Kept GDX/AVGO/PLTR/IREN/MP/MU unchanged (no material new catalyst found for any in the available window). Insiders: full active 14-day sweep across all three buckets. Re-opened the primary aastocks.com disclosure tables directly for all three HKEX names and confirmed zero change -- Xiaomi (1810.HK) still tops out at the 22 Sep BlackRock 4.98% print, Tencent (0700.HK) still at Zhang Xiulan's 18 Aug buy (a low-quality aggregator snippet mentioned an unverifiable 'Oct 4 Siu Shun Yang' transaction that could not be corroborated against the primary table or any dated filing, so it is noted but not asserted as fact), and SMIC (0981.HK) still at the 24 Jun crossing. Actively re-searched Wing Tai, Ho Bee, Singtel, MPACT, UOL, DBS, F&N, VICOM, City Developments, Yangzijiang, Seatrium, Keppel REIT and CapitaLand China Trust -- the only concrete new item found was Seatrium's own Oct 13 share buyback (1,025,000 shares at S$1.945, via the company's listedcompany.com insider-trades page), a corporate-level repurchase, not a named-director dealing, so correctly excluded; every other tracked name had no verifiable new director/substantial-shareholder filing in the last 14 days and is carried forward unchanged with re-check dates bumped to 2026-10-17. No price-discipline removals this run. Super-investors: code-owned, not touched this run.",
