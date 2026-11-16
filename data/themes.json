@@ -1,11 +1,11 @@
 {
- "asOf": "2026-11-09",
- "generatedAt": "2026-11-09T01:46:28.111Z",
+ "asOf": "2026-11-16",
+ "generatedAt": "2026-11-16T02:14:46.959Z",
  "source": "SEC EDGAR full-text search (efts.sec.gov, keyless); distinct filers counted by paging hits, never from the entity_filter aggregation; insider link on filer CIK identity against data/signals.json",
  "scan": {
-  "checkedAt": "2026-11-09T01:46:28.111Z",
+  "checkedAt": "2026-11-16T02:14:46.959Z",
   "ok": true,
-  "requests": 22,
+  "requests": 23,
   "errors": []
  },
  "guidance": "Consider entry only at the Evidenced→Priced transition, and never initiate at Crowded. The radar counts filings; it does not size or recommend.",
@@ -18,27 +18,27 @@
    "stagePrev": null,
    "changedOn": "2026-09-17",
    "why": [
-    "2026 Q4 is still open (counted through 2026-11-09) — reported but never scored, because a part-quarter count reads as a collapse",
+    "2026 Q4 is still open (counted through 2026-11-16) — reported but never scored, because a part-quarter count reads as a collapse",
     "Candidate since 2026 Q1: distinct filers went 15 → 34 between 2025 Q4 and 2026 Q1, at least 2× from a base above 10",
-    "Evidenced by product: 54 ETF filings in the last 12 months, latest ETF Series Solutions 485APOS 2026-11-06",
+    "Evidenced by insiders: MP (3 insiders bought by 2026-11-12) — a cluster among the theme's own filers",
     "only 1 of the theme's names are priced here (MP), so co-movement cannot be measured — the rung stays Evidenced and the price leg is not invented",
-    "Crowded: 10 distinct trusts have an EFFECTIVE (485BPOS) filing naming the theme, across 25 filings — WisdomTree Trust 2026-10-28; ETF Opportunities Trust 2026-10-28; Managed Portfolio Series 2026-10-07; Tema ETF Trust 2026-10-05"
+    "Crowded: 10 distinct trusts have an EFFECTIVE (485BPOS) filing naming the theme, across 26 filings — ETF Opportunities Trust 2026-11-12; WisdomTree Trust 2026-10-28; Managed Portfolio Series 2026-10-07; Tema ETF Trust 2026-10-05"
    ],
    "candidateOn": "2026-03-31",
    "crowding": {
     "level": "crowded",
     "effectiveTrusts": 10,
-    "effectiveFilings": 25,
+    "effectiveFilings": 26,
     "proposedFilings": 31,
     "initiations": 0,
     "trusts": [
      {
-      "trust": "WisdomTree Trust",
-      "date": "2026-10-28",
+      "trust": "ETF Opportunities Trust",
+      "date": "2026-11-12",
       "form": "485BPOS"
      },
      {
-      "trust": "ETF Opportunities Trust",
+      "trust": "WisdomTree Trust",
       "date": "2026-10-28",
       "form": "485BPOS"
      },
@@ -165,12 +165,12 @@
     {
      "q": "2026 Q4",
      "from": "2026-10-01",
-     "to": "2026-11-09",
-     "filings": 76,
-     "filingsDistinct": 67,
-     "filers": 41,
+     "to": "2026-11-16",
+     "filings": 105,
+     "filingsDistinct": 94,
+     "filers": 54,
      "filersAgg": 30,
-     "pagedDocs": 76,
+     "pagedDocs": 105,
      "truncated": false,
      "partial": true
     }
@@ -186,7 +186,19 @@
      "cik": "2074973",
      "name": "Churchill Capital Corp XI",
      "ticker": "CCXI",
+     "filings": 6
+    },
+    {
+     "cik": "2051985",
+     "name": "Iron Horse Acquisition II Corp.",
+     "ticker": "IRHO",
      "filings": 5
+    },
+    {
+     "cik": "1460702",
+     "name": "FF EAI Robotics Ecosystem Inc.",
+     "ticker": "FFR",
+     "filings": 4
     },
     {
      "cik": "1832483",
@@ -195,9 +207,15 @@
      "filings": 4
     },
     {
-     "cik": "1460702",
-     "name": "FF EAI Robotics Ecosystem Inc.",
-     "ticker": "FFR",
+     "cik": "2097288",
+     "name": "BHAV Acquisition Corp",
+     "ticker": "BHAV",
+     "filings": 4
+    },
+    {
+     "cik": "1036044",
+     "name": "INVE Technologies, Inc.",
+     "ticker": "INVE",
      "filings": 3
     },
     {
@@ -207,15 +225,27 @@
      "filings": 3
     },
     {
+     "cik": "1854445",
+     "name": "Brightline Interactive, Inc./NV",
+     "ticker": "BTLN",
+     "filings": 3
+    },
+    {
      "cik": "1892704",
      "name": "First Breach, Inc.",
      "ticker": "FBDT",
      "filings": 3
     },
     {
-     "cik": "2051985",
-     "name": "Iron Horse Acquisition II Corp.",
-     "ticker": "IRHO",
+     "cik": "4127",
+     "name": "SKYWORKS SOLUTIONS, INC.",
+     "ticker": "SWKS",
+     "filings": 3
+    },
+    {
+     "cik": "746210",
+     "name": "TaoWeave, Inc.",
+     "ticker": "TWAV",
      "filings": 3
     },
     {
@@ -225,9 +255,27 @@
      "filings": 3
     },
     {
+     "cik": "1173489",
+     "name": "CEVA INC",
+     "ticker": "CEVA",
+     "filings": 2
+    },
+    {
      "cik": "1462056",
      "name": "Backblaze, Inc.",
      "ticker": "BLZE",
+     "filings": 2
+    },
+    {
+     "cik": "1662684",
+     "name": "KULR Technology Group, Inc.",
+     "ticker": "KULR",
+     "filings": 2
+    },
+    {
+     "cik": "1776909",
+     "name": "CuriosityStream Inc.",
+     "ticker": "CURI",
      "filings": 2
     },
     {
@@ -255,9 +303,9 @@
      "filings": 2
     },
     {
-     "cik": "1854445",
-     "name": "Brightline Interactive, Inc./NV",
-     "ticker": "BTLN",
+     "cik": "1892322",
+     "name": "HeartCore Enterprises, Inc.",
+     "ticker": "HTCR",
      "filings": 2
     },
     {
@@ -267,21 +315,15 @@
      "filings": 2
     },
     {
+     "cik": "1970622",
+     "name": "USA Rare Earth, Inc.",
+     "ticker": "USAR",
+     "filings": 2
+    },
+    {
      "cik": "1976663",
      "name": "Nexscient, Inc.",
      "ticker": "NXNT",
-     "filings": 2
-    },
-    {
-     "cik": "2097288",
-     "name": "BHAV Acquisition Corp",
-     "ticker": "BHAV",
-     "filings": 2
-    },
-    {
-     "cik": "4127",
-     "name": "SKYWORKS SOLUTIONS, INC.",
-     "ticker": "SWKS",
      "filings": 2
     },
     {
@@ -291,15 +333,9 @@
      "filings": 2
     },
     {
-     "cik": "746210",
-     "name": "TaoWeave, Inc.",
-     "ticker": "TWAV",
-     "filings": 2
-    },
-    {
-     "cik": "1036044",
-     "name": "INVE Technologies, Inc.",
-     "ticker": "INVE",
+     "cik": "1114925",
+     "name": "LANTRONIX INC",
+     "ticker": "LTRX",
      "filings": 1
     },
     {
@@ -327,6 +363,18 @@
      "filings": 1
     },
     {
+     "cik": "1567900",
+     "name": "REALLOYS INC.",
+     "ticker": "ALOY",
+     "filings": 1
+    },
+    {
+     "cik": "1575793",
+     "name": "Energous Corp",
+     "ticker": "WATT",
+     "filings": 1
+    },
+    {
      "cik": "1667011",
      "name": "Arteris, Inc.",
      "ticker": "AIP",
@@ -342,6 +390,12 @@
      "cik": "1743725",
      "name": "GRID DYNAMICS HOLDINGS, INC.",
      "ticker": "GDYN",
+     "filings": 1
+    },
+    {
+     "cik": "1769628",
+     "name": "CoreWeave, Inc.",
+     "ticker": "CRWV",
      "filings": 1
     },
     {
@@ -363,9 +417,27 @@
      "filings": 1
     },
     {
-     "cik": "1970622",
-     "name": "USA Rare Earth, Inc.",
-     "ticker": "USAR",
+     "cik": "1824502",
+     "name": "Archer Aviation Inc.",
+     "ticker": "ACHR",
+     "filings": 1
+    },
+    {
+     "cik": "1826681",
+     "name": "Palladyne AI Corp.",
+     "ticker": "PDYN",
+     "filings": 1
+    },
+    {
+     "cik": "1840317",
+     "name": "VEEA INC.",
+     "ticker": "VEEA",
+     "filings": 1
+    },
+    {
+     "cik": "2022308",
+     "name": "KIDZ AI Inc.",
+     "ticker": "KIDZ",
      "filings": 1
     },
     {
@@ -405,6 +477,12 @@
      "filings": 1
     },
     {
+     "cik": "866374",
+     "name": "FLEX LTD.",
+     "ticker": "FLEX",
+     "filings": 1
+    },
+    {
      "cik": "877212",
      "name": "ZEBRA TECHNOLOGIES CORP",
      "ticker": "ZBRA",
@@ -424,6 +502,15 @@
     }
    ],
    "etfs": [
+    {
+     "trust": "ETF Opportunities Trust",
+     "cik": "1771146",
+     "form": "485BPOS",
+     "date": "2026-11-12",
+     "adsh": "0001771146-26-002283",
+     "url": "https://www.sec.gov/Archives/edgar/data/1771146/000177114626002283/0001771146-26-002283-index.htm",
+     "effective": true
+    },
     {
      "trust": "ETF Series Solutions",
      "cik": "1540305",
@@ -932,15 +1019,15 @@
    "sic": [
     {
      "code": "3674",
-     "count": 14
+     "count": 15
     },
     {
      "code": "3569",
-     "count": 11
+     "count": 12
     },
     {
      "code": "7372",
-     "count": 10
+     "count": 12
     },
     {
      "code": "3711",
@@ -948,22 +1035,50 @@
     },
     {
      "code": "7389",
+     "count": 7
+    },
+    {
+     "code": "6770",
      "count": 5
+    },
+    {
+     "code": "7370",
+     "count": 5
+    },
+    {
+     "code": "1000",
+     "count": 4
+    },
+    {
+     "code": "6199",
+     "count": 4
     },
     {
      "code": "3480",
      "count": 3
     },
     {
-     "code": "6199",
+     "code": "3577",
      "count": 3
     },
     {
-     "code": "6770",
+     "code": "7371",
      "count": 3
     },
     {
-     "code": "1000",
+     "code": "7373",
+     "count": 3
+    },
+    {
+     "code": "7374",
+     "count": 3
+    },
+    {
+     "code": "3663",
+     "count": 2
+    },
+    {
+     "code": "3670",
      "count": 2
     },
     {
@@ -971,15 +1086,7 @@
      "count": 2
     },
     {
-     "code": "7370",
-     "count": 2
-    },
-    {
-     "code": "7371",
-     "count": 2
-    },
-    {
-     "code": "7373",
+     "code": "7812",
      "count": 2
     },
     {
@@ -999,7 +1106,7 @@
      "count": 1
     },
     {
-     "code": "3577",
+     "code": "3576",
      "count": 1
     },
     {
@@ -1007,7 +1114,7 @@
      "count": 1
     },
     {
-     "code": "3663",
+     "code": "3672",
      "count": 1
     },
     {
@@ -1015,15 +1122,32 @@
      "count": 1
     },
     {
+     "code": "3721",
+     "count": 1
+    },
+    {
      "code": "3844",
      "count": 1
     },
     {
-     "code": "7374",
+     "code": "8200",
      "count": 1
     }
    ],
    "insiderOverlap": [
+    {
+     "cik": "1801368",
+     "ticker": "MP",
+     "name": "MP Materials Corp. / DE",
+     "filings": 3,
+     "buys": 3,
+     "sells": 0,
+     "latest": "2026-11-12",
+     "side": "buy",
+     "cluster": true,
+     "clusterOn": "2026-11-12",
+     "insiders": 3
+    },
     {
      "cik": "1769628",
      "ticker": "CRWV",
@@ -1031,7 +1155,7 @@
      "filings": 15,
      "buys": 0,
      "sells": 15,
-     "latest": "2026-10-30",
+     "latest": "2026-11-10",
      "side": "sell",
      "cluster": false,
      "clusterOn": null
@@ -1049,13 +1173,25 @@
      "clusterOn": null
     },
     {
+     "cik": "1743725",
+     "ticker": "GDYN",
+     "name": "GRID DYNAMICS HOLDINGS, INC.",
+     "filings": 12,
+     "buys": 0,
+     "sells": 12,
+     "latest": "2026-11-12",
+     "side": "sell",
+     "cluster": false,
+     "clusterOn": null
+    },
+    {
      "cik": "1667011",
      "ticker": "AIP",
      "name": "Arteris, Inc.",
-     "filings": 8,
+     "filings": 9,
      "buys": 0,
-     "sells": 8,
-     "latest": "2026-11-04",
+     "sells": 9,
+     "latest": "2026-11-12",
      "side": "sell",
      "cluster": false,
      "clusterOn": null
@@ -1073,25 +1209,13 @@
      "clusterOn": null
     },
     {
-     "cik": "1743725",
-     "ticker": "GDYN",
-     "name": "GRID DYNAMICS HOLDINGS, INC.",
-     "filings": 7,
-     "buys": 0,
-     "sells": 7,
-     "latest": "2026-11-03",
-     "side": "sell",
-     "cluster": false,
-     "clusterOn": null
-    },
-    {
      "cik": "804328",
      "ticker": "QCOM",
      "name": "QUALCOMM INC/DE",
-     "filings": 5,
+     "filings": 6,
      "buys": 0,
-     "sells": 5,
-     "latest": "2026-10-20",
+     "sells": 6,
+     "latest": "2026-11-09",
      "side": "sell",
      "cluster": false,
      "clusterOn": null
@@ -1100,9 +1224,9 @@
      "cik": "1804176",
      "ticker": "BFLY",
      "name": "Butterfly Network, Inc.",
-     "filings": 4,
+     "filings": 3,
      "buys": 0,
-     "sells": 4,
+     "sells": 3,
      "latest": "2026-11-03",
      "side": "sell",
      "cluster": false,
@@ -1133,18 +1257,6 @@
      "clusterOn": null
     },
     {
-     "cik": "1045810",
-     "ticker": "NVDA",
-     "name": "NVIDIA CORP",
-     "filings": 2,
-     "buys": 0,
-     "sells": 2,
-     "latest": "2026-09-23",
-     "side": "sell",
-     "cluster": false,
-     "clusterOn": null
-    },
-    {
      "cik": "1297989",
      "ticker": "EXLS",
      "name": "ExlService Holdings, Inc.",
@@ -1157,13 +1269,37 @@
      "clusterOn": null
     },
     {
+     "cik": "1413447",
+     "ticker": "NXPI",
+     "name": "NXP Semiconductors N.V.",
+     "filings": 2,
+     "buys": 0,
+     "sells": 2,
+     "latest": "2026-11-06",
+     "side": "sell",
+     "cluster": false,
+     "clusterOn": null
+    },
+    {
+     "cik": "1816581",
+     "ticker": "OUST",
+     "name": "Ouster, Inc.",
+     "filings": 2,
+     "buys": 0,
+     "sells": 2,
+     "latest": "2026-11-12",
+     "side": "sell",
+     "cluster": false,
+     "clusterOn": null
+    },
+    {
      "cik": "1841925",
      "ticker": "INDI",
      "name": "indie Semiconductor, Inc.",
      "filings": 2,
      "buys": 0,
      "sells": 2,
-     "latest": "2026-11-03",
+     "latest": "2026-11-10",
      "side": "sell",
      "cluster": false,
      "clusterOn": null
@@ -1181,14 +1317,14 @@
      "clusterOn": null
     },
     {
-     "cik": "817720",
-     "ticker": "SYNA",
-     "name": "SYNAPTICS Inc",
+     "cik": "855658",
+     "ticker": "LSCC",
+     "name": "LATTICE SEMICONDUCTOR CORP",
      "filings": 2,
-     "buys": 0,
-     "sells": 2,
-     "latest": "2026-10-21",
-     "side": "sell",
+     "buys": 1,
+     "sells": 1,
+     "latest": "2026-11-10",
+     "side": "both",
      "cluster": false,
      "clusterOn": null
     },
@@ -1205,18 +1341,6 @@
      "clusterOn": null
     },
     {
-     "cik": "1280263",
-     "ticker": "AMBA",
-     "name": "AMBARELLA INC",
-     "filings": 1,
-     "buys": 0,
-     "sells": 1,
-     "latest": "2026-09-28",
-     "side": "sell",
-     "cluster": false,
-     "clusterOn": null
-    },
-    {
      "cik": "1283699",
      "ticker": "TMUS",
      "name": "T-Mobile US, Inc.",
@@ -1224,18 +1348,6 @@
      "buys": 0,
      "sells": 1,
      "latest": "2026-11-03",
-     "side": "sell",
-     "cluster": false,
-     "clusterOn": null
-    },
-    {
-     "cik": "1413447",
-     "ticker": "NXPI",
-     "name": "NXP Semiconductors N.V.",
-     "filings": 1,
-     "buys": 0,
-     "sells": 1,
-     "latest": "2026-10-05",
      "side": "sell",
      "cluster": false,
      "clusterOn": null
@@ -1265,14 +1377,14 @@
      "clusterOn": null
     },
     {
-     "cik": "1824502",
-     "ticker": "ACHR",
-     "name": "Archer Aviation Inc.",
+     "cik": "1805521",
+     "ticker": "FFAI",
+     "name": "FARADAY FUTURE INTELLIGENT ELECTRIC INC.",
      "filings": 1,
-     "buys": 0,
-     "sells": 1,
-     "latest": "2026-09-23",
-     "side": "sell",
+     "buys": 1,
+     "sells": 0,
+     "latest": "2026-11-06",
+     "side": "buy",
      "cluster": false,
      "clusterOn": null
     },
@@ -1284,6 +1396,18 @@
      "buys": 0,
      "sells": 1,
      "latest": "2026-10-05",
+     "side": "sell",
+     "cluster": false,
+     "clusterOn": null
+    },
+    {
+     "cik": "2028027",
+     "ticker": "NTWO",
+     "name": "Newbury Street II Acquisition Corp",
+     "filings": 1,
+     "buys": 0,
+     "sells": 1,
+     "latest": "2026-11-09",
      "side": "sell",
      "cluster": false,
      "clusterOn": null
@@ -1313,14 +1437,14 @@
      "clusterOn": null
     },
     {
-     "cik": "855658",
-     "ticker": "LSCC",
-     "name": "LATTICE SEMICONDUCTOR CORP",
+     "cik": "817720",
+     "ticker": "SYNA",
+     "name": "SYNAPTICS Inc",
      "filings": 1,
-     "buys": 1,
-     "sells": 0,
-     "latest": "2026-11-04",
-     "side": "buy",
+     "buys": 0,
+     "sells": 1,
+     "latest": "2026-10-21",
+     "side": "sell",
      "cluster": false,
      "clusterOn": null
     }
@@ -1352,7 +1476,7 @@
    "stagePrev": null,
    "changedOn": "2026-09-20",
    "why": [
-    "2026 Q4 is still open (counted through 2026-11-09) — reported but never scored, because a part-quarter count reads as a collapse",
+    "2026 Q4 is still open (counted through 2026-11-16) — reported but never scored, because a part-quarter count reads as a collapse",
     "not a Candidate: no complete quarter has doubled its distinct filers from a base above 10 (latest 2026 Q2 8 → 2026 Q3 9)",
     "Crowded: 4 distinct trusts have an EFFECTIVE (485BPOS) filing naming the theme, across 6 filings — Collaborative Investment Series Trust 2026-08-28; Krane Shares Trust 2026-07-29; Roundhill ETF Trust 2026-04-30; Morgan Stanley Portfolios, Series 81 2025-04-30"
    ],
@@ -1487,12 +1611,12 @@
     {
      "q": "2026 Q4",
      "from": "2026-10-01",
-     "to": "2026-11-09",
-     "filings": 9,
-     "filingsDistinct": 9,
+     "to": "2026-11-16",
+     "filings": 10,
+     "filingsDistinct": 10,
      "filers": 4,
-     "filersAgg": 5,
-     "pagedDocs": 9,
+     "filersAgg": 6,
+     "pagedDocs": 10,
      "truncated": false,
      "partial": true
     }
@@ -1502,7 +1626,7 @@
      "cik": "2074973",
      "name": "Agility Robotics, Inc.",
      "ticker": "CCXI",
-     "filings": 5
+     "filings": 6
     },
     {
      "cik": "1318605",
@@ -1645,7 +1769,7 @@
    "sic": [
     {
      "code": "3569",
-     "count": 5
+     "count": 6
     },
     {
      "code": "3711",
@@ -1662,25 +1786,25 @@
    ],
    "insiderOverlap": [
     {
-     "cik": "1045810",
-     "ticker": "NVDA",
-     "name": "NVIDIA CORP",
-     "filings": 2,
-     "buys": 0,
-     "sells": 2,
-     "latest": "2026-09-23",
-     "side": "sell",
+     "cik": "1805521",
+     "ticker": "FFAI",
+     "name": "FARADAY FUTURE INTELLIGENT ELECTRIC INC.",
+     "filings": 1,
+     "buys": 1,
+     "sells": 0,
+     "latest": "2026-11-06",
+     "side": "buy",
      "cluster": false,
      "clusterOn": null
     },
     {
-     "cik": "1606242",
-     "ticker": "VTIX",
-     "name": "Virtuix Holdings Inc.",
+     "cik": "2028027",
+     "ticker": "NTWO",
+     "name": "Newbury Street II Acquisition Corp",
      "filings": 1,
      "buys": 0,
      "sells": 1,
-     "latest": "2026-09-28",
+     "latest": "2026-11-09",
      "side": "sell",
      "cluster": false,
      "clusterOn": null
