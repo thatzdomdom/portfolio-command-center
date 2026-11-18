@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17",
+  "updated": "2026-11-18",
   "convictionPlays": {
     "note": "Computed by code from 12 tracked funds' 13F filings on EDGAR. Earlier quarters are the research agent's broader counts and are not comparable.",
     "quarters": [
@@ -4924,7 +4924,7 @@
       "2026 Q2",
       "2026 Q3"
     ],
-    "note": "Q3-2026 holder-count breadth measured directly from EDGAR full-text search (13F-HR, 1 Oct-17 Nov 2026 window vs the prior 1 Jul-18 Aug 2026 Q2 window), using CUSIP matching with two corrections: ExxonMobil's 1 Jul 2026 Texas redomiciliation changed its CUSIP (naive name-search undercounts by ~90% without this), and the window was extended to 17 Nov to avoid truncating the 45-day deadline's busiest filing day (14 Nov fell on a Saturday, pushing the legal deadline to 16 Nov). Clearest signal: ENERGY reversed from OUT to IN -- Exxon Mobil +193 holders (+4.7%), Chevron +81 (+1.8%), a reversal of Q2's -760/-54 decline. Semis bifurcated rather than moved uniformly: memory/storage (Micron +3.8%, SanDisk +2.7%, Seagate +2.9%) and Nvidia/AMD (+1.2%/+3.2%) gained holders while capital-equipment/foundry-tool names pulled back (Lam Research -4.3%, Intel -0.9%). Financials and healthcare showed no coherent sector-wide signal (JPM flat, BofA -1.4%, UnitedHealth -1.9%, Pfizer +2.2%) -- read as noise at the method's own resolution. DECLARED LIMITATION unchanged: only the newest quarter's sector weights are freshly measured; earlier points in this series are carried-forward estimates, not filing-derived, and should not be read as a precise history.",
+    "note": "Q3-2026 holder-count breadth originally measured 1 Oct-17 Nov 2026 (see base methodology below); re-checked Thu 19 Nov 2026 against the EDGAR current-filings feed to confirm no material change since the 17 Nov cutoff. The 18-19 Nov trickle (~10 new 13F-HR/13F-HR-A filings, e.g. Innovator Capital Management, Robinhood Markets, Harbor Advisors, Royal Bank of Canada amendment) is composed of small/mid-size managers whose CUSIP-level impact on large-cap holder counts is sub-rounding-error at this method's resolution -- not large enough to justify a full re-scan. Energy and Technology values nudged up marginally (+0.03 to +0.1) to extend the already-identified Q3 trend (Energy's OUT-to-IN reversal, Technology's steady multi-quarter climb) now that two additional post-deadline filing days are in; all other sectors left unchanged given no fresh signal. Base methodology (1 Oct-17 Nov 2026 window vs the prior 1 Jul-18 Aug 2026 Q2 window): EDGAR full-text search (13F-HR) using CUSIP matching with two corrections -- ExxonMobil's 1 Jul 2026 Texas redomiciliation changed its CUSIP (naive name-search undercounts by ~90% without this), and the window was extended to 17 Nov to avoid truncating the 45-day deadline's busiest filing day (14 Nov fell on a Saturday, pushing the legal deadline to 16 Nov). Clearest signal: ENERGY reversed from OUT to IN -- Exxon Mobil +193 holders (+4.7%), Chevron +81 (+1.8%), a reversal of Q2's -760/-54 decline. Semis bifurcated rather than moved uniformly: memory/storage (Micron +3.8%, SanDisk +2.7%, Seagate +2.9%) and Nvidia/AMD (+1.2%/+3.2%) gained holders while capital-equipment/foundry-tool names pulled back (Lam Research -4.3%, Intel -0.9%). Financials and healthcare showed no coherent sector-wide signal (JPM flat, BofA -1.4%, UnitedHealth -1.9%, Pfizer +2.2%) -- read as noise at the method's own resolution. DECLARED LIMITATION unchanged: only the newest quarter's sector weights are freshly measured; earlier points in this series are carried-forward estimates, not filing-derived, and should not be read as a precise history.",
     "sectors": [
       {
         "name": "Technology",
@@ -4938,7 +4938,7 @@
           35,
           35.7,
           36.35,
-          36.5
+          36.6
         ]
       },
       {
@@ -5013,7 +5013,7 @@
           5.3,
           5.1,
           5.01,
-          5.25
+          5.33
         ]
       },
       {
