@@ -1,116 +1,136 @@
 {
-  "updated": "2026-11-19",
-  "note": "As of 07:02 SGT Thu 19 Nov, pre-Asia-open (SGX/HKEX not yet trading). All items below are from the Wed 18 Nov US/global session or later except the Mon 16 Nov Singapore-REIT item, which is retained for its direct relevance to the SGX REIT sleeve.",
+  "updated": "2026-11-20",
+  "note": "As of 07:02 SGT Fri 20 Nov, pre-Asia-open (SGX/HKEX not yet trading). Thursday 19 Nov was a sharp acceleration of the equity selloff (S&P -2.02%, 4th straight down day; VIX +15.8% to 28.44) alongside another leg down in gold/silver/miners and BTC. Items below are dominated by the Wed 18 Nov evening through Fri 20 Nov morning SGT window; two items (China LPR, Japan CPI) are same-day forward-looking events still pending as of this writeup.",
   "items": [
     {
-      "date": "2026-11-18",
-      "headline": "Precious-metals miners crushed far harder than bullion -- GDX -6.94%, SILJ -5.85%, SLVP -6.52% vs GLD -2.48%, SLV -4.69%",
-      "summary": "Gold broke below $3,800 (14-month low) and silver fell toward $46 as Fed hike odds for Dec 9 firmed to ~95-98% and the dollar pushed to roughly a 19-month high, driving a broad precious-metals selloff. Miners (GDX, SILJ, SLVP, NEM, PAAS, AG, HL) fell 1.5-3x harder than the metals themselves -- consistent with operating leverage (fixed mining costs mean every dollar move in the metal swings profit, and therefore the equity, by a larger percentage) rather than any mining-specific scandal; no CME margin-requirement hike was identified as a distinct trigger for the day.",
+      "date": "2026-11-19",
+      "headline": "Miners crushed harder than metal again -- GDX -3.77%, SILJ -5.66%, SLVP -4.55% vs GLD -1.76%, SLV -2.60% -- as dollar hits fresh 19-month high",
+      "summary": "The US Dollar Index touched 103.97, its highest since April 2025, as Fed officials pushed for a bigger December hike; gold and silver both fell again and the leveraged miner complex (GDX/SILJ/SLVP) amplified the move 2-3x via operating leverage, consistent with Wednesday's pattern. Precious-metals analysts flagged the move as a technically significant break (GDX through its Oct 30 low) and debated whether forced/margin-driven selling was exhausting itself or continuing to build.",
       "category": "Precious Metals",
       "impact": "bearish",
-      "tickers": ["GDX", "SILJ", "SLVP", "GLD", "SLV", "NEM", "PAAS", "AG", "HL"],
-      "actionable": "This was a macro/leverage event (hawkish Fed + strong dollar), not an idiosyncratic miner-specific risk -- but that same operating leverage means GDX/SILJ/SLVP will keep amplifying whatever bullion does next, so stress-test margin buffers on the levered silver book against further dollar strength into the Dec 9 FOMC rather than against a miner-specific headline risk.",
-      "sources": ["https://www.usagold.com/daily-precious-metals-market-report-november-18-2026/", "https://finance.yahoo.com/markets/commodities/articles/gold-14-month-low-traders-164318443.html"]
+      "tickers": ["GDX", "SILJ", "SLVP", "GLD", "SLV"],
+      "actionable": "This is the single highest-relevance item for the levered silver book: the dollar-strength/hawkish-Fed driver that pushed the loan to -4.2% from a margin call on Wednesday did not reverse Thursday and instead intensified, so treat the margin buffer as still shrinking into Friday's Asia open rather than stabilizing.",
+      "sources": ["https://www.fxstreet.com/news/us-dollar-takes-a-breather-after-rally-to-19-month-high-202611191423", "https://discoveryalert.com/analysis/gold-silver-selloff-margin-calls-bear-market-november-2026/", "https://silvergoldalpha.substack.com/p/bullion-breakdown-even-gdx-broke"]
     },
     {
-      "date": "2026-11-18",
-      "headline": "MP Materials +8%, USA Rare Earth +7% on US-China rare-earth-talks optimism; Needham reinstates MP at Buy, $48 PT",
-      "summary": "Rare-earth equities jumped as traders positioned for rare-earth supply-chain discussion at the Trump-Xi-Putin APEC summit in Shenzhen, with MP Materials up roughly 8% and USA Rare Earth up ~7%. Separately, Needham analyst James Ricchiuti reinstated MP coverage with a Buy rating and $48 price target (~38% upside), citing progress at Mountain Pass including expanded heavy-rare-earth separation capacity and MP's position as an emerging vertically-integrated magnet supplier with GM/Apple offtake and US government backing.",
-      "category": "Rare Earths",
-      "impact": "bullish",
-      "tickers": ["MP", "USAR"],
-      "actionable": "The pop is sentiment/headline-driven (summit anticipation plus a single fresh analyst call) rather than new fundamental data, so it reinforces the long-term DoD/magnet thesis without confirming a re-rating -- a reasonable watchlist add on confirmation of constructive Shenzhen headlines, not a chase at the open.",
-      "sources": ["https://finance.yahoo.com/markets/stocks/articles/usa-rare-earth-climbs-7-155604804.html", "https://www.gurufocus.com/news/9207245/mp-reinstated-by-needham-price-target-announced-at-48"]
-    },
-    {
-      "date": "2026-11-18",
-      "headline": "Lynas rebounds 2.83% to A$12.37 after Tuesday's 8.2% plunge -- broad commodity-rout bounce, not company-specific",
-      "summary": "Lynas shares recovered Wednesday after copper, iron ore, lithium, uranium and rare-earth names were all sold heavily Tuesday in an indiscriminate commodities rout; there was no new Lynas-specific catalyst behind either the Tuesday drop or Wednesday's bounce. The stock remains roughly 45% below its A$22.37 52-week high, well under the ~A$16.35 average analyst price target, even after a quarterly update showing sales revenue +55% YoY and a record average selling price of A$102.1/kg.",
-      "category": "Rare Earths",
-      "impact": "mixed",
-      "tickers": ["LYC.AX"],
-      "actionable": "This reads as beta/mean-reversion after an indiscriminate selloff rather than thesis confirmation -- the underlying operating metrics (record ASP, strong revenue growth) are genuinely positive, but don't mistake Wednesday's bounce for a resolved uptrend given the stock is still far below both its highs and consensus targets.",
-      "sources": ["https://www.ibtimes.com.au/lynas-shares-rebound-after-commodities-sell-off-1878826"]
-    },
-    {
-      "date": "2026-11-18",
-      "headline": "FOMC minutes: 'almost all' participants see further hikes likely appropriate; 10-2 vote masked a closer internal debate",
-      "summary": "The October FOMC minutes showed the committee held rates at 3.75-4.00% by a 10-2 vote (Cook and Hammack dissenting in favor of a 25bp hike), but revealed 'some participants' beyond the two dissenters favored hiking at that meeting, and a couple flagged a move larger than 25bp as worth considering in December. The hawkish tone pushed the dollar to roughly a 19-month high and firmed Dec 9 hike odds to ~95-98%, with gold and Bitcoin each falling 3%+ and oil down about 3% in the reaction.",
+      "date": "2026-11-19",
+      "headline": "Fed's Waller renews push for a 50bp December hike ('shock therapy'); Goolsbee says 'all options on the table'; Williams and Daly push back against a jumbo move",
+      "summary": "Governor Christopher Waller reiterated on Thursday that the Fed should consider a half-point hike in December unless officials clearly signal a follow-up January move, warning inflation is 'spreading' and that shock therapy may be necessary. Chicago Fed's Goolsbee said he won't rule out a larger-than-usual increase given 'multiple months of borderline disturbingly high inflation,' while NY Fed's Williams (Nov 17) and SF Fed's Daly (Nov 18) both argued against dramatic/abrupt action, underscoring a genuinely divided FOMC heading into the Dec 8-9 meeting.",
       "category": "Fed/Macro",
       "impact": "bearish",
-      "tickers": ["SPY", "GLD", "SLV", "TLT", "BTC-USD"],
-      "actionable": "No dovish surprise emerged -- the minutes confirm rather than reverse the hawkish repricing that is the single biggest threat to the levered silver/miners book, so the working assumption should remain continued dollar strength and rate pressure into the Dec 9 decision.",
-      "sources": ["https://financefeeds.com/fomc-minutes-reveal-how-close-the-fed-came/", "https://www.fxstreet.com/cryptocurrencies/news/risk-off-sell-off-hits-bitcoin-gold-and-equities-as-fed-hike-bets-build-202611181709"]
+      "tickers": ["GLD", "SLV", "DXY", "TLT"],
+      "actionable": "Market pricing of a ~95-97% December hike is no longer just a baseline case -- a sitting Fed governor is now explicitly advocating for a larger 50bp move, which is the single biggest tail risk to the silver/gold book if it gains support among other voters before Dec 9.",
+      "sources": ["https://en.fnnews.com/news/202611190313128716", "https://www.bloomberg.com/news/articles/2026-11-19/fed-s-goolsbee-says-all-options-on-fomc-table-amid-hot-inflation", "https://en.sedaily.com/world/2026/11/19/feds-waller-again-floats-half-point-hike-says-shock-may-be"]
     },
     {
-      "date": "2026-11-18",
-      "headline": "Trump-Xi-Putin hold unprecedented trilateral summit at APEC Shenzhen -- trade, chip export controls and rare earths on the agenda",
-      "summary": "Trump arrived in Shenzhen for a first-ever three-way summit with Xi and Putin, with the agenda spanning AI/semiconductor export controls, rare-earth supply chains, Ukraine and Iran alongside trade. Trump claimed US rare-earth production would match China's within a year, referencing the prior APEC-summit truce under which China paused export controls in exchange for tariff relief and resumed US soybean/fentanyl-precursor cooperation.",
+      "date": "2026-11-19",
+      "headline": "Anthropic's record $81bn Nasdaq IPO pops 17% to close, but euphoria fades into a broad AI-stock selloff that drags S&P to a 4th straight losing day",
+      "summary": "Anthropic (ANT) priced at $83, opened at $111.50 (+34%) and closed at $97.17 (+17%), valuing the company near $1.76 trillion in the largest IPO on record. The initial lift faded by afternoon as megacap AI names reversed hard (Nvidia -3.3%, Alphabet -3.46%, Amazon -3.87%), with the VIX jumping 15.8% to 28.44 (highest since March) as the S&P fell 2.02% for a fourth consecutive loss (Mon -1.92%, Tue -1.03%, Wed -0.23%, Thu -2.02%).",
+      "category": "Fed/Macro",
+      "impact": "bearish",
+      "tickers": ["SPY", "QQQ", "VIX"],
+      "actionable": "The selloff is now explicitly framed as 'is the AI boom's valuation sustainable' doubt rather than pure rate fear -- a second, distinct risk-off driver layering on top of the hawkish-Fed/dollar story, which raises the odds of continued broad de-risking (including further margin pressure on the leveraged positions) into next week.",
+      "sources": ["https://fortune.com/2026/11/19/anthropic-ipo-first-day-trading-nasdaq-record-valuation/", "https://www.ad-hoc-news.de/boerse/news/marktberichte/vix-jumps-15-80-prozent-to-28-44-as-tech-selloff-revives-volatility/70538098", "https://www.cnn.com/2026/11/19/business/live-news/anthropic-ipo"]
+    },
+    {
+      "date": "2026-11-19",
+      "headline": "Tencent slides further (-6.71% Thursday) as AI-capex worries deepen; Hang Seng hits a 4-month low, Hang Seng Tech a 26-month low",
+      "summary": "Tencent fell as much as 6.71% Thursday, a much sharper reaction than Wednesday's initial -0.85% print-day move, as investors kept digesting the 257% capex surge and negative free cash flow from Tuesday's Q3 results. The slide dragged the Hang Seng Index down 1.95% to 22,841.62 (a 4-month low) and the Hang Seng Tech Index down 2.33% to a 26-month low, with US-China tech tensions and new chip-related export restrictions cited as compounding factors.",
+      "category": "China/HK Tech",
+      "impact": "bearish",
+      "tickers": ["0700.HK"],
+      "actionable": "The capex/FCF-negative thesis flagged Wednesday as 'self-inflicted, not demand weakness' is now driving a materially larger two-day drawdown than initially priced -- re-check position sizing on 0700.HK against the possibility this becomes a multi-day de-rating rather than a one-day dip.",
+      "sources": ["https://www.ad-hoc-news.de/boerse/news/marktberichte/hang-seng-falls-1-95-prozent-to-22-841-62-as-technology-stocks-weaken/70537616", "https://www.brecorder.com/news/40449693/hong-kong-stocks-hit-4-month-low-as-us-china-tensions-weigh-on-tech", "https://www.ad-hoc-news.de/boerse/news/marktberichte/hang-seng-slides-1-95-prozent-as-tencent-sell-off-deepens/70535724"]
+    },
+    {
+      "date": "2026-11-19",
+      "headline": "New US AI-chip export rule naming Singapore takes effect -- data centers now need a US license, closing a China-access loophole",
+      "summary": "A US Commerce Department interim final rule took effect Thursday Nov 19 requiring data centers in Singapore, Malaysia, Thailand, Indonesia and Brazil to obtain a US government license before receiving, re-exporting or transferring advanced AI chips, aimed at preventing Chinese entities (including Huawei and SMIC) from circumventing chip controls via remote compute in third countries. Singapore's government said it is 'studying' the measure and engaging affected companies; Malaysia said it will not negotiate and expects operators to comply.",
+      "category": "SGX/Singapore",
+      "impact": "mixed",
+      "tickers": ["0981.HK"],
+      "actionable": "This directly touches Singapore's data-center/AI-infrastructure ecosystem and reinforces the SMIC chip-control overhang simultaneously -- watch for Singapore-specific compliance costs or data-center capex delays as a second-order drag on the SGX book beyond generic risk-off beta.",
+      "sources": ["https://qz.com/us-ai-chip-export-licenses-southeast-asia-data-centers-111726", "https://en.sedaily.com/world/2026/11/16/us-curbs-ai-chip-exports-to-singapore-and-four-other-nations", "https://theedgemalaysia.com/node/826051"]
+    },
+    {
+      "date": "2026-11-19",
+      "headline": "MP Materials and Lynas extend 3-day winning streaks, bucking the broader selloff on US-China rare-earth-talks optimism",
+      "summary": "MP Materials (+1.98%) and Lynas (+3.40%) both logged a third straight up day Thursday even as the broader market and precious-metals complex sold off hard, with traders positioning around the Trump-Xi-Putin Shenzhen summit's rare-earth agenda. The move builds on this week's Needham reinstatement of MP at Buy ($48 PT) and reports that MP has cleared a GM magnet-qualification milestone while targeting Apple as a 2027 customer.",
+      "category": "Rare Earths",
+      "impact": "bullish",
+      "tickers": ["MP", "LYC.AX"],
+      "actionable": "Rare earths are now the one portfolio sleeve decoupling positively from the broader risk-off/dollar-strength wave hitting silver, gold miners, crypto and HK tech -- the three-day streak plus concrete GM/Apple offtake progress makes this the strongest 'things are going right' pocket in the book right now.",
+      "sources": ["https://247wallst.com/investing/2026/11/18/usa-rare-earth-climbs-7-mp-materials-jumps-8-as-traders-eye-u-s-china-rare-earth-talks-united-states-antimony-rallies-7", "https://www.defenseworld.net/2026/11/14/mp-materials-clears-gm-magnet-milestone-targets-apple-as-next-customer.html", "https://www.benzinga.com/trading-ideas/long-ideas/26/11/63389707/trump-china-ai-supply-chain"]
+    },
+    {
+      "date": "2026-11-19",
+      "headline": "Trump-Xi-Putin trilateral in Shenzhen issues a 'peace declaration' and pledges more oil supply, but dodges Ukraine/Iran and leaves rare-earth compliance unresolved",
+      "summary": "The unprecedented three-way summit produced a joint 'peace declaration' committing to strategic stability and UN reform, and a pledge to boost global production/supply of refined petroleum, but made no mention of Ukraine or Iran and announced no concrete new trade breakthroughs. Separately, US officials reiterated that China has delivered only about two-thirds of its Busan rare-earth pledge even as the broader export-curb truce has been extended to Jan 10, 2027 to allow further negotiation.",
       "category": "Geopolitics",
       "impact": "mixed",
-      "tickers": ["0700.HK", "0981.HK", "FXI", "MP", "LYC.AX"],
-      "actionable": "No concrete new agreement has been confirmed yet -- watch the next 24-48 hours for a joint statement specifically on rare-earth export controls or chip licensing, which could move the HK-tech and rare-earth sleeves sharply in either direction.",
-      "sources": ["https://fortune.com/2026/11/18/trump-xi-putin-shenzhen-apec-trade-truce-export-controls/", "https://www.cnn.com/2026/11/17/politics/live-news/trump-visit-china-philippines"]
+      "tickers": ["0700.HK", "0981.HK", "MP", "LYC.AX"],
+      "actionable": "No concrete new rare-earth or chip-export agreement emerged from the summit itself -- the compliance gap (two-thirds delivered) keeps the China-supply-risk thesis underpinning the rare-earth watchlist intact, while the lack of HK-tech-specific resolution means that sleeve stays exposed to headline risk through the Jan 10 truce deadline.",
+      "sources": ["https://www.euronews.com/2026/11/19/us-and-china-want-to-help-end-ukraine-war-trump-says-ahead-of-trilateral-with-russia", "https://theoregongroup.com/latest-news/us-warns-china-rare-earths-two-thirds-busan-pledge/", "https://www.cnn.com/2026/11/19/politics/trump-putin-xi-meeting-takeaways"]
     },
     {
-      "date": "2026-11-18",
-      "headline": "Oil tumbles as API shows 5.28mn-barrel US crude build; IEA's Q4 surplus call weighs",
-      "summary": "WTI and Brent both fell sharply (WTI toward $83-84, Brent toward $91-92) after the American Petroleum Institute reported a 5.28-million-barrel US crude inventory build for the week ended Nov 13, reinforcing the IEA's Nov 13 Oil Market Report call that global supply should return to surplus in Q4 as Middle East exports recover faster than demand. Ongoing US-Iran friction and Strait of Hormuz shipping risk limited, but did not reverse, the decline.",
-      "category": "Energy",
-      "impact": "bearish",
-      "tickers": ["CL=F", "BZ=F", "XLE", "USO"],
-      "actionable": "No direct portfolio holding here, but the inventory-build/surplus story is a genuine disinflationary data point that modestly cuts against the hawkish-Fed narrative -- a secondary input for the cash-pile rate view, not yet enough to move Dec-hike pricing.",
-      "sources": ["https://invezz.com/news/2026/11/18/oil-price-today-api-528-million-barrel-us-crude-build/", "https://hdfcsky.com/news/brent-crude-oil-price-today-november-18-2026-brent-falls-0-5percent-to-92-6-wti-drops-1-15percent-as-us-stockpiles-rise-middle-east-risks-limit-losses"]
-    },
-    {
-      "date": "2026-11-18",
-      "headline": "Bitcoin breaks below its 200-week moving average -- down ~14% in a week toward $62k support",
-      "summary": "Bitcoin fell roughly 14% over seven days to the $62,000-$63,500 area, breaking below its 200-week moving average for the first time in this cycle -- a long-horizon technical level that has historically flagged periods of extreme market weakness. The decline tracks the same hawkish Fed repricing and dollar strength hitting gold and miners, compounded by continued spot-ETF outflows exceeding $1bn for a second straight week.",
+      "date": "2026-11-19",
+      "headline": "Bitcoin slides to ~$62,154 as November spot-ETF outflows reach roughly $2.6bn cumulative",
+      "summary": "Bitcoin fell further Thursday, tracking the same hawkish-Fed/strong-dollar pressure hitting gold and miners, with US spot BTC ETFs recording cumulative net outflows of about $2.6 billion for the month. Analysts flagged $62,000 as the key support level to watch, warning that a sustained break below it could open a path toward $60,000.",
       "category": "Crypto",
       "impact": "bearish",
       "tickers": ["BTC-USD"],
-      "actionable": "Confirms crypto is trading as a high-beta, rate-sensitive risk asset right now rather than an idiosyncratic story -- its synchronized breakdown with gold/miners reinforces that Fed repricing, not a crypto-specific shock, is the dominant cross-asset driver, useful context for how correlated the precious-metals book may behave if hike odds firm further.",
-      "sources": ["https://www.fool.com/coverage/stock-market-today/2026/11/18/crypto-market-today-nov-18-bitcoin-s-12-weekly-plunge-has-triggered-a-rare-signal-with-a-surprising-history/", "https://crypto.news/bitcoin-price-weekly-selloff-62k-support/"]
+      "actionable": "BTC continues to trade as a high-beta, rate-sensitive risk asset in lockstep with gold/miners rather than an uncorrelated hedge -- its ongoing weakness is confirming, not adding new information to, the dominant dollar-strength/hawkish-Fed cross-asset driver already stressing the silver book.",
+      "sources": ["https://www.kucoin.com/news/flash/bitcoin-drops-to-62k-amid-2-35-billion-etf-outflows-in-november", "https://cryptobriefing.com/bitcoin-62k-realized-losses-cycle-lows/", "https://www.okx.com/en-us/orbit/insight/93165056045728"]
     },
     {
-      "date": "2026-11-18",
-      "headline": "Tencent Q3: revenue +8% to RMB207.3bn, but profit -6% as AI capex surges 257%",
-      "summary": "Tencent's Q3 revenue rose 8% YoY to RMB207.3bn with gross profit +7%, but non-IFRS operating and net profit both fell 6% as operating capex payments jumped 257% YoY to RMB63.6bn, pushing free cash flow negative (-RMB69.1bn); excluding new AI products, operating profit was actually up 8%. The stock closed down 0.85% on the print, with WorkBuddy AI assistant surpassing 10 million daily active users and cloud revenue accelerating 35% YoY.",
+      "date": "2026-11-20",
+      "headline": "China's PBoC due to set November LPR at HK market open -- 23 of 28 economists expect an 18th straight month on hold",
+      "summary": "China's one-year and five-year Loan Prime Rates are due at 01:15 GMT Friday (09:15 SGT), right around the HKEX open. A Reuters poll of 28 economists found 23 (82%) expect both rates held at 3.00%/3.50% for an 18th consecutive month, with the PBoC's shift toward overnight reverse repos as its main policy tool further reducing the LPR's signaling role.",
       "category": "China/HK Tech",
       "impact": "mixed",
-      "tickers": ["0700.HK"],
-      "actionable": "The profit miss is self-inflicted AI-capex spending, not demand weakness (ex-AI operating profit still grew 8%), so the modest -0.85% reaction looks like a justified de-rating of near-term margins rather than a thesis-breaker for the HK-tech sleeve.",
-      "sources": ["https://www.manilatimes.net/2026/11/18/tmt-newswire/pr-newswire/tencent-announces-2026-third-quarter-results/2473131", "https://finance.biggo.com/news/72deef99-5323-42f8-9f6d-4b570f5341d3"]
+      "tickers": ["0700.HK", "0981.HK", "1810.HK"],
+      "actionable": "A widely-expected hold means no fresh PBoC stimulus tailwind to offset Thursday's HK-tech selloff at Friday's open -- any surprise cut would be a genuine positive catalyst for 0700.HK/0981.HK/1810.HK, but base case is a non-event.",
+      "sources": ["https://investinglive.com/central-banks/economic-and-event-calendar-in-asia-friday-november-20-2026-fed-s-paulson-japan-cpi-and-china-s-lpr/", "https://1trader.com/en/cn-lpr-2026-11-20/"]
     },
     {
-      "date": "2026-11-18",
-      "headline": "HSI closes down for HK tech, but Southbound money keeps buying SMIC and Hua Hong -- domestic-chip rotation intact",
-      "summary": "The Hang Seng Index closed lower with tech shares under pressure broadly (Tencent -0.85%, Xiaomi -0.13%), but Southbound Stock Connect recorded roughly HK$2.75bn of net buying, with SMIC and Hua Hong Semiconductor continuing to attract inflows even as the wider tech tape fell. This extends the domestic-chip-self-sufficiency rotation first triggered by the mid-November US export-control tightening.",
-      "category": "China/HK Tech",
-      "impact": "mixed",
-      "tickers": ["0981.HK", "0700.HK"],
-      "actionable": "Southbound money is still net-buying the domestic-foundry names specifically rather than HK tech broadly -- a sign the SMIC chip-rotation position is holding up on its own idiosyncratic merits even as the index-level HK-tech beta stays weak.",
-      "sources": ["https://www.ad-hoc-news.de/boerse/news/marktberichte/hang-seng-ends-0-91-prozent-lower-at-23-294-75-as-tech-shares-retreat/70532309"]
+      "date": "2026-11-20",
+      "headline": "Japan's October core CPI (due later Friday) forecast to accelerate to 2.3%, reinforcing BoJ Governor Ueda's hawkish guidance",
+      "summary": "Japan's national CPI for October is due at 23:30 GMT Friday, with core inflation (ex-fresh food) forecast to rise to 2.3% from 2.1% in September. BoJ Governor Kazuo Ueda said on Nov 18 the central bank should continue raising rates while anchoring inflation near the 2% target, and markets now price an 82-84% chance of a hike to 1.50% at the Dec 17-18 meeting following firmer producer-price data.",
+      "category": "Fed/Macro",
+      "impact": "bearish",
+      "tickers": ["GLD", "SLV", "DXY"],
+      "actionable": "A hawkish BoJ alongside a hawkish Fed is a double dollar-strength/yield-pressure setup for precious metals -- if tonight's CPI beats the 2.3% forecast, expect it to reinforce rather than offset the DXY-strength story that is the dominant threat to the margin-stressed silver position.",
+      "sources": ["https://www.bloomberg.com/news/articles/2026-11-12/japan-producer-prices-pick-up-backing-case-for-another-boj-hike", "https://investinglive.com/central-banks/economic-and-event-calendar-in-asia-friday-november-20-2026-fed-s-paulson-japan-cpi-and-china-s-lpr/"]
     },
     {
-      "date": "2026-11-18",
-      "headline": "STI falls for a third straight session on AI-spending caution and US chip-export-curb overhang, despite Nvidia's beat",
-      "summary": "Singapore's Straits Times Index fell to around 5,054.89 (-1.1%) as investor caution over AI capex and lingering US chip-export restrictions outweighed Nvidia's strong Q3 beat and guidance. ST Engineering fell over 2% despite announcing an OCBC-partnered quantum-readiness pilot under the GFTN's Q-FINEX testbed, while Riverstone dropped over 4% on a CEO transition announcement.",
+      "date": "2026-11-19",
+      "headline": "STI opens down 1.04% as global risk-off spreads to Singapore; S-REITs keep lagging the index",
+      "summary": "The Straits Times Index opened 1.04% lower Thursday amid broad-based declines tracking the global selloff. Singapore REITs continued underperforming, with the FTSE ST All-Share Real Estate REITs Index down 1.56% Wednesday versus the STI's 1.06% decline, extending a year-to-date gap (S-REITs roughly -14% YTD vs STI +12.3%).",
       "category": "SGX/Singapore",
       "impact": "bearish",
-      "tickers": ["ES3.SI", "S63.SI", "O39.SI"],
-      "actionable": "The STI's weakness is driven by regional AI-capex/chip-curb sentiment rather than a Singapore-specific shock -- no direct read-through has been flagged yet for the core SGX bank/REIT/developer holdings beyond general risk-off beta.",
-      "sources": ["https://sg.finance.yahoo.com/news/ai-spending-caution-drags-singapore-093313080.html", "https://thefinance.sg/2026/11/18/8-investor-dos-and-donts-as-the-sti-heads-south/"]
+      "tickers": ["ES3.SI"],
+      "actionable": "The STI weakness is beta to the global risk-off wave rather than a Singapore-specific shock, but the S-REIT underperformance gap is widening again even as the SORA-easing tailwind flagged Monday remains structurally intact -- the REIT sleeve's recovery case is a 2027 story, not a this-week one.",
+      "sources": ["https://www.businesstoday.com.my/2026/11/19/singapore-shares-open-lower-sti-falls-1-04-amid-broad-based-declines/", "https://www.kucoin.com/news/flash/singapore-reits-drop-1-56-on-nov-18-ntt-dc-reit-offers-11-23-yield"]
     },
     {
-      "date": "2026-11-16",
-      "headline": "Is the Great Singapore REIT Comeback finally here? SORA easing widens the yield-spread case even as S-REITs lag the STI",
-      "summary": "Analysts flagged early signs of institutional investors returning to S-REITs this week as 3-month compounded SORA continues easing from its 2024 peak, lowering financing costs and widening the distribution-yield spread over risk-free SGS bonds/fixed deposits. The CSOP iEdge S-REIT Leaders Index ETF (SGX: SRT) is still down ~11% YTD as of Nov 5 versus a ~13.7% gain for the broader STI, so the sector remains a laggard even as the rate backdrop improves.",
-      "category": "SGX/Singapore",
-      "impact": "bullish",
-      "tickers": ["SRT.SI", "C38U.SI", "A17U.SI"],
-      "actionable": "This is a genuine tailwind for the SGX REIT sleeve that is independent of -- and currently diverging from -- the Fed-driven hawkish/dollar-strength narrative hitting precious metals, since Singapore's SORA cycle is easing while the US Fed is still hiking; don't extrapolate the global hawkish-Fed story onto local REIT financing costs.",
-      "sources": ["https://thefinance.sg/2026/11/16/is-the-great-singapore-reit-comeback-finally-here/"]
+      "date": "2026-11-19",
+      "headline": "Oil holds roughly flat near $83 WTI even as the Shenzhen trilateral pledges more refined-petroleum supply",
+      "summary": "WTI traded little-changed around $83 a barrel Thursday (little moved from Wednesday's API-driven selloff) even after the Trump-Xi-Putin declaration included a joint pledge to 'boost the production and supply' of refined petroleum. No portfolio holding is directly exposed, but a credible supply-side pledge is a mild disinflationary data point working against the hawkish-Fed narrative if it materializes.",
+      "category": "Energy",
+      "impact": "mixed",
+      "tickers": ["CL=F", "USO"],
+      "actionable": "Not a direct holding, but worth tracking as a secondary input into the Fed's inflation read -- a genuine supply boost would be a small offset to the Waller/Goolsbee hawkish case that is currently the bigger threat to the silver book.",
+      "sources": ["https://www.5paisa.com/blog/crude-oil-price-today-19-november-2026", "https://www.cnn.com/2026/11/19/politics/trump-putin-xi-meeting-takeaways"]
+    },
+    {
+      "date": "2026-11-18",
+      "headline": "Xiaomi gets a fresh CICC Buy rating ahead of Nov 24 earnings, even as CLSA trims 2026 profit forecast 13% on soft consumer spending",
+      "summary": "Xiaomi is holding up as a relative outperformer within the HK-tech sleeve heading into its Nov 24 Q3 report, with CICC reinstating a Buy rating even as CLSA cut its 2026 adjusted net-profit forecast by 13% citing weaker-than-expected Chinese consumer spending. The stock has continued to tick higher on the rating news despite the broader Tencent-led tech rout.",
+      "category": "China/HK Tech",
+      "impact": "mixed",
+      "tickers": ["1810.HK"],
+      "actionable": "Xiaomi's relative resilience versus Tencent/SMIC this week suggests the market is still discriminating on fundamentals rather than selling HK tech as one undifferentiated basket -- useful context ahead of the Nov 24 print, which is now the next binary catalyst for the 1810.HK position.",
+      "sources": ["https://www.ad-hoc-news.de/boerse/news/corporate-news/xiaomi-stock-faces-november-24-earnings-test-after-cicc-buy-rating/70479887", "https://www.ad-hoc-news.de/boerse/news/unternehmensnachrichten/xiaomi-s-record-ev-month-meets-a-profit-warning-buybacks-a-62-prozent-earnings-drop-and-the/70517030"]
     }
   ]
 }
