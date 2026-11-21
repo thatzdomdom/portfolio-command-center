@@ -1,0 +1,980 @@
+{
+  "updated": "2026-11-21",
+  "asOf": "2026-11-20",
+  "note": "Sat 21 Nov 2026 07:xx SGT refresh, as of the Fri 20 Nov US close (latest completed session; markets closed for the weekend, no newer session for US/HK/SG/JP/KR). Friday was a SHARP, DISTINCT escalation, not a simple continuation of Thursday's Fed/Philly-Fed risk-off: S&P 500 -3.70% to 6910.39 (5th straight down day, confirming a correction from October highs), Nasdaq -5.28%, Russell 2000 -2.76%, VIX +26.2% to 35.89 (highest since March). The proximate triggers were two Friday-specific AI-credibility shocks -- Reuters reported SEC enforcement staff are examining Nvidia's accounting practices (NVDA -14%, ~$500bn of market cap erased) and Ming-Chi Kuo reported Alphabet cut ~20% of its 2027 Broadcom-designed TPU orders in favor of MediaTek (AVGO -11.4%, MRVL -10%) -- landing on monthly options expiration day when ~55-57% of SPY/QQQ's negative gamma was rolling off, a structural amplifier that helps explain why VIX moved so much more than the index itself. Gold and silver fell in the SAME session as equities (GLD -3.67%, SLV -6.74%, GDX -5.00%, SILJ -5.89%) despite softer US data (final UoM sentiment rose to 51.5, inflation expectations fell to 3.7%/3.3%) -- analysts attribute this to a margin-call transmission mechanism (leveraged investors raising cash from liquid winners to meet equity-related calls) rather than a fresh metals-specific catalyst, consistent with COMEX managed-money futures positions shrinking even as ETF holdings rose. Rare earths gave back their 3-day rally (MP -7.39%, having rallied Nov 17-19 on US-China trade-talk optimism and a 3-insider cluster buy) as broad-market beta overwhelmed the idiosyncratic story. Bitcoin extended a separate, multi-week decline (-4.51% to $59,109) tied to ~$1.9bn of cumulative spot-ETF outflows, MSCI's removal of Strategy (MSTR) from its indexes, and thin weekend Coinbase-concentrated selling -- this looks like continuation of an existing drain, not a new Friday-specific shock. CNN Fear & Greed fell to 14 (Extreme Fear, from 19 Thursday), yet counterintuitively BofA/EPFR and Lipper's week-ended-18-Nov fund flows (published Nov 20, finally covering this entire selloff week) both showed net equity INFLOWS (+$66.6bn and +$59.2bn respectively) -- a genuine divergence between price action and fund-level flows worth flagging rather than reconciling into one narrative. Fed Governor Waller's Nov 18 call for a 'shock therapy' 50bp December hike, reinforced by Governor Cook's hawkish tone Nov 20, keeps the rate backdrop a second, independent headwind. All 40 universe calls plus the 9-ticker rare-earth basket were re-levelled this run; the largest-magnitude-move tickers got fresh ticker-specific drivers, the rest were nudged in the direction of the broad shock per house rule rather than re-invented without a fresh catalyst.",
+  "macro": {
+    "regime": "Correction confirmed: a distinct AI-credibility shock (Nvidia SEC accounting probe, Broadcom/Google TPU-order cut) lands on a negative-gamma options-expiry day, driving the sharpest VIX spike since March even as softer inflation data and still-positive weekly fund flows complicate a simple capitulation read",
+    "riskOnProb": 0.22,
+    "regimeScore": -0.58,
+    "asOf": "2026-11-21",
+    "narrative": "Friday 20 Nov was the sharpest single session of this five-day drawdown and looks structurally different from the prior four: Reuters' report that SEC enforcement staff are probing Nvidia's accounting (-14%, ~$500bn erased) and a Ming-Chi Kuo note that Alphabet cut ~20% of its 2027 Broadcom TPU orders for MediaTek (AVGO -11.4%, MRVL -10%) are direct hits to the single most crowded, highest-multiple trade of 2026 -- AI capex monetization -- not another macro-data or Fed-minutes read-through. Landing on monthly options expiration, with ~55-57% of SPY/QQQ's negative gamma rolling off, mechanically amplified the move: VIX's 26.2% spike to 35.89 is disproportionate even to a -3.70% S&P day, consistent with dealer hedging flows rather than fear alone. Gold, silver and miners fell in lockstep with equities (GLD -3.67%, SLV -6.74%, GDX -5.00%) despite a softer US print (final UoM sentiment 51.5, up from 48.0; inflation expectations down to 3.7%/3.3%) -- the clean inverse of what a inflation-expectations-driven move would look like, pointing instead to forced margin-call liquidation of liquid winners to cover equity losses, a dynamic the owner's own 2.487x-levered, FAILING-survivability silver position is directly exposed to being caught in. Bitcoin's further slide to $59,109 continues a separate multi-week drain (cumulative 2026 spot-ETF outflows near $2bn, MSCI's removal of Strategy from its indexes, concentrated weekend Coinbase selling) rather than reacting fresh to Friday's equity news. The one genuinely confusing cross-current: BofA/EPFR and Lipper's week-ended-18-Nov fund flows, both published Friday/Saturday and finally covering this whole selloff week, showed net equity INFLOWS (+$66.6bn and +$59.2bn) even as price action and sentiment (Fear & Greed 14, Extreme Fear) screamed capitulation -- a real divergence between flow data and price/sentiment data this run does not try to force into one story. Separately, rare earths (MP -7.39%) gave back a 3-day, trade-talk-driven rally as broad-market beta took over, and Fed Governor Waller's renewed push for a 50bp December hike (backed by Governor Cook's Nov 20 tone) keeps the rate backdrop a second, independent source of pressure into the Dec 8-9 FOMC.",
+    "drivers": [
+      {
+        "factor": "Reuters reported SEC enforcement staff are examining Nvidia's accounting practices; shares fell ~14%, erasing roughly $500bn of market cap and acting as Friday's primary single-stock catalyst",
+        "read": "A direct hit to the credibility of the single largest, most crowded AI-capex trade -- distinct from Thursday's macro-data-driven selloff and the hardest-to-dismiss catalyst of this entire drawdown",
+        "impact": "cautionary"
+      },
+      {
+        "factor": "Ming-Chi Kuo reported Alphabet cut ~20% (~1M units) of its 2027 Broadcom-designed TPU orders in favor of MediaTek-built chips; Broadcom fell 11.4%, Marvell 10%",
+        "read": "Concrete evidence that AI capex plans are being actively reshuffled, not just questioned in the abstract -- a second, independent data point alongside the Nvidia probe that the AI-infrastructure spending cycle has real seams",
+        "impact": "cautionary"
+      },
+      {
+        "factor": "Friday was monthly options expiration with ~55-57% of SPY/QQQ's negative gamma rolling off, per SpotGamma -- a structural amplifier layered on top of the Nvidia/Broadcom news",
+        "read": "Explains why VIX's 26.2% spike to 35.89 was disproportionate even to the S&P's -3.70% move; argues against mechanically extrapolating Friday's magnitude into next week once gamma normalizes post-expiry",
+        "impact": "mixed"
+      },
+      {
+        "factor": "Gold, silver and miners fell in lockstep with equities (GLD -3.67%, SLV -6.74%, GDX -5.00%) even as US data improved (final UoM sentiment up to 51.5, inflation expectations down to 3.7%/3.3%) -- analysts attribute the move to margin-call-driven liquidation of liquid winners, not a fresh metals catalyst",
+        "read": "The inverse of what an inflation-expectations-driven selloff would look like; this is the single most important read for the owner's 2.487x-levered, FAILING-survivability silver position, which is directly exposed to being forced-sold in exactly this dynamic",
+        "impact": "cautionary"
+      },
+      {
+        "factor": "BofA/EPFR and Lipper's week-ended-18-Nov weekly fund flows (published Fri/Sat, finally covering the whole selloff week) showed net equity INFLOWS of +$66.6bn and +$59.2bn respectively, even as Fear & Greed fell to 14 (Extreme Fear)",
+        "read": "A genuine divergence between flow data and price/sentiment data -- flows have not capitulated the way price action has, which could mean dip-buying is absorbing the selling, or that flows simply lag faster-moving price/sentiment by a few days",
+        "impact": "mixed"
+      },
+      {
+        "factor": "Fed Governor Waller renewed his push for a 'shock therapy' 50bp December hike (Nov 18), reinforced by Governor Cook's hawkish tone Nov 20, even as CME-implied odds still favor 25bp (~90-97%)",
+        "read": "An independent, rates-driven headwind running in parallel to the AI-credibility shock -- directly pressures the owner's SGX REITs via financing costs and adds a second channel of pressure on precious metals via the real-rate/dollar transmission",
+        "impact": "cautionary"
+      }
+    ],
+    "byAssetClass": [
+      {
+        "assetClass": "Equity",
+        "stance": "UW",
+        "pUp12m": 0.48,
+        "note": "Friday's Nvidia SEC-probe/Broadcom-TPU-cut shock, landing on a negative-gamma options-expiry day, confirmed a correction (S&P 5th straight down day, VIX +26.2% to 35.89) distinct from and sharper than Thursday's macro-driven selloff; still-positive weekly fund flows (+$66.6bn BofA/EPFR) argue against full capitulation.",
+        "tilt": -0.02
+      },
+      {
+        "assetClass": "Commodities",
+        "stance": "UW",
+        "pUp12m": 0.42,
+        "note": "Gold/silver/miners fell in lockstep with equities (GLD -3.67%, SLV -6.74%, GDX -5.00%) on what analysts read as margin-call-driven forced liquidation rather than a fresh metals catalyst -- the clean opposite of what Friday's softer US inflation-expectations print would otherwise imply; rare earths (MP -7.39%) gave back a 3-day rally to the same broad-market beta.",
+        "tilt": -0.02
+      },
+      {
+        "assetClass": "Crypto",
+        "stance": "UW",
+        "pUp12m": 0.4,
+        "note": "Bitcoin extended a separate, multi-week drain (-4.51% to $59,109; ~$1.9bn cumulative 2026 spot-ETF outflows, MSCI's removal of Strategy/MSTR from its indexes, thin weekend Coinbase-concentrated selling) rather than reacting fresh to Friday's equity-specific news -- Fear & Greed crypto reading sits near 10-12, Extreme Fear.",
+        "tilt": -0.02
+      },
+      {
+        "assetClass": "Bonds",
+        "stance": "UW",
+        "pUp12m": 0.46,
+        "note": "Fed Governor Waller's renewed 50bp-hike push (backed by Governor Cook Nov 20) keeps the policy-path headwind dominant for long duration, only partially offset by Friday's VIX spike (+26.2%) bringing some flight-to-quality demand; final UoM inflation expectations easing to 3.7%/3.3% is a mild, not dominant, favorable cross-current.",
+        "tilt": -0.018
+      },
+      {
+        "assetClass": "USD/Cash",
+        "stance": "OW",
+        "pUp12m": 0.66,
+        "note": "A hawkish Fed path (Waller's 50bp push, Cook's reinforcing tone) combined with intensifying risk-off (VIX +26.2% to 35.89, Fear & Greed at 14/Extreme Fear) continues to support holding dollar/cash ballast; the owner's large cash pile is the direct structural beneficiary of this regime.",
+        "tilt": 0.02
+      }
+    ],
+    "sources": [
+      "https://lufkindailynews.com/news_reuters/business/nvidias-accounting-is-a-focus-of-us-sec-investigation-sources-say/article_c8f7024b-2150-5b9b-b932-82c34f92f8cb.html",
+      "https://stockanalysis.com/news/broadcom-falls-google-tpu-cut-mediatek/",
+      "https://spotgamma.com/negative-gamma-selloff-november-opex/",
+      "https://www.cnbc.com/2026/11/18/federal-reserve-governor-christopher-waller.html",
+      "https://www.kitco.com/news/article/2026-11-20/gold-price-trades-near-3568oz-after-final-consumer-sentiment-rises-515",
+      "https://discoveryalert.com/analysis/gold-silver-selloff-margin-calls-bear-market-november-2026/",
+      "https://www.kucoin.com/blog/why-is-bitcoin-price-crashing-in-november-2026",
+      "https://finance.yahoo.com/markets/stocks/articles/2-questions-decide-risk-assets-135611700.html",
+      "https://247wallst.com/investing/2026/11/19/usa-rare-earth-rises-5-mp-materials-gains-3-critical-metals-dips-can-trumps-pledge-to-catch-china-on-rare-earths-revive-the-sector/",
+      "https://www.tokenpost.com/news/investing/62212"
+    ]
+  },
+  "calls": [
+    {
+      "ticker": "SPY",
+      "name": "SPDR S&P 500 ETF Trust",
+      "assetClass": "Equity",
+      "pUp1m": 0.34,
+      "pUp3m": 0.4,
+      "pUp12m": 0.52,
+      "ev1m": -0.028,
+      "ev3m": -0.012,
+      "ev12m": 0.03,
+      "drivers": [
+        "S&P 500 fell 3.70% Friday to 6910.39, a 5th straight down day and the sharpest single session of this drawdown, confirming a correction from October highs",
+        "The proximate trigger was AI-credibility-specific (Reuters' Nvidia SEC accounting-probe report, Google's Broadcom TPU order cut), not another round of the same Fed/Philly-Fed story -- a genuinely new risk dimension",
+        "VIX spiked 26.2% to 35.89 (highest since March), amplified by ~55-57% of SPY/QQQ's negative gamma rolling off on monthly options expiration -- a structural, partly mechanical amplifier that should fade post-expiry",
+        "Counterpoint: BofA/EPFR and Lipper's week-ended-18-Nov fund flows (published Fri/Sat) showed net equity inflows of +$66.6bn/+$59.2bn despite the price action -- flows have not capitulated the way sentiment has"
+      ],
+      "confidence": 0.42
+    },
+    {
+      "ticker": "QQQ",
+      "name": "Invesco QQQ Trust (Nasdaq-100)",
+      "assetClass": "Equity",
+      "pUp1m": 0.26,
+      "pUp3m": 0.32,
+      "pUp12m": 0.5,
+      "ev1m": -0.045,
+      "ev3m": -0.022,
+      "ev12m": 0.035,
+      "drivers": [
+        "Nasdaq fell 5.28% Friday to 22617.73 -- by far the sharpest index move of the week -- as Nvidia's SEC-probe report (-14%, ~$500bn erased) and Broadcom's TPU-order-cut news (-11.4%) hit the index's largest AI-exposed constituents directly",
+        "This is the clearest evidence yet that AI-capex-monetization doubt has moved from a valuation argument to a credibility/execution argument -- a genuinely worse signal for the index's concentration risk",
+        "Negative-gamma options expiry (~55-57% of QQQ's rolling off) mechanically amplified Friday's move; some reversion in realized vol is likely once the expiry effect passes",
+        "Marvell -10% on the same Google/TPU news confirms the hit is spreading beyond the two headline names within the semiconductor-adjacent AI-infrastructure trade"
+      ],
+      "confidence": 0.38
+    },
+    {
+      "ticker": "IWM",
+      "name": "iShares Russell 2000 ETF",
+      "assetClass": "Equity",
+      "pUp1m": 0.38,
+      "pUp3m": 0.42,
+      "pUp12m": 0.49,
+      "ev1m": -0.02,
+      "ev3m": -0.01,
+      "ev12m": 0.0,
+      "drivers": [
+        "Russell 2000 fell 2.76% Friday to 2581.79 -- a smaller decline than the mega-cap-heavy indices since small caps carry less direct AI-capex-credibility exposure to the Nvidia/Broadcom-specific news",
+        "Still fully participated in the broad risk-off (VIX +26.2% to 35.89) and remains the most rate-sensitive segment given Fed Governor Waller's renewed 50bp-hike push",
+        "Relative outperformance vs QQQ/XLK on Friday is consistent with this being an AI-concentration-specific shock rather than a broad-economy growth scare",
+        "Dec 9 FOMC remains the key swing event given small caps' financing-cost sensitivity"
+      ],
+      "confidence": 0.3
+    },
+    {
+      "ticker": "EFA",
+      "name": "iShares MSCI EAFE ETF",
+      "assetClass": "Equity",
+      "pUp1m": 0.39,
+      "pUp3m": 0.42,
+      "pUp12m": 0.485,
+      "ev1m": -0.02,
+      "ev3m": -0.01,
+      "ev12m": -0.002,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "Less direct exposure to the Nvidia-probe/Broadcom-TPU-specific shock than the US, but shares the same dollar-strength/hawkish-Fed-Waller-50bp backdrop.",
+        "Developed-market equities share the same dollar-strength/hawkish-Fed-plus-growth-scare dynamic pressuring US assets this week",
+        "10-year UST yield holding near 5.08-5.09% keeps the rate-differential backdrop dollar-supportive, a headwind for EAFE's USD-translated returns"
+      ],
+      "confidence": 0.22
+    },
+    {
+      "ticker": "EEM",
+      "name": "iShares MSCI Emerging Markets ETF",
+      "assetClass": "Equity",
+      "pUp1m": 0.365,
+      "pUp3m": 0.405,
+      "pUp12m": 0.472,
+      "ev1m": -0.026,
+      "ev3m": -0.012,
+      "ev12m": -0.003,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "A firmer dollar on Waller's renewed 50bp-hike push plus the broad US-led risk-off (S&P -3.70% Friday) is a double headwind for EM equities.",
+        "EM equities carry a double headwind: a firmer dollar on hawkish Fed repricing plus the broader US-led risk-off tape (S&P -2.02% Thursday)",
+        "The Trump-Xi-Putin Shenzhen summit remains the dominant two-sided catalyst for China/EM sentiment this week"
+      ],
+      "confidence": 0.23
+    },
+    {
+      "ticker": "VGK",
+      "name": "Vanguard FTSE Europe ETF",
+      "assetClass": "Equity",
+      "pUp1m": 0.39,
+      "pUp3m": 0.42,
+      "pUp12m": 0.485,
+      "ev1m": -0.019,
+      "ev3m": -0.009,
+      "ev12m": -0.002,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "Limited direct exposure to the Nvidia/Broadcom-specific AI-capex shock; shares the broad dollar-strength/hawkish-Fed headwind hitting all DM ex-US assets.",
+        "European equities share the dollar-strength/hawkish-Fed headwind hitting all DM ex-US assets this week",
+        "Limited direct exposure to the Anthropic-IPO/AI-capex-doubt dynamic driving Thursday's Nasdaq-specific reversal"
+      ],
+      "confidence": 0.21
+    },
+    {
+      "ticker": "EWJ",
+      "name": "iShares MSCI Japan ETF",
+      "assetClass": "Equity",
+      "pUp1m": 0.425,
+      "pUp3m": 0.455,
+      "pUp12m": 0.518,
+      "ev1m": -0.014,
+      "ev3m": -0.003,
+      "ev12m": 0.018,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "Less direct exposure to the Nvidia/Broadcom-specific shock; BOJ Governor Ueda's hawkish guidance and elevated UST yields remain the key swing factors for the yen cross.",
+        "Japan's Core CPI y/y print (fcst 2.3%, prev 2.1%) is due today (Fri), a key input for BOJ policy-gap dynamics versus a now-reconfirmed-hawkish Fed",
+        "BOJ remains the most dovish major DM central bank, a widening policy gap that's typically USD/JPY supportive for exporter earnings"
+      ],
+      "confidence": 0.25
+    },
+    {
+      "ticker": "INDA",
+      "name": "iShares MSCI India ETF",
+      "assetClass": "Equity",
+      "pUp1m": 0.41,
+      "pUp3m": 0.44,
+      "pUp12m": 0.505,
+      "ev1m": -0.017,
+      "ev3m": -0.006,
+      "ev12m": 0.011,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "India carries less direct exposure to the Nvidia/Broadcom AI-capex shock than the US, but shares the broad dollar-strength headwind from Waller's 50bp-hike push.",
+        "India carries less direct exposure to the Anthropic-IPO/AI-capex-doubt dynamic than the US, but shares the broad dollar-strength headwind",
+        "India's domestic-demand-led growth story remains comparatively insulated from this week's Fed-path/growth-scare cross-currents"
+      ],
+      "confidence": 0.2
+    },
+    {
+      "ticker": "FXI",
+      "name": "iShares China Large-Cap ETF",
+      "assetClass": "Equity",
+      "pUp1m": 0.385,
+      "pUp3m": 0.415,
+      "pUp12m": 0.482,
+      "ev1m": -0.021,
+      "ev3m": -0.008,
+      "ev12m": -0.002,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "China-linked equities inherit the broad dollar-strength/risk-off tape; the rare-earth-truce extension remains a secondary, trade-detente-positive swing factor not reflected in Friday's across-the-board selling.",
+        "The Trump-Xi-Putin Shenzhen summit remains the week's single biggest two-sided catalyst for China-linked equities",
+        "China's extension of its rare-earth export-control pause to Jan 10, 2027 is a tentative trade-detente positive for broader China sentiment"
+      ],
+      "confidence": 0.23
+    },
+    {
+      "ticker": "MTUM",
+      "name": "iShares MSCI USA Momentum Factor ETF",
+      "assetClass": "Equity",
+      "pUp1m": 0.32,
+      "pUp3m": 0.375,
+      "pUp12m": 0.515,
+      "ev1m": -0.037,
+      "ev3m": -0.011,
+      "ev12m": 0.033,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "Momentum remains heavily exposed to the AI/chip unwind -- Friday's Nvidia/Broadcom-specific shock hits the factor's largest recent winners directly.",
+        "Momentum factor remains heavily exposed to the AI/chip-sector unwind and Thursday's Anthropic-IPO 'sell the news' reversal",
+        "VIX spiking 15.8% to 28.44 is a direct headwind for momentum strategies, which tend to underperform sharply in high-vol regime shifts"
+      ],
+      "confidence": 0.25
+    },
+    {
+      "ticker": "QUAL",
+      "name": "iShares MSCI USA Quality Factor ETF",
+      "assetClass": "Equity",
+      "pUp1m": 0.43,
+      "pUp3m": 0.47,
+      "pUp12m": 0.53,
+      "ev1m": -0.013,
+      "ev3m": -0.002,
+      "ev12m": 0.03,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "Quality's balance-sheet strength is a relative advantage given the reinforced hawkish rate path, though mega-cap-tech weight still carries some AI-capex-shock exposure.",
+        "Quality factor's balance-sheet strength is a relative advantage given the now-reinforced hawkish, higher-for-longer rate path",
+        "Mega-cap tech weight still carries some AI-capex-doubt exposure shared with QQQ/MTUM, tempering the defensive benefit"
+      ],
+      "confidence": 0.28
+    },
+    {
+      "ticker": "USMV",
+      "name": "iShares MSCI USA Min Vol Factor ETF",
+      "assetClass": "Equity",
+      "pUp1m": 0.505,
+      "pUp3m": 0.51,
+      "pUp12m": 0.53,
+      "ev1m": 0.006,
+      "ev3m": 0.009,
+      "ev12m": 0.018,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "Min-vol's defensive composition is structurally the best-positioned factor for Friday's VIX spike to 35.89, with limited direct exposure to the Nvidia/Broadcom-specific shock.",
+        "Min-vol factor is structurally the most defensive posture given VIX's 15.8% spike to 28.44 Thursday",
+        "Defensive composition offers ballast heading into Friday's revised UoM consumer sentiment and inflation-expectations data"
+      ],
+      "confidence": 0.3
+    },
+    {
+      "ticker": "VLUE",
+      "name": "iShares MSCI USA Value Factor ETF",
+      "assetClass": "Equity",
+      "pUp1m": 0.465,
+      "pUp3m": 0.505,
+      "pUp12m": 0.552,
+      "ev1m": -0.004,
+      "ev3m": 0.01,
+      "ev12m": 0.039,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "Value's underweight to mega-cap AI/tech is a relative advantage given Friday's Nvidia/Broadcom-specific selloff hitting growth-heavy benchmarks hardest.",
+        "Value factor's underweight to mega-cap AI/tech is a relative advantage given Thursday's Anthropic-IPO-driven tech reversal",
+        "Energy-sector weighting is roughly flat near-term given Thursday's largely sideways oil tape (WTI -0.12%)"
+      ],
+      "confidence": 0.26
+    },
+    {
+      "ticker": "XLK",
+      "name": "Technology Select Sector SPDR Fund",
+      "assetClass": "Equity",
+      "pUp1m": 0.24,
+      "pUp3m": 0.3,
+      "pUp12m": 0.49,
+      "ev1m": -0.05,
+      "ev3m": -0.025,
+      "ev12m": 0.03,
+      "drivers": [
+        "Technology was the session's epicenter: Nvidia -14% on the Reuters SEC-accounting-probe report (~$500bn erased) and Broadcom -11.4%/Marvell -10% on Google's reported 20% TPU-order cut to MediaTek",
+        "Two distinct, credible AI-capex-credibility shocks landing the same day is a materially worse signal than Thursday's valuation-anxiety-only selloff",
+        "Negative-gamma options expiry amplified the move mechanically; some of Friday's magnitude should fade post-expiry even if the underlying news doesn't resolve",
+        "No SEC enforcement action has been announced -- this is a probe report, not a finding; confidence stays moderate pending any follow-through"
+      ],
+      "confidence": 0.34
+    },
+    {
+      "ticker": "SMH",
+      "name": "VanEck Semiconductor ETF",
+      "assetClass": "Equity",
+      "pUp1m": 0.2,
+      "pUp3m": 0.27,
+      "pUp12m": 0.48,
+      "ev1m": -0.06,
+      "ev3m": -0.03,
+      "ev12m": 0.028,
+      "drivers": [
+        "Semiconductors took the hardest hit of any sector Friday: Nvidia -14% (SEC accounting-probe report), Broadcom -11.4% and Marvell -10% (Google's reported TPU-order cut to MediaTek) all land directly in this ETF's core holdings",
+        "The Broadcom/Google news is a concrete, sourced report of actual capex reallocation -- not speculation about AI-ROI sustainability in the abstract -- a harder data point against the semiconductor-demand thesis",
+        "Negative-gamma options expiry mechanically amplified the move; SMH is among the highest-beta vehicles to that dynamic given its concentration",
+        "No confirmation yet of SEC enforcement action against Nvidia -- a probe report, not a charged finding -- keeping this a elevated-but-not-maximal-confidence negative call"
+      ],
+      "confidence": 0.3
+    },
+    {
+      "ticker": "XLF",
+      "name": "Financial Select Sector SPDR Fund",
+      "assetClass": "Equity",
+      "pUp1m": 0.445,
+      "pUp3m": 0.49,
+      "pUp12m": 0.54,
+      "ev1m": -0.01,
+      "ev3m": 0.006,
+      "ev12m": 0.038,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "Financials carry a two-sided read: Friday's broad risk-off (S&P -3.70%) pressures sentiment even as a still-hawkish Fed path (Waller's 50bp push) supports net interest margins.",
+        "Financials carry a two-sided read: higher terminal rates support net interest margins even as Thursday's broad risk-off tape (S&P -2.02%) pressures sector sentiment",
+        "Credit stress stays concentrated in CCC-tier names (spreads past 1000bp) rather than broadening into IG/BB, limiting the credit-quality tail risk financials are most exposed to"
+      ],
+      "confidence": 0.27
+    },
+    {
+      "ticker": "XLE",
+      "name": "Energy Select Sector SPDR Fund",
+      "assetClass": "Equity",
+      "pUp1m": 0.42,
+      "pUp3m": 0.455,
+      "pUp12m": 0.51,
+      "ev1m": -0.017,
+      "ev3m": -0.004,
+      "ev12m": 0.016,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "Energy stayed comparatively resilient Friday (XLE -0.62%, the smallest sector decline) as WTI held roughly flat (+0.49%); minimal direct exposure to the Nvidia/Broadcom AI-capex shock.",
+        "WTI was roughly flat Thursday (-0.12% to $83.16) after Wednesday's sharp -3.2% decline, while USO itself rose 1.45% to $138.09 -- an equity/futures-roll divergence rather than a clean spot-price signal",
+        "Brent fell a further 2.07% to $90.05, keeping the Brent-WTI spread dynamic in focus"
+      ],
+      "confidence": 0.28
+    },
+    {
+      "ticker": "XLV",
+      "name": "Health Care Select Sector SPDR Fund",
+      "assetClass": "Equity",
+      "pUp1m": 0.48,
+      "pUp3m": 0.495,
+      "pUp12m": 0.52,
+      "ev1m": -0.003,
+      "ev3m": 0.005,
+      "ev12m": 0.017,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "Healthcare's defensive, low-beta profile is relevant given Friday's VIX spike; no direct link to the Nvidia/Broadcom-specific AI shock.",
+        "Healthcare's defensive, low-beta profile is especially relevant given Thursday's 15.8% VIX spike to 28.44",
+        "No direct link to the Anthropic-IPO/AI-capex-specific reversal driving Thursday's Nasdaq underperformance"
+      ],
+      "confidence": 0.24
+    },
+    {
+      "ticker": "XLI",
+      "name": "Industrial Select Sector SPDR Fund",
+      "assetClass": "Equity",
+      "pUp1m": 0.435,
+      "pUp3m": 0.475,
+      "pUp12m": 0.517,
+      "ev1m": -0.011,
+      "ev3m": 0.002,
+      "ev12m": 0.02,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "Industrials carry cyclical exposure to the hawkish Fed path and the broad risk-off tape, though no direct Nvidia/Broadcom-specific exposure.",
+        "Industrials carry cyclical exposure to both the hawkish Fed path and Thursday's Philly Fed plunge to 6.3 (6-month low), a direct read on manufacturing-sector health",
+        "Dow fell 2.19% Thursday, roughly in line with the broader market, reflecting Industrials/legacy-cyclical weight within that index"
+      ],
+      "confidence": 0.24
+    },
+    {
+      "ticker": "XLU",
+      "name": "Utilities Select Sector SPDR Fund",
+      "assetClass": "Equity",
+      "pUp1m": 0.415,
+      "pUp3m": 0.44,
+      "pUp12m": 0.478,
+      "ev1m": -0.014,
+      "ev3m": -0.006,
+      "ev12m": -0.002,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "Utilities' bond-proxy profile faces a headwind from Waller's renewed 50bp-hike push; secular AI-datacenter power-demand remains a structural offset even as the AI-capex-cut headlines are a mild cross-current on that thesis.",
+        "Utilities' bond-proxy profile faces a direct headwind from the reconfirmed hawkish Fed path and 10-year yield near 5.08-5.09%",
+        "Secular AI-datacenter power-demand growth remains a structural offset, though the reported 2027 data-center capacity cuts (70+GW to 40-50GW) are a mild cross-current on that thesis"
+      ],
+      "confidence": 0.25
+    },
+    {
+      "ticker": "XLP",
+      "name": "Consumer Staples Select Sector SPDR Fund",
+      "assetClass": "Equity",
+      "pUp1m": 0.45,
+      "pUp3m": 0.455,
+      "pUp12m": 0.48,
+      "ev1m": -0.008,
+      "ev3m": -0.002,
+      "ev12m": -0.002,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "Consumer staples' classic defensive positioning is relevant given Friday's VIX spike and 5th straight down session; no direct AI-capex exposure.",
+        "Consumer staples' classic defensive positioning is relevant given Thursday's 15.8% VIX spike and fourth straight down session",
+        "Bond-proxy duration sensitivity faces a headwind now that Dec hike odds sit near 95%"
+      ],
+      "confidence": 0.24
+    },
+    {
+      "ticker": "XLY",
+      "name": "Consumer Discretionary Select Sector SPDR Fund",
+      "assetClass": "Equity",
+      "pUp1m": 0.395,
+      "pUp3m": 0.425,
+      "pUp12m": 0.487,
+      "ev1m": -0.02,
+      "ev3m": -0.008,
+      "ev12m": 0.01,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "Consumer discretionary carries direct read-through from higher-for-longer financing costs now that Waller is pushing for a 50bp December hike.",
+        "Consumer discretionary carries direct read-through from higher-for-longer financing costs now that Dec hike odds sit near 95%",
+        "Jobless claims rising to 203K (above forecast) and continuing claims up 70K to 1.763M are early labor-market-softening signals relevant to discretionary spending power"
+      ],
+      "confidence": 0.25
+    },
+    {
+      "ticker": "GLD",
+      "name": "SPDR Gold Shares",
+      "assetClass": "Commodities",
+      "pUp1m": 0.36,
+      "pUp3m": 0.4,
+      "pUp12m": 0.52,
+      "ev1m": -0.03,
+      "ev3m": -0.01,
+      "ev12m": 0.018,
+      "drivers": [
+        "Gold fell 3.67% Friday to 322.87 (spot ~$3,539) in lockstep with equities despite softer US data (final UoM sentiment up to 51.5, inflation expectations down to 3.7%/3.3%) -- the inverse of what an inflation-expectations-driven move would look like",
+        "Analysts (Peter Schiff, Commerzbank, XTB, Metals Focus) attribute the move to margin-call-driven liquidation of liquid winners to cover equity losses, not a fresh gold-specific catalyst -- COMEX managed-money futures positions have been shrinking even as ETF holdings rose",
+        "Gold/silver ratio has blown out to ~82-83 (from ~78 on Nov 9), the highest since Nov 2025 -- a classic forced-deleveraging signature that historically precedes at least a partial mean-reversion once margin pressure exhausts",
+        "Fed Governor Waller's renewed 50bp-hike push is an independent, real-rate-driven headwind running in parallel to the margin-call dynamic"
+      ],
+      "confidence": 0.38
+    },
+    {
+      "ticker": "SLV",
+      "name": "iShares Silver Trust",
+      "assetClass": "Commodities",
+      "pUp1m": 0.26,
+      "pUp3m": 0.3,
+      "pUp12m": 0.38,
+      "ev1m": -0.06,
+      "ev3m": -0.03,
+      "ev12m": -0.015,
+      "drivers": [
+        "Silver fell 6.74% Friday to 36.97 (SI=F futures -7.31% to 41.08), underperforming gold again as miners (GDX -5.00%, SILJ -5.89%, SLVP -4.93%) amplified the move 1.3-1.6x via operating leverage",
+        "The gold/silver ratio blowing out to ~82-83 (from ~78 on Nov 9) is the clearest sign yet of silver-specific forced deleveraging -- Metals Focus projects a 2026 silver ETF outflow of ~45m oz after 2025's 278m oz inflow",
+        "This is the single highest-relevance call for the owner's book: a 2.487x-levered silver position with a FAILING survivability metric sits directly in the path of the margin-call transmission mechanism this move exemplifies",
+        "No fresh silver-specific demand catalyst identified -- the move reads as forced liquidation layered on the same dollar-strength/hawkish-Fed headwind pressuring the whole precious-metals complex"
+      ],
+      "confidence": 0.34
+    },
+    {
+      "ticker": "DBC",
+      "name": "Invesco DB Commodity Index Tracking Fund",
+      "assetClass": "Commodities",
+      "pUp1m": 0.33,
+      "pUp3m": 0.38,
+      "pUp12m": 0.46,
+      "ev1m": -0.025,
+      "ev3m": -0.008,
+      "ev12m": 0.0,
+      "drivers": [
+        "Broad commodities were pulled down by the same margin-call dynamic hitting gold/silver (GLD -3.67%, SLV -6.74%) even as oil stayed closer to flat (WTI +0.49%, Brent -2.29%) -- a mixed, not uniform, cross-commodity picture",
+        "Rare earths (MP -7.39%) also gave back their 3-day rally to the same broad-risk-off beta, not reflected proportionally in DBC's energy/metals/ag weighting",
+        "Dollar strength from the hawkish Fed path (Waller's 50bp push) remains the dominant cross-commodity headwind specifically for precious metals",
+        "No broad-commodity-specific catalyst beyond the equity-driven margin-call spillover and oil's relative stabilization"
+      ],
+      "confidence": 0.25
+    },
+    {
+      "ticker": "USO",
+      "name": "United States Oil Fund",
+      "assetClass": "Commodities",
+      "pUp1m": 0.5,
+      "pUp3m": 0.485,
+      "pUp12m": 0.51,
+      "ev1m": 0.001,
+      "ev3m": -0.001,
+      "ev12m": 0.012,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "WTI held roughly flat Friday (+0.49% to $83.62) even as the broader market and metals complex sold off sharply -- oil is decoupling from the equity/precious-metals-margin-call dynamic this week.",
+        "WTI was roughly flat Thursday (-0.12% to $83.16) after Wednesday's sharp -3.2% decline, while USO itself rose 1.45% to $138.09 -- an equity/futures-roll divergence rather than a clean spot-price signal",
+        "Brent fell a further 2.07% to $90.05, keeping the Brent-WTI spread dynamic in focus"
+      ],
+      "confidence": 0.23
+    },
+    {
+      "ticker": "URA",
+      "name": "Global X Uranium ETF",
+      "assetClass": "Commodities",
+      "pUp1m": 0.485,
+      "pUp3m": 0.525,
+      "pUp12m": 0.583,
+      "ev1m": -0.001,
+      "ev3m": 0.012,
+      "ev12m": 0.05,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "Uranium/nuclear-power names carry an AI-datacenter-power-demand tailwind structurally separate from Friday's AI-capex-credibility shock, even as the Broadcom/Google TPU-cut news is a mild, indirect cross-current on that demand thesis.",
+        "Uranium/nuclear-power names carry an AI-datacenter-power-demand tailwind structurally separate from this week's broad risk-off tape",
+        "Reported 2027 data-center capacity plans being cut from 70+GW to 40-50GW is a genuine, two-sided data point for the AI-power-demand thesis underpinning this group"
+      ],
+      "confidence": 0.23
+    },
+    {
+      "ticker": "COPX",
+      "name": "Global X Copper Miners ETF",
+      "assetClass": "Commodities",
+      "pUp1m": 0.39,
+      "pUp3m": 0.43,
+      "pUp12m": 0.488,
+      "ev1m": -0.02,
+      "ev3m": -0.007,
+      "ev12m": -0.002,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "Copper miners carry a dollar-strength headwind from Waller's renewed hawkish push, layered on Friday's broad risk-off; secular grid/data-center electrification demand remains a structural, longer-dated offset.",
+        "Copper miners carry a dollar-strength headwind this week layered on Thursday's broad risk-off tape (S&P -2.02%)",
+        "The reconfirmed hawkish Fed path tightens global liquidity, a further headwind for industrial-metals demand"
+      ],
+      "confidence": 0.22
+    },
+    {
+      "ticker": "DBA",
+      "name": "Invesco DB Agriculture Fund",
+      "assetClass": "Commodities",
+      "pUp1m": 0.485,
+      "pUp3m": 0.493,
+      "pUp12m": 0.51,
+      "ev1m": -0.003,
+      "ev3m": -0.001,
+      "ev12m": 0.01,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "Agricultural commodities remain the least directly linked to Friday's AI-capex-credibility shock or the precious-metals margin-call dynamic.",
+        "Agricultural commodities remain less directly linked to this week's Fed-minutes/growth-scare/AI-capex-driven selloff",
+        "Dollar firmness is a mild, broad-based headwind for USD-priced ag commodities"
+      ],
+      "confidence": 0.18
+    },
+    {
+      "ticker": "BTC-USD",
+      "name": "Bitcoin",
+      "assetClass": "Crypto",
+      "pUp1m": 0.26,
+      "pUp3m": 0.33,
+      "pUp12m": 0.44,
+      "ev1m": -0.035,
+      "ev3m": -0.01,
+      "ev12m": -0.012,
+      "drivers": [
+        "Bitcoin fell 4.51% Friday to $59,109, continuing a separate, multi-week decline (~-16-23% MTD) rather than reacting fresh to Friday's equity-specific AI shock",
+        "US spot BTC ETFs show ~$1.9bn of cumulative 2026 outflows through mid-Nov; MSCI's Nov 11 decision to remove Strategy (MSTR, holder of 850,364 BTC) from its global indexes by Nov 30 pressures sentiment via the largest corporate BTC proxy",
+        "Selling has been disproportionately concentrated on Coinbase over weekends (~$1.08bn net selling Oct 31-Nov 15) -- thin weekend liquidity is amplifying moves, consistent with continued Saturday-morning softness",
+        "Crypto Fear & Greed sits near 10-12 (Extreme Fear), confirming genuine sentiment deterioration distinct from, but compounded by, Friday's equity-market shock"
+      ],
+      "confidence": 0.3
+    },
+    {
+      "ticker": "ETH-USD",
+      "name": "Ethereum",
+      "assetClass": "Crypto",
+      "pUp1m": 0.24,
+      "pUp3m": 0.31,
+      "pUp12m": 0.42,
+      "ev1m": -0.038,
+      "ev3m": -0.013,
+      "ev12m": -0.015,
+      "drivers": [
+        "Tracks Bitcoin's multi-week ETF-outflow/thin-liquidity dynamic with typically higher beta to risk-sentiment swings",
+        "No ETH-specific catalyst identified this run -- the move is best read as inheriting BTC's structural drain rather than an independent story",
+        "Crypto Fear & Greed near 10-12 (Extreme Fear) applies across the whole complex, not just BTC",
+        "Friday's equity-market AI shock spilled into crypto broadly on top of the pre-existing multi-week outflow trend"
+      ],
+      "confidence": 0.22
+    },
+    {
+      "ticker": "SOL-USD",
+      "name": "Solana",
+      "assetClass": "Crypto",
+      "pUp1m": 0.23,
+      "pUp3m": 0.3,
+      "pUp12m": 0.41,
+      "ev1m": -0.04,
+      "ev3m": -0.015,
+      "ev12m": -0.02,
+      "drivers": [
+        "Tracks the same multi-week crypto-wide outflow/thin-liquidity dynamic as BTC/ETH, typically with higher beta still",
+        "No SOL-specific catalyst identified this run",
+        "Crypto Fear & Greed near 10-12 (Extreme Fear) applies across the whole complex",
+        "Higher-beta, lower-confidence profile versus BTC/ETH given thinner liquidity and less macro linkage"
+      ],
+      "confidence": 0.18
+    },
+    {
+      "ticker": "TLT",
+      "name": "iShares 20+ Year Treasury Bond ETF",
+      "assetClass": "Bonds",
+      "pUp1m": 0.44,
+      "pUp3m": 0.46,
+      "pUp12m": 0.49,
+      "ev1m": 0.0,
+      "ev3m": 0.0,
+      "ev12m": 0.0,
+      "drivers": [
+        "Friday's VIX spike (+26.2% to 35.89) typically brings some flight-to-quality Treasury demand, a genuine offset to the hawkish-rate headwind",
+        "Fed Governor Waller's renewed push for a 50bp December hike (backed by Governor Cook Nov 20) keeps the policy-path headwind dominant over any single-day flight-to-quality bid",
+        "Final UoM inflation expectations easing to 3.7%/3.3% is a mild, favorable cross-current for nominal duration, not yet decisive",
+        "Net call stays close to neutral given the two-sided pull between a hawkish Fed and genuine equity-market stress"
+      ],
+      "confidence": 0.33
+    },
+    {
+      "ticker": "IEF",
+      "name": "iShares 7-10 Year Treasury Bond ETF",
+      "assetClass": "Bonds",
+      "pUp1m": 0.44,
+      "pUp3m": 0.455,
+      "pUp12m": 0.49,
+      "ev1m": -0.004,
+      "ev3m": -0.006,
+      "ev12m": -0.001,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "Intermediate Treasuries sit between TLT's acute duration exposure and SHY's insulation; Friday's VIX spike brings a partial flight-to-quality offset to Waller's hawkish 50bp push.",
+        "Intermediate Treasuries sit between TLT's acute duration exposure and SHY's insulation, with the same two-sided growth-scare-vs-hawkish-Fed pull",
+        "10-year yield near 5.08-5.09% keeps the rate backdrop broadly unfavorable for this duration bucket"
+      ],
+      "confidence": 0.3
+    },
+    {
+      "ticker": "SHY",
+      "name": "iShares 1-3 Year Treasury Bond ETF",
+      "assetClass": "Bonds",
+      "pUp1m": 0.58,
+      "pUp3m": 0.58,
+      "pUp12m": 0.59,
+      "ev1m": 0.004,
+      "ev3m": 0.008,
+      "ev12m": 0.021,
+      "drivers": [
+        "Short-duration Treasuries are far less exposed to Friday's equity-specific AI shock or the long-end rate-path debate",
+        "A near-term Fed path still leaning toward at least 25bp in December has limited incremental impact on front-end yields already pricing it in",
+        "Low-volatility, near-cash substitute consistent with the macro view's OW USD/Cash stance amid Friday's VIX spike to 35.89",
+        "The owner's large cash pile is the direct structural beneficiary of this regime -- SHY remains the cleanest low-beta expression of that view"
+      ],
+      "confidence": 0.42
+    },
+    {
+      "ticker": "TIP",
+      "name": "iShares TIPS Bond ETF",
+      "assetClass": "Bonds",
+      "pUp1m": 0.455,
+      "pUp3m": 0.46,
+      "pUp12m": 0.49,
+      "ev1m": -0.003,
+      "ev3m": -0.003,
+      "ev12m": -0.001,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "Easing UoM inflation expectations (3.7%/3.3%, down from 4.7%/3.5%) is a genuine breakeven-relevant data point, partially offsetting nominal duration risk from the still-hawkish Fed path.",
+        "TIPS carry an inflation-protection offset against the hawkish FOMC minutes even as nominal duration risk stays elevated with the broader Treasury complex",
+        "The minutes' emphasis on inflation remaining above target is a genuine breakeven-supportive data point, even as Thursday's Philly Fed plunge is a growth-not-inflation signal"
+      ],
+      "confidence": 0.23
+    },
+    {
+      "ticker": "LQD",
+      "name": "iShares iBoxx Investment Grade Corporate Bond ETF",
+      "assetClass": "Bonds",
+      "pUp1m": 0.385,
+      "pUp3m": 0.41,
+      "pUp12m": 0.468,
+      "ev1m": -0.015,
+      "ev3m": -0.014,
+      "ev12m": -0.003,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "IG spreads stay comparatively orderly; Friday's equity-driven risk-off and Waller's hawkish 50bp push are the dominant headwinds via duration, not credit quality.",
+        "IG spreads stay comparatively orderly even as CCC-tier high-yield spreads surge past 1000bp -- duration risk from the hawkish Fed, not credit quality, remains the main headwind here",
+        "LQD's multi-year duration profile inherits most of this week's FOMC-minutes-driven rate uncertainty affecting TLT/IEF"
+      ],
+      "confidence": 0.27
+    },
+    {
+      "ticker": "HYG",
+      "name": "iShares iBoxx High Yield Corporate Bond ETF",
+      "assetClass": "Bonds",
+      "pUp1m": 0.4,
+      "pUp3m": 0.425,
+      "pUp12m": 0.477,
+      "ev1m": -0.013,
+      "ev3m": -0.005,
+      "ev12m": -0.003,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "HY credit stress remains concentrated in the weakest (CCC) tier; Friday's broad equity selloff and VIX spike typically coincide with some HY spread widening at the margin even outside that tier.",
+        "HY credit stress is deepening at the margin: CCC-rated spreads have surged past 1000bp (highest since 2022), though BB-rated spreads widened a far milder ~24bp",
+        "This bifurcation (weakest tier deteriorating, BB/broad market more orderly) is the key signal to monitor for any broadening into a systemic credit event"
+      ],
+      "confidence": 0.28
+    },
+    {
+      "ticker": "EMB",
+      "name": "iShares JP Morgan USD EM Bond ETF",
+      "assetClass": "Bonds",
+      "pUp1m": 0.355,
+      "pUp3m": 0.385,
+      "pUp12m": 0.447,
+      "ev1m": -0.025,
+      "ev3m": -0.021,
+      "ev12m": -0.005,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "EM sovereign debt carries a double headwind: dollar strength from Waller's renewed hawkish push plus the same broad US-led risk-off tape pressuring EM equities.",
+        "EM sovereign debt carries a double headwind: dollar strength on the hawkish Fed repricing plus the same broad risk-off tape pressuring EM equities (VIX +15.8%)",
+        "A firm dollar is a textbook headwind for USD-denominated EM debt"
+      ],
+      "confidence": 0.23
+    },
+    {
+      "ticker": "BND",
+      "name": "Vanguard Total Bond Market ETF",
+      "assetClass": "Bonds",
+      "pUp1m": 0.39,
+      "pUp3m": 0.412,
+      "pUp12m": 0.459,
+      "ev1m": -0.015,
+      "ev3m": -0.014,
+      "ev12m": -0.004,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "Core aggregate bonds track the same two-sided hawkish-Fed-vs-equity-market-stress duration dynamic as the Treasury complex broadly, partially offset by shorter effective duration than TLT.",
+        "Core aggregate bonds track the same two-sided hawkish-Fed-vs-growth-scare duration dynamic as the Treasury complex broadly, partially offset by shorter effective duration than TLT",
+        "Friday's revised UoM sentiment/inflation-expectations data is the next incremental input into the rate-path debate"
+      ],
+      "confidence": 0.26
+    }
+  ],
+  "callsNote": "Sat 21 Nov run: all 40 universe calls plus the 9-ticker rare-earth basket re-levelled after Friday's sharp, distinct AI-credibility shock -- Reuters' Nvidia SEC-accounting-probe report (-14%, ~$500bn erased) and Google's reported Broadcom TPU-order cut (AVGO -11.4%, MRVL -10%) landed on a negative-gamma options-expiry day, driving VIX +26.2% to 35.89 (highest since March) against a -3.70% S&P day. Gold/silver/miners fell in lockstep with equities on what reads as margin-call-driven forced liquidation (GLD -3.67%, SLV -6.74%, GDX -5.00%) rather than a fresh metals catalyst, directly relevant to the owner's 2.487x-levered, FAILING-survivability silver position. MP/Lynas gave back a 3-day trade-talk rally to the same broad-market beta. Bitcoin's further slide continues a separate, multi-week ETF-outflow/MSCI-removal/thin-liquidity drain. Counterpoint: weekly fund flows (BofA/EPFR, Lipper) for the week ended 18 Nov showed net equity INFLOWS despite the price action -- flagged, not reconciled into one story. Tickers with a fresh, sourced catalyst (SPY/QQQ/IWM/XLK/SMH/GLD/SLV/DBC/BTC/ETH/SOL/TLT/SHY/MP/LYC.AX/UUUU/USAR) got full driver rewrites; the rest were nudged in the direction of the broad shock per house rule rather than re-invented without a ticker-specific catalyst.",
+  "rareEarthCalls": [
+    {
+      "ticker": "REMX",
+      "name": "VanEck Rare Earth and Strategic Metals ETF",
+      "assetClass": "Equity",
+      "pUp1m": 0.55,
+      "pUp3m": 0.585,
+      "pUp12m": 0.63,
+      "ev1m": 0.01,
+      "ev3m": 0.025,
+      "ev12m": 0.065,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "Tracks the MP/Lynas 3-day rally giveback on Friday's broad risk-off; the China export-licensing regime on heavy rare earths remains the structural scarcity premium underpinning the ex-China basket regardless of this week's round-trip.",
+        "China's export-licensing regime on heavy rare earths (dysprosium, terbium, yttrium) remains the structural scarcity premium underpinning the ex-China basket",
+        "MP Materials (+1.98% to $36.66) and Lynas (+3.40% to A$12.79) both extended a third straight up day as China's rare-earth export-control pause extension to Jan 10, 2027 keeps trade-detente sentiment supportive ahead of the ongoing Trump-Xi-Putin Shenzhen summit"
+      ],
+      "confidence": 0.31
+    },
+    {
+      "ticker": "REXC",
+      "name": "Sprott Rare Earths Ex-China ETF",
+      "assetClass": "Equity",
+      "pUp1m": 0.53,
+      "pUp3m": 0.575,
+      "pUp12m": 0.62,
+      "ev1m": 0.005,
+      "ev3m": 0.021,
+      "ev12m": 0.06,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "Tracks the same ex-China rare-earth/critical-minerals re-shoring theme as REMX, including Friday's basket-wide reversal of the Nov 17-19 relief rally.",
+        "Tracks the same ex-China rare-earth/critical-minerals re-shoring theme as REMX, including the third-straight-day MP/Lynas rally",
+        "Same Pentagon-backing/reshoring tailwinds at the theme level apply over the 12-month horizon"
+      ],
+      "confidence": 0.2
+    },
+    {
+      "ticker": "MP",
+      "name": "MP Materials Corp",
+      "assetClass": "Equity",
+      "pUp1m": 0.52,
+      "pUp3m": 0.6,
+      "pUp12m": 0.68,
+      "ev1m": 0.008,
+      "ev3m": 0.03,
+      "ev12m": 0.095,
+      "drivers": [
+        "Fell 7.39% Friday to $33.95, giving back a 3-day rally (Nov 17-19, +1.98% to +5.22%) that had been driven by US-China rare-earth-talks optimism and a Nov 10 3-insider cluster buy ($3.35M, no 10b5-1 plans) near a 52-week low",
+        "Friday's decline reads as broad-market beta (the Nvidia-probe/Broadcom-TPU shock hit every risk asset) rather than a reversal of the underlying rare-earth thesis -- no MP-specific negative news was found",
+        "Bridgewater's Q3 2026 13F (filed Nov 16-17) added to MP +9.9% ($23.2M), aligning with the insider cluster buy on timing",
+        "The 100% DoD magnet-offtake deal and $110/kg NdPr price floor remain the structural backstop independent of this week's sentiment-driven round-trip"
+      ],
+      "confidence": 0.36
+    },
+    {
+      "ticker": "LYC.AX",
+      "name": "Lynas Rare Earths Ltd",
+      "assetClass": "Equity",
+      "pUp1m": 0.47,
+      "pUp3m": 0.52,
+      "pUp12m": 0.58,
+      "ev1m": -0.002,
+      "ev3m": 0.01,
+      "ev12m": 0.04,
+      "drivers": [
+        "No Lynas-specific Friday news found; the dominant company storyline remains structural -- no permanent CEO ahead of the Nov 25, 2026 AGM after a preferred candidate withdrew (interim CEO Pol Le Roux since end-June)",
+        "Shares the same ex-China rare-earth basket exposure as MP, including giving back the Nov 17-19 trade-talk-driven relief rally to Friday's broad risk-off",
+        "Remains the largest ex-China separator, continuing to scale its Texas processing plant plus an October deal to acquire a Brazilian rare-earths mine",
+        "CEO-search uncertainty into the Nov 25 AGM is a near-term idiosyncratic risk layered on top of the basket-wide beta"
+      ],
+      "confidence": 0.24
+    },
+    {
+      "ticker": "UUUU",
+      "name": "Energy Fuels Inc",
+      "assetClass": "Equity",
+      "pUp1m": 0.38,
+      "pUp3m": 0.42,
+      "pUp12m": 0.5,
+      "ev1m": -0.02,
+      "ev3m": 0.0,
+      "ev12m": 0.022,
+      "drivers": [
+        "Fell 9.49% Friday, the sharpest single-day move in the rare-earth basket, extending a Nov 16-17 William Blair-triggered group selloff (USAR -10-11.6%, Critical Metals -13%, MP -5%) over dysprosium/samarium feedstock delays",
+        "The feedstock-delay bear case specifically targets USA Rare Earth's supply chain but spilled into the whole monazite/uranium-adjacent complex Energy Fuels sits in",
+        "Diversified uranium + rare-earth (monazite) dual-thesis model has not cushioned this week's selling -- the market isn't yet rewarding the diversification",
+        "No fresh Energy-Fuels-specific catalyst beyond the group-wide feedstock-delay overhang and Friday's broad risk-off"
+      ],
+      "confidence": 0.22
+    },
+    {
+      "ticker": "USAR",
+      "name": "USA Rare Earth Inc",
+      "assetClass": "Equity",
+      "pUp1m": 0.4,
+      "pUp3m": 0.44,
+      "pUp12m": 0.52,
+      "ev1m": -0.015,
+      "ev3m": 0.005,
+      "ev12m": 0.03,
+      "drivers": [
+        "William Blair downgraded USAR from Outperform to Market Perform (Nov 16-17) citing dysprosium/samarium feedstock shortages pushing sales/margin estimates into 2028; shares fell ~10-11.6% before a partial Nov 18-19 relief rally (+5-7%) on US-China trade-talk optimism, then were swept into Friday's broad selloff",
+        "Bridgewater's Q3 2026 13F added to USAR +50% while Soros cut -37.3% in the SAME quarter -- a genuine, unresolved smart-money disagreement that predates the downgrade",
+        "Commercial magnet sales from its Stillwater, OK facility underpin the structural domestic-supply-chain thesis independent of this week's volatility",
+        "High execution/financing volatility keeps confidence below MP/Lynas given both the feedstock-delay overhang and the hedge-fund split"
+      ],
+      "confidence": 0.26
+    },
+    {
+      "ticker": "NEO.TO",
+      "name": "Neo Performance Materials Inc",
+      "assetClass": "Equity",
+      "pUp1m": 0.48,
+      "pUp3m": 0.52,
+      "pUp12m": 0.57,
+      "ev1m": -0.001,
+      "ev3m": 0.011,
+      "ev12m": 0.042,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "Estonia sintered-magnet facility (automotive-qualified, reserved Bosch capacity) remains a structural catalyst independent of Friday's broad-market-driven basket selloff; already profitable, a lower-execution-risk profile than USAR.",
+        "Estonia sintered-magnet facility (automotive-qualified, with reserved Bosch capacity) is a structural catalyst benefiting from Western buyers' ongoing diversification away from Chinese magnet supply",
+        "Already profitable on separation/magnet-making, a lower-execution-risk profile than USAR"
+      ],
+      "confidence": 0.23
+    },
+    {
+      "ticker": "ILU.AX",
+      "name": "Iluka Resources Ltd",
+      "assetClass": "Equity",
+      "pUp1m": 0.46,
+      "pUp3m": 0.49,
+      "pUp12m": 0.54,
+      "ev1m": -0.004,
+      "ev3m": 0.006,
+      "ev12m": 0.028,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "Australia's first fully-integrated rare-earth refinery remains pre-commercial, limiting near-term catalysts; legacy mineral-sands business dilutes pure rare-earth optionality versus MP/Lynas.",
+        "Advancing Australia's first fully-integrated rare-earth refinery with government financing, a longer-dated structural project benefiting from the Western re-shoring push",
+        "Legacy mineral-sands (titanium/zircon) business dilutes pure rare-earth optionality versus MP/Lynas"
+      ],
+      "confidence": 0.17
+    },
+    {
+      "ticker": "6680.HK",
+      "name": "JL MAG Rare-Earth Co Ltd",
+      "assetClass": "Equity",
+      "pUp1m": 0.485,
+      "pUp3m": 0.5,
+      "pUp12m": 0.522,
+      "ev1m": -0.002,
+      "ev3m": 0.004,
+      "ev12m": 0.019,
+      "drivers": [
+        "Friday's selloff was a distinct AI-credibility shock (Reuters' Nvidia SEC-accounting-probe report, Google's reported Broadcom TPU-order cut), landing on a negative-gamma options-expiry day (VIX +26.2% to 35.89) -- not a repeat of Thursday's same Fed/Philly-Fed story.",
+        "China's dominant sintered NdFeB magnet producer -- Friday's ex-China-basket reversal (MP -7.39%) is a mild two-sided signal; the export-control-pause extension continues to preserve Beijing's processing-dominance leverage.",
+        "China's dominant sintered NdFeB magnet producer; the export-control pause extension to Jan 10, 2027, rather than any fresh escalation, preserves Beijing's processing dominance as continued leverage",
+        "This week's rally in the ex-China basket (MP +1.98%, Lynas +3.40%, both third straight up day) on trade-truce optimism is a mild two-sided signal for JL MAG -- any eventual permanent easing of China's export leverage would cut against its domestic-champion thesis"
+      ],
+      "confidence": 0.22
+    }
+  ]
+}
