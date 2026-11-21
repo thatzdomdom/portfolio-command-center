@@ -1,238 +1,191 @@
 {
-  "updated": "2026-11-21",
-  "note": "Sat 21 Nov 2026 07:xx SGT run, as of the Fri 20 Nov US close (latest completed session; weekend, pre-Asia-Monday-open). Friday's AI-credibility shock (Nvidia SEC-probe report, Broadcom/Google TPU-order cut) dominates; several items are from the Nov 19-20 window specifically because that is when the news broke, not a freshness gap.",
+  "updated": "2026-11-22",
+  "note": "Sun 22 Nov 2026 07:00 SGT run, BEFORE Asia's Monday open. Sweeps Sat 21 / Sun 22 weekend news specifically (per standing rule) on top of Friday 20 Nov items not yet fully captured. At least five items below are dated 21-22 Nov: the Baltic Sea drone strike on a sanctioned Russian tanker, the Strait of Hormuz tanker attacks feeding Sunday's oil-futures reopen, Bitcoin's crash-then-9%-rebound round trip, the $2.4bn crypto liquidation wave, and continued Nvidia-SEC-probe fallout coverage. HK/SG company-specific weekend news was thin (markets closed, no fresh Tencent/SMIC/Xiaomi/SGX-REIT headlines since Friday's close) -- flagged explicitly rather than padded.",
   "items": [
     {
-      "date": "2026-11-20",
-      "headline": "Reuters: SEC enforcement staff examining Nvidia's accounting practices; shares fall ~14%, erasing ~$500bn",
-      "summary": "Reuters reported SEC enforcement staff are examining Nvidia's accounting practices, though the scope and start date were undisclosed. Shares fell as much as 14% intraday, the stock's worst session in years, acting as the single largest catalyst behind Friday's broad market selloff.",
-      "category": "China/HK Tech",
+      "date": "2026-11-21",
+      "headline": "Ukraine reportedly drone-strikes sanctioned Russian tanker Sparta II in the Baltic; vessel drifts into Finnish waters, NATO airspace tensions spill over",
+      "summary": "The Sparta II, a Russian cargo ship under US sanctions bound for Kaliningrad, was struck by drones in international waters west of Gogland island late Saturday and drifted into Finnish waters; Finland called in Swedish combat aircraft and Estonian naval support, and all 16 crew were evacuated. It came a day after a Russian missile reportedly violated Polish airspace, underscoring a widening Baltic-NATO risk corridor beyond Ukraine's borders.",
+      "category": "Geopolitics",
+      "impact": "mixed",
+      "tickers": [
+        "BZ=F",
+        "CL=F"
+      ],
+      "actionable": "A genuine NATO-adjacent escalation (Finnish/Swedish/Estonian military assets scrambled for a sanctioned Russian vessel) rather than a Ukraine-only story -- raises tail risk of a Baltic shipping/insurance disruption that would be a fresh, independent bid for oil/gas alongside the Hormuz tanker attacks, worth monitoring for any SGX-listed shipping or energy-linked spillover.",
+      "sources": [
+        "https://www.abc.net.au/news/2026-11-22/russian-cargo-ship-burns-in-baltic-sea-after-drone-strike/107413782",
+        "https://www.sbs.com.au/news/article/russian-cargo-ship-struck-by-drone-off-the-coast-of-finland/ewmq17sol"
+      ]
+    },
+    {
+      "date": "2026-11-21",
+      "headline": "Two tankers hit by projectiles near Strait of Hormuz as Iran escalates shipping blockade; ~25 incidents in a week, Sunday oil futures reopen to price it in",
+      "summary": "UK Maritime Trade Operations reported two tankers struck near Oman's Khasab on Saturday -- one hit in the stern, another in the engine room -- while Iran's navy separately claimed a tanker caught fire after hitting a mine in a restricted zone; no casualties were reported. Al Jazeera's correspondent counted roughly 25 such incidents over the preceding week (about three daily) as Iran asserts all Hormuz passage must be coordinated with its navy, in apparent retaliation for a continuing US blockade of Iranian ports.",
+      "category": "Energy",
+      "impact": "bullish",
+      "tickers": [
+        "CL=F",
+        "BZ=F",
+        "USO"
+      ],
+      "actionable": "This is the concrete catalyst Sunday-evening oil futures will reopen against -- a genuine supply-side risk premium building in the world's most important chokepoint, distinct from Friday's AI-driven equity rout; worth tracking for a potential energy-sector hedge or re-rating opportunity even as the portfolio has no direct oil holding.",
+      "sources": [
+        "https://www.aljazeera.com/news/2026/11/21/tankers-hit-in-strait-of-hormuz-as-iran-tightens-grip-on-shipping",
+        "https://www.cnbc.com/amp/2026/11/21/two-tanker-attacks-reported-near-omans-khasab-ukmto-says.html"
+      ]
+    },
+    {
+      "date": "2026-11-20 to 2026-11-21",
+      "headline": "Bitcoin crashes below $57,000 (two-year low $55,130) on a $2.4bn liquidation wave, then rebounds 9% to retake $60,300 as forced selling clears",
+      "summary": "Coinglass data showed $2.4bn in crypto futures liquidated in 24 hours (over $1bn in BTC futures, $545m in ETH futures) as Bitcoin crashed to a two-year low near $55,130 and Ether dropped toward $1,560; Glassnode said the flush cleared a stale cluster of leveraged long bets between $59,000-$62,000 that had built up over months. Bitcoin then rebounded 9% to ~$60,300 by Saturday afternoon as that forced-selling pressure abated, though QCP Capital cautioned a durable recovery needs tech-equity stabilization and returning institutional ETF flows.",
+      "category": "Crypto",
+      "impact": "mixed",
+      "tickers": [
+        "BTC-USD",
+        "ETH-USD",
+        "MSTR"
+      ],
+      "actionable": "Confirms crypto's weekend round trip was leverage-flush-and-release mechanics layered on top of the existing multi-week ETF-outflow/MSCI-removal drain, not a new standalone shock -- the bounce off $55k is a useful reference level, but QCP's conditioning on equity stabilization means Monday's Asia open (and any Nvidia/Broadcom follow-through) is the key swing factor for whether $60k holds.",
+      "sources": [
+        "https://www.coindesk.com/markets/2026/11/21/bitcoin-bounces-9-from-two-year-low-to-retake-usd60-000-as-traders-eye-monday-s-stock-open",
+        "https://www.cryptotimes.io/2026/11/21/ethereum-price-crashes-to-1-5k-as-crypto-liquidations-top-2-4b-schiff-predicts-1k-eth/"
+      ]
+    },
+    {
+      "date": "2026-11-21",
+      "headline": "Nvidia's seven-week losing streak (-46%, worst since 2008) now compounds an SEC accounting probe, a California AG subpoena, and a CEO exit -- weekend press digests the pile-up",
+      "summary": "Weekend coverage (24/7 Wall St, Yahoo Finance) framed Nvidia's slide as its longest weekly losing streak since 2008, down 46% over seven weeks and roughly $2.6tn in market value, even as the company's revenue run-rate dwarfs 2008 levels. The pile-up now includes Friday's Reuters-reported SEC accounting probe, a Nov 19 California AG subpoena probing whether ex-CEO Jensen Huang's personal ties to China led to chip/secrets diversion or misleading disclosures, and interim-CEO transition to CFO Colette Kress after Huang's Nov 12 resignation.",
+      "category": "Fed/Macro",
       "impact": "bearish",
       "tickers": [
         "NVDA",
         "QQQ",
         "SMH"
       ],
-      "actionable": "No direct holding, but this is the hardest-to-dismiss AI-capex-credibility shock of the drawdown -- watch for contagion into HK tech's own AI-capex narrative (0700.HK, 0981.HK) when Monday's Asia session opens and finally prices this in.",
+      "actionable": "No direct holding, but this is now a multi-pronged credibility crisis (SEC + state AG + governance vacuum), not a one-headline shock, which raises the odds of continued AI-capex-narrative contagion into HK tech's own buildout story (0700.HK, 0981.HK) at Monday's Asia open rather than a one-day bounce-back.",
       "sources": [
-        "https://lufkindailynews.com/news_reuters/business/nvidias-accounting-is-a-focus-of-us-sec-investigation-sources-say/article_c8f7024b-2150-5b9b-b932-82c34f92f8cb.html",
-        "https://www.fool.com/investing/2026/11/20/nvidia-stock-plunge-wipes-out-nearly-usd500-billion-in-one-day-as-sec-reportedly-probes-its-accounting/"
-      ]
-    },
-    {
-      "date": "2026-11-20",
-      "headline": "Google reportedly cuts 2027 Broadcom TPU orders ~20% in favor of MediaTek; Broadcom -11.4%, Marvell -10%",
-      "summary": "TF International analyst Ming-Chi Kuo reported Alphabet cut roughly 1 million units (~20%) of Broadcom-designed TPU 8i chips planned for 2027, reallocating to MediaTek-built TPU 8t chips, citing power and supply-chain constraints.",
-      "category": "China/HK Tech",
-      "impact": "bearish",
-      "tickers": [
-        "AVGO",
-        "GOOGL",
-        "MRVL"
-      ],
-      "actionable": "Concrete, sourced evidence that AI capex plans are being actively reshuffled, not just questioned in the abstract -- a second independent data point alongside the Nvidia probe for gauging how durable the 'AI winter' narrative is before adding risk anywhere in the book.",
-      "sources": [
-        "https://stockanalysis.com/news/broadcom-falls-google-tpu-cut-mediatek/",
-        "https://247wallst.com/investing/2026/11/20/broadcom-stock-plunges-12-and-loses-191-billion-after-a-report-that-google-cut-its-plans-for-broadcom-ai-chips/"
-      ]
-    },
-    {
-      "date": "2026-11-20",
-      "headline": "Friday's selloff landed on monthly options expiration with ~55-57% of SPY/QQQ's negative gamma rolling off",
-      "summary": "SpotGamma noted SPX net gamma was roughly -$137bn per 1% move at Thursday's close, with the bulk of SPY's and QQQ's 40-day negative gamma expiring Friday -- a structural setup that mechanically amplifies whatever directional news hits that day.",
-      "category": "Fed/Macro",
-      "impact": "mixed",
-      "tickers": [
-        "SPY",
-        "QQQ",
-        "VIX"
-      ],
-      "actionable": "Explains why VIX's 26.2% spike to 35.89 was disproportionate even to the S&P's -3.70% move; argues against mechanically extrapolating Friday's magnitude into next week once gamma normalizes post-expiry.",
-      "sources": [
-        "https://spotgamma.com/negative-gamma-selloff-november-opex/",
-        "https://theadaptivetrader.substack.com/p/pre-market-note-november-20-2026"
-      ]
-    },
-    {
-      "date": "2026-11-18 to 2026-11-20",
-      "headline": "Gold/silver selloff diagnosed as a margin-call cascade, not a fresh bear catalyst -- directly relevant to the owner's levered silver position",
-      "summary": "Analysts (Peter Schiff, Commerzbank, XTB) attribute the metals slide to leveraged investors raising cash from liquid winners (gold/silver) to meet equity-related margin calls; COMEX managed-money futures positions shrank even as ETF holdings rose, a classic forced-liquidation signature. Miners underperformed on operating leverage.",
-      "category": "Precious Metals",
-      "impact": "bearish",
-      "tickers": [
-        "GDX",
-        "SILJ",
-        "SLVP",
-        "AG",
-        "HL",
-        "PAAS",
-        "NEM"
-      ],
-      "actionable": "The single most important item for the owner's 2.487x-levered silver/miners position: a 'margin-call, not fundamental-bear' framing argues the move could partially mean-revert if equities stabilize, but the FAILING survivability metric means the owner is exposed to being forced-sold in exactly this dynamic before any reversion happens.",
-      "sources": [
-        "https://discoveryalert.com/analysis/gold-silver-selloff-margin-calls-bear-market-november-2026/",
-        "https://discoveryalert.com/analysis/gold-silver-selloff-liquidation-november-2026/"
-      ]
-    },
-    {
-      "date": "2026-11-20",
-      "headline": "Gold/silver ratio blows out to ~82-83, highest since Nov 2025, as silver ETF flows turn to outflow",
-      "summary": "Metals Focus expects a 2026 silver ETF outflow of ~45m oz after a 278m oz inflow in 2025; the gold/silver ratio rose from ~78 (9 Nov) to ~83 (18 Nov), reflecting silver's steeper decline (down over 21% in the past month vs gold's smaller fall).",
-      "category": "Precious Metals",
-      "impact": "bearish",
-      "tickers": [
-        "SLV",
-        "SI=F"
-      ],
-      "actionable": "Confirms silver-specific (not just gold) forced de-risking is still running -- directly relevant to the owner's silver-heavy, leveraged book; the ratio blowout is a classic capitulation signature worth tracking for a potential reversal entry once margin pressure exhausts.",
-      "sources": [
-        "https://www.kitco.com/opinion/2026-11-18/gold-and-silver-weather-perfect-storm-demand-holds-firm"
-      ]
-    },
-    {
-      "date": "2026-11-09 to 2026-11-21",
-      "headline": "Bitcoin's multi-week slide continues via ETF outflows, MSCI's removal of Strategy (MSTR), and weekend Coinbase-concentrated selling",
-      "summary": "US spot BTC ETFs show roughly $1.9bn of cumulative outflows through mid-Nov; MSCI's Nov 11 decision to remove Strategy (holder of 850,364 BTC) from its global indexes by Nov 30 pressures sentiment; Coinbase alone accounted for ~$1.08bn of net BTC selling Oct 31-Nov 15, concentrated over weekends when liquidity is thinnest.",
-      "category": "Crypto",
-      "impact": "bearish",
-      "tickers": [
-        "BTC-USD",
-        "MSTR"
-      ],
-      "actionable": "Friday's -4.51% BTC move and continued weekend softness look like a continuation of this multi-week structural drain rather than a new Friday-specific shock -- worth tracking as 'known, multi-week driver' distinct from the equity-market AI shock.",
-      "sources": [
-        "https://www.kucoin.com/blog/why-is-bitcoin-price-crashing-in-november-2026",
-        "https://en.coinotag.com/coinbase-1-08-billion-net-bitcoin-selling",
-        "https://247wallst.com/investing/cryptocurrency/2026/11/12/msci-is-removing-strategy-holder-of-850364-bitcoin-from-its-indexes-will-saylor-have-to-sell-btc/"
-      ]
-    },
-    {
-      "date": "2026-11-16 to 2026-11-20",
-      "headline": "Rare-earth basket round-trips: William Blair's USA Rare Earth downgrade, a 3-day relief rally, then Friday's broad reversal",
-      "summary": "William Blair downgraded USA Rare Earth (USAR) on Nov 16-17 citing dysprosium/samarium feedstock shortages pushing estimates into 2028; USAR fell ~10-11.6%, Critical Metals -13%, MP Materials -5%. By Nov 18-19 the group rebounded 3-8% on US-China rare-earth-talk optimism before Friday's broad risk-off erased those gains (MP -7.39%).",
-      "category": "Rare Earths",
-      "impact": "mixed",
-      "tickers": [
-        "MP",
-        "USAR",
-        "LYC.AX"
-      ],
-      "actionable": "Confirms MP's Friday decline was a broad-market/risk-off reversal of a rare-earth-specific relief rally, not a new MP-specific negative catalyst -- the underlying feedstock-delay bear case (USAR-specific) is a separate, slower-moving risk from Friday's macro-driven reversal.",
-      "sources": [
-        "https://247wallst.com/investing/2026/11/16/usa-rare-earth-tumbles-10-on-william-blair-downgrade-over-feedstock-issues-critical-metals-plunges-13-mp-materials-drops-5/",
-        "https://247wallst.com/investing/2026/11/19/usa-rare-earth-rises-5-mp-materials-gains-3-critical-metals-dips-can-trumps-pledge-to-catch-china-on-rare-earths-revive-the-sector/"
+        "https://247wallst.com/investing/2026/11/21/nvidias-worst-losing-streak-since-2008-now-has-an-sec-problem-what-shareholders-need-to-know/",
+        "https://www.cbsnews.com/sanfrancisco/news/california-nvidia-subpoena-jensen-huang-affair-alleged-chinese-spy/"
       ]
     },
     {
       "date": "2026-11-18",
-      "headline": "Fed Governor Waller renews push for a 50bp December hike, says Fed may need to 'shock' inflation expectations lower",
-      "summary": "Waller told CNBC that stubborn ~3% inflation may require a jumbo hike at the Dec 8-9 FOMC rather than 25bp, to prevent inflation expectations from becoming anchored too high; CME FedWatch still shows 25bp favored at roughly 90-97% odds vs 3-10% for 50bp.",
+      "headline": "Needham reinstates MP Materials at Buy with a $48/share target as three insiders put $3.6m into shares near the 52-week low",
+      "summary": "Needham resumed coverage of MP Materials with a Buy rating and a $48/share price target, arguing the company is in the early innings of a transformation from miner to vertically integrated rare-earth/magnet supplier, with commercial magnet deliveries to GM expected in Q4 2026 and Apple-linked magnet revenue flagged for H2 2027. Separately, three MP Materials insiders bought a combined $3.6m of stock between Nov 10-17 near the 52-week low, even as the broader rare-earth complex (Critical Metals -8%, USAR -5%) extended its Nov 20 selloff.",
+      "category": "Rare Earths",
+      "impact": "bullish",
+      "tickers": [
+        "MP",
+        "USAR"
+      ],
+      "actionable": "Insider buying plus a fresh sell-side reinstatement at a meaningful premium to spot is a genuine fundamental counter-signal for the owner's MP position sitting inside a broader rare-earth group that just got hit by Friday's macro-driven reversal -- worth distinguishing this company-specific bull case from the sector-wide feedstock-delay bear case already flagged on USAR.",
+      "sources": [
+        "https://www.gurufocus.com/news/9207245/mp-reinstated-by-needham-price-target-announced-at-48",
+        "https://247wallst.com/investing/2026/11/18/three-mp-materials-insiders-just-bet-3-6-million-on-their-own-stock-near-its-52-week-low/"
+      ]
+    },
+    {
+      "date": "2026-11-20 to 2026-11-21",
+      "headline": "Gold holds near 14-month low around $3,500-3,538, silver near $41, as weekend commentary splits between 'margin-call capitulation' and 'genuine bear market' reads",
+      "summary": "Spot gold traded around $3,502-3,538/oz over the weekend -- down more than 30% from January's all-time high and its lowest since September 2025 -- while silver held near $41/oz. Kitco's weekend roundup (citing Rich Checkan and others) argued the move is margin-call-driven forced liquidation rather than owners of physical metal exiting, while rising Treasury yields, a firmer dollar, and swelling December-hike bets continue to work against both metals into Monday's Asia open.",
+      "category": "Precious Metals",
+      "impact": "bearish",
+      "tickers": [
+        "GLD",
+        "SLV",
+        "GDX",
+        "SILJ",
+        "SLVP"
+      ],
+      "actionable": "Weekend commentary has not resolved the margin-call-vs-bear-market debate that matters most for the owner's leveraged silver/miners book -- gold/silver holding steady rather than extending Friday's rout over the weekend is a mild positive sign for a Monday bounce, but the real-rate/dollar/hike-odds backdrop remains unambiguously hostile.",
+      "sources": [
+        "https://www.kitco.com/news/video/2026-11-20/margin-calls-not-gold-owners-are-behind-the-selloff-rich-checkan",
+        "https://www.kitco.com/news/article/2026-11-20/wall-street-stays-bearish-after-golds-slide-3500-main-street-pessimism"
+      ]
+    },
+    {
+      "date": "2026-11-20",
+      "headline": "CME FedWatch odds of a December 25bp hike surge to ~97%, up from 76% a month ago, after Waller floats a 50bp 'shock' move",
+      "summary": "Futures markets now assign roughly 96.9% probability to a quarter-point Fed hike at the Dec 8-9 FOMC (vs 76.3% a month earlier), with hold odds down to about 3% and a 50bp move still a tail outcome; the repricing follows Governor Waller's comments that the Fed may need to shock inflation expectations lower given stubborn ~3% inflation.",
       "category": "Fed/Macro",
       "impact": "bearish",
       "tickers": [
         "TLT",
         "GLD",
-        "SLV"
-      ],
-      "actionable": "Directly threatens the owner's SGX REITs via financing costs and adds a second, independent leg of pressure on silver/miners via the real-rate/dollar channel -- raises the probability December brings a genuine hawkish surprise, not just a priced-in 25bp.",
-      "sources": [
-        "https://www.cnbc.com/2026/11/18/federal-reserve-governor-christopher-waller.html",
-        "https://www.tradingview.com/news/cointelegraph:961304b12094b:0-bitcoin-stocks-wobble-as-fed-s-waller-talks-of-shock-50-point-rate-hike/"
-      ]
-    },
-    {
-      "date": "2026-11-20",
-      "headline": "Final November UoM consumer sentiment revised up to 51.5; inflation expectations fall -- but gold fell anyway",
-      "summary": "Final November reading rose to 51.5 (from October's 48.0), driven by post-midterm-election optimism; 1-year inflation expectations fell to 3.7% (from 4.7%) and 5-year to 3.3% (from 3.5%). Gold still fell roughly 3.67% that session, overwhelmed by equity-driven margin selling.",
-      "category": "Fed/Macro",
-      "impact": "mixed",
-      "tickers": [
-        "GLD",
-        "SI=F",
-        "GC=F"
-      ],
-      "actionable": "Confirms Friday's gold/silver weakness was NOT about inflation-expectations repricing (those improved) -- it was forced/margin selling, which matters for distinguishing a 'buy the dip' vs 'structural bear' read on the owner's heavily levered silver book.",
-      "sources": [
-        "https://www.kitco.com/news/article/2026-11-20/gold-price-trades-near-3568oz-after-final-consumer-sentiment-rises-515",
-        "https://seekingalpha.com/news/4675184-consumer-sentiment-revised-slightly-higher-in-novembers-final-print"
-      ]
-    },
-    {
-      "date": "2026-11-18",
-      "headline": "Tencent Q3 capex surges 225% YoY to RMB65.1bn amid AI buildout; president says US chip curbs delay next model",
-      "summary": "Tencent's Q3 2026 results showed revenue +7.5-8% YoY to RMB207.3bn alongside a 225% YoY capex surge; President Martin Lau said new US curbs on offshore AI chip access 'set everyone back in China' and will delay Tencent's next model version.",
-      "category": "China/HK Tech",
-      "impact": "bearish",
-      "tickers": [
-        "0700.HK"
-      ],
-      "actionable": "Tencent's own AI-capex anxiety (echoing the global Nvidia/Broadcom theme) plus explicit commentary on US chip-export curbs hurting Chinese model development directly explains part of the HK session's weakness and is a read-through for the 0700.HK holding on both capex-sustainability and export-control fronts.",
-      "sources": [
-        "https://www.manilatimes.net/2026/11/18/tmt-newswire/pr-newswire/tencent-announces-2026-third-quarter-results/2473131",
-        "https://stockanalysis.com/quote/hkg/0700/transcripts/731168-q3-2026/"
-      ]
-    },
-    {
-      "date": "2026-11-20",
-      "headline": "Hang Seng closes -1.89% at 22,410.80, a 4th straight loss; Hang Seng Tech -3.78%, an 8th straight decline",
-      "summary": "The weekly loss reached 5.19% (Hang Seng Tech -7.92%); SMIC and Hua Hong bucked the index trend intraday on continued China chip-self-sufficiency optimism following strong Q3 results, even as the broader tech complex extended its losing streak amid AI-spending-return skepticism.",
-      "category": "China/HK Tech",
-      "impact": "bearish",
-      "tickers": [
-        "0700.HK",
-        "0981.HK",
-        "1810.HK"
-      ],
-      "actionable": "Confirms HK's Friday session was already a multi-day losing streak before Friday's fresh US AI shock -- Monday's HK open is the first chance to price in the Nvidia/Broadcom news directly, so expect continued pressure on 0700/0981/1810.HK into next week.",
-      "sources": [
-        "https://www.ad-hoc-news.de/boerse/news/marktberichte/hang-seng-falls-1-89-prozent-to-22-410-80-as-tech-sell-off-deepens/70539959",
-        "https://news.futunn.com/en/post/1005160831/hong-kong-stock-market-close-nov-20-hang-seng-index"
-      ]
-    },
-    {
-      "date": "2026-11-20",
-      "headline": "Singapore STI falls 2.07% to 4,974.43, a 5th straight session, as new US AI-chip export curbs hit local data centres",
-      "summary": "DBS -2.31% to S$67.70, OCBC -2.23% to S$27.68, UOB -1.82% to S$36.70 as new US AI-chip export restrictions were reported to affect Singapore-based data centres, compounding the broader risk-off.",
-      "category": "SGX/Singapore",
-      "impact": "bearish",
-      "tickers": [
+        "SLV",
         "D05.SI",
         "O39.SI",
         "U11.SI"
       ],
-      "actionable": "A concrete, Singapore-specific catalyst (AI chip export curbs hitting local data-center buildout) beyond generic global risk-off -- directly relevant to the owner's SGX banks/REITs/developers exposure and worth flagging as a new, distinct regional risk thread rather than just imported US weakness.",
+      "actionable": "A near-certain December hike is now priced, not just debated -- this is the macro backdrop both the owner's SGX bank/REIT exposure (financing costs) and levered silver/miners position (real-rate/dollar channel) must absorb into year-end regardless of how the Nvidia/crypto/oil stories resolve.",
       "sources": [
-        "https://businessupturn.com/asia/southeast-asia/singapore/singapores-straits-times-index-declines-over-2-at-friday-close/",
-        "https://longbridge.com/en/news/306032707"
+        "https://247wallst.com/investing/2026/11/18/traders-now-see-a-95-chance-the-fed-hikes-rates-in-december/",
+        "https://en.sedaily.com/society/2026/11/19/us-dec-rate-hike-odds-at-957-percent-as-fed-resists-bigger"
+      ]
+    },
+    {
+      "date": "2026-11-21 to 2026-11-22",
+      "headline": "No fresh HK/SG company-specific weekend headlines identified -- Tencent, SMIC, Xiaomi and SGX REITs/banks quiet since Friday's close",
+      "summary": "A targeted sweep for Saturday/Sunday news on Tencent (0700.HK), SMIC (0981.HK), Xiaomi (1810.HK), and SGX-listed REITs/banks/developers found only recycled Friday-close trading data (Stock Connect turnover, Friday's Hang Seng/STI closes already reported) and no new company- or policy-specific weekend announcements. This is reported explicitly rather than padded with stale items, consistent with Asia markets being shut and no scheduled weekend events for these names.",
+      "category": "China/HK Tech",
+      "impact": "mixed",
+      "tickers": [
+        "0700.HK",
+        "0981.HK",
+        "1810.HK",
+        "D05.SI",
+        "O39.SI",
+        "U11.SI"
+      ],
+      "actionable": "The genuine information gap is Monday's Asia open itself: 0700/0981/1810.HK and SGX banks/REITs have not yet had a chance to price in Friday's Nvidia SEC probe, Broadcom/Google TPU cut, or the weekend's Hormuz/Baltic escalations -- expect the first real reaction, not confirmation, when Hong Kong and Singapore open.",
+      "sources": [
+        "https://longbridge.com/en/news/306263910",
+        "https://businessupturn.com/asia/southeast-asia/singapore/singapores-straits-times-index-declines-over-2-at-friday-close/"
       ]
     },
     {
       "date": "2026-11-19",
-      "headline": "Trump-Xi-Putin trilateral in Shenzhen produces a joint declaration on oil supply and UN reform -- markets cratered the next day anyway",
-      "summary": "The first-ever three-way meeting of the US, China and Russian leaders occurred on the sidelines of APEC China 2026; the three agreed to pursue expanded oil production and discuss UN reform, with Trump calling it a '12 out of 10.'",
+      "headline": "California AG Bonta subpoenas Nvidia over Jensen Huang's alleged ties to a Chinese national, probing chip/secrets diversion and investor disclosures",
+      "summary": "California Attorney General Rob Bonta issued an investigative subpoena to Nvidia following reports that former CEO Jensen Huang had an extramarital affair with a Chinese businesswoman alleged to have intelligence ties, alongside two relationships with Nvidia employees. Bonta's office is investigating whether the relationship enabled China to obtain Nvidia's advanced chips or confidential information, and whether the company's public disclosures misled investors -- running in parallel with Congress's own move to subpoena Huang and the SEC's accounting probe.",
       "category": "Geopolitics",
-      "impact": "mixed",
+      "impact": "bearish",
       "tickers": [
-        "CL=F",
-        "BZ=F"
+        "NVDA",
+        "SMH"
       ],
-      "actionable": "A genuinely de-escalatory geopolitical headline that did NOT prevent Friday's crater -- underscores that Friday's selloff was AI/credit-specific, not geopolitical risk-off, and is consistent with oil's relative flatness in the price spine (WTI +0.49%).",
+      "actionable": "A third, independent legal front (state AG, beyond the SEC and DOJ) targeting the same company whose chip-export-control stance already weighs on Tencent's AI roadmap (0700.HK) -- raises the odds that US-China tech decoupling rhetoric intensifies further, a tail risk worth monitoring for the HK tech book even without direct NVDA exposure.",
       "sources": [
-        "https://www.cnbc.com/2026/11/19/trump-xi-putin-trilateral-meeting-china.html",
-        "https://www.aljazeera.com/news/2026/11/19/groundbreaking-trump-xi-putin-summit-five-key-takeaways"
+        "https://www.cnbc.com/2026/11/19/nvidia-california-bonta-subpoena-china-chips.html",
+        "https://www.usnews.com/news/top-news/articles/2026-11-19/california-ag-subpoenas-nvidia-over-concerns-about-former-ceo-china"
       ]
     },
     {
-      "date": "2026-11-19 to 2026-11-20",
-      "headline": "Russia-Ukraine escalation runs in parallel to the Shenzhen summit: Crimea bridge strike retaliation, Kyiv embassy drone damage, Poland airspace violation",
-      "summary": "Following a Ukrainian strike on the Kerch/Crimea bridge, Putin ended the Black Sea/energy-infrastructure strike moratorium; Russian drone/missile attacks on Kyiv damaged the Dutch and Austrian embassies; Poland's defense minister said Russia violated its airspace overnight with two missiles and a drone.",
+      "date": "2026-11-19",
+      "headline": "US and Venezuela sign military partnership agreement in Caracas, first since January's Maduro extraction",
+      "summary": "US Defense Secretary Pete Hegseth visited Caracas and signed a military cooperation agreement with Venezuela's interim government (Acting President Delcy Rodriguez), covering joint training, intelligence sharing, and border security, framed around counter-narcotics operations. It is the first formal US-Venezuela military tie-up since US special forces extracted then-President Maduro in a January raid.",
+      "category": "Geopolitics",
+      "impact": "mixed",
+      "tickers": [
+        "CL=F"
+      ],
+      "actionable": "A genuine US-Venezuela thaw that could eventually affect regional oil supply dynamics, though it is a slower-moving structural story rather than a weekend price driver -- lower priority than the Hormuz/Baltic escalations for immediate portfolio relevance, flagged mainly as background context for the energy/geopolitics picture.",
+      "sources": [
+        "https://militarytimes.com/news/pentagon-congress/2026/11/19/hegseth-in-caracas-announces-us-venezuela-military-partnership-agreement",
+        "https://www.war.gov/News/News-Stories/Article/Article/4370431/trump-announces-us-militarys-capture-of-maduro/"
+      ]
+    },
+    {
+      "date": "2026-11-21",
+      "headline": "Russia launches ~150-drone, 3-missile overnight barrage on Ukraine, killing a 7-year-old and a paramedic in Kryvyi Rih",
+      "summary": "Ukraine's Air Force said Russia launched three ballistic missiles and 148 drones (87 jet-powered) overnight into Saturday, with strikes on Kryvyi Rih killing a seven-year-old boy and a 20-year-old paramedic and a drone strike on a Kharkiv-region residential building injuring 11, including two children. The barrage came one day after a Russian missile reportedly violated Polish airspace and the same weekend Ukraine allegedly struck a sanctioned Russian tanker in the Baltic, underscoring the conflict's continued intensity despite the Shenzhen trilateral's de-escalatory rhetoric.",
       "category": "Geopolitics",
       "impact": "mixed",
       "tickers": [],
-      "actionable": "A genuine escalation running in parallel to the Trump-Xi-Putin 'de-escalation' headline, creating a confusing two-track geopolitical picture -- worth watching as a tail risk for HK tech/SGX exposure given regional spillover potential, though it does not appear to be Friday's proximate equity-selloff driver.",
+      "actionable": "Confirms the Russia-Ukraine track is escalating, not cooling, in parallel with (not instead of) the Trump-Xi-Putin summit optics -- relevant tail risk for safe-haven flows (gold/silver, already saturated by margin selling) and worth tracking for any NATO-direct-involvement escalation that would shift the macro narrative away from pure AI-capex jitters.",
       "sources": [
-        "https://www.fdd.org/overnight-brief/november-20-2026/",
-        "https://kyivindependent.com/"
+        "https://united24media.com/war-in-ukraine/russia-bombards-ukraine-overnight-killing-7-year-old-boy-and-paramedic-injuring-dozens-24584",
+        "https://abcnews.com/International/wireStory/russia-targets-emergency-crews-site-deadly-strike-southern-137951536"
       ]
     }
   ]

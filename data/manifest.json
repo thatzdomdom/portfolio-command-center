@@ -1,44 +1,44 @@
 {
-  "sgtDate": "2026-11-21",
-  "generatedAt": "2026-11-20T23:24:25.483Z",
+  "sgtDate": "2026-11-22",
+  "generatedAt": "2026-11-21T23:23:02.592Z",
   "files": {
     "news.json": {
-      "asOf": "2026-11-21",
+      "asOf": "2026-11-22",
       "generatedAt": null,
       "cadence": "daily",
-      "count": 14,
+      "count": 11,
       "source": "research agent + adversarial verifier"
     },
     "model.json": {
-      "asOf": "2026-11-21",
+      "asOf": "2026-11-22",
       "generatedAt": null,
       "cadence": "daily",
       "count": 40,
       "source": "research agent (macro); pUp calls unpublished since phase 0"
     },
     "market.json": {
-      "asOf": "2026-11-21",
+      "asOf": "2026-11-22",
       "generatedAt": null,
       "cadence": "daily",
       "count": null,
       "source": "research agent"
     },
     "brief.json": {
-      "asOf": "2026-11-21",
+      "asOf": "2026-11-22",
       "generatedAt": null,
       "cadence": "daily",
       "count": 6,
       "source": "research agent"
     },
     "intel.json": {
-      "asOf": "2026-11-21",
+      "asOf": "2026-11-22",
       "generatedAt": null,
       "cadence": "daily",
-      "count": 30,
+      "count": 31,
       "source": "research agent; price-gated"
     },
     "investors.json": {
-      "asOf": "2026-11-20",
+      "asOf": "2026-11-21",
       "generatedAt": null,
       "cadence": "daily-verify",
       "count": 12,
@@ -46,28 +46,28 @@
     },
     ".prices.json": {
       "asOf": "2026-11-20",
-      "generatedAt": "2026-11-20T23:02:22.254Z",
+      "generatedAt": "2026-11-21T23:03:13.437Z",
       "cadence": "daily",
       "count": 67,
       "source": "price-spine.js (Yahoo chart, ETF-proxied)"
     },
     "closes.json": {
       "asOf": "2026-11-20",
-      "generatedAt": "2026-11-20T23:02:35.129Z",
+      "generatedAt": "2026-11-21T23:03:26.588Z",
       "cadence": "daily",
       "count": 67,
       "source": "closes.js (2y daily closes, exchange-indexed, from .prices-2y)"
     },
     ".calendar.json": {
-      "asOf": "2026-11-20",
-      "generatedAt": "2026-11-20T23:02:35.193Z",
+      "asOf": "2026-11-21",
+      "generatedAt": "2026-11-21T23:03:26.653Z",
       "cadence": "daily",
       "count": 50,
       "source": "calendar-spine.js (ForexFactory)"
     },
     "fx.json": {
       "asOf": "2026-11-20",
-      "generatedAt": "2026-11-20T23:02:36.504Z",
+      "generatedAt": "2026-11-21T23:03:27.743Z",
       "cadence": "daily",
       "count": 5,
       "source": "fx.js (ECB reference rates)"
@@ -82,7 +82,7 @@
     },
     "valuation.json": {
       "asOf": "2026-11-20",
-      "generatedAt": "2026-11-20T23:02:36.633Z",
+      "generatedAt": "2026-11-21T23:03:27.863Z",
       "cadence": "daily",
       "count": 61,
       "source": "valuate.js",
@@ -96,8 +96,8 @@
       "source": "form4-scan.js (EDGAR daily index; GitHub Actions)"
     },
     "alerts.json": {
-      "asOf": "2026-11-20",
-      "generatedAt": "2026-11-20T23:02:36.990Z",
+      "asOf": "2026-11-21",
+      "generatedAt": "2026-11-21T23:03:28.223Z",
       "cadence": "daily",
       "count": 1992,
       "source": "alerts.js (policy.json applied to signals)"
@@ -118,14 +118,14 @@
     },
     "technicals.json": {
       "asOf": "2026-11-20",
-      "generatedAt": "2026-11-20T23:02:36.696Z",
+      "generatedAt": "2026-11-21T23:03:27.926Z",
       "cadence": "daily",
       "count": 67,
       "source": "technicals.js (trend gate, vol, drawdown from .prices-2y)"
     },
     "targets.json": {
       "asOf": "2026-11-20",
-      "generatedAt": "2026-11-20T23:02:36.798Z",
+      "generatedAt": "2026-11-21T23:03:28.030Z",
       "cadence": "daily",
       "count": 39,
       "source": "targets.js (SHADOW policy weights)"
@@ -138,15 +138,15 @@
       "source": "silver-backtest.js (SLV full history, margin-account model)"
     },
     ".validation.json": {
-      "asOf": "2026-11-21",
+      "asOf": "2026-11-22",
       "generatedAt": null,
       "cadence": "daily",
       "count": 0,
       "source": "validate-all.js (count = problems)"
     },
     "oneaction.json": {
-      "asOf": "2026-11-21",
-      "generatedAt": "2026-11-20T23:02:37.057Z",
+      "asOf": "2026-11-22",
+      "generatedAt": "2026-11-21T23:03:28.291Z",
       "cadence": "daily",
       "count": 1,
       "source": "one-action.js (count = 1 when an action is open)",
@@ -189,8 +189,8 @@
       "source": "themes.js (SEC EDGAR full-text search, keyless; GitHub Actions, 06:20 SGT Monday; count = seeded terms)"
     },
     "drawdown.json": {
-      "asOf": "2026-11-21",
-      "generatedAt": "2026-11-20T23:02:36.855Z",
+      "asOf": "2026-11-22",
+      "generatedAt": "2026-11-21T23:03:28.086Z",
       "cadence": "daily",
       "count": 39,
       "source": "drawdown.js (peak drawdown per line and per scope from completed closes on each instrument’s own exchange calendar; count = priced positions; asOf = the run date, because the newest bar differs per exchange and every figure carries its own inside the file)",
