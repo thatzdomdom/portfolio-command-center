@@ -1,10 +1,10 @@
 {
-  "updated": "2026-11-22",
-  "note": "Sun 22 Nov 2026 run. No new US session since Saturday's run -- Fri 20 Nov remains the latest completed close (markets shut the weekend) -- so this is a re-verification/refresh pass, not a new-data pass. Two things moved versus Saturday's bake: (1) CNN Fear & Greed's Friday-close print is corrected from 14 to 9.7 -- the 14 figure baked Saturday was an earlier intraday/pre-close snapshot; multiple independent sources that settled after full close (Kobeissi Letter via 24/7 Wall St and Yahoo Finance, KuCoin Flash, IndexErgo) now agree the actual Fri 20 Nov close was 9.7, the first sub-10 reading since Mar 2026 and the 4th-lowest since the 2022 bear market. (2) The 200dma/50dma breadth 'wide source disagreement' flagged Saturday is now resolved: investing.com's dated historical tables give clean, internally-consistent closes (S5TH 45.92% on 20 Nov vs 56.46% on 19 Nov; S5FI 42.74% on 20 Nov vs 49.10% on 19 Nov), independently corroborated by Fool.com/StockTitan commentary citing the same ~45.92% 200dma figure. The sector-breadth conflict is also resolved (10 of 11 S&P sectors declined Fri, only Consumer Staples positive, per two convergent sources). Fund flows: re-checked for a newer EPFR/Lipper edition -- none exists (next edition, week ending Wed 25 Nov, won't publish until ~27 Nov); carried forward from Saturday's bake with asOf/period left honest, and two further regional-breakdown leads (isimarkets, globalbankingandfinance) were checked and discarded as inapplicable (wrong year / wrong week) rather than used to fill gaps. Crypto Fear & Greed (24/7 market, genuinely updates on weekends) ticked to 12 Extreme Fear as of Sat/Sun per alternative.me, vs 11 baked Saturday.",
+  "updated": "2026-11-23",
+  "note": "Mon 23 Nov 2026 07:03 SGT run, before Asia's open (SGX 09:00, HKEX 09:30 SGT) and before any new US session (Fri 20 Nov close remains the latest completed session everywhere; Japan closed today for a bank holiday). Fear&Greed and breadth are re-verified, not re-dated to a new session -- both are carried forward from Friday's close since markets have not traded since. What's new this run: the global fund flows section (week ended Wed 18 Nov, still the most current EPFR/BofA edition published) now has confirmed Japan (-$4.2B outflow, biggest since May) and Gold (+$0.2B, negligible -- gold did NOT act as a safe haven this week, selling off alongside equities/crypto in a broad deleveraging move) breakouts that were unconfirmed/omitted in Sunday's bake; China remains a proxy-only figure (Lipper's broader Asia-ex-Japan category, not a clean China-only EPFR/BofA number) and is labelled as such rather than presented as direct.",
   "fearGreed": {
     "value": 9.7,
     "rating": "Extreme Fear",
-    "asOf": "2026-11-20 close (corrected from 14 baked Sat 21 Nov -- see note)",
+    "asOf": "2026-11-20 close (re-verified Mon 23 Nov pre-Asia-open; no new session since Friday)",
     "prevClose": 19,
     "prev1w": 37,
     "prev1m": 30,
@@ -61,7 +61,7 @@
     "note": "CORRECTION from Sat 21 Nov's bake: the value-14 print was an earlier intraday/pre-close snapshot (a KuCoin Flash article citing it was published 2026/11/20 17:04 SGT, hours before the NY close). After full settlement, multiple independent sources published Sat 21 Nov (Kobeissi Letter via 24/7 Wall St and Yahoo Finance, a separate KuCoin Flash item timestamped 2026/11/21 14:53 SGT, and Korean tracker IndexErgo showing 9.67) converge on 9.7 as Friday's actual close -- first sub-10 reading since Mar 2026, 4th-lowest since the 2022 bear market, a 30.6-point/76% drop over the prior six sessions. CNN's own API (production.dataviz.cnn.io, cnn.com/markets/fear-and-greed) still returns 418/451 to automated fetches, so this remains a cross-source reconstruction, not a direct pull. Component table is retained from Saturday's bake: Market Momentum (1) and Stock Price Breadth (21) were independently re-confirmed exact-match via a separate component-level search this run, and Stock Price Strength (28-29) near-matched; the remaining four sub-readings (Put/Call, Volatility, Safe-Haven, Junk Bond) could not be independently re-verified for the final close and are carried forward as approximate -- flagged rather than silently revised, since a simple average of the 7 baked components (~12.4) doesn't fully reconcile with the confirmed 9.7 composite (CNN's actual weighting isn't published). Crypto value updated to 12 (alternative.me, which genuinely updates through the weekend since crypto trades 24/7) from 11 baked Saturday; alternative.me shows 12 for both 'now' and 'yesterday', 13 a week ago, 68 a month ago."
   },
   "breadth": {
-    "asOf": "2026-11-20 close (200dma/50dma and sector disagreement from Sat's run now resolved -- see note)",
+    "asOf": "2026-11-20 close (re-verified Mon 23 Nov pre-Asia-open; no new session since Friday)",
     "metrics": [
       {
         "label": "% S&P 500 > 200-day MA",
@@ -124,9 +124,9 @@
     ]
   },
   "flows": {
-    "asOf": "2026-11-20 (re-verified Sun 22 Nov -- no newer edition exists; carried forward honestly, not refreshed with new numbers)",
+    "asOf": "2026-11-23 (re-verified; underlying data is week ending Wed 18 Nov 2026, still the most current EPFR/BofA/Lipper edition -- the next edition, week ending 25 Nov, will not publish until ~27 Nov)",
     "period": "week ending Wed 18 Nov 2026 (BofA/EPFR + Reuters/LSEG Lipper, both published Fri/Sat 20-21 Nov -- the first editions to finally cover the entire Mon-Fri 16-20 Nov selloff week). Re-checked this run: the next EPFR/Lipper edition (week ending Wed 25 Nov) will not publish until ~Fri 27 Nov, so this remains the most current available data -- confirmed via direct re-search, not assumed.",
-    "narrative": "Despite the week's brutal price action (S&P down five straight sessions into Friday's sharpest single-day move), BOTH BofA/EPFR and Lipper's newly-published week-ended-18-Nov editions show net equity INFLOWS, not capitulation outflows -- a genuinely counterintuitive result this run flags rather than forces into the price/sentiment narrative. BofA/EPFR: global equity funds +$66.6bn, US equities +$45.6bn (7th straight week), tech funds +$5.4bn (8th straight week), EM equities +$8.3bn (8th straight week); bonds -$7.4bn (first outflow since April 2025) and EM debt -$7.5bn (most since April 2020); crypto funds -$1.1bn; BofA's own Bull & Bear Indicator fell to 7.1 from 7.4 (re-confirmed this run via an independent Yahoo Finance writeup of the same Hartnett note -- money-market +$0.4bn and gold +$0.2bn both matched exactly, cross-validating Saturday's bake rather than contradicting it). Lipper: US equity funds +$45.71bn (largest since 23 Sep, 3rd straight week), tech funds +$10.3bn (largest since 16 Jun), global equity funds +$59.23bn (9th straight week); US bond funds -$5.58bn (first outflow in 4 weeks, high-yield -$2.31bn, long Treasury -$2.64bn); money market -$19.12bn (2nd straight weekly outflow). ICI has not yet published a week-ended-18-Nov edition (still on week ended 11 Nov). Two leads chased this run for the still-missing Europe/China/Japan/Gold standalone breakouts both turned out inapplicable and were discarded rather than used: an isimarkets EPFR chartbook (dated week ending 19 Nov *2025*, wrong year) and a globalbankingandfinance Europe-inflow writeup (week ended 11 Nov 2026, the wrong week).",
+    "narrative": "Despite the week's brutal price action (S&P down five straight sessions into Friday's sharpest single-day move), BOTH BofA/EPFR and Lipper's newly-published week-ended-18-Nov editions show net equity INFLOWS, not capitulation outflows -- a genuinely counterintuitive result this run flags rather than forces into the price/sentiment narrative. BofA/EPFR: global equity funds +$66.6bn, US equities +$45.6bn (7th straight week), tech funds +$5.4bn (8th straight week), EM equities +$8.3bn (8th straight week); bonds -$7.4bn (first outflow since April 2025) and EM debt -$7.5bn (most since April 2020); crypto funds -$1.1bn; BofA's own Bull & Bear Indicator fell to 7.1 from 7.4 (re-confirmed this run via an independent Yahoo Finance writeup of the same Hartnett note -- money-market +$0.4bn and gold +$0.2bn both matched exactly, cross-validating Saturday's bake rather than contradicting it). Lipper: US equity funds +$45.71bn (largest since 23 Sep, 3rd straight week), tech funds +$10.3bn (largest since 16 Jun), global equity funds +$59.23bn (9th straight week); US bond funds -$5.58bn (first outflow in 4 weeks, high-yield -$2.31bn, long Treasury -$2.64bn); money market -$19.12bn (2nd straight weekly outflow). ICI has not yet published a week-ended-18-Nov edition (still on week ended 11 Nov). Two leads chased this run for the still-missing Europe/China/Japan/Gold standalone breakouts both turned out inapplicable and were discarded rather than used: an isimarkets EPFR chartbook (dated week ending 19 Nov *2025*, wrong year) and a globalbankingandfinance Europe-inflow writeup (week ended 11 Nov 2026, the wrong week). This run fills two gaps flagged Sunday as unconfirmed: BofA/EPFR data shows a Japan equity-fund outflow of -$4.2bn (the biggest since May 2026) and a Gold-fund inflow of just +$0.2bn -- negligible, and notably NOT safe-haven behavior, since spot gold fell roughly 8.7% the same week alongside equities and crypto in what reads as broad margin-driven deleveraging rather than a flight to havens. A China-specific figure still cannot be cleanly isolated from EPFR/BofA; the closest available is Lipper's broader Asia-ex-Japan fund category (-$2.78bn), reported here as an explicit proxy, not a China-only number.",
     "regions": [
       {
         "region": "US Equities",
@@ -151,17 +151,17 @@
       },
       {
         "region": "China",
-        "direction": "inflow",
-        "amount": "not separately broken out this run",
-        "amountUSD": null,
-        "note": "Neither BofA/EPFR nor Lipper's week-ended-18-Nov reporting found this run isolated a standalone China figure; omitted rather than carried forward stale."
+        "direction": "outflow",
+        "amount": "~-$2.78B (Asia ex-Japan proxy, Lipper)",
+        "amountUSD": -2780000000,
+        "note": "No clean China-only EPFR/BofA figure available this run either; Lipper's broader Asian-funds category (captures China exposure) posted -$2.78bn as new US chip-export curbs hit Chinese AI/tech shares. Explicit proxy, not a pure China number -- reported rather than left blank since it is now at least directionally sourced."
       },
       {
         "region": "Japan",
-        "direction": "unconfirmed",
-        "amount": "unconfirmed this run",
-        "amountUSD": null,
-        "note": "No verifiable standalone Japan figure found for the week ended 18 Nov; omitted rather than guessed."
+        "direction": "outflow",
+        "amount": "-$4.2B",
+        "amountUSD": -4200000000,
+        "note": "BofA/EPFR: biggest Japan equity-fund outflow since May 2026, confirmed this run (unconfirmed in the prior bake)."
       },
       {
         "region": "Money-market/Cash",
@@ -179,10 +179,10 @@
       },
       {
         "region": "Gold",
-        "direction": "unconfirmed",
-        "amount": "unconfirmed this run",
-        "amountUSD": null,
-        "note": "Neither tracker broke out a gold-fund figure for this specific week in the reporting found; omitted rather than carrying forward the stale week-ended-11-Nov +$49M/+$614M figures, which now predate Friday's margin-call-driven metals selloff."
+        "direction": "inflow",
+        "amount": "+$0.2B",
+        "amountUSD": 200000000,
+        "note": "BofA/EPFR: negligible inflow, confirmed this run. Did NOT reflect safe-haven behavior -- spot gold fell ~8.7% the same week amid broad deleveraging/margin-call selling across risk and hard assets alike."
       }
     ],
     "movements": [
@@ -203,13 +203,22 @@
         "to": "Equities (Lipper view, partially contradicted by BofA's near-flat cash read)",
         "amount": "-$19.12B out of cash (Lipper) vs +$45.71B/+$59.23B into equities (Lipper)",
         "note": "Lipper's own data would read as a rotation OUT of cash INTO equities even during the selloff week -- directly at odds with the price/sentiment narrative and flagged, not reconciled, this run."
+      },
+      {
+        "from": "Risk assets broadly, including Gold",
+        "to": "No clear safe haven -- broad deleveraging",
+        "amount": "Gold -8.7% spot price this week / only +$0.2B fund inflow",
+        "note": "Gold failed to act as a hedge this week, selling off with equities and crypto -- consistent with liquidation/margin-call dynamics rather than classic flight-to-safety. Confirmed this run."
       }
     ],
     "sources": [
       "https://finance.yahoo.com/markets/stocks/articles/2-questions-decide-risk-assets-135611700.html",
       "https://za.investing.com/news/stock-market-news/us-equity-funds-draw-inflows-for-a-third-straight-week-4588691",
       "https://www.investing.com/news/economy-news/global-equity-funds-attract-inflows-for-a-ninth-straight-week-5041603",
-      "https://www.ici.org/research/stats/combined_flows"
+      "https://www.ici.org/research/stats/combined_flows",
+      "https://ceoeconomy.com/article/global-equity-funds-ninth-week-inflows-lipper",
+      "https://finance.yahoo.com/technology/ai/articles/china-ai-stocks-sink-us-032800790.html",
+      "https://ceoworld.biz/2026/11/22/gold-price-slump-wipes-an-estimated-15-trillion-from-gold-and-silver/"
     ]
   }
 }
