@@ -1,216 +1,169 @@
 {
-  "updated": "2026-11-25",
-  "note": "8 of 13 items dated Nov 23-25 (last 24-48h), exceeding the 3-5 freshness minimum. Several source pages (247wallst, brecorder, invezz, forbes) returned HTTP 403 on direct fetch and could only be verified via search-engine snippets cross-checked against 2+ independent outlets each -- treat exact figures as directionally reliable. No major fresh SGX-developer-specific (property) headline found this run; the SGX section leans on banks and REITs only.",
+  "updated": "2026-11-26",
+  "note": "US cash equity/bond markets (NYSE, Nasdaq, Treasuries) are CLOSED all day today, Thu Nov 26, for Thanksgiving, reopening for a shortened 9:30am-1:00pm ET session on Black Friday Nov 27 -- so nothing in the US book is actionable until Friday's half-day or Monday. 10 of 12 items below are dated Nov 24-26 (well above the 3-5 freshness minimum); the remaining two (Nvidia SEC probe, SMIC Q3) are slightly older but kept as live, unresolved tail-risk/structural context for the HK tech sleeve. Asia/crypto/geopolitics kept moving overnight as expected: Hang Seng's Thu-morning bounce, Bitcoin's partial recovery, the Russia-Estonia escalation, and the Taiwan PLA exercise are all genuinely new since Wed's US close.",
   "items": [
     {
-      "date": "2026-11-24",
-      "headline": "Credit spreads blow out even as equities bounced -- confirms the 'no credit confirmation' warning",
-      "summary": "US high-yield option-adjusted spreads widened from 323bp to 376bp between Nov 13-20, the largest one-week jump since early 2026; CCC-and-below spreads widened 92bp vs just 8bp for investment grade. A Nov 24 Forbes piece argues the bond market is flagging the equity rebound as unstable even as stocks rallied off Monday's Nvidia-driven surge.",
-      "category": "Fed/Macro",
+      "date": "2026-11-25",
+      "headline": "Silver smashed to a one-year low near $39-41 as CME hikes margins (silver 8%->9%, gold 5%->6%) right as hot PCE cements a December Fed hike",
+      "summary": "Silver futures fell 4.6-5.7% on Nov 25 to roughly $38.90-40.71, deepening a 25%+ monthly slide that Tavi Costa called the worst year-to-date performance in 30 years; CME's margin hike on gold and silver took effect after Tuesday's close, raising the cost of carrying leveraged positions just as the hot PCE print cemented ~94-97% odds of a Dec 9 Fed hike. Gold broke below $3,500 for the first time since September 2025, falling about 3% to roughly $3,446-3,476.",
+      "category": "Precious Metals",
       "impact": "bearish",
-      "tickers": [
-        "HYG",
-        "JNK",
-        "^VIX",
-        "SPY"
-      ],
-      "actionable": "Credit is the tell to watch before adding risk -- a book already overweight levered silver/miners and HK tech should treat the equity bounce as fragile and keep the cash pile as dry powder rather than chasing it.",
+      "tickers": ["SI=F", "GC=F", "SLV", "GDX"],
+      "actionable": "This is the most acute threat to the book right now -- a margin-hike-driven leverage squeeze stacked on a hawkish Fed repricing is exactly the scenario that pushes a silver-collateralized loan toward a margin call, so preserving cash buffer and reducing leverage takes priority over any dip-buying instinct.",
       "sources": [
-        "https://www.forbes.com/sites/chrisgunster/2026/11/24/what-the-bond-market-is-saying-about-the-stock-market-correction/",
-        "https://koreainvestinsights.substack.com/p/high-yield-crossed-350bp-the-damage"
+        "https://www.usagold.com/daily-precious-metals-market-report-november-25-2026/",
+        "https://journalarta.com/en/2026/11/25/silver-futures-plunge-5-65-to-40-71-hitting-a-one-year-low/",
+        "https://mlq.ai/news/gold-falls-3-to-3446-its-lowest-since-august-2025-after-hot-pce-data/"
       ]
     },
     {
       "date": "2026-11-25",
-      "headline": "Core PCE + Q3 GDP revision due tonight (21:30 SGT), last clean inflation read before Dec 9 FOMC",
-      "summary": "October core PCE is forecast at +0.3% m/m / 3.2% y/y (up from 3.1%), with Q3 GDP's second estimate seen at 3.5% (up from 3.4%); the Fed's Beige Book follows at 2pm ET. FOMC's Williams has said inflation remains 'too high' and signaled he favors another hike, while Governor Waller reportedly floated support for a larger 50bp move given hot price data.",
+      "headline": "COMEX registered silver drains another 3.1M oz in a day even as price falls -- 'silver crisis' chatter builds",
+      "summary": "Physical COMEX registered silver stocks fell by roughly 3.1 million ounces in a single session this week even as futures prices kept dropping, a divergence analysts flag as genuine physical tightness beneath paper-market liquidation. Front-month contracts for gold, silver, platinum and palladium are all trading below spot -- a backwardation signal of physical scarcity -- fueling renewed talk of a potential COMEX silver delivery squeeze, though no default has occurred.",
+      "category": "Precious Metals",
+      "impact": "mixed",
+      "tickers": ["SI=F", "SLV", "PSLV"],
+      "actionable": "The inventory/price divergence means the loan's silver collateral could see a violent short-covering snapback if physical delivery stress bites, but until that happens the price trend is still down -- don't read inventory draws alone as a buy signal while margin pressure dominates.",
+      "sources": [
+        "https://kingworldnews.com/are-we-approaching-a-silver-comex-crisis/",
+        "https://www.barchart.com/story/news/36416583/explained-the-massive-short-squeeze-underway-in-silver-and-margin-calls-from-brokers",
+        "https://no1sdailydigest.substack.com/p/daily-digest-2026-11-25"
+      ]
+    },
+    {
+      "date": "2026-11-25",
+      "headline": "October core PCE jumps to 3.3% y/y (highest in ~3 years), GDP beats -- December Fed hike now near-certain",
+      "summary": "October core PCE rose 3.3% y/y (vs 3.2% forecast, up from 3.1%) and 0.3% m/m, while headline PCE hit 3.8% y/y; Q3 GDP's second estimate also beat forecasts. New York Fed President John Williams said policymakers have 'more work to do' on inflation, while Governor Waller continued floating a possible 50bp move; CME FedWatch and Polymarket now price a December 9 hike at roughly 94-97%.",
       "category": "Fed/Macro",
       "impact": "bearish",
-      "tickers": [
-        "GC=F",
-        "SI=F",
-        "DXY",
-        "^TNX"
-      ],
-      "actionable": "A hot core-PCE print plus hawkish Fed-speak is the single biggest near-term threat to both gold/silver (real-rate pressure) and the HK-tech/SGX risk legs -- watch the 21:30 SGT release closely before SGX/HKEX open.",
+      "tickers": ["GC=F", "SI=F", "DXY", "^TNX"],
+      "actionable": "The inflation read confirmed the worst case flagged in the prior preview -- real-rate pressure from a near-certain Dec 9 hike is a headwind for gold/silver and a drag on HK-tech/SGX risk appetite, reinforcing a defensive, cash-heavy stance into the holiday-thinned session.",
       "sources": [
-        "https://www.marketalleys.com/post/us-pce-and-gdp-due-nov-25-marketalleys-preview-2026-11-23",
-        "https://nst.com.my/business/corporate/2026/11/1584371/feds-williams-says-inflation-remains-too-high-signals-further",
-        "https://mlq.ai/news/week-ahead-pce-inflation-and-gdp-on-wednesday-thanksgiving-market-closures-and-earnings-from-dell-hpe-and-deere-nov-23-27/"
+        "https://coinalertnews.com/news/2026/11/25/fed-rate-hike-december-done-deal",
+        "https://cryptobriefing.com/polymarket-94-odds-december-fed-rate-hike/",
+        "https://www.tradingandinvestmentnews.co.uk/december-fed-hike-williams/"
       ]
     },
     {
-      "date": "2026-11-24",
-      "headline": "Silver extends crash to ~$42, now ~65% below January's $121.65 peak; gold-silver ratio near 86",
-      "summary": "Silver fell a further 2-3% on Nov 24 to roughly $42/oz (SLV closed $36.84, -5.32%), down ~65% from its January 2026 all-time high and down over 21% in the past month alone. The gold-to-silver ratio has blown out to ~85.8 from ~55 at the cycle peak, even as COMEX registered silver inventories sit over 70% below their 2021 peak -- a tension between apparent physical tightness and continued price collapse.",
-      "category": "Precious Metals",
-      "impact": "bearish",
-      "tickers": [
-        "SI=F",
-        "GDX",
-        "SILJ",
-        "SLVP"
-      ],
-      "actionable": "This is the live risk to the book's core position -- leveraged silver/miners exposure is still falling despite tight registered inventories, so this is not yet a buy-the-dip signal; size and margin cushion matter more than conviction right now.",
-      "sources": [
-        "https://fortune.com/article/current-price-of-silver-11-24-2026/",
-        "https://theraisinahills.com/silver-price-crash-explained-why-falling-65-percent-forecast-november-2026/",
-        "https://discoveryalert.com/analysis/gold-silver-selloff-liquidation-november-2026/"
-      ]
-    },
-    {
-      "date": "2026-11-22",
-      "headline": "SEC accounting probe into Nvidia zeroes in on the 2025 geography-reporting change that erased Singapore",
-      "summary": "Reuters sources say the SEC's investigation is focused on Nvidia's 2025 shift from billing-address to customer-headquarters revenue reporting, which eliminated Singapore as a separately disclosed market -- Singapore billings had been nearly half of global revenue under the old method. The probe also sits alongside separate concerns about 'circular' AI financing deals and revenue quality; Reuters could not confirm the probe's exact scope.",
-      "category": "China/HK Tech",
-      "impact": "bearish",
-      "tickers": [
-        "NVDA",
-        "0700.HK",
-        "9988.HK",
-        "SOXX"
-      ],
-      "actionable": "An open accounting probe into Nvidia's single biggest swing factor (AI capex) is a standing tail risk for HK tech names (Tencent, Alibaba, Xiaomi) that are themselves ramping AI capex on the same demand assumptions -- don't treat Monday's Nvidia-driven HK tech pop as durable.",
-      "sources": [
-        "https://www.brecorder.com/news/40450203/nvidias-accounting-is-a-focus-of-us-sec-investigation-sources-say",
-        "https://blog.pebblous.ai/blog/nvidia-singapore-revenue-geography-basis/en/"
-      ]
-    },
-    {
-      "date": "2026-11-24",
-      "headline": "Bitcoin falls below $60,000, erasing Monday's Nvidia-rally spike; record $4.71bn November ETF outflows",
-      "summary": "Bitcoin dropped roughly 2-3% on Nov 24 to near $59,700-60,200, giving back all of Monday's bounce tied to Nvidia's Jensen Huang reinstatement. US spot Bitcoin ETFs logged a fifth straight day of outflows, taking November's cumulative outflow to a record $4.71 billion.",
-      "category": "Crypto",
-      "impact": "bearish",
-      "tickers": [
-        "BTC-USD",
-        "IBIT",
-        "ETH-USD"
-      ],
-      "actionable": "Crypto trading 24/7 is the cleanest real-time read on whether Monday's risk rally has legs -- its full round-trip lower, alongside widening credit spreads, corroborates the 'rebound not confirmed' thesis and argues against deploying cash into the bounce.",
-      "sources": [
-        "https://invezz.com/news/2026/11/24/why-is-bitcoin-down-today-below-60000",
-        "https://www.fool.com/coverage/stock-market-today/2026/11/24/crypto-market-today-nov-24-bitcoin-falls-below-usd60-000-as-etf-outflows-hit-a-record-usd4-7-billion/"
-      ]
-    },
-    {
-      "date": "2026-11-24",
-      "headline": "Hang Seng gives back Nvidia-rally gains, closes down 0.73%; Hang Seng Tech -1.17% as Xiaomi, Meituan slide",
-      "summary": "Hong Kong stocks opened up over 1% on continued optimism from Nvidia's CEO reinstatement, with Hang Seng Tech briefly gaining 2%+ intraday, but both indices faded into the close -- HSI finished at 22,219.65 (-164pts) and Hang Seng Tech at 3,466.87. Xiaomi and Meituan each fell more than 3% as early AI enthusiasm gave way to property stress and demand concerns.",
-      "category": "China/HK Tech",
-      "impact": "bearish",
-      "tickers": [
-        "^HSI",
-        "3690.HK",
-        "1810.HK",
-        "9888.HK"
-      ],
-      "actionable": "The intraday fade from +1% to a red close is itself the signal -- HK tech is trading as a high-beta Nvidia proxy rather than on its own fundamentals, so the book's HK tech sleeve stays exposed to further US AI-sentiment whiplash into tonight's PCE. Southbound money still bought the dip (+HK$6.2bn) even as the index fell.",
-      "sources": [
-        "https://longbridge.com/en/news/306577198",
-        "https://www.ad-hoc-news.de/boerse/news/marktberichte/hang-seng-closes-0-73-prozent-lower-as-ai-gains-fade/70549505"
-      ]
-    },
-    {
-      "date": "2026-11-24",
-      "headline": "KOSPI surges 6.32% to reclaim 5,000 as Korea's foreign-selling streak finally breaks",
-      "summary": "South Korea's KOSPI jumped 297.49 points (+6.32%) to 5,006.03 on Nov 24, a day behind the US's Nvidia-driven rally, ending foreign investors' 7-session net-selling streak (+\u20a9739.2bn) and extending domestic institutional buying to a 2nd day (+\u20a9869.2bn). Retail, which had bought every prior crash-day dip, flipped to a \u20a92.04 trillion net sell -- selling into the rally rather than buying it.",
+      "date": "2026-11-26",
+      "headline": "Hang Seng snaps six-day losing streak as Xiaomi rebounds 4% despite a 68% profit collapse",
+      "summary": "The Hang Seng rose about 46 points to 22,265 in Thursday morning trade (Nov 26 HK time), ending a six-day losing run, led by Xiaomi's 4.1% rebound after Q3 results beat lowered expectations even as net profit plunged 68.4% (adjusted profit -56.8%) on rising memory-chip costs and a widening EV/AI segment loss -- Xiaomi's third straight quarter of revenue decline (-5.2%). Several major banks reportedly backed the stock after the print.",
       "category": "China/HK Tech",
       "impact": "mixed",
-      "tickers": [
-        "^KS11",
-        "005930.KS",
-        "000660.KS"
-      ],
-      "actionable": "Korea's belated catch-up rally, with foreign/institutional buying but retail selling into strength, is a reminder that Asia's AI-capex-linked markets (Samsung, SK Hynix) remain high-beta to the same Nvidia-sentiment swings driving the book's HK tech sleeve.",
+      "tickers": ["3690.HK", "^HSI", "0700.HK"],
+      "actionable": "Xiaomi's 'beat on a lowered bar despite deteriorating fundamentals' pattern is the same AI-capex/margin story hitting the whole HK tech sleeve -- a bounce here is tradeable but not yet evidence the sector's underlying profitability problem is resolved.",
       "sources": [
-        "https://en.sedaily.com/market/2026/11/24/kospi-reclaims-5000-on-nvidia-ceos-return-but-doubts-linger",
-        "https://www.fnnews.com/news/202611241533204053"
-      ]
-    },
-    {
-      "date": "2026-11-19",
-      "headline": "Alibaba and Tencent earnings both show AI capex burning cash faster than it's generating profit",
-      "summary": "Alibaba's Sept-quarter revenue rose 10% y/y to RMB271.5bn and beat consensus, but adjusted EPS missed and AI-infrastructure spend continued to outpace operating cash generation. Tencent's Q3 revenue rose 8% y/y to RMB207.3bn, but non-IFRS profit fell 6% y/y as R&D and new AI-initiative costs ate into margins.",
-      "category": "China/HK Tech",
-      "impact": "mixed",
-      "tickers": [
-        "9988.HK",
-        "0700.HK",
-        "BABA"
-      ],
-      "actionable": "Both core HK tech holdings are now explicitly trading off AI-capex-ROI narratives rather than core-business growth -- the same scrutiny now applied to Nvidia's accounting could extend to these names' own AI spend disclosures.",
-      "sources": [
-        "https://finchannel.com/alibaba-earnings-rebound-but-ai-spending-deepens-cash-outflow/142282/american-business-trends/stock-prices/2026/11/",
-        "https://www.smartkarma.com/home/news/earnings/tencent-holdings-ltd/2026-q3"
-      ]
-    },
-    {
-      "date": "2026-11-13",
-      "headline": "S-REITs down ~14% YTD vs STI +12% as T-bill yields retreat from 4%+ peaks toward 2.5-3.0%",
-      "summary": "The iEdge S-REIT Index was down about 14.1% YTD as of Nov 13 versus the Straits Times Index's 12.3% gain, a 33-point divergence driven by refinancing at higher rates. Singapore 6-month T-bill yields have fallen from above 4% to roughly 2.5-3.0%, which should reduce the competing-yield headwind that has weighed on REIT valuations.",
-      "category": "SGX/Singapore",
-      "impact": "mixed",
-      "tickers": [
-        "CRPU.SI",
-        "T82U.SI",
-        "C38U.SI"
-      ],
-      "actionable": "Falling T-bill yields are the clearest tailwind building for the SGX REIT sleeve even as the sector remains deeply out of favor -- this is the most plausible near-term mean-reversion trade in the book if rate-cut expectations hold, but watch tonight's PCE/GDP for confirmation that yields keep falling.",
-      "sources": [
-        "https://sg.news.yahoo.com/great-singapore-reit-comeback-finally-093000758.html",
-        "https://thesmartinvestor.com.sg/singapore-reits-are-down-8-while-the-sti-is-up-25-should-income-investors-be-worried/"
-      ]
-    },
-    {
-      "date": "2026-11-21",
-      "headline": "US warns China it has met only two-thirds of Busan rare-earth pledges as truce extension holds",
-      "summary": "China extended its pause on expanded rare-earth export controls by two months (past the original Nov 10 expiry) as part of the Busan trade-truce implementation, with the US reciprocating by extending tariff exclusions on 178 Chinese products. However, US officials said Friday that Beijing has fulfilled only about two-thirds of its rare-earth commitments, keeping the truce's durability in question ahead of further talks.",
-      "category": "Rare Earths",
-      "impact": "mixed",
-      "tickers": [
-        "MP",
-        "LYC.AX",
-        "USAR"
-      ],
-      "actionable": "The truce is holding but compliance gaps keep the China rare-earth leverage threat alive -- the watch-list basket (MP/Lynas/USAR) stays a binary political-headline trade rather than a fundamentals trade until the two-thirds compliance gap is resolved.",
-      "sources": [
-        "https://theoregongroup.com/latest-news/us-warns-china-rare-earths-two-thirds-busan-pledge/",
-        "https://www.thenationalnews.com/news/us/2026/11/09/china-extends-pause-on-rare-earth-export-curbs-for-two-months/"
+        "https://longbridge.com/en/news/306719961",
+        "https://longbridge.com/en/news/306763282",
+        "https://qz.com/xiaomi-profit-drops-68-memory-chip-costs-112426"
       ]
     },
     {
       "date": "2026-11-24",
-      "headline": "Oil at 3-month lows on oversupply and US-Iran diplomacy, but Houthi attack claim and Goldman warning flag upside risk",
-      "summary": "Brent and WTI both slipped to three-month lows on Nov 24 (Brent ~$89, WTI ~$80-82) as optimism built around US-Iran talks (VP Vance engaging Qatar as intermediary) and oversupply concerns ahead of this weekend's OPEC+ meeting, where Iraq has disputed OPEC+'s assessment of its production capacity. Yemen's Houthis claimed an attack on Saudi Arabia's Rabigh refinery (damage unconfirmed), and Goldman Sachs raised its December Brent forecast from $90 to $105, warning of a possible spike to $140 in 2027 if regional supply disruptions persist.",
-      "category": "Energy",
-      "impact": "mixed",
-      "tickers": [
-        "BZ=F",
-        "CL=F",
-        "XLE"
-      ],
-      "actionable": "Oil is pricing diplomacy-driven calm, but the Houthi/Saudi and Iraq/OPEC+ frictions are live tail risks that could reprice energy and inflation expectations fast -- relevant mainly as an input to tonight's PCE read and any renewed stagflation narrative that would hurt both equities and the cash-heavy defensive stance.",
+      "headline": "PLA runs unannounced 'isolation' exercise toward Guam as Taiwan heads into Nov 28 local elections under PRC interference",
+      "summary": "US analysts assess the PLA is very likely conducting a major, unannounced military exercise simulating an extended isolation of Taiwan, with naval operations extending beyond the first island chain toward Guam -- signaling a rehearsal of blocking US/allied reinforcement in a contingency. Separately, Taiwanese prosecutors indicted a Taoyuan city-council candidate on Nov 20 for taking PRC campaign funding ahead of Taiwan's Nov 28 elections, and the Legislative Yuan passed a supplemental ~NT$145.7bn (~US$4.6bn) defense-spending budget the same day.",
+      "category": "Geopolitics",
+      "impact": "bearish",
+      "tickers": ["0981.HK", "TSM", "^HSI"],
+      "actionable": "A PLA exercise rehearsing blockade of reinforcement routes to Taiwan is a standing tail risk for the SMIC/HK-tech sleeve specifically (Taiwan Strait supply-chain exposure) -- it doesn't change today's positioning but argues against adding further China-tech beta into the Nov 28 election window.",
       "sources": [
-        "https://www.kotakneo.com/news/commodities/oil-price-today-24-november-2026-brent-falls-below-90-us-iran-talks-supply-risks/",
-        "https://commodity-board.com/oil-slides-to-three-month-low-as-supply-rebound-trumps-geopolitics"
+        "https://www.aei.org/commentary/china-taiwan-update-november-24-2026/",
+        "https://www.aei.org/commentary/china-taiwan-update-november-20-2026/"
       ]
     },
     {
       "date": "2026-11-23",
-      "headline": "Ukraine escalates deep strikes on Russian oil infrastructure; Western intel warns of possible Russian nuclear ASAT move",
-      "summary": "Ukraine struck three major Russian oil nodes over Nov 22-23 -- the Novoshakhtinsk refinery, Tatarstan's Kaleikino storage tanks, and the Lukoil-Permnefteorgsintez refinery roughly 1,449km from the border -- as part of an escalated deep-strike campaign. Separately, Western intelligence has warned of a potential Russian nuclear anti-satellite deployment, while Latvia's president said the war could reach a decisive tipping point in 2027.",
+      "headline": "Russia accuses Estonia of enabling Ukrainian drone strikes, warns the NATO ally is 'on the verge of triggering open war'",
+      "summary": "Russia's Foreign Ministry accused Estonia of a range of hostile actions -- including tacitly allowing Ukrainian drones to use its airspace for attacks on northwestern Russia -- and warned the situation was approaching 'open war'; NATO states deny intentionally permitting the drone transits. The escalation follows Estonia's announcement of a six-month border closure with Russia and comes alongside Ukraine's continuing deep-strike campaign against Russian energy infrastructure.",
       "category": "Geopolitics",
       "impact": "mixed",
-      "tickers": [
-        "BZ=F",
-        "GC=F",
-        "^VIX"
-      ],
-      "actionable": "Escalation in Russian energy-infrastructure strikes is a latent upside catalyst for oil and a tail-risk bid for gold/safe-havens -- a genuine escalation (vs. the market's current calm pricing) would be one of the few scenarios that could pull gold higher even as silver remains under separate liquidation pressure.",
+      "tickers": ["BZ=F", "GC=F", "^VIX"],
+      "actionable": "A direct Russia-NATO-member threat is a fresh escalation vector beyond the existing Ukraine-strikes-on-oil story -- it is one of the few live catalysts that could put a safe-haven bid under gold even while silver remains under separate margin/liquidation pressure.",
       "sources": [
-        "https://martyau79.substack.com/p/24nov2026-geopolitical-intelligence",
-        "https://www.justsecurity.org/165763/early-edition-november-24-2026/"
+        "https://www.aljazeera.com/news/2026/11/23/russia-threatens-hostile-estonia-with-open-war",
+        "https://time.com/article/2026/11/24/russia-estonia-conflict-open-war-border-nato-ukraine-eu/",
+        "https://www.kyivpost.com/post/91134"
+      ]
+    },
+    {
+      "date": "2026-11-25",
+      "headline": "OPEC+ faces its most complicated meeting in years on Nov 29, setting 2027 quotas against a forecast 1.7mb/d Q4 supply surplus",
+      "summary": "OPEC+ ministers meet in Vienna on Sunday Nov 29 to set 2027 production baselines, with no agreed output framework beyond December 31 and a sweeping first-ever capacity audit on the table the same day. The IEA projects global oil supply will outpace demand by 1.7 million barrels/day in Q4 2026 -- the first surplus since the US-Iran war -- while Brent has already fallen to three-month lows near $89 amid the oversupply narrative and improving US-Iran diplomacy.",
+      "category": "Energy",
+      "impact": "mixed",
+      "tickers": ["BZ=F", "CL=F", "XLE"],
+      "actionable": "A surprise supply-discipline signal at Sunday's meeting versus the market's current expectation of inaction is a near-term risk to the book's disinflation/stagflation assumptions underlying the Fed-hike and cash-heavy thesis -- watch for headlines over the long weekend.",
+      "sources": [
+        "https://www.rigzone.com/news/opec_will_see_one_of_most_complicated_meetings_in_years-25-nov-2026-185164-article/",
+        "https://www.icis.com/explore/resources/news/2026/11/25/11243387/oil-falls-on-supply-glut-concerns-eyes-on-29-nov-opec-meeting/"
+      ]
+    },
+    {
+      "date": "2026-11-26",
+      "headline": "Bitcoin claws back to ~$60-61k, up 10% off Saturday's $55,130 low, even as hot PCE hardens Fed-hike bets",
+      "summary": "Bitcoin has rebounded to roughly $60,000-61,200 as of Nov 26, about 10% above its Nov 21 low of $55,130, though the Nov 25 PCE print (core 3.3%, headline 3.8%) and near-certain December Fed hike are being cited as a fresh headwind weighing on crypto risk appetite. US spot Bitcoin ETFs had logged a record $4.71bn of November outflows through Nov 24, leaving it unclear whether the bounce reflects genuine demand or short covering.",
+      "category": "Crypto",
+      "impact": "mixed",
+      "tickers": ["BTC-USD", "IBIT", "ETH-USD"],
+      "actionable": "Crypto's partial recovery despite a hawkish Fed repricing is a tentative sign the broader risk-rally narrative hasn't fully round-tripped, but the scale of November ETF outflows argues for treating it as unconfirmed rather than a signal to add risk elsewhere in the book.",
+      "sources": [
+        "https://www.kucoin.com/news/flash/us-inflation-hits-3-8-ahead-of-december-fed-meeting-weighing-on-crypto",
+        "https://coindcx.com/blog/price-predictions/bitcoin-price-weekly"
+      ]
+    },
+    {
+      "date": "2026-11-25",
+      "headline": "Lynas locks in a 10-year Malaysia license renewal and a 2038 price floor, plus a Brazil acquisition; MP Materials' NdPr output up 41%",
+      "summary": "At its FY26 AGM, Lynas said Malaysia renewed its operating license for 10 years and detailed a 12-year JARE agreement with a US$110/kg NdPr floor price through 2038, plus new downstream deals for a Malaysian magnet factory and an agreement to acquire Brazil's Meteoric Resources (light and heavy rare earths). MP Materials separately reported Q3 NdPr separation at Mountain Pass up 41% y/y to 1,018 tonnes, sold at a realized ~$100/kg under its 10-year, $110/kg DoD price-floor contract.",
+      "category": "Rare Earths",
+      "impact": "bullish",
+      "tickers": ["LYC.AX", "MP", "USAR"],
+      "actionable": "Government-backed price floors on both the Lynas-JARE deal and the MP-DoD contract are turning the watch-list names into structurally de-risked, policy-subsidized earners rather than pure China-leverage headline trades -- this strengthens the fundamental case for adding to the rare-earth watchlist independent of the next Busan-truce headline.",
+      "sources": [
+        "https://www.globenewswire.com/news-release/2026/11/25/3410308/28124/en/rare-earth-elements-global-strategic-business-report-capitalize-on-11-7-cagr-to-us-15-8-billion-by-2030-as-lynas-arafura-iluka-and-china-northern-rare-earth-reshape-supply.html",
+        "https://www.tipranks.com/news/company-announcements/lynas-reports-fy26-results-supply-chain-expansion",
+        "https://wisevoter.com/world/2026/11/25/rare-earth-price-gap-china-exports"
+      ]
+    },
+    {
+      "date": "2026-11-25",
+      "headline": "STI slips 0.6% on Seatrium retrenchment and bank weakness, but S-REITs buck the tape as T-bill yields keep falling",
+      "summary": "The Straits Times Index fell 0.6% to 4,930.83 on Nov 25, dragged by Seatrium (-4.2% on retrenchment news) and DBS/OCBC (down 0.2-1.2%), even as Singtel rose 1.9%. Singapore REITs moved the other way -- the FTSE ST All-Share Real Estate REIT Index was up 0.61% with 21 advancers vs 9 decliners, led by industrial/logistics names, as short-term T-bill yields continue easing from their 4%+ peak.",
+      "category": "SGX/Singapore",
+      "impact": "mixed",
+      "tickers": ["^STI", "D05.SI", "O39.SI", "C38U.SI"],
+      "actionable": "REITs decoupling positively from a down STI session on falling T-bill yields is incremental confirmation of the mean-reversion thesis flagged previously -- it's a reason to hold rather than trim the S-REIT sleeve, while the bank/Seatrium weakness is a reminder the cyclical/industrial side of the SGX book still faces headwinds.",
+      "sources": [
+        "https://www.kucoin.com/news/flash/singapore-reits-rise-on-nov-25-2026-esr-reit-offers-11-32-yield",
+        "https://longbridge.com/en/news/306761324",
+        "https://thelibraryestate.com/singapore-markets-mid-morning-update-sti-slips-in-early-trade-as-the-chip-selloff-spreads-nov-25-2026/"
+      ]
+    },
+    {
+      "date": "2026-11-17",
+      "headline": "Nvidia's SEC accounting probe widens scrutiny of the Singapore-erasing revenue-reporting change; stock fell 13% on the report",
+      "summary": "The SEC's civil investigation into Nvidia is focused on potential investor-disclosure violations tied to its 2025 shift from billing-address to customer-headquarters revenue reporting, which removed Singapore (previously near half of global revenue under the old method) from its geographic breakdown; Nvidia shares fell about 13% when Reuters first detailed the probe. The scrutiny sits alongside a separate DOJ antitrust review of Nvidia's $12.9bn Hugging Face acquisition.",
+      "category": "China/HK Tech",
+      "impact": "bearish",
+      "tickers": ["NVDA", "0700.HK", "9988.HK", "SOXX"],
+      "actionable": "This remains a live, unresolved tail risk for the HK tech sleeve's AI-capex thesis (Tencent/Alibaba/Xiaomi all lean on the same Nvidia-driven demand backdrop) -- it's a reason not to chase the Hang Seng's Nvidia-sentiment bounces until the probe's scope is clarified.",
+      "sources": [
+        "https://www.brecorder.com/news/40450203/nvidias-accounting-is-a-focus-of-us-sec-investigation-sources-say",
+        "https://www.investing.com/news/economy-news/exclusiveus-secs-nvidia-probe-is-examining-potential-accounting-issues-sources-say-5042460",
+        "https://www.pymnts.com/cpi-posts/nvidia-faces-sec-probe-into-potential-accounting-issues/"
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "headline": "SMIC guides FY2026 revenue above $12bn and warns AI chip capacity stays tight through 2027-28",
+      "summary": "SMIC's Q3 results beat estimates, with net profit up 123.4% y/y to $428.4m and revenue up 33.9% to $3.19bn; co-CEO Zhao Haijun now sees full-year revenue topping $12bn (+~30%) at a ~26% gross margin, with Q4 guidance of 4-6% sequential growth. Management flagged that AI-driven chip manufacturing capacity will stay extremely tight through 2027, with shortages persisting into mid-to-late 2028, while China accounted for 90.8% of Q3 revenue.",
+      "category": "China/HK Tech",
+      "impact": "bullish",
+      "tickers": ["0981.HK", "SOXX"],
+      "actionable": "SMIC's multi-year tight-capacity guidance is a structural positive for the portfolio's SMIC exposure independent of today's HK-tech sentiment swings, though its 90%+ China-revenue concentration keeps it exposed to any escalation in the Taiwan Strait or export-control headlines above.",
+      "sources": [
+        "https://investinglive.com/stocks/smic-co-ceo-sees-2026-revenue-topping-12-billion-as-ai-demand-stretches-chip-upcycle/",
+        "https://www.marketscreener.com/news/smic-says-ai-chip-supply-chain-will-remain-tight-through-2027-ce785ed9db89fe2d"
       ]
     }
   ]
