@@ -1,50 +1,50 @@
 {
-  "updated": "2026-11-26",
-  "note": "Thu 26 Nov 2026 run, SGT morning -- today is US Thanksgiving, so US cash equity markets are CLOSED all day and the last real data point remains Wed 25 Nov's close (S&P500 7182.78 -0.25%, Nasdaq 23585.80 -0.62%, Dow 50182.95 +0.33%, VIX 28.29 +7.32%). Fear&Greed ticked down to 15/Extreme Fear (from 17) per a fresher Nov-25-close reconstruction (fgscore.com, cross-validated by feargreedtracker.com's independent -2pt/15 read) -- consistent with VIX's renewed Wednesday pickup after the Nov 23 snapback. Crypto Fear&Greed (24/7 market, genuinely fresh) sits at 13/Extreme Fear via alternative.me's own API, down from 11 in the prior run. Breadth is a mixed picture on the newer Wed-Nov-25 data: the NYSE advance/decline line flipped back to advancers-led (~1.29:1, reversing Tuesday's decliner lead) and the broader tape ran ~61% advancing, but new 52-week lows actually widened to 594 (vs 43 new highs) from Tuesday's 309 -- a sign the healing is uneven, with laggards still breaking down even as the average stock outperformed. The slower structural gauges (% above 200/50-DMA near 53%, McClellan Summation -630, only 3-of-11 sectors above 200-DMA) have no fresher reading this run and are carried from Nov 23 close. Flows remain unchanged for a third straight run: still the week-ending-18-Nov BofA/EPFR/Lipper edition -- re-confirmed this run that no newer edition has published (a Nov-22-dated Hartnett Flow Show commentary piece, 'Johnny Lovedrop to Billy Big Boots,' discusses that same week-18-Nov window, not a new data week); the next edition is due ~Fri 27 Nov but may slip further given today's full Thanksgiving closure, and even once published will only add Mon-Wed (24-25 Nov) flows since Thu/Fri trading is closed/abbreviated.",
+  "updated": "2026-11-28",
+  "note": "Sat 28 Nov 2026 SGT weekend catch-up run. Fri 27 Nov's half-day US session (which the prior run was still waiting on) has now closed: S&P +1.60% to 7297.49, Nasdaq +2.31%, VIX -11.16% to 23.81 -- a broad relief bounce. CNN's own site/API remain blocked to automated fetch (HTTP 451/418), so fearGreed below is again a cross-corroborated third-party reconstruction (fgscore.com, myweeklystock.substack.com, macromicro.me, lines.com all independently converge on the same reading), not a direct CNN read. Breadth and flows are both genuinely refreshed this run with fresher data than the last run carried. Flows widget flags an unusual divergence: Lipper/Reuters and EPFR/BofA-via-Citi report OPPOSITE directions for US and EM equity flows in the same week ending 25 Nov -- both are shown rather than forcing a false consensus, since this is a known methodology gap (different fund universes) rather than an error.",
   "fearGreed": {
-    "value": 15,
-    "rating": "Extreme Fear",
-    "asOf": "2026-11-25 close, ~17:19 ET (fgscore.com reconstruction timestamp; cross-validated same-day by feargreedtracker.com's independent -2pt/15 reading). CNN's own site/API remain blocked to automated fetch (cnn.com/markets/fear-and-greed returned HTTP 451; the underlying production.dataviz.cnn.io graphdata API returned HTTP 418).",
-    "prevClose": 17,
-    "prev1w": 30,
-    "prev1m": 30,
-    "prev1y": 6,
-    "cryptoValue": 13,
+    "value": 25,
+    "rating": "Fear",
+    "asOf": "2026-11-27 close (fgscore.com reconstruction, cross-validated by myweeklystock.substack.com, macromicro.me and lines.com -- all four independently land on 25/100. CNN's own site/API remain blocked to automated fetch: cnn.com/markets/fear-and-greed returns HTTP 451, production.dataviz.cnn.io/graphdata returns HTTP 418, again this run).",
+    "prevClose": 19,
+    "prev1w": 18,
+    "prev1m": 34,
+    "prev1y": null,
+    "cryptoValue": 12,
     "cryptoRating": "Extreme Fear",
     "components": [
       {
         "name": "Market Momentum",
-        "reading": "3",
+        "reading": "8",
         "signal": "fear"
       },
       {
         "name": "Stock Price Strength",
-        "reading": "27",
+        "reading": "29",
         "signal": "fear"
       },
       {
         "name": "Stock Price Breadth",
-        "reading": "17",
+        "reading": "30",
         "signal": "fear"
       },
       {
         "name": "Put/Call Options",
-        "reading": "7",
+        "reading": "19",
         "signal": "fear"
       },
       {
         "name": "Market Volatility",
-        "reading": "34",
-        "signal": "fear"
+        "reading": "50",
+        "signal": "neutral"
       },
       {
         "name": "Safe-Haven Demand",
-        "reading": "5",
+        "reading": "19",
         "signal": "fear"
       },
       {
         "name": "Junk Bond Demand",
-        "reading": "13",
+        "reading": "19",
         "signal": "fear"
       }
     ],
@@ -52,168 +52,167 @@
       "https://www.cnn.com/markets/fear-and-greed (attempted -- HTTP 451 blocked)",
       "https://production.dataviz.cnn.io/index/fearandgreed/graphdata (attempted -- HTTP 418 blocked)",
       "https://fgscore.com/en/markets/sp500",
-      "https://feargreedtracker.com/fear-greed-index-stock-market",
-      "https://www.whendomarketsopen.com/fear-and-greed-index/",
-      "https://www.worldmonitor.app/tools/fear-and-greed-index/",
-      "https://api.alternative.me/fng/ (crypto Fear & Greed, official API, directly reachable)",
+      "https://myweeklystock.substack.com/p/weekly-market-recap-nov-23-27-relief",
+      "https://en.macromicro.me/series/22748/cnn-fear-and-greed",
+      "https://www.lines.com/prediction-markets/economy/fear-greed-index-on-november-27-2026",
+      "https://api.alternative.me/fng/",
       "https://alternative.me/crypto/fear-and-greed-index/"
     ],
-    "note": "CNN's own site/API are still unreachable this run (451 on the public page, 418 'I'm a teapot' on the underlying dataviz API we tried last run too), so the headline value is again a third-party reconstruction of CNN's published methodology. This run's primary source, fgscore.com, carries a Nov-25-close timestamp (17:19 ET) -- one session fresher than whendomarketsopen.com, which is still showing a stale Nov-24-dated 17 reading. feargreedtracker.com independently corroborates both the level (15) and the direction (-2 points from yesterday's 17), giving two-source agreement on the index having ticked back down into deeper Extreme Fear territory alongside Wednesday's VIX pickup. Component-level readings disagree modestly across sources (e.g. Market Volatility sub-score 34 here vs. 43 in the prior run's Nov-24 snapshot), likely reflecting different smoothing windows each site uses to reconstruct CNN's proprietary calculation -- treat component figures as directionally reliable, not precise. Crypto Fear & Greed came directly from alternative.me's own JSON API (not blocked), reading 13/Extreme Fear for its most recent timestamped day -- a genuine incremental move versus the prior run's 11, since crypto trades 24/7 and has a real new data point today."
+    "note": "Genuine improvement this run: the index rose to 25/Fear (from 19 a day earlier, and from an extreme-fear low near 9.7-18 the week of Nov 20) as Friday's broad equity bounce fed through CNN's momentum/breadth/put-call sub-components -- still firmly in Fear territory, not Neutral or Greed. Crypto sentiment moved the opposite way in character: it ticked up only marginally to 12/Extreme Fear (from 11) and remains deeply disconnected from the equity recovery -- BTC did not join Friday's rally. A second independent tracker (thetrading.tools, different methodology) shows a lower absolute level (17 Extreme Fear) but the same directional read, reinforcing that the exact number varies by provider while the 'improving off extreme-fear lows, still fearful' story is robust.",
+    "components_sourceNote": "Component figures are directionally reliable, not precise -- different reconstruction sites use different smoothing windows for CNN's proprietary calculation."
   },
   "breadth": {
-    "asOf": "mixed -- NYSE advance/decline and new-highs/new-lows as of Wed 25 Nov close (fresh, one session newer than the prior run's Nov 23/24 mix); % above 200/50-DMA, McClellan Summation, and sector-level breadth remain only as of Nov 23 close -- no fresher reading found for those slower-updating gauges this run",
+    "asOf": "Fri 27 Nov 2026 close for the advance/decline and new-high/low metrics (a genuinely fresher session than the Wed 25 Nov data this widget carried last run); % above 200/50-DMA figures are approximate and cross-sourced, with estimates spanning Investing.com's $S5TH index (53.08% as of Wed 25 Nov) through a post-rally weekly recap (~59%, up from 45% the prior week) -- reported as a range given the spread.",
     "metrics": [
       {
         "label": "% S&P 500 above 200-day MA",
-        "value": "53% (263/497 eligible) (Nov 23 close, carried forward -- no fresher figure found this run)",
+        "value": "approx. high-50s%, Fri 27 Nov post-rally estimate (one tracker: 59%, up from 45% the prior week; Investing.com's $S5TH index showed 53.08% as of Wed 25 Nov pre-rally) -- treat as approximate/cross-sourced given the post-rally figure is a single-source estimate",
         "signal": "neutral",
-        "pct": 53
+        "pct": 58
       },
       {
         "label": "% S&P 500 above 50-day MA",
-        "value": "53% (262/499 eligible) (Nov 23 close, carried forward -- no fresher figure found this run)",
+        "value": "no clean 50-DMA figure found this run; closest proxy is '% above 20-day MA: 55%, up from 19% the prior week' (explicitly a different, shorter-window metric, not a true 50-DMA read)",
         "signal": "neutral",
-        "pct": 53
+        "pct": null
       },
       {
-        "label": "NYSE advancing vs declining issues (Wed Nov 25 close)",
-        "value": "Advancers led decliners ~1.29:1 -- a reversal back from Tuesday's decliner lead (broader tape ran roughly 61% advancing / 36% declining; approximate, cross-sourced)",
-        "signal": "neutral",
-        "pct": 61
+        "label": "NYSE advancing vs declining issues (Fri 27 Nov close)",
+        "value": "Advancers led decliners ~3.25:1 NYSE-wide; within the S&P 500 specifically, advancers beat decliners 419 to 80 -- a genuinely broad up day",
+        "signal": "bullish",
+        "pct": 76
       },
       {
-        "label": "52-week new highs minus new lows (NYSE, Nov 25)",
-        "value": "43 highs vs 594 lows (net -551) -- new lows widened sharply from Tuesday's 309, even as the advance/decline ratio improved (approximate, cross-sourced)",
+        "label": "52-week new highs minus new lows (NYSE, Fri 27 Nov)",
+        "value": "55 new highs vs 73 new lows (net -18) NYSE-wide; S&P 500 itself had 12 new highs, 0 new lows; Nasdaq had 53 highs vs 96 lows. New-low list still dominated by AI/mega-cap names (GOOGL, NVDA, AVGO, ORCL, CAT) even as the broad tape rallied",
         "signal": "bearish",
         "pct": null
       },
       {
         "label": "McClellan Summation Index (NYSE)",
-        "value": "-630 as of Nov 23 close (approximate/lagged; no fresher reading found this run)",
+        "value": "-698 as of Wed 25 Nov close (last verified print; no fresher Fri 27 Nov figure found this run, so likely improved somewhat on the rally but not confirmed)",
         "signal": "bearish",
         "pct": null
       },
       {
         "label": "Advance-Decline line trend",
-        "value": "Falling / lagging price -- A/D line has lagged price for ~55+ sessions, last peaked Aug 2026 (approximate, cross-sourced; unchanged this run)",
+        "value": "Structurally lagging price for ~55+ sessions even as the Fri 27 Nov single-day breadth was strong -- a caution flag that the week's bounce hasn't yet repaired the multi-week A/D divergence",
         "signal": "bearish",
         "pct": null
       },
       {
         "label": "S&P sectors above 200-DMA",
-        "value": "3 of 11 (Health Care 80%, Consumer Staples 76%, Financials 55%); 8 sectors below 50% (approximate, macromicro reconstruction, carried forward -- no fresher sector-level breakdown found this run)",
-        "signal": "bearish",
-        "pct": 27
+        "value": "approx. 8 of 11 sectors above their 200-DMA as of ~25 Nov (pre-rally); all 11 sectors were positive for the Nov 23-27 week on a performance basis (a different, non-%-above-200DMA measure) -- likely improved further post-Friday but not independently confirmed",
+        "signal": "neutral",
+        "pct": 64
       }
     ],
-    "note": "Breadth sent a mixed signal on the newer Wednesday data: the headline advance/decline ratio flipped back to advancers-led and the average stock outperformed the cap-weighted indices, but new 52-week lows actually widened (594 vs Tuesday's 309) -- a sign that laggards are still breaking down even on an up-breadth day. Combined with unchanged, still-bearish structural gauges (Summation Index, A/D line, sector count), this reads as partial/uneven healing rather than a clean breadth turn.",
+    "note": "Friday's +1.60% S&P day was genuinely broad (419 advancers vs 80 decliners within the index, ~3.25:1 NYSE-wide) and the full Nov 23-27 week saw all 11 sectors positive with participation metrics rising. But the McClellan Summation Index was still negative into Wed 25 Nov, the A-D line has structurally lagged price for weeks, and Friday's new-low list was still full of AI/mega-cap names. Net: the one-day/one-week bounce was broad-based, but the underlying multi-week breadth trend is still recovering from a narrow, mega-cap-tech-led deterioration -- broadening, not yet a confirmed breadth turn.",
     "sources": [
-      "https://chartrow.com/sp500/market-breadth",
-      "https://en.macromicro.me/charts/98990/sp500-sectors-200ma-breadth",
-      "https://wallstreetplumber.substack.com/p/recon-daily-november-25-2026",
-      "https://www.mcoscillator.com/market_breadth_data/",
-      "https://www.thetrading.tools/advance-decline-line",
-      "https://www.barchart.com/stocks/quotes/$S5TH/technical-analysis",
-      "https://deanfi.com/markets/breadth/"
+      "https://www.investing.com/indices/sp-500-stocks-above-200-day-average-historical-data",
+      "https://myweeklystock.substack.com/p/weekly-market-recap-nov-23-27-relief",
+      "https://swingfolio.com/daily/us/2026-11-27/afternoon",
+      "https://thetechtrader.com/vix-mcclellan-oversold-signals-november-2026/",
+      "https://www.fool.com/investing/2026/11/18/the-s-and-p-500-just-ended-a-run-of-155-trading-days-above-its-200-day-average-here-s-what-followed-34-similar-runs-since-1950/"
     ]
   },
   "flows": {
-    "asOf": "2026-11-26 (re-checked Thu AM SGT; US Thanksgiving holiday, cash markets closed all day. Underlying data still week ending Wed 18 Nov 2026, unchanged for a 3rd consecutive run.)",
-    "period": "week ending Wed 18 Nov 2026 (BofA/EPFR + Reuters/LSEG Lipper). Re-checked this run: no edition covering the week ended 25 Nov has published. Next edition due ~Fri 27 Nov, and may slip further given today's full Thanksgiving market closure; even once published it will only add Mon-Wed (24-25 Nov) flows, since Thu/Fri trading is closed or abbreviated.",
-    "narrative": "Re-confirmed this run (Thu 26 Nov, Thanksgiving): no newer BofA/EPFR or Lipper edition has published since the week-ended-18-Nov figures first appeared three runs ago. A Nov-22-dated Hartnett Flow Show commentary piece ('Johnny Lovedrop to Billy Big Boots') was found and checked -- it discusses the same week-ended-18-Nov data window, not a new data week, so it does not change anything here. Underlying figures remain: global equity funds +$59.23bn Lipper / +$66.6bn BofA, 9th straight week; US equities +$45.71bn, largest since 23 Sep; tech funds +$12.3bn Lipper; Bull & Bear Indicator at 7.1, down from 7.4, driven by EM-debt and high-yield outflows and wider credit spreads. EM debt saw -$7.5bn outflows (most since April 2020) even as EM equities kept drawing +$1.98-8.3bn inflows -- a debt/equity divergence; Europe gained +$1.5bn (most since Feb) while Japan lost -$4.2bn (biggest since May). This window (through Wed 18 Nov) still predates the Nov 20 crash, Nov 23 Nvidia-driven rebound, and the Nov 24-25 consolidation entirely -- whenever the week-ending-25-Nov edition finally publishes, it will be the first to show any reaction, covering the full round trip plus the subsequent two-session wobble. Separately, prime-brokerage data (Goldman, via Tickmill) previously showed hedge funds stayed net sellers of US equities into Monday's rally and that the +4.73% S&P bounce was short-covering (a ~$19bn forced cover after selling ~$57bn over the prior month, Goldman desk conviction only 5/10) rather than fresh institutional buying, while retail (Vanda) kept buying dips, net +$3.49bn into Nvidia alone from Nov 4-23 -- no update to that prime-brokerage read was found this run.",
+    "asOf": "2026-11-28 -- the week-ending-25-Nov edition both providers were waiting on has now published",
+    "period": "week ending Wed 25 Nov 2026 (Lipper/Reuters and EPFR/Citi both published this week, with MATERIALLY DIFFERENT figures for US and EM equities -- a known methodology gap, not an error; both are shown rather than forcing a false consensus). This window still predates Friday 27 Nov's rally.",
+    "narrative": "Two providers covering the same week ended 25 Nov diverge sharply on direction. LSEG Lipper/Reuters: global equity funds -$22.73bn (largest weekly outflow in 14 months), US equities -$30.57bn (largest since 9 Sep, with tech funds -$7.57bn), Europe +$7.29bn, EM +$971mn, bonds -$3.51bn, money-market -$49.42bn, gold -$2.14bn (largest since 25 March). EPFR/Citi (via a separately reported note): global equity funds +$63bn, US-focused funds +$23.4bn, Europe -$700mn, EM +$36.7bn (China ETFs +$28.3bn >75% of the total, Taiwan ETFs +$7bn) even as direct FII flows were net sellers of Taiwan/Korea -- a passive-ETF-buying-vs-active-selling divergence within Asia. Both agree gold saw an outflow and that money-market funds were drawn down even as equities also saw mixed flows -- an unusual 'de-risking into nothing' pattern rather than classic flight-to-safety. Crucially, all of this predates Friday 27 Nov's broad equity/metals/HK-tech rally; the next weekly print (week ending 2 Dec) would be the first to show whether flows followed price into that bounce.",
     "regions": [
       {
         "region": "US Equities",
-        "direction": "inflow",
-        "amount": "+$45.6B (BofA/EPFR) / +$45.71B (Lipper)",
-        "amountUSD": 45600000000,
-        "note": "7th straight weekly inflow (BofA/EPFR); Lipper's figure was the largest single week since 23 Sep. Both figures predate the Nov 20-25 crash/rebound/consolidation round trip; still the latest published data as of this run."
+        "direction": "outflow",
+        "amount": "-$30.57B (Lipper/Reuters) vs +$23.4B (EPFR/Citi) -- opposite signs, same nominal week",
+        "amountUSD": -30570000000,
+        "note": "Lipper: largest US outflow since 9 Sep, driven by tech (-$7.57bn) and healthcare (-$3.04bn). EPFR/Citi shows the opposite direction -- likely a fund-universe/ETF-inclusion difference between the two trackers, flagged rather than resolved."
       },
       {
         "region": "Europe/Intl DM",
         "direction": "inflow",
-        "amount": "component of Lipper's +$59.23B global figure; no standalone Europe breakout confirmed this run either",
-        "amountUSD": null,
-        "note": "Still no clean standalone Europe figure for this specific week; omitted rather than carried forward from a stale/wrong-week number."
+        "amount": "+$7.29B (Lipper/Reuters) / -$700mn (EPFR/Citi)",
+        "amountUSD": 7290000000,
+        "note": "Another cross-provider disagreement on direction for the same week; Lipper's figure is the one carried as primary given it's the more granular regional breakout."
       },
       {
         "region": "EM",
         "direction": "inflow",
-        "amount": "+$8.3B (BofA/EPFR, 8th straight week)",
-        "amountUSD": 8300000000,
-        "note": "EM debt moved the opposite direction (-$7.5bn, most since April 2020) -- investors favoring EM equity over EM credit that week."
+        "amount": "+$971mn (Lipper, 8th straight week) / +$36.7B (EPFR/Citi, China ETFs +$28.3bn + Taiwan ETFs +$7bn)",
+        "amountUSD": 36700000000,
+        "note": "Both agree on inflow direction but differ by an order of magnitude -- EPFR/Citi's figure is ETF-ONLY and explicitly notes direct/FII flows were net SELLERS of Taiwan and Korea the same week, a passive-vs-active divergence."
       },
       {
         "region": "China",
-        "direction": "outflow",
-        "amount": "~-$2.78B (Asia ex-Japan proxy, Lipper)",
-        "amountUSD": -2780000000,
-        "note": "Still no clean China-only EPFR/BofA figure; Lipper's broader Asia-ex-Japan category is reported as an explicit proxy, not a pure China number."
+        "direction": "inflow",
+        "amount": "+$28.3B into China ETFs specifically (EPFR/Citi, >75% of the EM ETF total for the week)",
+        "amountUSD": 28300000000,
+        "note": "The single largest, most specific regional figure found this run; corroborates the same week's China State Council stabilization pledge and chip-stock rally reflected in model.json/news.json."
       },
       {
         "region": "Japan",
         "direction": "outflow",
-        "amount": "-$4.2B",
-        "amountUSD": -4200000000,
-        "note": "BofA/EPFR: biggest Japan equity-fund outflow since May 2026, for the week ending 18 Nov."
+        "amount": "second straight week of redemptions (EPFR/Citi; no clean $ figure given this run)",
+        "amountUSD": null,
+        "note": "Lipper's narrower Asia-ex-EM category also showed -$2.75bn outflow for developed Asia incl. Japan."
       },
       {
         "region": "Money-market/Cash",
         "direction": "outflow",
-        "amount": "+$0.4B (BofA, roughly flat) / -$19.12B (Lipper)",
-        "amountUSD": -19120000000,
-        "note": "Genuine divergence between the two trackers that week -- Lipper's 2nd straight weekly outflow vs. BofA's near-flat read; different fund universes/methodologies."
+        "amount": "-$49.42B (Lipper/Reuters), 3rd straight weekly outflow",
+        "amountUSD": -49420000000,
+        "note": "No EPFR money-market figure located for the same week; Lipper's figure stands alone. Cash being drawn down even as equities (per Lipper) also saw outflows is an unusual 'de-risking into nothing' pattern."
       },
       {
         "region": "Bonds/Credit",
         "direction": "outflow",
-        "amount": "-$7.4B (BofA, first outflow since April 2025) / -$5.58B (Lipper, first in 4 weeks)",
-        "amountUSD": -7400000000,
-        "note": "Both trackers agreed on direction -- a corroborated bond-fund outflow signal coinciding with the start of the equity selloff and Fed hawkish commentary that week."
+        "amount": "-$3.51B (Lipper/Reuters), 3rd straight weekly outflow",
+        "amountUSD": -3510000000,
+        "note": "No EPFR bonds figure located for direct comparison this run."
       },
       {
         "region": "Gold",
-        "direction": "inflow",
-        "amount": "+$0.2B",
-        "amountUSD": 200000000,
-        "note": "BofA/EPFR: negligible inflow for the week ending 18 Nov -- notably before gold's subsequent ~8.7% selloff alongside equities/crypto later that week."
+        "direction": "outflow",
+        "amount": "-$2.14B (Lipper/Reuters), largest outflow since 25 March",
+        "amountUSD": -2140000000,
+        "note": "Both providers' commentary agrees on gold outflows this week -- notable given this predates Friday 27 Nov's sharp gold/silver bounce; the next print will show whether flows followed Friday's price action."
       }
     ],
     "movements": [
       {
-        "from": "Bond funds",
-        "to": "n/a (first joint bond-fund outflow since Apr 2025/in 4 weeks)",
-        "amount": "-$7.4B (BofA) / -$5.58B (Lipper)",
-        "note": "Both major trackers agreed bond funds saw their first outflow in months that week -- a setup worth revisiting once the week-ending-25-Nov data finally publishes and captures the Fed/Bessent dovish-pushback reaction."
+        "from": "Global cash/money-market funds and bonds",
+        "to": "n/a -- not a clean flight-to-safety",
+        "amount": "-$49.42bn cash, -$3.51bn bonds (Lipper)",
+        "note": "An unusual pattern: de-risking out of cash AND bonds in the same week risk equities (per Lipper) also saw outflows -- money left several asset classes at once rather than rotating cleanly."
       },
       {
-        "from": "Crypto funds",
+        "from": "US tech/AI-infrastructure equity funds",
+        "to": "n/a (net redemption)",
+        "amount": "-$7.57bn (Lipper, within a -$12.41bn broader sector-fund outflow)",
+        "note": "Attributed by both providers' commentary to AI-capex-return anxiety plus hawkish Fed rhetoric -- consistent with the Wed 25 Nov hot-data/hawkish-Fed narrative in model.json."
+      },
+      {
+        "from": "Europe (Lipper view)",
+        "to": "n/a -- contradicted by EPFR/Citi's opposite-signed Europe figure",
+        "amount": "+$7.29bn (Lipper) vs -$700mn (EPFR/Citi)",
+        "note": "A classic US-to-Europe rotation story on the Lipper cut, but provider-dependent -- not asserted as consensus."
+      },
+      {
+        "from": "Active/FII investors in Taiwan and Korea",
+        "to": "Passive China/Taiwan ETFs",
+        "amount": "+$28.3bn China ETFs / +$7bn Taiwan ETFs even as direct FII flows were net sellers of both markets",
+        "note": "A genuine passive-buying-vs-active-selling divergence within the same EM/Asia complex the same week."
+      },
+      {
+        "from": "Gold funds",
         "to": "n/a",
-        "amount": "-$1.1B (BofA)",
-        "note": "Consistent with Bitcoin price weakness and continued spot-ETF outflows; crypto Fear & Greed remains at 13/Extreme Fear this run (see fearGreed widget)."
-      },
-      {
-        "from": "Money-market/Cash (Lipper view)",
-        "to": "Equities (Lipper view, partially contradicted by BofA's near-flat cash read)",
-        "amount": "-$19.12B out of cash (Lipper) vs +$45.71B/+$59.23B into equities (Lipper)",
-        "note": "Lipper's own data reads as a rotation OUT of cash INTO equities even in a week price action would later prove to have been the calm before the following week's crash."
-      },
-      {
-        "from": "Risk assets broadly, including Gold",
-        "to": "No clear safe haven that week -- broad deleveraging arrived a few days later",
-        "amount": "Gold fund flows only +$0.2B that week; spot gold fell further (~8.7%) in the days after this data window closed",
-        "note": "This EPFR/BofA window (through 18 Nov) predates the worst of the deleveraging; gold's failure to act as a hedge intensified after this snapshot was taken."
+        "amount": "-$2.14bn, largest since 25 March",
+        "note": "This print predates Friday 27 Nov's sharp gold/silver price bounce -- a real test of whether flows follow price will show up in the week-ending-2-Dec data."
       }
     ],
     "sources": [
-      "https://pro.thestreet.com/market-commentary/the-week-ahead-time-for-a-bounce",
-      "https://www.kucoin.com/news/flash/global-equity-funds-see-59-23b-net-inflow-for-ninth-consecutive-week",
-      "https://wtvbam.com/2026/11/20/global-equity-funds-attract-inflows-for-a-ninth-straight-week/",
-      "https://ceoeconomy.com/article/global-equity-funds-ninth-week-inflows-lipper",
-      "https://finance.biggo.com/news/2da86e80-5eaf-4b22-9591-6d727bcd0b1e",
-      "https://www.ici.org/research/stats/combined_flows",
-      "https://ceoworld.biz/2026/11/22/gold-price-slump-wipes-an-estimated-15-trillion-from-gold-and-silver/",
-      "https://finvaulta.com/research/bank-of-america/series/the-flow-show"
+      "https://www.investing.com/news/economy-news/global-equity-funds-log-biggest-weekly-outflow-in-14-months-5053188",
+      "https://www.investing.com/news/stock-market-news/em-equity-funds-pull-in-367b-led-by-china-and-taiwan-etfs-93CH-5053187"
     ]
   }
 }
