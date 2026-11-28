@@ -1,0 +1,43 @@
+# Dead-man switch — runs on GitHub, not on the Mac.
+#
+# Phase 1 of the 11 Sep 2026 redesign (decision 5: keyless jobs move to Actions). Every previous
+# watchdog lived on the same Mac as the pipeline it watched, so a sleeping, updating or logged-out
+# Mac silenced the alarm along with the job. This one reads the published manifest from GitHub
+# Pages and alerts if its sgtDate is not today's SGT weekday date — i.e. nothing was published
+# this morning. It carries no figure and no ticker; ntfy topics are guessable, so the message is
+# only "look at the brief".
+#
+# 00:30 UTC = 08:30 SGT, after the 07:02 research run and publish, before the 08:15 email is read.
+name: deadman
+on:
+  schedule:
+    - cron: '30 0 * * 1-5'
+  workflow_dispatch:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Compare manifest date with today (SGT)
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |
+          set -u
+          TODAY=$(TZ=Asia/Singapore date +%F)
+          URL="https://thatzdomdom.github.io/portfolio-command-center/data/manifest.json?t=$(date +%s)"
+          BODY=$(curl -fsSL -m 30 "$URL" 2>/dev/null) || BODY=""
+          if [ -z "$BODY" ]; then
+            STATE="manifest UNREACHABLE"
+          else
+            SGT=$(echo "$BODY" | python3 -c 'import sys,json;print(json.load(sys.stdin).get("sgtDate",""))' 2>/dev/null || echo "")
+            if [ "$SGT" = "$TODAY" ]; then STATE="ok"; else STATE="manifest is $SGT, today is $TODAY"; fi
+          fi
+          echo "deadman: $STATE"
+          if [ "$STATE" != "ok" ]; then
+            if [ -n "${NTFY_TOPIC:-}" ]; then
+              curl -s -o /dev/null -m 15 \
+                -H "Title: Portfolio: nothing published this morning" -H "Priority: urgent" -H "Tags: rotating_light" \
+                -d "Dead-man (GitHub): $STATE. Open the 08:15 brief — it should read [DEGRADED]. Check the Mac: research log, publish gate." \
+                "https://ntfy.sh/${NTFY_TOPIC}"
+            fi
+            exit 1
+          fi

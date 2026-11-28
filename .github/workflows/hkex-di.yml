@@ -1,0 +1,65 @@
+# Hong Kong disclosure-of-interests scan — runs on GitHub, not on the Mac.
+#
+# Phase 7 of the 11 Sep 2026 redesign, and the same split as form4-scan and 13f-scan (decision 5:
+# keyless fetchers move to Actions). 06:45 SGT Mon–Fri sits after the 13F job at 06:15 and before
+# the Mac's research run at 07:02, so the Mac's `git pull` picks up a file that is already current.
+# Actions WRITES data/hkex.json; the Mac only reads it. If both could write, one local edit would
+# make that pull refuse and turn the publish red.
+#
+# HKEX may refuse GitHub's IP range — THIS IS UNPROVEN. The scan has only ever run from the owner's
+# Mac (19 Sep 2026: 3 codes, 47 notices, no errors). Until a real run here succeeds, treat the
+# Actions route as untested. That is also why this job fails loudly instead of committing a husk:
+# hkex-di.js exits 1 if no code returned a table at all, and the guard below refuses to commit a
+# file whose scan is not ok or whose universe is empty. An empty `filings` list is NOT a failure —
+# Tencent filed one notice in ninety days, and a quiet week is the normal case.
+name: hkex-di
+on:
+  schedule:
+    - cron: '45 22 * * 0-4'   # 06:45 SGT Mon–Fri
+  workflow_dispatch:
+    inputs:
+      days:
+        description: 'days of relevant events to scan (default 14)'
+        default: '7'
+permissions:
+  contents: write
+concurrency:
+  group: hkex-di
+  cancel-in-progress: false
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Scan HKEX disclosure of interests
+        run: |
+          set -e
+          node scripts/hkex-di.js --days "${{ github.event.inputs.days || '14' }}"
+      - name: Refuse to commit a husk
+        run: |
+          node -e '
+            const fs = require("fs");
+            let j;
+            try { j = JSON.parse(fs.readFileSync("data/hkex.json", "utf8")); }
+            catch (e) { console.error("hkex.json missing or unreadable: " + e.message); process.exit(1); }
+            const codes = (j.universe || []).filter(u => u.sid).length;
+            if (!codes) { console.error("hkex.json names no resolved stock code — refusing to commit over a good file"); process.exit(1); }
+            if (!j.scan || j.scan.ok !== true) { console.error("scan.ok is not true: " + JSON.stringify((j.scan || {}).errors || [])); process.exit(1); }
+            if (j.bookSource === "none") { console.error("no book source — index.html holdings did not parse"); process.exit(1); }
+            console.log(`ok: ${codes} code(s) from ${j.bookSource}, ${(j.filings || []).length} filing(s) retained`);
+          '
+      - name: Commit hkex.json if changed
+        run: |
+          git config user.name "hkex-di (GitHub Actions)"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/hkex.json
+          if git diff --cached --quiet; then echo "no change"; exit 0; fi
+          git commit -m "hkex: disclosure-of-interests scan $(TZ=Asia/Singapore date +'%F %H:%M') SGT"
+          git pull --rebase --autostash origin main
+          git push origin HEAD:main
